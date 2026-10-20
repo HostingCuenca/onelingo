@@ -20,7 +20,7 @@ import { filaDe, metricasSuscripciones, refrescarPlanesDerivados, suscripcionDe 
  * y la última actividad conocida. `h.hoy` es el día actual en esa zona.
  */
 const DIAS_ACTIVOS = `dias_activos AS (
-  SELECT usuario_id, (fecha AT TIME ZONE $1)::date AS dia FROM eventos
+  SELECT usuario_id, (fecha AT TIME ZONE $1)::date AS dia FROM eventos WHERE tipo <> 'cambio_idiomas_admin'
   UNION SELECT usuario_id, (fecha AT TIME ZONE $1)::date FROM conversaciones
   UNION SELECT p.usuario_id, d::date FROM progreso p,
     jsonb_array_elements_text(CASE WHEN jsonb_typeof(p.estado->'diasActividad') = 'array' THEN p.estado->'diasActividad' ELSE '[]'::jsonb END) d

@@ -11,10 +11,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:onelingo/app/theme.dart';
 import 'package:onelingo/core/api/pagos_api.dart';
 import 'package:onelingo/core/api/sync.dart';
+import 'package:onelingo/core/diagnostico.dart' show escalaDiagnosticoCliente;
 import 'package:onelingo/core/efectos.dart';
 import 'package:onelingo/core/i18n/i18n.dart';
 import 'package:onelingo/core/pagos/providers.dart';
 import 'package:onelingo/core/state/providers.dart';
+import 'package:onelingo/features/plans/idiomas_plan.dart';
 import 'package:onelingo/features/plans/pago_screen.dart';
 import 'package:onelingo/features/plans/plans_screen.dart';
 
@@ -65,6 +67,11 @@ Map<String, dynamic> _suscripcionJson({
   bool puedeGestionar = false,
   int usados = 0,
   bool agotada = false,
+  List<String>? idiomas,
+  bool todos = false,
+  int porElegir = 0,
+  Map<String, Object?>? cambio,
+  Map<String, bool>? accesoPorIdioma,
 }) => {
   'planId': planId,
   'estado': estado,
@@ -80,6 +87,11 @@ Map<String, dynamic> _suscripcionJson({
     'restanteSegundos': (3600 - usados).clamp(0, 3600),
     'agotada': agotada,
   },
+  'idiomas': ?idiomas,
+  'todosLosIdiomas': todos,
+  'idiomasPorElegir': porElegir,
+  'cambioIdiomas': ?cambio,
+  'accesoPorIdioma': ?accesoPorIdioma,
 };
 
 /// Simula el backend: rutas → (código, cuerpo). Guarda las peticiones.
@@ -348,9 +360,15 @@ void main() {
       expect(find.text('Subscribe'), findsNWidgets(2));
       await tester.tap(find.text('Subscribe').last);
       await tester.pumpAndSettle();
+      // Plan de 2 idiomas: selector con el idioma meta (inglés) ya marcado.
+      expect(find.text("Choose your plan's 2 languages"), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('idioma-plan-fr')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Continue'));
+      await tester.pumpAndSettle();
       final checkout = servidor.peticiones.last;
       expect('${checkout.method} ${checkout.url.path}', 'POST /pagos/checkout');
-      expect(jsonDecode(checkout.body), {'planId': 'p2'});
+      expect(jsonDecode(checkout.body), {'planId': 'p2', 'idiomas': ['en', 'fr']});
       expect(checkout.headers['authorization'], 'Bearer tok');
       expect(abiertas, ['https://checkout.stripe.com/c/pay/cs_test_1']);
       await _fin();
@@ -436,6 +454,10 @@ void main() {
       await _pantallaPlanes(tester, c);
       await tester.tap(find.text('Suscribirme').first);
       await tester.pumpAndSettle();
+      // Plan de 1 idioma: el idioma meta ya basta.
+      expect(find.text('Elige el idioma de tu plan'), findsOneWidget);
+      await tester.tap(find.text('Continuar'));
+      await tester.pumpAndSettle();
       expect(abiertas, isEmpty);
       expect(find.textContaining('Ya tienes una suscripción activa'), findsOneWidget);
       await _fin();
@@ -454,6 +476,274 @@ void main() {
       expect(servidor.rutasPedidas, isNot(contains('POST /pagos/checkout')));
       expect(find.text('PLAN ACTUAL'), findsOneWidget);
       await _fin();
+    });
+  });
+
+  group('idiomas por suscripción', () {
+    Map<String, dynamic> conIdiomas({
+      List<String> idiomas = const ['en', 'fr'],
+      Map<String, Object?> cambio = const {'regla': 'uno_por_periodo', 'permitido': true, 'proximoCambio': null},
+      int porElegir = 0,
+      String origen = 'stripe',
+    }) => _suscripcionJson(
+      planId: 'p2', estado: 'activa', origen: origen, acceso: true, puedeGestionar: origen == 'stripe',
+      periodoFin: '2026-11-20T12:00:00Z', idiomas: idiomas, porElegir: porElegir, cambio: cambio,
+      accesoPorIdioma: {for (final c in idiomasDePago) c: idiomas.contains(c)},
+    )..['accesoPlan'] = idiomas.isNotEmpty;
+
+    testWidgets('selector: idioma meta marcado, exige exactamente N y bloquea el resto', (tester) async {
+      final prefs = await _prefs();
+      final servidor = _Servidor({
+        'GET /planes': (200, _planesJson()),
+        'GET /usuarios/me/suscripcion': (200, _suscripcionJson()),
+        'POST /pagos/checkout': (200, {'url': 'https://checkout.stripe.com/x'}),
+      });
+      final c = _contenedor(prefs, servidor, abiertas: []);
+      await _pantallaPlanes(tester, c);
+      await tester.tap(find.text('Suscribirme').last);
+      await tester.pumpAndSettle();
+      expect(find.text('Elige los 2 idiomas de tu plan'), findsOneWidget);
+      expect(find.text('1 de 2 elegidos'), findsOneWidget);
+      CheckboxListTile casilla(String c) => tester.widget(find.byKey(ValueKey('idioma-plan-$c')));
+      expect(casilla('en').value, isTrue);
+      expect(_boton(tester, 'Continuar').onPressed, isNull);
+      await tester.tap(find.byKey(const ValueKey('idioma-plan-de')));
+      await tester.pumpAndSettle();
+      expect(find.text('2 de 2 elegidos'), findsOneWidget);
+      // Completo: los demás no se pueden marcar; desmarcar sí.
+      expect(casilla('fr').onChanged, isNull);
+      expect(casilla('en').onChanged, isNotNull);
+      await tester.tap(find.text('Continuar'));
+      await tester.pumpAndSettle();
+      expect(jsonDecode(servidor.peticiones.last.body), {'planId': 'p2', 'idiomas': ['en', 'de']});
+      await _fin();
+    });
+
+    testWidgets('plan «todos»: sin selector, checkout con idiomas vacíos', (tester) async {
+      final planes = _planesJson();
+      (planes['planes'] as List).add({
+        'id': 'p9', 'nombre': {'es': 'Ilimitado', 'en': 'Unlimited'}, 'incluye': {'es': [], 'en': []},
+        'idiomas': 0, 'precio': 60, 'moneda': 'usd', 'intervalo': 'mes', 'destacado': false, 'orden': 9,
+      });
+      final prefs = await _prefs();
+      final servidor = _Servidor({
+        'GET /planes': (200, planes),
+        'GET /usuarios/me/suscripcion': (200, _suscripcionJson()),
+        'POST /pagos/checkout': (200, {'url': 'https://checkout.stripe.com/y'}),
+      });
+      final abiertas = <String>[];
+      final c = _contenedor(prefs, servidor, abiertas: abiertas);
+      await _pantallaPlanes(tester, c);
+      expect(find.text('Todos los idiomas'), findsOneWidget);
+      await tester.tap(find.text('Suscribirme').last);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('idiomas de tu plan'), findsNothing);
+      expect(jsonDecode(servidor.peticiones.last.body), {'planId': 'p9', 'idiomas': []});
+      expect(abiertas, ['https://checkout.stripe.com/y']);
+      await _fin();
+    });
+
+    testWidgets('chips y «Cambiar idiomas» permitido: PUT con los nuevos idiomas', (tester) async {
+      final prefs = await _prefs();
+      final servidor = _Servidor({
+        'GET /planes': (200, _planesJson()),
+        'GET /usuarios/me/suscripcion': (200, conIdiomas()),
+        'PUT /usuarios/me/suscripcion/idiomas': (200, conIdiomas(idiomas: ['en', 'de'])),
+      });
+      final c = _contenedor(prefs, servidor);
+      await _pantallaPlanes(tester, c);
+      expect(find.byKey(const ValueKey('chip-idioma-en')), findsOneWidget);
+      expect(find.byKey(const ValueKey('chip-idioma-fr')), findsOneWidget);
+      await tester.tap(find.text('Cambiar idiomas'));
+      await tester.pumpAndSettle();
+      expect(find.text('2 de 2 elegidos'), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('idioma-plan-fr')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('idioma-plan-de')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Continuar'));
+      await tester.pumpAndSettle();
+      final put = servidor.peticiones.last;
+      expect('${put.method} ${put.url.path}', 'PUT /usuarios/me/suscripcion/idiomas');
+      expect(jsonDecode(put.body), {'idiomas': ['en', 'de']});
+      expect(find.byKey(const ValueKey('chip-idioma-de')), findsOneWidget);
+      expect(find.byKey(const ValueKey('chip-idioma-fr')), findsNothing);
+      expect(c.read(suscripcionProvider)!.idiomas, ['en', 'de']);
+      await _fin();
+    });
+
+    testWidgets('cambio no permitido: «Próximo cambio» o «Pide el cambio al soporte»', (tester) async {
+      final prefs = await _prefs();
+      final c = _contenedor(prefs, _Servidor({
+        'GET /planes': (200, _planesJson()),
+        'GET /usuarios/me/suscripcion': (200, conIdiomas(cambio: {'regla': 'uno_por_periodo', 'permitido': false, 'proximoCambio': '2026-12-01T12:00:00Z'})),
+      }));
+      await _pantallaPlanes(tester, c);
+      expect(find.text('Cambiar idiomas'), findsNothing);
+      expect(find.text('Próximo cambio: 01/12/2026'), findsOneWidget);
+      c.read(suscripcionProvider.notifier).aplicar(conIdiomas(origen: 'cortesia', cambio: {'regla': 'solo_admin', 'permitido': false, 'proximoCambio': null}));
+      await tester.pumpAndSettle();
+      expect(find.text('Pide el cambio al soporte'), findsOneWidget);
+      expect(find.text('Acceso otorgado por el administrador hasta el 20/11/2026'), findsOneWidget);
+      await _fin();
+    });
+
+    testWidgets('idiomas por elegir: aviso que abre el selector con los que ya tiene', (tester) async {
+      final prefs = await _prefs();
+      final servidor = _Servidor({
+        'GET /planes': (200, _planesJson()),
+        'GET /usuarios/me/suscripcion': (200, conIdiomas(porElegir: 1)),
+      });
+      final c = _contenedor(prefs, servidor);
+      await _pantallaPlanes(tester, c);
+      expect(find.text('Te falta elegir 1 idioma de tu plan'), findsOneWidget);
+      await tester.tap(find.text('Te falta elegir 1 idioma de tu plan'));
+      await tester.pumpAndSettle();
+      expect(find.text('Elige los 3 idiomas de tu plan'), findsOneWidget);
+      expect(find.text('2 de 3 elegidos'), findsOneWidget);
+      await tester.tapAt(const Offset(10, 10));
+      await tester.pumpAndSettle();
+      await _fin();
+    });
+
+    testWidgets('Stripe sin idiomas: sin acceso hasta elegirlos; el aviso los pide con el meta marcado', (tester) async {
+      final prefs = await _prefs();
+      final sinElegir = conIdiomas(idiomas: [], porElegir: 2)..['acceso'] = false;
+      final servidor = _Servidor({
+        'GET /planes': (200, _planesJson()),
+        'GET /usuarios/me/suscripcion': (200, sinElegir),
+        'PUT /usuarios/me/suscripcion/idiomas': (200, conIdiomas(idiomas: ['en', 'ja'])),
+      });
+      final c = _contenedor(prefs, servidor);
+      await _pantallaPlanes(tester, c);
+      expect(c.read(estadoPlanProvider).tienePlan, isFalse);
+      // Sigue siendo su plan y puede gestionarlo.
+      expect(find.text('TU PLAN'), findsOneWidget);
+      expect(find.text('Gestionar suscripción'), findsOneWidget);
+      await tester.tap(find.text('Te faltan 2 idiomas de tu plan por elegir'));
+      await tester.pumpAndSettle();
+      expect(find.text('1 de 2 elegidos'), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('idioma-plan-ja')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Continuar'));
+      await tester.pumpAndSettle();
+      expect(jsonDecode(servidor.peticiones.last.body), {'idiomas': ['en', 'ja']});
+      expect(c.read(estadoPlanProvider).tienePlan, isTrue);
+      expect(find.textContaining('por elegir'), findsNothing);
+      await _fin();
+    });
+
+    Future<void> perfil(WidgetTester tester, ProviderContainer c, String codigo) async {
+      final router = GoRouter(initialLocation: '/perfil', routes: [
+        GoRoute(
+          path: '/perfil',
+          builder: (_, _) => Scaffold(
+            body: Consumer(
+              builder: (context, ref, _) => TextButton(
+                onPressed: () => cambiarIdiomaMetaConAviso(context, ref, codigo),
+                child: const Text('CAMBIAR'),
+              ),
+            ),
+          ),
+        ),
+        GoRoute(path: '/planes', builder: (_, _) => const Text('PLANES')),
+      ]);
+      await tester.pumpWidget(UncontrolledProviderScope(
+        container: c,
+        child: MaterialApp.router(theme: buildTheme(), routerConfig: router),
+      ));
+      await tester.tap(find.text('CAMBIAR'));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('idioma no pagado: aviso con «Añadirlo a mi plan» y «Cambiar un idioma»', (tester) async {
+      final prefs = await _prefs();
+      final servidor = _Servidor({'GET /usuarios/me/suscripcion': (200, conIdiomas())});
+      final c = _contenedor(prefs, servidor);
+      await c.read(suscripcionProvider.notifier).refrescar();
+      expect(c.read(estadoPlanProvider).planId, 'p2');
+      await perfil(tester, c, 'de');
+      expect(c.read(progressProvider).idiomaMeta, 'de');
+      expect(find.text('Este idioma no está en tu plan: estás en la prueba gratuita'), findsOneWidget);
+      expect(find.text('Cambiar un idioma de mi plan'), findsOneWidget);
+      await tester.tap(find.text('Cambiar un idioma de mi plan'));
+      await tester.pumpAndSettle();
+      // Plan lleno (2 de 2): el alumno quita uno para poner el nuevo.
+      expect(find.text('2 de 2 elegidos'), findsOneWidget);
+      await tester.tapAt(const Offset(10, 10));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('CAMBIAR'));
+      await tester.pumpAndSettle();
+      expect(find.text('Este idioma no está en tu plan: estás en la prueba gratuita'), findsNothing,
+          reason: 'ya está en alemán: no hay cambio');
+      await _fin();
+    });
+
+    testWidgets('idioma no pagado sin cambio permitido: solo «Añadirlo», que abre los planes', (tester) async {
+      final prefs = await _prefs();
+      final c = _contenedor(prefs, _Servidor({
+        'GET /usuarios/me/suscripcion': (200, conIdiomas(cambio: {'regla': 'solo_admin', 'permitido': false})),
+      }));
+      await c.read(suscripcionProvider.notifier).refrescar();
+      await perfil(tester, c, 'it');
+      expect(find.text('Cambiar un idioma de mi plan'), findsNothing);
+      await tester.tap(find.text('Añadirlo a mi plan'));
+      await tester.pumpAndSettle();
+      expect(find.text('PLANES'), findsOneWidget);
+      await _fin();
+    });
+
+    testWidgets('idioma pagado o DEMO: sin aviso', (tester) async {
+      final prefs = await _prefs(email: 'carla@onelingo.demo', planId: 'p2');
+      final servidor = _Servidor({});
+      final c = _contenedor(prefs, servidor);
+      await perfil(tester, c, 'fr');
+      expect(c.read(progressProvider).idiomaMeta, 'fr');
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(c.read(estadoPlanProvider).planId, 'p2');
+      expect(servidor.peticiones, isEmpty);
+      await _fin();
+    });
+
+    test('bloqueo por idioma con accesoPorIdioma', () async {
+      final prefs = await _prefs();
+      final c = _contenedor(prefs, _Servidor({
+        'GET /usuarios/me/suscripcion': (200, {
+          ...conIdiomas(idiomas: ['en']),
+          'prueba': {'minutos': 60, 'segundosUsados': 3600, 'restanteSegundos': 0, 'agotada': true},
+        }),
+      }));
+      await c.read(suscripcionProvider.notifier).refrescar();
+      var ep = c.read(estadoPlanProvider);
+      expect(ep.tienePlan, isTrue);
+      expect(ep.trialAgotado, isFalse);
+      expect(c.read(progressProvider).planId, 'p2');
+      c.read(progressProvider.notifier).cambiarIdiomaMeta('fr');
+      ep = c.read(estadoPlanProvider);
+      expect(ep.tienePlan, isFalse);
+      expect(ep.trialAgotado, isTrue);
+      // El plan local sigue al idioma: en francés cuenta la prueba.
+      expect(c.read(progressProvider).planId, '');
+      c.read(progressProvider.notifier).cambiarIdiomaMeta('en');
+      expect(c.read(estadoPlanProvider).trialAgotado, isFalse);
+      expect(c.read(progressProvider).planId, 'p2');
+    });
+
+    test('cambiar de idioma conserva la ubicación de cada idioma', () async {
+      final prefs = await _prefs(sesion: false);
+      final c = _contenedor(prefs, _Servidor({}));
+      final n = c.read(progressProvider.notifier);
+      n.guardarDiagnostico({'idioma': 'en', 'escala': escalaDiagnosticoCliente}, 6);
+      final enIngles = c.read(progressProvider);
+      n.cambiarIdiomaMeta('fr');
+      expect(c.read(progressProvider).idiomaMeta, 'fr');
+      expect(c.read(progressProvider).nivelInicial, 1);
+      expect(c.read(progressProvider).diagnostico, isNull);
+      n.cambiarIdiomaMeta('en');
+      final vuelta = c.read(progressProvider);
+      expect(vuelta.nivelCliente, enIngles.nivelCliente);
+      expect(vuelta.nivelEscala, enIngles.nivelEscala);
+      expect(vuelta.diagnostico, enIngles.diagnostico);
     });
   });
 

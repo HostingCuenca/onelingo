@@ -82,6 +82,9 @@ class PlanServidor {
     return incluye['es'] ?? incluye.values.firstOrNull ?? const [];
   }
 
+  /// `idiomas == 0`: el plan incluye todos los idiomas.
+  bool get todosLosIdiomas => idiomas == 0;
+
   /// «$20», «$19.99», «€15»…
   String get precioTexto => formatoPrecio(precio, moneda);
 
@@ -94,7 +97,7 @@ class PlanServidor {
         nombre: _mapaTextos(j['nombre']),
         descripcion: _mapaTextos(j['descripcion']),
         incluye: _mapaListas(j['incluye']),
-        idiomas: (j['idiomas'] as num?)?.round() ?? 1,
+        idiomas: (j['idiomas'] as num?)?.round().clamp(0, 10) ?? 1,
         precio: (j['precio'] as num?)?.toDouble() ?? 0,
         moneda: (j['moneda'] as String?)?.toLowerCase() ?? moneda,
         intervalo: j['intervalo'] == 'anio' ? 'anio' : 'mes',
@@ -208,6 +211,41 @@ class PruebaServidor {
   }
 }
 
+/// Los 10 idiomas que se pueden pagar (anexo de idiomas por suscripción).
+const idiomasDePago = ['en', 'es', 'fr', 'de', 'pt', 'it', 'zh', 'ja', 'ko', 'ru'];
+
+/// `cambioIdiomas` de la suscripción: si el alumno puede cambiar un idioma.
+class CambioIdiomas {
+  const CambioIdiomas({
+    this.regla = 'uno_por_periodo',
+    this.permitido = false,
+    this.proximoCambio,
+  });
+
+  /// libre | uno_por_periodo | solo_admin
+  final String regla;
+  final bool permitido;
+  final DateTime? proximoCambio;
+
+  static CambioIdiomas fromJson(Object? j) {
+    if (j is! Map) return const CambioIdiomas();
+    return CambioIdiomas(
+      regla: j['regla'] as String? ?? 'uno_por_periodo',
+      permitido: j['permitido'] == true,
+      proximoCambio: j['proximoCambio'] is String
+          ? DateTime.tryParse(j['proximoCambio'] as String)
+          : null,
+    );
+  }
+
+  /// «Próximo cambio: …» o «Pide el cambio al soporte» si no está permitido.
+  String? get motivo => permitido
+      ? null
+      : proximoCambio != null && regla != 'solo_admin'
+      ? tr('Próximo cambio: {fecha}', {'fecha': fechaCorta(proximoCambio!)})
+      : tr('Pide el cambio al soporte');
+}
+
 /// Respuesta de `GET /usuarios/me/suscripcion` y `POST /pagos/confirmar`.
 class Suscripcion {
   const Suscripcion({
@@ -220,6 +258,12 @@ class Suscripcion {
     this.modo,
     this.puedeGestionar = false,
     this.prueba = const PruebaServidor(),
+    this.idiomas = const [],
+    this.todosLosIdiomas = false,
+    this.idiomasPorElegir = 0,
+    this.cambioIdiomas = const CambioIdiomas(),
+    this.accesoPorIdioma = const {},
+    this.accesoPlan,
   });
 
   final String planId;
@@ -229,6 +273,8 @@ class Suscripcion {
 
   /// stripe | cortesia | null
   final String? origen;
+
+  /// Acceso de pago en el idioma meta que el servidor tiene guardado.
   final bool acceso;
   final DateTime? periodoFin;
   final bool cancelaAlFinal;
@@ -236,16 +282,52 @@ class Suscripcion {
   final bool puedeGestionar;
   final PruebaServidor prueba;
 
-  bool get esStripe => origen == 'stripe';
-  bool get esCortesia => origen == 'cortesia' && acceso;
+  /// Idiomas pagados (códigos) y si el plan o la cortesía son «todos».
+  final List<String> idiomas;
+  final bool todosLosIdiomas;
 
-  /// Plan efectivo: solo cuenta si da acceso.
-  String get planEfectivo => acceso ? planId : '';
+  /// Idiomas del plan aún sin elegir (p. ej. tras subir de 2 a 3).
+  final int idiomasPorElegir;
+  final CambioIdiomas cambioIdiomas;
+
+  /// Acceso de pago en cada uno de los 10 idiomas.
+  final Map<String, bool> accesoPorIdioma;
+
+  /// Acceso de pago en algún idioma (null si el servidor no lo manda).
+  final bool? accesoPlan;
+
+  /// Idiomas que incluye el plan (elegidos + por elegir); 0 = todos.
+  int get idiomasDelPlan =>
+      todosLosIdiomas ? 0 : idiomas.length + idiomasPorElegir;
+
+  /// La suscripción da acceso de pago en algún idioma («tiene plan»).
+  bool get vigente =>
+      accesoPlan ?? (acceso || accesoPorIdioma.containsValue(true));
+
+  /// Suscripción en curso aunque aún no dé acceso (p. ej. idiomas por elegir).
+  bool get enCurso =>
+      vigente ||
+      (estado != 'vencida' &&
+          estado != 'sin_plan' &&
+          (estado != 'cancelada' ||
+              (periodoFin?.isAfter(DateTime.now()) ?? false)));
+
+  /// Acceso de pago en [idioma]. Sin `accesoPorIdioma` (servidor anterior al
+  /// anexo), el booleano general.
+  bool accesoEn(String idioma) => accesoPorIdioma.isNotEmpty
+      ? accesoPorIdioma[idioma] == true
+      : acceso;
+
+  /// Plan efectivo en [idioma]: vacío si ahí sigue la prueba gratuita.
+  String planEfectivoEn(String idioma) => accesoEn(idioma) ? planId : '';
+
+  bool get esStripe => origen == 'stripe';
+  bool get esCortesia => origen == 'cortesia' && enCurso;
 
   /// Suscripción de Stripe que el alumno puede ver y gestionar (incluido un
   /// impago, para que actualice su tarjeta).
   bool get stripeVigente =>
-      esStripe && estado != 'vencida' && (acceso || estado == 'impago');
+      esStripe && enCurso;
 
   String get estadoTexto => switch (estado) {
     'activa' => tr('Activa'),
@@ -268,6 +350,17 @@ class Suscripcion {
     modo: j['modo'] as String?,
     puedeGestionar: j['puedeGestionar'] == true,
     prueba: PruebaServidor.fromJson(j['prueba']),
+    idiomas: (j['idiomas'] as List? ?? const []).whereType<String>().toList(),
+    todosLosIdiomas: j['todosLosIdiomas'] == true,
+    idiomasPorElegir: (j['idiomasPorElegir'] as num?)?.round() ?? 0,
+    cambioIdiomas: CambioIdiomas.fromJson(j['cambioIdiomas']),
+    accesoPorIdioma: j['accesoPorIdioma'] is Map
+        ? {
+            for (final e in (j['accesoPorIdioma'] as Map).entries)
+              '${e.key}': e.value == true,
+          }
+        : const {},
+    accesoPlan: j['accesoPlan'] is bool ? j['accesoPlan'] as bool : null,
   );
 }
 

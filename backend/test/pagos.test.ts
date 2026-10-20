@@ -82,7 +82,7 @@ globalThis.fetch = (async (entrada: any, init: any = {}) => {
     st.precios.set(p.id, p); return json(200, p);
   }
   if ((r = m(/^POST \/prices\/(\w+)$/))) { const p = st.precios.get(r[1]); if (datos.get('active') === 'false') p.active = false; return json(200, p); }
-  if (m(/^POST \/checkout\/sessions$/)) { const s = { id: id('cs_test'), url: '', status: 'open', client_reference_id: datos.get('client_reference_id'), subscription: null }; s.url = `https://checkout.stripe.com/c/pay/${s.id}`; st.sesiones.set(s.id, s); return json(200, s); }
+  if (m(/^POST \/checkout\/sessions$/)) { const s: any = { id: id('cs_test'), url: '', status: 'open', client_reference_id: datos.get('client_reference_id'), subscription: null, metadata: {} }; s.url = `https://checkout.stripe.com/c/pay/${s.id}`; st.sesiones.set(s.id, s); return json(200, s); }
   if ((r = m(/^GET \/checkout\/sessions\/(\w+)$/))) { const s = st.sesiones.get(r[1]); return s ? json(200, { ...s, subscription: s.subscription ? st.subs.get(s.subscription) : null }) : json(404, { error: { message: 'No such checkout.session' } }); }
   if ((r = m(/^GET \/subscriptions\/(\w+)$/))) { const s = st.subs.get(r[1]); return s ? json(200, s) : json(404, { error: { message: 'No such subscription' } }); }
   if (m(/^GET \/balance_transactions$/)) return json(200, { data: st.transacciones, has_more: false });
@@ -91,12 +91,12 @@ globalThis.fetch = (async (entrada: any, init: any = {}) => {
 const llamadasA = (re: RegExp) => st.llamadas.filter((l) => re.test(`${l.metodo} ${l.ruta}`));
 
 /** Suscripción de Stripe con la forma de la API actual (periodo en el item). */
-function suscripcionStripe(o: { usuarioId?: string; precio: any; status?: string; cancelAlFinal?: boolean; fin?: number; cliente?: string; endedAt?: number }) {
+function suscripcionStripe(o: { usuarioId?: string; precio: any; status?: string; cancelAlFinal?: boolean; fin?: number; inicio?: number; cliente?: string; endedAt?: number; idiomas?: string }) {
   const s = {
     id: id('sub'), object: 'subscription', status: o.status ?? 'active', customer: o.cliente ?? id('cus'), livemode: false,
     cancel_at_period_end: !!o.cancelAlFinal, cancel_at: null, canceled_at: o.endedAt ?? null, ended_at: o.endedAt ?? null,
-    metadata: o.usuarioId ? { usuario_id: o.usuarioId, plan_id: o.precio.metadata?.plan_id } : {},
-    items: { data: [{ price: o.precio, current_period_end: o.fin ?? Math.floor(Date.now() / 1000) + 30 * 86400 }] },
+    metadata: o.usuarioId ? { usuario_id: o.usuarioId, plan_id: o.precio.metadata?.plan_id, ...(o.idiomas !== undefined ? { idiomas: o.idiomas } : {}) } : {},
+    items: { data: [{ price: o.precio, current_period_start: o.inicio ?? Math.floor(Date.now() / 1000) - 86400, current_period_end: o.fin ?? Math.floor(Date.now() / 1000) + 30 * 86400 }] },
   };
   st.subs.set(s.id, s);
   return s;
@@ -213,6 +213,64 @@ test('Customer Portal: parámetros de cambio de plan (price, create_prorations, 
   assert.equal(once.get('features[subscription_update][products][10][product]'), null, 'Stripe admite 10');
 });
 
+test('idiomas: validación, acceso por idioma, qué es un cambio y regla cambioIdiomas', () => {
+  assert.equal(Sus.errorIdiomas(['en', 'fr'], 2, { exactos: true }), null);
+  assert.match(Sus.errorIdiomas(['en'], 2, { exactos: true })!, /elige exactamente 2/);
+  assert.match(Sus.errorIdiomas(['en', 'en'], 2)!, /repetido/);
+  assert.match(Sus.errorIdiomas(['xx'], 2)!, /no válido/);
+  assert.equal(Sus.errorIdiomas([], 0, { exactos: true }), null);
+  assert.match(Sus.errorIdiomas(['en'], 0, { exactos: true })!, /todos los idiomas/);
+  assert.match(Sus.errorIdiomas(['en', 'fr', 'de'], 2)!, /no puedes tener 3/);
+  assert.match(Sus.errorIdiomas([], 2)!, /al menos un idioma/);
+  assert.deepEqual(Sus.leerIdiomas(' EN,fr,xx,en '), ['en', 'fr']); assert.equal(Sus.leerIdiomas(undefined), null);
+  assert.deepEqual(Sus.ajustarAlPlan(['en', 'fr', 'de'], 2), ['en', 'fr']); assert.deepEqual(Sus.ajustarAlPlan(['en'], 0), ['en']);
+  assert.equal(Sus.esCambioIdiomas(['en', 'fr'], ['fr', 'en']), false, 'reordenar');
+  assert.equal(Sus.esCambioIdiomas(['en'], ['en', 'fr']), false, 'completar «por elegir»');
+  assert.equal(Sus.esCambioIdiomas(['en', 'fr'], ['en', 'de']), true);
+  const ahora = new Date('2026-10-20T12:00:00Z');
+  const base = { usuario_id: 'u', plan_id: 'p2', origen: 'stripe', estado: 'activa', cancela_al_final: false, periodo_fin: '2026-11-01T00:00:00Z', periodo_inicio: '2026-10-01T00:00:00Z',
+    idiomas: ['en', 'fr'], todos_idiomas: false } as any;
+  const acc = Sus.accesoPorIdioma(base, 2, ahora);
+  assert.equal(Object.keys(acc).length, 10); assert.deepEqual(Object.keys(acc).filter((k) => acc[k]), ['en', 'fr']);
+  assert.ok(Object.values(Sus.accesoPorIdioma({ ...base, todos_idiomas: true }, 2, ahora)).every(Boolean), 'cortesía «todos»');
+  assert.ok(Object.values(Sus.accesoPorIdioma(base, 0, ahora)).every(Boolean), 'plan de 0 = todos');
+  assert.ok(!Object.values(Sus.accesoPorIdioma({ ...base, estado: 'impago' }, 2, ahora)).some(Boolean));
+  assert.deepEqual(Sus.idiomasDe({ ...base, idiomas: ['en'] }, 3), { idiomas: ['en'], todos: false, porElegir: 2 });
+  // uno_por_periodo con periodo de Stripe: un cambio desde periodo_inicio; el siguiente, al acabar el periodo.
+  assert.deepEqual(Sus.reglaCambioIdiomas('uno_por_periodo', base, ahora), { regla: 'uno_por_periodo', permitido: true, proximoCambio: null });
+  assert.deepEqual(Sus.reglaCambioIdiomas('uno_por_periodo', { ...base, ultimo_cambio_idiomas: '2026-10-05T00:00:00Z' }, ahora),
+    { regla: 'uno_por_periodo', permitido: false, proximoCambio: '2026-11-01T00:00:00.000Z' });
+  assert.equal(Sus.reglaCambioIdiomas('uno_por_periodo', { ...base, ultimo_cambio_idiomas: '2026-09-25T00:00:00Z' }, ahora).permitido, true, 'periodo anterior');
+  // Cortesía sin periodo: cada 30 días desde el último cambio.
+  const cort = { ...base, origen: 'cortesia', periodo_fin: null, periodo_inicio: null };
+  assert.deepEqual(Sus.reglaCambioIdiomas('uno_por_periodo', { ...cort, ultimo_cambio_idiomas: '2026-10-10T00:00:00Z' }, ahora),
+    { regla: 'uno_por_periodo', permitido: false, proximoCambio: '2026-11-09T00:00:00.000Z' });
+  assert.equal(Sus.reglaCambioIdiomas('uno_por_periodo', { ...cort, ultimo_cambio_idiomas: '2026-09-10T00:00:00Z' }, ahora).permitido, true);
+  assert.deepEqual(Sus.reglaCambioIdiomas('libre', { ...base, ultimo_cambio_idiomas: '2026-10-19T00:00:00Z' }, ahora), { regla: 'libre', permitido: true, proximoCambio: null });
+  assert.deepEqual(Sus.reglaCambioIdiomas('solo_admin', base, ahora), { regla: 'solo_admin', permitido: false, proximoCambio: null });
+  assert.equal(Sus.reglaCambioIdiomas('libre', { ...base, estado: 'vencida' }, ahora).permitido, false, 'sin acceso no hay cambios');
+});
+
+test('desglose por idioma: suscriptores, cortesías y MRR repartido a partes iguales', () => {
+  const ahora = new Date('2026-10-20T12:00:00Z');
+  const fila = (o: object) => ({ origen: 'stripe', estado: 'activa', periodo_fin: null, importe_centavos: 3000, moneda: 'usd', intervalo: 'mes', plan_idiomas: 2, todos_idiomas: false, ...o });
+  const d = Sus.desglosePorIdioma([
+    fila({ idiomas: ['en', 'fr'] }),                                   // 30/mes → 15 en + 15 fr
+    fila({ idiomas: ['en'], importe_centavos: 24000, intervalo: 'anio', plan_idiomas: 1 }), // 20/mes → en
+    fila({ idiomas: [], plan_idiomas: 0, importe_centavos: 5000 }),     // todos
+    fila({ idiomas: [] }),                                             // por elegir
+    fila({ origen: 'cortesia', idiomas: ['fr'], importe_centavos: null }),
+    fila({ idiomas: ['de'], estado: 'impago' }),                       // sin acceso: no cuenta
+  ], ahora);
+  const de = (k: string) => d.find((x) => x.idioma === k);
+  assert.deepEqual(de('en'), { idioma: 'en', suscriptores: 2, cortesias: 0, mrr: 35 });
+  assert.deepEqual(de('fr'), { idioma: 'fr', suscriptores: 1, cortesias: 1, mrr: 15 });
+  assert.deepEqual(de('todos'), { idioma: 'todos', suscriptores: 1, cortesias: 0, mrr: 50 });
+  assert.deepEqual(de('por_elegir'), { idioma: 'por_elegir', suscriptores: 1, cortesias: 0, mrr: 30 });
+  assert.deepEqual(de('de'), { idioma: 'de', suscriptores: 0, cortesias: 0, mrr: 0 });
+  assert.equal(d.length, 12);
+});
+
 // ── Rutas contra la base temporal ────────────────────────────────────────────
 let app: Awaited<ReturnType<typeof crearApp>>;
 let U1 = '', U2 = '', U3 = '';
@@ -235,7 +293,7 @@ after(async () => {
   await c.query(`DROP DATABASE IF EXISTS ${NOMBRE_BD} WITH (FORCE)`); await c.end();
 });
 
-test('migraciones 006 y 007: idempotentes, 3 planes semilla y p2 destacado', { skip: sinBd }, async () => {
+test('migraciones 006, 007 y 008: idempotentes, 3 planes semilla y p2 destacado', { skip: sinBd }, async () => {
   const { readFile } = await import('node:fs/promises');
   await pool.query(await readFile(new URL('../sql/006_pagos.sql', import.meta.url), 'utf8')); // segunda vez: sin efecto ni error
   const r = await pool.query('SELECT id, precio_centavos, idiomas, nombre->>\'en\' AS en, jsonb_array_length(incluye->\'en\') AS ventajas FROM planes ORDER BY orden');
@@ -257,6 +315,12 @@ test('migraciones 006 y 007: idempotentes, 3 planes semilla y p2 destacado', { s
   await pool.query(m7);
   assert.deepEqual(await destacados(), []);
   await pool.query("UPDATE planes SET destacado = true, actualizado_en = creado_en WHERE id = 'p2'");
+  // 008 (idiomas por suscripción) dos veces: sin error; regla por defecto y `idiomas` admite 0 pero no 11.
+  const m8 = await readFile(new URL('../sql/008_pagos_idiomas.sql', import.meta.url), 'utf8');
+  await pool.query(m8); await pool.query(m8);
+  assert.equal((await pool.query('SELECT cambio_idiomas FROM ajustes_pago')).rows[0].cambio_idiomas, 'uno_por_periodo');
+  await assert.rejects(pool.query("UPDATE planes SET idiomas = 11 WHERE id = 'p1'"));
+  await assert.rejects(pool.query("UPDATE ajustes_pago SET cambio_idiomas = 'otra'"));
 });
 
 test('GET /planes sin Stripe: 3 planes, pagos no disponibles; checkout 503', { skip: sinBd }, async () => {
@@ -374,7 +438,15 @@ test('Stripe en Conexiones: pk rechazada sin llamar; 401 «Clave inválida»; gu
 
 test('checkout y confirmar sin webhook; 409 con suscripción activa; portal', { skip: sinBd }, async () => {
   st.llamadas = [];
-  const r = await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(U1), payload: { planId: 'p2' } });
+  // Validación de idiomas (p2 incluye 2): número exacto, códigos válidos y sin repetidos; 400 sin llamar a Stripe.
+  const mal = async (idiomas: unknown) => (await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(U1), payload: { planId: 'p2', idiomas } }));
+  assert.match((await mal(['en'])).json().error, /^Este plan incluye 2 idiomas: elige exactamente 2 \(has elegido 1\)\.$/);
+  assert.match((await mal(undefined)).json().error, /elige exactamente 2 \(has elegido 0\)/);
+  assert.match((await mal(['en', 'xx'])).json().error, /^Código de idioma no válido: xx\./);
+  assert.match((await mal(['en', 'EN'])).json().error, /^Idioma repetido: en\.$/);
+  assert.equal((await mal(['en', 'fr', 'de'])).statusCode, 400);
+  assert.equal(llamadasA(/^POST \/checkout\/sessions$/).length, 0);
+  const r = await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(U1), payload: { planId: 'p2', idiomas: ['EN', 'fr'] } });
   assert.equal(r.statusCode, 200, r.body);
   assert.match(r.json().url, /^https:\/\/checkout\.stripe\.com\//);
   const d = llamadasA(/^POST \/checkout\/sessions$/)[0].datos;
@@ -383,18 +455,23 @@ test('checkout y confirmar sin webhook; 409 con suscripción activa; portal', { 
   assert.equal(d.get('success_url'), 'https://app.onelingo.test/#/pago?estado=ok&session_id={CHECKOUT_SESSION_ID}');
   assert.equal(d.get('cancel_url'), 'https://app.onelingo.test/#/pago?estado=cancelado');
   assert.equal(d.get('subscription_data[metadata][usuario_id]'), U1);
+  assert.equal(d.get('subscription_data[metadata][idiomas]'), 'en,fr'); assert.equal(d.get('metadata[idiomas]'), 'en,fr');
   const precioP2 = (await pool.query("SELECT stripe_precio_id FROM planes WHERE id = 'p2'")).rows[0].stripe_precio_id;
   assert.equal(d.get('line_items[0][price]'), precioP2); assert.equal(d.get('line_items[0][quantity]'), '1');
 
   // El alumno paga (simulado) y vuelve: «Confirmar» consulta la sesión.
   const sesion = st.sesiones.values().next().value;
-  const sub = suscripcionStripe({ precio: st.precios.get(precioP2) });
+  sesion.metadata = { usuario_id: U1, plan_id: 'p2', idiomas: 'en,fr' };
+  const sub = suscripcionStripe({ precio: st.precios.get(precioP2) }); // sin metadata: los idiomas salen de la sesión
   sesion.status = 'complete'; sesion.subscription = sub.id;
   assert.equal((await app.inject({ method: 'POST', url: '/pagos/confirmar', headers: tok(U2), payload: { sessionId: sesion.id } })).statusCode, 403, 'sesión ajena');
   const c = await app.inject({ method: 'POST', url: '/pagos/confirmar', headers: tok(U1), payload: { sessionId: sesion.id } });
   assert.equal(c.statusCode, 200);
   assert.deepEqual([c.json().planId, c.json().estado, c.json().origen, c.json().acceso, c.json().modo, c.json().puedeGestionar], ['p2', 'activa', 'stripe', true, 'test', true]);
   assert.equal((await pool.query('SELECT plan_id FROM usuarios WHERE id = $1', [U1])).rows[0].plan_id, 'p2');
+  assert.deepEqual([c.json().idiomas, c.json().todosLosIdiomas, c.json().idiomasPorElegir], [['en', 'fr'], false, 0]);
+  assert.deepEqual(Object.entries(c.json().accesoPorIdioma).filter(([, v]) => v).map(([k]) => k), ['en', 'fr']);
+  assert.equal(Object.keys(c.json().accesoPorIdioma).length, 10);
   const otra = await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(U1), payload: { planId: 'p3' } });
   assert.equal(otra.statusCode, 409); assert.equal(otra.json().portal, true);
   // Cortesía rechazada si ya paga por Stripe.
@@ -421,7 +498,7 @@ const estadoDe = async (u: string) => (await app.inject({ url: '/usuarios/me/sus
 
 test('webhook: firma válida, inválida y caducada; evento repetido idempotente', { skip: sinBd }, async () => {
   const precio = st.precios.get((await pool.query("SELECT stripe_precio_id FROM planes WHERE id = 'p1'")).rows[0].stripe_precio_id);
-  const sub = suscripcionStripe({ usuarioId: U2, precio });
+  const sub = suscripcionStripe({ usuarioId: U2, precio, idiomas: 'en' });
   const ev = evento('customer.subscription.created', sub);
   assert.equal((await enviar(ev, { secreto: 'whsec_falso' })).statusCode, 400);
   assert.equal((await enviar(ev, { t: Math.floor(Date.now() / 1000) - 600 })).statusCode, 400);
@@ -431,6 +508,7 @@ test('webhook: firma válida, inválida y caducada; evento repetido idempotente'
   const r = await enviar(ev);
   assert.equal(r.statusCode, 200, r.body); assert.equal(r.json().aplicada, true);
   assert.equal((await estadoDe(U2)).planId, 'p1');
+  assert.deepEqual((await estadoDe(U2)).idiomas, ['en'], 'idiomas de metadata.idiomas de la suscripción');
   // invoice.paid repetido: la segunda vez no se consulta a Stripe ni se reprocesa.
   const inv = evento('invoice.paid', { id: 'in_1', parent: { subscription_details: { subscription: sub.id } } });
   st.llamadas = [];
@@ -447,9 +525,9 @@ test('webhook: created → updated con cancel_at_period_end → payment_failed �
   const sub = suscripcionStripe({ precio, cliente: 'cus_carla' });
   // created sin metadata: llega por checkout.session.completed con client_reference_id.
   st.sesiones.set('cs_test_carla', { id: 'cs_test_carla', status: 'complete', client_reference_id: U3, subscription: sub.id });
-  assert.equal((await enviar(evento('checkout.session.completed', { id: 'cs_test_carla', mode: 'subscription', subscription: sub.id, client_reference_id: U3 }))).statusCode, 200);
+  assert.equal((await enviar(evento('checkout.session.completed', { id: 'cs_test_carla', mode: 'subscription', subscription: sub.id, client_reference_id: U3, metadata: { idiomas: 'ja,en,ko' } }))).statusCode, 200);
   let e = await estadoDe(U3);
-  assert.deepEqual([e.planId, e.estado, e.acceso, e.cancelaAlFinal], ['p3', 'activa', true, false]);
+  assert.deepEqual([e.planId, e.estado, e.acceso, e.cancelaAlFinal, e.idiomas], ['p3', 'activa', true, false, ['ja', 'en', 'ko']]);
   // updated: cancela al final del periodo (sigue con acceso).
   sub.cancel_at_period_end = true;
   await enviar(evento('customer.subscription.updated', { ...sub }));
@@ -546,6 +624,12 @@ test('webhook: cambio de plan en el portal (subscription.updated) cambia plan_id
   assert.equal((await pool.query('SELECT plan_id FROM usuarios WHERE id = $1', [U1])).rows[0].plan_id, 'p3');
   let f = (await pool.query('SELECT plan_id, stripe_precio_id, importe_centavos FROM suscripciones WHERE usuario_id = $1', [U1])).rows[0];
   assert.deepEqual(f, { plan_id: 'p3', stripe_precio_id: precioP3.id, importe_centavos: 4000 });
+  // Sube de 2 a 3 idiomas: conserva los 2 y el tercero queda «por elegir»; completarlo no cuenta como cambio.
+  assert.deepEqual([e.idiomas, e.idiomasPorElegir], [['en', 'fr'], 1]);
+  const comp = await app.inject({ method: 'PUT', url: '/usuarios/me/suscripcion/idiomas', headers: tok(U1), payload: { idiomas: ['en', 'fr', 'de'] } });
+  assert.equal(comp.statusCode, 200, comp.body); assert.deepEqual([comp.json().idiomas, comp.json().idiomasPorElegir], [['en', 'fr', 'de'], 0]);
+  assert.equal((await pool.query('SELECT ultimo_cambio_idiomas FROM suscripciones WHERE usuario_id = $1', [U1])).rows[0].ultimo_cambio_idiomas, null);
+  assert.equal(comp.json().cambioIdiomas.permitido, true);
   // Vuelve al Price archivado de p2, sin metadata ni Product reconocible: solo lo encuentra el historial.
   sub.metadata = { usuario_id: U1, plan_id: 'p3' };
   sub.items.data[0].price = { ...precioViejoP2, metadata: {}, product: 'prod_desconocido' };
@@ -553,8 +637,9 @@ test('webhook: cambio de plan en el portal (subscription.updated) cambia plan_id
   assert.equal(r.json().planId, 'p2');
   e = await estadoDe(U1);
   assert.equal(e.planId, 'p2');
-  f = (await pool.query('SELECT plan_id, stripe_precio_id, importe_centavos FROM suscripciones WHERE usuario_id = $1', [U1])).rows[0];
-  assert.deepEqual(f, { plan_id: 'p2', stripe_precio_id: precioViejoP2.id, importe_centavos: 3000 });
+  f = (await pool.query('SELECT plan_id, stripe_precio_id, importe_centavos, idiomas FROM suscripciones WHERE usuario_id = $1', [U1])).rows[0];
+  // Baja de 3 a 2: se conservan los 2 primeros (el servidor nunca guarda más que los del plan).
+  assert.deepEqual(f, { plan_id: 'p2', stripe_precio_id: precioViejoP2.id, importe_centavos: 3000, idiomas: ['en', 'fr'] });
 });
 
 test('panel: /admin/suscripciones con resumen (MRR) y /admin/resumen con métricas y minutos de prueba', { skip: sinBd }, async () => {
@@ -575,4 +660,124 @@ test('panel: /admin/suscripciones con resumen (MRR) y /admin/resumen con métric
   assert.equal((await app.inject({ url: '/planes' })).json().pruebaMinutos, 30);
   const det = (await app.inject({ url: `/admin/usuarios/${U1}`, headers: admin() })).json();
   assert.equal(det.suscripcion.planId, 'p2'); assert.equal(det.suscripcion.origen, 'stripe');
+});
+
+test('panel: desglose por idioma y filtro por idioma en /admin/suscripciones', { skip: sinBd }, async () => {
+  const d = (await app.inject({ url: '/admin/suscripciones', headers: admin() })).json();
+  const de = (k: string) => d.resumen.porIdioma.find((x: any) => x.idioma === k);
+  // U1: p2 [en, fr] a 30/mes; U2: anual p1 (240/año = 20/mes) sin idiomas en la metadata → «por elegir».
+  assert.deepEqual([de('en').suscriptores, de('en').mrr, de('fr').mrr, de('por_elegir').suscriptores, de('por_elegir').mrr], [1, 15, 15, 1, 20]);
+  const u1 = d.filas.find((f: any) => f.usuarioId === U1);
+  assert.deepEqual([u1.idiomas, u1.todosLosIdiomas, u1.idiomasPorElegir, u1.idiomasPlan], [['en', 'fr'], false, 0, 2]);
+  const fr = (await app.inject({ url: '/admin/suscripciones?idioma=fr', headers: admin() })).json();
+  assert.deepEqual(fr.filas.map((f: any) => f.usuarioId), [U1]);
+  assert.equal((await app.inject({ url: '/admin/suscripciones?idioma=xx', headers: admin() })).statusCode, 400);
+});
+
+test('cambioIdiomas: uno_por_periodo (proximoCambio), libre y solo_admin; el admin edita sin regla; queda en eventos', { skip: sinBd }, async () => {
+  const put = (idiomas: string[], h = tok(U1)) => app.inject({ method: 'PUT', url: '/usuarios/me/suscripcion/idiomas', headers: h, payload: { idiomas } });
+  const ajustes = (cambioIdiomas: string) => app.inject({ method: 'PUT', url: '/admin/pagos/ajustes', headers: admin(), payload: { pruebaMinutos: 60, moneda: 'usd', cambioIdiomas } });
+  assert.equal((await app.inject({ url: '/admin/pagos/ajustes', headers: admin() })).json().cambioIdiomas, 'uno_por_periodo');
+  let e = await estadoDe(U1);
+  assert.deepEqual(e.cambioIdiomas, { regla: 'uno_por_periodo', permitido: true, proximoCambio: null });
+  let r = await put(['en', 'de']);
+  assert.equal(r.statusCode, 200, r.body); assert.deepEqual(r.json().idiomas, ['en', 'de']);
+  assert.deepEqual([r.json().cambioIdiomas.permitido, r.json().cambioIdiomas.proximoCambio], [false, r.json().periodoFin]);
+  assert.equal((await put(['de', 'en'])).statusCode, 200, 'reordenar no es un cambio');
+  r = await put(['en', 'it']);
+  assert.equal(r.statusCode, 403); assert.match(r.json().error, /Ya cambiaste un idioma en este periodo/);
+  assert.equal(r.json().proximoCambio, e.periodoFin);
+  // Empieza otro periodo de facturación (renovación por el webhook): vuelve a poder.
+  const sub = st.subs.get((await pool.query('SELECT stripe_suscripcion_id FROM suscripciones WHERE usuario_id = $1', [U1])).rows[0].stripe_suscripcion_id);
+  const ahoraS = Math.floor(Date.now() / 1000);
+  sub.items.data[0].current_period_start = ahoraS + 5; sub.items.data[0].current_period_end = ahoraS + 35 * 86400;
+  await enviar(evento('customer.subscription.updated', { ...sub }));
+  assert.deepEqual((await estadoDe(U1)).idiomas, ['de', 'en'], 'la renovación conserva los idiomas de la fila, no los de la metadata');
+  assert.equal((await put(['en', 'it'])).statusCode, 200);
+  // libre: sin límite.
+  await ajustes('libre');
+  assert.equal((await put(['en', 'ru'])).statusCode, 200); assert.equal((await put(['en', 'ko'])).statusCode, 200);
+  // solo_admin: 403 sin fecha; el admin sí puede (respetando el número de idiomas del plan).
+  await ajustes('solo_admin');
+  r = await put(['en', 'ja']);
+  assert.equal(r.statusCode, 403); assert.deepEqual(Object.keys(r.json()).sort(), ['error', 'proximoCambio']); assert.equal(r.json().proximoCambio, null);
+  assert.equal((await estadoDe(U1)).cambioIdiomas.permitido, false);
+  const antesUlt = (await pool.query('SELECT ultimo_cambio_idiomas FROM suscripciones WHERE usuario_id = $1', [U1])).rows[0].ultimo_cambio_idiomas;
+  const adm = (idiomas: unknown) => app.inject({ method: 'PUT', url: `/admin/usuarios/${U1}/suscripcion/idiomas`, headers: admin(), payload: { idiomas } });
+  r = await adm(['ja', 'zh']);
+  assert.equal(r.statusCode, 200, r.body); assert.deepEqual(r.json().idiomas, ['ja', 'zh']);
+  assert.equal((await adm(['ja', 'zh', 'ru'])).statusCode, 400);
+  assert.equal((await app.inject({ method: 'PUT', url: `/admin/usuarios/${U1}/suscripcion/idiomas`, headers: tok(U1), payload: { idiomas: ['en'] } })).statusCode, 403);
+  assert.deepEqual((await pool.query('SELECT ultimo_cambio_idiomas FROM suscripciones WHERE usuario_id = $1', [U1])).rows[0].ultimo_cambio_idiomas, antesUlt, 'el admin no gasta el cambio del alumno');
+  const ev = (await pool.query(`SELECT tipo, datos FROM eventos WHERE usuario_id = $1 AND tipo LIKE 'cambio_idiomas%' ORDER BY id`, [U1])).rows;
+  assert.ok(ev.some((x) => x.tipo === 'cambio_idiomas' && x.datos.cambio === true && x.datos.antes.join() === 'en,fr' && x.datos.despues.join() === 'en,de'));
+  assert.ok(ev.some((x) => x.tipo === 'cambio_idiomas' && x.datos.cambio === false), 'completar/reordenar también se registra, sin contar');
+  assert.equal(ev.filter((x) => x.tipo === 'cambio_idiomas_admin').length, 1);
+  assert.equal((await ajustes('otra')).statusCode, 400);
+  await ajustes('uno_por_periodo');
+  await adm(['en', 'fr']);
+});
+
+test('cortesía con idiomas o «todos»; acceso según idioma_meta; regla de 30 días sin periodo', { skip: sinBd }, async () => {
+  const U4 = (await pool.query("INSERT INTO usuarios (email, nombre, idioma_meta) VALUES ('dora@pagos.test', 'dora', 'en') RETURNING id")).rows[0].id as string;
+  const cort = (payload: object) => app.inject({ method: 'POST', url: `/admin/usuarios/${U4}/cortesia`, headers: admin(), payload });
+  const put = (idiomas: string[]) => app.inject({ method: 'PUT', url: '/usuarios/me/suscripcion/idiomas', headers: tok(U4), payload: { idiomas } });
+  // Sin cortesía: sin acceso en ningún idioma.
+  let e = await estadoDe(U4);
+  assert.equal(e.acceso, false); assert.ok(!Object.values(e.accesoPorIdioma).some(Boolean));
+  assert.equal((await put(['en'])).statusCode, 409);
+  // «todos» en un plan de 2: todos los idiomas, nada que elegir ni cambiar.
+  let r = await cort({ planId: 'p2', idiomas: 'todos' });
+  assert.equal(r.statusCode, 200, r.body);
+  assert.deepEqual([r.json().todosLosIdiomas, r.json().idiomasPorElegir, r.json().acceso, r.json().cambioIdiomas.permitido], [true, 0, true, false]);
+  assert.ok(Object.values(r.json().accesoPorIdioma).every(Boolean));
+  assert.equal((await put(['en', 'fr'])).statusCode, 400);
+  // Lista: el que falta queda «por elegir»; `acceso` = acceso en el idioma meta.
+  r = await cort({ planId: 'p2', idiomas: ['fr'] });
+  assert.deepEqual([r.json().idiomas, r.json().idiomasPorElegir, r.json().acceso, r.json().accesoPlan, r.json().accesoPorIdioma.fr], [['fr'], 1, false, true, true]);
+  await pool.query("UPDATE usuarios SET idioma_meta = 'fr' WHERE id = $1", [U4]);
+  assert.equal((await estadoDe(U4)).acceso, true, 'acceso en el idioma meta (fr)');
+  // Completar no cuenta; un cambio sí; el siguiente, a los 30 días.
+  assert.equal((await put(['fr', 'it'])).statusCode, 200);
+  assert.equal((await estadoDe(U4)).cambioIdiomas.permitido, true);
+  assert.equal((await put(['de', 'it'])).statusCode, 200);
+  r = await put(['de', 'ru']);
+  assert.equal(r.statusCode, 403);
+  const dias = (new Date(r.json().proximoCambio).getTime() - Date.now()) / 86_400_000;
+  assert.ok(dias > 29.9 && dias <= 30, `proximoCambio a 30 días (${dias})`);
+  // Validación de la cortesía.
+  assert.match((await cort({ planId: 'p2', idiomas: ['fr', 'fr'] })).json().error, /repetido/);
+  assert.match((await cort({ planId: 'p2', idiomas: ['fr', 'de', 'it'] })).json().error, /no puedes tener 3/);
+  assert.equal((await cort({ planId: 'p2', idiomas: ['zz'] })).statusCode, 400);
+  // Sin idiomas: el idioma meta del alumno.
+  r = await cort({ planId: 'p1' });
+  assert.deepEqual(r.json().idiomas, ['fr']);
+  assert.equal((await app.inject({ method: 'DELETE', url: `/admin/usuarios/${U4}/cortesia`, headers: admin() })).statusCode, 200);
+  await pool.query('DELETE FROM usuarios WHERE id = $1', [U4]);
+});
+
+test('plan de 0 idiomas («Todos los idiomas»): checkout sin selector, confirmar da acceso en los 10', { skip: sinBd }, async () => {
+  const c = await app.inject({ method: 'POST', url: '/admin/planes', headers: admin(), payload: {
+    id: 'todo', nombre: { es: 'Todos los idiomas', en: 'All languages' }, incluye: { es: ['Todo'], en: ['Everything'] }, idiomas: 0, precio: 60, intervalo: 'mes', orden: 9,
+  } });
+  assert.equal(c.statusCode, 201, c.body);
+  assert.equal((await app.inject({ url: '/planes' })).json().planes.find((p: any) => p.id === 'todo').idiomas, 0);
+  assert.equal((await app.inject({ method: 'PUT', url: '/admin/planes/todo', headers: admin(), payload: { idiomas: 11 } })).statusCode, 400);
+  const U5 = (await pool.query("INSERT INTO usuarios (email, nombre, idioma_meta) VALUES ('eva@pagos.test', 'eva', 'ko') RETURNING id")).rows[0].id as string;
+  const mal = await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(U5), payload: { planId: 'todo', idiomas: ['en'] } });
+  assert.equal(mal.statusCode, 400); assert.match(mal.json().error, /todos los idiomas/);
+  st.llamadas = [];
+  const r = await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(U5), payload: { planId: 'todo', idiomas: [] } });
+  assert.equal(r.statusCode, 200, r.body);
+  const d = llamadasA(/^POST \/checkout\/sessions$/)[0].datos;
+  assert.equal(d.get('subscription_data[metadata][idiomas]'), null);
+  const sesion = [...st.sesiones.values()].at(-1);
+  const sub = suscripcionStripe({ precio: st.precios.get((await pool.query("SELECT stripe_precio_id FROM planes WHERE id = 'todo'")).rows[0].stripe_precio_id) });
+  sesion.status = 'complete'; sesion.subscription = sub.id;
+  const e = (await app.inject({ method: 'POST', url: '/pagos/confirmar', headers: tok(U5), payload: { sessionId: sesion.id } })).json();
+  assert.deepEqual([e.planId, e.todosLosIdiomas, e.idiomasPorElegir, e.acceso, e.idiomasPlan], ['todo', true, 0, true, 0]);
+  assert.ok(Object.values(e.accesoPorIdioma).every(Boolean));
+  assert.equal(e.cambioIdiomas.permitido, false);
+  await pool.query('DELETE FROM usuarios WHERE id = $1', [U5]);
+  assert.equal((await app.inject({ method: 'DELETE', url: '/admin/planes/todo', headers: admin() })).statusCode, 200);
 });

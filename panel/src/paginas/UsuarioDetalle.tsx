@@ -4,18 +4,44 @@ import { api, ESTADOS, fecha, hace, IDIOMAS, minutos, nivelCorto, num, PLATAFORM
 const lista = (v: unknown) => (Array.isArray(v) ? v.join(', ') : typeof v === 'object' && v ? Object.keys(v).join(', ') : String(v ?? ''))
 
 /** Suscripción del alumno y cortesía (acceso sin pago dado por el administrador). */
+const CODIGOS = ['en', 'fr', 'es', 'pt', 'de', 'it', 'zh', 'ja', 'ru', 'ko']
+
+/** Chips para elegir idiomas; el orden de selección cuenta (al bajar de plan se conservan los primeros). */
+function SelectorIdiomas({ valor, max, onChange }: { valor: string[]; max: number; onChange: (v: string[]) => void }) {
+  return (
+    <div className="chips">
+      {CODIGOS.map((c) => {
+        const i = valor.indexOf(c)
+        return <button type="button" key={c} className={`chip ${i >= 0 ? 'si' : ''}`} disabled={i < 0 && valor.length >= max}
+          onClick={() => onChange(i >= 0 ? valor.filter((x) => x !== c) : [...valor, c])}>{IDIOMAS[c] ?? c}{i >= 0 && <span className="n">{i + 1}</span>}</button>
+      })}
+    </div>
+  )
+}
+
+const REGLAS: Record<string, string> = { libre: 'cambio libre', uno_por_periodo: 'un cambio por periodo', solo_admin: 'solo desde el panel' }
+
 function Suscripcion({ id, s, alCambiar }: { id: string; s: any; alCambiar: () => void }) {
-  const [planes, setPlanes] = useState<{ id: string; nombre: { es: string }; archivado: boolean }[]>([])
+  const [planes, setPlanes] = useState<{ id: string; nombre: { es: string }; archivado: boolean; idiomas: number }[]>([])
   const [plan, setPlan] = useState(''); const [hasta, setHasta] = useState(''); const [nota, setNota] = useState('')
+  const [modoIdiomas, setModoIdiomas] = useState<'meta' | 'lista' | 'todos'>('meta'); const [lista, setLista] = useState<string[]>([])
+  const [editando, setEditando] = useState(false); const [nuevos, setNuevos] = useState<string[]>([])
   const [msg, setMsg] = useState(''); const [ocupado, setOcupado] = useState(false)
+  const nPlanCortesia = planes.find((p) => p.id === plan)?.idiomas ?? 1
+  const guardarIdiomas = async () => {
+    setOcupado(true); setMsg('')
+    try { await api(`/admin/usuarios/${id}/suscripcion/idiomas`, { metodo: 'PUT', cuerpo: { idiomas: nuevos } }); setEditando(false); alCambiar() }
+    catch (x: any) { setMsg(x.message) } finally { setOcupado(false) }
+  }
   useEffect(() => { api('/admin/planes').then((r) => { const l = r.planes.filter((p: any) => !p.archivado); setPlanes(l); setPlan((x) => x || l[0]?.id || '') }).catch(() => {}) }, [])
   const [clase, etq] = ESTADOS[s.estado] ?? ['', s.estado]
   const enStripe = s.origen === 'stripe' && ['activa', 'prueba_stripe', 'impago'].includes(s.estado)
   const dar = async (e: React.FormEvent) => {
     e.preventDefault(); setOcupado(true); setMsg('')
     try {
-      await api(`/admin/usuarios/${id}/cortesia`, { metodo: 'POST', cuerpo: { planId: plan, hasta: hasta ? new Date(`${hasta}T23:59:59`).toISOString() : null, nota } })
-      setHasta(''); setNota(''); alCambiar()
+      const idiomas = nPlanCortesia === 0 ? undefined : modoIdiomas === 'todos' ? 'todos' : modoIdiomas === 'lista' ? lista : undefined
+      await api(`/admin/usuarios/${id}/cortesia`, { metodo: 'POST', cuerpo: { planId: plan, idiomas, hasta: hasta ? new Date(`${hasta}T23:59:59`).toISOString() : null, nota } })
+      setHasta(''); setNota(''); setLista([]); setModoIdiomas('meta'); alCambiar()
     } catch (x: any) { setMsg(x.datos?.detalles?.join(' · ') || x.message) } finally { setOcupado(false) }
   }
   const quitar = async () => {
@@ -30,7 +56,8 @@ function Suscripcion({ id, s, alCambiar }: { id: string; s: any; alCambiar: () =
         <span className={`pill ${clase}`}>{etq}</span>
         {s.origen && <span className="pill">{s.origen === 'cortesia' ? 'Cortesía' : 'Stripe'}</span>}
         {s.modo && <span className={`pill ${s.modo === 'live' ? 'ok' : 'trial'}`}>{s.modo === 'live' ? 'MODO REAL' : 'MODO TEST'}</span>}
-        <span className={`pill ${s.acceso ? 'ok' : 'mal'}`}>{s.acceso ? 'Con acceso' : 'Sin acceso'}</span>
+        <span className={`pill ${s.accesoPlan ? 'ok' : 'mal'}`}>{s.accesoPlan ? 'Con acceso' : 'Sin acceso'}</span>
+        {s.accesoPlan && !s.acceso && <span className="pill trial">{IDIOMAS[s.idiomaMeta] ?? s.idiomaMeta} (idioma actual) en prueba</span>}
       </div>
       <div className="sus-datos">
         <div><div className="l">Plan</div><b>{s.planId || s.filaPlanId || '—'}</b></div>
@@ -38,6 +65,20 @@ function Suscripcion({ id, s, alCambiar }: { id: string; s: any; alCambiar: () =
         <div><div className="l">Prueba gratuita</div>{minutos(s.prueba.segundosUsados)} de {s.prueba.minutos} min{s.prueba.agotada ? ' · agotada' : ''}</div>
         {s.stripeClienteId && <div><div className="l">Cliente de Stripe</div><span className="mono">{s.stripeClienteId}</span></div>}
       </div>
+      {s.idiomasPlan !== null && s.idiomasPlan !== undefined && <div style={{ margin: '4px 0 8px' }}>
+        <div className="muted" style={{ fontSize: 12, marginBottom: 4 }}>Idiomas de pago{s.idiomasPlan > 0 ? ` (el plan incluye ${s.idiomasPlan})` : ''} · {REGLAS[s.cambioIdiomas?.regla] ?? ''}
+          {s.cambioIdiomas?.proximoCambio ? ` · próximo cambio del alumno: ${fecha(s.cambioIdiomas.proximoCambio)}` : ''}</div>
+        {editando ? <>
+          <SelectorIdiomas valor={nuevos} max={s.idiomasPlan} onChange={setNuevos} />
+          <div className="acciones"><button type="button" disabled={ocupado || nuevos.length === 0} onClick={guardarIdiomas}>{ocupado ? 'Guardando…' : 'Guardar idiomas'}</button>
+            <button type="button" className="sec" onClick={() => setEditando(false)}>Cancelar</button>
+            <span className="muted">{nuevos.length} de {s.idiomasPlan}. Sin aplicar la regla de cambios del alumno.</span></div>
+        </> : <div className="chips">
+          {s.todosLosIdiomas ? <span className="pill ok">Todos los idiomas</span> : s.idiomas.map((c: string) => <span key={c} className={`pill ${s.accesoPlan ? 'ok' : ''}`}>{IDIOMAS[c] ?? c}</span>)}
+          {s.idiomasPorElegir > 0 && <span className="pill trial">{s.idiomasPorElegir} por elegir</span>}
+          {!s.todosLosIdiomas && s.idiomasPlan > 0 && <button type="button" className="chip" onClick={() => { setNuevos(s.idiomas); setEditando(true) }}>Editar idiomas</button>}
+        </div>}
+      </div>}
       {s.nota && <p className="muted uso-nota">Nota: {s.nota}</p>}
       {s.origen === 'cortesia' && <div className="acciones"><button className="sec" disabled={ocupado} onClick={quitar}>Quitar cortesía</button></div>}
       {enStripe ? <p className="muted uso-nota">Paga con Stripe: los cambios (cancelar, tarjeta) se hacen en el portal del alumno o en el Dashboard de Stripe.</p> : (
@@ -48,6 +89,14 @@ function Suscripcion({ id, s, alCambiar }: { id: string; s: any; alCambiar: () =
             <label className="campo"><span>Hasta (vacío = sin fecha)</span><input type="date" value={hasta} min={new Date().toISOString().slice(0, 10)} onChange={(e) => setHasta(e.target.value)} /></label>
             <label className="campo"><span>Nota</span><input maxLength={500} value={nota} onChange={(e) => setNota(e.target.value)} placeholder="Beca, socio, prueba…" /></label>
           </div>
+          {nPlanCortesia === 0 ? <p className="muted uso-nota">Este plan incluye todos los idiomas.</p> : <>
+            <label className="campo" style={{ maxWidth: 320 }}><span>Idiomas</span><select value={modoIdiomas} onChange={(e) => setModoIdiomas(e.target.value as any)}>
+              <option value="meta">El que aprende ahora ({IDIOMAS[s.idiomaMeta] ?? s.idiomaMeta})</option>
+              <option value="lista">Elegir (hasta {nPlanCortesia})</option>
+              <option value="todos">Todos los idiomas</option>
+            </select></label>
+            {modoIdiomas === 'lista' && <SelectorIdiomas valor={lista.slice(0, nPlanCortesia)} max={nPlanCortesia} onChange={setLista} />}
+          </>}
           <div className="acciones"><button disabled={ocupado || !plan}>{ocupado ? 'Guardando…' : 'Dar acceso'}</button></div>
         </form>
       )}
@@ -70,7 +119,7 @@ export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id:
     <>
       <div className="cab"><div><span className="volver" onClick={volver}>← {desde === 'suscripciones' ? 'Suscripciones' : 'Alumnos'}</span><h1>{u.nombre}</h1>
         <span className="muted mono">{u.email} · {PLATAFORMAS[u.plataforma || 'desconocida'] ?? u.plataforma} · registrado {fecha(u.creado_en)} · activo {hace(u.ultima_actividad)}</span></div>
-        <div>{d.suscripcion.acceso ? <span className="pill ok">Plan {d.suscripcion.planId}</span> : <span className="pill trial">Prueba gratuita · {Math.round(d.suscripcion.prueba.restanteSegundos / 60)} min</span>}</div></div>
+        <div>{d.suscripcion.accesoPlan ? <span className="pill ok">Plan {d.suscripcion.planId}</span> : <span className="pill trial">Prueba gratuita · {Math.round(d.suscripcion.prueba.restanteSegundos / 60)} min</span>}</div></div>
       <div className="kpis">
         <div className="kpi"><div className="v">{IDIOMAS[u.idioma_meta] ?? u.idioma_meta}</div><div className="l">Aprende</div><div className="nota">nativo: {IDIOMAS[u.idioma_nativo] ?? u.idioma_nativo}</div></div>
         <div className="kpi"><div className="v">{d.clases}</div><div className="l">Clases completadas</div>{d.legado > 0 && <div className="nota">{d.legado} del temario antiguo</div>}</div>
@@ -84,7 +133,8 @@ export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id:
       <div className="grid2">
         <div className="tarjeta"><h2>Progreso por idioma y nivel</h2>
           {d.progresoIdiomas.map((pi: any) => <div key={pi.idioma} style={{ marginBottom: 12 }}>
-            <b>{IDIOMAS[pi.idioma] ?? pi.idioma}</b> <span className="muted">· {pi.total} clases</span>
+            <b>{IDIOMAS[pi.idioma] ?? pi.idioma}</b> <span className="muted">· {pi.total} clases</span>{' '}
+            {d.suscripcion.accesoPorIdioma?.[pi.idioma] ? <span className="pill ok">De pago</span> : <span className="pill trial">Prueba</span>}
             <table><tbody>{pi.niveles.filter((n: any) => n.clases > 0 || n.nivel <= Math.max(1, nivelMax)).map((n: any) => <tr key={n.nivel}>
               <td style={{ width: 50 }}>{nivelCorto(n.nivel)}</td>
               <td><div className="barra"><i style={{ width: `${n.publicadas ? Math.min(100, (n.clases / n.publicadas) * 100) : n.clases ? 100 : 0}%` }} /></div></td>

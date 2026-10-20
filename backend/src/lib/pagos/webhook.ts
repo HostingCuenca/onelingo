@@ -20,7 +20,7 @@ export async function aplicarEvento(ev: any): Promise<Record<string, unknown>> {
     case 'checkout.session.completed': {
       if (o.mode !== 'subscription' || !o.subscription) return { ignorado: 'no es una suscripción' };
       const sub = typeof o.subscription === 'string' ? await stripe.obtenerSuscripcion(o.subscription) : o.subscription;
-      return sincronizarDesdeStripe(sub, { usuarioId: o.client_reference_id ?? o.metadata?.usuario_id ?? null });
+      return sincronizarDesdeStripe(sub, { usuarioId: o.client_reference_id ?? o.metadata?.usuario_id ?? null, idiomas: o.metadata?.idiomas });
     }
     case 'customer.subscription.created':
     case 'customer.subscription.updated':

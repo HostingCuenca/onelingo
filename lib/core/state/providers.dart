@@ -650,6 +650,39 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
     return true;
   }
 
+  /// Cambia el idioma que se estudia. La ubicación (nivel, prueba de nivel,
+  /// fundamentos) es de cada idioma: la del idioma actual se guarda en
+  /// `practicas['ubicacion:<idioma>']` y se recupera al volver a él. Un idioma
+  /// nuevo empieza sin ubicación (nivel 1), como tras un registro.
+  /// El progreso de la ruta ya va por idioma en sus propias claves.
+  void cambiarIdiomaMeta(String codigo) {
+    if (codigo == state.idiomaMeta) return;
+    final j = state.toJson();
+    final practicas = Map<String, dynamic>.from(state.practicas);
+    practicas['ubicacion:${state.idiomaMeta}'] = {
+      'nivelInicial': state.nivelInicial,
+      'nivelEscala': state.nivelEscala,
+      'nivelClienteInicial': ?state.nivelClienteInicial,
+      'fundamentos': state.fundamentos,
+      'diagnostico': ?state.diagnostico,
+    };
+    final previa = (practicas['ubicacion:$codigo'] as Map?)
+        ?.cast<String, dynamic>();
+    j
+      ..remove('nivelClienteInicial')
+      ..remove('diagnostico')
+      ..['idiomaMeta'] = codigo
+      ..['practicas'] = practicas
+      ..['nivelInicial'] = previa?['nivelInicial'] ?? 1
+      ..['nivelEscala'] = previa?['nivelEscala'] ?? escalaDiagnosticoLegacy
+      ..['fundamentos'] = previa?['fundamentos'] ?? false;
+    if (previa?['nivelClienteInicial'] != null) {
+      j['nivelClienteInicial'] = previa!['nivelClienteInicial'];
+    }
+    if (previa?['diagnostico'] != null) j['diagnostico'] = previa!['diagnostico'];
+    _save(ProgressState.fromJson(j));
+  }
+
   /// Plan efectivo que dice el servidor (dato derivado, como `usuarios.plan_id`):
   /// detiene o reanuda el conteo local de la prueba.
   void aplicarPlanServidor(String planId) {

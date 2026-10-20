@@ -29,9 +29,9 @@ export interface ProveedorPagos {
   /** Producto/precio del plan en el proveedor. Rellena `out` a medida que avanza. */
   sincronizarPlan(plan: FilaPlan, out: SyncPlan): Promise<SyncPlan>;
   /** URL de la página de pago alojada para suscribirse. */
-  crearCheckout(d: { usuarioId: string; email: string; clienteId: string | null; plan: FilaPlan; exito: string; cancelar: string }): Promise<string>;
+  crearCheckout(d: { usuarioId: string; email: string; clienteId: string | null; plan: FilaPlan; idiomas: string[]; exito: string; cancelar: string }): Promise<string>;
   /** Sesión de pago y suscripción resultante (objeto del proveedor), para confirmar sin webhook. */
-  obtenerCheckout(sessionId: string): Promise<{ usuarioId: string | null; completada: boolean; suscripcion: any | null; clienteId: string | null }>;
+  obtenerCheckout(sessionId: string): Promise<{ usuarioId: string | null; completada: boolean; suscripcion: any | null; clienteId: string | null; idiomas: string | null }>;
   obtenerSuscripcion(id: string): Promise<any>;
   /** URL del portal donde el alumno gestiona su suscripción (con `configuracion`, la de OneLingo). */
   crearPortal(clienteId: string, retorno: string, configuracion?: string | null): Promise<string>;
@@ -96,8 +96,9 @@ export const stripe: ProveedorPagos = {
       client_reference_id: d.usuarioId,
       ...(d.clienteId ? { customer: d.clienteId } : { customer_email: d.email }),
       success_url: d.exito, cancel_url: d.cancelar,
-      metadata: { usuario_id: d.usuarioId, plan_id: d.plan.id },
-      subscription_data: { metadata: { usuario_id: d.usuarioId, plan_id: d.plan.id } },
+      // Idiomas elegidos ("en,fr"; vacío en un plan de todos los idiomas): el webhook y «Confirmar» los guardan.
+      metadata: { usuario_id: d.usuarioId, plan_id: d.plan.id, idiomas: d.idiomas.join(',') || undefined },
+      subscription_data: { metadata: { usuario_id: d.usuarioId, plan_id: d.plan.id, idiomas: d.idiomas.join(',') || undefined } },
     });
     if (!ses?.url) throw new Error('Stripe no devolvió la URL de pago.');
     return ses.url;
@@ -113,6 +114,7 @@ export const stripe: ProveedorPagos = {
       completada: ses?.status === 'complete',
       suscripcion: sus,
       clienteId: typeof ses?.customer === 'string' ? ses.customer : ses?.customer?.id ?? null,
+      idiomas: typeof ses?.metadata?.idiomas === 'string' ? ses.metadata.idiomas : null,
     };
   },
 

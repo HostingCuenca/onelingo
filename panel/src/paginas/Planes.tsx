@@ -7,7 +7,8 @@ type Plan = {
   intervalo: 'mes' | 'anio'; destacado: boolean; orden: number; visible: boolean; archivado: boolean; suscriptores: number; actualizadoEn: string
   stripe: { estado: 'sincronizado' | 'sin sincronizar' | 'sin stripe'; error: string | null; productoId: string | null; precioId: string | null; modo: string | null }
 }
-type Datos = { planes: Plan[]; ajustes: { pruebaMinutos: number; moneda: string }; pagos: { disponible: boolean; modo: 'test' | 'live' | null } }
+type Regla = 'libre' | 'uno_por_periodo' | 'solo_admin'
+type Datos = { planes: Plan[]; ajustes: { pruebaMinutos: number; moneda: string; cambioIdiomas?: Regla }; pagos: { disponible: boolean; modo: 'test' | 'live' | null } }
 type Form = { id: string; nombreEs: string; nombreEn: string; descEs: string; descEn: string; incluyeEs: string; incluyeEn: string; idiomas: string; precio: string; intervalo: 'mes' | 'anio'; orden: string; destacado: boolean; visible: boolean }
 
 const INTERVALO: Record<string, string> = { mes: 'al mes', anio: 'al año' }
@@ -59,7 +60,10 @@ function Editor({ plan, orden, pagos, alGuardar, cancelar }: { plan?: Plan; orde
       <div className="form-grid tres">
         <label className="campo"><span>Precio ({(plan?.moneda ?? 'usd').toUpperCase()})</span><input required inputMode="decimal" value={f.precio} onChange={c('precio')} placeholder="20.00" /></label>
         <label className="campo"><span>Cobro</span><select value={f.intervalo} onChange={c('intervalo')}><option value="mes">Mensual</option><option value="anio">Anual</option></select></label>
-        <label className="campo"><span>Idiomas incluidos</span><input type="number" min={1} max={10} required value={f.idiomas} onChange={c('idiomas')} /></label>
+        <label className="campo"><span>Idiomas incluidos</span><select value={f.idiomas} onChange={c('idiomas')}>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => <option key={n} value={String(n)}>{n} {n === 1 ? 'idioma' : 'idiomas'} a elegir</option>)}
+          <option value="0">Todos los idiomas</option>
+        </select></label>
         <label className="campo"><span>Orden</span><input type="number" min={0} value={f.orden} onChange={c('orden')} /></label>
         {!plan && <label className="campo"><span>Id (opcional)</span><input value={f.id} onChange={c('id')} placeholder="se genera del nombre" pattern="[a-z0-9][a-z0-9-]{0,39}" /></label>}
       </div>
@@ -79,21 +83,28 @@ function Editor({ plan, orden, pagos, alGuardar, cancelar }: { plan?: Plan; orde
 
 function Ajustes({ a, alGuardar }: { a: Datos['ajustes']; alGuardar: () => void }) {
   const [min, setMin] = useState(String(a.pruebaMinutos)); const [moneda, setMoneda] = useState(a.moneda)
+  const [regla, setRegla] = useState<Regla>(a.cambioIdiomas ?? 'uno_por_periodo')
   const [msg, setMsg] = useState(''); const [ocupado, setOcupado] = useState(false)
   const guardar = async (e: React.FormEvent) => {
     e.preventDefault(); setOcupado(true); setMsg('')
-    try { await api('/admin/pagos/ajustes', { metodo: 'PUT', cuerpo: { pruebaMinutos: Number(min), moneda } }); setMsg('Guardado.'); alGuardar() }
+    try { await api('/admin/pagos/ajustes', { metodo: 'PUT', cuerpo: { pruebaMinutos: Number(min), moneda, cambioIdiomas: regla } }); setMsg('Guardado.'); alGuardar() }
     catch (x: any) { setMsg(x.datos?.detalles?.join(' · ') || x.message) } finally { setOcupado(false) }
   }
   return (
     <form className="tarjeta conexion-form" onSubmit={guardar}>
-      <h2>Prueba gratuita</h2>
+      <h2>Prueba gratuita e idiomas</h2>
       <div className="form-grid tres">
         <label className="campo"><span>Minutos de uso real</span><input type="number" min={0} max={10000} required value={min} onChange={(e) => setMin(e.target.value)} /></label>
         <label className="campo"><span>Moneda de los planes nuevos</span><input maxLength={3} required value={moneda} onChange={(e) => setMoneda(e.target.value.toLowerCase())} /></label>
+        <label className="campo"><span>Cambiar un idioma por otro</span><select value={regla} onChange={(e) => setRegla(e.target.value as Regla)}>
+          <option value="uno_por_periodo">Uno por periodo de facturación</option>
+          <option value="libre">Libre</option>
+          <option value="solo_admin">Solo desde el panel</option>
+        </select></label>
       </div>
       <div className="acciones"><button disabled={ocupado}>{ocupado ? 'Guardando…' : 'Guardar'}</button>{msg && <span className="muted">{msg}</span>}</div>
-      <p className="muted uso-nota">La app la recibe en <span className="mono">GET /planes</span> y en la suscripción del alumno. El tiempo usado nunca baja aunque la app mande menos.</p>
+      <p className="muted uso-nota">La app la recibe en <span className="mono">GET /planes</span> y en la suscripción del alumno. El tiempo usado nunca baja aunque la app mande menos. Los minutos de prueba son únicos y se suman entre todos los idiomas.
+        Cambio de idioma: «uno por periodo» cuenta desde el inicio del periodo de Stripe (cada 30 días en las cortesías); completar los idiomas «por elegir» no cuenta. Desde el detalle del alumno siempre puedes editarlos.</p>
     </form>
   )
 }
@@ -140,7 +151,7 @@ export default function Planes() {
             return <tr key={p.id} style={p.archivado ? { opacity: 0.6 } : undefined}>
               <td><b>{p.nombre.es}</b>{p.destacado && <> <span className="pill">Destacado</span></>}<br /><span className="muted">{p.nombre.en || '— sin inglés —'} · <span className="mono">{p.id}</span> · orden {p.orden}</span></td>
               <td className="num">{precio(p)}</td>
-              <td className="num">{p.idiomas}</td>
+              <td className="num">{p.idiomas === 0 ? 'Todos' : p.idiomas}</td>
               <td>{p.archivado ? <span className="pill mal">Archivado</span> : p.visible ? <span className="pill ok">Visible</span> : <span className="pill trial">Oculto</span>}</td>
               <td className="num">{p.suscriptores}</td>
               <td><span className={`pill ${clase}`} title={p.stripe.error ?? p.stripe.precioId ?? ''}>{etq}</span>

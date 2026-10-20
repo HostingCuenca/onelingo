@@ -16,6 +16,7 @@ import '../../core/i18n/i18n.dart';
 import '../../core/lexico/lexico.dart';
 import '../../core/nivel0/nivel0.dart';
 import '../../core/pagos/providers.dart';
+import '../plans/idiomas_plan.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
@@ -301,6 +302,12 @@ class ProgressScreen extends ConsumerWidget {
             tr('Mis errores'),
             tr('{n} por practicar', {'n': s.errores.where((e) => !e.practicado).length}),
             () => context.push('/errores'),
+          ),
+          _Fila(
+            Icons.translate_rounded,
+            tr('Idioma que estudias'),
+            trDato(idioma(s.idiomaMeta).nombre),
+            () => elegirIdiomaQueEstudias(context, ref),
           ),
           _Fila(
             Icons.smart_toy_outlined,

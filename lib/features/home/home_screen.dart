@@ -9,6 +9,7 @@ import '../../core/content/fotos.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/pagos/providers.dart';
+import '../plans/idiomas_plan.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/daily_activities.dart';
 import '../../shared/widgets/mascot_coach.dart';
@@ -83,6 +84,10 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 4),
             const StreakCard(),
             const SizedBox(height: 16),
+            if ((plan.suscripcion?.idiomasPorElegir ?? 0) > 0) ...[
+              AvisoIdiomasPorElegir(suscripcion: plan.suscripcion!),
+              const SizedBox(height: 16),
+            ],
             if (!plan.tienePlan) _TrialBanner(restante: restante),
             if (!plan.tienePlan) const SizedBox(height: 16),
             // Idiomas sin ruta nueva (hoy ninguno): curso en preparación.

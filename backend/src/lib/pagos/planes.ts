@@ -11,18 +11,24 @@ import { PRUEBA_MINUTOS_POR_DEFECTO } from '../analitica.js';
 import { proveedorActivo, stripe, type FilaPlan, type SyncPlan } from './proveedor.js';
 
 // ── Ajustes ──────────────────────────────────────────────────────────────────
-export type Ajustes = { pruebaMinutos: number; moneda: string };
+/** Regla para que el alumno cambie un idioma de su plan por otro (anexo de idiomas). */
+export const REGLAS_CAMBIO_IDIOMAS = ['libre', 'uno_por_periodo', 'solo_admin'] as const;
+export type ReglaCambioIdiomas = typeof REGLAS_CAMBIO_IDIOMAS[number];
+export type Ajustes = { pruebaMinutos: number; moneda: string; cambioIdiomas: ReglaCambioIdiomas };
 export async function ajustesPago(): Promise<Ajustes> {
-  const f = await uno<{ prueba_minutos: number; moneda: string }>('SELECT prueba_minutos, moneda FROM ajustes_pago WHERE id').catch(() => undefined);
-  return { pruebaMinutos: Number.isFinite(Number(f?.prueba_minutos)) ? Number(f!.prueba_minutos) : PRUEBA_MINUTOS_POR_DEFECTO, moneda: f?.moneda || 'usd' };
+  const f = await uno<{ prueba_minutos: number; moneda: string; cambio_idiomas?: string }>('SELECT * FROM ajustes_pago WHERE id').catch(() => undefined);
+  const regla = REGLAS_CAMBIO_IDIOMAS.find((r) => r === f?.cambio_idiomas) ?? 'uno_por_periodo';
+  return { pruebaMinutos: Number.isFinite(Number(f?.prueba_minutos)) ? Number(f!.prueba_minutos) : PRUEBA_MINUTOS_POR_DEFECTO, moneda: f?.moneda || 'usd', cambioIdiomas: regla };
 }
 export const AjustesEntrada = z.object({
   pruebaMinutos: z.number().int().min(0).max(10_000),
   moneda: z.string().trim().toLowerCase().regex(/^[a-z]{3}$/, 'Código de moneda de 3 letras (usd, eur…)'),
+  cambioIdiomas: z.enum(REGLAS_CAMBIO_IDIOMAS).optional(),
 });
 export async function guardarAjustes(a: z.infer<typeof AjustesEntrada>) {
-  await query(`INSERT INTO ajustes_pago (id, prueba_minutos, moneda, actualizado_en) VALUES (true, $1, $2, now())
-    ON CONFLICT (id) DO UPDATE SET prueba_minutos = EXCLUDED.prueba_minutos, moneda = EXCLUDED.moneda, actualizado_en = now()`, [a.pruebaMinutos, a.moneda]);
+  await query(`INSERT INTO ajustes_pago (id, prueba_minutos, moneda, cambio_idiomas, actualizado_en) VALUES (true, $1, $2, coalesce($3, 'uno_por_periodo'), now())
+    ON CONFLICT (id) DO UPDATE SET prueba_minutos = EXCLUDED.prueba_minutos, moneda = EXCLUDED.moneda,
+      cambio_idiomas = coalesce($3, ajustes_pago.cambio_idiomas), actualizado_en = now()`, [a.pruebaMinutos, a.moneda, a.cambioIdiomas ?? null]);
   return ajustesPago();
 }
 
@@ -75,7 +81,7 @@ export const PlanEntrada = z.object({
   nombre: TextoCorto(80, 1),
   descripcion: TextoCorto(500).default({ es: '', en: '' }),
   incluye: z.object({ es: Ventajas, en: Ventajas }).default({ es: [], en: [] }),
-  idiomas: z.number().int().min(1).max(10),
+  idiomas: z.number().int().min(0).max(10), // 0 = todos los idiomas
   precio: z.number().min(0.5, 'Stripe no cobra menos de 0,50').max(100_000),
   moneda: z.string().trim().toLowerCase().regex(/^[a-z]{3}$/).optional(),
   intervalo: z.enum(['mes', 'anio']),

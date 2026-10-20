@@ -81,9 +81,22 @@ class PagosApi {
     return r.ok && r.cuerpo.containsKey('estado') ? r.cuerpo : null;
   }
 
-  /// `POST /pagos/checkout` → `{url}` de Stripe Checkout.
-  Future<RespuestaPago> checkout(String planId) =>
-      _pedir('POST', '/pagos/checkout', cuerpo: {'planId': planId});
+  /// `POST /pagos/checkout` → `{url}` de Stripe Checkout. [idiomas] lleva
+  /// exactamente los idiomas del plan (vacía si el plan es «todos»).
+  Future<RespuestaPago> checkout(String planId, List<String> idiomas) =>
+      _pedir(
+        'POST',
+        '/pagos/checkout',
+        cuerpo: {'planId': planId, 'idiomas': idiomas},
+      );
+
+  /// `PUT /usuarios/me/suscripcion/idiomas`: cambia o completa los idiomas
+  /// pagados. 403 con `proximoCambio` si la regla no lo permite.
+  Future<RespuestaPago> cambiarIdiomas(List<String> idiomas) => _pedir(
+    'PUT',
+    '/usuarios/me/suscripcion/idiomas',
+    cuerpo: {'idiomas': idiomas},
+  );
 
   /// `POST /pagos/confirmar` → mismo cuerpo que la suscripción.
   Future<RespuestaPago> confirmar(String sessionId) =>

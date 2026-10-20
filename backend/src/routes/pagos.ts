@@ -1,4 +1,4 @@
-import type { FastifyInstance } from 'fastify';
+import type { FastifyInstance, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import { requiereAdmin, requiereAlumno, type Sesion } from '../lib/auth.js';
 import { uno } from '../lib/db.js';
@@ -6,11 +6,17 @@ import { stripeConfig } from '../lib/conexiones.js';
 import { idPortal, plan, sincronizarPlan } from '../lib/pagos/planes.js';
 import { proveedorActivo } from '../lib/pagos/proveedor.js';
 import { ErrorStripe, verificarFirma } from '../lib/pagos/stripe.js';
-import { darCortesia, ErrorSus, filaDe, FILTROS_ESTADO, quitarCortesia, resumenAdmin, sincronizarDesdeStripe, suscripcionDe } from '../lib/pagos/suscripciones.js';
+import {
+  cambiarIdiomas, CODIGOS_IDIOMA, darCortesia, ErrorSus, errorIdiomas, filaDe, FILTROS_ESTADO, quitarCortesia, resumenAdmin, sincronizarDesdeStripe, suscripcionDe,
+} from '../lib/pagos/suscripciones.js';
 import { procesarWebhook } from '../lib/pagos/webhook.js';
 
 const SIN_PAGOS = { error: 'Los pagos aún no están disponibles (Stripe no está vinculado).' };
 const EN_CURSO = ['activa', 'prueba_stripe', 'impago'];
+const Idiomas = z.array(z.string().max(10)).max(10);
+const conErrorSus = async (reply: FastifyReply, fn: () => Promise<unknown>) => {
+  try { return await fn(); } catch (e) { if (e instanceof ErrorSus) return reply.code(e.status).send({ error: e.message, ...e.extra }); throw e; }
+};
 const errorProveedor = (e: unknown) => ({ error: `Stripe: ${e instanceof Error ? e.message : String(e)}`.slice(0, 400) });
 
 /**
@@ -21,15 +27,24 @@ export default async function rutas(app: FastifyInstance) {
   // ── Alumno ─────────────────────────────────────────────────────────────────
   app.get('/usuarios/me/suscripcion', { preHandler: requiereAlumno }, async (req) => suscripcionDe((req.user as Sesion).sub));
 
+  /** Cambiar o completar los idiomas del plan (regla `cambioIdiomas`; 403 con `proximoCambio` si no toca). */
+  app.put('/usuarios/me/suscripcion/idiomas', { preHandler: requiereAlumno }, async (req, reply) => {
+    const { idiomas } = z.object({ idiomas: Idiomas }).parse(req.body);
+    return conErrorSus(reply, () => cambiarIdiomas((req.user as Sesion).sub, idiomas));
+  });
+
   app.post('/pagos/checkout', { preHandler: requiereAlumno }, async (req, reply) => {
     const uid = (req.user as Sesion).sub;
-    const { planId } = z.object({ planId: z.string().min(1).max(40) }).parse(req.body);
+    const { planId, idiomas: elegidos } = z.object({ planId: z.string().min(1).max(40), idiomas: Idiomas.default([]) }).parse(req.body);
+    const idiomas = elegidos.map((c) => c.trim().toLowerCase());
     const p = proveedorActivo();
     if (!p) return reply.code(503).send(SIN_PAGOS);
     const f = await filaDe(uid);
     if (f?.origen === 'stripe' && EN_CURSO.includes(f.estado)) return reply.code(409).send({ error: 'Ya tienes una suscripción activa: gestiónala desde el portal.', portal: true });
     let pl = await plan(planId);
     if (!pl || pl.archivado || !pl.visible) return reply.code(404).send({ error: 'Ese plan no está disponible.' });
+    const malIdiomas = errorIdiomas(idiomas, Number(pl.idiomas), { exactos: true });
+    if (malIdiomas) return reply.code(400).send({ error: malIdiomas });
     if (!(pl.stripe_sincronizado && pl.stripe_modo === p.modo() && pl.stripe_precio_id)) {
       await sincronizarPlan(planId);
       pl = await plan(planId);
@@ -40,7 +55,7 @@ export default async function rutas(app: FastifyInstance) {
     const urlApp = stripeConfig().urlApp;
     try {
       const url = await p.crearCheckout({
-        usuarioId: uid, email: u.email, clienteId: f?.stripe_cliente_id && f.modo === p.modo() ? f.stripe_cliente_id : null, plan: pl,
+        usuarioId: uid, email: u.email, clienteId: f?.stripe_cliente_id && f.modo === p.modo() ? f.stripe_cliente_id : null, plan: pl!, idiomas,
         exito: `${urlApp}/#/pago?estado=ok&session_id={CHECKOUT_SESSION_ID}`, cancelar: `${urlApp}/#/pago?estado=cancelado`,
       });
       return { url };
@@ -56,7 +71,7 @@ export default async function rutas(app: FastifyInstance) {
     let c;
     try { c = await p.obtenerCheckout(sessionId); } catch (e) { return reply.code(e instanceof ErrorStripe && e.status === 404 ? 404 : 502).send(errorProveedor(e)); }
     if (c.usuarioId !== uid) return reply.code(403).send({ error: 'Esta sesión de pago no es tuya.' });
-    if (c.completada && c.suscripcion) await sincronizarDesdeStripe(c.suscripcion, { usuarioId: uid });
+    if (c.completada && c.suscripcion) await sincronizarDesdeStripe(c.suscripcion, { usuarioId: uid, idiomas: c.idiomas });
     return suscripcionDe(uid);
   });
 
@@ -93,16 +108,24 @@ export default async function rutas(app: FastifyInstance) {
 
   // ── Panel ──────────────────────────────────────────────────────────────────
   app.get('/admin/suscripciones', { preHandler: requiereAdmin }, async (req) => {
-    const f = z.object({ estado: z.enum(FILTROS_ESTADO).default(''), q: z.string().max(200).default('') }).parse(req.query);
+    const f = z.object({ estado: z.enum(FILTROS_ESTADO).default(''), q: z.string().max(200).default(''), idioma: z.enum(['', ...CODIGOS_IDIOMA]).default('') }).parse(req.query);
     return resumenAdmin(f);
   });
 
   const uid = (p: unknown) => z.object({ id: z.string().uuid() }).parse(p).id;
   app.post('/admin/usuarios/:id/cortesia', { preHandler: requiereAdmin }, async (req, reply) => {
-    const d = z.object({ planId: z.string().min(1).max(40), hasta: z.string().datetime({ offset: true }).nullable().optional(), nota: z.string().max(500).default('') }).parse(req.body);
-    try { return await darCortesia(uid(req.params), d); } catch (e) { if (e instanceof ErrorSus) return reply.code(e.status).send({ error: e.message }); throw e; }
+    const d = z.object({
+      planId: z.string().min(1).max(40), idiomas: z.union([Idiomas, z.literal('todos')]).optional(),
+      hasta: z.string().datetime({ offset: true }).nullable().optional(), nota: z.string().max(500).default(''),
+    }).parse(req.body);
+    return conErrorSus(reply, () => darCortesia(uid(req.params), d));
+  });
+  /** El administrador edita los idiomas: sin la regla de cambios, pero con el número de idiomas del plan. */
+  app.put('/admin/usuarios/:id/suscripcion/idiomas', { preHandler: requiereAdmin }, async (req, reply) => {
+    const { idiomas } = z.object({ idiomas: Idiomas }).parse(req.body);
+    return conErrorSus(reply, () => cambiarIdiomas(uid(req.params), idiomas, { admin: true }));
   });
   app.delete('/admin/usuarios/:id/cortesia', { preHandler: requiereAdmin }, async (req, reply) => {
-    try { return await quitarCortesia(uid(req.params)); } catch (e) { if (e instanceof ErrorSus) return reply.code(e.status).send({ error: e.message }); throw e; }
+    return conErrorSus(reply, () => quitarCortesia(uid(req.params)));
   });
 }

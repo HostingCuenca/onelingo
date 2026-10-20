@@ -111,10 +111,20 @@ class SuscripcionNotifier extends StateNotifier<Suscripcion?> {
   /// y deja el plan derivado en el progreso local.
   void aplicar(Map<String, dynamic> j) {
     if (!_activo) return;
-    final s = Suscripcion.fromJson(j);
-    state = s;
+    state = Suscripcion.fromJson(j);
     _prefs.setString(_clave, jsonEncode(j));
-    _ref.read(progressProvider.notifier).aplicarPlanServidor(s.planEfectivo);
+    sincronizarPlanLocal();
+  }
+
+  /// El plan local es el del idioma que se estudia: en un idioma no pagado
+  /// la prueba gratuita (única para todos los idiomas) sigue contando.
+  void sincronizarPlanLocal() {
+    final s = state;
+    if (s == null || !_activo) return;
+    final progreso = _ref.read(progressProvider);
+    _ref
+        .read(progressProvider.notifier)
+        .aplicarPlanServidor(s.planEfectivoEn(progreso.idiomaMeta));
   }
 }
 
@@ -127,6 +137,10 @@ final suscripcionProvider =
       );
       ref.listen(progressProvider.select((s) => s.email), (antes, ahora) {
         if (antes != ahora) n.cambioDeUsuario();
+      });
+      // Otro idioma meta: el plan y la prueba se evalúan en ese idioma.
+      ref.listen(progressProvider.select((s) => s.idiomaMeta), (antes, ahora) {
+        if (antes != ahora) n.sincronizarPlanLocal();
       });
       return n;
     });
@@ -143,11 +157,12 @@ final estadoPlanProvider = Provider<EstadoPlan>((ref) {
     final usados = sus.prueba.segundosUsados > s.trialSegundos
         ? sus.prueba.segundosUsados
         : s.trialSegundos;
-    // planId vacío = sin acceso de pago: el alumno está en prueba gratuita.
-    final conPlan = sus.planEfectivo.isNotEmpty;
+    // planId vacío o idioma no pagado: el alumno está en prueba gratuita.
+    final planId = sus.planEfectivoEn(s.idiomaMeta);
+    final conPlan = planId.isNotEmpty;
     final restante = conPlan ? total : (total - usados).clamp(0, total);
     return EstadoPlan(
-      planId: sus.planEfectivo,
+      planId: planId,
       pruebaTotal: total,
       trialRestante: restante,
       trialAgotado: !conPlan && (sus.prueba.agotada || restante == 0),
