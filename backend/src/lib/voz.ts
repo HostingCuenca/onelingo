@@ -1,11 +1,17 @@
 /** Voz con ElevenLabs. Cada texto se sintetiza UNA vez: se guarda en AUDIO_DIR/<hash>.mp3 y en la tabla `audios`. */
 import { createHash } from 'node:crypto';
+import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, writeFile, stat, rename, unlink, link, copyFile, constants } from 'node:fs/promises';
 import path from 'node:path';
 import { Readable } from 'node:stream';
 import { config } from './config.js';
 import { query, uno } from './db.js';
 import { numerosEnPalabrasDe } from './numeros_de.js';
+import { numerosEnPalabrasEs } from './numeros_es.js';
+import { numerosEnPalabrasFr } from './numeros_fr.js';
+import { numerosEnPalabrasIt } from './numeros_it.js';
+import { numerosEnPalabrasPt } from './numeros_pt.js';
+import { numerosEnPalabrasRu } from './numeros_ru.js';
 import { normalizarParaVoz } from './voz_texto.js';
 
 /**
@@ -115,11 +121,40 @@ export function rolDeVoz(voz: string | undefined, idioma: string): string {
 
 export const vozDisponible = () => config.elevenApiKey.length > 0;
 
+/** Conversor de cifras → palabras por idioma (solo donde la voz las lee mal). */
+const CIFRAS_EN_PALABRAS: Record<string, (t: string) => string> = {
+  de: numerosEnPalabrasDe, fr: numerosEnPalabrasFr, es: numerosEnPalabrasEs,
+  pt: numerosEnPalabrasPt, it: numerosEnPalabrasIt, ru: numerosEnPalabrasRu,
+};
+
 /**
  * Quita la romanización "(…)" y la notación de la vista (ver voz_texto.ts):
  * solo se sintetiza lo que se pronuncia. `modo: 'letra'` lee nombres de letras.
  */
+/**
+ * Lecturas de kanji sueltos y jukujikun (tools/voz/lecturas_ja.py): sin contexto
+ * la voz elige una lectura cualquiera (星 salió «ほしい»), así que se le pasa la
+ * lectura en kana que enseña el curso.
+ */
+const LECTURAS_JA: Record<string, string> = (() => {
+  const url = new URL('./lecturas_ja.json', import.meta.url);
+  return existsSync(url) ? JSON.parse(readFileSync(url, 'utf8')) : {};
+})();
+const KANA = /^[\u3041-\u309f\u30a0-\u30ffー]+$/u;
+
+/** Japonés: palabra corta con kanji → su lectura («星 (ほし)», «星» → «ほし»). */
+function lecturaJa(t: string): string | undefined {
+  const m = t.match(/^\s*([^\s()]+)\s*(?:\(([^)]*)\))?/u);
+  if (!m || t.slice(m[0].length).replace(/\([^)]*\)/g, '').trim()) return undefined;
+  const base = m[1].replace(/[。、！？!?.]+$/u, '');
+  if (!LECTURAS_JA[base]) return undefined;
+  const dada = m[2]?.split(/[,、;；]/)[0].trim();
+  return dada && KANA.test(dada) ? dada : LECTURAS_JA[base];
+}
+
 export function textoParaVoz(t: string, idioma = 'en', modo?: string) {
+  const lectura = idioma === 'ja' && !modo ? lecturaJa(t) : undefined;
+  if (lectura) t = lectura;
   const nativo = t.replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
   const limpio = normalizarParaVoz(nativo, idioma, modo);
   // En chino y japonés el contenido separa palabras con espacios para los
@@ -127,11 +162,11 @@ export function textoParaVoz(t: string, idioma = 'en', modo?: string) {
   // La coma que separa alternativas pasa a la de su escritura.
   if (idioma === 'zh') return limpio.replace(/, ?/g, '，').replace(/ /g, '');
   if (idioma === 'ja') return limpio.replace(/, ?/g, '、').replace(/ /g, '');
-  // En alemán la voz lee mal las cifras: se le pasan escritas (ver numeros_de.ts).
-  // PENDIENTE: en los demás idiomas las cifras las lee el modelo (fechas, horas,
-  // teléfonos, caso ruso). El contenido de clases ya evita cifras en el audio;
-  // si hiciera falta, un conversor por idioma como numeros_de.ts.
-  return idioma === 'de' ? numerosEnPalabrasDe(limpio) : limpio;
+  // Las cifras se pasan escritas: Flash v2.5 las lee mal en de, fr, es, pt, it
+  // y ru (ver numeros_<idioma>.ts). En inglés, coreano, japonés y chino las lee
+  // bien y se quedan como están.
+  const conversor = CIFRAS_EN_PALABRAS[idioma];
+  return conversor ? conversor(limpio) : limpio;
 }
 
 /** Idiomas que Flash/Turbo v2.5 pueden forzar con `language_code` (ISO 639-1). */

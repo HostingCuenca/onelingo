@@ -953,7 +953,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           ),
         );
         vista.add(const SizedBox(height: 12));
-        // Cada personaje con su voz (elenco.json; ver core/elenco.dart).
+        // Cada personaje con su voz (elenco de la clase y global; ver core/elenco.dart).
         final hablantes = [for (final f in p.frases) f.hablante];
         for (final linea in p.frases) {
           final propio = linea.hablante == 'Tú' || linea.hablante == 'You';
@@ -1026,7 +1026,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
   ) async {
     final voz = dialogo == null
         ? null
-        : await Elenco.voz(u.idioma, dialogo, hablante);
+        : await Elenco.voz(u.idioma, dialogo, hablante, clase: u.id);
     if (!mounted) return;
     await escucharTexto(context, texto, u.idioma, voz: voz);
   }

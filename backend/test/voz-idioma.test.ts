@@ -131,7 +131,7 @@ test('alemán: las cifras se leen en palabras (años, fechas, horas, §, decimal
   assert.equal(v('bei 3,5 %'), 'bei drei Komma fünf Prozent');
   assert.equal(v('Wir haben 21 Gäste und 101 Stühle.'), 'Wir haben einundzwanzig Gäste und einhunderteins Stühle.');
   assert.equal(v('Ich bin 15, mein Vater ist 50.'), 'Ich bin fünfzehn, mein Vater ist fünfzig.');
-  assert.equal(textoParaVoz('Es kostet 437 Euro.', 'fr'), 'Es kostet 437 Euro.');
+  assert.equal(textoParaVoz('It costs 437 euros.', 'en'), 'It costs 437 euros.');
 });
 
 test('letras: modo letra dice el nombre; sin modo, una letra suelta es palabra en minúscula', () => {
@@ -161,15 +161,15 @@ test('la notación de la vista no se pronuncia', () => {
   assert.equal(textoParaVoz('hätte + Partizip II', 'de'), 'hätte, Partizip II');
   assert.equal(textoParaVoz('don / doña + nombre de pila', 'es'), 'don, doña, nombre de pila');
   assert.equal(textoParaVoz('Bitte reagieren Sie ___ bis zum 20. März.', 'de'), 'Bitte reagieren Sie … bis zum zwanzigsten März.');
-  assert.equal(textoParaVoz('0 · 1 · 2 · 3', 'ru'), '0, 1, 2, 3');
+  assert.equal(textoParaVoz('0 · 1 · 2 · 3', 'ru'), 'ноль, один, два, три');
   assert.equal(textoParaVoz('와 / 과', 'ko'), '와, 과.');
   assert.equal(textoParaVoz('N 대신', 'ko'), '대신.');
   assert.equal(textoParaVoz('一定 是 / 肯定 是', 'zh'), '一定是，肯定是');
   assert.equal(textoParaVoz('才 / 就 + hora', 'zh'), '才，就。');
   assert.equal(textoParaVoz('ない + ように', 'ja'), 'ないように');
   assert.equal(textoParaVoz('볼 만한 + sustantivo', 'ko'), '볼 만한.');
-  assert.equal(textoParaVoz('Pagamos hoje R$ 5.000 por mês.', 'pt'), 'Pagamos hoje 5.000 reais por mês.');
-  assert.equal(textoParaVoz('À vista no Pix: R$ 6.480.', 'pt'), 'À vista no Pix: 6.480 reais.');
+  assert.equal(textoParaVoz('Pagamos hoje R$ 5.000 por mês.', 'pt'), 'Pagamos hoje cinco mil reais por mês.');
+  assert.equal(textoParaVoz('À vista no Pix: R$ 6.480.', 'pt'), 'À vista no Pix: seis mil quatrocentos e oitenta reais.');
   assert.equal(textoParaVoz('Abierto 24/7', 'en'), 'Abierto 24/7');
   assert.equal(textoParaVoz('KTV 很 好玩', 'zh'), 'KTV很好玩');
 });

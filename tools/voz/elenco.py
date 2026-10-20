@@ -22,7 +22,9 @@ Reglas (en este orden):
    distintas. Además, la app resuelve en cada diálogo los choques que queden
    (lib/core/elenco.dart).
 4. Lo que no se puede inferir con seguridad (apellidos japoneses, «Dr. Weber»,
-   «Turista», «Paul und Mia») NO entra: la app aplica el respaldo por orden de
+   «Turista», «Paul und Mia») NO entra: su voz se decide clase a clase en
+   elenco_clases.json (tools/voz/elenco_clases.py, ejecútalo después de este);
+   lo que tampoco se resuelve allí usa el respaldo de la app por orden de
    aparición en el diálogo (alterna narradora / narrador).
 
 Idempotente: las entradas que ya existen en elenco.json se conservan (también
@@ -185,7 +187,7 @@ def dialogos(idioma):
     """Listas de líneas {hablante, texto} de todo el contenido del idioma."""
     salida = []
     for f in sorted(glob.glob(os.path.join(RAIZ, 'assets', 'contenido', idioma, '**', '*.json'), recursive=True)):
-        if os.path.basename(f) == 'elenco.json':
+        if os.path.basename(f) in ('elenco.json', 'elenco_clases.json'):
             continue
         try:
             datos = json.load(open(f, encoding='utf8'))

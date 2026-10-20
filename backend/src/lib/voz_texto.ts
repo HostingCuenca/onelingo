@@ -78,14 +78,26 @@ function quitarNotacion(t: string, idioma: string): string {
     .replace(/\s*[·•]\s*/g, ', ')
     // «N + V» se lee como pausa; en ja/zh «ない + ように» es la forma unida («ないように»).
     .replace(/(?<!\d)\s*\+\s*(?!\d)/g, idioma === 'ja' || idioma === 'zh' ? '' : ', ')
-    .replace(/(\D?)\s*\/\s*(\D?)/g, (m, a, b) => (/\d/.test(a + b) || (!a && !b) ? m : `${a}, ${b}`)) // alternativas: «와 / 과», no «24/7»
+    // alternativas: «와 / 과»; no «24/7» ni «km/h»
+    .replace(/(\D?)\s*\/\s*(\D?)/g, (m, a, b, pos: number, todo: string) =>
+      (/\d/.test(a + b) || (!a && !b) || (todo.slice(pos - 1, pos + 1) === 'km' && b === 'h') ? m : `${a}, ${b}`))
     .replace(/\s*=\s*/g, ': ');
   if (idioma === 'de') s = s.replace(/,\s*[-–]\S*\s*$/u, ''); // «das Medikament, -e»
   // «R$ 5.000» sale «ele 5 imboás»: la moneda va detrás, en palabras.
-  if (idioma === 'pt') s = s.replace(/R\$\s*([\d.,]*\d)/g, '$1 reais').replace(/US\$\s*([\d.,]*\d)/g, '$1 dólares');
+  // «R$ 84 mil» → «84 mil reais»; «R$ 1,2 milhão» → «1,2 milhão de reais».
+  if (idioma === 'pt') {
+    const moneda = (nombre: string) => (_m: string, n: string, esc = '') => `${n}${esc} ${/milh|bilh/.test(esc) ? 'de ' : ''}${nombre}`;
+    const escala = '(\\s+(?:mil|milhões|milhão|bilhões|bilhão)(?![\\p{L}]))?';
+    s = s.replace(new RegExp(`US\\$\\s*([\\d.,]*\\d)${escala}`, 'gu'), moneda('dólares'))
+      .replace(new RegExp(`R\\$\\s*([\\d.,]*\\d)${escala}`, 'gu'), moneda('reais'));
+  }
   if (idioma === 'ja' || idioma === 'zh' || idioma === 'ko') {
-    // Comodines de fórmula (N, V, A) y guiones de sufijo («-ㄴ데요»).
-    s = s.replace(/(^|[\s,(])[NVA](?![A-Za-z])/g, '$1').replace(/(^|[\s,])-(?=\S)/g, '$1');
+    // Comodines de fórmula (N, V, A, Adj, Adv) y guiones de sufijo («-ㄴ데요»). Los
+    // sustantivos numerados («N1 は N2 に», la voz decía «1は2に») se leen A, B, C, como en
+    // los manuales: «AはBに例えられる».
+    s = s.replace(/(^|[\s,(])(?:Adj|Adv|[NVA])(?![A-Za-z0-9])/g, (m, a: string) => (m.endsWith('A') && /(^|[\s,(])B(?![A-Za-z0-9])/.test(s) ? m : a)).replace(/(^|[\s,])-(?=\S)/g, '$1')
+      .replace(/(^|[\s,(])N([1-3])(?![A-Za-z0-9])/g, (_m, a: string, d: string) => a + 'ABC'[Number(d) - 1])
+      .replace(/(^|[\s,(])(?:Adj|Adv|[NVA])\d+(?![A-Za-z0-9])/g, '$1');
     // Glosas en minúscula del apoyo («才 / 就 + hora», «볼 만한 + sustantivo»); las siglas (KTV) se quedan.
     if (/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u.test(s)) {
       s = s.replace(/(?<!\p{Script=Latin})(?=\p{Ll})\p{Script=Latin}+(?!\p{Script=Latin})/gu, '');
