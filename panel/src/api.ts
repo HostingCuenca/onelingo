@@ -23,3 +23,15 @@ export const IDIOMAS: Record<string, string> = { en: 'Inglés', es: 'Español', 
 export const NIVELES = ['Básico', 'Básico', 'Básico Av.', 'Intermedio', 'Intermedio', 'Interm. Av.', 'Avanzado', 'Avanzado', 'Av. Superior', 'Dominio']
 export const PLANES: Record<string, string> = { '': 'Prueba gratuita', p1: '1 idioma · $20', p2: '2 idiomas · $30', p3: '3 idiomas · $40' }
 export const SKILLS: Record<string, string> = { gramatica: 'Gramática', vocabulario: 'Vocabulario', conjugacion: 'Conjugación', listening: 'Listening', pronunciacion: 'Pronunciación', frases: 'Formación de frases', escritura: 'Escritura' }
+/** Descarga un archivo de la API (con la sesión del panel). */
+export async function descargar(ruta: string, nombre: string) {
+  const r = await fetch(BASE + ruta, { headers: token() ? { authorization: `Bearer ${token()}` } : {} })
+  if (!r.ok) throw new ApiError(`Error ${r.status}`, r.status)
+  const url = URL.createObjectURL(await r.blob())
+  const a = document.createElement('a'); a.href = url; a.download = nombre; document.body.appendChild(a); a.click(); a.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+export const PLATAFORMAS: Record<string, string> = { web: 'Web', android: 'Android', ios: 'iPhone / iPad', macos: 'Mac', windows: 'Windows', linux: 'Linux', desconocida: 'Sin dato' }
+export const nivelCorto = (n: number | null | undefined) => n === null || n === undefined ? '—' : n === 0 ? 'F0' : `N${n}`
+export const usd = (v: number) => `$${v < 1 ? v.toFixed(v < 0.01 && v > 0 ? 4 : 2) : v.toFixed(2)}`
+export const num = (v: number) => Number(v ?? 0).toLocaleString('es')

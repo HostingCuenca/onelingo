@@ -46,7 +46,7 @@ export default function App() {
         <a className={ruta.p === 'conversaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conversaciones' })}>Conversaciones IA</a>
         <a className={ruta.p === 'audios' ? 'activo' : ''} onClick={() => setRuta({ p: 'audios' })}>Voz y audios</a>
         <a className={ruta.p === 'correos' ? 'activo' : ''} onClick={() => setRuta({ p: 'correos' })}>Correos</a>
-        <div className="pie">API: {import.meta.env.DEV ? 'localhost:8091' : 'misma raíz'}<br /><button className="sec" onClick={() => { guardarToken(null); setSesion(false) }}>Salir</button></div>
+        <div className="pie"><span className="api">API: {import.meta.env.DEV ? 'localhost:8091' : 'misma raíz'}<br /></span><button className="sec" onClick={() => { guardarToken(null); setSesion(false) }}>Salir</button></div>
       </aside>
       <main>
         {ruta.p === 'resumen' && <Resumen />}
