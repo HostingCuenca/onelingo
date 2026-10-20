@@ -749,3 +749,18 @@ Backup: `/var/www/onelingo/backups/20261019-edu-61-chino/web-anterior` (= edu-60
 - lock liberado.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261019-edu-61-chino/web-retirada-post && cp -al backups/20261019-edu-61-chino/web-anterior web'`
 Pendiente (barrido): ordinales 第五+ separados por el validador; compuestos verbo+resultado (说完, 做好) separados; palabras básicas sin entrada (放心, 到底, 规则…); `elenco.json` de zh por regenerar con los personajes de N5–N10.
+
+## Release: 20261019-edu-62-japones
+
+Fecha: 2026-10-19 · Responsable: Claude (Claude Code), dentro del encargo del usuario en el chat («continuemos con japonés y chino, terminemos todas las clases»), con el flujo de un despliegue por idioma completo. Solo web y audios cortos; sin cambios de backend ni reinicio.
+Contenido: japonés COMPLETO, con Fundamentos (f0) y N1–N10 (500 clases); N5–N10 son nuevos (`3ec5720`), cada nivel con corrección por parejas de bloques y pasada final. Desde N5 el rōmaji va solo en el vocabulario. La prueba de ubicación llega hasta N10 (diagnóstico v2 con 180 ítems). `elenco.json` añade ななこさん; los apellidos sin género usan el respaldo por orden (el test de elenco ya no los cuenta).
+Audio: 218 cortos de ja pendientes; se subieron solo los 141 verificados por transcripción, con `--ignore-existing` (2391 → 2532). Los 77 sin verificar se generan al vuelo con `/voz`.
+Commit: `3ec5720` (build desde worktree limpio) · `main.dart.js` sha256 `fa472738c58bd50b…` (igual que edu-61: solo cambian los assets).
+Pruebas: Flutter completo, 422 en verde (1 omitido) y 0 fallos, con el mismo contenido que `3ec5720`. `validar_ruta.py`: 10 idiomas, 0 errores. `validar_diagnostico.py --idioma ja`: n1–n10 OK.
+Backup: `/var/www/onelingo/backups/20261019-edu-62-japones/web-anterior` (= edu-61). Verificado:
+- responden 200: `/`, `/main.dart.js`, `/api/salud`, `ja/ruta/n10-b10.json`, `ja/diagnostico-v2.json` y `zh/ruta/n10-b10.json`;
+- curso ja en prod con 101 módulos;
+- PM2 `onelingo-api` online y las demás apps intactas;
+- lock liberado.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261019-edu-62-japones/web-retirada-post && cp -al backups/20261019-edu-62-japones/web-anterior web'`
+Pendiente (barrido): el validador rechaza formas conjugadas con kanji (来ました, 食べても…) y obliga a escribirlas en kana; «は pegada» en los bancos (では, ずには); partículas を/に en N10 c26–c34; c31–c35 de N10 algo mecánicas; elenco ja por regenerar.
