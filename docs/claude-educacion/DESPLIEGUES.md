@@ -764,3 +764,18 @@ Backup: `/var/www/onelingo/backups/20261019-edu-62-japones/web-anterior` (= edu-
 - lock liberado.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261019-edu-62-japones/web-retirada-post && cp -al backups/20261019-edu-62-japones/web-anterior web'`
 Pendiente (barrido): el validador rechaza formas conjugadas con kanji (来ました, 食べても…) y obliga a escribirlas en kana; «は pegada» en los bancos (では, ずには); partículas を/に en N10 c26–c34; c31–c35 de N10 algo mecánicas; elenco ja por regenerar.
+
+## Release: 20261019-edu-63-voces-cifras
+
+Fecha: 2026-10-19 · Responsable: Claude (Claude Code), dentro del barrido de voces que pidió el usuario («que esté pulido bien lo de las voces; si es necesario reiniciar el servidor de la API, procedamos»). Backend (archivo por archivo) + web + audios cortos; PM2 `onelingo-api` reiniciado (solo esa app).
+Contenido:
+- Cifras a palabras antes de la voz en fr, es, pt, it y ru (`numeros_{comun,fr,es,pt,it,ru}.ts`; antes solo de). Sonda con Flash v2.5 + transcripción, 86 frases: antes fr «74»→64, ru 1147→1947 y 1911→1919, «Статья 2»→«да», pt «4,8»→«quatro do oito», es «60»→160; después, bien (fr «soixante-quatorze», ru «в тысяча девятьсот одиннадцатом году»). Muestras en el scratchpad `barrido-voz/sonda1` y `sonda2`.
+- Patrones «N1 は N2 に» se leen «AはBに» (antes «1は2に»); V1/Adj… no dejan cifras.
+- ja: kanji suelto o jukujikun → lectura en kana del curso (`lecturas_ja.json`, 195 entradas; 星 salía «ほしい»).
+- Voz por clase (`assets/contenido/<idioma>/elenco_clases.json`, `tools/voz/elenco_clases.py`): apellidos y oficios sin género global reciben voz según la clase. Líneas sin voz asignada: ja 23,8 % → 5,4 %, es 5,2 → 3,4 %, pt 2,8 → 0,5 %, it/en → 0.
+Audio: 5 cortos ja nuevos verificados (い, き, ち, ひ, ま) subidos con `--ignore-existing` (2532 → 2537). Los textos con cifras o kanji suelto cambian de clave y se regeneran al vuelo.
+Commit: `64c00ad` (build desde worktree limpio) · `main.dart.js` sha256 `7f6884135924d362…`.
+Pruebas: backend 44/44 (`npx tsx --test test/*.test.ts`), `tsc --noEmit` limpio; Flutter completo 425 en verde (1 omitido); `validar_ruta.py` 0 errores. En prod, `textoParaVoz` comprobado: «74»(fr) → «soixante-quatorze.», «星»(ja) → «ほし。».
+Backup: web en `backups/20261019-edu-63-voces-cifras/web-anterior` (= edu-62); `voz.ts` y `voz_texto.ts` anteriores en `backups/20261019-edu-63-voces-cifras/backend-lib/`. Verificado: `/`, `/main.dart.js`, `/api/salud`, `/api/voz/estado`, `ja/elenco_clases.json` responden 200; PM2 `onelingo-api` online y las demás apps intactas; lock liberado.
+Rollback: web `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261019-edu-63-voces-cifras/web-retirada-post && cp -al backups/20261019-edu-63-voces-cifras/web-anterior web'`; backend: copiar `backend-lib/voz.ts` y `voz_texto.ts` a `backend/src/lib/` y `pm2 restart onelingo-api` (los numeros_*.ts y lecturas_ja.json nuevos quedan sin uso).
+Visto en el log de errores de la API (anterior a esta release): Gemini responde 403 «project has been denied access» y el diagnóstico cae a OpenAI.
