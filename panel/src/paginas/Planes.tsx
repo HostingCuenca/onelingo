@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api, fecha } from '../api'
+import ErrorCarga from '../ErrorCarga'
 
 type Texto = { es: string; en: string }
 type Plan = {
@@ -128,7 +129,7 @@ export default function Planes() {
       await cargar()
     } catch (x: any) { setAviso(x.message) } finally { setOcupado('') }
   }
-  if (err) return <p className="err">{err}</p>
+  if (err) return <ErrorCarga msg={err} reintentar={() => { setErr(''); cargar() }} />
   if (!d) return <p className="muted">Cargando…</p>
   const pendientes = d.planes.filter((p) => !p.archivado && p.stripe.estado === 'sin sincronizar').length
   return (

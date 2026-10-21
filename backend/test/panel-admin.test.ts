@@ -216,3 +216,17 @@ test('/admin/resumen: usuarios, embudo, retención, clases, IA y voz', async () 
     assert.deepEqual(d.errores[0].frecuentes, [{ correccion: 'I have', n: 2 }]);
   } finally { await app.close(); (pool as any).query = original; }
 });
+
+test('/admin/login: usuario sin distinguir mayúsculas ni espacios, PIN exacto y sesión de 30 días', async () => {
+  const { config } = await import('../src/lib/config.js');
+  const { app } = await montar([]);
+  try {
+    const entrar = (usuario: string, pin: string) => app.inject({ method: 'POST', url: '/admin/login', payload: { usuario, pin } });
+    const ok = await entrar(` ${config.adminUsuario.toUpperCase()} `, ` ${config.adminPin} `);
+    assert.equal(ok.statusCode, 200);
+    const { exp, iat } = app.jwt.decode(ok.json().token) as { exp: number; iat: number };
+    assert.equal(exp - iat, 30 * 24 * 3600);
+    assert.equal((await entrar(config.adminUsuario, config.adminPin + 'x')).statusCode, 401);
+    assert.equal((await entrar('otro', config.adminPin)).statusCode, 401);
+  } finally { await app.close(); (pool as any).query = original; }
+});

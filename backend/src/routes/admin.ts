@@ -105,8 +105,10 @@ export const COLUMNAS_CSV = ['nombre', 'email', 'idioma_meta', 'idioma_nativo', 
 export default async function rutas(app: FastifyInstance) {
   app.post('/admin/login', async (req, reply) => {
     const { usuario, pin } = z.object({ usuario: z.string(), pin: z.string() }).parse(req.body);
-    if (usuario !== config.adminUsuario || pin !== config.adminPin) return reply.code(401).send({ error: 'Usuario o PIN incorrectos' });
-    return { token: app.jwt.sign({ sub: 'admin', rol: 'admin' } satisfies Sesion, { expiresIn: '12h' }) };
+    // El usuario no distingue mayúsculas (los teclados del móvil ponen «Admin»); el PIN sí.
+    if (usuario.trim().toLowerCase() !== config.adminUsuario.toLowerCase() || pin.trim() !== config.adminPin) return reply.code(401).send({ error: 'Usuario o PIN incorrectos' });
+    // 30 días: el administrador entra sobre todo desde el móvil y no debe quedarse fuera cada mañana.
+    return { token: app.jwt.sign({ sub: 'admin', rol: 'admin' } satisfies Sesion, { expiresIn: '30d' }) };
   });
 
   app.get('/admin/resumen', { preHandler: requiereAdmin }, async () => {

@@ -2,17 +2,34 @@ const BASE = '/api'
 export class ApiError extends Error { status: number; datos?: any; constructor(m: string, s: number, d?: any) { super(m); this.status = s; this.datos = d } }
 export const token = () => localStorage.getItem('onelingo.panel.token')
 export const guardarToken = (t: string | null) => t ? localStorage.setItem('onelingo.panel.token', t) : localStorage.removeItem('onelingo.panel.token')
+/** Evento que avisa a la app de que la sesión caducó o ya no vale: vuelve al login. */
+export const SESION_CADUCADA = 'onelingo-panel:sesion-caducada'
+const SIN_RED = 'No se pudo conectar con el servidor. Revisa tu conexión a internet y vuelve a intentar.'
+const espera = (ms: number) => new Promise((r) => setTimeout(r, ms))
+/** fetch con mensajes claros: sin red reintenta las lecturas una vez; un 401 cierra la sesión. */
+async function pedir(ruta: string, init: RequestInit): Promise<Response> {
+  const metodo = init.method ?? 'GET'
+  let r: Response | null = null
+  for (let intento = 0; intento < (metodo === 'GET' ? 3 : 1) && !r; intento++) {
+    if (intento) await espera(800 * intento)
+    try { r = await fetch(BASE + ruta, init) } catch { r = null }
+  }
+  if (!r) throw new ApiError(SIN_RED, 0)
+  if (r.status === 401 && ruta !== '/admin/login' && token()) { guardarToken(null); window.dispatchEvent(new Event(SESION_CADUCADA)) }
+  return r
+}
 export async function api<T = any>(ruta: string, op: { metodo?: string; cuerpo?: unknown } = {}): Promise<T> {
-  const r = await fetch(BASE + ruta, {
+  const r = await pedir(ruta, {
     method: op.metodo ?? 'GET',
     // Sin cuerpo no se manda content-type: Fastify rechaza un JSON vacío (DELETE, POST sin datos).
     headers: { ...(op.cuerpo === undefined ? {} : { 'content-type': 'application/json' }), ...(token() ? { authorization: `Bearer ${token()}` } : {}) },
     body: op.cuerpo === undefined ? undefined : JSON.stringify(op.cuerpo),
   })
   const d = await r.json().catch(() => ({}))
-  if (!r.ok) throw new ApiError(d.error ?? `Error ${r.status}`, r.status, d)
+  if (!r.ok) throw new ApiError(d.error ?? mensajeHttp(r.status), r.status, d)
   return d as T
 }
+const mensajeHttp = (s: number) => s >= 502 && s <= 504 ? 'El servidor se está reiniciando. Espera unos segundos y vuelve a intentar.' : `Error ${s}`
 export const fecha = (v?: string | null) => v ? new Date(v).toLocaleString('es-EC', { dateStyle: 'short', timeStyle: 'short' }) : '—'
 export const hace = (v?: string | null) => {
   if (!v) return '—'
@@ -26,8 +43,8 @@ export const PLANES: Record<string, string> = { '': 'Prueba gratuita', p1: '1 id
 export const SKILLS: Record<string, string> = { gramatica: 'Gramática', vocabulario: 'Vocabulario', conjugacion: 'Conjugación', listening: 'Listening', pronunciacion: 'Pronunciación', frases: 'Formación de frases', escritura: 'Escritura' }
 /** Descarga un archivo de la API (con la sesión del panel). */
 export async function descargar(ruta: string, nombre: string) {
-  const r = await fetch(BASE + ruta, { headers: token() ? { authorization: `Bearer ${token()}` } : {} })
-  if (!r.ok) throw new ApiError(`Error ${r.status}`, r.status)
+  const r = await pedir(ruta, { headers: token() ? { authorization: `Bearer ${token()}` } : {} })
+  if (!r.ok) throw new ApiError(mensajeHttp(r.status), r.status)
   const url = URL.createObjectURL(await r.blob())
   const a = document.createElement('a'); a.href = url; a.download = nombre; document.body.appendChild(a); a.click(); a.remove()
   setTimeout(() => URL.revokeObjectURL(url), 1000)

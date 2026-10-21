@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api, IDIOMAS, minutos, nivelCorto, num, PLANES, PLATAFORMAS, SKILLS, usd } from '../api'
 import { BarrasH, LineasDias } from '../Graficos'
+import ErrorCarga from '../ErrorCarga'
 
 const OTRAS_IA: Record<string, string> = {
   transcripcion: 'Transcripciones de voz', revision_escritura: 'Revisiones de escritura', diagnostico_pregunta: 'Preguntas de ubicación generadas', diagnostico_escritura: 'Evaluaciones de escritura (ubicación)',
@@ -30,7 +31,7 @@ export default function Resumen() {
   const [err, setErr] = useState('')
   const cargar = () => { setErr(''); api('/admin/resumen').then(setD).catch((e) => setErr(e.message)) }
   useEffect(() => { cargar(); api('/admin/estado-ia').then(setIa).catch(() => {}) }, [])
-  if (err) return <p className="err">{err} <button className="sec" onClick={cargar}>Reintentar</button></p>
+  if (err) return <ErrorCarga msg={err} reintentar={cargar} />
   if (!d) return <p className="muted">Cargando…</p>
   const u = d.usuarios, total = u.total
   const base = d.embudo[0]?.usuarios ?? 0

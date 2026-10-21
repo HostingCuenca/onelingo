@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api, ApiError, fecha, num, usd } from '../api'
+import ErrorCarga from '../ErrorCarga'
 
 type Verificacion = { ok: boolean; nivel: 'ok' | 'aviso' | 'error'; mensaje: string; detalles?: string[]; verificadoEn: string }
 type Proveedor = {
@@ -227,7 +228,7 @@ export default function Conexiones() {
   const cargar = () => api('/admin/conexiones').then(setD).catch((x) => setErr(x.message))
   const cargarConsumo = () => api('/admin/conexiones/consumo').then(setConsumo).catch(() => setConsumo({}))
   useEffect(() => { cargar(); cargarConsumo() }, [])
-  if (err) return <p className="err">{err}</p>
+  if (err) return <ErrorCarga msg={err} reintentar={() => { setErr(''); cargar(); cargarConsumo() }} />
   if (!d) return <p className="muted">Cargando…</p>
   return (
     <>

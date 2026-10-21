@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api, ESTADOS, fecha, hace, IDIOMAS, minutos, nivelCorto, num, PLATAFORMAS, SKILLS, usd } from '../api'
+import ErrorCarga from '../ErrorCarga'
 
 const lista = (v: unknown) => (Array.isArray(v) ? v.join(', ') : typeof v === 'object' && v ? Object.keys(v).join(', ') : String(v ?? ''))
 
@@ -110,7 +111,7 @@ export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id:
   const [err, setErr] = useState('')
   const cargar = () => api(`/admin/usuarios/${id}`).then(setD).catch((e) => setErr(e.message))
   useEffect(() => { cargar() }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
-  if (err) return <p className="err">{err}</p>
+  if (err) return <ErrorCarga msg={err} reintentar={() => { setErr(''); cargar() }} />
   if (!d) return <p className="muted">Cargando…</p>
   const u = d.usuario, p = d.progreso, e = p?.estado ?? {}
   const g = e.diagnostico
