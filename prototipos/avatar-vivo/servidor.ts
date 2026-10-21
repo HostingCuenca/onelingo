@@ -46,6 +46,14 @@ createServer(async (req, res) => {
       res.writeHead(200, { 'content-type': 'application/json' }); res.end(JSON.stringify(await tts(texto.trim(), idioma, rol)));
       return;
     }
+    if (req.method === 'POST' && url.pathname === '/captura') {
+      // Solo para comparar looks a resolución completa: guarda el lienzo en render/<nombre>.png.
+      let b = ''; for await (const c of req) b += c;
+      const { nombre, png } = JSON.parse(b);
+      if (!/^[a-z0-9-]{1,40}$/.test(nombre) || !String(png).startsWith('data:image/png;base64,')) throw new Error('Captura inválida');
+      await writeFile(path.join(RAIZ, 'render', `${nombre}.png`), Buffer.from(String(png).split(',')[1], 'base64'));
+      res.writeHead(204).end(); return;
+    }
     const ruta = path.normalize(path.join(RAIZ, url.pathname === '/' ? 'index.html' : decodeURIComponent(url.pathname)));
     if (!ruta.startsWith(RAIZ + path.sep) || ruta.includes(`${path.sep}cache${path.sep}`)) { res.writeHead(403).end(); return; }
     const datos = await readFile(ruta);

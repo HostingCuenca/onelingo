@@ -23,6 +23,8 @@ img.meshy{width:100%;border-radius:12px}
     <div class="tarjeta">
       <label for="modelo">Avatar</label>
       <select id="modelo"><option value="mpfb">MPFB · CC0 (uso comercial libre)</option><option value="avaturn">Avaturn · desde foto (solo prueba interna)</option></select>
+      <label for="look">Color e iluminación</label>
+      <select id="look"><option value="estudio">Estudio · piel cálida, luz de retrato (recomendado)</option><option value="original">Original de TalkingHead</option></select>
       <label for="idioma">Idioma y voz</label>
       <select id="idioma"><option value="es|mujer_b">Español · Marcela</option><option value="es|narradora">Español · Isabel</option><option value="en|mujer_b">Inglés · Cassidy</option><option value="en|narradora">Inglés · Matilda</option><option value="pt|mujer_b">Portugués · Ana</option></select>
       <label for="texto">Qué dice</label>
@@ -35,6 +37,7 @@ img.meshy{width:100%;border-radius:12px}
   </div>
 </main>
 <script type="module">
+import * as THREE from 'three';
 import { TalkingHead } from './vendor/talkinghead/talkinghead.mjs';
 import { visemasLatinos, palabras } from './visemas.mjs';
 const $ = (id) => document.getElementById(id), estado = (t) => $('estado').textContent = t;
@@ -65,11 +68,29 @@ function arreglarPelo() {
   }
   return capas.map((o) => o.name);
 }
+// Iluminación de retrato. El original de TalkingHead usa ACES (lava la piel), luz
+// ambiente fuerte (cara plana) y la luz principal azulada y por detrás. «Estudio»:
+// tono Neutral (colores fieles), luz principal cálida delante y arriba, relleno
+// suave del entorno y un contraluz lila (color de marca) que separa pelo y hombros
+// del fondo, colocado detrás para que no tiña la mejilla.
+const LOOKS = {
+  estudio: { tm: THREE.NeutralToneMapping, exp: 1.03, env: 0.7, amb: ['#fff4ec', 0.6], key: ['#ffefe0', 3.2, [-1.5, 3.1, 3.1]], rim: ['#c9baff', 3.2, [1.3, 2.8, -3.4]] },
+  original: { tm: THREE.ACESFilmicToneMapping, exp: 1, env: 1, amb: ['#ffffff', 2], key: ['#8888aa', 20, [1.53, 1.08, -0.7]], rim: ['#ffffff', 0, [0, 0, 0]] },
+};
+const contraluz = new THREE.DirectionalLight(); contraluz.target.position.set(0, 1.5, 0); head.scene.add(contraluz, contraluz.target);
+function aplicarLook() {
+  const o = LOOKS[$('look').value], r = head.renderer, s = head.scene;
+  r.toneMapping = o.tm; r.toneMappingExposure = o.exp; s.environmentIntensity = o.env;
+  head.lightAmbient.color.set(o.amb[0]); head.lightAmbient.intensity = o.amb[1];
+  head.lightDirect.color.set(o.key[0]); head.lightDirect.intensity = o.key[1]; head.lightDirect.position.set(...o.key[2]);
+  contraluz.color.set(o.rim[0]); contraluz.intensity = o.rim[1]; contraluz.position.set(...o.rim[2]); head.lightSpot.intensity = 0;
+  s.traverse((m) => { if (m.isMesh) for (const x of [].concat(m.material)) x.needsUpdate = true }); // el tono se compila en el shader
+}
 async function cargar() {
   const m = $('modelo').value; estado('Cargando avatar…');
   const t = performance.now();
   await head.showAvatar({ url: `modelos/${m}.glb`, avatarMood: 'happy', lipsyncLang: 'en', ...AJUSTES[m] }, (ev) => { if (ev.lengthComputable) estado(`Cargando avatar… ${Math.round(ev.loaded / ev.total * 100)} %`) });
-  const pelo = arreglarPelo();
+  const pelo = arreglarPelo(); aplicarLook();
   estado(`Listo · ${m} en ${Math.round(performance.now() - t)} ms · pelo: ${pelo.length} capas`);
 }
 function pintarFrases() { const [idi] = $('idioma').value.split('|'); $('frases').replaceChildren(...(FRASES[idi] ?? []).map((f) => Object.assign(document.createElement('button'), { textContent: f.slice(0, 34) + '…', onclick: () => { $('texto').value = f; hablar() } }))) }
@@ -91,6 +112,6 @@ async function hablar() {
 }
 const ANIMOS = ['happy', 'neutral', 'love', 'sad', 'angry', 'fear', 'disgust', 'sleep']; let a = 0;
 $('animo').onclick = () => { a = (a + 1) % ANIMOS.length; head.setMood(ANIMOS[a]); estado('Ánimo: ' + ANIMOS[a]) };
-$('hablar').onclick = hablar; $('modelo').onchange = cargar; $('idioma').onchange = pintarFrases;
+$('look').onchange = aplicarLook; $('hablar').onclick = hablar; $('modelo').onchange = cargar; $('idioma').onchange = pintarFrases;
 pintarFrases(); cargar().catch((e) => estado('Error: ' + e.message));
 </script></html>
