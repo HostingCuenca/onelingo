@@ -46,11 +46,31 @@ const FRASES = {
 const head = new TalkingHead($('avatar'), { lipsyncModules: ['en'], lipsyncLang: 'en', cameraView: 'upper', cameraRotateEnable: false, modelFPS: 30, avatarMood: 'happy', lightAmbientIntensity: 2, lightDirectIntensity: 20 });
 window.head = head;
 const AJUSTES = { mpfb: { body: 'F', baseline: {} }, avaturn: { body: 'F', baseline: { headRotateX: -0.05, eyeBlinkLeft: 0.15, eyeBlinkRight: 0.15 } } };
+// Pelo «fantasma»: las capas de pelo con mezcla semitransparente (BLEND) se dibujan
+// sin profundidad y en desorden, y se ve la cara a través. Técnica de dos pasadas:
+// 1) núcleo sólido (recorte alto, escribe profundidad) que tapa lo de detrás;
+// 2) copia suave encima (mezcla, sin escribir profundidad) solo para los bordes
+//    finos de cada mechón, sin el granulado de un recorte bajo.
+function arreglarPelo() {
+  const capas = [];
+  head.scene.traverse((o) => { if (o.isMesh && !o.userData.peloSuave && [].concat(o.material).some((m) => /hair|ponytail|bob|braid|afro/i.test(m.name))) capas.push(o) });
+  for (const o of capas) {
+    const base = [].concat(o.material)[0];
+    const solido = base.clone(); Object.assign(solido, { transparent: false, depthWrite: true, alphaTest: 0.55, alphaToCoverage: false, side: 2 });
+    const suave = base.clone(); Object.assign(suave, { transparent: true, depthWrite: false, alphaTest: 0.02, alphaToCoverage: false, side: 2 });
+    o.material = solido; o.renderOrder = 1;
+    const copia = o.clone(); copia.material = suave; copia.renderOrder = 2; copia.userData.peloSuave = true;
+    if (o.morphTargetInfluences) copia.morphTargetInfluences = o.morphTargetInfluences; // misma animación
+    o.parent.add(copia);
+  }
+  return capas.map((o) => o.name);
+}
 async function cargar() {
   const m = $('modelo').value; estado('Cargando avatar…');
   const t = performance.now();
   await head.showAvatar({ url: `modelos/${m}.glb`, avatarMood: 'happy', lipsyncLang: 'en', ...AJUSTES[m] }, (ev) => { if (ev.lengthComputable) estado(`Cargando avatar… ${Math.round(ev.loaded / ev.total * 100)} %`) });
-  estado(`Listo · ${m} en ${Math.round(performance.now() - t)} ms`);
+  const pelo = arreglarPelo();
+  estado(`Listo · ${m} en ${Math.round(performance.now() - t)} ms · pelo: ${pelo.length} capas`);
 }
 function pintarFrases() { const [idi] = $('idioma').value.split('|'); $('frases').replaceChildren(...(FRASES[idi] ?? []).map((f) => Object.assign(document.createElement('button'), { textContent: f.slice(0, 34) + '…', onclick: () => { $('texto').value = f; hablar() } }))) }
 async function hablar() {
