@@ -14,6 +14,11 @@ const LOGO = `${import.meta.env.BASE_URL}logo-panel.webp`
 
 type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string; desde?: 'usuarios' | 'suscripciones' } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' } | { p: 'planes' } | { p: 'suscripciones' }
 
+const TITULOS: Record<Ruta['p'], string> = {
+  resumen: 'Resumen', usuarios: 'Alumnos', usuario: 'Alumno', planes: 'Planes', suscripciones: 'Suscripciones',
+  conversaciones: 'Conversaciones IA', audios: 'Voz y audios', conexiones: 'Conexiones', correos: 'Correos',
+}
+
 function Login({ onOk }: { onOk: () => void }) {
   const [usuario, setUsuario] = useState('admin'); const [pin, setPin] = useState(''); const [err, setErr] = useState('')
   const entrar = async (e: React.FormEvent) => {
@@ -36,16 +41,33 @@ function Login({ onOk }: { onOk: () => void }) {
 
 export default function App() {
   const [sesion, setSesion] = useState(!!token())
-  const [ruta, setRuta] = useState<Ruta>({ p: 'resumen' })
+  const [ruta, setRutaBase] = useState<Ruta>({ p: 'resumen' })
+  const [menu, setMenu] = useState(false)
+  const setRuta = (r: Ruta) => { setRutaBase(r); setMenu(false); window.scrollTo(0, 0) }
+  useEffect(() => {
+    if (!menu) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenu(false) }
+    window.addEventListener('keydown', onKey); document.body.classList.add('sin-scroll')
+    return () => { window.removeEventListener('keydown', onKey); document.body.classList.remove('sin-scroll') }
+  }, [menu])
   useEffect(() => {
     const onErr = (e: PromiseRejectionEvent) => { if (e.reason?.status === 401) { guardarToken(null); setSesion(false) } }
     window.addEventListener('unhandledrejection', onErr); return () => window.removeEventListener('unhandledrejection', onErr)
   }, [])
   if (!sesion) return <Login onOk={() => setSesion(true)} />
+  const titulo = TITULOS[ruta.p]
   return (
-    <div className="app">
-      <aside>
-        <div className="marca"><img src={LOGO} alt="" width={34} height={32} /><span>One<b>Lingo</b> · Panel</span></div>
+    <div className={menu ? 'app menu-abierto' : 'app'}>
+      <header className="barra-movil">
+        <button className="hamburguesa" aria-label={menu ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menu} aria-controls="menu-lateral" onClick={() => setMenu(!menu)}>
+          <span /><span /><span />
+        </button>
+        <img src={LOGO} alt="" width={28} height={26} />
+        <span className="titulo-movil">{titulo}</span>
+      </header>
+      <div className="velo" onClick={() => setMenu(false)} />
+      <aside id="menu-lateral">
+        <div className="marca"><img src={LOGO} alt="" width={34} height={32} /><span>One<b>Lingo</b> · Panel</span><button className="cerrar-menu" aria-label="Cerrar menú" onClick={() => setMenu(false)}>×</button></div>
         <a className={ruta.p === 'resumen' ? 'activo' : ''} onClick={() => setRuta({ p: 'resumen' })}>Resumen</a>
         <a className={ruta.p === 'usuarios' || ruta.p === 'usuario' ? 'activo' : ''} onClick={() => setRuta({ p: 'usuarios' })}>Alumnos</a>
         <a className={ruta.p === 'planes' ? 'activo' : ''} onClick={() => setRuta({ p: 'planes' })}>Planes</a>
