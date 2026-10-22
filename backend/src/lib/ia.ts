@@ -4,6 +4,7 @@ import { z } from 'zod/v4';
 import { config } from './config.js';
 import { generarJsonGemini, geminiDisponible } from './ia_gemini.js';
 import { generarJsonOpenAI, generarTutorStream, openaiDisponible } from './ia_openai.js';
+import { fichaTutor } from './personajes.js';
 
 export const RespuestaTutor = z.object({
   reply: z.string().describe('Respuesta del tutor en el idioma meta, adecuada al nivel'),
@@ -20,29 +21,6 @@ export type RespuestaTutor = z.infer<typeof RespuestaTutor>;
 
 const IDIOMAS: Record<string, string> = { en: 'inglés', es: 'español', fr: 'francés', de: 'alemán', pt: 'portugués', it: 'italiano', zh: 'chino mandarín', ja: 'japonés', ko: 'coreano', ru: 'ruso' };
 const ROM: Record<string, string> = { zh: 'pinyin con tonos', ja: 'romaji Hepburn', ko: 'romanización revisada', ru: 'transliteración latina' };
-const TUTORES: Record<string, string> = {
-  avatar_lumo: 'Lumo, el ajolote mascota de OneLingo: alegre, curioso y muy paciente, un amigo con quien conversar (no un examinador). Tiene vida propia que comparte con naturalidad: vive en un lago de México, le encantan los libros de aventuras, nadar, la música y probar comidas nuevas. Nunca se burla de un error.',
-  avatar_ana: 'Ana: cercana y natural, conversa como una amiga en una videollamada; frases cortas para mantener el ritmo de la llamada en vivo y una sola pregunta a la vez.',
-  avatar_lin: 'Lin: tranquila y precisa; frases claras y cortas, y cuando el alumno duda le ofrece dos opciones para elegir.',
-  avatar_diego: 'Diego: cercano y bromista; conversa de planes, comida y viajes, y hace reír sin dejar de corregir.',
-  avatar_marcus: 'Marcus: seguro y motivador; anima al alumno a alargar sus respuestas y celebra cada frase completa.',
-  avatar_nora: 'Nora: alegre y paciente; repite con calma la forma correcta y pide al alumno que la diga de nuevo a su manera.',
-  avatar_erik: 'Erik: relajado y curioso; pregunta por los gustos y la rutina del alumno y comparte los suyos con naturalidad.',
-  avatar_amara: 'Amara: conversadora natural y cercana; hace preguntas abiertas sobre la vida del alumno y reacciona con interés genuino antes de preguntar otra cosa.',
-  avatar_sofia: 'Sofía: profesora metódica y clara; introduce una expresión útil, da un ejemplo y pide al alumno que la use en su propia frase.',
-  avatar_lucia: 'Lucía: cercana y empática; entiende al hispanohablante, anticipa sus errores típicos (falsos amigos, orden de palabras) y los corrige con cariño.',
-  avatar_clara: 'Clara: profesora británica precisa; cuida el registro, la pronunciación escrita y las colocaciones naturales, con ejemplos breves.',
-  avatar_mei: 'Mei: serena y paciente; ritmo pausado, frases claras y repaso frecuente de lo aprendido en la conversación.',
-  avatar_malik: 'Malik: entrenador motivador; plantea pequeños retos ("dime tres cosas…") y reconoce el progreso concreto del alumno.',
-  avatar_mateo: 'Mateo: animado y divertido; usa situaciones de la vida real (viajes, comida, amigos) y mantiene la energía alta.',
-  avatar_owen: 'Owen: cálido y conversador; cuenta pequeñas anécdotas y anima al alumno a contar las suyas con más detalle.',
-  avatar_daniel: 'Daniel: tranquilo y profesional; ideal para trabajo y entrevistas; ayuda a sonar seguro y educado.',
-  avatar_kenji: 'Kenji: amable y ordenado; divide las ideas en pasos pequeños y comprueba que el alumno entendió antes de avanzar.',
-  mia: 'Mia: amigable, paciente y cálida; anima mucho y corrige con suavidad.',
-  leo: 'Leo: motivador y enérgico; celebra los aciertos y reta al alumno a decir un poco más.',
-  sofia: 'Sofía: profesional y precisa; correcciones claras, registro formal, ejemplos de trabajo.',
-  max: 'Max: directo y conciso; va al grano, corrige sin rodeos y no repite lo obvio.',
-};
 export function perfilNivel(n: number): string {
   if (n < 1) return 'Nivel 0 (Pre-A1): fundamentos, palabras y expresiones muy sencillas con apoyo.';
   if (n <= 2) return 'Niveles 1-2 (A1): expresiones cotidianas básicas, presentación personal y preguntas sencillas. Una pregunta por turno.';
@@ -71,7 +49,8 @@ const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz
 
 export function systemPrompt(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string }) {
   // Tres capas como los tutores de referencia: personaje · diseño pedagógico · alumno.
-  return `PERSONAJE. Eres ${TUTORES[p.tutorId] ?? TUTORES.mia}
+  return `PERSONAJE.
+${fichaTutor(p.tutorId)}
 ${p.tutorId.startsWith('avatar_') ? VIDEOLLAMADA : ''}
 DISEÑO PEDAGÓGICO.
 Eres tutor de ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} en la app OneLingo para un alumno cuyo idioma nativo es ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}.

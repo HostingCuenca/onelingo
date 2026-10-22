@@ -58,3 +58,17 @@ test('learner facts are bounded data and video-call rules only for avatars', () 
   assert.doesNotMatch(systemPrompt({ ...base, tutorId: 'mia' }), /VIDEOLLAMADA/);
   assert.notEqual(systemPrompt({ ...base, tutorId: 'avatar_amara' }), systemPrompt({ ...base, tutorId: 'avatar_sofia' }).replace('Sofía', 'Amara'));
 });
+
+test('every roster tutor has its own full character sheet', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const { tutoresConFicha, fichaTutor } = await import('../src/lib/personajes.js');
+  const roster = JSON.parse(await readFile(new URL('../../web/avatar/roster.json', import.meta.url), 'utf8'));
+  const ids = [...roster.tutors.map((t: any) => `avatar_${t.id}`), 'mia', 'leo', 'sofia', 'max'];
+  for (const id of ids) {
+    assert.ok(tutoresConFicha().includes(id), `sin ficha: ${id}`);
+    const f = fichaTutor(id);
+    for (const parte of ['Tu vida:', 'Cómo conversas:', 'Cómo enseñas:', 'Evita:', 'tutor de IA de OneLingo']) assert.ok(f.includes(parte), `${id} sin ${parte}`);
+    assert.doesNotMatch(f, /Ecuador|Quito|Guayaquil|Cuenca/);
+  }
+  assert.equal(new Set(ids.map(fichaTutor)).size, ids.length); // todas distintas
+});
