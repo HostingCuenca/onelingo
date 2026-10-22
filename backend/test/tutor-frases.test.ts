@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { frasesCompletas, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
-import { resumirHechos } from '../src/lib/situaciones.js';
-import { systemPrompt } from '../src/lib/ia.js';
+import { correccionesPrevias, resumirHechos } from '../src/lib/situaciones.js';
+import { depurarCorrecciones, systemPrompt } from '../src/lib/ia.js';
 const originalFetch = globalThis.fetch;
 const encoder = new TextEncoder();
 const event = (j: unknown) => encoder.encode(`data: ${JSON.stringify(j)}\n\n`);
@@ -84,4 +84,39 @@ test('cada tutor en vivo conoce un idioma de primera mano y todos los idiomas ti
   assert.match(fichaTutor('avatar_erik', 'ja'), /especialidad es el japonés, justo el que practica/);
   assert.match(fichaTutor('avatar_erik', 'en'), /Hoy el alumno practica otro idioma/);
   assert.doesNotMatch(fichaTutor('mia', 'en'), /especialidad es el/);
+});
+
+test('the safety net drops corrections that teach nothing', () => {
+  const c = (original: string, correcto: string) => ({ original, correcto, explicacion: '', skill: 'gramatica' as const });
+  const quedan = (m: string, ...cs: ReturnType<typeof c>[]) => depurarCorrecciones(m, cs).map(x => x.correcto);
+  // Dictado por voz: solo mayúsculas y puntuación.
+  assert.deepEqual(quedan('hola me llamo john', c('hola me llamo john', 'Hola, me llamo John.')), []);
+  // Autocorrección en el mismo mensaje.
+  assert.deepEqual(quedan('Et dimanche je suis allé à le... au parc.', c('à le', 'au')), []);
+  // Cita algo que el alumno no dijo.
+  assert.deepEqual(quedan('Et dimanche je suis allé à le... au parc.', c('à le parc', 'au parc')), []);
+  assert.deepEqual(quedan('Et dimanche je suis allé à le... au parc.', c('à le... au parc', 'au parc')), []);
+  assert.deepEqual(quedan('This one is more better', c('more better', 'better')), ['better']);
+  // Errores reales se quedan, aunque la forma buena aparezca más adelante en otro sitio.
+  assert.deepEqual(quedan('Yesterday I go to the cinema', c('I go', 'I went')), ['I went']);
+  assert.deepEqual(quedan('I am agree, is more comfortable', c('I am agree', 'I agree'), c('is more', 'it is more')), ['I agree', 'it is more']);
+  assert.deepEqual(quedan('毎日学校を行きます。', c('学校を行きます', '学校に行きます')), ['学校に行きます']);
+});
+
+test('corrections already made in the call reach the tutor so repeats get a hint', () => {
+  assert.equal(correccionesPrevias([]), '');
+  assert.equal(correccionesPrevias([{ respuesta: { corrections: [] } }, { respuesta: null }]), '');
+  const t = correccionesPrevias([{ respuesta: { corrections: [{ original: 'I go to the park', correcto: 'I went to the park', skill: 'conjugacion', explicacion: 'x' }] } }]);
+  assert.match(t, /YA CORREGIDO/);
+  assert.match(t, /I went to the park/);
+  assert.doesNotMatch(t, /explicacion/);
+});
+
+test('the prompt teaches how to correct and teach', () => {
+  const p = systemPrompt({ idiomaMeta: 'en', idiomaNativo: 'es', nivel: 2, tutorId: 'avatar_frank' });
+  assert.match(p, /CÓMO CORREGIR/);
+  assert.match(p, /CÓMO ENSEÑAR/);
+  assert.match(p, /Como máximo 1 corrección/);
+  assert.match(p, /inglés estadounidense/);
+  assert.match(systemPrompt({ idiomaMeta: 'es', idiomaNativo: 'en', nivel: 5, tutorId: 'avatar_diego' }), /Como máximo 2 correcciones[\s\S]*sin regionalismos/);
 });
