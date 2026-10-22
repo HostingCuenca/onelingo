@@ -4,12 +4,15 @@
 import {createAvatar} from './avatar.js?v=27';
 import {createLumo} from './lumo.js?v=27';
 import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
+import {createAvatarTH} from './avatar-th.js?v=1';
+import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
+import {abrirEscucha, esEco, vivoDisponible} from './vivo.js?v=1';
 
 const $ = id => document.getElementById(id), audio = $('audio');
 // Todo lo que usa la conversación se carga ANTES de avisar a la app: si el
 // aviso llegaba antes que topics.json, el saludo fallaba en silencio.
 const [roster, units] = await Promise.all([
-  fetch('./roster.json?v=23').then(r => r.json()),
+  fetch('./roster.json?v=24').then(r => r.json()),
   fetch('./topics.json?v=26').then(r => r.json()),
 ]);
 
@@ -22,11 +25,14 @@ let cola = [], sonando = false, respuestaCompleta = true, vozController = null, 
 const SILENCIO = silencioWav();
 // Grabación al mantener pulsado (como los audios de WhatsApp).
 let grab = null;
+// Llamada en vivo: micrófono abierto con transcripción en tiempo real; si no
+// se puede (navegador, red, servidor sin clave) se vuelve a mantener pulsado.
+let vivo = null, modoVivo = false, mudo = false, arrastre = '', finVozEn = 0, lineaActual = null;
 
 const parametros = new URLSearchParams(location.search), embebido = parametros.has('embebido'), tutorInicial = parametros.get('tutor');
 if (embebido) document.body.classList.add('embebido');
 const languages = {en: 'inglés', es: 'español', fr: 'francés', de: 'alemán', pt: 'portugués', it: 'italiano', zh: 'chino', ja: 'japonés', ko: 'coreano', ru: 'ruso'};
-const preferred = {en: ['lumo', 'amara', 'sofia', 'clara'], es: ['lumo', 'lucia', 'mateo'], fr: ['lumo', 'clara', 'sofia'], de: ['lumo', 'daniel', 'owen'], pt: ['lumo', 'amara', 'mateo'], it: ['lumo', 'sofia', 'mateo'], zh: ['lumo', 'mei', 'kenji'], ja: ['lumo', 'kenji', 'mei'], ko: ['lumo', 'mei', 'kenji'], ru: ['lumo', 'owen', 'clara']};
+const preferred = {en: ['ana', 'lumo', 'amara', 'sofia', 'clara'], es: ['ana', 'lumo', 'lucia', 'mateo'], fr: ['ana', 'lumo', 'clara', 'sofia'], de: ['ana', 'lumo', 'daniel', 'owen'], pt: ['ana', 'lumo', 'amara', 'mateo'], it: ['ana', 'lumo', 'sofia', 'mateo'], zh: ['ana', 'lumo', 'mei', 'kenji'], ja: ['ana', 'lumo', 'kenji', 'mei'], ko: ['ana', 'lumo', 'mei', 'kenji'], ru: ['ana', 'lumo', 'owen', 'clara']};
 const language = () => config?.idiomaMeta || 'en', languageName = () => languages[language()] || languages.en;
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const headers = () => ({Authorization: `Bearer ${config.token}`});
@@ -57,7 +63,7 @@ window.addEventListener('message', event => {
     const c = JSON.parse(event.data);
     if (c.type !== 'onelingo-avatar-init') return;
     const u = new URL(c.api);
-    if (u.origin !== location.origin && !['127.0.0.1', 'localhost'].includes(u.hostname)) return;
+    if (u.origin !== location.origin && u.hostname !== location.hostname && !['127.0.0.1', 'localhost'].includes(u.hostname)) return;
     config = c;
     // Abierta desde una situación: empieza con su tema y objetivo.
     const temaInicial = units.find(x => x.id === c.tema);
@@ -69,7 +75,9 @@ window.addEventListener('message', event => {
     if (embebido && tutorInicial && !tutor) { const t = roster.tutors.find(x => x.id === tutorInicial); if (t) select(t); }
   } catch { /* mensaje ajeno */ }
 });
-parent.postMessage('onelingo-avatar-ready', location.origin);
+// En Android el visor va en un WebView: los avisos salen por su canal `OneLingo`.
+const avisarApp = msg => window.OneLingo?.postMessage ? window.OneLingo.postMessage(msg) : parent.postMessage(msg, location.origin);
+avisarApp('onelingo-avatar-ready');
 
 function renderGallery() {
   const recommendations = preferred[language()] || preferred.en;
@@ -97,6 +105,11 @@ const fuente = {
     const t = audio.currentTime;
     return {hablando: true, amplitud: .25 + .35 * Math.abs(Math.sin(t * 9)), graves: BANDAS_TIPICAS.graves * (1 + Math.sin(t * 5)), medios: BANDAS_TIPICAS.medios * (1 + Math.cos(t * 7)), agudos: BANDAS_TIPICAS.agudos, sibilantes: BANDAS_TIPICAS.sibilantes};
   },
+  // Avatares con visemas alineados: la boca sigue los tiempos de cada letra.
+  reloj() {
+    const hablando = sonando && !audio.paused && !audio.ended && audio.src !== SILENCIO;
+    return {hablando, ms: audio.currentTime * 1000, linea: lineaActual};
+  },
 };
 
 function sinSesion() {
@@ -117,7 +130,7 @@ async function select(t) {
   error(''); phase('Preparando…', 'loading'); controls();
   const version = ++selection;
   try {
-    avatar = t.tipo === '2d' ? createLumo($('stage'), fuente) : createAvatar($('stage'), fuente);
+    avatar = t.tipo === '2d' ? createLumo($('stage'), fuente) : t.tipo === 'th' ? createAvatarTH($('stage'), fuente, t.th) : createAvatar($('stage'), fuente);
     // El saludo (texto y voz) se prepara mientras carga el personaje: al
     // contestar, el tutor habla al instante.
     const carga = avatar.load(t.model, e => { if (version === selection && e.total) $('loading').textContent = `Cargando a ${t.name} · ${Math.round(e.loaded / e.total * 100)} %`; });
@@ -166,7 +179,8 @@ function iniciarLlamada() {
   if (enLlamada || !avatar || !config?.token) return;
   if (audio.src !== SILENCIO || audio.paused) { audio.src = SILENCIO; audio.play().catch(() => {}); }
   // Permiso del micrófono al empezar: así no aparece a mitad de mantener pulsado.
-  navigator.mediaDevices?.getUserMedia?.({audio: true}).then(s => s.getTracks().forEach(t => t.stop())).catch(() => {});
+  if (vivoDisponible()) abrirVivo();
+  else navigator.mediaDevices?.getUserMedia?.({audio: true}).then(s => s.getTracks().forEach(t => t.stop())).catch(() => {});
   document.body.classList.remove('puede-llamar');
   enLlamada = true; inicioLlamada = Date.now(); iniciarReloj(); controls(); error('');
   phase('Conectando…', 'thinking');
@@ -208,6 +222,7 @@ function colgar(resumen = true) {
   const habia = enLlamada;
   stop();
   if (grab) cancelarGrabacion();
+  cerrarVivo();
   enLlamada = false; clearInterval(reloj); controls();
   $('form').hidden = true;
   if (habia && tutor) {
@@ -221,7 +236,7 @@ function colgar(resumen = true) {
 }
 $('end').onclick = () => colgar(true);
 // Integrada en la app, la flecha devuelve a «Tutores con IA» (la app no pone cabecera propia).
-$('back').onclick = () => { if (embebido) { colgar(false); parent.postMessage('onelingo-avatar-salir', location.origin); return; } selection++; colgar(false); avatar?.dispose(); avatar = null; $('session').hidden = true; $('selection').hidden = false; };
+$('back').onclick = () => { if (embebido) { colgar(false); avisarApp('onelingo-avatar-salir'); return; } selection++; colgar(false); avatar?.dispose(); avatar = null; $('session').hidden = true; $('selection').hidden = false; };
 
 // ---------- Voz del tutor ----------
 function senalVoz() { if (!vozController) vozController = new AbortController(); return vozController.signal; }
@@ -229,8 +244,8 @@ function senalVoz() { if (!vozController) vozController = new AbortController();
 // (rolDeVoz en backend/src/lib/voz.ts). Un texto largo lo divide el servidor
 // por frases. `previo` (la frase anterior de la misma respuesta) va como
 // previous_text: cada frase no empieza con entonación de inicio.
-function urlVoz(text, previo = '') {
-  const url = new URL(config.api + '/voz/stream');
+function urlVoz(text, previo = '', ruta = '/voz/stream') {
+  const url = new URL(config.api + ruta);
   url.search = new URLSearchParams({texto: text, idioma: language(), voz: 'avatar_' + tutor.id, ...(previo ? {previo} : {})});
   return url;
 }
@@ -238,6 +253,13 @@ let fraseAnterior = {version: -1, texto: ''};
 function prepararFrase(text, version) {
   const previo = fraseAnterior.version === version ? fraseAnterior.texto : '';
   fraseAnterior = {version, texto: text};
+  // Con visemas: el MP3 llega junto con el tiempo de cada letra.
+  if (avatar?.alineado) {
+    return fetch(urlVoz(text, previo, '/voz/alineada'), {headers: headers(), signal: senalVoz()})
+      .then(r => { if (!r.ok) throw Error(`La voz no está disponible (${r.status}).`); return r.json(); })
+      .then(d => ({url: URL.createObjectURL(new Blob([Uint8Array.from(atob(d.audio), c => c.charCodeAt(0))], {type: 'audio/mpeg'})), env: null, texto: text,
+        linea: d.alineacion ? lineaDeVisemas(d.alineacion, language()) : null}));
+  }
   return fetch(urlVoz(text, previo), {headers: headers(), signal: senalVoz()})
     .then(r => { if (!r.ok) throw Error(`La voz no está disponible (${r.status}).`); return r.arrayBuffer(); })
     .then(async bytes => ({url: URL.createObjectURL(new Blob([bytes], {type: 'audio/mpeg'})), env: await envolvente(bytes).catch(() => null)}));
@@ -258,8 +280,10 @@ async function siguiente(version) {
   try {
     const f = await item.listo;
     if (version !== epoch) { URL.revokeObjectURL(f.url); return; }
-    soltarURL(); urlActual = f.url; envActual = f.env;
+    soltarURL(); urlActual = f.url; envActual = f.env; lineaActual = f.linea || null;
     audio.src = f.url;
+    // Audio guardado antes de existir la alineación: tiempos repartidos por la duración.
+    if (f.texto && !f.linea) audio.addEventListener('loadedmetadata', () => { if (urlActual === f.url && isFinite(audio.duration)) lineaActual = lineaDeVisemas(alineacionEstimada(f.texto, audio.duration), language()); }, {once: true});
     await audio.play();
   } catch (e) {
     if (version !== epoch || vozController?.signal.aborted) return;
@@ -271,17 +295,17 @@ function soltarURL() { if (urlActual) { URL.revokeObjectURL(urlActual); urlActua
 function detenerVoz() {
   vozController?.abort(); vozController = null; fraseAnterior = {version: -1, texto: ''};
   for (const item of cola) item.listo.then(f => URL.revokeObjectURL(f.url), () => {});
-  cola = []; sonando = false; envActual = null;
+  cola = []; sonando = false; envActual = null; lineaActual = null;
   audio.pause(); audio.removeAttribute('src'); audio.load(); soltarURL();
 }
 audio.onplaying = () => {
   if (audio.src === SILENCIO) return;
   phase('Hablando…', 'speaking');
-  status('Mantén pulsado 🎙 para interrumpir y responder.');
+  status(modoVivo ? (mudo ? 'Micrófono silenciado: toca 🎙 para hablar.' : 'Puedes interrumpir hablando.') : 'Mantén pulsado 🎙 para interrumpir y responder.');
 };
 audio.onended = () => {
   if (audio.src === SILENCIO) return;
-  envActual = null;
+  envActual = null; lineaActual = null; finVozEn = performance.now();
   if (cola.length) { siguiente(epoch); return; }
   sonando = false; finTurno();
 };
@@ -294,7 +318,8 @@ audio.onerror = () => {
 function finTurno() {
   if (!enLlamada || sonando || cola.length || !respuestaCompleta || busy || grab) return;
   phase(`En llamada · ${$('stage').dataset.reloj || '00:00'}`, 'ready');
-  status(history.some(t => t.rol === 'alumno') ? 'Tu turno: mantén pulsado 🎙 para responder.' : 'Mantén pulsado 🎙 y responde en voz alta.');
+  if (modoVivo) status(mudo ? 'Micrófono silenciado: toca 🎙 para hablar.' : 'Tu turno: habla cuando quieras.');
+  else status(history.some(t => t.rol === 'alumno') ? 'Tu turno: mantén pulsado 🎙 para responder.' : 'Mantén pulsado 🎙 y responde en voz alta.');
 }
 $('replay').onclick = () => { if (!lastReply || busy || !enLlamada) return; detenerVoz(); encolar(lastReply, epoch); };
 
@@ -489,6 +514,7 @@ function finGrabacion(mio) {
 hablar.addEventListener('pointerdown', e => {
   if (e.button > 0 || hablar.disabled) return;
   e.preventDefault();
+  if (modoVivo) { alternarMudo(); return; } // en vivo el botón solo silencia
   try { hablar.setPointerCapture(e.pointerId); } catch { /* sin captura */ }
   empezarGrabacion(e.clientX);
 });
@@ -499,9 +525,76 @@ hablar.addEventListener('pointerup', soltar);
 hablar.addEventListener('pointercancel', () => { if (grab) grab.cancelado = true; soltar(); });
 hablar.addEventListener('lostpointercapture', soltar);
 hablar.addEventListener('contextmenu', e => e.preventDefault());
-hablar.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); empezarGrabacion(0); } });
+hablar.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); if (modoVivo) alternarMudo(); else empezarGrabacion(0); } });
 hablar.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); soltar(); } });
 hablar.addEventListener('click', e => e.preventDefault());
+
+// ---------- Llamada en vivo (micrófono abierto) ----------
+const palabras = s => (s.trim().match(/[\p{L}\p{N}]+/gu) || []).length + ((/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(s) && s.trim().length >= 3) ? 1 : 0);
+// Lo que el micrófono oye mientras el tutor habla (o justo después) puede ser su propia voz.
+const tutorAudible = () => sonando || performance.now() - finVozEn < 1500;
+function textoVivo() { $('hablarTexto').textContent = mudo ? 'Silenciado · toca 🎙 para hablar' : 'Micrófono abierto · habla cuando quieras'; document.body.classList.toggle('mudo', mudo); }
+async function abrirVivo() {
+  if (vivo || modoVivo) return;
+  modoVivo = true; mudo = false; arrastre = '';
+  document.body.classList.add('vivo'); textoVivo();
+  try {
+    const h = await abrirEscucha({
+      idioma: language(),
+      pedirToken: async () => {
+        const r = await fetch(config.api + '/llamada/token', {method: 'POST', headers: headers()});
+        if (!r.ok) throw Error(r.status === 429 ? 'Demasiadas llamadas seguidas.' : `Sin escucha en vivo (${r.status}).`);
+        return r.json();
+      },
+      onParcial: oirParcial, onFinal: oirFinal,
+      onEstado: (e, detalle) => { if (e === 'error') { console.warn('escucha en vivo', detalle); volverAPulsar('Se cortó la escucha en vivo: mantén pulsado 🎙 para hablar.'); } },
+    });
+    if (!modoVivo || !enLlamada) { h.cerrar(); return; }
+    vivo = h; vivo.silenciar(mudo);
+  } catch (e) {
+    console.warn('escucha en vivo', e?.name, e?.message);
+    if (!modoVivo || !enLlamada) return;
+    volverAPulsar('Mantén pulsado 🎙 para hablar.');
+    if (e?.name === 'NotAllowedError') error('Activa el permiso del micrófono para hablar, o escribe con ⌨️.');
+  }
+}
+function cerrarVivo() {
+  const h = vivo; vivo = null; modoVivo = false; arrastre = '';
+  document.body.classList.remove('vivo', 'mudo');
+  $('hablarTexto').textContent = 'Mantén pulsado para hablar';
+  h?.cerrar();
+}
+function volverAPulsar(pista) { cerrarVivo(); if (enLlamada) { status(pista); controls(); } }
+function alternarMudo() { mudo = !mudo; vivo?.silenciar(mudo); textoVivo(); if (mudo) mostrarAlumno(''); if (!sonando && !busy) finTurno(); }
+// Mientras el alumno habla: se muestra lo que va diciendo y, si el tutor
+// estaba hablando o pensando, se le interrumpe.
+function oirParcial(texto) {
+  if (!enLlamada || mudo || !texto.trim()) return;
+  if (tutorAudible() && esEco(texto, $('subTutor').textContent)) return;
+  if (sonando || busy) {
+    if (palabras(texto) < 2) return;
+    // Seguía hablando tras una pausa: lo que ya se había enviado se junta con lo nuevo.
+    if (busy && !sonando) recuperarTurno();
+    stop();
+  }
+  if ($('stage').dataset.phase !== 'listening') { phase('Te escucho…', 'listening'); limpiarTurno(); status(''); }
+  mostrarAlumno((arrastre ? arrastre + ' ' : '') + texto);
+}
+function oirFinal(texto) {
+  if (!enLlamada || mudo) return;
+  if (tutorAudible() && esEco(texto, $('subTutor').textContent || lastReply)) return;
+  if (busy && !sonando) recuperarTurno();
+  const todo = (arrastre ? arrastre + ' ' : '') + texto; arrastre = '';
+  stop();
+  void requestTutor({texto: todo}, false);
+}
+function recuperarTurno() {
+  const ultimo = history[history.length - 1];
+  if (ultimo?.rol !== 'alumno') return;
+  history.pop(); arrastre = ultimo.texto;
+  const b = $('messages').lastElementChild;
+  if (b?.classList.contains('mine') && b.textContent === ultimo.texto) b.remove();
+}
 
 // ---------- Hoja inferior: conversación y temas ----------
 function abrirPanel(cual) {
@@ -557,5 +650,9 @@ async function mostrarResumen() {
 
 window.addEventListener('offline', () => { stop(); error('No hay conexión. Vuelve a intentarlo cuando tengas internet.'); });
 window.addEventListener('pagehide', () => { colgar(false); avatar?.dispose(); });
-document.addEventListener('visibilitychange', () => { if (document.hidden && grab) cancelarGrabacion(); });
+// En segundo plano no se escucha; al volver, el micrófono en vivo se reabre.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { if (grab) cancelarGrabacion(); if (modoVivo) { cerrarVivo(); stop(); document.body.dataset.reabrirVivo = '1'; } return; }
+  if (document.body.dataset.reabrirVivo && enLlamada) { delete document.body.dataset.reabrirVivo; abrirVivo(); finTurno(); }
+});
 controls();

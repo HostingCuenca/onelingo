@@ -2,7 +2,7 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { query } from '../lib/db.js';
 import { config } from '../lib/config.js';
-import { obtenerAudio, obtenerAudioStream, leerAudio, vozDisponible, VOCES, NATIVAS, AJUSTES_VOZ, cuotaVoz, textoParaVoz, hashAudio, ajustesDeVoz, vozMaxTotal } from '../lib/voz.js';
+import { obtenerAudio, obtenerAudioAlineado, obtenerAudioStream, leerAudio, vozDisponible, VOCES, NATIVAS, AJUSTES_VOZ, cuotaVoz, textoParaVoz, hashAudio, ajustesDeVoz, vozMaxTotal } from '../lib/voz.js';
 import { transcribirOpenAI, openaiDisponible } from '../lib/ia_openai.js';
 import { requiereAlumno, requiereAdmin, type Sesion } from '../lib/auth.js';
 
@@ -41,6 +41,25 @@ export default async function rutas(app: FastifyInstance) {
     } catch (e) {
       clearTimeout(timer);
       req.log.error({ err: String(e) }, 'voz_stream');
+      return reply.code(502).send({ error: 'voz_error' });
+    }
+  });
+
+  /**
+   * Videollamada en vivo: el MP3 (base64) y el tiempo de cada letra para mover la
+   * boca del tutor con las sílabas reales. Misma caché que /voz (no se paga dos
+   * veces); `alineacion` es null si el audio ya existía sin ella.
+   */
+  app.get('/voz/alineada', { preHandler: alumnoOToken }, async (req, reply) => {
+    const q = z.object({ texto: z.string().min(1).max(vozMaxTotal()), idioma: z.string().default('en'), voz: z.string().optional(), previo: z.string().max(2000).optional() }).parse(req.query);
+    const inicio = performance.now();
+    try {
+      const a = await obtenerAudioAlineado(q);
+      req.log.info({ ms: Math.round(performance.now() - inicio), cache: a.cache, alineada: !!a.alineacion }, 'voz_alineada');
+      return reply.header('cache-control', 'private, no-store').header('x-voz-cache', a.cache ? 'hit' : 'miss')
+        .send({ hash: a.hash, cache: a.cache, audio: a.buffer.toString('base64'), alineacion: a.alineacion });
+    } catch (e) {
+      req.log.error({ err: String(e) }, 'voz_alineada');
       return reply.code(502).send({ error: 'voz_error' });
     }
   });

@@ -99,7 +99,7 @@ export const NATIVAS: Record<string, Record<Rol, string>> = {
 const ALIAS: Record<string, Rol> = {
   mia: 'mujer_b', sofia: 'mujer_b', leo: 'hombre_b', max: 'hombre_b',
   avatar_lumo: 'lumo',
-  avatar_amara: 'mujer_b', avatar_sofia: 'mujer_b', avatar_lucia: 'mujer_b', avatar_clara: 'mujer_b', avatar_mei: 'mujer_b',
+  avatar_ana: 'mujer_b', avatar_amara: 'mujer_b', avatar_sofia: 'mujer_b', avatar_lucia: 'mujer_b', avatar_clara: 'mujer_b', avatar_mei: 'mujer_b',
   avatar_malik: 'hombre_b', avatar_mateo: 'hombre_b', avatar_owen: 'hombre_b', avatar_daniel: 'hombre_b', avatar_kenji: 'hombre_b',
 };
 
@@ -414,6 +414,90 @@ export async function obtenerAudio(p: PeticionVoz): Promise<Audio> {
   const buffer = Buffer.concat(partes);
   await mkdir(dir(), { recursive: true }).then(() => writeFile(path.join(dir(), `${hash}.mp3`), buffer)).catch(() => {});
   return { hash, buffer, cache, voz: q.rol, caracteres: q.texto.length };
+}
+
+/**
+ * Tiempo de cada letra del audio (ElevenLabs «with-timestamps»). La videollamada
+ * en vivo mueve la boca del tutor con esto: sílabas reales, no el volumen.
+ */
+export type Alineacion = { characters: string[]; character_start_times_seconds: number[]; character_end_times_seconds: number[] };
+export type AudioAlineado = Audio & { alineacion: Alineacion | null };
+
+async function sintetizarAlineado(texto: string, vozId: string, idioma: string, previo?: string, ajustes = AJUSTES_VOZ) {
+  const url = `https://api.elevenlabs.io/v1/text-to-speech/${vozId}/with-timestamps?output_format=mp3_44100_128`;
+  let r!: Response;
+  for (let i = 0; i < 3; i++) {
+    r = await fetch(url, {
+      method: 'POST',
+      headers: { 'xi-api-key': config.elevenApiKey, 'content-type': 'application/json' },
+      body: JSON.stringify(cuerpoSintesis(texto, idioma, config.elevenModelo, previo, ajustes)),
+    });
+    if (r.ok) {
+      const d = await r.json() as { audio_base64?: string; alignment?: Alineacion | null; normalized_alignment?: Alineacion | null };
+      if (!d.audio_base64) throw new Error('audio_vacio');
+      return { buffer: Buffer.from(d.audio_base64, 'base64'), alineacion: d.alignment ?? d.normalized_alignment ?? null };
+    }
+    if ((r.status === 429 || r.status >= 500) && i < 2) { await new Promise((res) => setTimeout(res, 1000 * (i + 1))); continue; }
+    break;
+  }
+  const detalle = await r.text().catch(() => '');
+  throw new Error(`ElevenLabs ${r.status}: ${detalle.slice(0, 200)}`);
+}
+
+const leerAlineacion = (hash: string) =>
+  readFile(path.join(dir(), `${hash}.json`), 'utf8').then((t) => JSON.parse(t) as Alineacion, () => null);
+
+/** Une las alineaciones de varios trozos seguidos (cada uno empieza donde acabó el anterior). */
+export function unirAlineaciones(partes: (Alineacion | null)[]): Alineacion | null {
+  if (!partes.length || partes.some((a) => !a)) return null;
+  const out: Alineacion = { characters: [], character_start_times_seconds: [], character_end_times_seconds: [] };
+  let desfase = 0;
+  for (const a of partes as Alineacion[]) {
+    out.characters.push(...a.characters);
+    out.character_start_times_seconds.push(...a.character_start_times_seconds.map((t) => +(t + desfase).toFixed(3)));
+    out.character_end_times_seconds.push(...a.character_end_times_seconds.map((t) => +(t + desfase).toFixed(3)));
+    desfase += a.character_end_times_seconds.at(-1) ?? 0;
+  }
+  return out;
+}
+
+const enCursoAlineado = new Map<string, Promise<{ buffer: Buffer; alineacion: Alineacion | null }>>();
+/**
+ * Un trozo con su alineación. Si el MP3 ya estaba en caché se reutiliza (no se
+ * vuelve a pagar) y la alineación sale de `<hash>.json` si existe; si no, va
+ * `null` y el cliente reparte las letras a lo largo del audio.
+ */
+async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: string) {
+  const hit = await buscarTrozo(t, idioma, rol, vozId);
+  if (hit) { await registrarUso(hit.hash); return { hash: hit.hash, buffer: hit.buffer, alineacion: await leerAlineacion(hit.hash), cache: true }; }
+  if (!vozDisponible()) throw new Error('voz_no_configurada');
+  let pendiente = enCursoAlineado.get(t.hash);
+  if (!pendiente) {
+    pendiente = (async () => {
+      await mkdir(dir(), { recursive: true });
+      const r = await sintetizarAlineado(t.texto, vozId, idioma, t.previo, ajustesDeVoz(rol));
+      await writeFile(path.join(dir(), `${t.hash}.mp3`), r.buffer);
+      if (r.alineacion) await writeFile(path.join(dir(), `${t.hash}.json`), JSON.stringify(r.alineacion)).catch(() => {});
+      await registrarAudio(t.hash, idioma, rol, vozId, t.texto, r.buffer.length);
+      return r;
+    })().finally(() => enCursoAlineado.delete(t.hash));
+    enCursoAlineado.set(t.hash, pendiente);
+  }
+  const r = await pendiente;
+  return { hash: t.hash, buffer: r.buffer, alineacion: r.alineacion, cache: false };
+}
+
+/** Como `obtenerAudio`, pero con el tiempo de cada letra (videollamada en vivo). */
+export async function obtenerAudioAlineado(p: PeticionVoz): Promise<AudioAlineado> {
+  const q = preparar(p);
+  const partes = [];
+  for (const t of q.trozos) partes.push(await trozoAlineado(t, p.idioma, q.rol, q.v.id));
+  const hash = partes.length === 1 ? partes[0].hash : sha(`trozos|${q.trozos.map((t) => t.hash).join('|')}`);
+  return {
+    hash, voz: q.rol, caracteres: q.texto.length, cache: partes.every((x) => x.cache),
+    buffer: partes.length === 1 ? partes[0].buffer : Buffer.concat(partes.map((x) => x.buffer)),
+    alineacion: unirAlineaciones(partes.map((x) => x.alineacion)),
+  };
 }
 
 export async function leerAudio(hash: string): Promise<Buffer | null> {

@@ -110,7 +110,14 @@ body.grabando .hablar-texto{color:var(--rojo)}
 .resumen{border:2px solid var(--morado-claro);border-radius:18px;padding:12px 14px}.resumen h3{margin:0 0 6px;color:var(--morado)}.resumen h4{margin:10px 0 4px;font-size:14px}.resumen ul{margin:0;padding-left:18px;display:grid;gap:4px}.resumen li small{display:block;color:var(--gris)}.resumen s{color:var(--rojo)}.resumen strong{color:#197D58}.resumen .siguiente{margin:10px 0 0;padding:10px 12px;border-radius:14px;background:var(--verde-suave);color:#1F5A2B;font-weight:700}
 .opcion-tema{text-align:left;padding:12px 14px;border-radius:14px;border:1.5px solid var(--borde);font-weight:700}
 .opcion-tema[aria-pressed="true"]{border-color:var(--morado);background:var(--morado-suave);color:var(--morado)}
-@media(prefers-reduced-motion:reduce){.lumo2d,.hablar{transition:none}}
+.lienzo-th{position:absolute;inset:0}
+.lienzo-th canvas{display:block}
+body.vivo .hablar{background:var(--verde,#14a37f);animation:pulso 2.4s ease-in-out infinite}
+body.vivo.mudo .hablar{background:var(--gris);animation:none}
+body.vivo .hablar-texto{color:var(--verde,#14a37f)}
+body.vivo.mudo .hablar-texto{color:var(--gris)}
+@keyframes pulso{0%,100%{box-shadow:0 0 0 0 #14a37f55}50%{box-shadow:0 0 0 12px #14a37f00}}
+@media(prefers-reduced-motion:reduce){.lumo2d,.hablar{transition:none;animation:none}}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/build/three.module.js","three/addons/":"./vendor/examples/jsm/"}}</script>
 <section id="selection"><p id="eyebrow">ONELINGO · TUTOR CON IA</p><h1>Una conversación, a tu ritmo.</h1><p id="selectionCopy">Elige a tu tutor.</p><p id="authStatus" role="status">Conectando con tu sesión…</p><div id="gallery"></div></section>
@@ -151,4 +158,4 @@ body.grabando .hablar-texto{color:var(--rojo)}
  </div>
  <audio id="audio" preload="auto" playsinline></audio>
 </section>
-<script type="module" src="./practice.js?v=29"></script></html>
+<script type="module" src="./practice.js?v=30"></script></html>

@@ -10,6 +10,7 @@ import { pool } from './lib/db.js';
 import rutasUsuarios from './routes/usuarios.js';
 import rutasAdmin from './routes/admin.js';
 import rutasEjercicios from './routes/ejercicios.js';
+import rutasLlamada from './routes/llamada.js';
 import rutasAuth from './routes/auth.js';
 import rutasChat from './routes/chat.js';
 import rutasVoz from './routes/voz.js';
@@ -42,5 +43,6 @@ export async function crearApp() {
   await app.register(rutasPlanes);
   await app.register(rutasPagos);
   await app.register(rutasEjercicios);
+  await app.register(rutasLlamada);
   return app;
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -50,21 +49,20 @@ class TutorsScreen extends ConsumerWidget {
                 titulo: tr('Videollamada con un tutor'),
                 texto: tr('Cara a cara, por voz o escribiendo.'),
               ),
-              if (!kIsWeb)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Tarjeta(
-                    color: OL.amarilloSuave,
-                    sombra: false,
-                    child: Text(
-                      tr(
-                        'La videollamada está disponible en la versión web. Mientras tanto, usa el chat de voz de abajo.',
-                      ),
-                      style: const TextStyle(fontSize: 13, height: 1.35),
-                    ),
-                  ),
-                ),
-              _TarjetaLumo(onTap: () => _abrirVideollamada(context, 'lumo')),
+              _TarjetaDestacada(
+                tutor: anaTutor,
+                titulo: tr('Llamada en vivo con Ana'),
+                etiqueta: tr('En vivo'),
+                recortar: true,
+                onTap: () => _abrirVideollamada(context, 'ana'),
+              ),
+              const SizedBox(height: 12),
+              _TarjetaDestacada(
+                tutor: lumoTutor,
+                titulo: tr('Habla con Lumo'),
+                etiqueta: tr('Nuevo'),
+                onTap: () => _abrirVideollamada(context, 'lumo'),
+              ),
               const SizedBox(height: 12),
               LayoutBuilder(
                 builder: (context, c) {
@@ -181,7 +179,9 @@ class TutorsScreen extends ConsumerWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        tr('Para conversar con la IA necesitas conexión a internet.'),
+                        tr(
+                          'Para conversar con la IA necesitas conexión a internet.',
+                        ),
                         style: const TextStyle(
                           fontSize: 12,
                           color: OL.morado,
@@ -200,28 +200,30 @@ class TutorsScreen extends ConsumerWidget {
   }
 }
 
-void _abrirVideollamada(BuildContext context, String id) {
-  if (kIsWeb) {
+void _abrirVideollamada(BuildContext context, String id) =>
     context.push('/avatar/$id');
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(tr('La videollamada está disponible en la versión web.')),
-      ),
-    );
-  }
-}
 
-/// Lumo destacado: habla con bocas sincronizadas con la voz y carga al
-/// instante. Un solo personaje en la tarjeta, sin animación de entrada.
-class _TarjetaLumo extends StatelessWidget {
-  const _TarjetaLumo({required this.onTap});
+/// Tutor destacado (Ana en vivo, Lumo): un solo personaje en la tarjeta,
+/// sin animación de entrada.
+class _TarjetaDestacada extends StatelessWidget {
+  const _TarjetaDestacada({
+    required this.tutor,
+    required this.titulo,
+    required this.etiqueta,
+    required this.onTap,
+    this.recortar = false,
+  });
+  final Tutor3d tutor;
+  final String titulo, etiqueta;
   final VoidCallback onTap;
+
+  /// Retrato realista: llena el cuadro con esquinas redondeadas.
+  final bool recortar;
 
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
-    label: tr('Videollamada con Lumo'),
+    label: tr('Videollamada con {tutor}', {'tutor': tutor.nombre}),
     child: Tarjeta(
       onTap: onTap,
       color: OL.moradoSuave,
@@ -232,10 +234,14 @@ class _TarjetaLumo extends StatelessWidget {
           SizedBox(
             width: 108,
             height: 132,
-            child: Image.asset(
-              lumoTutor.retrato,
-              fit: BoxFit.contain,
-              excludeFromSemantics: true,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(recortar ? 16 : 0),
+              child: Image.asset(
+                tutor.retrato,
+                fit: recortar ? BoxFit.cover : BoxFit.contain,
+                alignment: Alignment.topCenter,
+                excludeFromSemantics: true,
+              ),
             ),
           ),
           const SizedBox(width: 12),
@@ -243,15 +249,18 @@ class _TarjetaLumo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Etiqueta(tr('Nuevo'), color: OL.blanco, fondo: OL.naranja),
+                Etiqueta(etiqueta, color: OL.blanco, fondo: OL.naranja),
                 const SizedBox(height: 6),
                 Text(
-                  tr('Habla con Lumo'),
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+                  titulo,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  lumoTutor.estilo,
+                  tutor.estilo,
                   style: const TextStyle(
                     color: OL.gris,
                     fontSize: 13,

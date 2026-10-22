@@ -9,6 +9,9 @@ class Tutor3d {
 
   /// Descripción en el idioma de la interfaz (se resuelve al mostrarla).
   String get estilo => switch (id) {
+    'ana' => tr(
+      'Llamada en vivo: habla cuando quieras, te escucha y te responde al instante.',
+    ),
     'lumo' => tr(
       'Tu compañero de OneLingo: habla contigo, te corrige y carga al instante.',
     ),
@@ -29,6 +32,10 @@ class Tutor3d {
 /// Lumo que habla (2D con bocas sincronizadas con la voz): el tutor más
 /// ligero (~80 KB frente a 1,1–1,4 MB de un tutor 3D). Va destacado primero.
 const lumoTutor = Tutor3d('lumo', 'Lumo');
+
+/// Ana: tutora realista de la llamada en vivo (micrófono abierto, se le
+/// puede interrumpir). Va destacada encima de Lumo.
+const anaTutor = Tutor3d('ana', 'Ana');
 
 const tutores3d = [
   Tutor3d('amara', 'Amara'),
@@ -68,7 +75,7 @@ List<Tutor3d> tutores3dPara(String idioma) {
 }
 
 Tutor3d? tutor3d(String id) {
-  for (final t in [lumoTutor, ...tutores3d]) {
+  for (final t in [anaTutor, lumoTutor, ...tutores3d]) {
     if (t.id == id) return t;
   }
   return null;

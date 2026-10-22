@@ -1,0 +1,36 @@
+import type { FastifyInstance } from 'fastify';
+import { query } from '../lib/db.js';
+import { config } from '../lib/config.js';
+import { requiereAlumno, type Sesion } from '../lib/auth.js';
+
+/** Tokens por alumno y hora (cada llamada pide uno al empezar y otro si se reconecta). */
+export const TOKENS_POR_HORA = 30;
+const emitidos = new Map<string, number[]>();
+export function puedeEmitir(usuario: string, ahora = Date.now()) {
+  const recientes = (emitidos.get(usuario) ?? []).filter((t) => ahora - t < 3_600_000);
+  if (recientes.length >= TOKENS_POR_HORA) { emitidos.set(usuario, recientes); return false; }
+  recientes.push(ahora); emitidos.set(usuario, recientes); return true;
+}
+
+/**
+ * Videollamada en vivo. El navegador transcribe el micrófono directamente con
+ * ElevenLabs (Scribe v2 Realtime, por WebSocket) usando un token de un solo uso
+ * que caduca a los 15 minutos: la clave de ElevenLabs nunca sale del servidor y
+ * el audio del alumno no pasa por aquí (menos latencia).
+ */
+export default async function rutas(app: FastifyInstance) {
+  app.post('/llamada/token', { preHandler: requiereAlumno }, async (req, reply) => {
+    const s = req.user as Sesion;
+    if (!config.elevenApiKey) return reply.code(503).send({ error: 'voz_no_configurada' });
+    if (!puedeEmitir(s.sub)) return reply.code(429).send({ error: 'demasiadas_llamadas' });
+    const r = await fetch('https://api.elevenlabs.io/v1/single-use-token/realtime_scribe', { method: 'POST', headers: { 'xi-api-key': config.elevenApiKey } });
+    if (!r.ok) {
+      req.log.error({ status: r.status, detalle: (await r.text().catch(() => '')).slice(0, 200) }, 'llamada_token');
+      return reply.code(502).send({ error: 'transcripcion_no_disponible' });
+    }
+    const { token } = await r.json() as { token?: string };
+    if (!token) return reply.code(502).send({ error: 'transcripcion_no_disponible' });
+    await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1, $2, $3)', [s.sub, 'llamada_token', '{}']).catch(() => {});
+    return { token, url: 'wss://api.elevenlabs.io/v1/speech-to-text/realtime', modelo: 'scribe_v2_realtime', caducaEnSegundos: 900 };
+  });
+}

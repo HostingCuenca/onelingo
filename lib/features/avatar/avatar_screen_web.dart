@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:js_interop';
 import 'dart:ui_web' as ui_web;
 
@@ -9,9 +8,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/api/sync.dart';
 import '../../core/state/providers.dart';
-import '../../core/biblioteca.dart';
 import '../../core/i18n/i18n.dart';
 import 'tutores_3d.dart';
+import 'visor_datos.dart';
 
 /// Same-origin isolated viewer; credentials stay in memory and never in URLs.
 class AvatarScreen extends ConsumerStatefulWidget {
@@ -44,7 +43,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     frame = web.HTMLIFrameElement()
       ..src = Uri.base
           .resolve(
-            '/avatar/index.html?v=avatar29&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
+            '/avatar/index.html?v=avatar30&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
           )
           .toString()
       ..title = tr('Practica con un tutor de IA')
@@ -64,22 +63,12 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
         return;
       }
       if (dato != 'onelingo-avatar-ready') return;
-      final s = ref.read(progressProvider);
       frame.contentWindow?.postMessage(
-        jsonEncode({
-          'type': 'onelingo-avatar-init',
-          'api': Sync.baseUrl,
-          'token': Sync.instancia.token,
-          'nivel': s.nivelActual.clamp(1, 10),
-          'idiomaMeta': s.idiomaMeta,
-          'idiomaNativo': s.idiomaNativo,
-          'tema': ?widget.tema,
-          'objetivoId': ?widget.objetivoId,
-          'contexto':
-              'Sectores: ${s.sectores.join(', ')}. Objetivos: ${s.objetivos.join(', ')}. '
-              'Prioridades de aprendizaje: ${RutaBiblioteca.prioridades(s.diagnostico, s.practicas).take(3).join(', ')}. '
-              'Temas a reforzar: ${((s.diagnostico?['refuerzo'] as List?) ?? []).take(5).join(', ')}.',
-        }).toJS,
+        datosVisor(
+          ref.read(progressProvider),
+          tema: widget.tema,
+          objetivoId: widget.objetivoId,
+        ).toJS,
         web.window.location.origin.toJS,
       );
     }).toJS;
