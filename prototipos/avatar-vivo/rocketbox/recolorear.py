@@ -1,5 +1,6 @@
 # Piel más clara (porcelana) y pelo platino sobre las texturas de un Rocketbox.
-#   python3 recolorear.py carpeta_texturas prefijo pestanas.json salida/
+#   python3 recolorear.py carpeta_texturas prefijo pestanas.json salida/ [recuadro_tatuaje]
+#   PELO=original deja el pelo como venía (solo cambia la piel).
 # Piel: píxeles de tono piel se llevan a un tono claro conservando el detalle.
 # Pelo: lo oscuro y poco saturado fuera de la cara (cabeza) y toda la textura
 # de mechones (menos las pestañas) pasa a platino, con el relieve de cada mechón.
@@ -9,7 +10,8 @@ tex, pre, pest, sal = sys.argv[1:5]
 os.makedirs(sal, exist_ok=True)
 for f in os.listdir(tex): shutil.copy(os.path.join(tex, f), sal)
 LUM = np.array([.3, .59, .11], np.float32)
-PIEL = np.array([.94, .80, .72], np.float32)   # porcelana cálida
+PIEL = np.array([.92, .78, .69], np.float32)   # porcelana cálida
+TENIR = os.environ.get('PELO', 'platino') != 'original'
 PLATINO = np.array([.93, .94, .97], np.float32)
 
 def cargar(n, modo='RGB'): return np.asarray(Image.open(os.path.join(tex, f'{pre}_{n}.tga')).convert(modo)).astype(np.float32) / 255
@@ -19,8 +21,11 @@ def mascara_piel(c):
     r, g, b = c[..., 0], c[..., 1], c[..., 2]; mx, mn = c.max(-1), c.min(-1); sat = (mx - mn) / (mx + 1e-3)
     return ((r > g) & (g > b) & (r - b > .08) & (sat > .12) & (sat < .62) & (c @ LUM > .22) & (c @ LUM < .92)).astype(np.float32)
 def aclarar(c, M):
-    media = c[M > .5].mean(0)
-    nuevo = c / media * PIEL
+    # Divide por el color medio local de la piel (radio grande) y lleva a PIEL:
+    # quedan poros y sombras finas, se van manchas y diferencias entre zonas.
+    def bl(x): return np.asarray(Image.fromarray(np.clip(x * 255, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(40))).astype(np.float32) / 255
+    local = bl(c * M[..., None]) / np.maximum(bl(M)[..., None], 1e-3)
+    nuevo = np.clip(c / np.maximum(local, .05) * PIEL, 0, 1)
     return c * (1 - M[..., None]) + nuevo * M[..., None]
 def platino(c, M, ref):
     l = c @ LUM; lo, hi = np.percentile(l[ref], 5), np.percentile(l[ref], 97)
@@ -38,7 +43,7 @@ atlas_ojos = ((x < .2) & (y > .6)) | ((x > .19) & (x < .33) & (y > .83))  # boca
 pelo = (c @ LUM < .32) & ((sat < .55) | (c @ LUM < .15)) & ~cara & ~atlas_ojos
 pelo = blur(pelo.astype(np.float32), 1.5)
 c = aclarar(c, piel * (1 - pelo))
-c = platino(c, pelo, pelo > .5)
+if TENIR: c = platino(c, pelo, pelo > .5)
 guardar(c, 'head_color')
 # Cuerpo: solo la piel (la ropa queda); se borra el tatuaje del brazo.
 c = cargar('body_color')
@@ -64,6 +69,7 @@ quitar = np.zeros_like(a, bool)
 for x0, y0, x1, y1 in json.load(open(pest)):
     quitar[int((1 - y1) * L) - 4:int((1 - y0) * L) + 4, int(x0 * L) - 4:int(x1 * L) + 4] = True
 M = ((a > .02) & ~quitar).astype(np.float32)
-rgb = platino(rgb, M, (a > .5) & ~quitar)
-guardar(np.dstack([rgb, a]), 'opacity_color', 'RGBA')
+if TENIR:
+    rgb = platino(rgb, M, (a > .5) & ~quitar)
+    guardar(np.dstack([rgb, a]), 'opacity_color', 'RGBA')
 print('LISTO', sal)
