@@ -49,7 +49,7 @@ Si una variante falla, queda la frase original: no hay reintentos ni revisor por
 | # | Idioma | Estado | Nota |
 |---|---|---|---|
 | 1 | Francés (fr) | **completo** N1–N10 (22-10), sin desplegar | piloto; ~2,3 M tokens; 2 errores de las originales corregidos |
-| 2 | Alemán (de) | en curso (variación N1–N9) | latino, sin cambios en el constructor |
+| 2 | Alemán (de) | **completo** N1–N10 (22-10), sin desplegar | ~2 M tokens; 3.309 variantes de los agentes, 44 descartadas en revisión (registro du/Sie, hechos, colocaciones) |
 | 3 | Portugués (pt) | pendiente | latino |
 | 4 | Italiano (it) | pendiente | latino |
 | 5 | Español (es) | pendiente | apoyo solo en inglés |
