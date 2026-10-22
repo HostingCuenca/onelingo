@@ -29,34 +29,63 @@ class SelectorIdiomaApp extends ConsumerWidget {
             color: sobreColor ? OL.moradoClaro : OL.gris,
           ),
           for (final e in I18n.disponibles.entries)
-            ChoiceChip(
-              label: Text(e.value),
-              selected: actual == e.key,
-              showCheckmark: false,
-              // M3 ignora backgroundColor/selectedColor en parte: se fija el
-              // color por estado con `color` para que el chip nunca salga
-              // blanco opaco con texto blanco.
-              color: WidgetStateProperty.resolveWith<Color?>((states) {
-                final sel = states.contains(WidgetState.selected);
-                if (sobreColor) {
-                  return sel ? OL.blanco : OL.blanco.withValues(alpha: .15);
-                }
-                return sel ? OL.moradoClaro : OL.blanco;
-              }),
-              labelStyle: TextStyle(
-                fontWeight: FontWeight.w800,
-                // Sobre fondo morado: no seleccionado = texto blanco; en el
-                // resto de casos el texto es morado (contrasta con blanco).
-                color: sobreColor && actual != e.key ? OL.blanco : OL.morado,
-              ),
-              side: BorderSide(
-                color: sobreColor ? OL.blanco.withValues(alpha: .4) : OL.grisClaro,
-              ),
-              onSelected: (_) => ref
+            _Ficha(
+              texto: e.value,
+              elegida: actual == e.key,
+              sobreColor: sobreColor,
+              alElegir: () => ref
                   .read(progressProvider.notifier)
                   .elegirIdiomaInterfaz(e.key),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// Ficha de idioma con colores fijos por estado. No usa ChoiceChip: en Android
+/// el tema M3 pintaba la no elegida blanca opaca con el texto blanco encima.
+class _Ficha extends StatelessWidget {
+  const _Ficha({
+    required this.texto,
+    required this.elegida,
+    required this.sobreColor,
+    required this.alElegir,
+  });
+
+  final String texto;
+  final bool elegida, sobreColor;
+  final VoidCallback alElegir;
+
+  @override
+  Widget build(BuildContext context) {
+    final (fondo, letra, borde) = switch ((sobreColor, elegida)) {
+      (true, true) => (OL.blanco, OL.morado, OL.blanco),
+      (true, false) => (
+        Colors.transparent,
+        OL.blanco,
+        OL.blanco.withValues(alpha: .55),
+      ),
+      (false, true) => (OL.moradoClaro, OL.morado, OL.morado),
+      (false, false) => (OL.blanco, OL.morado, OL.grisClaro),
+    };
+    return Semantics(
+      button: true,
+      selected: elegida,
+      child: Material(
+        color: fondo,
+        shape: StadiumBorder(side: BorderSide(color: borde, width: 1.5)),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: elegida ? null : alElegir,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
+            child: Text(
+              texto,
+              style: TextStyle(fontWeight: FontWeight.w800, color: letra),
+            ),
+          ),
+        ),
       ),
     );
   }
