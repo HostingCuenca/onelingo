@@ -4,7 +4,7 @@
 import {createAvatar} from './avatar.js?v=27';
 import {createLumo} from './lumo.js?v=27';
 import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
-import {createAvatarTH} from './avatar-th.js?v=2';
+import {createAvatarTH} from './avatar-th.js?v=10';
 import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
 import {abrirEscucha, esEco, vivoDisponible} from './vivo.js?v=1';
 
@@ -12,7 +12,7 @@ const $ = id => document.getElementById(id), audio = $('audio');
 // Todo lo que usa la conversación se carga ANTES de avisar a la app: si el
 // aviso llegaba antes que topics.json, el saludo fallaba en silencio.
 const [roster, units] = await Promise.all([
-  fetch('./roster.json?v=27').then(r => r.json()),
+  fetch('./roster.json?v=29').then(r => r.json()),
   fetch('./topics.json?v=26').then(r => r.json()),
 ]);
 

@@ -90,8 +90,9 @@ test('tutores, avatares y roles se traducen a la voz nativa del idioma practicad
 test('el género de cada avatar coincide con web/avatar/roster.json', () => {
   const roster = JSON.parse(readFileSync(new URL('../../web/avatar/roster.json', import.meta.url), 'utf8'));
   for (const t of roster.tutors as { id: string; gender: string }[]) {
-    const esperado = t.id === 'lumo' ? 'lumo' : t.gender === 'female' ? 'mujer_b' : t.gender === 'male' ? 'hombre_b' : 'narradora';
-    assert.equal(rolPedido(`avatar_${t.id}`), esperado, t.id);
+    // Cada tutor puede tener su propia voz, pero siempre de su género.
+    const validos = t.id === 'lumo' ? ['lumo'] : t.gender === 'female' ? ['mujer_b', 'narradora'] : t.gender === 'male' ? ['hombre_b', 'narrador'] : ['narradora'];
+    assert.ok(validos.includes(rolPedido(`avatar_${t.id}`)), `${t.id}: ${rolPedido(`avatar_${t.id}`)}`);
   }
 });
 

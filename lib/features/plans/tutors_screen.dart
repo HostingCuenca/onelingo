@@ -49,6 +49,40 @@ class TutorsScreen extends ConsumerWidget {
                 titulo: tr('Videollamada con un tutor'),
                 texto: tr('Cara a cara, por voz o escribiendo.'),
               ),
+              // Los tutores realistas en vivo van primero, en una fila que se
+              // desliza, antes de las tarjetas de Ana y Lumo.
+              Text(
+                tr('Nuevos tutores en vivo'),
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                clipBehavior: Clip.none,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (final t in tutoresVivo)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: SizedBox(
+                          width: 148,
+                          height: 236,
+                          child: _TarjetaTutor3d(
+                            tutor: t,
+                            recomendado: false,
+                            enVivo: true,
+                            onTap: () => _abrirVideollamada(context, t.id),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
               _TarjetaDestacada(
                 tutor: anaTutor,
                 titulo: tr('Llamada en vivo con Ana'),
@@ -75,13 +109,6 @@ class TutorsScreen extends ConsumerWidget {
                     crossAxisSpacing: 12,
                     childAspectRatio: .66,
                     children: [
-                      for (final t in tutoresVivo)
-                        _TarjetaTutor3d(
-                          tutor: t,
-                          recomendado: false,
-                          enVivo: true,
-                          onTap: () => _abrirVideollamada(context, t.id),
-                        ),
                       for (final t in tutores3dPara(s.idiomaMeta))
                         _TarjetaTutor3d(
                           tutor: t,

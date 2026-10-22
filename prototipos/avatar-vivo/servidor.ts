@@ -1,11 +1,13 @@
 /**
- * Piloto local de TalkingHead (no se despliega). Sirve esta carpeta y
- * POST /tts → ElevenLabs «with-timestamps»: audio + tiempo de cada letra, para
- * mover la boca con las sílabas reales. La clave sale de la config del backend
- * (se arranca desde backend/ para que lea su .env); nunca llega al navegador.
- * Las respuestas se guardan en cache/ para no pagar dos veces la misma frase.
+ * Sala de pruebas local de los tutores en vivo (no se despliega). Sirve esta
+ * carpeta, el visor real en /avatar/ (web/avatar) y POST /voz, que pide la voz
+ * con el tiempo de cada letra igual que la app (obtenerAudioAlineado, misma
+ * voz por tutor y misma caché en disco del backend). La clave sale de la
+ * config del backend (se arranca desde backend/ para que lea su .env); nunca
+ * llega al navegador.
  *
  *   cd backend && npx tsx ../prototipos/avatar-vivo/servidor.ts
+ *   cd backend && npx tsx ../prototipos/avatar-vivo/precargar.ts   (todas las frases)
  */
 import { createServer } from 'node:http';
 import { createHash } from 'node:crypto';
@@ -13,11 +15,12 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { config } from '../../backend/src/lib/config.js';
-import { VOCES, NATIVAS, cuerpoSintesis, ajustesDeVoz, type Rol } from '../../backend/src/lib/voz.js';
+import { VOCES, NATIVAS, cuerpoSintesis, ajustesDeVoz, obtenerAudioAlineado, type Rol } from '../../backend/src/lib/voz.js';
 
 const RAIZ = path.dirname(fileURLToPath(import.meta.url));
+const VISOR = path.resolve(RAIZ, '../../web/avatar');
 const PUERTO = Number(process.env.PUERTO ?? 8197);
-const TIPOS: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.mjs': 'text/javascript', '.js': 'text/javascript', '.glb': 'model/gltf-binary', '.png': 'image/png', '.json': 'application/json' };
+const TIPOS: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.mjs': 'text/javascript', '.js': 'text/javascript', '.glb': 'model/gltf-binary', '.png': 'image/png', '.webp': 'image/webp', '.json': 'application/json' };
 
 async function tts(texto: string, idioma: string, rol: Rol) {
   const clave = NATIVAS[idioma]?.[rol];
@@ -46,6 +49,15 @@ createServer(async (req, res) => {
       res.writeHead(200, { 'content-type': 'application/json' }); res.end(JSON.stringify(await tts(texto.trim(), idioma, rol)));
       return;
     }
+    if (req.method === 'POST' && url.pathname === '/voz') {
+      let b = ''; for await (const c of req) b += c;
+      const { texto, idioma, tutor } = JSON.parse(b);
+      if (typeof texto !== 'string' || !texto.trim() || texto.length > 400 || !/^[a-z]{2}$/.test(idioma) || !/^[a-z]{2,12}$/.test(tutor)) throw new Error('Petición inválida');
+      const a = await obtenerAudioAlineado({ texto: texto.trim(), idioma, voz: `avatar_${tutor}` });
+      res.writeHead(200, { 'content-type': 'application/json' });
+      res.end(JSON.stringify({ voz: a.voz, cache: a.cache, audio: a.buffer.toString('base64'), alineacion: a.alineacion }));
+      return;
+    }
     if (req.method === 'POST' && url.pathname === '/captura') {
       // Solo para comparar looks a resolución completa: guarda el lienzo en render/<nombre>.png.
       let b = ''; for await (const c of req) b += c;
@@ -54,8 +66,10 @@ createServer(async (req, res) => {
       await writeFile(path.join(RAIZ, 'render', `${nombre}.png`), Buffer.from(String(png).split(',')[1], 'base64'));
       res.writeHead(204).end(); return;
     }
-    const ruta = path.normalize(path.join(RAIZ, url.pathname === '/' ? 'index.html' : decodeURIComponent(url.pathname)));
-    if (!ruta.startsWith(RAIZ + path.sep) || ruta.includes(`${path.sep}cache${path.sep}`)) { res.writeHead(403).end(); return; }
+    const visor = url.pathname.startsWith('/avatar/');
+    const base = visor ? VISOR : RAIZ;
+    const ruta = path.normalize(path.join(base, url.pathname === '/' ? 'index.html' : decodeURIComponent(visor ? url.pathname.slice('/avatar'.length) : url.pathname)));
+    if (!ruta.startsWith(base + path.sep) || ruta.includes(`${path.sep}cache${path.sep}`)) { res.writeHead(403).end(); return; }
     const datos = await readFile(ruta);
     res.writeHead(200, { 'content-type': TIPOS[path.extname(ruta)] ?? 'application/octet-stream', 'cache-control': 'no-cache' }); res.end(datos);
   } catch (e: any) {

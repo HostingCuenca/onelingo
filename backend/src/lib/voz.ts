@@ -99,7 +99,7 @@ export const NATIVAS: Record<string, Record<Rol, string>> = {
 const ALIAS: Record<string, Rol> = {
   mia: 'mujer_b', sofia: 'mujer_b', leo: 'hombre_b', max: 'hombre_b',
   avatar_lumo: 'lumo',
-  avatar_ana: 'mujer_b', avatar_lin: 'mujer_b', avatar_diego: 'hombre_b', avatar_marcus: 'hombre_b', avatar_nora: 'mujer_b', avatar_erik: 'hombre_b', avatar_amara: 'mujer_b', avatar_sofia: 'mujer_b', avatar_lucia: 'mujer_b', avatar_clara: 'mujer_b', avatar_mei: 'mujer_b',
+  avatar_ana: 'mujer_b', avatar_lin: 'narradora', avatar_diego: 'hombre_b', avatar_marcus: 'narrador', avatar_nora: 'mujer_b', avatar_erik: 'hombre_b', avatar_amara: 'mujer_b', avatar_sofia: 'mujer_b', avatar_lucia: 'mujer_b', avatar_clara: 'mujer_b', avatar_mei: 'mujer_b',
   avatar_malik: 'hombre_b', avatar_mateo: 'hombre_b', avatar_owen: 'hombre_b', avatar_daniel: 'hombre_b', avatar_kenji: 'hombre_b',
 };
 
