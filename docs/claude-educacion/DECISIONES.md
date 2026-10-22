@@ -307,3 +307,13 @@ Decisión:
 - Todo nace bilingüe `{es, en}` y con autor/revisor distintos. La IA no es necesaria para cursar ni aprobar.
 - Antes de aprobar `curriculo/pt`, deben congelarse el inventario sonoro, los prerrequisitos de Fundamentos, la política de variación regional y las voces nativas brasileñas.
 Referencia: `PLAN_PORTUGUES.md`.
+
+## DEC-036 — 100 clases por nivel con clases de refuerzo
+Fecha: 2026-10-22 · Acuerdo del cliente: ver 100 clases por nivel en todos los idiomas, sin reescribir contenido.
+Decisión:
+- Cada clase `cNN` de los 9 idiomas con ruta DEC-034 recibe una clase de refuerzo `rNN` (`refuerzoDe`), ubicada al final de su bloque y encadenada en la ruta lineal. El inglés ya tiene 100 por nivel y no cambia.
+- El refuerzo reutiliza el material revisado del bloque, en versión más exigente: producción en lugar de reconocimiento, dictado, completar sin opciones, mezcla de clases del bloque, situación invertida y nota mínima de 0,9.
+- Las frases escritas llevan una variación ligera hecha por IA: un elemento cambiado, solo vocabulario enseñado y control automático. Si una variante falla, queda la original. Los audios usan frases existentes, así que no generan créditos nuevos.
+- Consumo objetivo: un agente por nivel, de ~0,2 a 0,35 M tokens. Hay revisión humana o de Claude sobre una tabla por nivel, sin revisor por bloque.
+- Despliegue por idioma completo (DEC de despliegue por idioma), con un commit por idioma.
+Referencia: `PLAN_REFUERZOS.md`, `tools/contenido/refuerzo/`.

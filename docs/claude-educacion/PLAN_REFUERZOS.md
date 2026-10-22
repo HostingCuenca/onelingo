@@ -1,0 +1,75 @@
+# Plan: 100 clases por nivel con clases de refuerzo (DEC-036)
+
+## Objetivo
+
+Los 9 idiomas distintos del inglés tienen 50 clases por nivel (`cNN`, plan DEC-034). El cliente quiere ver 100 por nivel. Por cada clase `cNN` se suma una **clase de refuerzo `rNN`**, un poco más exigente, armada con el material del bloque que ya está revisado. No se escriben clases nuevas. El inglés ya tiene 100 por nivel y no se toca.
+
+Al terminar: 9 idiomas × 10 niveles × 50 refuerzos = **4.500 clases nuevas**, y cada idioma queda con 1.000.
+
+## Método de bajo consumo (probado en fr N1, 22-10-2026)
+
+Herramientas en `tools/contenido/refuerzo/`:
+
+| Paso | Comando | Costo |
+|---|---|---|
+| 1. Paquete del nivel | `construir.py <idioma> N todo --paquete` | 0 tokens |
+| 2. Variación ligera | un agente sonnet por nivel con `ENCARGO_VARIACION.md` (máx. 3 llamadas) | ~160 k tokens en fr N1 |
+| 3. Construir y validar | `construir.py <idioma> N todo`: control automático y `validar_ruta.py` | 0 tokens |
+| 4. Revisión | `revision.py <idioma> N salida.html`: tabla original → variante | lectura humana o de Claude |
+| 5. Correcciones | editar `<idioma>/nN.variantes.json`, quitar la clave o corregirla, y volver al paso 3 | mínimo |
+
+**Cómo es una clase de refuerzo:**
+- repaso breve con el error típico, los ejemplos, el vocabulario y la tabla de la clase original;
+- los ejercicios de la clase original en versión más difícil: elegir pasa a escribir, escuchar pasa a dictado y completar va sin opciones;
+- dos ejercicios de otras clases del bloque, una frase combinada y un relacionar mezclado;
+- la situación invertida, donde el alumno hace la parte de un personaje;
+- nota mínima de 0,9 y sin pistas fuera de la práctica guiada.
+
+**Variación con IA:** cambia un solo elemento por frase. Las variantes van solo en ejercicios escritos. Los dictados y los diálogos usan las frases originales, que ya tienen el audio en caché, así que no gastan créditos nuevos de ElevenLabs.
+
+**Control automático de cada variante:**
+- solo palabras ya enseñadas hasta su bloque;
+- de 1 a 3 palabras cambiadas;
+- conserva la palabra del hueco;
+- no repite otra frase del bloque;
+- no menciona Ecuador;
+- trae las traducciones.
+
+Si una variante falla, queda la frase original: no hay reintentos ni revisor por bloque.
+
+## Resultado del piloto (fr N1)
+
+- 50 refuerzos, entre 11 y 17 ejercicios cada uno, con al menos el 91 % de producción. `validar_ruta.py` da 0 errores y pasan las pruebas de contenido de Flutter.
+- 324 de 348 frases variadas (93 %). En la revisión a ojo se corrigieron 4: Cuenca en lugar de un lugar francés, «Bonjour, à demain», «les cafés» y una traducción.
+- Consumo: **161 k tokens y 4 minutos** para el nivel, frente a ~3,6 M por nivel al escribir clases.
+- Probado en la app local: el repaso, escribir sin opciones, completar variado y el dictado funcionan, y el nivel cuenta 100 unidades.
+
+## Orden de trabajo
+
+| # | Idioma | Estado | Nota |
+|---|---|---|---|
+| 1 | Francés (fr) | **completo** N1–N10 (22-10), sin desplegar | piloto; ~2,3 M tokens; 2 errores de las originales corregidos |
+| 2 | Alemán (de) | en curso (variación N1–N9) | latino, sin cambios en el constructor |
+| 3 | Portugués (pt) | pendiente | latino |
+| 4 | Italiano (it) | pendiente | latino |
+| 5 | Español (es) | pendiente | apoyo solo en inglés |
+| 6 | Ruso (ru) | pendiente | **antes hay que adaptar** el constructor a los campos `*Rom` (transliteración) |
+| 7 | Chino (zh) | pendiente | `*Rom` (pinyin). En «ordenar» solo se reutilizan las fichas existentes, porque no hay espacios entre palabras |
+| 8 | Japonés (ja) | pendiente | `*Rom` (romaji). «ordenar» igual que en chino |
+| 9 | Coreano (ko) | pendiente | `*Rom`. El validador ko rechaza conjugaciones válidas, así que quedarán más frases originales (Kiwi queda para después) |
+
+**Por idioma:**
+1. Los 10 niveles, de 3 en 3 agentes en paralelo.
+2. Revisión de cada tabla.
+3. Conectar el constructor al `ruta-<idioma>/integrar.py`.
+4. `flutter test`.
+5. **Un commit por idioma, sin push.**
+6. Despliegue a producción solo con el idioma al 100 % y con autorización expresa, un despliegue por idioma (`DEPLOYMENT_RUNBOOK.md`).
+
+**Estimación:** 2,5–3 M tokens de agentes por idioma (los niveles altos tienen frases y vocabulario más largos), unos 25 M en total.
+
+## Cuidados
+
+- `ruta-<idioma>/integrar.py` reescribe los bloques sin refuerzos. Tras integrar, vuelve a correr `construir.py <idioma> N todo`: es determinista y reaplica las variantes guardadas.
+- Quien ya iba avanzado en un nivel verá la clase siguiente bloqueada hasta hacer los refuerzos del bloque. Antes del lanzamiento no importa.
+- Las correcciones a mano en `nN-bYY.variantes.json` mandan sobre `nN.variantes.json`.

@@ -1,6 +1,6 @@
 # Estado actual
 
-Última actualización: 2026-10-06
+Última actualización: 2026-10-22
 Responsable: Claude (Claude Code)
 Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
 Fase actual: **Inglés (1.000 clases), francés, español, portugués de Brasil y alemán (500 clases cada uno) completos**; portugués publicado (edu-46). **Alemán completo** con el método ligero de `PLAN_ALEMAN.md` (500 clases, sin historia continua), pendiente de despliegue y calibración de voces de-DE.
@@ -8,6 +8,7 @@ Porcentaje aproximado: Fundamentos activos en 9 idiomas; portugués retirado y e
 
 ## Trabajando ahora
 
+- **100 clases por nivel con refuerzos (DEC-036, 22-10):** cada `cNN` recibe un refuerzo `rNN` más exigente, armado con el material del bloque y con variación ligera de frases por IA (`PLAN_REFUERZOS.md`, `tools/contenido/refuerzo/`). **Francés completo N1–N10** (500 refuerzos, 100 clases por nivel, validador en 0, ~2,3 M tokens; variantes revisadas nivel por nivel, quitadas las que tocaban hechos reales; corregidos dos errores de las originales: N2 c19 «S’il il pleut» y N4 c04 «je allais»). Commit local sin push; **sin desplegar** (requiere autorización). Sigue alemán (variación en curso) y luego pt → it → es → ru → zh/ja/ko.
 - **Portugués de Brasil completo (DEC-035, 06-10):** ruta f0 + N1–N10 (500 clases; 100 bloques revisados con GO; fichas alineadas con los bloques; pase final de canon: trato você Iara↔Camila, nombres únicos, MAPA actualizado), prueba de ubicación v2 (180 ítems, 10 GO), `pt` en `idiomasConRuta`, F6 de Fundamentos en versión escrita (el contraste A/B por oído queda para cuando haya voz pt-BR revisada). Voz del dispositivo pt-BR; voces propias pendientes de elección del cliente. Protagonista Camila Ortega (Miami, hija de colombianos, vive en Recife); sin menciones a Ecuador.
 - **Alemán completo (método ligero, 06-10):** ruta f0 + N1–N10 (500 clases; 100 bloques con GO; fichas alineadas), prueba de ubicación v2 (180 ítems, 10 GO), 50 situaciones × 3 tramos (5 lotes con GO), «Mis verbos» (128 verbos revisados), `de` en `idiomasConRuta`, `de.a1-1` retirado. `validar_ruta.py` exige id en cada paso (sin él la app no carga el módulo). Voces de-DE calibradas (06-10): Petra narra y Julius dialoga (nativas de Alemania, elegidas por prueba de ida y vuelta síntesis → transcripción); el backend pasa cifras, fechas, horas y «§» a palabras antes de sintetizar (`numeros_de.ts`), porque Flash leía «1921» como «1991» y «437» como «34».
 
