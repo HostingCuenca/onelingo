@@ -73,40 +73,84 @@ function medirOjo(head, lado) {
 function prepararMirada(head) {
   const L = medirOjo(head, 'Left'), R = medirOjo(head, 'Right');
   if (!L || !R || !MIRADA.every(k => head.mtAvatar[k])) return null;
-  for (const k of MIRADA) head.mtAvatar[k].max = 2.5; // un poco más allá del blendshape para alcanzar la cámara
+  // El globo gira con su hueso (TalkingHead no lo toca); los blendshapes eyeLook
+  // solo acompañan con el párpado. Empujarlos más allá de 1 para llegar a la
+  // cámara deformaba párpados y piel alrededor del ojo (mirada «fija»).
+  for (const o of [L, R]) o.reposo = o.hueso.quaternion.clone();
   const cam = new THREE.Vector3(), pos = new THREE.Vector3(), q = new THREE.Quaternion(), t = new THREE.Vector3(), e = new THREE.Vector3();
+  const qa = new THREE.Quaternion(), qb = new THREE.Quaternion(), eje = new THREE.Vector3();
   let sacada = {y: 0, x: 0, hasta: 0};
-  const poner = (k, v) => { const o = head.mtAvatar[k]; o.realtime = Math.min(2.5, Math.max(0, v)); o.needsUpdate = true; };
+  const poner = (k, v) => { const o = head.mtAvatar[k]; o.realtime = Math.min(1, Math.max(0, v)); o.needsUpdate = true; };
   const angulos = o => {
-    o.hueso.getWorldPosition(pos); o.hueso.getWorldQuaternion(q);
+    // Marco del ojo en reposo (padre × reposo): no depende del giro que le damos.
+    o.hueso.getWorldPosition(pos); o.hueso.parent.getWorldQuaternion(q).multiply(o.reposo);
     t.subVectors(cam, pos).normalize();
     const f = t.dot(e.copy(o.fwd).applyQuaternion(q)), iz = t.dot(e.copy(o.izq).applyQuaternion(q)), ar = t.dot(e.copy(o.arriba).applyQuaternion(q));
-    return {y: Math.atan2(iz, f) + sacada.y, x: Math.asin(Math.max(-1, Math.min(1, ar))) + sacada.x};
+    return {y: Math.max(-0.45, Math.min(0.45, Math.atan2(iz, f) + sacada.y)), x: Math.max(-0.3, Math.min(0.3, Math.asin(Math.max(-1, Math.min(1, ar))) + sacada.x))};
+  };
+  const girar = (o, a) => {
+    qa.setFromAxisAngle(o.arriba, a.y);                              // + = hacia la izquierda del avatar
+    qb.setFromAxisAngle(eje.copy(o.izq).negate(), a.x);              // + = hacia arriba
+    o.hueso.quaternion.copy(o.reposo).multiply(qa).multiply(qb);
   };
   return {
     mirar(ms) {
       // Microsacadas: saltos de ~1° cada poco, como al mirar a alguien a los ojos.
       if (ms > sacada.hasta) sacada = {y: (Math.random() - 0.5) * 0.04, x: (Math.random() - 0.5) * 0.03, hasta: ms + 600 + Math.random() * 1800};
       head.camera.getWorldPosition(cam);
-      const a = angulos(L), b = angulos(R);
-      // Positivo = hacia la izquierda del avatar: el izquierdo mira «afuera», el derecho «adentro».
-      poner('eyeLookOutLeft', a.y > 0 ? a.y / L.fuera : 0); poner('eyeLookInLeft', a.y < 0 ? -a.y / L.dentro : 0);
-      poner('eyeLookInRight', b.y > 0 ? b.y / R.dentro : 0); poner('eyeLookOutRight', b.y < 0 ? -b.y / R.fuera : 0);
-      const x = (a.x + b.x) / 2;
-      poner('eyesLookUp', x > 0 ? x / ((L.sube + R.sube) / 2) : 0); poner('eyesLookDown', x < 0 ? -x / ((L.baja + R.baja) / 2) : 0);
+      // Los dos ojos giran lo mismo (la cámara está a >4 m: no hay convergencia que
+      // notar). Por separado, el error al estimar el frente de cada globo (hasta 13°
+      // en M02) los dejaba bizcos; así conservan la relación del modelo.
+      const a = angulos(L), b = angulos(R), y = (a.y + b.y) / 2, x = (a.x + b.x) / 2;
+      // El blendshape del párpado también gira el globo (0,35·x): el hueso pone el resto.
+      girar(L, {y, x: x * 0.65}); girar(R, {y, x: x * 0.65});
+      for (const k of ['eyeLookInLeft', 'eyeLookOutLeft', 'eyeLookInRight', 'eyeLookOutRight']) poner(k, 0);
+      // El párpado sigue al ojo un poco al subir o bajar la mirada.
+      poner('eyesLookUp', x > 0 ? 0.35 * x / ((L.sube + R.sube) / 2) : 0); poner('eyesLookDown', x < 0 ? -0.35 * x / ((L.baja + R.baja) / 2) : 0);
     },
-    soltar() { for (const k of MIRADA) { head.mtAvatar[k].realtime = null; head.mtAvatar[k].needsUpdate = true; } },
+    soltar() {
+      for (const o of [L, R]) o.hueso.quaternion.copy(o.reposo);
+      for (const k of MIRADA) { head.mtAvatar[k].realtime = null; head.mtAvatar[k].needsUpdate = true; }
+    },
     medidas: {L, R},
+  };
+}
+
+// La pose de reposo de TalkingHead y el esqueleto Rocketbox dejan la cara ~12°
+// hacia abajo: para ver la cámara los ojos subían y miraban «desde debajo de las
+// cejas», distinto de sus renders de referencia. Cada cuadro, después de la pose y
+// antes de dibujar, se levanta la cabeza lo que falte para que el ojo en reposo
+// quede ~2° bajo la horizontal. El filtro es lento (~1,5 s): corrige el desvío
+// constante y deja los gestos cortos de la cabeza como están.
+function nivelarCabeza(head, mirada) {
+  const cabeza = head.armature.getObjectByName('Head'), o = mirada?.medidas.L;
+  if (!cabeza || !o) return () => {};
+  const q = new THREE.Quaternion(), qp = new THREE.Quaternion(), qc = new THREE.Quaternion(), f = new THREE.Vector3(), eje = new THREE.Vector3();
+  const META = -2 * Math.PI / 180;
+  let corr = null;
+  return dt => {
+    cabeza.updateWorldMatrix(true, true);
+    o.hueso.parent.getWorldQuaternion(q).multiply(o.reposo);
+    const p = Math.asin(Math.max(-1, Math.min(1, f.copy(o.fwd).applyQuaternion(q).y)));
+    const falta = Math.max(0, Math.min(0.35, META - p));
+    corr = corr === null ? falta : corr + (falta - corr) * Math.min(1, dt / 1500);
+    // Eje izquierda-derecha del avatar llevado al espacio del padre de la cabeza; negativo = sube la cara.
+    eje.copy(o.izq).applyQuaternion(q).applyQuaternion(cabeza.parent.getWorldQuaternion(qp).invert()).normalize();
+    cabeza.quaternion.premultiply(qc.setFromAxisAngle(eje, -corr));
+    cabeza.updateWorldMatrix(false, true);
   };
 }
 
 export function createAvatarTH(stage, fuente, ajustes = {}) {
   const nodo = document.createElement('div'); nodo.className = 'lienzo-th'; stage.prepend(nodo);
+  let cadaCuadro = () => {};
   const head = new TalkingHead(nodo, {
     lipsyncModules: [], lipsyncLang: 'en', cameraView: 'upper', cameraRotateEnable: false, cameraPanEnable: false, cameraZoomEnable: false,
     modelFPS: 30, modelPixelRatio: Math.min(devicePixelRatio, 1.5), avatarMood: 'happy',
     // Como en una videollamada: mira al alumno casi siempre y mueve poco la cabeza.
     avatarIdleEyeContact: 0.9, avatarSpeakingEyeContact: 0.95, avatarIdleHeadMove: 0.1, avatarSpeakingHeadMove: 0.15,
+    // Tras la pose y antes de dibujar: cabeza nivelada y ojos a la cámara.
+    update: dt => cadaCuadro(dt),
   });
   // Las miradas al azar de TalkingHead bajan hasta 0.6 rad (parece que mira
   // al suelo): se acotan a un vistazo corto alrededor de la cámara.
@@ -135,8 +179,6 @@ export function createAvatarTH(stage, fuente, ajustes = {}) {
     if (disposed) return;
     frame = requestAnimationFrame(tick);
     const mt = head.mtAvatar; if (!mt?.viseme_aa) return;
-    // Pensando mira a otro lado (lookAhead de TalkingHead); el resto, a ti.
-    if (mirada) { if (stage.dataset.phase === 'thinking') mirada.soltar(); else mirada.mirar(ms || 0); }
     const r = fuente.reloj?.();
     if (r?.hablando && r.linea?.length) {
       const w = pesos(r.linea, r.ms);
@@ -181,6 +223,12 @@ export function createAvatarTH(stage, fuente, ajustes = {}) {
         head.mtAvatar.mouthSmile.max = 2; head.setMood('happy');
       }
       mirada = prepararMirada(head); nodo.mirada = mirada;
+      const nivelar = nivelarCabeza(head, mirada);
+      cadaCuadro = dt => {
+        nivelar(dt);
+        // Pensando mira a otro lado (lookAhead de TalkingHead); el resto, a ti.
+        if (mirada) { if (stage.dataset.phase === 'thinking') mirada.soltar(); else mirada.mirar(performance.now()); }
+      };
       stage.dataset.loaded = 'true';
       tick();
     },
