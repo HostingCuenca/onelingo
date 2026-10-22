@@ -32,7 +32,23 @@ let vivo = null, modoVivo = false, mudo = false, arrastre = '', finVozEn = 0, li
 const parametros = new URLSearchParams(location.search), embebido = parametros.has('embebido'), tutorInicial = parametros.get('tutor');
 if (embebido) document.body.classList.add('embebido');
 const languages = {en: 'inglés', es: 'español', fr: 'francés', de: 'alemán', pt: 'portugués', it: 'italiano', zh: 'chino', ja: 'japonés', ko: 'coreano', ru: 'ruso'};
-const preferred = {en: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'amara', 'sofia', 'clara'], es: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'lucia', 'mateo'], fr: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'clara', 'sofia'], de: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'daniel', 'owen'], pt: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'amara', 'mateo'], it: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'sofia', 'mateo'], zh: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'mei', 'kenji'], ja: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'kenji', 'mei'], ko: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'mei', 'kenji'], ru: ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre', 'lumo', 'owen', 'clara']};
+// Tutores en vivo (6 × 2, ellas y ellos) con los especialistas del idioma primero
+// (idioma de primera mano: personajes.ts), luego Lumo y los tutores 3D sugeridos.
+const VIVOS = ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre'];
+const ESPECIALISTAS = {en: ['frank'], es: ['diego', 'tomas'], fr: ['lucas', 'andre'], de: ['nora'], pt: ['julia'], it: ['elena'], zh: ['ana'], ja: ['erik'], ko: ['hana'], ru: ['chloe']};
+const TRES_D = {
+  en: ['amara', 'sofia', 'clara'],
+  es: ['lucia', 'mateo'],
+  fr: ['clara', 'sofia'],
+  de: ['daniel', 'owen'],
+  pt: ['amara', 'mateo'],
+  it: ['sofia', 'mateo'],
+  zh: ['mei', 'kenji'],
+  ja: ['kenji', 'mei'],
+  ko: ['mei', 'kenji'],
+  ru: ['owen', 'clara'],
+};
+const preferred = Object.fromEntries(Object.entries(TRES_D).map(([l, otros]) => [l, [...ESPECIALISTAS[l], ...VIVOS.filter(t => !ESPECIALISTAS[l].includes(t)), 'lumo', ...otros]]));
 const language = () => config?.idiomaMeta || 'en', languageName = () => languages[language()] || languages.en;
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const headers = () => ({Authorization: `Bearer ${config.token}`});

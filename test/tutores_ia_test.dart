@@ -65,7 +65,9 @@ void main() {
     ]);
     final y = [
       for (final t in tutoresVivo)
-        tester.getTopLeft(find.bySemanticsLabel(t.nombre).first).dy,
+        tester
+            .getTopLeft(find.bySemanticsLabel(RegExp('^${t.nombre}')).first)
+            .dy,
     ];
     expect(y.take(6).toSet().length, 1);
     expect(y.skip(6).toSet().length, 1);
@@ -75,12 +77,33 @@ void main() {
       expect(t.rasgo, isNotEmpty, reason: t.id);
       expect(t.especialidad, isNotEmpty, reason: t.id);
     }
-    // Al tocar una cara se ve su ficha y el botón para llamarla.
-    expect(find.text('Videollamada con Ana'), findsOneWidget);
-    await tester.tap(find.bySemanticsLabel('Frank'));
-    await tester.pumpAndSettle();
-    expect(find.text('Tranquilo y experimentado'), findsOneWidget);
+    // El especialista del idioma que se estudia (inglés: Frank) viene elegido
+    // y marcado; al tocar otra cara se ve su ficha y el botón para llamarla.
+    expect(find.text('Especialista en inglés'), findsOneWidget);
     expect(find.text('Videollamada con Frank'), findsOneWidget);
+    for (final l in [
+      'en',
+      'es',
+      'fr',
+      'de',
+      'pt',
+      'it',
+      'ru',
+      'ko',
+      'ja',
+      'zh',
+    ]) {
+      expect(
+        tutoresVivo.where((t) => t.idiomaEspecial == l),
+        isNotEmpty,
+        reason: l,
+      );
+    }
+    await tester.tap(find.bySemanticsLabel(RegExp('^Erik')).first);
+    await tester.pumpAndSettle();
+    expect(find.text('Relajado y curioso'), findsOneWidget);
+    expect(find.text('Conoce de primera mano el japonés.'), findsOneWidget);
+    expect(find.text('Videollamada con Erik'), findsOneWidget);
     expect(
       tester.getTopLeft(find.text('Habla con Lumo')).dy,
       lessThan(

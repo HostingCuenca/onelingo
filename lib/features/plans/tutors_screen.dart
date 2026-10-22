@@ -51,7 +51,7 @@ class TutorsScreen extends ConsumerWidget {
               ),
               // Tutores realistas en vivo: ellas arriba, ellos abajo; al
               // tocar una cara se ve su ficha y el botón para llamarla.
-              const _ElencoEnVivo(),
+              _ElencoEnVivo(idioma: s.idiomaMeta),
               const SizedBox(height: 16),
               _TarjetaDestacada(
                 tutor: lumoTutor,
@@ -201,14 +201,29 @@ void _abrirVideollamada(BuildContext context, String id) =>
 
 /// Cuadrícula 5 × 2 de los tutores en vivo y la ficha del elegido.
 class _ElencoEnVivo extends StatefulWidget {
-  const _ElencoEnVivo();
+  const _ElencoEnVivo({required this.idioma});
+
+  /// Idioma que se estudia: sus especialistas llevan una marca y uno de ellos
+  /// aparece elegido.
+  final String idioma;
 
   @override
   State<_ElencoEnVivo> createState() => _ElencoEnVivoState();
 }
 
 class _ElencoEnVivoState extends State<_ElencoEnVivo> {
-  Tutor3d elegido = tutoresVivo.first;
+  late Tutor3d elegido = _especialista();
+
+  Tutor3d _especialista() => tutoresVivo.firstWhere(
+    (t) => t.idiomaEspecial == widget.idioma,
+    orElse: () => tutoresVivo.first,
+  );
+
+  @override
+  void didUpdateWidget(_ElencoEnVivo old) {
+    super.didUpdateWidget(old);
+    if (old.idioma != widget.idioma) elegido = _especialista();
+  }
 
   Widget _fila(List<Tutor3d> fila) => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,7 +240,9 @@ class _ElencoEnVivoState extends State<_ElencoEnVivo> {
     return Semantics(
       button: true,
       selected: si,
-      label: t.nombre,
+      label: t.idiomaEspecial == widget.idioma
+          ? '${t.nombre}, ${tr('Especialista en {idioma}', {'idioma': nombreIdiomaEnFrase(widget.idioma)})}'
+          : t.nombre,
       excludeSemantics: true,
       child: GestureDetector(
         onTap: () => setState(() => elegido = t),
@@ -233,25 +250,44 @@ class _ElencoEnVivoState extends State<_ElencoEnVivo> {
           children: [
             AspectRatio(
               aspectRatio: 9 / 11,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 150),
-                decoration: BoxDecoration(
-                  color: OL.moradoSuave,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: si ? OL.morado : OL.moradoSuave,
-                    width: 2.5,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    decoration: BoxDecoration(
+                      color: OL.moradoSuave,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: si ? OL.morado : OL.moradoSuave,
+                        width: 2.5,
+                      ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(11),
+                      child: Image.asset(
+                        t.retrato,
+                        fit: BoxFit.cover,
+                        alignment: Alignment.topCenter,
+                        excludeFromSemantics: true,
+                      ),
+                    ),
                   ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(11),
-                  child: Image.asset(
-                    t.retrato,
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                    excludeFromSemantics: true,
-                  ),
-                ),
+                  if (t.idiomaEspecial == widget.idioma)
+                    const Positioned(
+                      top: 3,
+                      right: 3,
+                      child: CircleAvatar(
+                        radius: 8,
+                        backgroundColor: OL.naranja,
+                        child: Icon(
+                          Icons.star_rounded,
+                          size: 12,
+                          color: OL.blanco,
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
             const SizedBox(height: 4),
@@ -298,12 +334,27 @@ class _ElencoEnVivoState extends State<_ElencoEnVivo> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                t.nombre,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w900,
-                ),
+              Wrap(
+                spacing: 8,
+                runSpacing: 4,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(
+                    t.nombre,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  if (t.idiomaEspecial == widget.idioma)
+                    Etiqueta(
+                      tr('Especialista en {idioma}', {
+                        'idioma': nombreIdiomaEnFrase(widget.idioma),
+                      }),
+                      color: OL.blanco,
+                      fondo: OL.naranja,
+                    ),
+                ],
               ),
               Text(
                 t.rasgo,
@@ -321,6 +372,15 @@ class _ElencoEnVivoState extends State<_ElencoEnVivo> {
                   height: 1.3,
                 ),
               ),
+              if (t.idiomaEspecial case final l? when l != widget.idioma) ...[
+                const SizedBox(height: 4),
+                Text(
+                  tr('Conoce de primera mano el {idioma}.', {
+                    'idioma': nombreIdiomaEnFrase(l),
+                  }),
+                  style: const TextStyle(color: OL.gris, fontSize: 12),
+                ),
+              ],
               const SizedBox(height: 12),
               FilledButton.icon(
                 style: FilledButton.styleFrom(

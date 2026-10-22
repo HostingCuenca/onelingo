@@ -72,3 +72,16 @@ test('every roster tutor has its own full character sheet', async () => {
   }
   assert.equal(new Set(ids.map(fichaTutor)).size, ids.length); // todas distintas
 });
+
+test('cada tutor en vivo conoce un idioma de primera mano y todos los idiomas tienen especialista', async () => {
+  const { idiomaEspecial, fichaTutor } = await import('../src/lib/personajes.js');
+  const idiomas = ['en', 'es', 'fr', 'de', 'pt', 'it', 'ru', 'ko', 'ja', 'zh'];
+  const vivos = ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre'].map((t) => `avatar_${t}`);
+  const de = vivos.map((t) => idiomaEspecial(t));
+  for (const [i, l] of de.entries()) assert.ok(l && idiomas.includes(l), vivos[i]);
+  for (const l of idiomas) assert.ok(de.includes(l), `sin especialista: ${l}`);
+  // Con su idioma aporta cultura y uso real; con otro, solo lo menciona.
+  assert.match(fichaTutor('avatar_erik', 'ja'), /especialidad es el japonés, justo el que practica/);
+  assert.match(fichaTutor('avatar_erik', 'en'), /Hoy el alumno practica otro idioma/);
+  assert.doesNotMatch(fichaTutor('mia', 'en'), /especialidad es el/);
+});

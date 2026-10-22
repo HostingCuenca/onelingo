@@ -32,7 +32,7 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   en_brittney: { id: 'kPzsL2i3teMYv0FxEYQ6', nombre: 'Brittney', descripcion: 'en · Julia · joven, entusiasta' },
   en_elise: { id: 'EST9Ui6982FZPSi7gCHi', nombre: 'Elise', descripcion: 'en · Nora · joven, dulce y pausada' },
   en_jon: { id: 'MFZUKuGQUsGJPQjTS4wC', nombre: 'Jon', descripcion: 'en · Tomas · cálido y pausado' },
-  en_adam: { id: 's3TPKV1kjDlVtZbl4Ksh', nombre: 'Adam', descripcion: 'en · Andre · joven, urbano y cercano' },
+  en_joe: { id: 'LEvd0YiWkwZ6hTZOmdVE', nombre: 'Joe', descripcion: 'en · Andre · joven, inglés de Nigeria' },
   en_nichalia_schwartz: { id: 'XfNU2rGpBa01ckF309OY', nombre: 'Nichalia Schwartz', descripcion: 'en · Hana · joven, serena y clara' },
   es_isabel: { id: 'rixsIpPlTphvsJd2mI03', nombre: 'Isabel', descripcion: 'es · narradora · mexicana, neutra' },
   es_enrique: { id: 'gbTn1bmCvNgk0QEAVyfM', nombre: 'Enrique', descripcion: 'es · narrador · mexicano' },
@@ -45,7 +45,7 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   es_sofia: { id: 'b2htR0pMe28pYwCY9gnP', nombre: 'Sofía', descripcion: 'es · Julia · joven, entusiasta' },
   es_marlene: { id: 'JYyJjNPfmNJdaby8LdZs', nombre: 'Marlene', descripcion: 'es · Nora · joven, dulce y pausada' },
   es_enrique_mondragon: { id: 'iDEmt5MnqUotdwCIVplo', nombre: 'Enrique Mondragón', descripcion: 'es · Tomas · cálido y pausado' },
-  es_juan_restrepo: { id: 'ucWwAruuGtBeHfnAaKcJ', nombre: 'Juan Restrepo', descripcion: 'es · Andre · joven, urbano y cercano' },
+  es_yuri_baldemira: { id: '82wULKdKN3C9KZQ4Q3rZ', nombre: 'Yuri Baldemira', descripcion: 'es · Andre · español caribeño' },
   es_lumina: { id: 'x5IDPSl4ZUbhosMmVFTk', nombre: 'Lumina', descripcion: 'es · Hana · joven, serena y clara' },
   fr_caroline: { id: 'kwhMCf63M8O3rCfnQ3oQ', nombre: 'Caroline', descripcion: 'fr · narradora · estándar, clara' },
   fr_nicolas: { id: 'aQROLel5sQbj1vuIVi6B', nombre: 'Nicolas', descripcion: 'fr · narrador · parisino' },
@@ -58,7 +58,7 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   fr_marine: { id: 'dzKt73kkmFQQ0Qnznorl', nombre: 'Marine', descripcion: 'fr · Julia · joven, entusiasta' },
   fr_jeanne: { id: 'txtf1EDouKke753vN8SL', nombre: 'Jeanne', descripcion: 'fr · Nora · joven, dulce y pausada' },
   fr_maxime: { id: '5Qfm4RqcAer0xoyWtoHC', nombre: 'Maxime', descripcion: 'fr · Tomas · cálido y pausado' },
-  fr_tristan_grech: { id: 'hv6gVog5LgtIUX88Nmq8', nombre: 'Tristan Grech', descripcion: 'fr · Andre · joven, urbano y cercano' },
+  fr_amadou: { id: '8R6pzcy1HIr4WcoApmzw', nombre: 'Amadou', descripcion: 'fr · Andre · francés de África occidental' },
   fr_victoria: { id: 'O31r762Gb3WFygrEOGh0', nombre: 'Victoria', descripcion: 'fr · Hana · joven, serena y clara' },
   de_petra: { id: 'lzvBSKYbNWDD0a6BaJSK', nombre: 'Petra', descripcion: 'de · narradora · estándar, educativa' },
   de_julius: { id: 'n6JEKnKG5a8I78SoBRry', nombre: 'Julius', descripcion: 'de · narrador · estándar' },
@@ -84,7 +84,7 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   pt_amanda_kelly: { id: 'oi8rgjIfLgJRsQ6rbZh3', nombre: 'Amanda Kelly', descripcion: 'pt · Julia · joven, entusiasta' },
   pt_yasmin_alves: { id: 'lWq4KDY8znfkV0DrK8Vb', nombre: 'Yasmin Alves', descripcion: 'pt · Nora · joven, dulce y pausada' },
   pt_victor_power: { id: 'YNOujSUmHtgN6anjqXPf', nombre: 'Victor Power', descripcion: 'pt · Tomas · cálido y pausado' },
-  pt_matheus_santos: { id: 'xWdpADtEio43ew1zGxUQ', nombre: 'Matheus Santos', descripcion: 'pt · Andre · joven, urbano y cercano' },
+  pt_tchize: { id: 'HbqJvmNWS8QoO8r8Gs9F', nombre: 'Tchize', descripcion: 'pt · Andre · portugués de Angola' },
   pt_alcione: { id: 'iw7467blzNLEVe32avRC', nombre: 'Alcione', descripcion: 'pt · Hana · joven, serena y clara' },
   it_sami: { id: 'fQmr8dTaOQq116mo2X7F', nombre: 'Sami', descripcion: 'it · narradora · estándar, pausada' },
   it_carmelo: { id: 'HuK8QKF35exsCh2e7fLT', nombre: 'Carmelo', descripcion: 'it · narrador · estándar' },
@@ -188,14 +188,16 @@ const ALIAS: Record<string, Rol> = {
  * igual a otro. Ana, Elena, Lucas y Diego usan las de mujer_b, narradora,
  * narrador y hombre_b (ALIAS); el resto, la elegida para su perfil en el piloto
  * del 2026-10-22 (síntesis + transcripción de vuelta con scribe_v1, CER y
- * velocidad dentro de lo normal del idioma).
+ * velocidad dentro de lo normal del idioma). Andre lleva una variedad africana
+ * o afrocaribeña nativa donde existe (en Nigeria, fr África occidental, pt
+ * Angola, es Caribe); en los demás idiomas, la voz estándar nativa.
  */
 export const VOZ_TUTOR: Record<string, Record<string, string>> = {
-  en: { avatar_andre: 'en_adam', avatar_chloe: 'en_alexandra', avatar_erik: 'en_young_jamal', avatar_frank: 'en_peter', avatar_hana: 'en_nichalia_schwartz', avatar_julia: 'en_brittney', avatar_nora: 'en_elise', avatar_tomas: 'en_jon' },
-  es: { avatar_andre: 'es_juan_restrepo', avatar_chloe: 'es_lina', avatar_erik: 'es_sebastian', avatar_frank: 'es_tony', avatar_hana: 'es_lumina', avatar_julia: 'es_sofia', avatar_nora: 'es_marlene', avatar_tomas: 'es_enrique_mondragon' },
-  fr: { avatar_andre: 'fr_tristan_grech', avatar_chloe: 'fr_mimi', avatar_erik: 'fr_anatole', avatar_frank: 'fr_francois_louis', avatar_hana: 'fr_victoria', avatar_julia: 'fr_marine', avatar_nora: 'fr_jeanne', avatar_tomas: 'fr_maxime' },
+  en: { avatar_andre: 'en_joe', avatar_chloe: 'en_alexandra', avatar_erik: 'en_young_jamal', avatar_frank: 'en_peter', avatar_hana: 'en_nichalia_schwartz', avatar_julia: 'en_brittney', avatar_nora: 'en_elise', avatar_tomas: 'en_jon' },
+  es: { avatar_andre: 'es_yuri_baldemira', avatar_chloe: 'es_lina', avatar_erik: 'es_sebastian', avatar_frank: 'es_tony', avatar_hana: 'es_lumina', avatar_julia: 'es_sofia', avatar_nora: 'es_marlene', avatar_tomas: 'es_enrique_mondragon' },
+  fr: { avatar_andre: 'fr_amadou', avatar_chloe: 'fr_mimi', avatar_erik: 'fr_anatole', avatar_frank: 'fr_francois_louis', avatar_hana: 'fr_victoria', avatar_julia: 'fr_marine', avatar_nora: 'fr_jeanne', avatar_tomas: 'fr_maxime' },
   de: { avatar_andre: 'de_timo', avatar_chloe: 'de_ela_2', avatar_erik: 'de_elias', avatar_frank: 'de_tristan_medersburg', avatar_hana: 'de_mila', avatar_julia: 'de_anna', avatar_nora: 'de_ava', avatar_tomas: 'de_otto' },
-  pt: { avatar_andre: 'pt_matheus_santos', avatar_chloe: 'pt_raquel', avatar_erik: 'pt_joao_pedro', avatar_frank: 'pt_lucas', avatar_hana: 'pt_alcione', avatar_julia: 'pt_amanda_kelly', avatar_nora: 'pt_yasmin_alves', avatar_tomas: 'pt_victor_power' },
+  pt: { avatar_andre: 'pt_tchize', avatar_chloe: 'pt_raquel', avatar_erik: 'pt_joao_pedro', avatar_frank: 'pt_lucas', avatar_hana: 'pt_alcione', avatar_julia: 'pt_amanda_kelly', avatar_nora: 'pt_yasmin_alves', avatar_tomas: 'pt_victor_power' },
   it: { avatar_andre: 'it_chris_basetta', avatar_chloe: 'it_mia', avatar_erik: 'it_lorenzo', avatar_frank: 'it_corrado_noventa', avatar_hana: 'it_linda_fiore', avatar_julia: 'it_giulia_pro', avatar_nora: 'it_valentina', avatar_tomas: 'it_andy' },
   ru: { avatar_andre: 'ru_andrey_permikin', avatar_chloe: 'ru_kate', avatar_erik: 'ru_denophine', avatar_frank: 'ru_vasko', avatar_hana: 'ru_ekaterina', avatar_julia: 'ru_natalia', avatar_nora: 'ru_lisa', avatar_tomas: 'ru_prince_nur' },
   ko: { avatar_andre: 'ko_min_joon', avatar_chloe: 'ko_kelee_k', avatar_erik: 'ko_taehyung', avatar_frank: 'ko_jin_geon_song', avatar_hana: 'ko_jennie', avatar_julia: 'ko_jy', avatar_nora: 'ko_salang', avatar_tomas: 'ko_hyuk' },

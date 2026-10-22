@@ -50,7 +50,7 @@ const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz
 export function systemPrompt(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string }) {
   // Tres capas como los tutores de referencia: personaje · diseño pedagógico · alumno.
   return `PERSONAJE.
-${fichaTutor(p.tutorId)}
+${fichaTutor(p.tutorId, p.idiomaMeta)}
 ${p.tutorId.startsWith('avatar_') ? VIDEOLLAMADA : ''}
 DISEÑO PEDAGÓGICO.
 Eres tutor de ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} en la app OneLingo para un alumno cuyo idioma nativo es ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}.

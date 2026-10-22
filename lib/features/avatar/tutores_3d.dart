@@ -42,6 +42,24 @@ class Tutor3d {
     _ => '',
   };
 
+  /// Idioma que el tutor en vivo conoce de primera mano (enseña los diez);
+  /// la ficha de backend/src/lib/personajes.ts dice cómo lo vivió.
+  String? get idiomaEspecial => switch (id) {
+    'ana' => 'zh',
+    'elena' => 'it',
+    'julia' => 'pt',
+    'chloe' => 'ru',
+    'nora' => 'de',
+    'hana' => 'ko',
+    'lucas' => 'fr',
+    'tomas' => 'es',
+    'frank' => 'en',
+    'diego' => 'es',
+    'erik' => 'ja',
+    'andre' => 'fr',
+    _ => null,
+  };
+
   /// En qué se apoya cada tutor en vivo para enseñar.
   String get especialidad => switch (id) {
     'ana' => tr('Viajes y conversación libre: habla de lo que quieras.'),
