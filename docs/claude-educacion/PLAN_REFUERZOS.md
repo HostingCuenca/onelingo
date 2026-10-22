@@ -51,7 +51,7 @@ Si una variante falla, queda la frase original: no hay reintentos ni revisor por
 | 1 | Francés (fr) | **completo** N1–N10 (22-10), sin desplegar | piloto; ~2,3 M tokens; 2 errores de las originales corregidos |
 | 2 | Alemán (de) | **completo** N1–N10 (22-10), sin desplegar | ~2 M tokens; 3.309 variantes de los agentes, 44 descartadas en revisión (registro du/Sie, hechos, colocaciones) |
 | 3 | Portugués (pt) | **completo** N1–N10 (22-10), sin desplegar | ~2,3 M tokens; curso con historia (Camila en Recife): los agentes cambiaban nombres, ciudades y cifras, así que se sumaron las reglas 6d/6e y un filtro automático; quedan 2.402 variantes tras quitar ~20 % en filtro y revisión |
-| 4 | Italiano (it) | pendiente | latino; curso con historia: reglas 6d/6e y filtro desde el inicio |
+| 4 | Italiano (it) | **completo** N1–N10 (22-10), sin desplegar | ~1,8 M tokens; con las reglas 6d/6e los agentes casi no tocaron la historia: 1.816 variantes, 6 % quitadas en filtro y revisión |
 | 5 | Español (es) | pendiente | apoyo solo en inglés |
 | 6 | Ruso (ru) | pendiente | **antes hay que adaptar** el constructor a los campos `*Rom` (transliteración) |
 | 7 | Chino (zh) | pendiente | `*Rom` (pinyin). En «ordenar» solo se reutilizan las fichas existentes, porque no hay espacios entre palabras |

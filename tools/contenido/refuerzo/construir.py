@@ -293,6 +293,10 @@ class Constructor:
         rel = self.relacionar(u, self.clases[(k + 2) % n])
         if rel:
             evaluacion.append(rel)
+        if len({e['formato'] for e in evaluacion}) < 2:  # sin frases cortas: ordenar la más corta de la clase
+            todas = sorted((f for f in frases(u) if len(palabras(f[0])) >= 3), key=lambda f: len(palabras(f[0])))
+            if todas:
+                evaluacion.append(self.ordenar_de(todas[0][0], todas[0][1]))
 
         pasos = ensenar + [
             {'id': 'pg', 'tipo': 'practica_guiada', 'items': guiada},
@@ -465,9 +469,20 @@ class Constructor:
                     continue
                 minimo = {'practica_guiada': 1, 'practica_independiente': 2}[p['tipo']]
                 for it in list(p['items']):
-                    if huella({k: v for k, v in it.items() if k != 'id'}) in en_evaluacion and len(p['items']) > minimo:
+                    h = huella({k: v for k, v in it.items() if k != 'id'})
+                    if h not in en_evaluacion:
+                        continue
+                    if len(p['items']) > minimo:
                         p['items'].remove(it)
                         self.informe['identicos_quitados'] += 1
+                        continue
+                    # Práctica al mínimo: sale de la evaluación, si le sobran ítems y formatos.
+                    ev = next(q for q in r['pasos'] if q['tipo'] == 'evaluacion')
+                    for x in list(ev['items']):
+                        if (huella({k: v for k, v in x.items() if k != 'id'}) == h and len(ev['items']) > 4
+                                and len({y['formato'] for y in ev['items'] if y is not x}) >= 2):
+                            ev['items'].remove(x)
+                            self.informe['identicos_quitados'] += 1
         # Encadenados ya detrás de la última clase: si la cadena se corta, el bloque
         # siguiente de esta misma corrida no ve el vocabulario anterior.
         anterior = self.clases[-1]
