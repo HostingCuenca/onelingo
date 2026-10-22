@@ -24,6 +24,17 @@ bpy.ops.import_scene.fbx(filepath=fbx)
 rb = [o for o in bpy.context.scene.objects if o.type == 'ARMATURE' and o is not tpl][0]
 malla = [o for o in bpy.context.scene.objects if o.type == 'MESH'][0]
 
+# QUITAR_CAPUCHA=<m>: borra la ropa (material body) por encima de la base de la
+# cabeza + <m> (negativo = más abajo); deja la cabeza sin capucha.
+if os.environ.get('QUITAR_CAPUCHA'):
+    import bmesh
+    zh = (rb.matrix_world @ rb.data.bones['Bip01 Head'].head_local).z + float(os.environ['QUITAR_CAPUCHA'])
+    bm = bmesh.new(); bm.from_mesh(malla.data); mw = malla.matrix_world
+    mats = malla.data.materials
+    fuera = [f for f in bm.faces if 'body' in mats[f.material_index].name.lower() and (mw @ f.calc_center_median()).z > zh]
+    bmesh.ops.delete(bm, geom=fuera, context='FACES'); bm.to_mesh(malla.data); bm.free()
+    print('CAPUCHA caras borradas', len(fuera))
+
 LADOS = {'L': 'Left', 'R': 'Right'}
 MAPA = {'Bip01 Pelvis': 'Hips', 'Bip01 Spine': 'Spine', 'Bip01 Spine1': 'Spine1', 'Bip01 Spine2': 'Spine2',
         'Bip01 Neck': 'Neck', 'Bip01 Head': 'Head', 'Bip01 LEye': 'LeftEye', 'Bip01 REye': 'RightEye'}

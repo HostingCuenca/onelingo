@@ -10,7 +10,12 @@ tex, pre, pest, sal = sys.argv[1:5]
 os.makedirs(sal, exist_ok=True)
 for f in os.listdir(tex): shutil.copy(os.path.join(tex, f), sal)
 LUM = np.array([.3, .59, .11], np.float32)
-PIEL = np.array([float(v) for v in os.environ.get('PIEL', '.92,.78,.69').split(',')], np.float32)  # porcelana cálida por omisión
+# PIEL=r,g,b fija el tono; PIEL=auto conserva el tono propio (media de la piel de la cara) y solo lo empareja.
+_piel = os.environ.get('PIEL', '.92,.78,.69')
+CARA = _piel != 'no'                       # PIEL=no: la cara queda como viene (rubias: el pelo claro cae en la máscara de piel)
+CUERPO = os.environ.get('CUERPO', 'si') != 'no'  # CUERPO=no: ropa color piel (beige) no se toca
+if not CARA: _piel = 'auto'
+PIEL = None if _piel == 'auto' else np.array([float(v) for v in _piel.split(',')], np.float32)
 TENIR = os.environ.get('PELO', 'platino') != 'original'
 PLATINO = np.array([.93, .94, .97], np.float32)
 
@@ -24,6 +29,8 @@ def aclarar(c, M):
     # Divide por el color medio local de la piel (radio grande) y lleva a PIEL:
     # quedan poros y sombras finas, se van manchas y diferencias entre zonas.
     def bl(x): return np.asarray(Image.fromarray(np.clip(x * 255, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(40))).astype(np.float32) / 255
+    global PIEL
+    if PIEL is None: PIEL = c[M > .5].mean(0)  # primera llamada: la cara
     local = bl(c * M[..., None]) / np.maximum(bl(M)[..., None], 1e-3)
     nuevo = np.clip(c / np.maximum(local, .05) * PIEL, 0, 1)
     return c * (1 - M[..., None]) + nuevo * M[..., None]
@@ -42,7 +49,7 @@ y = np.arange(L)[:, None] / L; x = np.arange(L)[None, :] / L
 atlas_ojos = ((x < .2) & (y > .6)) | ((x > .19) & (x < .33) & (y > .83))  # boca por dentro y globo ocular
 pelo = (c @ LUM < .32) & ((sat < .55) | (c @ LUM < .15)) & ~cara & ~atlas_ojos
 pelo = blur(pelo.astype(np.float32), 1.5)
-c = aclarar(c, piel * (1 - pelo))
+if CARA: c = aclarar(c, piel * (1 - pelo))
 if TENIR: c = platino(c, pelo, pelo > .5)
 guardar(c, 'head_color')
 # Cuerpo: solo la piel (la ropa queda); se borra el tatuaje del brazo.
@@ -61,8 +68,9 @@ if len(sys.argv) > 5:  # recuadro del tatuaje x0,y0,x1,y1 (0–1): se rellena co
     elipse = blur((((yy - h / 2) / (h / 2)) ** 2 + ((xx - w / 2) / (w / 2)) ** 2 < .8).astype(np.float32), 8)
     fondo = np.asarray(Image.fromarray((fondo * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(6))).astype(np.float32) / 255
     t = np.maximum(np.clip(t * 2.5, 0, 1), elipse); c[y0:y1, x0:x1] = sub * (1 - t[..., None]) + fondo * t[..., None]
-c = aclarar(c, blur(mascara_piel(c), 2))  # máscara de nuevo: donde estaba el tatuaje ya es piel
+if CUERPO: c = aclarar(c, blur(mascara_piel(c), 2))  # máscara de nuevo: donde estaba el tatuaje ya es piel
 guardar(c, 'body_color')
+if not os.path.exists(os.path.join(tex, f'{pre}_opacity_color.tga')): print('LISTO', sal, '(sin mechones)'); sys.exit()
 # Mechones (con alfa), menos las pestañas.
 o = cargar('opacity_color', 'RGBA'); rgb, a = o[..., :3], o[..., 3]; L = a.shape[0]
 quitar = np.zeros_like(a, bool)

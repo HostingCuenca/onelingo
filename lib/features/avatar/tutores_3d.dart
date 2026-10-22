@@ -12,11 +12,15 @@ class Tutor3d {
     'ana' => tr(
       'Llamada en vivo: habla cuando quieras, te escucha y te responde al instante.',
     ),
-    'lin' => tr('En vivo · tranquila y precisa'),
     'diego' => tr('En vivo · cercano y bromista'),
-    'marcus' => tr('En vivo · seguro y motivador'),
     'nora' => tr('En vivo · alegre y paciente'),
     'erik' => tr('En vivo · relajado y curioso'),
+    'elena' => tr('En vivo · elegante y serena'),
+    'lucas' => tr('En vivo · amable y práctico'),
+    'julia' => tr('En vivo · entusiasta y creativa'),
+    'chloe' => tr('En vivo · espontánea y risueña'),
+    'tomas' => tr('En vivo · cálido y paciente'),
+    'frank' => tr('En vivo · tranquilo y experimentado'),
     'lumo' => tr(
       'Tu compañero de OneLingo: habla contigo, te corrige y carga al instante.',
     ),
@@ -46,10 +50,14 @@ const anaTutor = Tutor3d('ana', 'Ana');
 /// MIT), con la misma tecnología que Ana. Van antes de los tutores 3D
 /// anteriores, que se retirarán más adelante.
 const tutoresVivo = [
-  Tutor3d('lin', 'Lin'),
+  Tutor3d('elena', 'Elena'),
+  Tutor3d('lucas', 'Lucas'),
+  Tutor3d('julia', 'Julia'),
   Tutor3d('diego', 'Diego'),
-  Tutor3d('marcus', 'Marcus'),
+  Tutor3d('chloe', 'Chloe'),
+  Tutor3d('tomas', 'Tomás'),
   Tutor3d('nora', 'Nora'),
+  Tutor3d('frank', 'Frank'),
   Tutor3d('erik', 'Erik'),
 ];
 
