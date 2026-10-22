@@ -10,7 +10,7 @@ tex, pre, pest, sal = sys.argv[1:5]
 os.makedirs(sal, exist_ok=True)
 for f in os.listdir(tex): shutil.copy(os.path.join(tex, f), sal)
 LUM = np.array([.3, .59, .11], np.float32)
-PIEL = np.array([.92, .78, .69], np.float32)   # porcelana cálida
+PIEL = np.array([float(v) for v in os.environ.get('PIEL', '.92,.78,.69').split(',')], np.float32)  # porcelana cálida por omisión
 TENIR = os.environ.get('PELO', 'platino') != 'original'
 PLATINO = np.array([.93, .94, .97], np.float32)
 

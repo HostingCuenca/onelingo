@@ -65,7 +65,9 @@ async function elegirTutor(t) {
   avatar = createAvatarTH(escena, fuente, t.th || {});
   escena.dataset.phase = 'ready';
   pintarFrases();
-  await avatar.load('/avatar/' + t.model, ev => { if (ev.lengthComputable) estado(`Cargando a ${t.name}… ${Math.round(ev.loaded / ev.total * 100)} %`); });
+  // ?modelo=f15 prueba un GLB de modelos/ (sin instalar) con el tutor elegido.
+  const prueba = new URLSearchParams(location.search).get('modelo');
+  await avatar.load(prueba ? `/modelos/${prueba}.glb` : '/avatar/' + t.model, ev => { if (ev.lengthComputable) estado(`Cargando a ${t.name}… ${Math.round(ev.loaded / ev.total * 100)} %`); });
   if (mio !== turno) return;
   window.head = escena.querySelector('.lienzo-th')?.cabeza; // para capturas desde la consola
   estado(`${t.name} · listo`);

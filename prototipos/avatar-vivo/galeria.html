@@ -1,0 +1,72 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Galería de avatares</title>
+<style>
+:root{--morado:#4519BB;--suave:#EEE9FF;--fondo:#F7F4F2;--linea:#E6DFDA;--gris:#6E6979}
+*{box-sizing:border-box}body{margin:0;background:var(--fondo);font:15px system-ui,sans-serif;color:#1C1B1B}
+main{max-width:1200px;margin:auto;padding:16px 16px 96px}
+h1{font-size:22px;margin:4px 0}h2{font-size:17px;margin:28px 0 4px}.muted{color:var(--gris);font-size:13px;margin:0 0 12px}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.ficha{position:relative;background:#fff;border:2px solid var(--linea);border-radius:14px;overflow:hidden;cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit}
+.ficha img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;background:#fff}
+.ficha b{display:block;padding:6px 10px 0;font-size:14px}.ficha small{display:block;padding:0 10px 8px;color:var(--gris);font-size:12px;min-height:2.6em}
+.ficha[aria-pressed=true]{border-color:var(--morado);box-shadow:0 0 0 3px var(--suave)}
+.ficha[aria-pressed=true]::after{content:"✓";position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:var(--morado);color:#fff;display:grid;place-items:center;font-weight:800}
+.uso{position:absolute;top:8px;left:8px;background:var(--morado);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px}
+.actual img{object-fit:contain;background:radial-gradient(circle at 50% 35%,#fff,#E9E3F7)}
+#barra{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--linea);padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+#barra button{border:0;border-radius:10px;padding:10px 16px;background:var(--morado);color:#fff;font-weight:700;cursor:pointer}
+#barra button:disabled{opacity:.4;cursor:default}
+.notas{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:12px 16px;font-size:14px}.notas li{margin:4px 0}
+</style>
+<main>
+  <h1>Galería de avatares</h1>
+  <p class="muted">Todos los modelos Rocketbox (licencia MIT, uso comercial libre) tal como vienen. Sobre el que elijas aplico la piel uniforme, el maquillaje, la cara más joven, la sonrisa y la mirada a la cámara, como en los tutores actuales. Toca los que te gusten y copia la lista.</p>
+
+  <h2>Tutores actuales</h2>
+  <p class="muted">Ya procesados, como se ven en la app.</p>
+  <div class="rejilla" id="actuales"></div>
+
+  <h2>Mujeres · Rocketbox (19)</h2>
+  <div class="rejilla" id="mujeres"></div>
+
+  <h2>Hombres · Rocketbox (21)</h2>
+  <div class="rejilla" id="hombres"></div>
+
+  <h2>Si Rocketbox no alcanza</h2>
+  <ul class="notas">
+    <li><b>MakeHuman / MPFB</b> (gratis, CC0): se arma la cara, el peinado y la edad a medida. Es lo de los tutores 3D anteriores; con mejor piel y pelo puede quedar más natural.</li>
+    <li><b>MetaPerson</b>: avatar realista a partir de una foto, compatible con nuestro visor. El primero es gratis; falta confirmar la licencia comercial.</li>
+    <li><b>Simli</b>: cara de video realista en tiempo real, como Praktika. 50 min gratis al mes para probar; después desde 10 USD al mes.</li>
+  </ul>
+</main>
+<div id="barra"><span id="elegidos">Ninguno elegido</span><button id="copiar" disabled>Copiar lista</button></div>
+<script>
+const USO = {F03: 'Lin', F17: 'Nora', M06: 'Diego', M12: 'Marcus', M16: 'Erik'};
+const NOTA = {
+  F01: 'Rubia · cola de caballo', F02: 'Castaña · cola · mayor', F03: 'Asiática · pelo negro suelto', F04: 'Rubia · corto', F05: 'Morena · melena corta',
+  F06: 'Velo blanco', F07: 'Castaña · recogido', F08: 'Castaña oscura · largo liso', F09: 'Castaña · moño bajo', F10: 'Hiyab negro',
+  F11: 'Morena · moño', F12: 'Pelirroja oscura · flequillo', F13: 'Rubia · corto', F14: 'Castaña · media melena', F15: 'Castaña · largo ondulado',
+  F16: 'Burka', F17: 'Rubia · moño', FP01: 'Rubia · rizos largos', FP02: 'Afro · rizos',
+};
+const sel = new Set();
+function ficha(id, src, titulo, nota, clase = '') {
+  const b = document.createElement('button'); b.className = 'ficha ' + clase; b.setAttribute('aria-pressed', 'false');
+  b.innerHTML = `${USO[id] ? `<span class="uso">${USO[id]}</span>` : ''}<img loading="lazy" alt="" src="${src}"><b>${titulo}</b><small>${nota}</small>`;
+  b.onclick = () => { sel.has(titulo) ? sel.delete(titulo) : sel.add(titulo); b.setAttribute('aria-pressed', String(sel.has(titulo))); pintar(); };
+  return b;
+}
+function pintar() {
+  document.getElementById('elegidos').textContent = sel.size ? 'Elegidos: ' + [...sel].join(', ') : 'Ninguno elegido';
+  document.getElementById('copiar').disabled = !sel.size;
+}
+document.getElementById('copiar').onclick = async () => {
+  try { await navigator.clipboard.writeText([...sel].join(', ')); document.getElementById('copiar').textContent = 'Copiado'; }
+  catch { document.getElementById('copiar').textContent = 'Cópialo de la barra'; }
+  setTimeout(() => document.getElementById('copiar').textContent = 'Copiar lista', 1500);
+};
+for (const [id, n] of [['ana', 'Ana'], ['lin', 'Lin'], ['diego', 'Diego'], ['marcus', 'Marcus'], ['nora', 'Nora'], ['erik', 'Erik']])
+  document.getElementById('actuales').append(ficha('', `/avatar/portraits/${id}.webp?_=${Date.now()}`, n, id === 'ana' ? 'Avaturn · solo uso no comercial' : 'Rocketbox procesado', 'actual'));
+for (const id of [...Array.from({length: 17}, (_, i) => 'F' + String(i + 1).padStart(2, '0')), 'FP01', 'FP02'])
+  document.getElementById('mujeres').append(ficha(id, `/modelos/previas/${id}.webp`, id, NOTA[id] || ''));
+for (let i = 1; i <= 21; i++) { const id = 'M' + String(i).padStart(2, '0');
+  document.getElementById('hombres').append(ficha(id, `/modelos/previas/${id}.webp`, id, '')); }
+</script></html>
