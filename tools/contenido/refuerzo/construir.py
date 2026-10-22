@@ -457,6 +457,17 @@ class Constructor:
                         self.informe['identicos_quitados'] += 1
                 if p['tipo'] == 'evaluacion' and len({it['formato'] for it in p['items']}) < 2:
                     sys.exit(f"{r['id']}: la evaluación quedó con un solo formato")
+            # Fuera de la práctica los ejercicios que repite la evaluación (contaminación), si sobra material.
+            en_evaluacion = {huella({k: v for k, v in it.items() if k != 'id'})
+                             for p in r['pasos'] if p['tipo'] == 'evaluacion' for it in p['items']}
+            for p in r['pasos']:
+                if p['tipo'] not in ('practica_guiada', 'practica_independiente'):
+                    continue
+                minimo = {'practica_guiada': 1, 'practica_independiente': 2}[p['tipo']]
+                for it in list(p['items']):
+                    if huella({k: v for k, v in it.items() if k != 'id'}) in en_evaluacion and len(p['items']) > minimo:
+                        p['items'].remove(it)
+                        self.informe['identicos_quitados'] += 1
         # Encadenados ya detrás de la última clase: si la cadena se corta, el bloque
         # siguiente de esta misma corrida no ve el vocabulario anterior.
         anterior = self.clases[-1]
