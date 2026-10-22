@@ -46,20 +46,41 @@ void main() {
     // Lumo que habla, destacado antes de los tutores 3D.
     expect(find.text('Habla con Lumo'), findsOneWidget);
     expect(find.bySemanticsLabel('Videollamada con Lumo'), findsOneWidget);
-    // Ana (llamada en vivo) va destacada encima de Lumo.
-    expect(find.bySemanticsLabel('Videollamada con Ana'), findsOneWidget);
-    // Tutores en vivo (Rocketbox) antes de los tutores 3D anteriores.
+    // Tutores en vivo: 6 × 2, ellas arriba y ellos abajo, antes de Lumo.
+    expect(tutorasVivo.map((t) => t.id), [
+      'ana',
+      'elena',
+      'julia',
+      'chloe',
+      'nora',
+      'hana',
+    ]);
+    expect(tutoresVivoHombres.map((t) => t.id), [
+      'lucas',
+      'tomas',
+      'frank',
+      'diego',
+      'erik',
+      'andre',
+    ]);
+    final y = [
+      for (final t in tutoresVivo)
+        tester.getTopLeft(find.bySemanticsLabel(t.nombre).first).dy,
+    ];
+    expect(y.take(6).toSet().length, 1);
+    expect(y.skip(6).toSet().length, 1);
+    expect(y[0], lessThan(y[6]));
+    expect(y[6], lessThan(tester.getTopLeft(find.text('Habla con Lumo')).dy));
     for (final t in tutoresVivo) {
-      expect(
-        find.bySemanticsLabel('Videollamada con ${t.nombre}'),
-        findsOneWidget,
-      );
+      expect(t.rasgo, isNotEmpty, reason: t.id);
+      expect(t.especialidad, isNotEmpty, reason: t.id);
     }
-    expect(find.text('En vivo'), findsNWidgets(1 + tutoresVivo.length));
-    expect(
-      tester.getTopLeft(find.text('Llamada en vivo con Ana')).dy,
-      lessThan(tester.getTopLeft(find.text('Habla con Lumo')).dy),
-    );
+    // Al tocar una cara se ve su ficha y el botón para llamarla.
+    expect(find.text('Videollamada con Ana'), findsOneWidget);
+    await tester.tap(find.bySemanticsLabel('Frank'));
+    await tester.pumpAndSettle();
+    expect(find.text('Tranquilo y experimentado'), findsOneWidget);
+    expect(find.text('Videollamada con Frank'), findsOneWidget);
     expect(
       tester.getTopLeft(find.text('Habla con Lumo')).dy,
       lessThan(

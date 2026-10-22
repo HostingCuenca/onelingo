@@ -49,48 +49,10 @@ class TutorsScreen extends ConsumerWidget {
                 titulo: tr('Videollamada con un tutor'),
                 texto: tr('Cara a cara, por voz o escribiendo.'),
               ),
-              // Los tutores realistas en vivo van primero, en una fila que se
-              // desliza, antes de las tarjetas de Ana y Lumo.
-              Text(
-                tr('Nuevos tutores en vivo'),
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(height: 8),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                clipBehavior: Clip.none,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (final t in tutoresVivo)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 12),
-                        child: SizedBox(
-                          width: 148,
-                          height: 236,
-                          child: _TarjetaTutor3d(
-                            tutor: t,
-                            recomendado: false,
-                            enVivo: true,
-                            onTap: () => _abrirVideollamada(context, t.id),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
+              // Tutores realistas en vivo: ellas arriba, ellos abajo; al
+              // tocar una cara se ve su ficha y el botón para llamarla.
+              const _ElencoEnVivo(),
               const SizedBox(height: 16),
-              _TarjetaDestacada(
-                tutor: anaTutor,
-                titulo: tr('Llamada en vivo con Ana'),
-                etiqueta: tr('En vivo'),
-                recortar: true,
-                onTap: () => _abrirVideollamada(context, 'ana'),
-              ),
-              const SizedBox(height: 12),
               _TarjetaDestacada(
                 tutor: lumoTutor,
                 titulo: tr('Habla con Lumo'),
@@ -237,7 +199,148 @@ class TutorsScreen extends ConsumerWidget {
 void _abrirVideollamada(BuildContext context, String id) =>
     context.push('/avatar/$id');
 
-/// Tutor destacado (Ana en vivo, Lumo): un solo personaje en la tarjeta,
+/// Cuadrícula 5 × 2 de los tutores en vivo y la ficha del elegido.
+class _ElencoEnVivo extends StatefulWidget {
+  const _ElencoEnVivo();
+
+  @override
+  State<_ElencoEnVivo> createState() => _ElencoEnVivoState();
+}
+
+class _ElencoEnVivoState extends State<_ElencoEnVivo> {
+  Tutor3d elegido = tutoresVivo.first;
+
+  Widget _fila(List<Tutor3d> fila) => Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      for (final (i, t) in fila.indexed) ...[
+        if (i > 0) const SizedBox(width: 8),
+        Expanded(child: _cara(t)),
+      ],
+    ],
+  );
+
+  Widget _cara(Tutor3d t) {
+    final si = t.id == elegido.id;
+    return Semantics(
+      button: true,
+      selected: si,
+      label: t.nombre,
+      excludeSemantics: true,
+      child: GestureDetector(
+        onTap: () => setState(() => elegido = t),
+        child: Column(
+          children: [
+            AspectRatio(
+              aspectRatio: 9 / 11,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 150),
+                decoration: BoxDecoration(
+                  color: OL.moradoSuave,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: si ? OL.morado : OL.moradoSuave,
+                    width: 2.5,
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(11),
+                  child: Image.asset(
+                    t.retrato,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.topCenter,
+                    excludeFromSemantics: true,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              t.nombre,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: si ? FontWeight.w900 : FontWeight.w600,
+                color: si ? OL.morado : null,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = elegido;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            Text(
+              tr('Tutores en vivo'),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(width: 8),
+            Etiqueta(tr('En vivo'), color: OL.blanco, fondo: OL.morado),
+          ],
+        ),
+        const SizedBox(height: 10),
+        _fila(tutorasVivo),
+        const SizedBox(height: 10),
+        _fila(tutoresVivoHombres),
+        const SizedBox(height: 12),
+        Tarjeta(
+          color: OL.moradoSuave,
+          borde: OL.moradoClaro,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                t.nombre,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              Text(
+                t.rasgo,
+                style: const TextStyle(
+                  color: OL.morado,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                t.especialidad,
+                style: const TextStyle(
+                  color: OL.gris,
+                  fontSize: 13,
+                  height: 1.3,
+                ),
+              ),
+              const SizedBox(height: 12),
+              FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(48),
+                ),
+                onPressed: () => _abrirVideollamada(context, t.id),
+                icon: const Icon(Icons.videocam_rounded),
+                label: Text(
+                  tr('Videollamada con {tutor}', {'tutor': t.nombre}),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Tutor destacado (Lumo): un solo personaje en la tarjeta,
 /// sin animación de entrada.
 class _TarjetaDestacada extends StatelessWidget {
   const _TarjetaDestacada({
@@ -245,14 +348,10 @@ class _TarjetaDestacada extends StatelessWidget {
     required this.titulo,
     required this.etiqueta,
     required this.onTap,
-    this.recortar = false,
   });
   final Tutor3d tutor;
   final String titulo, etiqueta;
   final VoidCallback onTap;
-
-  /// Retrato realista: llena el cuadro con esquinas redondeadas.
-  final bool recortar;
 
   @override
   Widget build(BuildContext context) => Semantics(
@@ -268,14 +367,11 @@ class _TarjetaDestacada extends StatelessWidget {
           SizedBox(
             width: 108,
             height: 132,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(recortar ? 16 : 0),
-              child: Image.asset(
-                tutor.retrato,
-                fit: recortar ? BoxFit.cover : BoxFit.contain,
-                alignment: Alignment.topCenter,
-                excludeFromSemantics: true,
-              ),
+            child: Image.asset(
+              tutor.retrato,
+              fit: BoxFit.contain,
+              alignment: Alignment.topCenter,
+              excludeFromSemantics: true,
             ),
           ),
           const SizedBox(width: 12),
@@ -352,13 +448,10 @@ class _TarjetaTutor3d extends StatelessWidget {
     required this.tutor,
     required this.recomendado,
     required this.onTap,
-    this.enVivo = false,
   });
   final Tutor3d tutor;
   final bool recomendado;
 
-  /// Tutor de la llamada en vivo (micrófono abierto).
-  final bool enVivo;
   final VoidCallback onTap;
 
   @override
@@ -389,16 +482,6 @@ class _TarjetaTutor3d extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (enVivo)
-                  Positioned(
-                    top: 8,
-                    left: 8,
-                    child: Etiqueta(
-                      tr('En vivo'),
-                      color: OL.blanco,
-                      fondo: OL.morado,
-                    ),
-                  ),
                 if (recomendado)
                   Positioned(
                     top: 8,

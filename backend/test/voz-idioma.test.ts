@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { codigoIdiomaVoz, cuerpoSintesis, hashAudio, hashAudioLegado, esAudioCorto, rolDeVoz, rolPedido, textoParaVoz, trocearTexto, NATIVAS, ROLES, VOCES, AJUSTES_VOZ } from '../src/lib/voz.js';
+import { VOZ_TUTOR, codigoIdiomaVoz, cuerpoSintesis, hashAudio, hashAudioLegado, esAudioCorto, rolDeVoz, rolPedido, textoParaVoz, trocearTexto, NATIVAS, ROLES, VOCES, AJUSTES_VOZ } from '../src/lib/voz.js';
 
 test('la síntesis fuerza el idioma en modelos v2.5 y no en los demás', () => {
   assert.equal(codigoIdiomaVoz('ja', 'eleven_flash_v2_5'), 'ja');
@@ -173,4 +173,17 @@ test('la notación de la vista no se pronuncia', () => {
   assert.equal(textoParaVoz('À vista no Pix: R$ 6.480.', 'pt'), 'À vista no Pix: seis mil quatrocentos e oitenta reais.');
   assert.equal(textoParaVoz('Abierto 24/7', 'en'), 'Abierto 24/7');
   assert.equal(textoParaVoz('KTV 很 好玩', 'zh'), 'KTV很好玩');
+});
+
+test('cada tutor en vivo tiene su propia voz nativa en cada idioma', () => {
+  const vivos = ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre'].map((t) => `avatar_${t}`);
+  for (const idioma of Object.keys(NATIVAS)) {
+    const claves = vivos.map((t) => rolDeVoz(t, idioma));
+    for (const c of claves) assert.ok(VOCES[c] && (c.startsWith(`${idioma}_`)), `${idioma}: ${c}`);
+    assert.equal(new Set(claves.map((c) => VOCES[c].id)).size, vivos.length, `${idioma}: una voz distinta por tutor`);
+    assert.ok(!claves.includes(NATIVAS[idioma].lumo), `${idioma}: nadie suena como Lumo`);
+    for (const t of Object.keys(VOZ_TUTOR[idioma])) assert.ok(vivos.includes(t), t);
+  }
+  // Un idioma sin voces usa las de inglés también para los tutores.
+  assert.equal(rolDeVoz('avatar_frank', 'xx'), VOZ_TUTOR.en.avatar_frank);
 });
