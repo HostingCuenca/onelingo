@@ -75,6 +75,13 @@ class TutorsScreen extends ConsumerWidget {
                     crossAxisSpacing: 12,
                     childAspectRatio: .66,
                     children: [
+                      for (final t in tutoresVivo)
+                        _TarjetaTutor3d(
+                          tutor: t,
+                          recomendado: false,
+                          enVivo: true,
+                          onTap: () => _abrirVideollamada(context, t.id),
+                        ),
                       for (final t in tutores3dPara(s.idiomaMeta))
                         _TarjetaTutor3d(
                           tutor: t,
@@ -318,9 +325,13 @@ class _TarjetaTutor3d extends StatelessWidget {
     required this.tutor,
     required this.recomendado,
     required this.onTap,
+    this.enVivo = false,
   });
   final Tutor3d tutor;
   final bool recomendado;
+
+  /// Tutor de la llamada en vivo (micrófono abierto).
+  final bool enVivo;
   final VoidCallback onTap;
 
   @override
@@ -351,6 +362,16 @@ class _TarjetaTutor3d extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (enVivo)
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Etiqueta(
+                      tr('En vivo'),
+                      color: OL.blanco,
+                      fondo: OL.morado,
+                    ),
+                  ),
                 if (recomendado)
                   Positioned(
                     top: 8,

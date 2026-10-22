@@ -21,7 +21,7 @@ button{padding:10px 14px;border:0;border-radius:10px;background:var(--morado);co
     <div class="tarjeta"><h1>Piloto · tutor en vivo</h1><p class="muted">TalkingHead (código abierto) dibujando el avatar en el dispositivo + voz de ElevenLabs con el tiempo de cada letra. Costo del avatar por minuto: $0.</p></div>
     <div class="tarjeta">
       <label for="modelo">Avatar</label>
-      <select id="modelo"><option value="mpfb">MPFB · CC0 (uso comercial libre)</option><option value="avaturn">Avaturn · desde foto (solo prueba interna)</option></select>
+      <select id="modelo"><option value="mpfb">MPFB · CC0 (uso comercial libre)</option><option value="avaturn">Avaturn · desde foto (solo prueba interna)</option><option value="rb-m08">Rocketbox M08 · MIT</option><option value="rb-f11">Rocketbox F11 · MIT</option><option value="rb-m07">Rocketbox M07 · MIT</option><option value="rb-m12">Rocketbox M12 · MIT</option><option value="rb-f01">Rocketbox F01 · MIT</option><option value="rb-m16">Rocketbox M16 · MIT</option><option value="rb-f17">Rocketbox F17 · MIT</option><option value="rb-fp01">Rocketbox FP01 · MIT</option></select>
       <label for="look">Color e iluminación</label>
       <select id="look"><option value="estudio">Estudio · piel cálida, luz de retrato (recomendado)</option><option value="original">Original de TalkingHead</option></select>
       <label for="idioma">Idioma y voz</label>
@@ -47,6 +47,8 @@ const FRASES = {
 const head = new TalkingHead($('avatar'), { lipsyncModules: ['en'], lipsyncLang: 'en', cameraView: 'upper', cameraRotateEnable: false, modelFPS: 30, avatarMood: 'happy', lightAmbientIntensity: 2, lightDirectIntensity: 20 });
 window.head = head;
 const AJUSTES = { mpfb: { body: 'F', baseline: {} }, avaturn: { body: 'F', baseline: { headRotateX: -0.05, eyeBlinkLeft: 0.15, eyeBlinkRight: 0.15 } } };
+// Rocketbox (MIT): cualquier rb-* usa cuerpo según la letra (rb-m = hombre, rb-f = mujer).
+const ajustesDe = m => AJUSTES[m] || { body: m.startsWith('rb-m') ? 'M' : 'F', baseline: {} };
 // Pelo «fantasma»: las capas de pelo con mezcla semitransparente (BLEND) se dibujan
 // sin profundidad y en desorden, y se ve la cara a través. Técnica de dos pasadas:
 // 1) núcleo sólido (recorte alto, escribe profundidad) que tapa lo de detrás;
@@ -87,7 +89,7 @@ function aplicarLook() {
 async function cargar() {
   const m = $('modelo').value; estado('Cargando avatar…');
   const t = performance.now();
-  await head.showAvatar({ url: `modelos/${m}.glb`, avatarMood: 'happy', lipsyncLang: 'en', ...AJUSTES[m] }, (ev) => { if (ev.lengthComputable) estado(`Cargando avatar… ${Math.round(ev.loaded / ev.total * 100)} %`) });
+  await head.showAvatar({ url: `modelos/${m}.glb`, avatarMood: 'happy', lipsyncLang: 'en', ...ajustesDe(m) }, (ev) => { if (ev.lengthComputable) estado(`Cargando avatar… ${Math.round(ev.loaded / ev.total * 100)} %`) });
   const pelo = arreglarPelo(); aplicarLook();
   estado(`Listo · ${m} en ${Math.round(performance.now() - t)} ms · pelo: ${pelo.length} capas`);
 }

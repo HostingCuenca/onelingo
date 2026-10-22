@@ -28,7 +28,7 @@ Uri urlVisor(String tutorId) {
       ? api.replace(path: '/avatar/index.html')
       : Uri.parse('https://onelingo.org/avatar/index.html');
   return base.replace(
-    queryParameters: {'v': 'avatar30', 'embebido': '1', 'tutor': tutorId},
+    queryParameters: {'v': 'avatar31', 'embebido': '1', 'tutor': tutorId},
   );
 }
 

@@ -12,6 +12,11 @@ class Tutor3d {
     'ana' => tr(
       'Llamada en vivo: habla cuando quieras, te escucha y te responde al instante.',
     ),
+    'lin' => tr('En vivo · tranquila y precisa'),
+    'diego' => tr('En vivo · cercano y bromista'),
+    'marcus' => tr('En vivo · seguro y motivador'),
+    'nora' => tr('En vivo · alegre y paciente'),
+    'erik' => tr('En vivo · relajado y curioso'),
     'lumo' => tr(
       'Tu compañero de OneLingo: habla contigo, te corrige y carga al instante.',
     ),
@@ -36,6 +41,17 @@ const lumoTutor = Tutor3d('lumo', 'Lumo');
 /// Ana: tutora realista de la llamada en vivo (micrófono abierto, se le
 /// puede interrumpir). Va destacada encima de Lumo.
 const anaTutor = Tutor3d('ana', 'Ana');
+
+/// Tutores realistas de la llamada en vivo (Microsoft Rocketbox, licencia
+/// MIT), con la misma tecnología que Ana. Van antes de los tutores 3D
+/// anteriores, que se retirarán más adelante.
+const tutoresVivo = [
+  Tutor3d('lin', 'Lin'),
+  Tutor3d('diego', 'Diego'),
+  Tutor3d('marcus', 'Marcus'),
+  Tutor3d('nora', 'Nora'),
+  Tutor3d('erik', 'Erik'),
+];
 
 const tutores3d = [
   Tutor3d('amara', 'Amara'),
@@ -75,7 +91,7 @@ List<Tutor3d> tutores3dPara(String idioma) {
 }
 
 Tutor3d? tutor3d(String id) {
-  for (final t in [anaTutor, lumoTutor, ...tutores3d]) {
+  for (final t in [anaTutor, ...tutoresVivo, lumoTutor, ...tutores3d]) {
     if (t.id == id) return t;
   }
   return null;

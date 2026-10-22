@@ -35,8 +35,16 @@ export function createAvatarTH(stage, fuente, ajustes = {}) {
   const nodo = document.createElement('div'); nodo.className = 'lienzo-th'; stage.prepend(nodo);
   const head = new TalkingHead(nodo, {
     lipsyncModules: [], lipsyncLang: 'en', cameraView: 'upper', cameraRotateEnable: false, cameraPanEnable: false, cameraZoomEnable: false,
-    modelFPS: 30, modelPixelRatio: Math.min(devicePixelRatio, 1.5), avatarMood: 'happy', avatarIdleEyeContact: 0.6, avatarSpeakingEyeContact: 0.8,
+    modelFPS: 30, modelPixelRatio: Math.min(devicePixelRatio, 1.5), avatarMood: 'happy',
+    // Como en una videollamada: mira al alumno casi siempre y mueve poco la cabeza.
+    avatarIdleEyeContact: 0.9, avatarSpeakingEyeContact: 0.95, avatarIdleHeadMove: 0.25, avatarSpeakingHeadMove: 0.3,
   });
+  // Las miradas al azar de TalkingHead bajan hasta 0.6 rad (parece que mira
+  // al suelo): se acotan a un vistazo corto alrededor de la cámara.
+  for (const fase of ['idle', 'speaking']) for (const alt of head.animTemplateEyes?.[fase]?.alt || []) {
+    const acotar = (vs, k, lim) => { if (vs?.[k]) vs[k] = vs[k].map(r => Array.isArray(r) ? [Math.max(r[0], -lim), Math.min(r[1], lim)] : r); };
+    acotar(alt.vs, 'eyesRotateX', 0.12); acotar(alt.vs, 'eyesRotateY', 0.3);
+  }
   const contraluz = new THREE.DirectionalLight();
   contraluz.target.position.set(0, 1.5, 0); head.scene.add(contraluz, contraluz.target);
   function iluminar() {

@@ -48,6 +48,14 @@ void main() {
     expect(find.bySemanticsLabel('Videollamada con Lumo'), findsOneWidget);
     // Ana (llamada en vivo) va destacada encima de Lumo.
     expect(find.bySemanticsLabel('Videollamada con Ana'), findsOneWidget);
+    // Tutores en vivo (Rocketbox) antes de los tutores 3D anteriores.
+    for (final t in tutoresVivo) {
+      expect(
+        find.bySemanticsLabel('Videollamada con ${t.nombre}'),
+        findsOneWidget,
+      );
+    }
+    expect(find.text('En vivo'), findsNWidgets(1 + tutoresVivo.length));
     expect(
       tester.getTopLeft(find.text('Llamada en vivo con Ana')).dy,
       lessThan(tester.getTopLeft(find.text('Habla con Lumo')).dy),

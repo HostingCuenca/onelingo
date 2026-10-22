@@ -4,7 +4,7 @@
 import {createAvatar} from './avatar.js?v=27';
 import {createLumo} from './lumo.js?v=27';
 import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
-import {createAvatarTH} from './avatar-th.js?v=1';
+import {createAvatarTH} from './avatar-th.js?v=2';
 import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
 import {abrirEscucha, esEco, vivoDisponible} from './vivo.js?v=1';
 
@@ -12,7 +12,7 @@ const $ = id => document.getElementById(id), audio = $('audio');
 // Todo lo que usa la conversación se carga ANTES de avisar a la app: si el
 // aviso llegaba antes que topics.json, el saludo fallaba en silencio.
 const [roster, units] = await Promise.all([
-  fetch('./roster.json?v=24').then(r => r.json()),
+  fetch('./roster.json?v=27').then(r => r.json()),
   fetch('./topics.json?v=26').then(r => r.json()),
 ]);
 
@@ -32,7 +32,7 @@ let vivo = null, modoVivo = false, mudo = false, arrastre = '', finVozEn = 0, li
 const parametros = new URLSearchParams(location.search), embebido = parametros.has('embebido'), tutorInicial = parametros.get('tutor');
 if (embebido) document.body.classList.add('embebido');
 const languages = {en: 'inglés', es: 'español', fr: 'francés', de: 'alemán', pt: 'portugués', it: 'italiano', zh: 'chino', ja: 'japonés', ko: 'coreano', ru: 'ruso'};
-const preferred = {en: ['ana', 'lumo', 'amara', 'sofia', 'clara'], es: ['ana', 'lumo', 'lucia', 'mateo'], fr: ['ana', 'lumo', 'clara', 'sofia'], de: ['ana', 'lumo', 'daniel', 'owen'], pt: ['ana', 'lumo', 'amara', 'mateo'], it: ['ana', 'lumo', 'sofia', 'mateo'], zh: ['ana', 'lumo', 'mei', 'kenji'], ja: ['ana', 'lumo', 'kenji', 'mei'], ko: ['ana', 'lumo', 'mei', 'kenji'], ru: ['ana', 'lumo', 'owen', 'clara']};
+const preferred = {en: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'amara', 'sofia', 'clara'], es: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'lucia', 'mateo'], fr: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'clara', 'sofia'], de: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'daniel', 'owen'], pt: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'amara', 'mateo'], it: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'sofia', 'mateo'], zh: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'mei', 'kenji'], ja: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'kenji', 'mei'], ko: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'mei', 'kenji'], ru: ['ana', 'lin', 'diego', 'marcus', 'nora', 'erik', 'lumo', 'owen', 'clara']};
 const language = () => config?.idiomaMeta || 'en', languageName = () => languages[language()] || languages.en;
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const headers = () => ({Authorization: `Bearer ${config.token}`});
