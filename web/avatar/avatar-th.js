@@ -118,7 +118,7 @@ export function createAvatarTH(stage, fuente, ajustes = {}) {
   // gestos al azar incluyen cejas fruncidas, nariz arrugada y labios
   // apretados: con los Rocketbox parecía que estaban molestos.
   const feliz = head.animMoods?.happy;
-  if (feliz) feliz.baseline = {...feliz.baseline, mouthSmile: 0.75, cheekSquintLeft: 0.12, cheekSquintRight: 0.12, browInnerUp: 0.12, eyesLookDown: 0};
+  if (feliz) feliz.baseline = {...feliz.baseline, mouthSmile: 0.75, cheekSquintLeft: 0.06, cheekSquintRight: 0.06, browInnerUp: 0.05, eyesLookDown: 0};
   head.mtRandomized = head.mtRandomized.filter(k => !/browDown|noseSneer|mouthPress|mouthFrown|mouthRoll|mouthShrug|cheekPuff/.test(k));
   const contraluz = new THREE.DirectionalLight();
   contraluz.target.position.set(0, 1.5, 0); head.scene.add(contraluz, contraluz.target);
@@ -169,14 +169,15 @@ export function createAvatarTH(stage, fuente, ajustes = {}) {
         const o = head.mtAvatar[k]; if (o) { o.min = -lim; o.max = lim; }
       }
       // Cada modelo sonríe con otra fuerza (en los Rocketbox la comisura sube
-      // ≈4 mm, en Avaturn el doble): se busca la misma sonrisa de ~6 mm.
+      // ≈4 mm, en Avaturn el doble): se busca la misma sonrisa de ~3 mm. Más (6 mm, ×1,6 en
+      // Rocketbox) saca el blendshape de su rango y deforma la cara frente a su referencia.
       let mm = 0;
       head.armature.traverse(o => {
         const i = o.morphTargetDictionary?.mouthSmileLeft, d = i === undefined ? null : o.geometry.morphAttributes.position?.[i];
         if (d) for (let v = 0; v < d.count; v++) mm = Math.max(mm, Math.hypot(d.getX(v), d.getY(v), d.getZ(v)));
       });
       if (feliz && mm > 0 && head.mtAvatar.mouthSmile) {
-        feliz.baseline.mouthSmile = Math.min(2, Math.max(0.4, 0.0058 / (mm * 0.8)));
+        feliz.baseline.mouthSmile = Math.min(1, Math.max(0.4, 0.0029 / (mm * 0.8)));
         head.mtAvatar.mouthSmile.max = 2; head.setMood('happy');
       }
       mirada = prepararMirada(head); nodo.mirada = mirada;
