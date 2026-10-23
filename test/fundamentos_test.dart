@@ -65,7 +65,7 @@ void main() {
       final clases = ruta.delNivel(nivel);
       expect(clases.length, greaterThanOrEqualTo(5), reason: nivel);
       for (final u in clases) {
-        expect(u.id, startsWith('pt.$nivel.c'), reason: u.id);
+        expect(u.id, matches(RegExp('^pt\\.$nivel\\.[cr]\\d')), reason: u.id);
         expect(u.prerequisitos, [previa], reason: u.id);
         previa = u.id;
       }
@@ -93,14 +93,14 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Curso completo publicado (método ligero: 50 clases por nivel).
+    // Curso completo publicado (método ligero: 100 clases por nivel: 50 + 50 de refuerzo).
     expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
-      expect(clases, hasLength(50), reason: nivel);
+      expect(clases, hasLength(100), reason: nivel);
       for (final u in clases) {
-        expect(u.id, startsWith('de.$nivel.c'), reason: u.id);
+        expect(u.id, matches(RegExp('^de\\.$nivel\\.[cr]\\d')), reason: u.id);
         expect(u.prerequisitos, [previa], reason: u.id);
         previa = u.id;
       }
@@ -127,16 +127,16 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial, curso completo: N1–N10 (50 clases por nivel); no
+    // Versión esencial, curso completo: N1–N10 (100 clases por nivel: 50 + 50 de refuerzo); no
     // queda ningún nivel «Próximamente».
     expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
     expect(nivelPublicadoMaximo(ruta), 10);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
-      expect(clases, hasLength(50), reason: nivel);
+      expect(clases, hasLength(100), reason: nivel);
       for (final u in clases) {
-        expect(u.id, startsWith('it.$nivel.c'), reason: u.id);
+        expect(u.id, matches(RegExp('^it\\.$nivel\\.[cr]\\d')), reason: u.id);
         expect(u.prerequisitos, [previa], reason: u.id);
         previa = u.id;
       }
@@ -169,16 +169,16 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial, curso completo: N1–N10 (50 clases por nivel); no
+    // Versión esencial, curso completo: N1–N10 (100 clases por nivel: 50 + 50 de refuerzo); no
     // queda ningún nivel «Próximamente».
     expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
     expect(nivelPublicadoMaximo(ruta), 10);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
-      expect(clases, hasLength(50), reason: nivel);
+      expect(clases, hasLength(100), reason: nivel);
       for (final u in clases) {
-        expect(u.id, startsWith('zh.$nivel.c'), reason: u.id);
+        expect(u.id, matches(RegExp('^zh\\.$nivel\\.[cr]\\d')), reason: u.id);
         expect(u.prerequisitos, [previa], reason: u.id);
         previa = u.id;
       }
@@ -222,16 +222,16 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial, curso completo: N1–N10 (50 clases por nivel); no
+    // Versión esencial, curso completo: N1–N10 (100 clases por nivel: 50 + 50 de refuerzo); no
     // queda ningún nivel «Próximamente».
     expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
     expect(nivelPublicadoMaximo(ruta), 10);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
-      expect(clases, hasLength(50), reason: nivel);
+      expect(clases, hasLength(100), reason: nivel);
       for (final u in clases) {
-        expect(u.id, startsWith('ja.$nivel.c'), reason: u.id);
+        expect(u.id, matches(RegExp('^ja\\.$nivel\\.[cr]\\d')), reason: u.id);
         expect(u.prerequisitos, [previa], reason: u.id);
         previa = u.id;
       }
@@ -275,16 +275,16 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial, curso completo: N1–N10 (50 clases por nivel); no
+    // Versión esencial, curso completo: N1–N10 (100 clases por nivel: 50 + 50 de refuerzo); no
     // queda ningún nivel «Próximamente».
     expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
     expect(nivelPublicadoMaximo(ruta), 10);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
-      expect(clases, hasLength(50), reason: nivel);
+      expect(clases, hasLength(100), reason: nivel);
       for (final u in clases) {
-        expect(u.id, startsWith('ru.$nivel.c'), reason: u.id);
+        expect(u.id, matches(RegExp('^ru\\.$nivel\\.[cr]\\d')), reason: u.id);
         expect(u.prerequisitos, [previa], reason: u.id);
         previa = u.id;
       }
@@ -328,16 +328,16 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial, curso completo: N1–N10 (50 clases por nivel); no
+    // Versión esencial, curso completo: N1–N10 (100 clases por nivel: 50 + 50 de refuerzo); no
     // queda ningún nivel «Próximamente».
     expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
     expect(nivelPublicadoMaximo(ruta), 10);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
-      expect(clases, hasLength(50), reason: nivel);
+      expect(clases, hasLength(100), reason: nivel);
       for (final u in clases) {
-        expect(u.id, startsWith('ko.$nivel.c'), reason: u.id);
+        expect(u.id, matches(RegExp('^ko\\.$nivel\\.[cr]\\d')), reason: u.id);
         expect(u.prerequisitos, [previa], reason: u.id);
         previa = u.id;
       }

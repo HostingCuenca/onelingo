@@ -23,6 +23,7 @@ Salida: `tools/contenido/refuerzo/<idioma>/nX-bYY.variantes.json`, escrita con *
 6e. **No toques los datos de un gráfico, estudio o acuerdo.** Si varias frases del bloque repiten las mismas cifras (participantes, porcentajes, meses de un gráfico, precio y plazo de un contrato), omite esas claves: cambiar una sola deja al bloque en contradicción. Tampoco varíes los textos largos (más de 20 palabras): suelen resumir la historia.
 7. **Traducciones `es` y `en` naturales** de la variante, no de la original.
 8. **Si no hay un cambio seguro con esas palabras, omite la clave.** Es mejor omitirla que forzarla, porque el script deja la frase original.
+8b. **Romanización (ruso, chino, japonés, coreano).** Si la frase trae `rom`, agrega `"rom"` con la romanización de la variante en la misma convención del original (acentos del ruso, tonos del pinyin, rōmaji, romanización revisada), palabra por palabra con los mismos espacios que la variante. Si el `rom` trae `___`, déjalo en el mismo lugar: es la palabra del hueco.
 9. **No hagas nada más.** No leas otros archivos, no ejecutes comandos ni git, y no expliques: escribe el JSON y termina.
 
 Un script valida cada variante: palabras enseñadas, de 1 a 3 palabras cambiadas, la palabra del hueco y las traducciones. Si una variante falla, se descarta sin pedir corrección.

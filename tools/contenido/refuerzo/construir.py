@@ -46,16 +46,36 @@ palabras = vr.palabras
 
 NOMBRE = {
     'fr': ('francés', 'French'), 'de': ('alemán', 'German'), 'pt': ('portugués', 'Portuguese'),
-    'it': ('italiano', 'Italian'), 'es': ('español', 'Spanish'),
+    'it': ('italiano', 'Italian'), 'es': ('español', 'Spanish'), 'ru': ('ruso', 'Russian'),
+    'zh': ('chino', 'Chinese'), 'ja': ('japonés', 'Japanese'), 'ko': ('coreano', 'Korean'),
 }
+# Romanización bajo el texto: textoRom en completar y tokensRom en ordenar (listas paralelas).
+ROMANIZADOS = {'ru', 'zh', 'ja', 'ko'}
 UMBRAL = 0.9
 # La app no menciona Ecuador (mercado EE. UU. + Latinoamérica): ninguna variante lo introduce.
-PROHIBIDAS = {'ecuador', 'équateur', 'equador', 'ekuador', 'quito', 'cuenca', 'guayaquil', 'équatorien', 'équatorienne'}
+PROHIBIDAS = {'ecuador', 'équateur', 'equador', 'ekuador', 'quito', 'cuenca', 'guayaquil', 'équatorien', 'équatorienne',
+              'эквадор', 'кито', '厄瓜多尔', '基多', 'エクアドル', 'キト', '에콰도르', '키토'}
 PRODUCCION = {'escribir', 'ordenar', 'completar'}
 
 
 def apoyo(es, en):
     return {'es': es, 'en': en}
+
+
+def solo_en(x, rellenar):
+    """Cursos con apoyo solo en inglés (español): el constructor trabaja con 'es' copiado
+    de 'en' (rellenar=True) y al escribir se quita 'es' (rellenar=False)."""
+    if isinstance(x, dict):
+        if 'en' in x and isinstance(x['en'], (str, list)):
+            if rellenar:
+                x.setdefault('es', x['en'])
+            else:
+                x.pop('es', None)
+        for v in x.values():
+            solo_en(v, rellenar)
+    elif isinstance(x, list):
+        for v in x:
+            solo_en(v, rellenar)
 
 
 def leer(p):
@@ -75,14 +95,41 @@ def fichas(texto):
     return [t for t in vr.PUNTUACION.sub(' ', texto).split() if t != '-']
 
 
-def barajar(tokens, semilla):
-    res = list(tokens)
+def barajar(tokens, semilla, roms=None):
+    """Fichas barajadas; con `roms` devuelve también la romanización en el mismo orden."""
+    idx = list(range(len(tokens)))
     rnd = random.Random(semilla)
     for _ in range(10):
-        rnd.shuffle(res)
-        if res != tokens or len(set(tokens)) < 2:
+        rnd.shuffle(idx)
+        if [tokens[i] for i in idx] != list(tokens) or len(set(tokens)) < 2:
             break
-    return res
+    res = [tokens[i] for i in idx]
+    return (res, [roms[i] for i in idx]) if roms is not None else res
+
+
+def con_rom(it, texto, rom):
+    """Fichas de «ordenar» para `texto`, con tokensRom si la romanización tiene las mismas palabras."""
+    tokens = fichas(texto)
+    roms = fichas(rom) if rom else None
+    if roms and len(roms) == len(tokens):
+        it['tokens'], it['tokensRom'] = barajar(tokens, texto, roms)
+    else:
+        it['tokens'] = barajar(tokens, texto)
+        it.pop('tokensRom', None)
+    return it
+
+
+def rom_ordenado(it):
+    """Romanización de la respuesta de un «ordenar» a partir de sus fichas, o None."""
+    pares = list(zip(it.get('tokens') or [], it.get('tokensRom') or []))
+    res = []
+    for f in fichas(it['respuesta']):
+        par = next((x for x in pares if x[0] == f), None)
+        if not par:
+            return None
+        pares.remove(par)
+        res.append(par[1])
+    return ' '.join(res)
 
 
 def entre_comillas(t):
@@ -138,7 +185,13 @@ class Constructor:
         self.lengua = NOMBRE[idioma]
         self.archivo = self.ruta / f'n{nv}-b{b:02d}.json'
         self.datos = leer(self.archivo)
+        if 'es' not in self.apoyos:
+            solo_en(self.datos, True)
         self.clases = [u for u in self.datos['unidades'] if es_clase(u)]
+        self.romaniza = idioma in ROMANIZADOS
+        self.rom_de = {x['texto']: x['rom'] for u in self.clases for p in u['pasos']
+                       for x in (p['items'] if p['tipo'] == 'ejemplos' else p.get('dialogo') or [])
+                       if x.get('rom')}
         self.dir = AQUI / idioma
         self.dir.mkdir(exist_ok=True)
         self.conocida = vr.conocida_para(idioma)
@@ -172,6 +225,8 @@ class Constructor:
         if f == 'completar':
             n = {**base, 'formato': 'completar', 'consigna': it['consigna'], 'texto': it['texto'],
                  'respuesta': it['respuesta']}
+            if it.get('textoRom'):
+                n['textoRom'] = it['textoRom']
             n['_candidata'] = (unir(it['texto'].replace('___', it['respuesta']), it['respuesta']), it['respuesta'])
             return n
         if f == 'escuchar' and it.get('audio'):
@@ -201,6 +256,8 @@ class Constructor:
             else:
                 n = {**base, 'formato': 'ordenar', 'consigna': it['consigna'], 'respuesta': it['respuesta'],
                      'tokens': barajar(it['tokens'], it['respuesta'])}
+                if it.get('tokensRom') and len(it['tokensRom']) == len(it['tokens']):
+                    n['tokens'], n['tokensRom'] = barajar(it['tokens'], it['respuesta'], it['tokensRom'])
             n['_candidata'] = (it['respuesta'], None)
             return n
         if f == 'escribir' and not it.get('audio'):
@@ -215,10 +272,10 @@ class Constructor:
         return [n for p in u['pasos'] if p['tipo'] == tipo for it in p['items']
                 if (n := self.endurecer(it)) is not None]
 
-    def ordenar_de(self, texto, tr, consigna=None):
-        return {'formato': 'ordenar', 'tokens': barajar(fichas(texto), texto), 'respuesta': texto,
-                'consigna': consigna or apoyo(f"Ordena: «{tr['es']}»", f"Put in order: “{tr['en']}”"),
-                'feedback': apoyo(texto, texto)}
+    def ordenar_de(self, texto, tr, consigna=None, rom=None):
+        return con_rom({'formato': 'ordenar', 'respuesta': texto,
+                        'consigna': consigna or apoyo(f"Ordena: «{tr['es']}»", f"Put in order: “{tr['en']}”"),
+                        'feedback': apoyo(texto, texto)}, texto, rom or self.rom_de.get(texto))
 
     # ---- una clase de refuerzo ----
     def refuerzo(self, k):
@@ -288,8 +345,10 @@ class Constructor:
         if a and b:
             texto = f'{a[0][0]} {b[0][0]}'
             tr = {l: f"{a[0][1][l]} {b[0][1][l]}" for l in ('es', 'en')}
+            ra, rb = self.rom_de.get(a[0][0]), self.rom_de.get(b[0][0])
             evaluacion.append(self.ordenar_de(texto, tr, apoyo(f'Ordena las dos frases: «{tr["es"]}»',
-                                                                 f'Put both sentences in order: “{tr["en"]}”')))
+                                                                 f'Put both sentences in order: “{tr["en"]}”'),
+                                              f'{ra} {rb}' if ra and rb else None))
         rel = self.relacionar(u, self.clases[(k + 2) % n])
         if rel:
             evaluacion.append(rel)
@@ -315,6 +374,10 @@ class Constructor:
                 if cand and self.conoce(cand[0], extra):
                     self.candidatas[f"{rid}.{it['id']}"] = {'frase': cand[0], 'mantener': cand[1],
                                                            'formato': it['formato']}
+                    rom = it.get('textoRom') if it['formato'] == 'completar' else (
+                        rom_ordenado(it) if it['formato'] == 'ordenar' else None)
+                    if self.romaniza and rom:
+                        self.candidatas[f"{rid}.{it['id']}"]['rom'] = rom
         r = {k2: copy.deepcopy(v) for k2, v in u.items()
              if k2 not in ('id', 'titulo', 'objetivo', 'concepto', 'pasos', 'criterioDominio', 'prerequisitos', 'orden')}
         obj = u['objetivo']
@@ -344,6 +407,7 @@ class Constructor:
             f"Eres {quien}. Ordena lo que dices: «{larga['traduccion']['es']}»",
             f"You are {quien}. Put what you say in order: “{larga['traduccion']['en']}”")))
         vocab = sorted({v['texto'] for v in u['vocabulario']}, key=len, reverse=True)
+        rom_vocab = {v['texto']: v['rom'] for v in u['vocabulario'] if v.get('rom')}
         for d in lineas:
             if d is larga:
                 continue
@@ -353,6 +417,11 @@ class Constructor:
                               'consigna': apoyo(f"Eres {quien}. Completa tu frase: «{d['traduccion']['es']}»",
                                                 f"You are {quien}. Complete your line: “{d['traduccion']['en']}”"),
                               'feedback': apoyo(d['texto'], d['texto'])})
+                rh = rom_vocab.get(hueco)
+                if d.get('rom') and rh:
+                    m = re.compile(rf"(?<!\w){re.escape(rh)}(?!\w)", re.I)
+                    if len(m.findall(d['rom'])) == 1:
+                        items[-1]['textoRom'] = m.sub('___', d['rom'], 1)
                 break
         else:
             otra = next((d for d in lineas if d is not larga), None)
@@ -368,19 +437,23 @@ class Constructor:
                 'dialogo': copy.deepcopy(dialogo), 'items': items}
 
     def relacionar(self, u, otra):
-        def pares(c):
-            return [par for p in c['pasos'] if p['tipo'] in ('practica_guiada', 'evaluacion')
-                    for it in p['items'] if it['formato'] == 'relacionar' for par in it['pares']]
+        def pares(c):  # (par, romanización o None)
+            return [(par, (it.get('paresRom') or [])[i] if i < len(it.get('paresRom') or []) else None)
+                    for p in c['pasos'] if p['tipo'] in ('practica_guiada', 'evaluacion')
+                    for it in p['items'] if it['formato'] == 'relacionar' for i, par in enumerate(it['pares'])]
         a, b = pares(u), pares(otra)
         if len(a) < 2 or len(b) < 2:
             return None
         mezcla = [a[-1], b[0], a[0], b[-1]]
-        if len({m[0] for m in mezcla}) < 4:
+        if len({m[0][0] for m in mezcla}) < 4:
             return None
-        return {'formato': 'relacionar', 'pares': copy.deepcopy(mezcla),
-                'consigna': apoyo('Relaciona: mezcla de esta clase y otra del bloque.',
-                                  'Match: a mix from this lesson and another in the unit.'),
-                'feedback': apoyo('Repasa las dos clases si fallaste alguna.', 'Review both lessons if you missed one.')}
+        n = {'formato': 'relacionar', 'pares': copy.deepcopy([m[0] for m in mezcla]),
+             'consigna': apoyo('Relaciona: mezcla de esta clase y otra del bloque.',
+                               'Match: a mix from this lesson and another in the unit.'),
+             'feedback': apoyo('Repasa las dos clases si fallaste alguna.', 'Review both lessons if you missed one.')}
+        if any(m[1] for m in mezcla):
+            n['paresRom'] = [m[1] for m in mezcla]
+        return n
 
     # ---- variación con IA ----
     def aceptar(self, original, var, mantener, extra):
@@ -415,9 +488,14 @@ class Constructor:
             hueco = '___ ' if elidida(it['respuesta']) else '___'
             it['texto'] = palabra_re(it['respuesta']).sub(hueco, texto, 1)
             it['consigna'] = apoyo(f'Completa: «{es}»', f'Complete: “{en}”')
+            rom = (var.get('rom') or '').strip()
+            if rom.count('___') == 1:
+                it['textoRom'] = rom
+            else:
+                it.pop('textoRom', None)
         elif it['formato'] == 'ordenar':
             it['respuesta'] = texto
-            it['tokens'] = barajar(fichas(texto), texto)
+            con_rom(it, texto, (var.get('rom') or '').strip())
             it['consigna'] = apoyo(f'Ordena: «{es}»', f'Put in order: “{en}”')
         else:
             it['respuesta'] = texto
@@ -490,6 +568,8 @@ class Constructor:
             r['prerequisitos'], r['orden'] = [anterior['id']], anterior['orden'] + 1
             anterior = r
         self.datos['unidades'] = self.clases + [r for r, _ in self.refuerzos]
+        if 'es' not in self.apoyos:
+            solo_en(self.datos, False)
         escribir_json(self.archivo, self.datos)
         self.resumen([r for r, _ in self.refuerzos])
 
@@ -554,7 +634,8 @@ def main():
             nuevas[f'b{b:02d}'] = sorted(c.permitidas - previas)
             previas |= c.permitidas
             frases_p += [{'clave': k, 'bloque': f'b{b:02d}', 'frase': v['frase'],
-                          **({'conservar': v['mantener']} if v['mantener'] else {})}
+                          **({'conservar': v['mantener']} if v['mantener'] else {}),
+                          **({'rom': v['rom']} if v.get('rom') else {})}
                          for k, v in c.candidatas.items() if k not in variantes]
         nombre = f'n{nv}' if len(bloques) > 1 else f'n{nv}-b{bloques[0]:02d}'
         destino = AQUI / idioma / f'{nombre}.paquete.json'

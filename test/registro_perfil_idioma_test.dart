@@ -114,7 +114,7 @@ void main() {
   test('las cifras del curso salen de la ruta de cada idioma', () async {
     final ja = (await cargador.cargar('ja'))!;
     final en = (await cargador.cargar('en'))!;
-    expect(clasesPorNivel(ja), 50);
+    expect(clasesPorNivel(ja), 100);
     expect(clasesPorNivel(en), 100);
     // La prueba de nivel pide 27 de 30: el 90 %, no el 65 % del examen antiguo.
     expect(porcentajePruebaNivel, 90);
@@ -128,7 +128,7 @@ void main() {
       prefs: borrador('ja', 6),
     );
     expect(find.text('Paso 7 de 7'), findsOneWidget);
-    expect(find.textContaining('50 clases por nivel'), findsOneWidget);
+    expect(find.textContaining('100 clases por nivel'), findsOneWidget);
     expect(find.textContaining('(90 %)'), findsOneWidget);
     expect(find.textContaining('100 lecciones'), findsNothing);
     expect(find.textContaining('65 %'), findsNothing);
@@ -152,7 +152,7 @@ void main() {
     );
     expect(ubicado.nivel, 'n3');
     expect(ubicado.clase, 1);
-    expect(ubicado.total, 50);
+    expect(ubicado.total, 100);
   });
 
   testWidgets('perfil: nivel y clase actuales de la ruta, no del modelo de 100', (
@@ -173,10 +173,9 @@ void main() {
       },
     );
     expect(find.text('Nivel 3 · B1'), findsWidgets);
-    expect(find.text('1/50'), findsOneWidget);
+    expect(find.text('1/100'), findsOneWidget);
     expect(find.text('Clase actual'), findsOneWidget);
     expect(find.textContaining('Lección 100'), findsNothing);
-    expect(find.textContaining('/100'), findsNothing);
   });
 
   testWidgets('fuera de la web no se ofrece descargar el APK', (tester) async {
