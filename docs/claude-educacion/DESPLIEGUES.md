@@ -839,6 +839,7 @@ Pendiente: vincular Stripe en modo test (el usuario pega la clave en Panel → C
 ## Release: 20261022-edu-70-tutores-vivo (registro reconstruido)
 
 Desplegada el 2026-10-22 (15:36–23:53, hora de Ecuador) por otra sesión de Claude Code, que el usuario interrumpió antes de cerrarla: no se registró aquí y el lock quedó puesto. Lo que se ve en el servidor: web y APK 0.4.0+4 (tutores en vivo, Ana incluida), backend de tutores (`personajes.ts`, `ia.ts`, `voz.ts`, `llamada.ts`…) igual a HEAD salvo `config.ts` (propio de prod) y `routes/admin.ts` (sin el cambio del panel `b2ba68f`). Backup: `backups/20261022-edu-70-tutores-vivo/`. El lock huérfano se guardó en `backups/20261023-edu-71-100-clases/lock-huerfano-edu-70.txt`.
+Complemento de la sesión que lo desplegó: build desde `git archive 56eebb0` (sin el francés `965b5af`), `API_URL=https://onelingo.org/api`, APK firmado (SHA-1 `e3c8f4ad…`). Backend: `app.ts`, `lib/ia.ts`, `lib/situaciones.ts`, `lib/voz.ts`, `routes/voz.ts` reemplazados (iguales a `44b0ac4` antes) y `lib/personajes.ts`, `routes/llamada.ts` nuevos; `tsc --noEmit` limpio en prod antes de `pm2 restart onelingo-api`; `.env` sin cambios (sha). Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; K=backups/20261022-edu-70-tutores-vivo; cp $K/backend/src/app.ts backend/src/; cp $K/backend/src/lib/*.ts backend/src/lib/; cp $K/backend/src/routes/voz.ts backend/src/routes/; pm2 restart onelingo-api'` (la web la reemplazó edu-71).
 
 ## Release: 20261023-edu-71-100-clases
 
