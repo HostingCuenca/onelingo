@@ -51,6 +51,11 @@ NOMBRE = {
 }
 # Romanización bajo el texto: textoRom en completar y tokensRom en ordenar (listas paralelas).
 ROMANIZADOS = {'ru', 'zh', 'ja', 'ko'}
+# Escritura propia de cada curso romanizado. En N1–N4 todo texto con ella lleva romanización;
+# desde N5, solo el vocabulario (test/romanizacion_test.dart).
+ESCRITURA = {'ru': re.compile(r'[\u0400-\u04FF]'), 'zh': re.compile(r'[\u4e00-\u9fff]'),
+             'ja': re.compile(r'[\u3040-\u30ff\u4e00-\u9fff]'), 'ko': re.compile(r'[\uac00-\ud7af]')}
+NIVEL_MAX_ROM = 4
 UMBRAL = 0.9
 # La app no menciona Ecuador (mercado EE. UU. + Latinoamérica): ninguna variante lo introduce.
 PROHIBIDAS = {'ecuador', 'équateur', 'equador', 'ekuador', 'quito', 'cuenca', 'guayaquil', 'équatorien', 'équatorienne',
@@ -189,6 +194,7 @@ class Constructor:
             solo_en(self.datos, True)
         self.clases = [u for u in self.datos['unidades'] if es_clase(u)]
         self.romaniza = idioma in ROMANIZADOS
+        self.rom_obligatoria = self.romaniza and nv <= NIVEL_MAX_ROM
         self.rom_de = {x['texto']: x['rom'] for u in self.clases for p in u['pasos']
                        for x in (p['items'] if p['tipo'] == 'ejemplos' else p.get('dialogo') or [])
                        if x.get('rom')}
@@ -327,8 +333,11 @@ class Constructor:
         independiente = self.endurecidos(u, 'practica_independiente')[:3]
         largas = sorted((f for f in pool if f[0] not in usadas and len(palabras(f[0])) >= 4),
                         key=lambda f: -len(palabras(f[0])))
-        if largas:
-            independiente.append(self.ordenar_de(*largas[0]))
+        for f in largas:  # en N1–N4 romanizado, la primera cuya romanización cuadra palabra por palabra
+            o = self.ordenar_de(*f)
+            if not self.falta_rom(o):
+                independiente.append(o)
+                break
         if not guiada:  # la práctica guiada es obligatoria
             guiada = [{**independiente.pop(0), 'pista': pista_err}] if independiente else []
 
@@ -456,10 +465,17 @@ class Constructor:
         return n
 
     # ---- variación con IA ----
-    def aceptar(self, original, var, mantener, extra):
+    def aceptar(self, original, var, mantener, extra, cand=None):
         texto = unir((var or {}).get('variante', '').strip(), mantener, self.idioma)
         if not texto or texto == original:
             return 'sin cambio'
+        if cand and (cand.get('rom') or (self.rom_obligatoria and cand['formato'] in ('completar', 'ordenar'))):
+            # la original lleva (o debe llevar) romanización: la variante también
+            rom = (var.get('rom') or '').strip()
+            if cand['formato'] == 'completar' and rom.count('___') != 1:
+                return 'sin romanización'
+            if cand['formato'] == 'ordenar' and len(fichas(rom)) != len(fichas(texto)):
+                return 'sin romanización'
         if not all((var.get(l) or '').strip() for l in self.apoyos):
             return 'sin traducción'
         if (set(palabras(texto)) - set(palabras(original))) & PROHIBIDAS:
@@ -476,6 +492,26 @@ class Constructor:
         if texto in self.frases_originales:
             return 'repite otra frase del bloque'
         return None
+
+    def falta_rom(self, it):
+        """En N1–N4 de un curso romanizado: ¿algún texto del ejercicio quedó sin su romanización?"""
+        if not self.rom_obligatoria:
+            return False
+        hay = ESCRITURA[self.idioma].search
+        if hay(it.get('texto') or '') and not it.get('textoRom'):
+            return True
+        if hay(it.get('pregunta') or '') and not it.get('preguntaRom'):
+            return True
+        toks = it.get('tokens') or []
+        if any(hay(t) for t in toks) and len(it.get('tokensRom') or []) != len(toks):
+            return True
+        ops, oro = it.get('opciones') or [], it.get('opcionesRom') or []
+        if any(hay(o.get('meta') or '' if isinstance(o, dict) else o) and not (i < len(oro) and oro[i])
+               for i, o in enumerate(ops)):
+            return True
+        pares = it.get('pares') or []
+        return bool(pares) and any(hay(json.dumps(x, ensure_ascii=False)) for x in pares) \
+            and len(it.get('paresRom') or []) != len(pares)
 
     def aplicar(self, rid, it, var):
         texto = unir(var['variante'].strip(), None, self.idioma)
@@ -520,7 +556,7 @@ class Constructor:
                     if clave not in self.candidatas:
                         continue
                     c = self.candidatas[clave]
-                    motivo = self.aceptar(c['frase'], variantes.get(clave), c['mantener'], extra)
+                    motivo = self.aceptar(c['frase'], variantes.get(clave), c['mantener'], extra, c)
                     if motivo:
                         if clave in variantes:
                             self.informe['rechazadas'][motivo] = self.informe['rechazadas'].get(motivo, 0) + 1
@@ -530,6 +566,16 @@ class Constructor:
                         self.informe['variadas'] += 1
                 # Fuera los ejercicios que quedaron idénticos a uno de las clases, si sobra material.
                 minimo = {'practica_guiada': 1, 'practica_independiente': 2, 'situacion': 1, 'evaluacion': 4}[p['tipo']]
+                # N1–N4 romanizado: fuera los que quedaron sin romanización (si sobra material).
+                for it in list(p['items']):
+                    if not self.falta_rom(it):
+                        continue
+                    resto = [x for x in p['items'] if x is not it]
+                    if len(resto) >= minimo and (p['tipo'] != 'evaluacion' or len({x['formato'] for x in resto}) >= 2):
+                        p['items'].remove(it)
+                        self.informe['sin_rom_quitados'] = self.informe.get('sin_rom_quitados', 0) + 1
+                    else:
+                        sys.exit(f"{r['id']}/{it['id']}: sin romanización y no sobra material para quitarlo")
                 for it in list(p['items']):
                     sin_id = {k: v for k, v in it.items() if k != 'id'}
                     if p['tipo'] == 'evaluacion' and len({x['formato'] for x in p['items'] if x is not it}) < 2:

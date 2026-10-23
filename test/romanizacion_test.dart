@@ -199,7 +199,7 @@ void main() {
       for (final u in _rutaPublicada('ru'))
         if ((u.nivelInterno ?? 0) >= 5) u,
     ];
-    expect(altas, hasLength(300));
+    expect(altas, hasLength(600)); // N5–N10: 6 × 100 clases (50 + 50 de refuerzo)
     for (final u in altas) {
       expect(u.vocabulario, isNotEmpty, reason: u.id);
       for (final v in u.vocabulario) {
@@ -218,7 +218,7 @@ void main() {
       for (final u in _rutaPublicada('ko'))
         if ((u.nivelInterno ?? 0) >= 5) u,
     ];
-    expect(altas, hasLength(300));
+    expect(altas, hasLength(600)); // N5–N10: 6 × 100 clases (50 + 50 de refuerzo)
     for (final u in altas) {
       expect(u.vocabulario, isNotEmpty, reason: u.id);
       for (final v in u.vocabulario) {
@@ -237,7 +237,7 @@ void main() {
       for (final u in _rutaPublicada('zh'))
         if ((u.nivelInterno ?? 0) >= 5) u,
     ];
-    expect(altas, hasLength(300));
+    expect(altas, hasLength(600)); // N5–N10: 6 × 100 clases (50 + 50 de refuerzo)
     for (final u in altas) {
       expect(u.vocabulario, isNotEmpty, reason: u.id);
       for (final v in u.vocabulario) {
@@ -256,7 +256,7 @@ void main() {
       for (final u in _rutaPublicada('ja'))
         if ((u.nivelInterno ?? 0) >= 5) u,
     ];
-    expect(altas, hasLength(300));
+    expect(altas, hasLength(600)); // N5–N10: 6 × 100 clases (50 + 50 de refuerzo)
     for (final u in altas) {
       expect(u.vocabulario, isNotEmpty, reason: u.id);
       for (final v in u.vocabulario) {

@@ -445,12 +445,15 @@ def procesar(idioma, existente, revisar=False):
         uid = u.get('id')
         lineas = collections.Counter(l['hablante'] for l in dialogo)
         presentes = set(lineas)
-        clase = {h: r for h, r in (existente.get(uid) or {}).items() if h in presentes}
+        # Un refuerzo (rNN) hereda lo decidido para su clase (cNN): mismos personajes.
+        base = u.get('refuerzoDe')
+        clase = {h: r for h, r in (existente.get(uid) or existente.get(base) or {}).items() if h in presentes}
         informe['conservadas'] += len(clase)
         generos = {}
         for h in sorted(presentes - set(global_) - set(clase), key=lambda x: (-lineas[x], x)):
-            if h in revisados.get(uid, {}):
-                g, pr = revisados[uid][h], [('?', 0, 'REVISADOS')]
+            rev = revisados.get(uid) or revisados.get(base) or {}
+            if h in rev:
+                g, pr = rev[h], [('?', 0, 'REVISADOS')]
                 informe['revisadas'] += 1
             else:
                 g, pr = inferir(h, u, p, dialogo, global_)
