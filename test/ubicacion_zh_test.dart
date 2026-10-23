@@ -206,9 +206,9 @@ void main() {
     final ruta = (await CargadorRuta().cargar('zh'))!;
     expect(nivelesPublicados(ruta), {for (var n = 1; n <= 10; n++) n});
     expect(nivelMaximoUbicacion(banco, publicados: nivelesPublicados(ruta)), 10);
-    // Cada nivel nuevo (N5–N10) trae sus 50 clases.
+    // Cada nivel nuevo (N5–N10) trae sus 100 clases (50 + 50 de refuerzo).
     for (var n = 5; n <= 10; n++) {
-      expect(ruta.delNivel('n$n'), hasLength(50), reason: 'N$n');
+      expect(ruta.delNivel('n$n'), hasLength(100), reason: 'N$n');
     }
   });
 
