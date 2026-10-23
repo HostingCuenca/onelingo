@@ -53,10 +53,10 @@ Si una variante falla, queda la frase original: no hay reintentos ni revisor por
 | 3 | Portugués (pt) | **completo** N1–N10 (22-10), sin desplegar | ~2,3 M tokens; curso con historia (Camila en Recife): los agentes cambiaban nombres, ciudades y cifras, así que se sumaron las reglas 6d/6e y un filtro automático; quedan 2.402 variantes tras quitar ~20 % en filtro y revisión |
 | 4 | Italiano (it) | **completo** N1–N10 (22-10), sin desplegar | ~1,8 M tokens; con las reglas 6d/6e los agentes casi no tocaron la historia: 1.816 variantes, 6 % quitadas en filtro y revisión |
 | 5 | Español (es) | **completo** N1–N10 (22-10), sin desplegar | ~2 M tokens; apoyo solo en inglés (el constructor copia `en` a `es` mientras arma y lo quita al escribir); historia en Quito: los agentes omiten esas frases; 2.292 variantes, ~35 quitadas en revisión |
-| 6 | Ruso (ru) | en curso | constructor adaptado a `*Rom` (22-10): `textoRom` y `tokensRom` se arman con la romanización de ejemplos, diálogo y vocabulario; las variantes traen su `rom` (regla 8b); si no cuadra palabra por palabra, el ejercicio queda sin romanización |
-| 7 | Chino (zh) | pendiente | `*Rom` (pinyin). El texto del curso ya viene separado por palabras, así que «ordenar» funciona igual |
-| 8 | Japonés (ja) | pendiente | `*Rom` (romaji). «ordenar» igual que en chino |
-| 9 | Coreano (ko) | pendiente | `*Rom`. El validador ko rechaza conjugaciones válidas, así que quedarán más frases originales (Kiwi queda para después) |
+| 6 | Ruso (ru) | **completo** N1–N10 (22-10), sin desplegar | 1.439 variantes, 18 quitadas en revisión; constructor adaptado a `*Rom`: `textoRom` y `tokensRom` se arman con la romanización de ejemplos, diálogo y vocabulario; las variantes traen su `rom` (regla 8b); si no cuadra palabra por palabra, el ejercicio queda sin romanización |
+| 7 | Chino (zh) | **completo** N1–N10 (22-10), sin desplegar | 2.048 variantes, 17 quitadas en revisión; `*Rom` (pinyin). El texto del curso ya viene separado por palabras, así que «ordenar» funciona igual |
+| 8 | Japonés (ja) | **completo** N1–N10 (22-10), sin desplegar | 1.964 variantes, 15 quitadas en revisión; `*Rom` (romaji). «ordenar» igual que en chino |
+| 9 | Coreano (ko) | **completo** N1–N10 (22-10), sin desplegar | 1.717 variantes, 24 quitadas en revisión; `*Rom`. El validador ko rechaza conjugaciones válidas, así que quedarán más frases originales (Kiwi queda para después) |
 
 **Por idioma:**
 1. Los 10 niveles, de 3 en 3 agentes en paralelo.
