@@ -37,6 +37,7 @@ Actualizado: 2026-10-03 (portugués reiniciado; planificación de Nivel 0 y Fund
 | Prueba de cada nivel | ítems de evaluación de la propia ruta | `itemsPruebaNivel`, `nivelSuperado`, `nivelPorPruebas` en `dominio.dart` | `test/prueba_nivel_test.dart` |
 | Situaciones (50 × 3 tramos) | `assets/contenido/situaciones/catalogo.json` (lista) + `assets/contenido/<idioma>/situaciones.json` (contenido por tramo). **Generados, no editar:** `lib/core/content/catalogo_situaciones.g.dart`, `web/avatar/topics.json`, `backend/src/content/situaciones-<idioma>.json` | `core/content/situaciones.dart`, `backend/src/lib/situaciones.ts` | `tools/contenido/validar_situaciones.py`, `generar_situaciones.py --comprobar`, `test/situaciones_v2_test.dart`, `backend/test/situaciones.test.ts` |
 | Léxico único (índice) | No es otra fuente: se calcula desde la ruta (pasos de vocabulario), las situaciones y el Nivel 0 | `core/lexico/lexico.dart` (`lexicoProvider`, `misPalabrasProvider`, repaso por palabra en `practicas['lexico:<idioma>']`) | `test/lexico_test.dart` |
+| Imágenes de vocabulario | `tools/imagenes/biblioteca.json` (895 conceptos, uno por imagen, comunes a los 10 idiomas; encargo en `ENCARGO.md`) → `assets/img/vocab/<archivo>.webp` (448 px, `revisar.py --exportar`). **Generado:** `assets/contenido/<idioma>/imagenes.json` (clave léxica → archivo, `tools/imagenes/mapear.py`) | `core/lexico/imagenes.dart` (`imagenesVocabProvider`, distractores por familia); tarjetas de vocabulario, «Mis palabras» y «Escucha y elige la imagen» en el repaso | `mapear.py --comprobar`, `test/imagenes_vocab_test.dart` |
 | Verbos («Mis verbos») | `tools/contenido/verbos/verbos-<idioma>.json` (revisada). **Generado:** `assets/contenido/<idioma>/verbos.json`, con tablas y nivel tomado de la ruta | `core/lexico/verbos.dart`; `tools/contenido/verbos/generar_verbos.py` | `generar_verbos.py --comprobar`, `test/lexico_test.dart` |
 | Lecturas y escuchas | `assets/contenido/en/{reading,listening}_units.json` | `core/content/learning_units.dart` | `test/lectura_escucha_test.dart` |
 | Guías de gramática | `lib/core/content/grammar_guides.dart` | — | `test/guias_gramatica_test.dart` |
@@ -71,7 +72,7 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
   - los datos se muestran con `trDato`;
   - el contenido lleva su apoyo en el propio JSON (`TextoApoyo`), no `tr()`.
 - **Textos:** español neutro (tú), sin jerga interna. Prohibido: «nivel interno», «orientativo», «evidencia», «no certifica», «comprobación guiada», «banco piloto». El nivel se muestra como «Nivel N · A2»; nunca se pide.
-- **Imágenes:** no se generan. Se buscan con licencia de uso comercial y se registran sus créditos.
+- **Imágenes:** las fotos se buscan con licencia de uso comercial y se registran sus créditos (`assets/img/fotos/CREDITOS.md`). Las ilustraciones propias (situaciones y vocabulario) las genera el cliente con IA y se integran con sus herramientas; no las genera un agente.
 
 ## 6. Hoja de ruta (acordada 2026-10-01)
 

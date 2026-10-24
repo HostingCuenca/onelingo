@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
 export 'language_flag.dart';
+export 'imagen_vocab.dart';
 export 'primary_button.dart';
 import '../../core/models/models.dart';
 

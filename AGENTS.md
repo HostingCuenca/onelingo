@@ -20,7 +20,7 @@ Este repositorio es la fuente de verdad. Lee en este orden y no más allá de lo
   - sin jerga interna;
   - nunca dos personajes a la vez.
   - `test/arquitectura_test.dart` lo vigila: si falla, corrige el código, no la prueba.
-- **Imágenes:** no se generan. Se buscan con licencia de uso comercial y se registran sus créditos.
+- **Imágenes:** las fotos se buscan con licencia de uso comercial y se registran sus créditos (`assets/img/fotos/CREDITOS.md`). Las ilustraciones propias (situaciones y vocabulario) las genera el cliente con IA y se integran con sus herramientas; no las genera un agente.
 - **Secretos:** nunca copies, muestres ni reemplaces `backend/.env`, `tools/contenido/.env`, claves SSH ni tokens.
 - **Producción:**
   - No reinicies Apache ni la API (PM2 `onelingo-api`) sin autorización expresa para ese despliegue.

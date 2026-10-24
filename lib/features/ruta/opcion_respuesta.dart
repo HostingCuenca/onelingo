@@ -19,8 +19,14 @@ class OpcionRespuesta extends StatefulWidget {
     required this.onTap,
     this.compacta = false,
     this.rom,
+    this.imagen,
   });
+
+  /// Con [imagen], solo se ve la imagen y el texto queda para el lector de pantalla.
   final String texto;
+
+  /// Ilustración cuadrada en lugar del texto («Escucha y elige la imagen»).
+  final String? imagen;
 
   /// Romanización pequeña y gris bajo el texto (ru, ko, ja, zh).
   final String? rom;
@@ -115,7 +121,9 @@ class _OpcionRespuestaState extends State<OpcionRespuesta>
       padding: EdgeInsets.only(bottom: hundida ? 1 : 4),
       child: Container(
         width: widget.compacta ? null : double.infinity,
-        padding: widget.compacta
+        padding: widget.imagen != null
+            ? const EdgeInsets.all(6)
+            : widget.compacta
             ? const EdgeInsets.symmetric(horizontal: 14, vertical: 10)
             : const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
         decoration: BoxDecoration(
@@ -123,7 +131,19 @@ class _OpcionRespuestaState extends State<OpcionRespuesta>
           borderRadius: BorderRadius.circular(radio),
           border: Border.all(color: borde, width: 2),
         ),
-        child: widget.rom == null
+        child: widget.imagen != null
+            ? AspectRatio(
+                aspectRatio: 1,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(radio - 6),
+                  child: Image.asset(
+                    widget.imagen!,
+                    fit: BoxFit.cover,
+                    semanticLabel: widget.texto,
+                  ),
+                ),
+              )
+            : widget.rom == null
             ? textoPrincipal
             : Column(
                 mainAxisSize: MainAxisSize.min,

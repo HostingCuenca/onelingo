@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
+import '../../core/lexico/imagenes.dart';
 import '../../core/lexico/lexico.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
@@ -36,6 +37,9 @@ class _MisPalabrasScreenState extends ConsumerState<MisPalabrasScreen> {
   Widget build(BuildContext context) {
     final s = ref.watch(progressProvider);
     final mias = ref.watch(misPalabrasProvider);
+    final imagenes =
+        ref.watch(imagenesVocabProvider(s.idiomaMeta)).valueOrNull ??
+        ImagenesVocab.vacio;
     return Scaffold(
       appBar: AppBar(title: Text(tr('Mis palabras'))),
       body: Movil(
@@ -92,6 +96,7 @@ class _MisPalabrasScreenState extends ConsumerState<MisPalabrasScreen> {
                           : _FilaPalabra(
                               entrada: f as EntradaLexico,
                               caja: estado[f.clave]?.caja,
+                              imagen: imagenes.de(f.texto),
                               onOir: () => VozNube.instancia.reproducir(
                                 f.texto,
                                 s.idiomaMeta,
@@ -282,9 +287,11 @@ class _FilaPalabra extends StatelessWidget {
     required this.entrada,
     required this.caja,
     required this.onOir,
+    this.imagen,
   });
   final EntradaLexico entrada;
   final int? caja;
+  final String? imagen;
   final VoidCallback onOir;
 
   @override
@@ -296,8 +303,14 @@ class _FilaPalabra extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       child: Row(
         children: [
-          const Icon(Icons.volume_up_rounded, color: OL.morado, size: 20),
-          const SizedBox(width: 10),
+          if (imagen != null)
+            ImagenVocab(imagen!, lado: 44, radio: 10)
+          else
+            const SizedBox(
+              width: 44,
+              child: Icon(Icons.volume_up_rounded, color: OL.morado, size: 20),
+            ),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

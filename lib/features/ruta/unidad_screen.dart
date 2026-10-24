@@ -13,6 +13,7 @@ import '../../core/aprendizaje/dominio.dart';
 import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/elenco.dart';
+import '../../core/lexico/imagenes.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/widgets.dart';
@@ -462,6 +463,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
   /// Romanización (ru, ko, ja, zh): visible en Fundamentos, N1 y N2; desde N3
   /// oculta y se abre con «Ver romanización» (vale para toda la clase).
   late bool verRom = romVisiblePorDefecto(u.nivelInterno);
+  var imagenes = ImagenesVocab.vacio;
   bool get romOcultable => !romVisiblePorDefecto(u.nivelInterno);
   void alternarRom() => setState(() => verRom = !verRom);
 
@@ -610,6 +612,9 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
   @override
   Widget build(BuildContext context) {
     ref.watch(progressProvider);
+    imagenes =
+        ref.watch(imagenesVocabProvider(u.idioma)).valueOrNull ??
+        ImagenesVocab.vacio;
     final pantalla = pantallas[indice];
     final nombreTipo = switch (pantalla.paso.tipo) {
       TipoPaso.explicacion ||
@@ -871,7 +876,15 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         for (final id in p.refs) {
           final v = u.vocablo(id);
           if (v == null) continue;
-          vista.add(_tarjetaFrase(v.texto, v.rom, t(v.traduccion), t(v.nota)));
+          vista.add(
+            _tarjetaFrase(
+              v.texto,
+              v.rom,
+              t(v.traduccion),
+              t(v.nota),
+              imagen: imagenes.de(v.texto),
+            ),
+          );
         }
       case TipoPaso.ejemplos:
         for (final f in p.frases) {
@@ -1040,6 +1053,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     String? hablanteRom,
     List<String?>? dialogo,
     Color color = OL.blanco,
+    String? imagen,
   }) => Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: Tarjeta(
@@ -1049,6 +1063,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       onTap: () => _escucharLinea(texto, hablante, dialogo),
       child: Row(
         children: [
+          if (imagen != null) ...[
+            ImagenVocab(imagen, lado: 76),
+            const SizedBox(width: 14),
+          ],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

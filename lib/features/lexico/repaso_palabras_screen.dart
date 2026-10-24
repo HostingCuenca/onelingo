@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/efectos.dart';
+import '../../core/lexico/imagenes.dart';
 import '../../core/lexico/lexico.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
@@ -15,15 +16,36 @@ import '../ruta/opcion_respuesta.dart';
 import '../../core/i18n/i18n.dart';
 
 /// Formas de preguntar una palabra; se alternan dentro de la sesión.
-enum FormaPregunta { significado, inversa, escucha }
+/// `imagen`: escucha la palabra y elige su ilustración entre cuatro.
+enum FormaPregunta { significado, inversa, escucha, imagen }
 
 class PreguntaPalabra {
   const PreguntaPalabra(this.entrada, this.forma, this.opciones, this.correcta);
   final EntradaLexico entrada;
   final FormaPregunta forma;
+
+  /// Textos o, en la forma `imagen`, rutas de las ilustraciones.
   final List<String> opciones;
   final int correcta;
-  bool get escucha => forma == FormaPregunta.escucha;
+  bool get escucha =>
+      forma == FormaPregunta.escucha || forma == FormaPregunta.imagen;
+}
+
+/// «Escucha y elige la imagen»: la de la palabra y tres de otras familias
+/// (que no se confundan a la vista); null si no hay con qué armarla.
+PreguntaPalabra? preguntaImagen(
+  EntradaLexico e,
+  ImagenesVocab imagenes,
+  Random rnd,
+) {
+  final propia = imagenes.porClave[e.clave];
+  if (propia == null) return null;
+  final otras = distractoresImagen(propia, imagenes.archivos, rnd);
+  if (otras.length < 3) return null;
+  final opciones = [propia, ...otras]..shuffle(rnd);
+  return PreguntaPalabra(e, FormaPregunta.imagen, [
+    for (final a in opciones) rutaImagenVocab(a),
+  ], opciones.indexOf(propia));
 }
 
 /// Pregunta de una palabra con 3 distractores del mismo idioma, preferidos de
@@ -82,23 +104,34 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
 
   String get _idioma => ref.read(progressProvider).idiomaMeta;
 
-  void _preparar(List<EntradaLexico> mias, LexicoIndice lexico) {
+  void _preparar(
+    List<EntradaLexico> mias,
+    LexicoIndice lexico,
+    ImagenesVocab imagenes,
+  ) {
     final s = ref.read(progressProvider);
+    // Con lector de pantalla las imágenes no se distinguen: esa forma no se usa.
+    final conImagen = !MediaQuery.accessibleNavigationOf(context);
     final sesion = seleccionarRepaso(
       mias,
       repasoLexico(s.practicas, s.idiomaMeta),
       DateTime.now(),
     );
     final banco = mias.length >= 8 ? mias : lexico.entradas.values.toList();
-    cola = [
-      for (var i = 0; i < sesion.length; i++)
-        preguntaPalabra(
-          sesion[i],
-          FormaPregunta.values[i % FormaPregunta.values.length],
-          banco,
-          rnd,
-        ),
-    ];
+    PreguntaPalabra pregunta(int i) {
+      final forma = FormaPregunta.values[i % FormaPregunta.values.length];
+      return (forma == FormaPregunta.imagen && conImagen
+              ? preguntaImagen(sesion[i], imagenes, rnd)
+              : null) ??
+          preguntaPalabra(
+            sesion[i],
+            forma == FormaPregunta.imagen ? FormaPregunta.escucha : forma,
+            banco,
+            rnd,
+          );
+    }
+
+    cola = [for (var i = 0; i < sesion.length; i++) pregunta(i)];
     total = sesion.length;
   }
 
@@ -146,7 +179,10 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
   Widget build(BuildContext context) {
     final mias = ref.watch(misPalabrasProvider).valueOrNull;
     final lexico = ref.watch(lexicoProvider).valueOrNull;
-    if (cola == null && mias != null && lexico != null) _preparar(mias, lexico);
+    final imagenes = ref.watch(imagenesVocabProvider(_idioma)).valueOrNull;
+    if (cola == null && mias != null && lexico != null && imagenes != null) {
+      _preparar(mias, lexico, imagenes);
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(tr('Repaso de palabras')),
@@ -179,7 +215,19 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
         'palabra': q.entrada.traduccion,
       }),
       FormaPregunta.escucha => tr('Escucha. ¿Qué significa?'),
+      FormaPregunta.imagen => tr('Escucha y elige la imagen'),
     };
+    EstadoOpcion estado(int i) => !comprobada
+        ? (elegida == i ? EstadoOpcion.seleccionada : EstadoOpcion.normal)
+        : i == q.correcta
+        ? EstadoOpcion.correcta
+        : i == elegida
+        ? EstadoOpcion.incorrecta
+        : EstadoOpcion.normal;
+    final imagen = ref
+        .watch(imagenesVocabProvider(_idioma))
+        .valueOrNull
+        ?.de(q.entrada.texto);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -231,20 +279,35 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
                 ),
               ],
               const SizedBox(height: 16),
-              for (var i = 0; i < q.opciones.length; i++)
-                OpcionRespuesta(
-                  texto: q.opciones[i],
-                  estado: !comprobada
-                      ? (elegida == i
-                            ? EstadoOpcion.seleccionada
-                            : EstadoOpcion.normal)
-                      : i == q.correcta
-                      ? EstadoOpcion.correcta
-                      : i == elegida
-                      ? EstadoOpcion.incorrecta
-                      : EstadoOpcion.normal,
-                  onTap: comprobada ? null : () => setState(() => elegida = i),
-                ),
+              if (q.forma == FormaPregunta.imagen)
+                GridView.count(
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 2,
+                  childAspectRatio: .9,
+                  children: [
+                    for (var i = 0; i < q.opciones.length; i++)
+                      OpcionRespuesta(
+                        texto: tr('Imagen {n}', {'n': i + 1}),
+                        imagen: q.opciones[i],
+                        estado: estado(i),
+                        onTap: comprobada
+                            ? null
+                            : () => setState(() => elegida = i),
+                      ),
+                  ],
+                )
+              else
+                for (var i = 0; i < q.opciones.length; i++)
+                  OpcionRespuesta(
+                    texto: q.opciones[i],
+                    estado: estado(i),
+                    onTap: comprobada
+                        ? null
+                        : () => setState(() => elegida = i),
+                  ),
             ],
           ),
         ),
@@ -255,10 +318,20 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
               child: AnswerFeedback(
                 correct: bien,
                 title: bien ? tr('¡Bien!') : tr('Casi'),
-                child: Text(
-                  '${q.entrada.texto} = ${q.entrada.traduccion}'
-                  '${q.entrada.ejemplo == null ? '' : '\n${q.entrada.ejemplo}'}',
-                  style: const TextStyle(height: 1.4),
+                child: Row(
+                  children: [
+                    if (imagen != null) ...[
+                      ImagenVocab(imagen, lado: 56, radio: 12),
+                      const SizedBox(width: 12),
+                    ],
+                    Expanded(
+                      child: Text(
+                        '${q.entrada.texto} = ${q.entrada.traduccion}'
+                        '${q.entrada.ejemplo == null ? '' : '\n${q.entrada.ejemplo}'}',
+                        style: const TextStyle(height: 1.4),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

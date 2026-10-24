@@ -5,6 +5,7 @@ Uso:
   python3 tools/imagenes/revisar.py                  # avance por lote, faltantes y nombres desconocidos
   python3 tools/imagenes/revisar.py --renombrar 3    # ChatGPT web: work/imagenes-vocab/lote-003/*.png
                                                      #   → originales/<archivo>.png por orden de descarga
+  python3 tools/imagenes/revisar.py --exportar       # originales → assets/img/vocab/<archivo>.webp (448 px)
 """
 import json
 import pathlib
@@ -15,13 +16,16 @@ from PIL import Image
 RAIZ = pathlib.Path(__file__).resolve().parents[2]
 BASE = RAIZ / 'work/imagenes-vocab'
 ORIG = BASE / 'originales'
+APP = RAIZ / 'assets/img/vocab'
+LADO, CALIDAD = 448, 75  # nítida en la tarjeta (≤ 150 dp a 3x) y ~20 KB por imagen
+EXT = ('.png', '.webp', '.jpg', '.jpeg')
 BIBLIO = json.loads((RAIZ / 'tools/imagenes/biblioteca.json').read_text())['imagenes']
 
 
 def renombrar(lote):
     carpeta = BASE / f'lote-{lote:03d}'
     esperadas = [i for i in BIBLIO if i['lote'] == lote]
-    hechas = {p.stem for p in ORIG.glob('*.png')}
+    hechas = {p.stem for p in ORIG.iterdir() if p.suffix.lower() in EXT}
     pendientes = [i for i in esperadas if i['archivo'] not in hechas]
     fotos = sorted((p for p in carpeta.iterdir() if p.suffix.lower() in ('.png', '.jpg', '.jpeg', '.webp')), key=lambda p: p.stat().st_mtime)
     if len(fotos) != len(pendientes):
@@ -32,7 +36,7 @@ def renombrar(lote):
 
 
 def revisar():
-    archivos = {p.stem: p for p in ORIG.glob('*.png')}
+    archivos = {p.stem: p for p in ORIG.iterdir() if p.suffix.lower() in EXT}
     conocidas = {i['archivo'] for i in BIBLIO}
     por_lote = {}
     for i in BIBLIO:
@@ -54,9 +58,22 @@ def revisar():
     print(f'total: {total}/{len(BIBLIO)}')
 
 
+def exportar():
+    APP.mkdir(parents=True, exist_ok=True)
+    conocidas = {i['archivo'] for i in BIBLIO}
+    for p in sorted(ORIG.iterdir()):
+        if p.suffix.lower() in EXT and p.stem in conocidas:
+            im = Image.open(p).convert('RGB').resize((LADO, LADO), Image.LANCZOS)
+            im.save(APP / f'{p.stem}.webp', 'WEBP', quality=CALIDAD, method=6)
+    total = sum(f.stat().st_size for f in APP.glob('*.webp'))
+    print(f'{len(list(APP.glob("*.webp")))} imágenes en {APP.relative_to(RAIZ)} ({total / 1e6:.1f} MB)')
+
+
 if __name__ == '__main__':
     ORIG.mkdir(parents=True, exist_ok=True)
     if sys.argv[1:2] == ['--renombrar']:
         renombrar(int(sys.argv[2]))
+    elif sys.argv[1:2] == ['--exportar']:
+        exportar()
     else:
         revisar()
