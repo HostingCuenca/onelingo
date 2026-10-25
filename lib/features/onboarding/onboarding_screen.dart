@@ -184,6 +184,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       _persistir();
       return;
     }
+    // Sin prueba esta vez (p. ej. volvió y eligió «desde cero»): no vale la
+    // de antes.
+    if (paso == 5) diagnostico = null;
     if (paso < 6) {
       setState(() => paso++);
       _persistir();
@@ -252,6 +255,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   duration: MediaQuery.disableAnimationsOf(context)
                       ? Duration.zero
                       : const Duration(milliseconds: 260),
+                  // Arriba, no centrado: los pasos cortos (sector, objetivos)
+                  // dejaban un hueco grande sobre las opciones.
+                  layoutBuilder: (actual, anteriores) => Stack(
+                    alignment: Alignment.topCenter,
+                    children: [...anteriores, ?actual],
+                  ),
                   transitionBuilder: (child, animation) => FadeTransition(
                     opacity: animation,
                     child: SlideTransition(

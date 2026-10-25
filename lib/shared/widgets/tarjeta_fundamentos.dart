@@ -49,8 +49,15 @@ class TarjetaFundamentos extends ConsumerWidget {
           Text(
             completo
                 ? tr('Fundamentos completados')
-                : aprobadas == 0 && siguiente?.orden == 0
+                : nivel == 'f0' && aprobadas == 0 && siguiente?.orden == 0
                 ? tr('Empieza desde cero')
+                // Ubicado en N3 sin haber abierto una clase: «Continuar»
+                // sonaba a algo empezado.
+                : aprobadas == 0 &&
+                      estados?[siguiente?.id]?.estado == EstadoUnidad.disponible
+                ? tr('Empezar: {titulo}', {
+                    'titulo': siguiente?.titulo.en(cadena) ?? tr('Fundamentos'),
+                  })
                 : tr('Continuar: {titulo}', {
                     'titulo': siguiente?.titulo.en(cadena) ?? tr('Fundamentos'),
                   }),

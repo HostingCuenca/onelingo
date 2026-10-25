@@ -86,6 +86,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   void dispose() {
     _chatClient?.close();
+    input.dispose();
+    scroll.dispose();
     Oido.instancia.cancelar();
     Voz.instancia.parar();
     super.dispose();
@@ -455,7 +457,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/practicar'),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -686,15 +689,16 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         : tr('Grabar respuesta'),
                     style: IconButton.styleFrom(
                       backgroundColor: escuchando ? OL.rojo : color,
+                      foregroundColor: OL.blanco,
+                      // Deshabilitado: el icono blanco sobre el gris claro de M3 no se veía.
+                      disabledBackgroundColor: OL.grisClaro,
+                      disabledForegroundColor: OL.gris,
                       fixedSize: const Size(48, 48),
                     ),
                     onPressed: pensando || transcribiendo
                         ? null
                         : _hablarAlTutor,
-                    icon: Icon(
-                      escuchando ? Icons.stop : Icons.mic,
-                      color: OL.blanco,
-                    ),
+                    icon: Icon(escuchando ? Icons.stop : Icons.mic),
                   ),
                   const SizedBox(width: 10),
                   Expanded(

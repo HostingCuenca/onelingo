@@ -17,6 +17,36 @@ enum EstadoUnidad {
   bool alMenos(EstadoUnidad otro) => index >= otro.index;
 }
 
+/// Área de un ejercicio para el perfil y «Mis errores»: vocabulario,
+/// gramatica, comprension, listening o escritura. Casi todas las clases
+/// listan «vocabulario» primero, así que la primera habilidad de la unidad
+/// no sirve: decide el formato y, si no basta, lo que trabaja la unidad.
+String areaDeItem(UnidadRuta u, Item i) {
+  final hs = {
+    for (final h in u.habilidades)
+      h.toLowerCase().replaceAll('á', 'a').replaceAll('ó', 'o'),
+  };
+  switch (i.formato) {
+    case FormatoItem.escuchar:
+      return 'listening';
+    case FormatoItem.escribir:
+      return 'escritura';
+    case FormatoItem.relacionar:
+      return 'vocabulario';
+    case FormatoItem.completar || FormatoItem.ordenar:
+      return hs.contains('gramatica') ? 'gramatica' : 'vocabulario';
+    case FormatoItem.elegir:
+      if ((i.texto ?? '').trim().isNotEmpty && hs.contains('lectura')) {
+        return 'comprension';
+      }
+      return hs.contains('vocabulario')
+          ? 'vocabulario'
+          : hs.contains('gramatica')
+          ? 'gramatica'
+          : 'comprension';
+  }
+}
+
 /// Claves de evidencia en `ProgressState.practicas`.
 abstract final class ClaveRuta {
   static String item(String unidad, String paso, String item) =>
@@ -365,7 +395,9 @@ List<Item> itemsPruebaNivel(RutaCargada ruta, String nivel, Random rnd) {
     final candidatos = [
       for (final u in unidades.sublist(desde, hasta))
         for (final (_, i) in u.itemsDe(TipoPaso.evaluacion))
-          if (_formatosPrueba.contains(i.formato)) i,
+          // La escritura abierta no se corrige (basta llegar a las palabras):
+          // en la prueba daba el punto con cualquier texto.
+          if (_formatosPrueba.contains(i.formato) && !i.abierta) i,
     ];
     if (candidatos.isEmpty) continue;
     final turno = _turnosPrueba[t % _turnosPrueba.length];

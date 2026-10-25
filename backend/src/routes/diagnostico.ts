@@ -15,7 +15,7 @@ const ESQUEMA = {
     puntuacion: { type: 'number', description: 'Nivel de escritura estimado de 1 a 10 (1-2 = A1, 3-4 = A2, 5-6 = B1, 7-8 = B2, 9-10 = C1)' },
     gramatica: { type: 'number' }, vocabulario: { type: 'number' }, coherencia: { type: 'number' }, naturalidad: { type: 'number' },
     correccion: { type: 'string', description: 'Versión corregida del texto conservando la idea del alumno' },
-    comentario: { type: 'string', description: 'Comentario breve en el idioma nativo del alumno: qué hace bien y qué debe mejorar' },
+    comentario: { type: 'string', description: 'Comentario breve en el idioma nativo del alumno, dirigido a él en segunda persona (nunca «el alumno» ni «the student»): qué hace bien y qué debe mejorar' },
     errores: { type: 'array', items: { type: 'string' }, description: 'Temas gramaticales o de vocabulario a reforzar, en el idioma nativo, cortos (p. ej. "concordancia sujeto-verbo", "ortografía")' },
   },
   required: ['puntuacion', 'gramatica', 'vocabulario', 'coherencia', 'naturalidad', 'correccion', 'comentario', 'errores'],

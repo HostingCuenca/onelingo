@@ -215,7 +215,9 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
                 ),
               ),
             Text(
-              ep.servidor
+              // Sin pagos activos los botones dicen «Pagos próximamente»: no
+              // se promete Stripe.
+              ep.servidor && catalogo.pagosDisponible
                   ? tr('Pago con tarjeta en la página segura de Stripe. Cancela cuando quieras desde «Gestionar suscripción».')
                   : tr('Pago mensual, cancela cuando quieras.'),
               textAlign: TextAlign.center,
@@ -253,10 +255,12 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
       );
     }
     final cargando = _esperando == p.id;
+    // Morado: mientras espera el botón está deshabilitado (gris claro) y el
+    // contorneado es transparente sobre blanco; el blanco no se veía.
     const indicador = SizedBox(
       width: 18,
       height: 18,
-      child: CircularProgressIndicator(strokeWidth: 2, color: OL.blanco),
+      child: CircularProgressIndicator(strokeWidth: 2, color: OL.morado),
     );
     // Ya paga con Stripe: los cambios de plan se hacen en el portal.
     if (sus != null && sus.stripeVigente && sus.puedeGestionar) {

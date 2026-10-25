@@ -163,10 +163,13 @@ class _Ruta extends StatelessWidget {
         primera != null &&
         !primera.omitible &&
         primera.estado != EstadoUnidad.bloqueada;
-    // Lecciones antiguas como práctica extra solo en idiomas sin Nivel 0 propio.
+    // Lecciones antiguas como práctica extra solo en idiomas sin Nivel 0 propio
+    // y con la interfaz en español: sus enunciados y traducciones solo
+    // existen en español.
     final hayLeccionesExtra =
         nivel == 'f0' &&
         ruta.curso.idioma != 'en' &&
+        estado.interfaz == 'es' &&
         leccionesDe(0).isNotEmpty;
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
@@ -180,9 +183,12 @@ class _Ruta extends StatelessWidget {
           t(
             modulos.length == 1
                 ? modulos.first.titulo
+                // Con un id que no es nivel (URL vieja) firstWhere lanzaba.
                 : ruta.curso.niveles
-                      .firstWhere((n) => n.id == nivel)
-                      .titulo,
+                          .where((n) => n.id == nivel)
+                          .firstOrNull
+                          ?.titulo ??
+                      modulos.first.titulo,
           ),
           style: const TextStyle(
             fontSize: 24,
@@ -395,7 +401,13 @@ class _Destacada extends StatelessWidget {
             const SizedBox(height: 14),
             BotonPrincipal(
               onPressed: () => context.push(destino),
-              child: Text(repaso ? tr('REPASAR') : tr('EMPEZAR')),
+              child: Text(
+                repaso
+                    ? tr('REPASAR')
+                    : info.estado == EstadoUnidad.disponible
+                    ? tr('EMPEZAR')
+                    : tr('CONTINUAR'),
+              ),
             ),
           ],
         ),

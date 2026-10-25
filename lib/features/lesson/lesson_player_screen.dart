@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/aprendizaje/correccion.dart' show mismaRespuesta;
 import '../../core/barajar.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/efectos.dart';
@@ -60,6 +61,10 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
     } else {
       racha = 0;
       vidas = (vidas - 1).clamp(0, 4);
+    }
+    // En «une las parejas» no hay una forma correcta que practicar después
+    // (guardaba el enunciado como corrección).
+    if (!correcto && step.type != StepType.matchPairs) {
       ref
           .read(progressProvider.notifier)
           .agregarError(
@@ -76,15 +81,22 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
   }
 
   String _explicacion(LessonStep s) => switch (s.type) {
-    StepType.orderWords =>
-      tr('Fíjate en el orden de las palabras: la frase correcta es "{frase}".', {'frase': s.answer}),
-    StepType.fillBlank =>
-      tr('Fíjate en el verbo y en la concordancia con el sujeto.'),
-    StepType.listenWrite => tr('Escucha de nuevo y presta atención a cada palabra; revisa la ortografía.'),
-    StepType.matchPairs =>
-      tr('Repasa el vocabulario de la unidad con las tarjetas.'),
-    _ =>
-      tr('La forma correcta es "{forma}". Practícala en voz alta.', {'forma': s.answer.isEmpty ? s.prompt : s.answer}),
+    StepType.orderWords => tr(
+      'Fíjate en el orden de las palabras: la frase correcta es "{frase}".',
+      {'frase': s.answer},
+    ),
+    StepType.fillBlank => tr(
+      'Fíjate en el verbo y en la concordancia con el sujeto.',
+    ),
+    StepType.listenWrite => tr(
+      'Escucha de nuevo y presta atención a cada palabra; revisa la ortografía.',
+    ),
+    StepType.matchPairs => tr(
+      'Repasa el vocabulario de la unidad con las tarjetas.',
+    ),
+    _ => tr('La forma correcta es "{forma}". Practícala en voz alta.', {
+      'forma': s.answer.isEmpty ? s.prompt : s.answer,
+    }),
   };
 
   void _siguiente() {
@@ -252,6 +264,7 @@ class _StepViewState extends State<_StepView> {
 
   @override
   void dispose() {
+    texto.dispose();
     Oido.instancia.cancelar();
     Voz.instancia.parar();
     super.dispose();
@@ -311,22 +324,18 @@ class _StepViewState extends State<_StepView> {
     }
   }
 
-  String _norm(String t) => t
-      .toLowerCase()
-      .replaceAll(RegExp(r"[^\w\s']"), '')
-      .trim()
-      .replaceAll(RegExp(r'\s+'), ' ');
-
   void _comprobar() {
     final String resp;
     final bool ok;
     switch (s.type) {
       case StepType.orderWords:
         resp = respuesta.join(' ');
-        ok = _norm(resp) == _norm(s.answer);
+        // Como en la ruta: tolera tildes y ’; el \w de antes (solo ASCII)
+        // borraba las letras con tilde y fallaba respuestas buenas.
+        ok = mismaRespuesta(resp, s.answer, idiomaContenido);
       case StepType.listenWrite:
         resp = texto.text;
-        ok = _norm(resp) == _norm(s.answer);
+        ok = mismaRespuesta(resp, s.answer, idiomaContenido);
       default:
         resp = seleccion;
         ok = seleccion == s.answer;
@@ -480,7 +489,9 @@ class _StepViewState extends State<_StepView> {
               onPressed: () =>
                   setState(() => mostrarTraduccion = !mostrarTraduccion),
               child: Text(
-                mostrarTraduccion ? tr('OCULTAR TRADUCCIÓN') : tr('VER TRADUCCIÓN'),
+                mostrarTraduccion
+                    ? tr('OCULTAR TRADUCCIÓN')
+                    : tr('VER TRADUCCIÓN'),
               ),
             ),
           ],
@@ -594,7 +605,9 @@ class _StepViewState extends State<_StepView> {
                 children: [
                   Text(
                     s.hint.isEmpty
-                        ? tr('Traduce al {idioma}', {'idioma': nombreIdiomaContenido()})
+                        ? tr('Traduce al {idioma}', {
+                            'idioma': nombreIdiomaContenido(),
+                          })
                         : s.hint,
                     style: const TextStyle(
                       color: OL.gris,
@@ -713,10 +726,15 @@ class _StepViewState extends State<_StepView> {
                               ),
                             )
                           : Text(
-                              tr('Toca para escuchar (puedes repetirlo las veces que quieras)'),
+                              tr(
+                                'Toca para escuchar (puedes repetirlo las veces que quieras)',
+                              ),
                               key: const ValueKey('b'),
                               textAlign: TextAlign.center,
-                              style: const TextStyle(color: OL.gris, fontSize: 12),
+                              style: const TextStyle(
+                                color: OL.gris,
+                                fontSize: 12,
+                              ),
                             ),
                     ),
                   ],
@@ -740,7 +758,10 @@ class _StepViewState extends State<_StepView> {
         if (s.hint.isNotEmpty)
           Align(
             alignment: Alignment.centerLeft,
-            child: Etiqueta(tr('Pista: {pista}', {'pista': s.hint}), icono: Icons.lightbulb_outline),
+            child: Etiqueta(
+              tr('Pista: {pista}', {'pista': s.hint}),
+              icono: Icons.lightbulb_outline,
+            ),
           ),
       ],
     );
@@ -812,7 +833,8 @@ class _StepViewState extends State<_StepView> {
             ),
           ],
         ),
-        if (fallos > 0) Etiqueta(tr('{n} intentos fallidos', {'n': fallos}), color: OL.rojo),
+        if (fallos > 0)
+          Etiqueta(tr('{n} intentos fallidos', {'n': fallos}), color: OL.rojo),
       ],
     );
   }
@@ -825,7 +847,9 @@ class _StepViewState extends State<_StepView> {
         ? tr('Micrófono no disponible en este dispositivo. Puedes continuar.')
         : grabando
         ? (Oido.instancia.modo == 'nube'
-              ? tr('Grabando… toca detener al terminar o deja 3 segundos de silencio')
+              ? tr(
+                  'Grabando… toca detener al terminar o deja 3 segundos de silencio',
+                )
               : tr('Escuchando… repite la frase'))
         : parecido == null
         ? tr('Toca el micrófono y repite la frase')
@@ -841,7 +865,9 @@ class _StepViewState extends State<_StepView> {
           padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 20),
           onTap: () =>
               Voz.instancia.hablar(s.prompt, idiomaContenido, velocidad: 0.4),
-          etiquetaSemantica: tr('Escuchar modelo: {texto}', {'texto': s.prompt}),
+          etiquetaSemantica: tr('Escuchar modelo: {texto}', {
+            'texto': s.prompt,
+          }),
           child: Column(
             children: [
               Text(
@@ -886,14 +912,14 @@ class _StepViewState extends State<_StepView> {
                   IconButton.filled(
                     style: IconButton.styleFrom(
                       backgroundColor: grabando ? OL.rojo : OL.morado,
+                      foregroundColor: OL.blanco,
+                      // Sin micrófono: el icono blanco sobre el gris claro de M3 no se veía.
+                      disabledBackgroundColor: OL.grisClaro,
+                      disabledForegroundColor: OL.gris,
                       fixedSize: const Size(72, 72),
                     ),
                     onPressed: sinMicro ? null : _grabar,
-                    icon: Icon(
-                      grabando ? Icons.stop : Icons.mic,
-                      color: OL.blanco,
-                      size: 34,
-                    ),
+                    icon: Icon(grabando ? Icons.stop : Icons.mic, size: 34),
                   ),
                 ],
               ),
@@ -927,7 +953,9 @@ class _StepViewState extends State<_StepView> {
               if (parecido != null) ...[
                 const SizedBox(height: 10),
                 Text(
-                  tr('Coincidencia de palabras; no evalúa pronunciación ni entonación.'),
+                  tr(
+                    'Coincidencia de palabras; no evalúa pronunciación ni entonación.',
+                  ),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 12, color: OL.gris),
                 ),
@@ -1080,7 +1108,9 @@ class _StepViewState extends State<_StepView> {
                     idiomaContenido,
                     voz: i.isEven ? 'narrador' : 'narradora',
                   ),
-                  etiquetaSemantica: tr('Escuchar {texto}', {'texto': visibles[i].$2}),
+                  etiquetaSemantica: tr('Escuchar {texto}', {
+                    'texto': visibles[i].$2,
+                  }),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

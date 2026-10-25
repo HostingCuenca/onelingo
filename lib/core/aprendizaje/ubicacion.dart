@@ -194,7 +194,8 @@ class Ubicacion {
   final _usados = <String>{};
   final respuestas = <RespuestaUbicacion>[];
   final _cerradas = <String>{};
-  int _turno = 0;
+  // Empieza por lectura (índice 1), no por escucha: abrir con un audio intimida.
+  int _turno = 1;
   bool _sinBase = false;
 
   ItemUbicacion? actual;
@@ -303,7 +304,11 @@ class Ubicacion {
     ];
     if (abiertas.isEmpty) return actual = null;
     final h = abiertas[_turno++ % abiertas.length];
-    final objetivo = _mediana(_posterior(h)).clamp(1, nivelMaximo);
+    // La primera pregunta de cada habilidad va al nivel que dijo el alumno
+    // («Un poco» = N1): la mediana del prior, ancho y cortado en 0, subía uno.
+    final inicial = _objetivas(h).isEmpty && n < habilidadesUbicacion.length;
+    final objetivo = (inicial ? declarado.inicio : _mediana(_posterior(h)))
+        .clamp(1, nivelMaximo);
     final item = _elegir(h, objetivo);
     if (item == null) {
       _cerradas.add(h);
@@ -360,6 +365,8 @@ class Ubicacion {
 
   /// Tarea de escritura en el nivel estimado (null si no hay o empieza de cero).
   ItemUbicacion? escritura() {
+    // Una sola tarea: sin esto, cada «Continuar» pedía otra escritura.
+    if (escrituraHecha || escrituraOmitida) return actual = null;
     final nivel = nivelInicio;
     if (nivel == 0) {
       escrituraOmitida = true;

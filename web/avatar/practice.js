@@ -421,7 +421,7 @@ async function requestTutor(entrada, opening = false) {
       if (!line) return;
       const e = JSON.parse(line.slice(6));
       if (e.tipo === 'error') throw Error(e.data);
-      if (e.tipo === 'transcripcion') {
+      if (e.tipo === 'transcripcion' && (e.data.texto || '').trim()) {
         transcrito = true;
         mostrarAlumno(e.data.texto); burbuja(e.data.texto, 'mine');
         history.push({rol: 'alumno', texto: e.data.texto});

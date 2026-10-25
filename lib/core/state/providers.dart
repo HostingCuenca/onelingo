@@ -734,20 +734,20 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
     );
   }
 
-  void registrarExamen(int nivel, int pct) {
+  /// Devuelve el XP ganado: 200 al aprobar por primera vez, 20 el primer
+  /// intento sin aprobar y 0 al repetir.
+  int registrarExamen(int nivel, int pct) {
     Sync.instancia.evento('examen', {'nivel': nivel, 'pct': pct});
     final anterior = state.examenes[nivel];
     final primeraAprobacion =
         pct >= Level.minimoAprobacion &&
         (anterior == null || anterior < Level.minimoAprobacion);
-    final s = _conActividad(
-      state,
-      primeraAprobacion
-          ? 200
-          : anterior == null
-          ? 20
-          : 0,
-    );
+    final xp = primeraAprobacion
+        ? 200
+        : anterior == null
+        ? 20
+        : 0;
+    final s = _conActividad(state, xp);
     _save(
       s.copyWith(
         examenes: {
@@ -756,6 +756,7 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
         },
       ),
     );
+    return xp;
   }
 
   void agregarError({

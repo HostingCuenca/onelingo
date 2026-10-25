@@ -1097,37 +1097,51 @@ class _PasoConstruyeState extends State<_PasoConstruye> {
         onLento: () => decir(widget.n, objetivo, lento: true),
       ),
       const SizedBox(height: 24),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          for (var i = 0; i < objetivo.length; i++)
-            GestureDetector(
-              onTap: i < usadas.length
-                  ? () => setState(() => usadas.removeAt(i))
-                  : null,
-              child: Container(
-                width: 58,
-                height: 66,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: OL.blanco,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: i < usadas.length ? OL.morado : OL.grisClaro,
-                    width: 2,
+      // Como en la pantalla de huecos: con palabras largas, una fila fija de
+      // 58 px se salía de la pantalla en teléfonos de 360.
+      LayoutBuilder(
+        builder: (context, c) {
+          final ancho =
+              ((c.maxWidth - 8.0 * objetivo.length) / objetivo.length).clamp(
+                34.0,
+                58.0,
+              );
+          return Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (var i = 0; i < objetivo.length; i++)
+                GestureDetector(
+                  onTap: i < usadas.length
+                      ? () => setState(() => usadas.removeAt(i))
+                      : null,
+                  child: Container(
+                    width: ancho,
+                    height: 66,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: OL.blanco,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: i < usadas.length ? OL.morado : OL.grisClaro,
+                        width: 2,
+                      ),
+                    ),
+                    child: FittedBox(
+                      child: Text(
+                        i < usadas.length ? fichas[usadas[i]] : '',
+                        style: const TextStyle(
+                          fontSize: 34,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                child: Text(
-                  i < usadas.length ? fichas[usadas[i]] : '',
-                  style: const TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-            ),
-        ],
+            ],
+          );
+        },
       ),
       const SizedBox(height: 28),
       Wrap(

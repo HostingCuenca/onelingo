@@ -28,6 +28,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
   String seleccion = '';
   bool? correcto;
   bool terminado = false;
+  int xpGanado = 0;
   bool empezado = false;
 
   @override
@@ -86,7 +87,9 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
         correcto = null;
       });
     } else {
-      ref.read(progressProvider.notifier).registrarExamen(widget.nivel, pct);
+      xpGanado = ref
+          .read(progressProvider.notifier)
+          .registrarExamen(widget.nivel, pct);
       setState(() => terminado = true);
     }
   }
@@ -108,7 +111,11 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () => context.pop(),
+                      // Desde el resultado de la lección se llega con go:
+                      // no hay nada debajo a lo que volver.
+                      onPressed: () => context.canPop()
+                          ? context.pop()
+                          : context.go('/aprender/nivel/${widget.nivel}'),
                       icon: const Icon(Icons.close, color: OL.gris),
                     ),
                     Expanded(
@@ -206,7 +213,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
   Widget _intro(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text(tr('Examen · Nivel {n}', {'n': widget.nivel}))),
     body: Movil(
-      child: Padding(
+      child: DesplazableLleno(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -272,7 +279,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
     return Scaffold(
       body: Movil(
         child: SafeArea(
-          child: Padding(
+          child: DesplazableLleno(
             padding: const EdgeInsets.all(24),
             child: Column(
               children: [
@@ -313,7 +320,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                     children: [
                       _Dato('$aciertos/${preguntas.length}', tr('Aciertos')),
                       _Dato('${Level.minimoAprobacion}%', tr('Mínimo')),
-                      _Dato(aprobado ? '+200' : '+20', 'XP'),
+                      _Dato('+$xpGanado', 'XP'),
                     ],
                   ),
                 ),

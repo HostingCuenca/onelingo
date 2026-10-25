@@ -227,7 +227,12 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(tr('Prueba de nivel')),
+        // En el registro la prueba es parte del paso 6: así el contador no salta.
+        title: Text(
+          esOnboarding
+              ? '${tr('Paso {n} de 7', {'n': 6})} · ${tr('Prueba de nivel')}'
+              : tr('Prueba de nivel'),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.close),
           tooltip: tr('Salir'),
@@ -444,7 +449,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
                   label: Text(
                     n == r.nivel
                         ? tr('N{n} (recomendado)', {'n': n})
-                        : 'N$n',
+                        : tr('N{n}', {'n': n}),
                   ),
                   selected: nivel == n,
                   onSelected: (_) => setState(() => elegido = n),
@@ -484,7 +489,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
         SizedBox(
           width: 52,
           child: Text(
-            nivel == 0 ? tr('inicio') : 'N$nivel',
+            nivel == 0 ? tr('inicio') : tr('N{n}', {'n': nivel}),
             textAlign: TextAlign.end,
             style: const TextStyle(fontWeight: FontWeight.w800),
           ),

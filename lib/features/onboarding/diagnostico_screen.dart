@@ -416,7 +416,9 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
       texto: t,
     );
     if (!mounted) return;
-    if (r == null) {
+    // Sin nota numérica se trata como fallo: si no, el envío quedaba
+    // bloqueado en «evaluando».
+    if (r == null || r['puntuacion'] is! num) {
       setState(() {
         evaluando = false;
         errorEscritura = tr(
@@ -498,7 +500,11 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/inicio'),
         ),
-        title: Text(tr('Diagnóstico de nivel')),
+        title: Text(
+          esOnboarding
+              ? '${tr('Paso {n} de 7', {'n': 6})} · ${tr('Diagnóstico de nivel')}'
+              : tr('Diagnóstico de nivel'),
+        ),
         actions: const [SoundToggle()],
       ),
       body: Movil(
@@ -667,7 +673,8 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           runSpacing: 6,
           children: [
             Etiqueta(
-              personalizado
+              // Puede pasar de 10 (hasta maxPreguntas): ahí, sin total.
+              personalizado && d.n + (respondida ? 0 : 1) <= 10
                   ? tr('Pregunta {n} de 10', {'n': d.n + (respondida ? 0 : 1)})
                   : tr('Pregunta {n}', {'n': d.n + (respondida ? 0 : 1)}),
               color: OL.gris,

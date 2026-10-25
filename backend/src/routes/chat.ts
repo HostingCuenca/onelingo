@@ -9,9 +9,10 @@ import { requiereAlumno, type Sesion } from '../lib/auth.js';
 
 const EsquemaChat = z.object({
   idiomaMeta: z.string(), idiomaNativo: z.string().default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().default('mia'),
-  situacionId: z.number().int().min(1).max(50).optional(), situacion: z.string().optional(), objetivo: z.string().optional(),
+  situacionId: z.number().int().min(1).max(50).optional(), situacion: z.string().max(4000).optional(), objetivo: z.string().max(4000).optional(),
   objetivoId: z.string().max(24).optional(), modo: z.enum(['practica', 'prueba']).default('practica'),
-  historial: z.array(z.object({ rol: z.enum(['tutor', 'alumno']), texto: z.string() })).max(30),
+  // Topes: sin ellos, el límite de 2 MB del cuerpo dejaba mandar prompts enormes.
+  historial: z.array(z.object({ rol: z.enum(['tutor', 'alumno']), texto: z.string().max(4000) })).max(30),
 });
 type DatosChat = z.infer<typeof EsquemaChat>;
 
@@ -121,9 +122,11 @@ export default async function rutas(app: FastifyInstance) {
       const t0 = performance.now();
       const { texto } = await transcribirOpenAI(audio.buffer, audio.nombre, d.idiomaMeta, audio.tipo);
       req.log.info({ ms: Math.round(performance.now() - t0), bytes: audio.buffer.length }, 'chat_voz_transcripcion');
-      emit('transcripcion', { texto });
       await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1, $2, $3)', [s.sub, 'transcripcion', JSON.stringify({ idioma: d.idiomaMeta, caracteres: texto.length, bytes: audio.buffer.length, origen: 'videollamada' })]).catch(() => {});
+      // Antes de emitirla: una transcripción vacía dejaba un turno del alumno
+      // en blanco y «Reintentar» lo mandaba al modelo.
       if (!texto.trim()) { emit('error', 'No te escuché bien. Mantén pulsado el micrófono mientras hablas.'); return null; }
+      emit('transcripcion', { texto });
       return { ...d, historial: [...d.historial, { rol: 'alumno' as const, texto }].slice(-30) };
     });
   });

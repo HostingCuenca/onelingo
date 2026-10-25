@@ -76,7 +76,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         ),
       ),
       StatefulShellRoute.indexedStack(
-        builder: (context, state, shell) => _Shell(shell: shell),
+        // Sin menú mientras la prueba de nivel es parte del registro: sus
+        // pestañas mandaban a /bienvenida y se perdía el registro.
+        builder: (context, state, shell) =>
+            _Shell(shell: shell, menu: onboardingDone),
         branches: [
           StatefulShellBranch(
             routes: [
@@ -300,8 +303,9 @@ final routerProvider = Provider<GoRouter>((ref) {
 });
 
 class _Shell extends StatelessWidget {
-  const _Shell({required this.shell});
+  const _Shell({required this.shell, required this.menu});
   final StatefulNavigationShell shell;
+  final bool menu;
 
   Future<void> _switchTab(BuildContext context, int index) async {
     await Future.wait([
@@ -316,39 +320,41 @@ class _Shell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Movil(child: shell),
-      bottomNavigationBar: Align(
-        alignment: Alignment.bottomCenter,
-        heightFactor: 1,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 480),
-          child: NavigationBar(
-            selectedIndex: shell.currentIndex,
-            onDestinationSelected: (i) => _switchTab(context, i),
-            destinations: [
-              NavigationDestination(
-                icon: const AppNavigationIcon(0),
-                selectedIcon: const AppNavigationIcon(0, selected: true),
-                label: tr('Inicio'),
+      bottomNavigationBar: !menu
+          ? null
+          : Align(
+              alignment: Alignment.bottomCenter,
+              heightFactor: 1,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 480),
+                child: NavigationBar(
+                  selectedIndex: shell.currentIndex,
+                  onDestinationSelected: (i) => _switchTab(context, i),
+                  destinations: [
+                    NavigationDestination(
+                      icon: const AppNavigationIcon(0),
+                      selectedIcon: const AppNavigationIcon(0, selected: true),
+                      label: tr('Inicio'),
+                    ),
+                    NavigationDestination(
+                      icon: const AppNavigationIcon(1),
+                      selectedIcon: const AppNavigationIcon(1, selected: true),
+                      label: tr('Aprender'),
+                    ),
+                    NavigationDestination(
+                      icon: const AppNavigationIcon(2),
+                      selectedIcon: const AppNavigationIcon(2, selected: true),
+                      label: tr('Practicar'),
+                    ),
+                    NavigationDestination(
+                      icon: const AppNavigationIcon(3),
+                      selectedIcon: const AppNavigationIcon(3, selected: true),
+                      label: tr('Perfil'),
+                    ),
+                  ],
+                ),
               ),
-              NavigationDestination(
-                icon: const AppNavigationIcon(1),
-                selectedIcon: const AppNavigationIcon(1, selected: true),
-                label: tr('Aprender'),
-              ),
-              NavigationDestination(
-                icon: const AppNavigationIcon(2),
-                selectedIcon: const AppNavigationIcon(2, selected: true),
-                label: tr('Practicar'),
-              ),
-              NavigationDestination(
-                icon: const AppNavigationIcon(3),
-                selectedIcon: const AppNavigationIcon(3, selected: true),
-                label: tr('Perfil'),
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

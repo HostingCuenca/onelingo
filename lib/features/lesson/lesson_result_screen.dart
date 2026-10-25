@@ -35,7 +35,7 @@ class LessonResultScreen extends ConsumerWidget {
         children: [
           Movil(
             child: SafeArea(
-              child: Padding(
+              child: DesplazableLleno(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [

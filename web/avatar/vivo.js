@@ -33,6 +33,10 @@ export const vivoDisponible = () => !!(window.AudioWorkletNode && window.WebSock
 export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEstado}) {
   let cerrado = false, silenciado = false, ws = null, ctx = null, stream = null, nodo = null, reintentos = 0;
   stream = await navigator.mediaDevices.getUserMedia({audio: {echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1}});
+  // Si algo falla antes de devolver el control (token 429/503, worklet), se
+  // suelta el micrófono: si no, quedaba encendido el resto de la llamada.
+  const soltar = () => { cerrado = true; try { ws?.close(); } catch {} stream?.getTracks().forEach(t => t.stop()); try { nodo?.disconnect(); } catch {} ctx?.close().catch(() => {}); };
+  try {
   ctx = new AudioContext({sampleRate: 16000});
   const url = URL.createObjectURL(new Blob([WORKLET], {type: 'text/javascript'}));
   await ctx.audioWorklet.addModule(url); URL.revokeObjectURL(url);
@@ -67,6 +71,7 @@ export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEs
     };
   }
   await conectar();
+  } catch (err) { soltar(); throw err; }
   if (ctx.state === 'suspended') await ctx.resume().catch(() => {});
 
   return {

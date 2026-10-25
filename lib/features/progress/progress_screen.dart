@@ -28,17 +28,22 @@ class ProgressScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
+    // Sin sesión de servidor (o usuario de prueba) los datos son solo locales.
+    final demo = !usaServidorPagos(s.email);
     // Nivel que ve el alumno: el de la ruta, sin superar lo publicado.
     final nAlumno = ref.watch(nivelAlumnoProvider);
     final ruta = ref.watch(rutaProvider(s.idiomaMeta)).valueOrNull;
     final estados = ruta == null ? null : estadosAlumno(ruta, s);
     final pos = ruta == null ? null : posicionEnRuta(ruta, s);
     // Quien empieza de cero pasa antes por el Nivel 0 · Leer y pronunciar.
-    final n0 = s.nivel0Pendiente ? ref.watch(nivel0Provider).valueOrNull : null;
-    final n0Hechas = n0 == null
+    final n0Datos = ref.watch(nivel0Provider).valueOrNull;
+    final n0 = s.nivel0Pendiente ? n0Datos : null;
+    final n0Hechas = n0Datos == null
         ? 0
-        : n0.lecciones
-              .where((l) => leccionN0Completa(s.practicas, n0.idioma, l.id))
+        : n0Datos.lecciones
+              .where(
+                (l) => leccionN0Completa(s.practicas, n0Datos.idioma, l.id),
+              )
               .length;
     // Nivel y clase actuales con el mismo criterio que Aprender.
     final nivelPos = pos?.nivel == null
@@ -77,7 +82,9 @@ class ProgressScreen extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
         children: [
           MascotCoach(
-            message: tr('Tu progreso se construye practicando y repasando. Cada habilidad cuenta.'),
+            message: tr(
+              'Tu progreso se construye practicando y repasando. Cada habilidad cuenta.',
+            ),
           ),
           Tarjeta(
             child: Row(
@@ -160,7 +167,11 @@ class ProgressScreen extends ConsumerWidget {
               ),
               _Stat(
                 Icons.check_circle_outline,
-                pos == null ? '—' : '${pos.aprobadas}',
+                // Las lecciones del Nivel 0 también cuentan: antes salía 0
+                // con varias terminadas.
+                pos == null && n0Hechas == 0
+                    ? '—'
+                    : '${(pos?.aprobadas ?? 0) + n0Hechas}',
                 tr('Lecciones completadas'),
                 OL.morado,
               ),
@@ -173,109 +184,134 @@ class ProgressScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 20),
-          if (s.idiomaMeta == 'en') ...[
-            TituloSeccion(tr('Práctica de inglés')),
+          // En todos los idiomas: antes solo salía en inglés y el resto
+          // veía ceros en «Lecciones por habilidad».
+          TituloSeccion(
+            s.idiomaMeta == 'en' ? tr('Práctica de inglés') : tr('Tu práctica'),
+          ),
+          const SizedBox(height: 10),
+          Tarjeta(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  tr('Tu actividad por área'),
+                  style: const TextStyle(fontWeight: FontWeight.w900),
+                ),
+                const SizedBox(height: 8),
+                for (final entry in {
+                  'vocabulario': tr('Vocabulario'),
+                  'gramatica': tr('Gramática'),
+                  'comprension': tr('Lectura'),
+                  'listening': tr('Escucha'),
+                  'escritura': tr('Escritura'),
+                }.entries)
+                  Builder(
+                    builder: (context) {
+                      final items = s.practicas.values
+                          .whereType<Map>()
+                          .where(
+                            (p) =>
+                                _area(p) == entry.key &&
+                                (p['idioma'] == s.idiomaMeta ||
+                                    (p['idioma'] == null &&
+                                        s.idiomaMeta == 'en')),
+                          )
+                          .toList();
+                      final review = items
+                          .where((p) => p['correcta'] == false)
+                          .length;
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        child: Text(
+                          items.length == 1
+                              ? tr(
+                                  '{area}: 1 actividad · {review} por reforzar',
+                                  {'area': entry.value, 'review': review},
+                                )
+                              : tr(
+                                  '{area}: {n} actividades · {review} por reforzar',
+                                  {
+                                    'area': entry.value,
+                                    'n': items.length,
+                                    'review': review,
+                                  },
+                                ),
+                        ),
+                      );
+                    },
+                  ),
+                const SizedBox(height: 8),
+                Text(
+                  tr(
+                    'Estas cifras muestran práctica, no dominio. Los aciertos con ayuda se guardan por separado de las evaluaciones de nivel.',
+                  ),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: OL.gris,
+                    height: 1.4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          // Cuenta solo las lecciones antiguas: sin ellas, todo en cero.
+          if (hab.values.any((n) => n > 0)) ...[
+            TituloSeccion(tr('Lecciones por habilidad')),
             const SizedBox(height: 10),
             Tarjeta(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    tr('Tu actividad por área'),
-                    style: const TextStyle(fontWeight: FontWeight.w900),
-                  ),
-                  const SizedBox(height: 8),
-                  for (final entry in {
-                    'vocabulario': tr('Vocabulario'),
-                    'gramatica': tr('Gramática'),
-                    'comprension': tr('Lectura'),
-                    'listening': tr('Listening'),
-                    'escritura': tr('Escritura'),
-                  }.entries)
-                    Builder(
-                      builder: (context) {
-                        final items = s.practicas.values
-                            .whereType<Map>()
-                            .where(
-                              (p) =>
-                                  p['skill'] == entry.key &&
-                                  (p['idioma'] == 'en' || p['idioma'] == null),
-                            )
-                            .toList();
-                        final review = items
-                            .where((p) => p['correcta'] == false)
-                            .length;
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: Text(
-                            tr('{area}: {n} actividades · {review} por reforzar', {'area': entry.value, 'n': items.length, 'review': review}),
+                  for (final k in [
+                    Skill.vocabulario,
+                    Skill.gramatica,
+                    Skill.frases,
+                    Skill.listening,
+                    Skill.pronunciacion,
+                    Skill.conversacion,
+                  ])
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 110,
+                            child: Text(
+                              k.nombre,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
-                        );
-                      },
+                          Expanded(
+                            child: BarraProgreso(
+                              (hab[k] ?? 0) / maxHab,
+                              color: _colorHab(k),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          SizedBox(
+                            width: 28,
+                            child: Text(
+                              '${hab[k] ?? 0}',
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: OL.gris,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  const SizedBox(height: 8),
-                  Text(
-                    tr('Estas cifras muestran práctica, no dominio. Los aciertos con ayuda se guardan por separado de las evaluaciones de nivel.'),
-                    style: const TextStyle(fontSize: 14, color: OL.gris, height: 1.4),
-                  ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
           ],
-          TituloSeccion(tr('Lecciones por habilidad')),
-          const SizedBox(height: 10),
-          Tarjeta(
-            child: Column(
-              children: [
-                for (final k in [
-                  Skill.vocabulario,
-                  Skill.gramatica,
-                  Skill.frases,
-                  Skill.listening,
-                  Skill.pronunciacion,
-                  Skill.conversacion,
-                ])
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 110,
-                          child: Text(
-                            k.nombre,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: BarraProgreso(
-                            (hab[k] ?? 0) / maxHab,
-                            color: _colorHab(k),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        SizedBox(
-                          width: 28,
-                          child: Text(
-                            '${hab[k] ?? 0}',
-                            textAlign: TextAlign.right,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: OL.gris,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
           if (ruta != null && estados != null) ...[
             TituloSeccion(tr('Tus diez niveles')),
             const SizedBox(height: 10),
@@ -300,7 +336,9 @@ class ProgressScreen extends ConsumerWidget {
           _Fila(
             Icons.fact_check_outlined,
             tr('Mis errores'),
-            tr('{n} por practicar', {'n': s.errores.where((e) => !e.practicado).length}),
+            tr('{n} por practicar', {
+              'n': s.errores.where((e) => !e.practicado).length,
+            }),
             () => context.push('/errores'),
           ),
           _Fila(
@@ -322,7 +360,9 @@ class ProgressScreen extends ConsumerWidget {
                 ? '$nombrePlan · $estadoSuscripcion'
                 : estadoPlan.trialAgotado
                 ? tr('Prueba gratuita terminada · elige un plan')
-                : tr('Prueba gratuita · {min} min restantes', {'min': estadoPlan.trialRestante ~/ 60}),
+                : tr('Prueba gratuita · {min} min restantes', {
+                    'min': estadoPlan.trialRestante ~/ 60,
+                  }),
             () => context.push('/planes'),
           ),
           const SizedBox(height: 16),
@@ -346,9 +386,17 @@ class ProgressScreen extends ConsumerWidget {
             onPressed: () => showDialog(
               context: context,
               builder: (ctx) => AlertDialog(
-                title: Text(tr('¿Reiniciar la demo?')),
+                // Con cuenta real no se pierde nada: el progreso está en el
+                // servidor. El aviso de borrado es solo para la demo.
+                title: Text(
+                  demo ? tr('¿Reiniciar la demo?') : tr('¿Cerrar sesión?'),
+                ),
                 content: Text(
-                  tr('Se borra el progreso local y vuelves al registro.'),
+                  demo
+                      ? tr('Se borra el progreso local y vuelves al registro.')
+                      : tr(
+                          'Tu progreso queda guardado en tu cuenta. Para seguir, inicia sesión otra vez.',
+                        ),
                 ),
                 actions: [
                   TextButton(
@@ -361,7 +409,7 @@ class ProgressScreen extends ConsumerWidget {
                       ref.read(progressProvider.notifier).reiniciar();
                     },
                     child: Text(
-                      tr('Reiniciar'),
+                      demo ? tr('Reiniciar') : tr('Cerrar sesión'),
                       style: const TextStyle(color: OL.rojo),
                     ),
                   ),
@@ -370,7 +418,7 @@ class ProgressScreen extends ConsumerWidget {
             ),
             icon: const Icon(Icons.logout, color: OL.rojo, size: 18),
             label: Text(
-              tr('Cerrar sesión / reiniciar demo'),
+              demo ? tr('Cerrar sesión / reiniciar demo') : tr('Cerrar sesión'),
               style: const TextStyle(color: OL.rojo),
             ),
           ),
@@ -414,8 +462,7 @@ class _FilaNivel extends StatelessWidget {
     final superado =
         primera != null && nivelSuperado(ruta, estados, s.practicas, nivel.id);
     final convalidado = !superado && (primera?.omitible ?? false);
-    final abierto =
-        primera != null && primera.estado != EstadoUnidad.bloqueada;
+    final abierto = primera != null && primera.estado != EstadoUnidad.bloqueada;
     final aprobadas = unidades
         .where((u) => estados[u.id]!.estado.alMenos(EstadoUnidad.aprobada))
         .length;
@@ -538,4 +585,31 @@ class _Fila extends StatelessWidget {
       ),
     ),
   );
+}
+
+/// Área de una práctica para «Tu actividad por área». La biblioteca guarda
+/// comprension/listening; la ruta guarda la habilidad de la unidad, a veces
+/// con tilde («gramática»), así que casi nada contaba. En la ruta manda el
+/// formato del ejercicio: un audio es escucha aunque la clase sea de gramática.
+String? _area(Map p) {
+  if (p['area'] is String) return p['area'] as String;
+  switch (p['formato']) {
+    case 'escuchar':
+      return 'listening';
+    case 'escribir':
+      return 'escritura';
+  }
+  final h = '${p['skill'] ?? ''}'
+      .toLowerCase()
+      .replaceAll('á', 'a')
+      .replaceAll('é', 'e')
+      .replaceAll('í', 'i')
+      .replaceAll('ó', 'o')
+      .replaceAll('ú', 'u');
+  return switch (h) {
+    'escucha' || 'listening' => 'listening',
+    'lectura' || 'comprension' => 'comprension',
+    'gramatica' || 'vocabulario' || 'escritura' => h,
+    _ => null,
+  };
 }

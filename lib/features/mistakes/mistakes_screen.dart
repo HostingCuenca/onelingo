@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/aprendizaje/correccion.dart' show mismaRespuesta;
+import '../../core/content/curriculum.dart' show idiomaContenido;
 import '../../core/i18n/i18n.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
@@ -191,8 +193,7 @@ class _ErrorCard extends ConsumerWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(minimumSize: const Size(120, 44)),
             onPressed: () {
-              final ok = ctrl.text.trim().toLowerCase().replaceAll(RegExp(r'[^\w\s]'), '') ==
-                  e.correccion.toLowerCase().replaceAll(RegExp(r'[^\w\s]'), '');
+              final ok = mismaRespuesta(ctrl.text, e.correccion, idiomaContenido);
               Navigator.pop(ctx);
               if (ok) ref.read(progressProvider.notifier).marcarErrorPracticado(e.id);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

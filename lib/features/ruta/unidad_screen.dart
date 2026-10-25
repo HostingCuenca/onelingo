@@ -44,6 +44,20 @@ class _Pantalla {
   final bool repetida;
 }
 
+/// Nombres en inglés para las consignas de la interfaz en inglés.
+const _nombreIdiomaEn = {
+  'en': 'English',
+  'es': 'Spanish',
+  'fr': 'French',
+  'de': 'German',
+  'pt': 'Portuguese',
+  'it': 'Italian',
+  'zh': 'Chinese',
+  'ja': 'Japanese',
+  'ko': 'Korean',
+  'ru': 'Russian',
+};
+
 const _nombreIdioma = {
   'en': 'inglés',
   'es': 'español',
@@ -90,9 +104,14 @@ const _nombreIdioma = {
     unir = Item(
       id: '${u.id}.dinamico.unir',
       formato: FormatoItem.relacionar,
-      consigna: const TextoApoyo({'es': 'Une cada palabra con su significado'}),
+      // Con la interfaz en inglés estas consignas salían en español.
+      consigna: const TextoApoyo({
+        'es': 'Une cada palabra con su significado',
+        'en': 'Match each word with its meaning',
+      }),
       feedback: const TextoApoyo({
         'es': 'Son palabras de esta clase: repásalas en voz alta.',
+        'en': 'These are words from this class: review them out loud.',
       }),
       pares: [for (final v in palabras.take(4)) (v.texto, v.traduccion)],
       paresRom: [for (final v in palabras.take(4)) v.rom],
@@ -111,8 +130,12 @@ const _nombreIdioma = {
       formato: FormatoItem.escribir,
       consigna: TextoApoyo({
         'es': 'Escribe esta frase en ${_nombreIdioma[u.idioma] ?? u.idioma}',
+        'en': 'Write this sentence in ${_nombreIdiomaEn[u.idioma] ?? u.idioma}',
       }),
-      feedback: const TextoApoyo({'es': 'Es uno de los ejemplos de la clase.'}),
+      feedback: const TextoApoyo({
+        'es': 'Es uno de los ejemplos de la clase.',
+        'en': "It's one of the examples from this class.",
+      }),
       texto: f.traduccion.en(cadena),
       respuesta: f.texto,
       aceptadas: [f.texto],
@@ -428,7 +451,18 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         .skip(indice + 1)
         .any((p) => p.paso.id == paso.id && p.item?.id == item.id);
     if (yaPendiente) return;
-    final ultimo = pantallas.lastIndexWhere((p) => p.paso.id == paso.id);
+    var ultimo = pantallas.lastIndexWhere((p) => p.paso.id == paso.id);
+    // El ejercicio extra de la clase va suelto dentro del bloque de otro
+    // paso: vuelve al final de ese bloque, no justo después de sí mismo.
+    if (paso.id.endsWith('.dinamico') && indice + 1 < pantallas.length) {
+      final vecino = pantallas[indice + 1].paso;
+      if (vecino.tipo != TipoPaso.evaluacion && !vecino.tipo.ensena) {
+        ultimo = max(
+          ultimo,
+          pantallas.lastIndexWhere((p) => p.paso.id == vecino.id),
+        );
+      }
+    }
     final current = pantallas[indice];
     pantallas.insert(
       ultimo + 1,
@@ -495,21 +529,27 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     try {
       final prefs = await SharedPreferences.getInstance();
       final guardado = prefs.getInt(claveProgreso) ?? 0;
-      // Se reanuda en la enseñanza o práctica, nunca a mitad de la evaluación.
-      final seguro = guardado.clamp(0, pantallas.length - 1);
-      if (mounted &&
-          seguro > 0 &&
-          pantallas[seguro].paso.tipo != TipoPaso.evaluacion) {
-        setState(() => indice = seguro);
+      // Se reanuda en la enseñanza o práctica; nunca a mitad de la
+      // evaluación, que vuelve a empezar desde su primera pantalla (antes
+      // se repetía toda la clase).
+      var seguro = guardado.clamp(0, pantallas.length - 1);
+      if (pantallas[seguro].paso.tipo == TipoPaso.evaluacion) {
+        seguro = pantallas.indexWhere(
+          (p) => p.paso.tipo == TipoPaso.evaluacion,
+        );
       }
+      if (mounted && seguro > 0) setState(() => indice = seguro);
     } catch (_) {}
   }
 
   void _guardarPosicion() {
     if (widget.repaso) return;
+    // Se guarda la posición sin contar las repeticiones: al reabrir, la lista
+    // se rearma sin ellas y el índice crudo saltaba pantallas no vistas.
+    final posicion = pantallas.take(indice).where((p) => !p.repetida).length;
     unawaited(
       SharedPreferences.getInstance()
-          .then((p) => p.setInt(claveProgreso, indice))
+          .then((p) => p.setInt(claveProgreso, posicion))
           .catchError((_) => true),
     );
   }
@@ -793,10 +833,15 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           onAlternarRom: romOcultable ? alternarRom : null,
           permitirReintento: !evalua,
           onComprobado: (correcta, respuesta) {
-            // La producción abierta no puntúa: solo se compara con el modelo.
-            if (evalua && !item.abierta) {
-              primeras.putIfAbsent('${p.id}:${item.id}', () => correcta);
-            } else if (!correcta) {
+            // La producción abierta no puntúa ni se repite: solo se compara
+            // con el modelo. Antes, en la evaluación, caía en la rama de
+            // repetir y volvía al final una y otra vez (y otra revisión de IA)
+            // mientras la IA no la diera por buena.
+            if (evalua) {
+              if (!item.abierta) {
+                primeras.putIfAbsent('${p.id}:${item.id}', () => correcta);
+              }
+            } else if (!correcta && !item.abierta) {
               setState(() => _repetirAlFinal(p, item));
             }
             ref
@@ -1222,13 +1267,16 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
             child: Text(tr('VOLVER A LA EXPLICACIÓN')),
           ),
         const SizedBox(height: 8),
-        OutlinedButton(
-          onPressed: reintentarEvaluacion,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            child: Text(tr('INTENTARLO DE NUEVO')),
+        // En un repaso, repetir al instante con las mismas preguntas daba la
+        // unidad por dominada de memoria: el repaso vuelve más adelante.
+        if (!widget.repaso)
+          OutlinedButton(
+            onPressed: reintentarEvaluacion,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              child: Text(tr('INTENTARLO DE NUEVO')),
+            ),
           ),
-        ),
       ],
       if (ok && siguienteUnidad != null && !widget.repaso)
         BotonPrincipal(

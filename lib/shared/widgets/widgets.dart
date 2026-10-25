@@ -345,6 +345,27 @@ class Logo extends StatelessWidget {
 }
 
 /// Contenedor centrado con ancho máximo para que la demo web no se estire.
+/// Columna con `Spacer` que ocupa toda la pantalla y, si no cabe (teléfonos
+/// de 360×640 o letra grande), se desplaza en vez de desbordarse.
+class DesplazableLleno extends StatelessWidget {
+  const DesplazableLleno({super.key, required this.child, this.padding});
+  final Widget child;
+  final EdgeInsets? padding;
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, c) => SingleChildScrollView(
+      padding: padding,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: c.maxHeight - (padding?.vertical ?? 0),
+        ),
+        child: IntrinsicHeight(child: child),
+      ),
+    ),
+  );
+}
+
 class Movil extends StatelessWidget {
   const Movil({super.key, required this.child});
   final Widget child;

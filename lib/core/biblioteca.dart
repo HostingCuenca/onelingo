@@ -150,10 +150,14 @@ class RutaBiblioteca {
         .toList();
     final errores = rs.where((r) => r['correcta'] == false).length;
     if (errores > 0) {
-      return tr(
-        '{n} actividades con errores por reforzar. Practica y comprueba con ejemplos nuevos.',
-        {'n': errores},
-      );
+      return errores == 1
+          ? tr(
+              '1 actividad con errores por reforzar. Practica y comprueba con ejemplos nuevos.',
+            )
+          : tr(
+              '{n} actividades con errores por reforzar. Practica y comprueba con ejemplos nuevos.',
+              {'n': errores},
+            );
     }
     if (rs.isNotEmpty) {
       return tr('Continúa con ejemplos nuevos y repasa lo que ya has trabajado.');

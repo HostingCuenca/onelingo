@@ -142,4 +142,43 @@ void main() {
     }
     expect(altas / 200, lessThan(.05));
   });
+
+  test('la primera pregunta es de lectura y al nivel que dijo el alumno', () {
+    for (final (d, nivel) in [
+      (Autodeclaracion.poco, 1),
+      (Autodeclaracion.defiendo, 3),
+      (Autodeclaracion.bastante, 5),
+      (Autodeclaracion.avanzado, 7),
+    ]) {
+      final u = Ubicacion(
+        banco: bancoSintetico(),
+        declarado: d,
+        random: Random(1),
+      );
+      final primera = u.siguiente()!;
+      expect(primera.habilidad, 'lectura', reason: '$d');
+      expect(primera.nivel, nivel, reason: '$d');
+    }
+  });
+
+  test('la tarea de escritura sale una sola vez', () {
+    final rnd = Random(5);
+    final a = Alumno({for (final h in habilidadesUbicacion) h: 4}, rnd);
+    final u = Ubicacion(
+      banco: bancoSintetico(),
+      declarado: Autodeclaracion.defiendo,
+      random: rnd,
+    );
+    for (var i = u.siguiente(); i != null; i = u.siguiente()) {
+      u.responder(a.responde(i));
+    }
+    final w = u.escritura();
+    expect(w, isNotNull);
+    u.responder(true);
+    final nivel = u.nivelEscritura;
+    // La pantalla vuelve a pedir la siguiente al pulsar «Continuar».
+    expect(u.siguiente(), isNull);
+    expect(u.escritura(), isNull);
+    expect(u.nivelEscritura, nivel);
+  });
 }

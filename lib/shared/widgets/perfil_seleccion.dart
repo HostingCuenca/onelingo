@@ -58,7 +58,7 @@ class PerfilSeleccion extends StatelessWidget {
           opciones(sectoresAprendizaje, sectores, true),
         ],
         if (!soloSectores) ...[
-          const SizedBox(height: 20),
+          if (!soloObjetivos) const SizedBox(height: 20),
           Text(
             tr('¿Qué quieres lograr con el {idioma}?', {
               'idioma': nombreIdiomaEnFrase(idiomaMeta),

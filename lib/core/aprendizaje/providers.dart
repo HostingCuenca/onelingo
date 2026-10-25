@@ -5,6 +5,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../diagnostico.dart' show escalaDiagnosticoCliente;
+import '../models/models.dart' show Skill;
 import '../state/providers.dart';
 import 'biblioteca_adaptador.dart';
 import 'cargador.dart';
@@ -49,7 +50,18 @@ final bibliotecaUnidadRuntimeProvider =
 /// Idiomas cuya pantalla Aprender usa los niveles de la ruta (esquema 2,
 /// con estado y prueba de cada nivel). El resto sigue con las lecciones
 /// antiguas hasta tener su N1 (PLAN_PRODUCCION.md, FR-5b).
-const idiomasConRuta = {'en', 'fr', 'es', 'pt', 'de', 'it', 'zh', 'ja', 'ru', 'ko'};
+const idiomasConRuta = {
+  'en',
+  'fr',
+  'es',
+  'pt',
+  'de',
+  'it',
+  'zh',
+  'ja',
+  'ru',
+  'ko',
+};
 
 /// Ruta de un idioma (null si aún no tiene).
 final rutaProvider = FutureProvider.family<RutaCargada?, String>(
@@ -83,9 +95,9 @@ final bancoUbicacionProvider = FutureProvider.family<BancoUbicacion?, String>((
   if (!idiomasConRuta.contains(idioma)) return null;
   final Map<String, dynamic> json;
   try {
-    json =
-        jsonDecode(await rootBundle.loadString(rutaBancoUbicacion(idioma)))
-            as Map<String, dynamic>;
+    json = jsonDecode(
+      await rootBundle.loadString(rutaBancoUbicacion(idioma)),
+    ) as Map<String, dynamic>;
   } catch (_) {
     return null;
   }
@@ -205,6 +217,7 @@ class RegistroRuta {
     _notifier.registrarPractica(clave, {
       'idioma': u.idioma,
       'skill': u.habilidades.first,
+      'area': areaDeItem(u, i),
       'nivel': u.nivelInterno,
       'ruta': 'ruta-v2',
       'unidad': u.id,
@@ -226,6 +239,51 @@ class RegistroRuta {
       'libraryVersion': ?libraryVersion,
       'selectionId': ?selectionId,
     });
+    _anotarError(u, i, correcta, respuesta);
+  }
+
+  /// «Mis errores» también recoge la ruta (antes solo el reproductor antiguo
+  /// guardaba errores y la pantalla salía vacía en el curso actual). Solo
+  /// formatos en los que «escribe la forma correcta» tiene sentido.
+  void _anotarError(UnidadRuta u, Item i, bool correcta, String respuesta) {
+    const formatos = {
+      FormatoItem.completar,
+      FormatoItem.ordenar,
+      FormatoItem.escribir,
+    };
+    final valida = i.respuesta;
+    if (correcta ||
+        i.abierta ||
+        valida == null ||
+        !formatos.contains(i.formato)) {
+      return;
+    }
+    final texto = i.texto ?? '';
+    final correccion =
+        i.formato == FormatoItem.completar && texto.contains('___')
+        ? texto.replaceFirst('___', valida)
+        : valida;
+    final s = _ref.read(progressProvider);
+    final cadena = cadenaApoyo(s.interfaz, 'es');
+    // El origen se muestra en la tarjeta: el título de la clase, no su id.
+    final origen = u.titulo.en(cadena);
+    // Fallar dos veces el mismo ejercicio no lo duplica.
+    if (s.errores.any(
+      (e) => !e.practicado && e.origen == origen && e.correccion == correccion,
+    )) {
+      return;
+    }
+    _notifier.agregarError(
+      skill: switch (areaDeItem(u, i)) {
+        'vocabulario' => Skill.vocabulario,
+        'listening' => Skill.listening,
+        _ => Skill.gramatica,
+      },
+      original: respuesta.trim().isEmpty ? '—' : respuesta.trim(),
+      correccion: correccion,
+      explicacion: i.feedback.en(cadena),
+      origen: origen,
+    );
   }
 
   /// Guarda el intento de evaluación; devuelve si la unidad quedó aprobada.

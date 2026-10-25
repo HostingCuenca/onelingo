@@ -125,6 +125,10 @@ class _SelectorIdiomasPlanState extends State<_SelectorIdiomasPlan> {
   }
 }
 
+/// Un cambio en curso (puede tardar hasta 12 s): un segundo envío chocaba con
+/// el bloqueo de «próximo cambio» del servidor.
+bool _cambiandoIdiomas = false;
+
 /// Cambia o completa los idiomas pagados con `PUT /usuarios/me/suscripcion/idiomas`.
 /// [incluir] se marca si cabe (p. ej. el idioma nuevo que se quiere pagar).
 Future<void> cambiarIdiomasSuscripcion(
@@ -134,7 +138,7 @@ Future<void> cambiarIdiomasSuscripcion(
   String? incluir,
 }) async {
   final cantidad = sus.idiomasDelPlan;
-  if (cantidad <= 0) return;
+  if (cantidad <= 0 || _cambiandoIdiomas) return;
   final marcados = [
     ...sus.idiomas,
     if (incluir != null &&
@@ -148,7 +152,11 @@ Future<void> cambiarIdiomasSuscripcion(
     marcados: marcados,
   );
   if (elegidos == null || !context.mounted) return;
-  final r = await ref.read(pagosApiProvider).cambiarIdiomas(elegidos);
+  _cambiandoIdiomas = true;
+  final r = await ref
+      .read(pagosApiProvider)
+      .cambiarIdiomas(elegidos)
+      .whenComplete(() => _cambiandoIdiomas = false);
   if (!context.mounted) return;
   final notifier = ref.read(suscripcionProvider.notifier);
   if (r.ok && r.cuerpo.containsKey('estado')) {

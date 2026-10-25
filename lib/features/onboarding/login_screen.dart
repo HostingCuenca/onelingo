@@ -24,6 +24,13 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final email = TextEditingController();
   final pass = TextEditingController();
+
+  @override
+  void dispose() {
+    email.dispose();
+    pass.dispose();
+    super.dispose();
+  }
   String? error;
   String? aviso;
   bool cargando = false;
@@ -32,6 +39,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   static const _googleClientIdWeb = String.fromEnvironment('GOOGLE_CLIENT_ID_WEB');
 
   Future<void> _entrar() async {
+    // Enter en la contraseña no pasa por el botón deshabilitado.
+    if (cargando) return;
     final correo = email.text.trim().toLowerCase();
     final demo = demoUserPorEmail(correo);
     if (demo != null && pass.text == DemoUser.password) {
@@ -80,8 +89,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           );
       context.go('/inicio');
     } on GoogleSignInException catch (e) {
+      if (!mounted) return;
       setState(() => error = e.code == GoogleSignInExceptionCode.canceled ? null : tr('Google: {detalle}. Falta configurar el ID de cliente (ver AUTENTICACION.md).', {'detalle': e.description ?? e.code.name}));
     } catch (e) {
+      if (!mounted) return;
       setState(() => error = tr('Google Sign-In no está configurado todavía en esta app (ver AUTENTICACION.md).'));
     } finally {
       if (mounted) setState(() => cargando = false);
