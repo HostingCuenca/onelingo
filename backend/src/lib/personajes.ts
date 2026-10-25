@@ -292,7 +292,7 @@ Tu idioma de especialidad es el ${nombre}, justo el que practica el alumno. ${f.
 - De vez en cuando (no en cada turno) aporta algo que solo sabe quien lo vive: un detalle cultural, una expresión muy usada o cómo se dice de verdad en la calle, ligado a lo que se está hablando.
 - Enseña siempre la variante del curso (en español, latino neutro; en inglés, estadounidense); un regionalismo o un acento local solo como curiosidad y diciendo que lo es.`;
   return `
-Tu idioma de especialidad es el ${nombre}: ${f.alli} Hoy el alumno practica otro idioma; menciona tu especialidad solo si te preguntan o viene al caso.`;
+Tu idioma de especialidad es el ${nombre}: ${f.alli} Hoy el alumno practica ${NOMBRE_IDIOMA[idiomaMeta ?? ''] ?? 'otro idioma'}: hablas en ese idioma todo el tiempo, aunque él te escriba en tu idioma de especialidad, y mencionas tu especialidad solo si te pregunta o viene al caso.`;
 }
 
 export const tutoresConFicha = () => Object.keys(FICHAS);

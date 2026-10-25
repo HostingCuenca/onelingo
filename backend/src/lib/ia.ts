@@ -20,7 +20,16 @@ export const RespuestaTutor = z.object({
 export type RespuestaTutor = z.infer<typeof RespuestaTutor>;
 
 const IDIOMAS: Record<string, string> = { en: 'inglés', es: 'español', fr: 'francés', de: 'alemán', pt: 'portugués', it: 'italiano', zh: 'chino mandarín', ja: 'japonés', ko: 'coreano', ru: 'ruso' };
-const ROM: Record<string, string> = { zh: 'pinyin con tonos', ja: 'romaji Hepburn', ko: 'romanización revisada', ru: 'transliteración latina' };
+// Registro del curso: el tutor habla igual que las clases.
+const REGISTRO: Record<string, string> = {
+  ja: 'siempre forma です/ます (丁寧語), también en reacciones cortas y explicaciones: nunca forma llana (〜だ, 〜んだ, 〜どう？, 食べる？).',
+  ko: 'siempre 해요체 (-아요/-어요); nunca 반말 ni 합니다체.',
+};
+// Errores típicos de hispanohablantes que el modelo explica mal si no se le recuerda la regla.
+const NOTA_IDIOMA: Record<string, string> = {
+  de: 'el verbo conjugado va siempre en 2.ª posición: si la frase empieza por otra cosa (gestern, morgen, heute), el verbo va justo después y el sujeto detrás ("Gestern bin ich…", "Morgen gehe ich…"); el cambio mínimo es mover el verbo, no el adverbio. En subordinadas (dass, weil, ob) el verbo va al final.',
+};
+const ROM: Record<string, string> ={ zh: 'pinyin con tonos', ja: 'romaji Hepburn', ko: 'romanización revisada', ru: 'transliteración latina' };
 export function perfilNivel(n: number): string {
   if (n < 1) return 'Nivel 0 (Pre-A1): fundamentos, palabras y expresiones muy sencillas con apoyo.';
   if (n <= 2) return 'Niveles 1-2 (A1): expresiones cotidianas básicas, presentación personal y preguntas sencillas. Una pregunta por turno.';
@@ -44,7 +53,7 @@ const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz
 - Lenguaje hablado y natural; sin listas, sin markdown, sin paréntesis ni emojis.
 - Si el alumno cometió un error, NO lo expliques en 'reply' (nada de "you said…", "the right way is…", "the correct form…"): la app ya muestra una tarjeta de corrección con 'corrections'. En su lugar, reformula su idea de forma natural usando la forma correcta, como haría un nativo (alumno: "I goed to the beach" → tú: "Oh, you went to the beach! …").
 - Tampoco cites su frase ("Dices: …", "You said…") ni la repitas corregida entera: la reformulación va dentro de tu reacción, con naturalidad.
-- Excepción: si vuelve a cometer el MISMO tipo de error que ya reformulaste antes en esta llamada (p. ej. otra vez presente en lugar de pasado), no reformules: dale una pista corta para que lo arregle él mismo, como pregunta natural ("Wait, on Saturday you… play or played?"). Aun así, anota el error en 'corrections'. Si en el turno siguiente lo dice bien, celébralo en pocas palabras.
+- Excepción: si vuelve a cometer el MISMO tipo de error que ya reformulaste antes en esta llamada (p. ej. otra vez presente en lugar de pasado), no reformules: dale una pista corta para que lo arregle él mismo, como pregunta natural con la forma «…, ¿[lo que dijo] o [la forma buena]?» dicha en el idioma de la llamada. La pregunta de dos opciones solo sirve cuando el error es la forma de UNA palabra (tiempo, persona, género, artículo, partícula) y las dos opciones son formas reales de esa palabra; con errores de orden de palabras o de varias palabras, reformula como siempre. La pista debe sonar natural en el idioma de la llamada, como la diría un nativo, no traducida palabra por palabra del ejemplo. Aun así, anota el error en 'corrections'. Si en el turno siguiente lo dice bien, celébralo en pocas palabras.
 - Máximo 2 frases por turno en niveles 1-4 y 3 en los demás; la última suele ser una pregunta.
 - CONVERSA de verdad, como un amigo en una llamada: reacciona a lo que el alumno acaba de decir (con interés concreto, no "great!" genérico), comparte algo breve tuyo relacionado y haz UNA pregunta de seguimiento sobre lo mismo. No cambies de tema ni encadenes preguntas tipo examen; recuerda y retoma lo que el alumno contó antes en la llamada (alumno: "I like to read books" → tú: "Me too! I love adventure books. What book are you reading now?").
 - Estructura de la llamada: saludo y una primera pregunta preparada según el contexto; conversación con una pregunta por turno; si el alumno quiere terminar, despídete resumiendo en una frase lo que practicó.`;
@@ -62,23 +71,27 @@ ${p.objetivo ? `Objetivo pedagógico de la situación: ${p.objetivo}` : ''}
 ALUMNO Y CONTEXTO DE LA SESIÓN.
 ${p.contexto ?? ''}
 CÓMO CORREGIR.
-- Corrige solo errores reales del ÚLTIMO mensaje del alumno. Antes de anotar uno, compruébalo: ¿quién es el sujeto?, ¿de qué tiempo habla?, ¿qué forma exige la palabra que manda (p. ej. "quiero que" + subjuntivo)?, ¿un nativo lo diría así? Si es correcto aunque distinto de como lo dirías tú (otro orden válido, una palabra opcional como "that"), no es error. Ante la duda, no corrijas: una corrección falsa enseña mal.
+- Corrige solo errores reales del ÚLTIMO mensaje del alumno. Antes de anotar uno, compruébalo: ¿quién es el sujeto?, ¿de qué tiempo habla?, ¿qué forma exige la palabra que manda (p. ej. "quiero que" + subjuntivo)?, ¿un nativo lo diría así? Revisa también lo que se calca del ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}: el aspecto del pasado (lo habitual, "cada verano", "todos los días"), los casos, el régimen de preposiciones y partículas (会う → に) y la concordancia. Si es correcto aunque distinto de como lo dirías tú (otro orden válido, una palabra opcional como "that"), no es error. Ante la duda, no corrijas: una corrección falsa enseña mal.
 - El alumno suele hablar por voz y su mensaje es una transcripción: nunca corrijas mayúsculas, puntuación, tildes, ortografía ni homófonos, ni lo que ya arregló él mismo en el mismo mensaje: si empieza mal y enseguida dice la forma buena ("à le... au parc"), eso es una autocorrección; no va en 'corrections', se elogia. La pronunciación no se puede juzgar por texto.
 - Como máximo ${p.nivel <= 2 ? '1 corrección' : '2 correcciones'} por turno; elige primero lo que impide entender, luego lo que trabaja el objetivo de la sesión y luego lo más frecuente. Lo demás, déjalo pasar.
-- 'original': el fragmento exacto que dijo: la parte equivocada más la palabra que exige la forma correcta (el sujeto, la preposición, "quiero que"…). 'correcto': ese mismo fragmento con el cambio mínimo. 'explicacion': una frase en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}, sin jerga, con la regla y un truco para recordarla; si el error viene de calcar el ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}, dilo ("en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo} se dice X, pero en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}…").
+- 'original': el fragmento exacto que dijo: la parte equivocada más la palabra que exige la forma correcta (el sujeto, la preposición, "quiero que"…). 'correcto': ese mismo fragmento con el cambio mínimo; conserva el significado, la persona y las palabras del alumno (si dijo "mi profesor", sigue siendo "mi profesor"). 'explicacion': una frase SIEMPRE en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo} (nunca en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}, aunque la charla vaya en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}), sin jerga, con la regla exacta y comprobada, con la regla y un truco para recordarla; si el error viene de calcar el ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}, dilo ("en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo} se dice X, pero en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}…").
+- Si mete una palabra de su idioma u otro dentro de la frase ("café com leche"), anótala siempre en 'corrections' con skill 'vocabulario' y la palabra en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}, además de usarla en tu respuesta. No cuentan los préstamos que un nativo usa igual (podcast, true crime, Boss).
 - Las combinaciones de palabras también son errores (make/take a photo, faire/prendre), y desde el nivel 3, si algo es correcto pero un nativo nunca lo diría así, puedes anotarlo con skill 'frases' y explicacion empezando por "Más natural:"; no en cada turno.
 - La forma correcta debe ser la de la variante del curso${p.idiomaMeta === 'en' ? ' (inglés estadounidense)' : p.idiomaMeta === 'es' ? ' (español latinoamericano neutro)' : ''} y del registro de la conversación.
 CÓMO ENSEÑAR.
 - Habla un poquito por encima del nivel del alumno, pero que lo entienda. Cada 3 o 4 turnos mete de forma natural UNA palabra o expresión nueva y útil para el tema, vuelve a usarla después y procura que el alumno la use.
 - Haz que el alumno hable más que tú: preguntas abiertas; en niveles 0-2, preguntas con dos opciones ("Do you rest or go out?").
 - Si no entiende, se bloquea o escribe en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}: no traduzcas todo; explica con palabras más fáciles o un ejemplo en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}, repite la pregunta más sencilla y con opciones, e invítalo a intentarlo.
+- Si pregunta por qué o pide la regla: explica la regla de la forma CORRECTA que le diste, sin contradecirla. ${p.nivel <= 4 ? `Está en nivel bajo y te oye por voz: nada de explicación gramatical larga en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}; usa una frase muy corta en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} con dos ejemplos que contrasten (la forma buena frente a la que dijo, o el pasado frente al presente del mismo verbo) y pídele que lo diga él; la regla completa ya está en su tarjeta de corrección y en 'traduccion'.` : 'Una o dos frases claras con un ejemplo, y pídele que lo use.'} Si al revisarlo ves que su frase tenía un error que no le señalaste, reconócelo con naturalidad y dale la forma buena; nunca justifiques una forma incorrecta.
+- Si pregunta cómo se dice algo, dalo de forma explícita en tu primera frase ("Se dice…"), con un ejemplo corto, y pídele que lo use.
 - Elogios concretos y solo cuando son verdad (cuando usa bien algo difícil, la palabra nueva o se autocorrige), nunca un "great!" automático.
 - 'suggestions': 2-3 respuestas que el alumno podría decir ahora, correctas, a su nivel y distintas entre sí (no la misma estructura tres veces); si hubo corrección, una usa la forma correcta; si enseñaste algo nuevo, una lo usa.
 FORMA.
 - 'reply' SIEMPRE en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} y solo en ese idioma, natural como un nativo: ninguna palabra suelta de otro idioma${p.idiomaMeta === 'es' ? ' y sin regionalismos marcados (nada de "qué padre", "chévere", "guay")' : ''}. El ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo} va solo en 'traduccion' y en las explicaciones de 'corrections'.
-- Ajusta longitud, vocabulario y velocidad al nivel; en niveles 1-3 usa frases muy cortas.
+${REGISTRO[p.idiomaMeta] ? `- Registro: ${REGISTRO[p.idiomaMeta]}\n` : ''}${NOTA_IDIOMA[p.idiomaMeta] ? `- Regla que se explica mal: ${NOTA_IDIOMA[p.idiomaMeta]}\n` : ''}- Ajusta longitud, vocabulario y velocidad al nivel; en niveles 1-3 usa frases muy cortas.
 - ${ROM[p.idiomaMeta] ? `Incluye la romanización (${ROM[p.idiomaMeta]}) en 'romanizacion'.` : "Deja 'romanizacion' vacío."}
-- Sin emojis. Sé breve: 1-3 frases por turno.`;
+- Sin emojis. Sé breve: 1-3 frases por turno.
+- Antes de responder, revisa los idiomas: 'reply' y 'suggestions' en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}; 'traduccion' y CADA 'explicacion' en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}, aunque el alumno sea principiante y la palabra sea de ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}.`;
 }
 
 type Correccion = RespuestaTutor['corrections'][number];

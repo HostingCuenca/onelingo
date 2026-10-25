@@ -40,7 +40,20 @@ async function conReintentos(hacer: () => Promise<Response>, intentos = 3): Prom
   throw new Error(`OpenAI ${r.status}: ${j?.error?.message ?? 'error'}`);
 }
 
-export async function generarJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown = ESQUEMA_TUTOR_OPENAI, modelo = config.openaiModelo) {
+// gpt-4.1-mini a veces deja la respuesta normal en `refusal` (1 de ~200 turnos): un reintento lo arregla.
+export async function generarJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown = ESQUEMA_TUTOR_OPENAI, modelo = config.openaiModelo, intento = 1): Promise<{ json: any; modelo: string; entrada: number; salida: number }> {
+  try { return await pedirJsonOpenAI(system, mensajes, esquema, modelo); }
+  catch (e) {
+    const refusal = (e as { refusal?: string }).refusal;
+    if (!refusal) throw e;
+    if (intento < 2) return generarJsonOpenAI(system, mensajes, esquema, modelo, intento + 1);
+    // Si vuelve a pasar con el tutor, el texto es su respuesta normal: mejor eso que un error.
+    if (esquema === ESQUEMA_TUTOR_OPENAI) return { json: { reply: refusal, romanizacion: '', traduccion: '', corrections: [], suggestions: [] }, modelo, entrada: 0, salida: 0 };
+    throw e;
+  }
+}
+
+async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown, modelo: string) {
   const { j } = await conReintentos(() => fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${config.openaiApiKey}` },
@@ -53,7 +66,7 @@ export async function generarJsonOpenAI(system: string, mensajes: { role: 'user'
     }),
   }));
   const m = j?.choices?.[0]?.message;
-  if (m?.refusal) throw new Error(`OpenAI rechazó la petición: ${m.refusal}`);
+  if (m?.refusal) throw Object.assign(new Error(`OpenAI rechazó la petición: ${m.refusal}`), { refusal: String(m.refusal) });
   const texto: string = m?.content ?? '';
   if (!texto) throw new Error(`OpenAI sin contenido (${j?.choices?.[0]?.finish_reason ?? 'sin candidatos'})`);
   return { json: JSON.parse(texto), modelo: j?.model ?? modelo, entrada: j?.usage?.prompt_tokens ?? 0, salida: j?.usage?.completion_tokens ?? 0 };

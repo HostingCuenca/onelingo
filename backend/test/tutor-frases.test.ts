@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { frasesCompletas, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
-import { correccionesPrevias, resumirHechos } from '../src/lib/situaciones.js';
+import { correccionesPrevias, resumirHechos, tipoCambio } from '../src/lib/situaciones.js';
 import { depurarCorrecciones, systemPrompt } from '../src/lib/ia.js';
 const originalFetch = globalThis.fetch;
 const encoder = new TextEncoder();
@@ -82,7 +82,7 @@ test('cada tutor en vivo conoce un idioma de primera mano y todos los idiomas ti
   for (const l of idiomas) assert.ok(de.includes(l), `sin especialista: ${l}`);
   // Con su idioma aporta cultura y uso real; con otro, solo lo menciona.
   assert.match(fichaTutor('avatar_erik', 'ja'), /especialidad es el japonés, justo el que practica/);
-  assert.match(fichaTutor('avatar_erik', 'en'), /Hoy el alumno practica otro idioma/);
+  assert.match(fichaTutor('avatar_erik', 'en'), /Hoy el alumno practica inglés: hablas en ese idioma todo el tiempo/);
   assert.doesNotMatch(fichaTutor('mia', 'en'), /especialidad es el/);
 });
 
@@ -110,6 +110,16 @@ test('corrections already made in the call reach the tutor so repeats get a hint
   assert.match(t, /YA CORREGIDO/);
   assert.match(t, /I went to the park/);
   assert.doesNotMatch(t, /explicacion/);
+});
+
+test('the "X or Y?" hint is only offered when one word changed', () => {
+  assert.deepEqual(tipoCambio('Meine Schwester hat Lehrerin', 'Meine Schwester ist Lehrerin'), { tipo: 'palabra', opciones: ['hat', 'ist'] });
+  assert.deepEqual(tipoCambio('영화를 봐요', '영화를 봤어요'), { tipo: 'palabra', opciones: ['봐요', '봤어요'] });
+  assert.deepEqual(tipoCambio('Il mela', 'La mela'), { tipo: 'palabra', opciones: ['il', 'la'] });
+  assert.deepEqual(tipoCambio('Morgen ich gehe zum Arzt', 'Morgen gehe ich zum Arzt'), { tipo: 'orden' });
+  assert.deepEqual(tipoCambio('I am agree', 'I agree'), { tipo: 'otro' });
+  assert.deepEqual(tipoCambio('我的老师是很好', '我的老师很好'), { tipo: 'otro' });
+  assert.match(correccionesPrevias([{ respuesta: { corrections: [{ original: 'Morgen ich gehe', correcto: 'Morgen gehe ich', skill: 'gramatica' }] } }]), /"tipo":"orden"/);
 });
 
 test('the prompt teaches how to correct and teach', () => {
