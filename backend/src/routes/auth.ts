@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import { OAuth2Client } from 'google-auth-library';
 import { z } from 'zod';
 import { config } from '../lib/config.js';
-import { enviarCorreo, plantilla } from '../lib/correo.js';
+import { enviarCorreo, esc, plantilla } from '../lib/correo.js';
 import { query, uno } from '../lib/db.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { planEfectivo } from '../lib/pagos/suscripciones.js';
@@ -32,6 +32,9 @@ export default async function rutas(app: FastifyInstance) {
     const email = d.email.toLowerCase();
     const existe = await uno('SELECT id, password_hash, google_id FROM usuarios WHERE email = $1', [email]);
     if (existe && (existe.password_hash || existe.google_id)) return reply.code(409).send({ error: 'Ya existe una cuenta con ese correo. Inicia sesión.' });
+    // Una cuenta antigua sin contraseña solo la reclama su dueño, con el enlace
+    // de recuperación al correo; registrarse encima se la quitaba a cualquiera.
+    if (existe && !email.endsWith('@onelingo.demo')) return reply.code(409).send({ error: 'Ya existe una cuenta con ese correo. Usa «¿Olvidaste tu contraseña?» para entrar.' });
     const hash = await bcrypt.hash(d.password, 10);
     const tokenVerif = randomBytes(24).toString('hex');
     const u = existe
@@ -39,7 +42,7 @@ export default async function rutas(app: FastifyInstance) {
       : await uno('INSERT INTO usuarios (email, nombre, idioma_nativo, idioma_meta, nivel_inicial, plataforma, trial_inicio, password_hash, token_verificacion) VALUES ($1,$2,$3,$4,$5,$6, now(), $7, $8) RETURNING id', [email, d.nombre, d.idiomaNativo, d.idiomaMeta, d.nivelInicial, d.plataforma, hash, tokenVerif]);
     await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1,$2,$3)', [u!.id, 'registro', JSON.stringify({ metodo: 'password', idiomaMeta: d.idiomaMeta })]);
     const url = `${config.publicUrl}/auth/verificar?token=${tokenVerif}`;
-    await enviarCorreo(email, 'Confirma tu correo en OneLingo', plantilla(`¡Hola, ${d.nombre}!`, 'Gracias por registrarte. Confirma tu correo para proteger tu cuenta y recuperar tu contraseña si la olvidas.', { texto: 'Confirmar correo', url }));
+    await enviarCorreo(email, 'Confirma tu correo en OneLingo', plantilla(`¡Hola, ${esc(d.nombre)}!`, 'Gracias por registrarte. Confirma tu correo para proteger tu cuenta y recuperar tu contraseña si la olvidas.', { texto: 'Confirmar correo', url }));
     return reply.code(201).send({ id: u!.id, token: tokenDe(app, u!.id), verificado: false });
   });
 
@@ -47,7 +50,7 @@ export default async function rutas(app: FastifyInstance) {
     const { token } = z.object({ token: z.string() }).parse(req.query);
     const u = await uno('UPDATE usuarios SET email_verificado = true, token_verificacion = NULL WHERE token_verificacion = $1 RETURNING nombre', [token]);
     reply.type('text/html');
-    return plantilla(u ? `Correo confirmado, ${u.nombre}` : 'Enlace no válido', u ? 'Ya puedes volver a la app de OneLingo.' : 'Este enlace ya se usó o ha caducado.');
+    return plantilla(u ? `Correo confirmado, ${esc(u.nombre)}` : 'Enlace no válido', u ? 'Ya puedes volver a la app de OneLingo.' : 'Este enlace ya se usó o ha caducado.');
   });
 
   /** Inicio de sesión con correo y contraseña. Devuelve el progreso guardado en el servidor. */
@@ -90,7 +93,7 @@ export default async function rutas(app: FastifyInstance) {
     if (u) {
       const token = randomBytes(24).toString('hex');
       await query("UPDATE usuarios SET token_reset=$2, reset_expira = now() + interval '1 hour' WHERE id=$1", [u.id, token]);
-      await enviarCorreo(email, 'Restablece tu contraseña de OneLingo', plantilla(`Hola, ${u.nombre}`, 'Recibimos una solicitud para cambiar tu contraseña. El enlace vale una hora.', { texto: 'Cambiar contraseña', url: `${config.publicUrl}/auth/restablecer?token=${token}` }));
+      await enviarCorreo(email, 'Restablece tu contraseña de OneLingo', plantilla(`Hola, ${esc(u.nombre)}`, 'Recibimos una solicitud para cambiar tu contraseña. El enlace vale una hora.', { texto: 'Cambiar contraseña', url: `${config.publicUrl}/auth/restablecer?token=${token}` }));
     }
     return { ok: true, mensaje: 'Si el correo existe, te enviamos un enlace para restablecer la contraseña.' };
   });
@@ -98,6 +101,9 @@ export default async function rutas(app: FastifyInstance) {
   app.get('/auth/restablecer', async (req, reply) => {
     const { token } = z.object({ token: z.string() }).parse(req.query);
     reply.type('text/html');
+    // El token va dentro del HTML: solo el formato que generamos (sin esto, un
+    // enlace con ?token="><script>… ejecutaba código en onelingo.org).
+    if (!/^[0-9a-f]{48}$/.test(token)) return plantilla('Enlace no válido', 'Pide un enlace nuevo desde la app.');
     return plantilla('Nueva contraseña', `<form method="post" action="${config.publicUrl}/auth/restablecer-form" style="display:flex;flex-direction:column;gap:10px;max-width:320px"><input type="hidden" name="token" value="${token}"/><input name="password" type="password" minlength="6" placeholder="Nueva contraseña" required style="padding:10px;border:1px solid #ddd;border-radius:8px"/><button style="background:#4519BB;color:#fff;border:0;padding:12px;border-radius:10px;font-weight:700">Guardar</button></form>`);
   });
 

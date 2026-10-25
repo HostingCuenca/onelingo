@@ -46,10 +46,15 @@ function nivelActual(estado: z.infer<typeof Estado>): number {
   return n;
 }
 
+// Entrada sin contraseña: solo para los usuarios de prueba de la app
+// (@onelingo.demo). Con cualquier otro correo daba la sesión de su dueño.
+const esDemo = (email: string) => email.endsWith('@onelingo.demo');
+
 export default async function rutas(app: FastifyInstance) {
   app.post('/usuarios/registro', async (req, reply) => {
     const d = Registro.parse(req.body);
     const email = d.email.toLowerCase();
+    if (!esDemo(email)) return reply.code(403).send({ error: 'Regístrate con correo y contraseña' });
     const existente = await uno('SELECT id FROM usuarios WHERE email = $1', [email]);
     const u = existente
       ? await uno('UPDATE usuarios SET nombre=$2, idioma_nativo=$3, idioma_meta=$4, nivel_inicial=$5, plataforma=$6, ultima_actividad=now() WHERE email=$1 RETURNING id', [email, d.nombre, d.idiomaNativo, d.idiomaMeta, d.nivelInicial, d.plataforma])
@@ -61,7 +66,7 @@ export default async function rutas(app: FastifyInstance) {
 
   app.post('/usuarios/login', async (req, reply) => {
     const { email } = z.object({ email: z.string().email() }).parse(req.body);
-    const u = await uno('SELECT id FROM usuarios WHERE email = $1', [email.toLowerCase()]);
+    const u = esDemo(email.toLowerCase()) ? await uno('SELECT id FROM usuarios WHERE email = $1', [email.toLowerCase()]) : null;
     if (!u) return reply.code(404).send({ error: 'Usuario no encontrado' });
     await query('UPDATE usuarios SET ultima_actividad = now() WHERE id = $1', [u.id]);
     await query('INSERT INTO eventos (usuario_id, tipo) VALUES ($1, $2)', [u.id, 'login']);

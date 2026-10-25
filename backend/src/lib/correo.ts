@@ -19,6 +19,10 @@ export async function enviarCorreo(para: string, asunto: string, html: string) {
   return enviado;
 }
 
+/** Escapa texto del usuario (nombres) antes de meterlo en el HTML. */
+export const esc = (t: string) =>
+  t.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+
 export const plantilla = (titulo: string, cuerpo: string, boton?: { texto: string; url: string }) => `
 <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#1c1b1b">
   <div style="font-size:22px;font-weight:800;margin-bottom:12px">One<span style="color:#4519BB">Lingo</span></div>
