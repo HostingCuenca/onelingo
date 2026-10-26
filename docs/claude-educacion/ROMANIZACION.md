@@ -27,6 +27,22 @@ Fecha: 07-10-2026. Solo para idiomas sin alfabeto latino (ru, ko, ja, zh). En it
 - **Desde N3:** va oculta. El botón «Ver romanización» la abre para toda la clase. Está en `ItemView` y en los pasos de enseñanza de `unidad_screen.dart`, y la prueba de nivel también lo tiene.
 - **Ejercicios de escucha:** la romanización de las opciones se muestra al corregir, nunca antes, porque delataría lo que se oye. En la ruta afecta a `escuchar`; en el Nivel 0, a `escucha_elige`, `toca_sonido`, `escucha_letra`, `deletreo`, `construye` y `cambia`. El panel de resultado enseña la romanización de la respuesta correcta.
 
+## Situaciones de práctica
+
+Están en `assets/contenido/<idioma>/situaciones.json` y su detalle en SITUACIONES_V2.md.
+- **Básico:** `fraseRom`, `metaRom` y `ejemploRom`.
+- **Intermedio y avanzado:** solo el `metaRom` del vocabulario.
+- **Japonés:** `lectura` en kana.
+- **Visualización:** `TextoRom` bajo el texto en `situation_screen.dart`.
+
+## Respuestas escritas en letras latinas
+
+En ru, ja, ko y zh el alumno puede escribir la respuesta en letras latinas (pinyin con o sin tonos, rōmaji, RR, transliteración) y se acepta como correcta. Después se le muestra cómo se escribe: «Bien. Así se escribe: …».
+- **`lib/core/aprendizaje/romanizado.dart` (`LexicoRom`):** sale de la romanización del curso cargado y se completa con transliteración algorítmica en ru, ko y kana.
+- **Comparación:** se hace sobre formas canónicas tolerantes; por ejemplo, ko con g/k, d/t, b/p y r/l; ja con ou/ō; ru con j/y y kh/h.
+- **Integración:** `correccion.dart` llama a `aceptaRomanizada` desde `respuestaEscritaCorrecta` y `mismaRespuesta`.
+- **Prueba:** `test/romanizado_test.dart`. Cubre más del 99 % de las respuestas escritas de N1–N4.
+
 ## Dónde se aplica
 
 - **App:**

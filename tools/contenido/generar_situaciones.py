@@ -62,6 +62,15 @@ def temas(catalogo):
     ) + '\n'
 
 
+def _sin_rom(x):
+    """El tutor no necesita la romanización ni la lectura (solo alargan el prompt)."""
+    if isinstance(x, dict):
+        return {k: _sin_rom(v) for k, v in x.items() if not k.endswith('Rom') and k != 'lectura'}
+    if isinstance(x, list):
+        return [_sin_rom(v) for v in x]
+    return x
+
+
 def backend(catalogo, contenido):
     nombres = {s['id']: s['nombre'] for s in catalogo['situaciones']}
     return json.dumps(
@@ -69,7 +78,7 @@ def backend(catalogo, contenido):
             'version': contenido['version'],
             'idioma': contenido['idioma'],
             'situaciones': [
-                {'id': s['id'], 'nombre': nombres[s['id']], 'tramos': s['tramos']}
+                {'id': s['id'], 'nombre': nombres[s['id']], 'tramos': _sin_rom(s['tramos'])}
                 for s in contenido['situaciones']
             ],
         },

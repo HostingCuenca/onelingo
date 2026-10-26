@@ -8,10 +8,14 @@ Uso:
 Acepta el archivo final ({"situaciones": [...]}) o un lote (lista de situaciones).
 Sale con código 1 si hay errores.
 """
+import importlib.util
 import json
 import pathlib
 import re
 import sys
+import unicodedata
+
+RAIZ = pathlib.Path(__file__).resolve().parents[2]
 
 TRAMOS = {'basico': 'b', 'intermedio': 'i', 'avanzado': 'a'}
 OBJ_PREFIJO = {'basico': 'o', 'intermedio': 'i', 'avanzado': 'a'}
@@ -84,11 +88,164 @@ def _normalizar(situaciones, errores):
     return generico
 
 
+# Nunca se menciona Ecuador (la app es para EE. UU. y Latinoamérica); el curso de
+# español es la excepción: se ambienta en Quito.
+ECUADOR = re.compile(
+    r'\b(?:ecuador\w*|ecuatorian\w*|quito|guayaquil|cuenca)\b|эквадор|厄瓜多|에콰도르|エクアドル', re.I)
+
+# Romanización en los idiomas sin alfabeto latino (docs/claude-educacion/ROMANIZACION.md,
+# reglas de cada tools/ia/idiomas/<idioma>.md). Como en el curso (rom en ejercicios hasta
+# N4, después solo en vocabulario): el básico la lleva en todo (`fraseRom`, `metaRom`,
+# `ejemploRom`); intermedio y avanzado, solo `metaRom` del vocabulario. En japonés, una
+# palabra con kanji lleva además `lectura` en kana (la voz lee esa, no el kanji).
+ROM_IDIOMAS = {'ru', 'ja', 'ko', 'zh'}
+_MODULOS = {}
+
+
+def _modulo(nombre, ruta):
+    if nombre not in _MODULOS:
+        sys.path.insert(0, str(RAIZ / 'tools/contenido'))
+        spec = importlib.util.spec_from_file_location(nombre, RAIZ / ruta)
+        m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(m)
+        _MODULOS[nombre] = m
+    return _MODULOS[nombre]
+
+
+ESCRITURA = {
+    'ru': re.compile(r'[А-Яа-яЁё]'),
+    'ko': re.compile(r'[가-힯]'),
+    'ja': re.compile(r'[ぁ-ゖァ-ヺ一-鿿]'),
+    'zh': re.compile(r'[一-鿿]'),
+}
+KANJI = re.compile(r'[一-鿿]')
+KANA = re.compile(r'[ぁ-ゖァ-ヺー]')
+# Básico (N1–N3) del japonés: solo kana y los kanji que el curso enseña en N1–N2.
+KANJI_BASICO_JA = set('日本人私先生学円水駅何今')
+
+
+def _error_rom(idioma, texto, rom):
+    """Mensaje si `rom` no es la romanización de `texto` según la ficha (o None)."""
+    if not isinstance(rom, str) or not rom.strip():
+        return 'sin romanización'
+    if ESCRITURA[idioma].search(rom):
+        return 'la romanización lleva la escritura del idioma'
+    if idioma == 'ru':
+        errores = []
+        _modulo('ruta_ru', 'tools/contenido/ruta-ru/validar.py').comprobar_par('', '', texto, rom, errores)
+        return errores[0].lstrip(': ') if errores else None
+    if idioma == 'ko':
+        e = _modulo('ruta_ko', 'tools/contenido/ruta-ko/validar.py').error_rom(rom)
+        if e:
+            return e
+        # RR con los cambios fonéticos de la ficha, eojeol por eojeol (nombre completo = 2).
+        e = _modulo('rr_ko', 'tools/contenido/rr_ko.py').errores_rom(texto, rom)
+        return e[0] if e else None
+    if idioma == 'zh':
+        m = _modulo('ruta_zh', 'tools/contenido/ruta-zh/validar.py')
+        e, _ = m.errores_rom(rom, '')
+        if '不' not in texto:
+            # «bù» de 部 o 步 no cambia de tono ante un 4.º: solo 不 hace sandhi.
+            e = [x for x in e if '«bù»' not in x]
+        if e:
+            return e[0].lstrip(': ')
+        if re.search(r'[,.?!;:][^\s,.?!;:…"”)]', rom):
+            return f'«{rom}»: en el pinyin va un espacio tras la puntuación («Hǎo, shūbāo»)'
+        # Como en el curso: «好，书包 我…» (puntuación pegada) ↔ «Hǎo, shūbāo wǒ…».
+        palabras = [t for t in re.split(r'[\s。，？！、；：…]+', texto) if m.HANZI.search(t)]
+        grupos = [g for g in re.split(r'[\s,.?!;:…]+', rom) if re.search(r'[a-zü]', g, re.I)]
+        if len(palabras) != len(grupos):
+            return f'«{texto}» tiene {len(palabras)} palabras y «{rom}» {len(grupos)} grupos (tras la coma, espacio en el pinyin)'
+        return None
+    # ja: Hepburn de la ficha cuando el texto va en kana; con kanji, al menos un grupo por palabra.
+    hep = _modulo('hepburn_ja', 'tools/contenido/hepburn_ja.py')
+    e = hep.errores_rom(texto, rom)
+    if e:
+        return e[0]
+    if len(texto.split()) != len(rom.split()):
+        return f'«{texto}» tiene {len(texto.split())} palabras y «{rom}» {len(rom.split())} grupos'
+    return None
+
+
+def _error_texto(idioma, texto, tramo):
+    """Forma del texto en la escritura del idioma (o None)."""
+    if idioma == 'zh':
+        e, _ = _modulo('ruta_zh', 'tools/contenido/ruta-zh/validar.py').errores_texto_chino(texto, '')
+        return e[0].lstrip(': ') if e else None
+    if idioma == 'ja':
+        if '\u3000' in texto:
+            return 'espacio de ancho completo'
+        if re.search(r'[ぁ-ヿ一-鿿][.,!?;]', texto):
+            return f'puntuación ASCII en «{texto}» (usa 。、？！)'
+        if re.search(r'\s[。、？！]', texto):
+            return f'espacio antes de la puntuación en «{texto}»'
+        if re.search(r'(?<!\s)\S{9,}', re.sub(r'[。、？！「」]', ' ', texto)) and KANA.search(texto):
+            return f'¿faltan espacios entre palabras? «{texto}»'
+        if tramo == 'basico':
+            fuera = sorted({k for k in KANJI.findall(texto) if k not in KANJI_BASICO_JA})
+            if fuera:
+                return f'kanji {fuera} en el básico (va en kana; solo {"".join(sorted(KANJI_BASICO_JA))})'
+    if idioma == 'ru' and '\u0301' in unicodedata.normalize('NFD', texto).replace('й', '').replace('Й', ''):
+        return f'marca de acento en el cirílico «{texto}» (el acento va solo en el rom)'
+    return None
+
+
+def validar_rom(situaciones, idioma):
+    errores = []
+    for s in situaciones:
+        for tramo, t in (s.get('tramos') or {}).items():
+            donde = f's{s.get("id")} {tramo}'
+            basico = tramo == 'basico'
+            campos = []  # (id, campo, texto, rom, obligatorio)
+            for o in t.get('objetivos', []):
+                campos.append((o.get('id'), 'frase', o.get('frase', ''), o.get('fraseRom'), basico))
+            for v in t.get('vocabulario', []):
+                campos.append((v.get('id'), 'meta', v.get('meta', ''), v.get('metaRom'), True))
+                campos.append((v.get('id'), 'ejemplo', v.get('ejemplo', ''), v.get('ejemploRom'), basico))
+                if idioma == 'ja':
+                    lectura = v.get('lectura')
+                    if KANJI.search(v.get('meta', '')) and not (lectura and KANA.search(lectura) and not KANJI.search(lectura)):
+                        errores.append(f'{donde}: {v.get("id")} «{v.get("meta")}» lleva kanji y le falta `lectura` en kana')
+                    elif lectura and not KANJI.search(v.get('meta', '')):
+                        errores.append(f'{donde}: {v.get("id")} lleva `lectura` sin kanji en «{v.get("meta")}»')
+                elif 'lectura' in v:
+                    errores.append(f'{donde}: {v.get("id")} lleva `lectura` (solo japonés)')
+                # El ejemplo contiene la palabra: su primer carácter (o los 3 primeros en ruso,
+                # que declina y conjuga) aparece en el ejemplo.
+                meta = re.sub(r'\s+', '', v.get('meta', ''))
+                if idioma == 'ru':
+                    raiz = (re.findall(r'[А-Яа-яЁё]+', v.get('meta', '').lower()) or [''])[0][:3]
+                    ok = raiz in v.get('ejemplo', '').lower()
+                else:
+                    ok = meta[:1] in v.get('ejemplo', '')
+                if meta and not ok:
+                    errores.append(f'{donde}: el ejemplo de «{v.get("meta")}» no la contiene')
+            for f in t.get('frases', []):
+                campos.append((f.get('id'), 'meta', f.get('meta', ''), f.get('metaRom'), basico))
+            for cid, campo, texto, rom, obligatorio in campos:
+                if e := _error_texto(idioma, texto, tramo):
+                    errores.append(f'{donde}: {cid} {campo}: {e}')
+                if obligatorio:
+                    if e := _error_rom(idioma, texto, rom):
+                        errores.append(f'{donde}: {cid} {campo}Rom: {e}')
+                elif rom is not None:
+                    errores.append(f'{donde}: {cid} lleva {campo}Rom (en {tramo} solo el vocabulario la lleva)')
+    return errores
+
+
 def validar(situaciones, idioma=None):
     global SOLO_EN
     SOLO_EN = idioma in APOYO_SOLO_EN
     errores = []
     situaciones = json.loads(json.dumps(situaciones))  # sin tocar el original
+    for x in ([] if idioma == 'es' else re.findall(r'"(?:[^"\\]|\\.)*"', json.dumps(situaciones, ensure_ascii=False))):
+        if ECUADOR.search(x):
+            errores.append(f'mención a Ecuador: {x[:80]}')
+            break
+    if '⚠' in json.dumps(situaciones, ensure_ascii=False):
+        errores.append('símbolo «⚠» en el contenido (la traducción correcta basta)')
+    if idioma in ROM_IDIOMAS:
+        errores += validar_rom(situaciones, idioma)
     generico = _normalizar(situaciones, errores)
     for s in situaciones:
         sid = s.get('id')
@@ -133,7 +290,8 @@ def validar(situaciones, idioma=None):
                 if generico and len(raiz) > 1 and raiz[0] in ('le', 'la', 'les', 'un', 'une', 'des', 'l', 'du', 'de',
                                                            'el', 'los', 'las', 'una', 'unos', 'unas',
                                                            'o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas',
-                                                           'der', 'die', 'das', 'ein', 'eine', 'sich'):
+                                                           'der', 'die', 'das', 'ein', 'eine', 'sich',
+                                                           'il', 'lo', 'gli', 'i', 'uno'):
                     # el artículo (o el «sich» del reflexivo alemán, que en el ejemplo
                     # va conjugado: «Ich melde mich») no tiene que repetirse en el ejemplo
                     raiz = raiz[1:]
@@ -169,8 +327,11 @@ def main():
         sys.exit(2)
     datos = json.load(open(sys.argv[1], encoding='utf-8'))
     situaciones = datos['situaciones'] if isinstance(datos, dict) else datos
-    # Idioma: el del archivo integrado o la carpeta del lote (situaciones/<idioma>/).
-    idioma = datos.get('idioma') if isinstance(datos, dict) else pathlib.Path(sys.argv[1]).resolve().parent.name
+    # Idioma: el del archivo integrado o la carpeta del lote (situaciones/<idioma>/[partes/]).
+    carpeta = pathlib.Path(sys.argv[1]).resolve().parent
+    if carpeta.name == 'partes':  # situaciones/<idioma>/partes/sNN.json
+        carpeta = carpeta.parent
+    idioma = datos.get('idioma') if isinstance(datos, dict) else carpeta.name
     errores = validar(situaciones, idioma)
     for e in errores:
         print('ERROR', e)

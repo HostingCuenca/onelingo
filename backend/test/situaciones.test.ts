@@ -17,7 +17,8 @@ test('situaciones v2: copia generada idéntica a la fuente, 50 × 3 tramos', () 
     assert.equal(t.vocabulario.length, 10);
     assert.ok(t.objetivos.every(o => o.frase && o.traduccion && o.titulo));
   }
-  assert.deepEqual(situacionesDe('it'), []);
+  assert.deepEqual(situacionesDe('xx'), []);
+  for (const idioma of ['it', 'ru', 'ja', 'ko', 'zh']) assert.equal(situacionesDe(idioma).length, 50, idioma);
   assert.deepEqual(situacionesDe('../x'), []);
 });
 test('objetivos de cualquier tramo son válidos solo en su situación', () => {
@@ -25,7 +26,8 @@ test('objetivos de cualquier tramo son válidos solo en su situación', () => {
   assert.ok(objetivoValido('en', 1, 's1-i1'));
   assert.ok(objetivoValido('en', 1, 's1-a3'));
   assert.equal(objetivoValido('en', 2, 's1-i1'), false);
-  assert.equal(objetivoValido('it', 1, 's1-o1'), false);
+  assert.equal(objetivoValido('xx', 1, 's1-o1'), false);
+  assert.ok(objetivoValido('zh', 50, 's50-a3'));
   assert.equal(situacionesDe('de').length, 50);
   assert.ok(objetivoValido('de', 1, 's1-o1'));
   assert.equal(tramoDeNivel(3), 'basico');

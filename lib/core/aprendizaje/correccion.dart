@@ -1,4 +1,5 @@
 import 'modelos.dart';
+import 'romanizado.dart';
 
 final _puntuacion = RegExp(r'[.,!?¡¿;:/。、！？「」…"“”«»()—–，：；]');
 final _espacios = RegExp(r'\s+');
@@ -90,7 +91,8 @@ String expandirContracciones(String normalizada) => normalizada
 /// que [respuestaEscritaCorrecta] (puntuación, tildes y contracciones).
 bool mismaRespuesta(String dada, String valida, String idioma) {
   final a = sinTildes(_forma(dada, idioma));
-  return a.isNotEmpty && a == sinTildes(_forma(valida, idioma));
+  return a.isNotEmpty && a == sinTildes(_forma(valida, idioma)) ||
+      aceptaRomanizada(idioma, [valida], dada);
 }
 
 bool _coincide(Item item, String respuesta, String idioma, bool tildes) {
@@ -102,9 +104,17 @@ bool _coincide(Item item, String respuesta, String idioma, bool tildes) {
 }
 
 /// Correcta si coincide con alguna forma válida. Un error solo de tildes se
-/// acepta (teclados sin esas letras) y se avisa con [soloFallanTildes].
+/// acepta (teclados sin esas letras) y se avisa con [soloFallanTildes]; en
+/// ru, ja, ko y zh también vale escrita en letras latinas
+/// ([escritaRomanizada]).
 bool respuestaEscritaCorrecta(Item item, String respuesta, String idioma) =>
-    _coincide(item, respuesta, idioma, false);
+    _coincide(item, respuesta, idioma, false) ||
+    aceptaRomanizada(idioma, item.respuestasValidas, respuesta);
+
+/// Correcta solo por estar en letras latinas: la app enseña cómo se escribe.
+bool escritaRomanizada(Item item, String respuesta, String idioma) =>
+    !_coincide(item, respuesta, idioma, false) &&
+    aceptaRomanizada(idioma, item.respuestasValidas, respuesta);
 
 bool soloFallanTildes(Item item, String respuesta, String idioma) =>
     !_coincide(item, respuesta, idioma, true) &&

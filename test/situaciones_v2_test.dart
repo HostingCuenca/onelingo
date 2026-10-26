@@ -34,6 +34,31 @@ void main() {
     expect(v.exitCode, 0, reason: '${v.stdout}');
   });
 
+  test('los 10 idiomas cargan; ru, ja, ko y zh traen romanización en básico', () {
+    for (final idioma in ['en', 'es', 'fr', 'de', 'pt', 'it', 'ru', 'ja', 'ko', 'zh']) {
+      // Como situacionesProvider: apoyo {es, en} resuelto al idioma de la interfaz.
+      final c = situacionesDesdeJson(
+        localizarApoyo(
+              jsonDecode(
+                File(
+                  'assets/contenido/$idioma/situaciones.json',
+                ).readAsStringSync(),
+              ),
+              'es',
+            )
+            as Map<String, dynamic>,
+      )!;
+      expect(c, hasLength(50), reason: idioma);
+      if (!['ru', 'ja', 'ko', 'zh'].contains(idioma)) continue;
+      for (final x in c.values) {
+        final b = x.tramo(Tramo.basico);
+        expect(b.objetivos.every((o) => o.fraseRom?.isNotEmpty ?? false), isTrue, reason: '$idioma ${x.id}');
+        expect(b.vocabulario.every((v) => (v.rom?.isNotEmpty ?? false) && (v.ejemploRom?.isNotEmpty ?? false)), isTrue, reason: '$idioma ${x.id}');
+        expect(x.tramo(Tramo.avanzado).vocabulario.every((v) => v.rom?.isNotEmpty ?? false), isTrue, reason: '$idioma ${x.id}');
+      }
+    }
+  });
+
   test('50 situaciones con tres tramos completos y objetivos únicos', () {
     expect(contenido.keys.toList()..sort(), [
       for (var i = 1; i <= 50; i++) i,

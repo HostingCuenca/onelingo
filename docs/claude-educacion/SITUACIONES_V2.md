@@ -107,3 +107,21 @@ Inglés conserva sus claves (`en` = palabra meta, `es` = traducción). Los idiom
 - **`meta`:** el texto en el idioma que se aprende (con artículo en los sustantivos).
 - **`traduccion` y `titulo`:** `{es, en}`, resueltos con `localizarApoyo`.
 - **Ids:** los mismos de siempre (`s<id>-o1`… básico, `s<id>-i*` intermedio, `s<id>-a*` avanzado).
+
+## Los 10 idiomas (2026-10-26)
+
+- **Idiomas:** en, es, fr, de y pt ya estaban hechos. Ahora se suman it, ru, ja, ko y zh, con 50 situaciones × 3 tramos cada uno.
+- **Encargo por idioma:** `tools/contenido/situaciones/<idioma>/ENCARGO.md` (registro, adaptación al país, tabla de romanización con ejemplos).
+- **Cómo se hizo:**
+  - **Autoría:** las partes van en `partes/sNN.json`. `python3 tools/contenido/situaciones/unir_partes.py <idioma> <N>` arma `lote-N.json` y lo valida.
+  - **Revisión:** cada lote tiene un revisor independiente con veredicto GO (`<idioma>/revision-N.md`).
+  - **Integración:** `integrar_lotes.py <idioma>`.
+- **Romanización (ru, ja, ko, zh):**
+  - **Básico:** `fraseRom` en los objetivos, `metaRom` y `ejemploRom` en el vocabulario y `metaRom` en las frases.
+  - **Intermedio y avanzado:** solo el `metaRom` del vocabulario.
+  - **Japonés:** `lectura` (kana) en el vocabulario que lleva kanji; la voz lee la lectura. En básico los kanji se limitan a 日本人私先生学円水駅何今.
+  - **Copia del backend:** `generar_situaciones.py` quita los campos `*Rom` y `lectura`, porque el tutor no los necesita.
+- **Validador (`validar_situaciones.py`):**
+  - **Romanización por idioma:** ru, acento en palabras de 2+ sílabas; ko, Romanización Revisada con `rr_ko.py`; ja, Hepburn con `hepburn_ja.py`; zh, tonos, sandhi y espacio tras la puntuación del pinyin. El «bù» de 部 o 步 no se marca como error.
+  - **Contenido:** rechaza «⚠» y menciones a Ecuador (salvo el curso de español).
+  - **El ejemplo contiene la palabra:** se exigen las 4 primeras letras de la primera palabra que no es artículo; el artículo no tiene que repetirse.

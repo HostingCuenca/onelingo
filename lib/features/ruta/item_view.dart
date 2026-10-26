@@ -326,6 +326,16 @@ class _ItemViewState extends State<ItemView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (ok && escritaRomanizada(item, respuestaActual, widget.idioma))
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(
+              tr('Bien. Así se escribe: {respuesta}', {
+                'respuesta': item.respuesta,
+              }),
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+            ),
+          ),
         if (ok && soloFallanTildes(item, respuestaActual, widget.idioma))
           Padding(
             padding: const EdgeInsets.only(bottom: 6),

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'integridad.dart' show indiceFormasVerbales;
 import 'modelos.dart';
+import 'romanizado.dart';
 
 /// Carga las rutas desde assets (rootBundle: válido en web y móvil).
 class CargadorRuta {
@@ -39,7 +40,10 @@ class CargadorRuta {
     ]);
     final unidades = [for (final u in porModulo) ...u];
     unidades.sort((a, b) => a.orden.compareTo(b.orden));
-    return RutaCargada(curso, unidades);
+    final ruta = RutaCargada(curso, unidades);
+    // Respuestas en letras latinas (ru, ja, ko, zh): el curso da las lecturas.
+    LexicoRom.registrar(idioma, ruta);
+    return ruta;
   }
 
   /// Forma conjugada → infinitivos según `assets/contenido/<idioma>/verbos.json`

@@ -46,11 +46,11 @@ List<PreguntaSituacion> preguntasPruebaSituacion(TramoSituacion t, Random rnd) {
     return PreguntaSituacion(
       enunciado: oir
           ? tr('Escucha. ¿Qué significa?')
-          : tr('¿Qué significa «{palabra}»?', {'palabra': p.en}),
+          : tr('¿Qué significa «{palabra}»?', {'palabra': p.conLectura}),
       opciones: opciones,
       correcta: opciones.indexOf(p.es),
-      explicacion: '${p.en} = ${p.es}. ${p.ejemplo}',
-      audio: oir ? p.en : null,
+      explicacion: '${p.conLectura} = ${p.es}. ${p.ejemplo}',
+      audio: oir ? p.audio : null,
     );
   }
 

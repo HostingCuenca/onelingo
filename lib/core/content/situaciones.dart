@@ -48,19 +48,48 @@ enum Tramo {
       this == basico || nivel >= nivelMinimo;
 }
 
+// Romanización (ru, ja, ko, zh; docs/claude-educacion/ROMANIZACION.md): el
+// básico la trae en todo; intermedio y avanzado, solo en el vocabulario.
+
 class ObjetivoSituacion {
-  const ObjetivoSituacion(this.id, this.titulo, this.frase, this.traduccion);
+  const ObjetivoSituacion(
+    this.id,
+    this.titulo,
+    this.frase,
+    this.traduccion, {
+    this.fraseRom,
+  });
   final String id, titulo, frase, traduccion;
+  final String? fraseRom;
 }
 
 class PalabraSituacion {
-  const PalabraSituacion(this.id, this.en, this.es, this.ejemplo);
+  const PalabraSituacion(
+    this.id,
+    this.en,
+    this.es,
+    this.ejemplo, {
+    this.rom,
+    this.ejemploRom,
+    this.lectura,
+  });
   final String id, en, es, ejemplo;
+  final String? rom, ejemploRom;
+
+  /// Japonés: lectura en kana de una palabra con kanji.
+  final String? lectura;
+
+  /// La palabra con su lectura, si la tiene: «予約 (よやく)».
+  String get conLectura => lectura == null ? en : '$en ($lectura)';
+
+  /// Lo que lee la voz: la lectura en kana evita que lea mal el kanji.
+  String get audio => lectura ?? en;
 }
 
 class FraseSituacion {
-  const FraseSituacion(this.id, this.en, this.es);
+  const FraseSituacion(this.id, this.en, this.es, {this.rom});
   final String id, en, es;
+  final String? rom;
 }
 
 class TramoSituacion {
@@ -72,7 +101,13 @@ class TramoSituacion {
   factory TramoSituacion.fromJson(Map<String, dynamic> j) => TramoSituacion(
     [
       for (final o in j['objetivos'] as List)
-        ObjetivoSituacion(o['id'], o['titulo'], o['frase'], o['traduccion']),
+        ObjetivoSituacion(
+          o['id'],
+          o['titulo'],
+          o['frase'],
+          o['traduccion'],
+          fraseRom: o['fraseRom'],
+        ),
     ],
     [
       // Inglés usa en/es; los idiomas nuevos, meta/traduccion (ya resuelta al
@@ -83,11 +118,19 @@ class TramoSituacion {
           v['meta'] ?? v['en'],
           v['traduccion'] ?? v['es'],
           v['ejemplo'],
+          rom: v['metaRom'],
+          ejemploRom: v['ejemploRom'],
+          lectura: v['lectura'],
         ),
     ],
     [
       for (final f in j['frases'] as List)
-        FraseSituacion(f['id'], f['meta'] ?? f['en'], f['traduccion'] ?? f['es']),
+        FraseSituacion(
+          f['id'],
+          f['meta'] ?? f['en'],
+          f['traduccion'] ?? f['es'],
+          rom: f['metaRom'],
+        ),
     ],
   );
 }

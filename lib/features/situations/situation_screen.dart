@@ -10,6 +10,7 @@ import '../../core/content/situaciones.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
+import '../../shared/widgets/romanizacion.dart';
 import '../../shared/widgets/situation_illustrations.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -128,10 +129,12 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                       const SizedBox(height: 10),
                       for (final p in t.vocabulario)
                         _Linea(
-                          titulo: p.en,
+                          titulo: p.conLectura,
+                          rom: p.rom,
                           traduccion: p.es,
                           ejemplo: p.ejemplo,
-                          onOir: () => _oir(p.en, s.idiomaMeta),
+                          ejemploRom: p.ejemploRom,
+                          onOir: () => _oir(p.audio, s.idiomaMeta),
                         ),
                       const SizedBox(height: 14),
                       TituloSeccion(tr('Frases útiles')),
@@ -139,6 +142,7 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                       for (final f in t.frases)
                         _Linea(
                           titulo: f.en,
+                          rom: f.rom,
                           traduccion: f.es,
                           onOir: () => _oir(f.en, s.idiomaMeta),
                         ),
@@ -353,12 +357,18 @@ class _TarjetaObjetivo extends StatelessWidget {
                 const Icon(Icons.volume_up_rounded, color: OL.morado, size: 20),
                 const SizedBox(width: 6),
                 Expanded(
-                  child: Text(
-                    objetivo.frase,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        objetivo.frase,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      TextoRom(objetivo.fraseRom),
+                    ],
                   ),
                 ),
               ],
@@ -398,11 +408,13 @@ class _Linea extends StatelessWidget {
   const _Linea({
     required this.titulo,
     required this.traduccion,
+    this.rom,
     this.ejemplo,
+    this.ejemploRom,
     required this.onOir,
   });
   final String titulo, traduccion;
-  final String? ejemplo;
+  final String? rom, ejemplo, ejemploRom;
   final VoidCallback onOir;
 
   @override
@@ -431,6 +443,7 @@ class _Linea extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                   ),
                 ),
+                TextoRom(rom),
                 Text(
                   traduccion,
                   style: const TextStyle(color: OL.gris, fontSize: 14),
@@ -444,6 +457,7 @@ class _Linea extends StatelessWidget {
                       fontStyle: FontStyle.italic,
                     ),
                   ),
+                  TextoRom(ejemploRom, tamano: 13),
                 ],
               ],
             ),
