@@ -88,11 +88,24 @@ Un plan incluye N idiomas (`planes.idiomas`, 1–10; **0 = todos**, «Todos los 
 | `planes_precios` | Historial de Prices de Stripe de cada plan (con fecha de archivado): un suscriptor con un Price antiguo o archivado se asocia igualmente a su plan. |
 | `suscripciones` | Una fila por alumno: plan, `origen` (`stripe`/`cortesia`), `estado` (`activa`, `prueba_stripe`, `impago`, `cancelada`, `vencida`), `cancela_al_final`, `periodo_fin`, ids de cliente/suscripción/precio de Stripe, `modo`, nota, importe e intervalo reales del suscriptor (para el MRR), alta y cancelación; `idiomas text[]`, `todos_idiomas` (cortesía «todos»), `periodo_inicio` (inicio del periodo de Stripe) y `ultimo_cambio_idiomas`. |
 | `pagos_eventos` | Id de cada evento de Stripe recibido (idempotencia), tipo, si se procesó y el error. |
-| `ajustes_pago` | Minutos de prueba gratuita (60), moneda por defecto (`usd`), regla `cambio_idiomas` (`uno_por_periodo`) e id y modo de la configuración del Customer Portal de OneLingo. |
+| `ajustes_pago` | Minutos de prueba gratuita (60), moneda por defecto (`usd`), regla `cambio_idiomas` (`uno_por_periodo`), `demo_activo` (usuarios demo, `true`) e id y modo de la configuración del Customer Portal de OneLingo. |
 
 **Acceso**: estado `activa` o `prueba_stripe`; `cancelada` con `periodo_fin` futuro; o cortesía sin fecha o con fecha futura. `usuarios.plan_id` es un dato derivado (plan con acceso o vacío) que se actualiza en cada cambio y se refresca al abrir el resumen y la lista de alumnos (cortesías o periodos caducados). A quien no tiene fila en `suscripciones` no se le toca el `plan_id` antiguo. **Plan de una suscripción de Stripe**: por su Price actual (`planes.stripe_precio_id` o el historial `planes_precios`, que incluye los archivados), luego `metadata.plan_id` del Price, el Product del plan y, por último, `metadata.plan_id` de la suscripción, que tras un cambio en el portal sigue diciendo el plan de la compra. Estados de Stripe: `active` → activa, `trialing` → prueba_stripe, `past_due`/`unpaid`/`incomplete` → impago, `canceled` → cancelada (hasta `ended_at`), el resto → vencida.
 
 **Prueba gratuita**: `PUT /usuarios/me/progreso` ignora el `planId` del cliente y guarda `trial_segundos` = máximo entre lo guardado y lo que manda la app (nunca baja). Login, Google y `GET /usuarios/me/progreso` devuelven `estado` con el `planId` del servidor y esa prueba.
+
+**El servidor hace cumplir la prueba** (`requierePractica` en `suscripciones.ts`). Afecta a `POST /chat`, `POST /chat/voz` y `POST /llamada/token`.
+- **Sin plan ni cortesía y con `trial_segundos` ≥ minutos de prueba:** responde 402 `{error: 'prueba_agotada'}`. Es un respaldo del bloqueo de la app.
+- **Prueba restante:** sale de lo que reporta la app; una app modificada podría no reportarla.
+- **`/chat/resumen` queda libre:** así se cierra el resumen de una conversación ya empezada.
+
+**Modo demo** (Panel → Planes → «Usuarios demo»; `demoActivo` en `PUT /admin/pagos/ajustes` y en `GET /planes`). Los usuarios demo son los `@onelingo.demo`, que entran sin contraseña.
+- **Activo:** cualquiera puede crear uno nuevo y usar al tutor durante la prueba.
+- **Desactivado:**
+  - `POST /usuarios/registro` y `POST /usuarios/login` responden 403 `demo_cerrado`;
+  - los demo ya creados reciben 403 `demo_cerrado` en el tutor;
+  - la app oculta el panel demo del login.
+- **Antes de publicar:** desactivarlo.
 
 ### Endpoints (sin `/api`: Apache lo quita)
 

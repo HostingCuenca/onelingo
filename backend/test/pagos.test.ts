@@ -781,3 +781,37 @@ test('plan de 0 idiomas («Todos los idiomas»): checkout sin selector, confirma
   await pool.query('DELETE FROM usuarios WHERE id = $1', [U5]);
   assert.equal((await app.inject({ method: 'DELETE', url: '/admin/planes/todo', headers: admin() })).statusCode, 200);
 });
+
+test('tutor: 402 con la prueba agotada y sin plan; modo demo cerrado: sin registro, sin entrada y 403 al tutor', { skip: sinBd }, async () => {
+  const ajustes = (demoActivo?: boolean) => app.inject({ method: 'PUT', url: '/admin/pagos/ajustes', headers: admin(), payload: { pruebaMinutos: 60, moneda: 'usd', ...(demoActivo === undefined ? {} : { demoActivo }) } });
+  await ajustes(true);
+  const U6 = (await pool.query("INSERT INTO usuarios (email, nombre, trial_segundos) VALUES ('dora@pagos.test', 'dora', 3600) RETURNING id")).rows[0].id as string;
+  for (const url of ['/chat', '/llamada/token']) {
+    const r = await app.inject({ method: 'POST', url, headers: tok(U6), payload: {} });
+    assert.equal(r.statusCode, 402, url); assert.equal(r.json().error, 'prueba_agotada');
+  }
+  await pool.query('UPDATE usuarios SET trial_segundos = 3599 WHERE id = $1', [U6]);
+  assert.notEqual((await app.inject({ method: 'POST', url: '/chat', headers: tok(U6), payload: {} })).statusCode, 402);
+  // Con cortesía vigente no cuenta la prueba.
+  await pool.query('UPDATE usuarios SET trial_segundos = 9000 WHERE id = $1', [U6]);
+  await pool.query("INSERT INTO suscripciones (usuario_id, plan_id, origen, estado) VALUES ($1, '', 'cortesia', 'activa')", [U6]);
+  assert.notEqual((await app.inject({ method: 'POST', url: '/chat', headers: tok(U6), payload: {} })).statusCode, 402);
+
+  const demo = { email: 'eva@onelingo.demo', nombre: 'Eva' };
+  const reg = await app.inject({ method: 'POST', url: '/usuarios/registro', payload: demo });
+  assert.equal(reg.statusCode, 201);
+  const tDemo = { authorization: `Bearer ${reg.json().token}` };
+  assert.notEqual((await app.inject({ method: 'POST', url: '/chat', headers: tDemo, payload: {} })).statusCode, 403);
+  assert.equal((await app.inject({ url: '/planes' })).json().demoActivo, true);
+
+  assert.equal((await ajustes(false)).json().demoActivo, false);
+  assert.equal((await ajustes()).json().demoActivo, false, 'sin el campo no cambia');
+  assert.equal((await app.inject({ url: '/planes' })).json().demoActivo, false);
+  assert.equal((await app.inject({ method: 'POST', url: '/usuarios/registro', payload: demo })).statusCode, 403);
+  assert.equal((await app.inject({ method: 'POST', url: '/usuarios/login', payload: { email: demo.email } })).statusCode, 403);
+  const r = await app.inject({ method: 'POST', url: '/chat', headers: tDemo, payload: {} });
+  assert.equal(r.statusCode, 403); assert.equal(r.json().error, 'demo_cerrado');
+
+  await ajustes(true);
+  await pool.query("DELETE FROM usuarios WHERE email IN ('dora@pagos.test', 'eva@onelingo.demo')");
+});

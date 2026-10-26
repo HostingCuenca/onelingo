@@ -6,6 +6,7 @@ import { query } from '../lib/db.js';
 import { iaDisponible, responder, resumirSesion } from '../lib/ia.js';
 import { openaiDisponible, transcribirOpenAI } from '../lib/ia_openai.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
+import { requierePractica } from '../lib/pagos/suscripciones.js';
 
 const EsquemaChat = z.object({
   idiomaMeta: z.string(), idiomaNativo: z.string().default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().default('mia'),
@@ -105,7 +106,7 @@ export default async function rutas(app: FastifyInstance) {
    * Ahorra el viaje de ida y vuelta entre /transcribir y /chat.
    * multipart: `datos` (JSON como /chat, historial SIN el turno nuevo) + `audio`.
    */
-  app.post('/chat/voz', { preHandler: requiereAlumno }, async (req, reply) => {
+  app.post('/chat/voz', { preHandler: [requiereAlumno, requierePractica] }, async (req, reply) => {
     if (!iaDisponible() || !openaiDisponible()) return reply.code(503).send({ error: 'ia_no_configurada' });
     const s = req.user as Sesion;
     let crudo: unknown; let archivo: { buffer: Buffer; nombre: string; tipo: string } | null = null;
@@ -131,7 +132,7 @@ export default async function rutas(app: FastifyInstance) {
     });
   });
 
-  app.post('/chat', { preHandler: requiereAlumno }, async (req, reply) => {
+  app.post('/chat', { preHandler: [requiereAlumno, requierePractica] }, async (req, reply) => {
     if (!iaDisponible()) return reply.code(503).send({ error: 'ia_no_configurada' });
     const s = req.user as Sesion;
     const d = EsquemaChat.parse(req.body);

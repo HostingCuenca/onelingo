@@ -5,6 +5,7 @@
  * - Cortesía del administrador.
  * - `usuarios.plan_id` se mantiene como dato derivado (lo usan las analíticas).
  */
+import type { FastifyReply, FastifyRequest } from 'fastify';
 import { query, uno } from '../db.js';
 import { ajustesPago, type ReglaCambioIdiomas } from './planes.js';
 import { proveedorActivo } from './proveedor.js';
@@ -312,6 +313,24 @@ export async function suscripcionDe(usuarioId: string, ahora = new Date()) {
     puedeGestionar: !!(p && f?.origen === 'stripe' && f.stripe_cliente_id && f.modo === p.modo()),
     prueba: { minutos: a.pruebaMinutos, segundosUsados: usados, restanteSegundos: Math.max(0, total - usados), agotada: usados >= total },
   };
+}
+
+/**
+ * ¿Puede el alumno usar al tutor (chat, voz, videollamada)? Con plan, sí; sin plan,
+ * mientras le quede prueba (`usuarios.trial_segundos`, lo que reporta la app). Los
+ * usuarios demo, además, solo con el modo demo abierto (Panel → Pagos).
+ */
+export async function bloqueoPractica(usuarioId: string, ahora = new Date()): Promise<{ status: 402 | 403; error: 'prueba_agotada' | 'demo_cerrado' } | null> {
+  const [f, a, u] = await Promise.all([filaDe(usuarioId), ajustesPago(), uno<{ trial_segundos: number; es_demo: boolean }>('SELECT trial_segundos, es_demo FROM usuarios WHERE id = $1', [usuarioId])]);
+  if (u?.es_demo && !a.demoActivo) return { status: 403, error: 'demo_cerrado' };
+  if (tieneAcceso(f, ahora)) return null;
+  if (Number(u?.trial_segundos ?? 0) >= a.pruebaMinutos * 60) return { status: 402, error: 'prueba_agotada' };
+  return null;
+}
+/** preHandler tras `requiereAlumno` en las rutas que gastan IA. */
+export async function requierePractica(req: FastifyRequest, reply: FastifyReply) {
+  const b = await bloqueoPractica((req.user as { sub: string }).sub);
+  if (b) return reply.code(b.status).send({ error: b.error });
 }
 
 // ── Cortesía ─────────────────────────────────────────────────────────────────

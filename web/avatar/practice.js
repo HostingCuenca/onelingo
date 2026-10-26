@@ -412,7 +412,7 @@ async function requestTutor(entrada, opening = false) {
     } else {
       response = await fetch(config.api + '/chat', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json', Accept: 'text/event-stream'}, body: JSON.stringify(datos), signal: current.signal});
     }
-    if (!response.ok) throw Error(response.status === 401 ? 'Tu sesión ha caducado. Vuelve a iniciar sesión.' : `No se pudo conectar con el tutor (${response.status}).`);
+    if (!response.ok) throw Error(await bloqueoTutor(response) ?? (response.status === 401 ? 'Tu sesión ha caducado. Vuelve a iniciar sesión.' : `No se pudo conectar con el tutor (${response.status}).`));
     const reader = response.body.getReader(), decoder = new TextDecoder();
     let pending = '';
     const evento = raw => {
@@ -550,6 +550,12 @@ const palabras = s => (s.trim().match(/[\p{L}\p{N}]+/gu) || []).length + ((/[\p{
 // Lo que el micrófono oye mientras el tutor habla (o justo después) puede ser su propia voz.
 const tutorAudible = () => sonando || performance.now() - finVozEn < 1500;
 function textoVivo() { $('hablarTexto').textContent = mudo ? 'Silenciado · toca 🎙 para hablar' : 'Micrófono abierto · habla cuando quieras'; document.body.classList.toggle('mudo', mudo); }
+// El servidor no deja usar al tutor: prueba gratuita agotada (402) o modo demo cerrado (403).
+async function bloqueoTutor(r) {
+  if (r.status === 402) return 'Tu prueba gratuita terminó. Elige un plan para seguir practicando con el tutor.';
+  if (r.status === 403 && (await r.json().catch(() => ({}))).error === 'demo_cerrado') return 'El acceso de demostración está cerrado.';
+  return null;
+}
 async function abrirVivo() {
   if (vivo || modoVivo) return;
   modoVivo = true; mudo = false; arrastre = '';
@@ -559,7 +565,7 @@ async function abrirVivo() {
       idioma: language(),
       pedirToken: async () => {
         const r = await fetch(config.api + '/llamada/token', {method: 'POST', headers: headers()});
-        if (!r.ok) throw Error(r.status === 429 ? 'Demasiadas llamadas seguidas.' : `Sin escucha en vivo (${r.status}).`);
+        if (!r.ok) throw Error(r.status === 429 ? 'Demasiadas llamadas seguidas.' : await bloqueoTutor(r) ?? `Sin escucha en vivo (${r.status}).`);
         return r.json();
       },
       onParcial: oirParcial, onFinal: oirFinal,

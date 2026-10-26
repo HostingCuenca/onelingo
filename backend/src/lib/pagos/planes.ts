@@ -14,21 +14,23 @@ import { proveedorActivo, stripe, type FilaPlan, type SyncPlan } from './proveed
 /** Regla para que el alumno cambie un idioma de su plan por otro (anexo de idiomas). */
 export const REGLAS_CAMBIO_IDIOMAS = ['libre', 'uno_por_periodo', 'solo_admin'] as const;
 export type ReglaCambioIdiomas = typeof REGLAS_CAMBIO_IDIOMAS[number];
-export type Ajustes = { pruebaMinutos: number; moneda: string; cambioIdiomas: ReglaCambioIdiomas };
+export type Ajustes = { pruebaMinutos: number; moneda: string; cambioIdiomas: ReglaCambioIdiomas; demoActivo: boolean };
 export async function ajustesPago(): Promise<Ajustes> {
-  const f = await uno<{ prueba_minutos: number; moneda: string; cambio_idiomas?: string }>('SELECT * FROM ajustes_pago WHERE id').catch(() => undefined);
+  const f = await uno<{ prueba_minutos: number; moneda: string; cambio_idiomas?: string; demo_activo?: boolean }>('SELECT * FROM ajustes_pago WHERE id').catch(() => undefined);
   const regla = REGLAS_CAMBIO_IDIOMAS.find((r) => r === f?.cambio_idiomas) ?? 'uno_por_periodo';
-  return { pruebaMinutos: Number.isFinite(Number(f?.prueba_minutos)) ? Number(f!.prueba_minutos) : PRUEBA_MINUTOS_POR_DEFECTO, moneda: f?.moneda || 'usd', cambioIdiomas: regla };
+  return { pruebaMinutos: Number.isFinite(Number(f?.prueba_minutos)) ? Number(f!.prueba_minutos) : PRUEBA_MINUTOS_POR_DEFECTO, moneda: f?.moneda || 'usd', cambioIdiomas: regla, demoActivo: f?.demo_activo ?? true };
 }
 export const AjustesEntrada = z.object({
   pruebaMinutos: z.number().int().min(0).max(10_000),
   moneda: z.string().trim().toLowerCase().regex(/^[a-z]{3}$/, 'Código de moneda de 3 letras (usd, eur…)'),
   cambioIdiomas: z.enum(REGLAS_CAMBIO_IDIOMAS).optional(),
+  demoActivo: z.boolean().optional(),
 });
 export async function guardarAjustes(a: z.infer<typeof AjustesEntrada>) {
-  await query(`INSERT INTO ajustes_pago (id, prueba_minutos, moneda, cambio_idiomas, actualizado_en) VALUES (true, $1, $2, coalesce($3, 'uno_por_periodo'), now())
+  await query(`INSERT INTO ajustes_pago (id, prueba_minutos, moneda, cambio_idiomas, demo_activo, actualizado_en) VALUES (true, $1, $2, coalesce($3, 'uno_por_periodo'), coalesce($4, true), now())
     ON CONFLICT (id) DO UPDATE SET prueba_minutos = EXCLUDED.prueba_minutos, moneda = EXCLUDED.moneda,
-      cambio_idiomas = coalesce($3, ajustes_pago.cambio_idiomas), actualizado_en = now()`, [a.pruebaMinutos, a.moneda, a.cambioIdiomas ?? null]);
+      cambio_idiomas = coalesce($3, ajustes_pago.cambio_idiomas), demo_activo = coalesce($4, ajustes_pago.demo_activo), actualizado_en = now()`,
+    [a.pruebaMinutos, a.moneda, a.cambioIdiomas ?? null, a.demoActivo ?? null]);
   return ajustesPago();
 }
 
@@ -57,7 +59,7 @@ export function estadoSync(f: FilaPlan) {
 export async function planesPublicos() {
   const [a, filas] = await Promise.all([ajustesPago(), query('SELECT * FROM planes WHERE visible AND NOT archivado ORDER BY orden, id')]);
   const p = proveedorActivo();
-  return { moneda: a.moneda, pruebaMinutos: a.pruebaMinutos, pagos: { disponible: !!p, modo: p?.modo() ?? null }, planes: filas.map((f) => aPublico(normalizar(f))) };
+  return { moneda: a.moneda, pruebaMinutos: a.pruebaMinutos, demoActivo: a.demoActivo, pagos: { disponible: !!p, modo: p?.modo() ?? null }, planes: filas.map((f) => aPublico(normalizar(f))) };
 }
 export async function plan(id: string): Promise<FilaPlan | null> {
   const f = await uno('SELECT * FROM planes WHERE id = $1', [id]);

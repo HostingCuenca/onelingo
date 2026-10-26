@@ -2,6 +2,7 @@ import type { FastifyInstance } from 'fastify';
 import { query } from '../lib/db.js';
 import { config } from '../lib/config.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
+import { requierePractica } from '../lib/pagos/suscripciones.js';
 
 /** Tokens por alumno y hora (cada llamada pide uno al empezar y otro si se reconecta). */
 export const TOKENS_POR_HORA = 30;
@@ -19,7 +20,7 @@ export function puedeEmitir(usuario: string, ahora = Date.now()) {
  * el audio del alumno no pasa por aquí (menos latencia).
  */
 export default async function rutas(app: FastifyInstance) {
-  app.post('/llamada/token', { preHandler: requiereAlumno }, async (req, reply) => {
+  app.post('/llamada/token', { preHandler: [requiereAlumno, requierePractica] }, async (req, reply) => {
     const s = req.user as Sesion;
     if (!config.elevenApiKey) return reply.code(503).send({ error: 'voz_no_configurada' });
     if (!puedeEmitir(s.sub)) return reply.code(429).send({ error: 'demasiadas_llamadas' });

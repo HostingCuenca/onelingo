@@ -9,7 +9,7 @@ type Plan = {
   stripe: { estado: 'sincronizado' | 'sin sincronizar' | 'sin stripe'; error: string | null; productoId: string | null; precioId: string | null; modo: string | null }
 }
 type Regla = 'libre' | 'uno_por_periodo' | 'solo_admin'
-type Datos = { planes: Plan[]; ajustes: { pruebaMinutos: number; moneda: string; cambioIdiomas?: Regla }; pagos: { disponible: boolean; modo: 'test' | 'live' | null } }
+type Datos = { planes: Plan[]; ajustes: { pruebaMinutos: number; moneda: string; cambioIdiomas?: Regla; demoActivo?: boolean }; pagos: { disponible: boolean; modo: 'test' | 'live' | null } }
 type Form = { id: string; nombreEs: string; nombreEn: string; descEs: string; descEn: string; incluyeEs: string; incluyeEn: string; idiomas: string; precio: string; intervalo: 'mes' | 'anio'; orden: string; destacado: boolean; visible: boolean }
 
 const INTERVALO: Record<string, string> = { mes: 'al mes', anio: 'al año' }
@@ -85,10 +85,11 @@ function Editor({ plan, orden, pagos, alGuardar, cancelar }: { plan?: Plan; orde
 function Ajustes({ a, alGuardar }: { a: Datos['ajustes']; alGuardar: () => void }) {
   const [min, setMin] = useState(String(a.pruebaMinutos)); const [moneda, setMoneda] = useState(a.moneda)
   const [regla, setRegla] = useState<Regla>(a.cambioIdiomas ?? 'uno_por_periodo')
+  const [demo, setDemo] = useState(a.demoActivo ?? true)
   const [msg, setMsg] = useState(''); const [ocupado, setOcupado] = useState(false)
   const guardar = async (e: React.FormEvent) => {
     e.preventDefault(); setOcupado(true); setMsg('')
-    try { await api('/admin/pagos/ajustes', { metodo: 'PUT', cuerpo: { pruebaMinutos: Number(min), moneda, cambioIdiomas: regla } }); setMsg('Guardado.'); alGuardar() }
+    try { await api('/admin/pagos/ajustes', { metodo: 'PUT', cuerpo: { pruebaMinutos: Number(min), moneda, cambioIdiomas: regla, demoActivo: demo } }); setMsg('Guardado.'); alGuardar() }
     catch (x: any) { setMsg(x.datos?.detalles?.join(' · ') || x.message) } finally { setOcupado(false) }
   }
   return (
@@ -103,9 +104,11 @@ function Ajustes({ a, alGuardar }: { a: Datos['ajustes']; alGuardar: () => void 
           <option value="solo_admin">Solo desde el panel</option>
         </select></label>
       </div>
+      <label className="check-linea" style={{ marginTop: 10 }}><input type="checkbox" checked={demo} onChange={(e) => setDemo(e.target.checked)} /> Usuarios demo (@onelingo.demo): entran sin contraseña</label>
       <div className="acciones"><button disabled={ocupado}>{ocupado ? 'Guardando…' : 'Guardar'}</button>{msg && <span className="muted">{msg}</span>}</div>
       <p className="muted uso-nota">La app la recibe en <span className="mono">GET /planes</span> y en la suscripción del alumno. El tiempo usado nunca baja aunque la app mande menos. Los minutos de prueba son únicos y se suman entre todos los idiomas.
-        Cambio de idioma: «uno por periodo» cuenta desde el inicio del periodo de Stripe (cada 30 días en las cortesías); completar los idiomas «por elegir» no cuenta. Desde el detalle del alumno siempre puedes editarlos.</p>
+        Cambio de idioma: «uno por periodo» cuenta desde el inicio del periodo de Stripe (cada 30 días en las cortesías); completar los idiomas «por elegir» no cuenta. Desde el detalle del alumno siempre puedes editarlos.
+        Usuarios demo: mientras estén activos, cualquiera puede crear uno nuevo y usar al tutor durante la prueba; desactívalos al publicar. Desactivados, la app oculta el panel demo y el servidor rechaza su entrada y el tutor.</p>
     </form>
   )
 }

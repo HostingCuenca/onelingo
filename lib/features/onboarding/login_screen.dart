@@ -8,6 +8,7 @@ import '../../app/theme.dart';
 import '../../core/api/sync.dart';
 import '../../core/content/demo_users.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/descarga_android.dart';
 import '../../shared/widgets/widgets.dart';
@@ -43,6 +44,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (cargando) return;
     final correo = email.text.trim().toLowerCase();
     final demo = demoUserPorEmail(correo);
+    if (demo != null && !ref.read(catalogoPlanesProvider).demoActivo) {
+      setState(() => error = tr('El acceso de demostración está cerrado.'));
+      return;
+    }
     if (demo != null && pass.text == DemoUser.password) {
       ref.read(progressProvider.notifier).cargar(demo.estado(), email: demo.email);
       context.go('/inicio');
@@ -179,6 +184,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             // Solo en la web: enlace al APK de Android.
             const SizedBox(height: 10),
             const DescargaAndroid(),
+            if (ref.watch(catalogoPlanesProvider).demoActivo) ...[
             const SizedBox(height: 18),
             Container(
               padding: const EdgeInsets.all(14),
@@ -224,6 +230,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ]),
                 ),
               ),
+            ],
           ],
         ),
       ),

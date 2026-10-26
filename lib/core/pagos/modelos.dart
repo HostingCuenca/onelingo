@@ -142,6 +142,7 @@ class CatalogoPlanes {
     this.pagosModo,
     this.listaPlanes,
     this.origen = OrigenCatalogo.respaldo,
+    this.demoActivo = true,
   });
 
   final String moneda;
@@ -153,6 +154,9 @@ class CatalogoPlanes {
   /// Planes del servidor; null = respaldo fijo.
   final List<PlanServidor>? listaPlanes;
   final OrigenCatalogo origen;
+
+  /// Usuarios demo (@onelingo.demo) habilitados en el servidor (Panel → Pagos).
+  final bool demoActivo;
 
   List<PlanServidor> get planes => listaPlanes ?? planesRespaldo();
   int get pruebaSegundos => pruebaMinutos * 60;
@@ -179,6 +183,7 @@ class CatalogoPlanes {
       pagosModo: pagos['modo'] as String?,
       listaPlanes: lista,
       origen: origen,
+      demoActivo: j['demoActivo'] != false,
     );
   }
 }

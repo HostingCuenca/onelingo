@@ -433,7 +433,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     setState(() {
       pensando = false;
       _respuestaEnCurso = null;
-      errorConexion = !Sync.instancia.conectado
+      errorConexion = Sync.instancia.bloqueoChat == 'prueba_agotada'
+          ? tr(
+              'Tu prueba gratuita terminó. Elige un plan para seguir practicando con el tutor.',
+            )
+          : Sync.instancia.bloqueoChat == 'demo_cerrado'
+          ? tr('El acceso de demostración está cerrado.')
+          : !Sync.instancia.conectado
           ? tr('Inicia sesión para practicar con el tutor.')
           : Conexion.estado.value == EstadoConexion.sinConexion
           ? tr(

@@ -172,6 +172,10 @@ class Sync {
   }
 
   /// Respuesta del tutor con IA real; null si el servidor no tiene IA o falla (la app usa el simulador).
+  /// Por qué el servidor no dejó usar al tutor en el último `chat`:
+  /// `prueba_agotada` (402) o `demo_cerrado` (403); null si no fue eso.
+  String? bloqueoChat;
+
   Future<Map<String, dynamic>?> chat({
     required String idiomaMeta,
     required String idiomaNativo,
@@ -186,6 +190,7 @@ class Sync {
     void Function(String)? onReply,
     http.Client? client,
   }) async {
+    bloqueoChat = null;
     if (!conectado) return null;
     final transport = client ?? http.Client();
     final deadline = Timer(const Duration(seconds: 40), transport.close);
@@ -213,6 +218,12 @@ class Sync {
       final response = await transport
           .send(req)
           .timeout(const Duration(seconds: 40));
+      if (response.statusCode == 402) bloqueoChat = 'prueba_agotada';
+      if (response.statusCode == 403) {
+        final cuerpo = await response.stream.bytesToString();
+        if (cuerpo.contains('demo_cerrado')) bloqueoChat = 'demo_cerrado';
+        return null;
+      }
       if (response.statusCode != 200) return null;
       if (!(response.headers['content-type'] ?? '').contains(
         'text/event-stream',
