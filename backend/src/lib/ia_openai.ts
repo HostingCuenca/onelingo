@@ -31,7 +31,12 @@ export const openaiDisponible = () => config.openaiApiKey.length > 0;
 async function conReintentos(hacer: () => Promise<Response>, intentos = 3): Promise<{ r: Response; j: any }> {
   let r!: Response, j: any;
   for (let i = 0; i < intentos; i++) {
-    r = await hacer();
+    try { r = await hacer(); }
+    catch (e) {
+      // Un corte de red ("fetch failed") también se reintenta; una cancelación del alumno, no.
+      if ((e as Error).name === 'AbortError' || i === intentos - 1) throw e;
+      await new Promise((res) => setTimeout(res, 800 * (i + 1))); continue;
+    }
     j = await r.json().catch(() => ({}));
     if (r.ok) return { r, j };
     if ((r.status === 429 || r.status >= 500) && i < intentos - 1) { await new Promise((res) => setTimeout(res, 800 * (i + 1))); continue; }
@@ -61,8 +66,8 @@ async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assis
       model: modelo,
       messages: [{ role: 'system', content: system }, ...mensajes],
       response_format: { type: 'json_schema', json_schema: { name: 'respuesta_tutor', strict: true, schema: esquema } },
-      temperature: 0.7,
-      max_tokens: 700,
+      // Los modelos con razonamiento no aceptan temperatura y cuentan lo que piensan en la salida.
+      ...(/^(gpt-5|gpt-6|o\d)/.test(modelo) ? { reasoning_effort: 'low', max_completion_tokens: 3000 } : { temperature: 0.7, max_tokens: 700 }),
     }),
   }));
   const m = j?.choices?.[0]?.message;
@@ -136,7 +141,8 @@ export function frasesCompletas(texto: string, cerrado: boolean): string[] {
 }
 
 export async function generarTutorStream(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], onReply: (texto: string) => void, signal: AbortSignal, onFrase?: (texto: string, indice: number) => void) {
-  const r = await fetch('https://api.openai.com/v1/chat/completions', {
+  // Solo se reintenta la conexión, antes de que llegue nada: a mitad del streaming la voz ya empezó.
+  const conectar = () => fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST', signal,
     headers: { 'content-type': 'application/json', authorization: `Bearer ${config.openaiApiKey}` },
     body: JSON.stringify({ model: config.openaiModelo,
@@ -144,6 +150,15 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
       response_format: { type: 'json_schema', json_schema: { name: 'respuesta_tutor', strict: true, schema: ESQUEMA_TUTOR_OPENAI } },
       temperature: 0.7, max_tokens: 700, stream: true, stream_options: { include_usage: true } }),
   });
+  let r!: Response;
+  for (let i = 0; i < 3; i++) {
+    try { r = await conectar(); } catch (e) {
+      if ((e as Error).name === 'AbortError' || i === 2) throw e;
+      await new Promise((res) => setTimeout(res, 800 * (i + 1))); continue;
+    }
+    if ((r.status === 429 || r.status >= 500) && i < 2) { await r.body?.cancel(); await new Promise((res) => setTimeout(res, 800 * (i + 1))); continue; }
+    break;
+  }
   if (!r.ok || !r.body) throw new Error(`OpenAI ${r.status}`);
   const reader = r.body.getReader(); const decoder = new TextDecoder();
   let pending = '', texto = '', enviado = false, done = false, frasesEnviadas = 0;

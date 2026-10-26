@@ -27,7 +27,11 @@ test('/chat/voz: transcribe, emits the transcript first and answers with the new
   globalThis.fetch = async (url, options) => {
     const u = String(url);
     if (u.includes('/audio/transcriptions')) return Response.json({ text: 'I like to read books.' });
-    if (u.includes('/chat/completions')) { historialEnviado = JSON.parse(String(options?.body)).messages; return sse('{"reply":"Me too! What book', ' are you reading?",', RESTO); }
+    if (u.includes('/chat/completions')) {
+      const cuerpo = JSON.parse(String(options?.body));
+      // El corrector va en una llamada aparte, sin streaming.
+      if (!cuerpo.stream) return Response.json({ choices: [{ message: { content: '{"analisis":"","corrections":[]}' } }] });
+      historialEnviado = cuerpo.messages; return sse('{"reply":"Me too! What book', ' are you reading?",', RESTO); }
     return originalFetch(url, options);
   };
   try {
@@ -41,7 +45,7 @@ test('/chat/voz: transcribe, emits the transcript first and answers with the new
     assert.deepEqual(eventos[0], { tipo: 'transcripcion', data: { texto: 'I like to read books.' } });
     assert.ok(eventos.some(e => e.tipo === 'frase'));
     assert.equal(eventos.at(-1).tipo, 'final');
-    assert.equal(historialEnviado.at(-1).content, 'I like to read books.');
+    assert.ok(historialEnviado.at(-1).content.startsWith('I like to read books.\n'));
     const sinAudio = new FormData(); sinAudio.append('datos', '{}');
     assert.equal((await originalFetch(address + '/chat/voz', { method: 'POST', headers: { authorization: `Bearer ${app.jwt.sign({ sub: 'test', rol: 'alumno' })}` }, body: sinAudio })).status, 400);
   } finally { globalThis.fetch = originalFetch; config.iaProveedor = prev.p; config.openaiApiKey = prev.k; pool.query = query; await app.close(); }

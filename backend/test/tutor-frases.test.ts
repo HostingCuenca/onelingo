@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { frasesCompletas, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
+import { frasesCompletas, generarJsonOpenAI, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
 import { correccionesPrevias, resumirHechos, tipoCambio } from '../src/lib/situaciones.js';
-import { depurarCorrecciones, systemPrompt } from '../src/lib/ia.js';
+import { depurarCorrecciones, promptCorrector, systemPrompt } from '../src/lib/ia.js';
 const originalFetch = globalThis.fetch;
 const encoder = new TextEncoder();
 const event = (j: unknown) => encoder.encode(`data: ${JSON.stringify(j)}\n\n`);
@@ -129,4 +129,28 @@ test('the prompt teaches how to correct and teach', () => {
   assert.match(p, /Como máximo 1 corrección/);
   assert.match(p, /inglés estadounidense/);
   assert.match(systemPrompt({ idiomaMeta: 'es', idiomaNativo: 'en', nivel: 5, tutorId: 'avatar_diego' }), /Como máximo 2 correcciones[\s\S]*sin regionalismos/);
+});
+
+test('a network cut before the answer is retried, a cancellation is not', async () => {
+  let llamadas = 0;
+  globalThis.fetch = async () => {
+    if (++llamadas === 1) throw new TypeError('fetch failed');
+    return Response.json({ choices: [{ message: { content: '{"ok":true}' } }] });
+  };
+  try {
+    assert.deepEqual((await generarJsonOpenAI('t', [], {})).json, { ok: true });
+    assert.equal(llamadas, 2);
+    llamadas = 0;
+    globalThis.fetch = async () => { llamadas++; throw Object.assign(new Error('cancelado'), { name: 'AbortError' }); };
+    await assert.rejects(generarTutorStream('t', [], () => {}, new AbortController().signal), /cancelado/);
+    assert.equal(llamadas, 1);
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test('the tutor keeps its limits and the corrector knows each language traps', () => {
+  const p = systemPrompt({ idiomaMeta: 'ja', idiomaNativo: 'es', nivel: 2, tutorId: 'avatar_erik' });
+  assert.match(p, /LÍMITES[\s\S]*número de emergencias[\s\S]*'reply' va en japonés aunque el alumno te pida responder en otro idioma/);
+  assert.match(promptCorrector('ja', 'es', 2), /会う・乗る・なる・似る llevan に/);
+  assert.match(promptCorrector('zh', 'es', 2), /我很高兴/);
+  assert.doesNotMatch(promptCorrector('xx', 'es', 2), /Trampas típicas/);
 });
