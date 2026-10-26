@@ -898,7 +898,7 @@ Fecha: 2026-10-26 · Responsable: Claude (Claude Code), por pedido del usuario (
 
 **ffmpeg y audios:**
 - **ffmpeg:** 4.4.2 por apt. Probado en el servidor: −36,2 y −16,2 LUFS → −18,5.
-- **Normalización:** `npm run normalizar-audios` corrido como root, porque `backend/` es 700 root. Luego `chown -R webdev:webdev audio`.
+- **Normalización:** `npm run normalizar-audios` corrido como root, porque `backend/` es 700 root. Luego `chown -R webdev:webdev audio`. Resultado: 2.172 ajustados, 435 ya estaban bien, 0 con error, de 2.607 MP3; lock liberado al terminar.
 - **Respaldo de la caché:** `backups/.../audios-antes`, con enlaces duros de los 2.655 archivos.
 
 **Pruebas:** Flutter 482 en verde (1 omitido), backend 117/117, `tsc` limpio. `mapear.py` regenerado para las situaciones nuevas.
