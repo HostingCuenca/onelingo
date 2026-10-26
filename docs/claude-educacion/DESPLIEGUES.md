@@ -871,3 +871,50 @@ APK: build desde un árbol limpio de `4cc0dfa` con `API_URL=https://onelingo.org
 Backup: `backups/20261025-edu-73-correcciones/` (`web-anterior`, `backend/lib`, `backend/routes`, `env.sha`).
 Verificado: `/`, `/main.dart.js`, `/version.json` (0.5.2), `/descargas/version.json`, `/api/salud`, `/api/planes`, `/avatar/index.html`, `/avatar/vivo.js`, `/panel/` y una imagen de vocabulario responden 200. El APK servido tiene el mismo sha que el local. `/auth/restablecer?token="><script>` responde «Enlace no válido» sin el script. En el navegador la app abre en `#/bienvenida` sin 404 de producción. `.env` sin cambios (sha), las 5 apps de PM2 online, lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; K=backups/20261025-edu-73-correcciones; S=staging/20261025-edu-73-correcciones; mv web $S/web-retirada-post && cp -al $K/web-anterior web; cp $K/backend/lib/*.ts backend/src/lib/; cp $K/backend/routes/*.ts backend/src/routes/; pm2 restart onelingo-api'`
+
+## Release: 20261026-edu-74-situaciones
+
+Fecha: 2026-10-26 · Responsable: Claude (Claude Code), por pedido del usuario («dale, despliega y pon la apk accesible facilmente»). Web + APK 0.5.3+8 + 19 archivos del backend (1 migración) + `web/avatar/practice.js`; ffmpeg instalado en el servidor; caché de voz normalizada; PM2 `onelingo-api` reiniciado (solo esa app).
+
+**Contenido:**
+- `8c7f33a`: corrector de tutores aparte (gpt-5.6-luna), límites y reintentos de red.
+- `63dff7c`: mismo volumen en todas las voces (−18 LUFS) y lecturas ja/ru.
+- `a93d0c1`: un ejercicio fallado vuelve como mucho dos veces.
+- `27f3f09`: situaciones en it, ru, ja, ko y zh con romanización; respuestas en letras latinas aceptadas.
+- `1ba5432`: el servidor bloquea al tutor con la prueba agotada (402); interruptor de usuarios demo.
+- `ed22679` y `30604eb`: app 0.5.3+8 y página de descarga.
+
+**APK fácil:**
+- **https://onelingo.org/descargar/:** página con botón, versión, enlace armv7, pasos de instalación y QR.
+- **https://onelingo.org/apk:** atajo que lleva a esa página.
+- **Logo:** va en `/descargar/icono.png`, porque Apache reserva `/icons/` con su alias por defecto. Por eso tampoco se sirven los íconos del manifiesto PWA; es un fallo previo, sin tocar.
+
+**Backend:**
+- **Archivos modificados:** `package.json` (script `normalizar-audios`), `content/situaciones-en.json`, `lib/ia.ts`, `lib/ia_openai.ts`, `lib/pagos/planes.ts`, `lib/pagos/suscripciones.ts`, `lib/voz.ts`, `lib/voz_texto.ts`, `routes/chat.ts`, `routes/llamada.ts`, `routes/usuarios.ts`.
+- **Archivos nuevos:** `lib/volumen.ts`, `normalizar-audios.ts`, `content/situaciones-{it,ru,ja,ko,zh}.json`, `sql/009_modo_demo.sql`.
+- **Estado previo:** prod era igual a `0b4a679` (sha por archivo), salvo `config.ts`, que no se tocó.
+- **Comprobación:** `tsc --noEmit` limpio en una copia de prod con su `config.ts` antes de copiar.
+- **Migración:** «Migración aplicada: 009_modo_demo.sql». `GET /planes` devuelve `demoActivo: true`; el demo queda activo y hay que apagarlo al lanzar (Panel → Planes).
+
+**ffmpeg y audios:**
+- **ffmpeg:** 4.4.2 por apt. Probado en el servidor: −36,2 y −16,2 LUFS → −18,5.
+- **Normalización:** `npm run normalizar-audios` corrido como root, porque `backend/` es 700 root. Luego `chown -R webdev:webdev audio`.
+- **Respaldo de la caché:** `backups/.../audios-antes`, con enlaces duros de los 2.655 archivos.
+
+**Pruebas:** Flutter 482 en verde (1 omitido), backend 117/117, `tsc` limpio. `mapear.py` regenerado para las situaciones nuevas.
+
+**APK:**
+- **Build:** desde un árbol limpio de `ed22679` con `API_URL=https://onelingo.org/api`, firmado con la llave propia (SHA-1 `e3c8f4ad…`), versionCode 2008.
+- **`/descargas/onelingo.apk`:** arm64-v8a, 147 MB, sha256 `eedc952b77cd9011…`.
+- **`/descargas/onelingo-armv7.apk`:** sha256 `4e8a568837a93104…`.
+- **Versión publicada:** `/descargas/version.json` 0.5.3. `main.dart.js` sha256 `d4adae063adb9f8b…`.
+
+**Backup:** `backups/20261026-edu-74-situaciones/` (`web-anterior`, `backend/` con los 11 archivos previos, `backend-nuevos.txt`, `audios-antes`, `env.sha`).
+
+**Verificado:**
+- **Responden 200:** `/`, `/main.dart.js`, `/version.json` (0.5.3+8), `/descargar/`, `/apk/`, `/descargas/version.json`, `/avatar/index.html`, `/avatar/practice.js` (con `bloqueoTutor`), `/panel/`, `/api/salud`, `/api/planes`, las situaciones de zh e it y una imagen de vocabulario.
+- **APK:** el servido tiene el mismo sha que el local y `content-type` `application/vnd.android.package-archive`.
+- **Navegador:** la app abre en `#/bienvenida`; `/descargar/` a 375 px sin desplazamiento lateral.
+- **Servidor:** las 5 apps de PM2 en línea y `.env` sin cambios.
+
+**Rollback:** `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; K=backups/20261026-edu-74-situaciones; S=staging/20261026-edu-74-situaciones; mv web $S/web-retirada-post && cp -al $K/web-anterior web; cp -r $K/backend/. backend/; (cd backend && xargs rm -f < ../$K/backend-nuevos.txt); pm2 restart onelingo-api'`. La columna `demo_activo` se puede quedar, porque es inocua. Los audios se restauran con `cp -al $K/audios-antes/. audio/` solo si hiciera falta.
