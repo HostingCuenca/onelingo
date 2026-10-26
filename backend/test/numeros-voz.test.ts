@@ -183,11 +183,20 @@ test('ja, zh, ko: la notación de patrones no deja cifras sueltas; los números 
   assert.equal(textoParaVoz('I have 21 apples at 8:15.', 'en'), 'I have 21 apples at 8:15.');
 });
 
-test('ja: kanji suelto o jukujikun → la lectura en kana que enseña el curso', () => {
+test('ja: un vocablo suelto se lee con la lectura en kana que enseña el curso', () => {
   assert.equal(textoParaVoz('星 (ほし)', 'ja'), 'ほし。');
   assert.equal(textoParaVoz('星', 'ja'), 'ほし。');
   assert.equal(textoParaVoz('今日', 'ja'), 'きょう。');
-  // Frases y palabras largas: la voz lee el kanji con su contexto.
+  // La lectura del vocablo manda también con varios kanji: 検疫 sola salía «かんい».
+  assert.equal(textoParaVoz('検疫 (けんえき)', 'ja'), 'けんえき');
+  // Frases: la voz lee el kanji con su contexto.
   assert.equal(textoParaVoz('星 が きれい です。', 'ja'), '星がきれいです。');
-  assert.equal(textoParaVoz('会社 (かいしゃ)', 'ja'), '会社。');
+  assert.equal(textoParaVoz('会社', 'ja'), '会社。');
+  assert.equal(textoParaVoz('ありがとう (arigatou)', 'ja'), 'ありがとう');
+});
+
+test('ru: las palabras que la voz leía mal llevan el acento escrito', () => {
+  assert.equal(textoParaVoz('А что говорили другие зрители в фойе?', 'ru'), 'А что говорили другие зрители в фойе́?');
+  assert.equal(textoParaVoz('Фойе', 'ru'), 'Фойе́');
+  assert.equal(textoParaVoz('фойе', 'es'), 'фойе');
 });

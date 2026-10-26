@@ -121,7 +121,8 @@ class VozNube {
   /// Versión de las voces del servidor. Súbela cuando cambie la voz de un
   /// rol o sus ajustes: entra en la clave de los MP3 descargados y en la URL,
   /// así el dispositivo no reproduce audio con la voz anterior.
-  static const versionVoces = 'v2';
+  /// v3: todas las voces al mismo volumen (backend/src/lib/volumen.ts).
+  static const versionVoces = 'v3';
 
   String _clave(String texto, String idioma, String voz, [String? modo]) =>
       sha1

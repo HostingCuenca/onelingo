@@ -52,6 +52,23 @@ const JAMO: Record<string, string> = {
 };
 
 const FIN: Record<string, string> = { ja: '。', zh: '。' };
+
+/**
+ * Palabras que la voz pronuncia mal y se arreglan con el acento escrito
+ * (comprobado con síntesis + Scribe, 26-10-2026: «фойе» salía «фаер»).
+ */
+const ACENTO: Record<string, Record<string, string>> = {
+  ru: { фойе: 'фойе́' },
+};
+function conAcento(s: string, idioma: string) {
+  const a = ACENTO[idioma];
+  if (!a) return s;
+  return s.replace(/\p{L}+/gu, (w) => {
+    const r = a[w.toLowerCase()];
+    if (!r) return w;
+    return w[0] === w[0].toLowerCase() ? r : r[0].toUpperCase() + r.slice(1);
+  });
+}
 const fin = (idioma: string) => FIN[idioma] ?? '.';
 const LETRA = /^\p{L}$/u;
 
@@ -113,7 +130,7 @@ function quitarNotacion(t: string, idioma: string): string {
  */
 export function normalizarParaVoz(texto: string, idioma: string, modo?: string): string {
   if (modo === 'letra') return deletrear(texto.trim(), idioma);
-  const s = quitarNotacion(texto, idioma);
+  const s = conAcento(quitarNotacion(texto, idioma), idioma);
   if (!s) return s;
   const letras = s.replace(/[\s\p{P}]/gu, '');
   // Muy corto y sin puntuación final: la voz lo corta o lo lee sin entonación.

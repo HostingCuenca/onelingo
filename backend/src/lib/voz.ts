@@ -2,6 +2,7 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, writeFile, stat, rename, unlink, link, copyFile, constants } from 'node:fs/promises';
+import { conGananciaVoz, normalizarVolumen } from './volumen.js';
 import path from 'node:path';
 import { Readable } from 'node:stream';
 import { config } from './config.js';
@@ -246,14 +247,17 @@ const LECTURAS_JA: Record<string, string> = (() => {
 })();
 const KANA = /^[\u3041-\u309f\u30a0-\u30ffー]+$/u;
 
-/** Japonés: palabra corta con kanji → su lectura («星 (ほし)», «星» → «ほし»). */
+/**
+ * Japonés: palabra suelta con kanji → su lectura («星 (ほし)», «星» → «ほし»). La que trae
+ * el vocablo entre paréntesis manda: con la palabra sola, la voz leía 検疫 como «かんい».
+ */
 function lecturaJa(t: string): string | undefined {
   const m = t.match(/^\s*([^\s()]+)\s*(?:\(([^)]*)\))?/u);
   if (!m || t.slice(m[0].length).replace(/\([^)]*\)/g, '').trim()) return undefined;
   const base = m[1].replace(/[。、！？!?.]+$/u, '');
-  if (!LECTURAS_JA[base]) return undefined;
   const dada = m[2]?.split(/[,、;；]/)[0].trim();
-  return dada && KANA.test(dada) ? dada : LECTURAS_JA[base];
+  if (dada && KANA.test(dada) && /\p{Script=Han}/u.test(base)) return dada;
+  return LECTURAS_JA[base];
 }
 
 export function textoParaVoz(t: string, idioma = 'en', modo?: string) {
@@ -485,7 +489,7 @@ async function audioTrozo(t: Trozo, idioma: string, rol: string, vozId: string) 
   if (!pendiente) {
     pendiente = (async () => {
       await mkdir(dir(), { recursive: true });
-      const buffer = await sintetizar(t.texto, vozId, idioma, t.previo, ajustesDeVoz(rol));
+      const buffer = await normalizarVolumen(await sintetizar(t.texto, vozId, idioma, t.previo, ajustesDeVoz(rol)), rol);
       await writeFile(path.join(dir(), `${t.hash}.mp3`), buffer);
       await registrarAudio(t.hash, idioma, rol, vozId, t.texto, buffer.length);
       return buffer;
@@ -579,7 +583,8 @@ async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: strin
   if (!pendiente) {
     pendiente = (async () => {
       await mkdir(dir(), { recursive: true });
-      const r = await sintetizarAlineado(t.texto, vozId, idioma, t.previo, ajustesDeVoz(rol));
+      const crudo = await sintetizarAlineado(t.texto, vozId, idioma, t.previo, ajustesDeVoz(rol));
+      const r = { ...crudo, buffer: await normalizarVolumen(crudo.buffer, rol) };
       await writeFile(path.join(dir(), `${t.hash}.mp3`), r.buffer);
       if (r.alineacion) await writeFile(path.join(dir(), `${t.hash}.json`), JSON.stringify(r.alineacion)).catch(() => {});
       await registrarAudio(t.hash, idioma, rol, vozId, t.texto, r.buffer.length);
@@ -654,17 +659,23 @@ export async function obtenerAudioStream(p: PeticionVoz, signal: AbortSignal, on
     });
     if (!response.ok || !response.body) throw new Error(`ElevenLabs ${response.status}`);
     const reader = response.body.getReader();
+    async function* crudos() {
+      while (true) {
+        const next = await reader.read();
+        if (next.done) return;
+        yield Buffer.from(next.value);
+      }
+    }
     async function* chunks() {
       const all: Buffer[] = []; let complete = false;
       try {
-        while (true) {
-          const next = await reader.read();
-          if (next.done) break;
+        // Sale ya con la ganancia de la voz; la caché guarda el clip medido y ajustado exacto.
+        for await (const chunk of conGananciaVoz(crudos(), rol)) {
           if (!all.length) onFirst();
-          const chunk = Buffer.from(next.value); all.push(chunk); yield chunk;
+          all.push(chunk); yield chunk;
         }
         if (!all.length) throw new Error('audio_vacio');
-        const buffer = Buffer.concat(all);
+        const buffer = await normalizarVolumen(Buffer.concat(all), rol);
         await mkdir(dir(), { recursive: true });
         const temp = `${ruta}.${process.pid}.part`;
         try { await writeFile(temp, buffer); await rename(temp, ruta); }
