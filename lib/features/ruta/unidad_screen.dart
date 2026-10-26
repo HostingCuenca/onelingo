@@ -444,13 +444,20 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     cadena: cadenaDelAlumno(ref.read(progressProvider), widget.ruta.curso),
   );
 
+  /// Veces que un ejercicio fallado puede volver. Sin tope, el último de su
+  /// bloque volvía al instante una y otra vez: sin teclado coreano, «안녕히
+  /// ____» no dejaba seguir la clase (emulador, 26-10-2026).
+  static const maxRepeticiones = 2;
+
   /// Un ejercicio de práctica fallado vuelve al final de su bloque (una vez
-  /// pendiente a la vez), en lugar de bloquear el avance.
+  /// pendiente a la vez y hasta [maxRepeticiones]), en lugar de bloquear el avance.
   void _repetirAlFinal(Paso paso, Item item) {
-    final yaPendiente = pantallas
-        .skip(indice + 1)
-        .any((p) => p.paso.id == paso.id && p.item?.id == item.id);
-    if (yaPendiente) return;
+    bool mismo(_Pantalla p) => p.paso.id == paso.id && p.item?.id == item.id;
+    if (pantallas.skip(indice + 1).any(mismo)) return;
+    if (pantallas.where((p) => p.repetida && mismo(p)).length >=
+        maxRepeticiones) {
+      return;
+    }
     var ultimo = pantallas.lastIndexWhere((p) => p.paso.id == paso.id);
     // El ejercicio extra de la clase va suelto dentro del bloque de otro
     // paso: vuelve al final de ese bloque, no justo después de sí mismo.

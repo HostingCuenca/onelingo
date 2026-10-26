@@ -197,6 +197,37 @@ void main() {
     },
   );
 
+  testWidgets('Un ejercicio que no sale vuelve dos veces y la clase sigue', (
+    tester,
+  ) async {
+    await montar(tester, const UnidadScreen(unidadId: 'en.f0.primer-contacto'));
+    for (var i = 0; i < 3; i++) {
+      await texto(tester, 'SIGUIENTE');
+    }
+    Future<void> fallar() async {
+      await texto(tester, 'goodbye');
+      await texto(tester, 'COMPROBAR');
+      expect(find.text('Vamos a repasarlo'), findsOneWidget);
+      await texto(tester, 'SIGUIENTE', ultimo: true);
+    }
+
+    await fallar();
+    await responder(tester, 'thank you');
+    await relacionar(tester, [
+      ('hello', 'hola'),
+      ('goodbye', 'adiós'),
+      ('please', 'por favor'),
+      ('thank you', 'gracias'),
+    ]);
+    // Último de su bloque: sin tope volvía al instante, sin fin.
+    for (var i = 0; i < 2; i++) {
+      expect(find.text('Otra vez'), findsOneWidget);
+      await fallar();
+    }
+    expect(find.text('Otra vez'), findsNothing);
+    await responder(tester, 'thank you');
+  });
+
   testWidgets('Ruta: muestra unidades, estados y la recomendación', (
     tester,
   ) async {
