@@ -10,14 +10,19 @@ import { query, uno } from '../db.js';
 import { ajustesPago, type ReglaCambioIdiomas } from './planes.js';
 import { proveedorActivo } from './proveedor.js';
 import type { ModoPago } from './stripe.js';
+import { reflejarFamilia, salirDeFamilia } from './familia.js';
 
 export type EstadoSus = 'activa' | 'prueba_stripe' | 'impago' | 'cancelada' | 'vencida';
 export type FilaSus = {
-  usuario_id: string; plan_id: string; origen: 'stripe' | 'cortesia'; estado: EstadoSus; cancela_al_final: boolean;
+  usuario_id: string; plan_id: string; origen: 'stripe' | 'cortesia' | 'familia'; estado: EstadoSus; cancela_al_final: boolean;
   periodo_fin: string | Date | null; stripe_cliente_id: string | null; stripe_suscripcion_id: string | null; stripe_precio_id: string | null;
   modo: ModoPago | null; nota: string; importe_centavos: number | null; moneda: string | null; intervalo: 'mes' | 'anio' | null;
   creado_en?: string | Date; cancelada_en?: string | Date | null; actualizado_en?: string | Date;
   idiomas?: string[] | null; periodo_inicio?: string | Date | null; ultimo_cambio_idiomas?: string | Date | null; todos_idiomas?: boolean;
+  /** Meses del periodo del Price (planes de 3, 6 o 12 meses). */
+  meses?: number | null;
+  /** Miembro de un plan familiar (`origen = 'familia'`): quién paga. */
+  titular_id?: string | null;
 };
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -106,12 +111,14 @@ export function estadoDesdeStripe(status: string): EstadoSus {
 
 /**
  * Acceso: `activa` o `prueba_stripe`; `cancelada` con `periodo_fin` futuro;
- * o cortesía sin fecha o con fecha futura.
+ * o cortesía sin fecha o con fecha futura. Familia (reflejo del titular):
+ * `activa`/`prueba_stripe` sin fecha o con fecha futura, `cancelada` con fecha futura.
  */
 export function tieneAcceso(f: Pick<FilaSus, 'origen' | 'estado' | 'periodo_fin'> | null | undefined, ahora = new Date()): boolean {
   if (!f) return false;
   const fin = fecha(f.periodo_fin);
   if (f.origen === 'cortesia') return !fin || fin > ahora;
+  if (f.origen === 'familia') return f.estado === 'cancelada' ? !!fin && fin > ahora : (f.estado === 'activa' || f.estado === 'prueba_stripe') && (!fin || fin > ahora);
   if (f.estado === 'activa' || f.estado === 'prueba_stripe') return true;
   if (f.estado === 'cancelada') return !!fin && fin > ahora;
   return false;
@@ -120,6 +127,7 @@ export function tieneAcceso(f: Pick<FilaSus, 'origen' | 'estado' | 'periodo_fin'
 export function estadoEfectivo(f: FilaSus | null | undefined, ahora = new Date()): EstadoSus | 'sin_plan' {
   if (!f) return 'sin_plan';
   if (f.origen === 'cortesia') return tieneAcceso(f, ahora) ? 'activa' : 'vencida';
+  if (f.origen === 'familia') return tieneAcceso(f, ahora) ? f.estado : 'vencida';
   return f.estado;
 }
 
@@ -131,6 +139,7 @@ export function datosDeStripe(sub: any) {
   const inicioPeriodo = deUnix(sub?.current_period_start) ?? deUnix(item?.current_period_start);
   const status = String(sub?.status ?? '');
   const iv = precio?.recurring?.interval ?? precio?.interval;
+  const cada = Number(precio?.recurring?.interval_count ?? precio?.interval_count ?? 1) || 1;
   return {
     estado: estadoDesdeStripe(status),
     cancela_al_final: status !== 'canceled' && (!!sub?.cancel_at_period_end || !!sub?.cancel_at),
@@ -143,6 +152,7 @@ export function datosDeStripe(sub: any) {
     importe_centavos: typeof precio?.unit_amount === 'number' ? precio.unit_amount : typeof precio?.amount === 'number' ? precio.amount : null,
     moneda: precio?.currency ?? null,
     intervalo: iv === 'year' ? 'anio' as const : iv === 'month' ? 'mes' as const : null,
+    meses: iv === 'year' ? 12 * cada : iv === 'month' ? cada : null,
     modo: (sub?.livemode ? 'live' : 'test') as ModoPago,
     cancelada_en: status === 'canceled' ? deUnix(sub?.canceled_at) ?? deUnix(sub?.ended_at) ?? new Date() : null,
     precioPlan: (precio?.metadata?.plan_id || null) as string | null,
@@ -166,7 +176,7 @@ export function debeAplicar(actual: FilaSus | null | undefined, nueva: Pick<Fila
   return !tieneAcceso(actual, ahora);
 }
 
-/** MRR en USD de las suscripciones de Stripe que pagan (los anuales cuentan /12). */
+/** MRR en USD de las suscripciones de Stripe que pagan (los anuales cuentan /12; los de N meses, /N). */
 export function calcularMrr(filas: (Partial<FilaSus> & { plan_precio_centavos?: number | null; plan_intervalo?: string | null; plan_moneda?: string | null })[]) {
   let centavos = 0, otras = 0;
   for (const f of filas) {
@@ -175,7 +185,7 @@ export function calcularMrr(filas: (Partial<FilaSus> & { plan_precio_centavos?: 
     const intervalo = f.intervalo ?? f.plan_intervalo ?? 'mes';
     const moneda = (f.moneda ?? f.plan_moneda ?? 'usd').toLowerCase();
     if (moneda !== 'usd') { otras++; continue; }
-    centavos += intervalo === 'anio' ? importe / 12 : importe;
+    centavos += importe / (Number(f.meses) > 1 ? Number(f.meses) : intervalo === 'anio' ? 12 : 1);
   }
   return { mrr: Math.round(centavos) / 100, otrasMonedas: otras };
 }
@@ -193,7 +203,8 @@ export async function actualizarPlanDerivado(usuarioId: string) {
 
 /** Acceso en SQL (alias `s`), igual que `tieneAcceso`. */
 export const ACCESO_SQL = `(s.origen = 'cortesia' AND (s.periodo_fin IS NULL OR s.periodo_fin > now()))
-  OR (s.origen = 'stripe' AND (s.estado IN ('activa', 'prueba_stripe') OR (s.estado = 'cancelada' AND s.periodo_fin > now())))`;
+  OR (s.origen = 'stripe' AND (s.estado IN ('activa', 'prueba_stripe') OR (s.estado = 'cancelada' AND s.periodo_fin > now())))
+  OR (s.origen = 'familia' AND ((s.estado IN ('activa', 'prueba_stripe') AND (s.periodo_fin IS NULL OR s.periodo_fin > now())) OR (s.estado = 'cancelada' AND s.periodo_fin > now())))`;
 
 /**
  * Pone al día `usuarios.plan_id` de quienes tienen fila en `suscripciones`
@@ -257,12 +268,12 @@ export async function sincronizarDesdeStripe(sub: any, op: { usuarioId?: string 
   const base = misma && actual!.idiomas?.length ? actual!.idiomas : deMetadata ?? (misma ? actual!.idiomas ?? [] : []);
   const idiomas = ajustarAlPlan(base, await idiomasDelPlan(plan));
   await query(`INSERT INTO suscripciones (usuario_id, plan_id, origen, estado, cancela_al_final, periodo_fin, stripe_cliente_id, stripe_suscripcion_id, stripe_precio_id,
-        modo, nota, importe_centavos, moneda, intervalo, creado_en, cancelada_en, actualizado_en, idiomas, periodo_inicio, todos_idiomas)
-      VALUES ($1,$2,'stripe',$3,$4,$5,$6,$7,$8,$9,'',$10,$11,$12, now(), $13, now(), $14, $15, false)
+        modo, nota, importe_centavos, moneda, intervalo, creado_en, cancelada_en, actualizado_en, idiomas, periodo_inicio, todos_idiomas, meses, titular_id)
+      VALUES ($1,$2,'stripe',$3,$4,$5,$6,$7,$8,$9,'',$10,$11,$12, now(), $13, now(), $14, $15, false, $16, NULL)
       ON CONFLICT (usuario_id) DO UPDATE SET plan_id=EXCLUDED.plan_id, origen='stripe', estado=EXCLUDED.estado, cancela_al_final=EXCLUDED.cancela_al_final,
         periodo_fin=EXCLUDED.periodo_fin, stripe_cliente_id=EXCLUDED.stripe_cliente_id, stripe_suscripcion_id=EXCLUDED.stripe_suscripcion_id,
         stripe_precio_id=EXCLUDED.stripe_precio_id, modo=EXCLUDED.modo, nota='', importe_centavos=EXCLUDED.importe_centavos, moneda=EXCLUDED.moneda,
-        intervalo=EXCLUDED.intervalo,
+        intervalo=EXCLUDED.intervalo, meses=EXCLUDED.meses, titular_id=NULL,
         creado_en = CASE WHEN suscripciones.origen = 'stripe' AND suscripciones.stripe_suscripcion_id = EXCLUDED.stripe_suscripcion_id THEN suscripciones.creado_en ELSE now() END,
         cancelada_en = CASE WHEN EXCLUDED.estado = 'cancelada' THEN coalesce(suscripciones.cancelada_en, EXCLUDED.cancelada_en) END,
         idiomas = EXCLUDED.idiomas, todos_idiomas = false,
@@ -270,8 +281,11 @@ export async function sincronizarDesdeStripe(sub: any, op: { usuarioId?: string 
         ultimo_cambio_idiomas = CASE WHEN suscripciones.origen = 'stripe' AND suscripciones.stripe_suscripcion_id = EXCLUDED.stripe_suscripcion_id THEN suscripciones.ultimo_cambio_idiomas END,
         actualizado_en = now()`,
     [uid, plan, d.estado, d.cancela_al_final, d.periodo_fin, d.stripe_cliente_id, d.stripe_suscripcion_id, d.stripe_precio_id, d.modo,
-      d.importe_centavos, d.moneda, d.intervalo, d.cancelada_en, idiomas, d.periodo_inicio]);
+      d.importe_centavos, d.moneda, d.intervalo, d.cancelada_en, idiomas, d.periodo_inicio, d.meses]);
   await actualizarPlanDerivado(uid);
+  // Paga por su cuenta: deja de ser miembro de otra familia. Si su plan es familiar, sus miembros lo reflejan.
+  if (actual?.origen === 'familia') await salirDeFamilia(uid, { conservarFila: true });
+  await reflejarFamilia(uid);
   return { aplicada: true, usuarioId: uid, estado: d.estado, planId: plan, idiomas };
 }
 
@@ -279,7 +293,7 @@ export async function sincronizarDesdeStripe(sub: any, op: { usuarioId?: string 
 export async function marcarImpago(subId: string) {
   const f = await uno<{ usuario_id: string }>(`UPDATE suscripciones SET estado = 'impago', actualizado_en = now()
     WHERE stripe_suscripcion_id = $1 AND origen = 'stripe' AND estado IN ('activa', 'prueba_stripe', 'impago') RETURNING usuario_id`, [subId]);
-  if (f) await actualizarPlanDerivado(f.usuario_id);
+  if (f) { await actualizarPlanDerivado(f.usuario_id); await reflejarFamilia(f.usuario_id); }
   return !!f;
 }
 
@@ -294,6 +308,7 @@ export async function suscripcionDe(usuarioId: string, ahora = new Date()) {
   const p = proveedorActivo();
   const usados = Math.max(0, Math.round(Number(u?.trial_segundos ?? 0)));
   const total = a.pruebaMinutos * 60;
+  const usuariosPlan = f ? Number((await uno<{ usuarios: number }>('SELECT usuarios FROM planes WHERE id = $1', [f.plan_id]))?.usuarios ?? 1) : null;
   return {
     planId: general ? f!.plan_id : '',
     estado: estadoEfectivo(f, ahora),
@@ -310,6 +325,11 @@ export async function suscripcionDe(usuarioId: string, ahora = new Date()) {
     periodoFin: f?.periodo_fin ? new Date(f.periodo_fin).toISOString() : null,
     cancelaAlFinal: !!f?.cancela_al_final,
     modo: f?.modo ?? null,
+    /** Meses del periodo que paga (1, 3, 6, 12) y personas que cubre su plan. */
+    meses: f?.origen === 'stripe' ? Number(f.meses ?? (f.intervalo === 'anio' ? 12 : 1)) : null,
+    usuariosPlan,
+    /** Miembro de un plan familiar: lo paga otra persona. */
+    familiar: f?.origen === 'familia',
     puedeGestionar: !!(p && f?.origen === 'stripe' && f.stripe_cliente_id && f.modo === p.modo()),
     prueba: { minutos: a.pruebaMinutos, segundosUsados: usados, restanteSegundos: Math.max(0, total - usados), agotada: usados >= total },
   };
@@ -394,9 +414,11 @@ export async function darCortesia(usuarioId: string, d: { planId: string; idioma
       ON CONFLICT (usuario_id) DO UPDATE SET plan_id=EXCLUDED.plan_id, origen='cortesia', estado='activa', cancela_al_final=false, periodo_fin=EXCLUDED.periodo_fin,
         nota=EXCLUDED.nota, stripe_suscripcion_id=NULL, stripe_precio_id=NULL, importe_centavos=NULL, moneda=NULL, intervalo=NULL,
         idiomas=EXCLUDED.idiomas, todos_idiomas=EXCLUDED.todos_idiomas, periodo_inicio=NULL, ultimo_cambio_idiomas=NULL,
-        creado_en=now(), cancelada_en=NULL, actualizado_en=now()`,
+        meses=NULL, titular_id=NULL, creado_en=now(), cancelada_en=NULL, actualizado_en=now()`,
     [usuarioId, d.planId, hasta, (d.nota ?? '').slice(0, 500), idiomas, todos]);
   await actualizarPlanDerivado(usuarioId);
+  if (actual?.origen === 'familia') await salirDeFamilia(usuarioId, { conservarFila: true });
+  await reflejarFamilia(usuarioId);
   return suscripcionDe(usuarioId, ahora);
 }
 
@@ -404,11 +426,12 @@ export async function quitarCortesia(usuarioId: string) {
   const f = await uno(`DELETE FROM suscripciones WHERE usuario_id = $1 AND origen = 'cortesia' RETURNING usuario_id`, [usuarioId]);
   if (!f) throw new ErrorSus('El alumno no tiene cortesía.', 404);
   await actualizarPlanDerivado(usuarioId);
+  await reflejarFamilia(usuarioId);
   return suscripcionDe(usuarioId);
 }
 
 // ── Panel ────────────────────────────────────────────────────────────────────
-export const FILTROS_ESTADO = ['', 'con_acceso', 'activa', 'prueba_stripe', 'impago', 'cancelada', 'vencida', 'cortesia', 'cancela_al_final'] as const;
+export const FILTROS_ESTADO = ['', 'con_acceso', 'activa', 'prueba_stripe', 'impago', 'cancelada', 'vencida', 'cortesia', 'familia', 'cancela_al_final'] as const;
 
 /**
  * Desglose por idioma: suscriptores de Stripe con acceso y cortesías vigentes por
@@ -436,8 +459,9 @@ export function desglosePorIdioma(filas: any[], ahora = new Date()) {
 /** `GET /admin/suscripciones`: filas (con buscador y filtros) y resumen de todas. */
 export async function resumenAdmin(filtro: { estado?: string; q?: string; idioma?: string } = {}, ahora = new Date()) {
   const todas = await query(`SELECT s.*, u.nombre, u.email, p.nombre AS plan_nombre, p.precio_centavos AS plan_precio_centavos,
-      p.intervalo AS plan_intervalo, p.moneda AS plan_moneda, p.idiomas AS plan_idiomas
-    FROM suscripciones s JOIN usuarios u ON u.id = s.usuario_id LEFT JOIN planes p ON p.id = s.plan_id ORDER BY s.actualizado_en DESC LIMIT 5000`);
+      p.intervalo AS plan_intervalo, p.moneda AS plan_moneda, p.idiomas AS plan_idiomas, t.email AS titular_email
+    FROM suscripciones s JOIN usuarios u ON u.id = s.usuario_id LEFT JOIN planes p ON p.id = s.plan_id LEFT JOIN usuarios t ON t.id = s.titular_id
+    ORDER BY s.actualizado_en DESC LIMIT 5000`);
   const modo = proveedorActivo()?.modo() ?? null;
   const delModo = todas.filter((f) => f.origen !== 'stripe' || !modo || f.modo === modo);
   const hace30 = new Date(ahora.getTime() - 30 * 86_400_000);
@@ -451,6 +475,7 @@ export async function resumenAdmin(filtro: { estado?: string; q?: string; idioma
     canceladas30: stripeM.filter((f) => f.cancelada_en && new Date(f.cancelada_en) >= hace30).length,
     impagos: stripeM.filter((f) => f.estado === 'impago').length,
     cortesias: todas.filter((f) => f.origen === 'cortesia' && tieneAcceso(f, ahora)).length,
+    familia: todas.filter((f) => f.origen === 'familia' && tieneAcceso(f, ahora)).length,
     otroModo: todas.length - delModo.length,
     porIdioma: desglosePorIdioma(delModo, ahora),
   };
@@ -462,13 +487,13 @@ export async function resumenAdmin(filtro: { estado?: string; q?: string; idioma
       usuarioId: f.usuario_id, nombre: f.nombre, email: f.email, planId: f.plan_id, planNombre: f.plan_nombre?.es ?? f.plan_id,
       origen: f.origen, estado: estadoEfectivo(f, ahora), acceso: tieneAcceso(f, ahora), cancelaAlFinal: f.cancela_al_final,
       periodoFin: f.periodo_fin, modo: f.modo, importe: f.importe_centavos !== null ? f.importe_centavos / 100 : null, moneda: f.moneda,
-      intervalo: f.intervalo ?? f.plan_intervalo, nota: f.nota, stripeClienteId: f.stripe_cliente_id, stripeSuscripcionId: f.stripe_suscripcion_id,
+      intervalo: f.intervalo ?? f.plan_intervalo, meses: f.meses ?? null, titularEmail: f.titular_email ?? null, nota: f.nota, stripeClienteId: f.stripe_cliente_id, stripeSuscripcionId: f.stripe_suscripcion_id,
       creadoEn: f.creado_en, actualizadoEn: f.actualizado_en,
       idiomas, todosLosIdiomas: todos, idiomasPorElegir: porElegir, idiomasPlan: Number(f.plan_idiomas ?? 1),
     }))
     .filter((f) => !q || `${f.nombre} ${f.email} ${f.planId} ${f.stripeClienteId ?? ''}`.toLowerCase().includes(q))
     .filter((f) => !filtro.idioma || f.todosLosIdiomas || f.idiomas.includes(filtro.idioma))
-    .filter((f) => !e || (e === 'con_acceso' ? f.acceso : e === 'cortesia' ? f.origen === 'cortesia' : e === 'cancela_al_final' ? f.cancelaAlFinal : f.estado === e));
+    .filter((f) => !e || (e === 'con_acceso' ? f.acceso : e === 'cortesia' || e === 'familia' ? f.origen === e : e === 'cancela_al_final' ? f.cancelaAlFinal : f.estado === e));
   return { resumen, filas: filas.slice(0, 500), total: filas.length };
 }
 

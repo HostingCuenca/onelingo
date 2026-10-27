@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { query, uno } from '../db.js';
 import { registrarAlGuardarStripe, stripeConfig } from '../conexiones.js';
 import { PRUEBA_MINUTOS_POR_DEFECTO } from '../analitica.js';
-import { proveedorActivo, stripe, type FilaPlan, type SyncPlan } from './proveedor.js';
+import { firmaDuracion, proveedorActivo, stripe, type Duracion, type FilaPlan, type PrecioDuracion, type SyncPlan } from './proveedor.js';
 
 // ── Ajustes ──────────────────────────────────────────────────────────────────
 /** Regla para que el alumno cambie un idioma de su plan por otro (anexo de idiomas). */
@@ -37,14 +37,25 @@ export async function guardarAjustes(a: z.infer<typeof AjustesEntrada>) {
 // ── Formato ──────────────────────────────────────────────────────────────────
 const texto = (v: any) => ({ es: String(v?.es ?? ''), en: String(v?.en ?? '') });
 const lista = (v: any) => ({ es: Array.isArray(v?.es) ? v.es.map(String) : [], en: Array.isArray(v?.en) ? v.en.map(String) : [] });
+const duraciones = (v: any): Duracion[] => (Array.isArray(v) ? v : [])
+  .map((d) => ({ meses: Number(d?.meses), precio_centavos: Number(d?.precio_centavos) }))
+  .filter((d) => Number.isInteger(d.meses) && d.meses > 1 && Number.isFinite(d.precio_centavos) && d.precio_centavos > 0)
+  .sort((a, b) => a.meses - b.meses);
 export function normalizar(f: any): FilaPlan {
-  return { ...f, nombre: texto(f.nombre), descripcion: texto(f.descripcion), incluye: lista(f.incluye), precio_centavos: Number(f.precio_centavos), idiomas: Number(f.idiomas), orden: Number(f.orden) };
+  return {
+    ...f, nombre: texto(f.nombre), descripcion: texto(f.descripcion), incluye: lista(f.incluye), precio_centavos: Number(f.precio_centavos), idiomas: Number(f.idiomas), orden: Number(f.orden),
+    duraciones: f.intervalo === 'mes' ? duraciones(f.duraciones) : [], usuarios: Math.max(1, Number(f.usuarios ?? 1) || 1),
+  };
 }
 /** Forma pública del contrato (`GET /planes`). */
 export function aPublico(f: FilaPlan) {
   return {
     id: f.id, nombre: f.nombre, descripcion: f.descripcion, incluye: f.incluye, idiomas: f.idiomas,
     precio: Math.round(f.precio_centavos) / 100, moneda: f.moneda, intervalo: f.intervalo, destacado: f.destacado, orden: f.orden,
+    /** Personas que cubre (Familiar: 4) y opciones de duración (la de 1 mes es `precio`). */
+    usuarios: f.usuarios,
+    duraciones: [...(f.intervalo === 'mes' ? [{ meses: 1, precio: Math.round(f.precio_centavos) / 100 }] : []),
+      ...f.duraciones.map((d) => ({ meses: d.meses, precio: Math.round(d.precio_centavos) / 100 }))],
   };
 }
 /** Estado de sincronización para el panel. */
@@ -78,7 +89,9 @@ export async function listarPlanesAdmin() {
 // ── Escritura ────────────────────────────────────────────────────────────────
 const TextoCorto = (max: number, min = 0) => z.object({ es: z.string().trim().min(min).max(max), en: z.string().trim().max(max).default('') });
 const Ventajas = z.array(z.string().trim().min(1).max(160)).max(20).default([]);
-export const PlanEntrada = z.object({
+const Duraciones = z.array(z.object({ meses: z.number().int().min(2).max(24), precio: z.number().min(0.5, 'Stripe no cobra menos de 0,50').max(100_000) })).max(6)
+  .refine((l) => new Set(l.map((d) => d.meses)).size === l.length, 'Hay dos duraciones con los mismos meses');
+const PlanBase = z.object({
   id: z.string().trim().toLowerCase().regex(/^[a-z0-9][a-z0-9-]{0,39}$/, 'Solo minúsculas, números y guiones').optional(),
   nombre: TextoCorto(80, 1),
   descripcion: TextoCorto(500).default({ es: '', en: '' }),
@@ -90,8 +103,16 @@ export const PlanEntrada = z.object({
   destacado: z.boolean().default(false),
   visible: z.boolean().default(true),
   orden: z.number().int().min(0).max(10_000).default(0),
+  /** Precios por 3, 6 o 12 meses (solo en planes mensuales). */
+  duraciones: Duraciones.default([]),
+  /** Personas que cubre el plan (el titular incluido). */
+  usuarios: z.number().int().min(1).max(10).default(1),
 });
-export const PlanCambios = PlanEntrada.omit({ id: true }).partial().extend({ archivado: z.boolean().optional() });
+const sinDuracionesAnuales = (d: { intervalo?: string; duraciones?: unknown[] }) => d.intervalo !== 'anio' || !d.duraciones?.length;
+const MSG_ANUAL = { message: 'Las duraciones son para planes mensuales: un plan anual no las lleva.', path: ['duraciones'] };
+export const PlanEntrada = PlanBase.refine(sinDuracionesAnuales, MSG_ANUAL);
+export const PlanCambios = PlanBase.omit({ id: true }).partial().extend({ archivado: z.boolean().optional() }).refine(sinDuracionesAnuales, MSG_ANUAL);
+const centavosDe = (l: { meses: number; precio: number }[]) => l.map((d) => ({ meses: d.meses, precio_centavos: Math.round(d.precio * 100) })).sort((a, b) => a.meses - b.meses);
 
 const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'plan';
 export class ErrorPlan extends Error { constructor(m: string, public status: number) { super(m); } }
@@ -104,9 +125,10 @@ export async function crearPlan(d: z.infer<typeof PlanEntrada>) {
     id = `${base}-${i}`.slice(0, 40);
   }
   const moneda = d.moneda ?? (await ajustesPago()).moneda;
-  await query(`INSERT INTO planes (id, nombre, descripcion, incluye, idiomas, precio_centavos, moneda, intervalo, destacado, visible, orden)
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
-    [id, JSON.stringify(d.nombre), JSON.stringify(d.descripcion), JSON.stringify(d.incluye), d.idiomas, Math.round(d.precio * 100), moneda, d.intervalo, d.destacado, d.visible, d.orden]);
+  await query(`INSERT INTO planes (id, nombre, descripcion, incluye, idiomas, precio_centavos, moneda, intervalo, destacado, visible, orden, duraciones, usuarios)
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,
+    [id, JSON.stringify(d.nombre), JSON.stringify(d.descripcion), JSON.stringify(d.incluye), d.idiomas, Math.round(d.precio * 100), moneda, d.intervalo, d.destacado, d.visible, d.orden,
+      JSON.stringify(centavosDe(d.duraciones)), d.usuarios]);
   return sincronizarPlan(id);
 }
 
@@ -118,11 +140,16 @@ export async function actualizarPlan(id: string, d: z.infer<typeof PlanCambios>)
     idiomas: d.idiomas ?? a.idiomas, precio_centavos: d.precio !== undefined ? Math.round(d.precio * 100) : a.precio_centavos,
     moneda: d.moneda ?? a.moneda, intervalo: d.intervalo ?? a.intervalo, destacado: d.destacado ?? a.destacado,
     visible: d.visible ?? a.visible, orden: d.orden ?? a.orden, archivado: d.archivado ?? a.archivado,
+    duraciones: d.duraciones ? centavosDe(d.duraciones) : a.duraciones, usuarios: d.usuarios ?? a.usuarios,
   };
+  if (n.intervalo === 'anio' && n.duraciones.length) {
+    if (d.duraciones?.length) throw new ErrorPlan(MSG_ANUAL.message, 400);
+    n.duraciones = []; // pasó a anual: las duraciones dejan de ofrecerse
+  }
   await query(`UPDATE planes SET nombre=$2, descripcion=$3, incluye=$4, idiomas=$5, precio_centavos=$6, moneda=$7, intervalo=$8, destacado=$9,
-      visible=$10, orden=$11, archivado=$12, stripe_sincronizado=false, actualizado_en=now() WHERE id=$1`,
+      visible=$10, orden=$11, archivado=$12, duraciones=$13, usuarios=$14, stripe_sincronizado=false, actualizado_en=now() WHERE id=$1`,
     [id, JSON.stringify(n.nombre), JSON.stringify(n.descripcion), JSON.stringify(n.incluye), n.idiomas, n.precio_centavos, n.moneda, n.intervalo,
-      n.destacado, n.visible, n.orden, n.archivado]);
+      n.destacado, n.visible, n.orden, n.archivado, JSON.stringify(n.duraciones), n.usuarios]);
   return sincronizarPlan(id);
 }
 
@@ -153,7 +180,8 @@ export async function sincronizarPlan(id: string, op: { portal?: boolean } = {})
   if (p) {
     const out: SyncPlan = { productoId: null, precioId: null, firma: null, modo: p.modo()!, precioNuevo: false, precioArchivado: null };
     let error: string | null = null;
-    try { await p.sincronizarPlan(a, out); } catch (e: any) { error = String(e?.message ?? e).slice(0, 300) || 'Error desconocido'; }
+    const actuales = a.stripe_modo === out.modo ? await preciosDuraciones(id, out.modo) : [];
+    try { await p.sincronizarPlan(a, out, actuales); } catch (e: any) { error = String(e?.message ?? e).slice(0, 300) || 'Error desconocido'; }
     // Se guarda también lo conseguido a medias (p. ej. el Product creado aunque falle el Price).
     await query(`UPDATE planes SET stripe_producto_id=$2, stripe_precio_id=$3, stripe_precio_firma=$4, stripe_modo=$5, stripe_sincronizado=$6, stripe_error=$7 WHERE id=$1`,
       [id, out.productoId, out.precioId, out.firma, out.modo, !error, error]);
@@ -172,7 +200,30 @@ async function guardarHistorialPrecios(id: string, a: FilaPlan, out: SyncPlan) {
   for (const [precio, modo, firma] of filas) {
     await query('INSERT INTO planes_precios (precio_id, plan_id, modo, firma) VALUES ($1,$2,$3,$4) ON CONFLICT (precio_id) DO NOTHING', [precio, id, modo, firma]);
   }
-  if (out.precioArchivado) await query('UPDATE planes_precios SET archivado_en = coalesce(archivado_en, now()) WHERE precio_id = $1', [out.precioArchivado]);
+  for (const d of out.duraciones ?? []) {
+    await query('INSERT INTO planes_precios (precio_id, plan_id, modo, firma, meses) VALUES ($1,$2,$3,$4,$5) ON CONFLICT (precio_id) DO NOTHING', [d.precioId, id, out.modo, d.firma, d.meses]);
+  }
+  for (const archivado of [out.precioArchivado, ...(out.duracionesArchivadas ?? [])]) {
+    if (archivado) await query('UPDATE planes_precios SET archivado_en = coalesce(archivado_en, now()) WHERE precio_id = $1', [archivado]);
+  }
+}
+
+/** Prices vigentes de las duraciones de un plan en un modo (historial `planes_precios`). */
+export async function preciosDuraciones(planId: string, modo: string): Promise<PrecioDuracion[]> {
+  const filas = await query<{ precio_id: string; firma: string; meses: number }>(`SELECT precio_id, firma, meses FROM planes_precios
+    WHERE plan_id = $1 AND modo = $2 AND meses > 1 AND archivado_en IS NULL ORDER BY meses, creado_en`, [planId, modo]);
+  return filas.map((f) => ({ precioId: f.precio_id, firma: f.firma, meses: Number(f.meses) }));
+}
+
+/**
+ * Price para suscribirse a `meses` (1 = el mensual del plan). null si el plan no
+ * ofrece esa duración o aún no está sincronizada en el modo del proveedor.
+ */
+export async function precioParaCheckout(pl: FilaPlan, meses: number, modo: string): Promise<string | null> {
+  if (meses === 1 || pl.intervalo === 'anio') return meses === 1 && pl.stripe_modo === modo ? pl.stripe_precio_id : null;
+  const d = pl.duraciones.find((x) => x.meses === meses);
+  if (!d || pl.stripe_modo !== modo) return null;
+  return (await preciosDuraciones(pl.id, modo)).find((x) => x.meses === meses && x.firma === firmaDuracion(d, pl.moneda))?.precioId ?? null;
 }
 
 export type EstadoPortal = { ok: boolean; productos: number; omitidos: number; error?: string };
@@ -186,9 +237,13 @@ export async function actualizarPortal(): Promise<EstadoPortal | undefined> {
   const p = proveedorActivo();
   if (!p) return undefined;
   const modo = p.modo();
-  const filas = await query<{ producto: string; precio: string }>(`SELECT stripe_producto_id AS producto, stripe_precio_id AS precio FROM planes
-    WHERE visible AND NOT archivado AND stripe_sincronizado AND stripe_modo = $1 AND stripe_producto_id IS NOT NULL AND stripe_precio_id IS NOT NULL
-    ORDER BY orden, id`, [modo]);
+  // Cada producto con su Price mensual y los de sus duraciones vigentes.
+  const filas = await query<{ producto: string; precio: string; precios: string[] }>(`SELECT p.stripe_producto_id AS producto, p.stripe_precio_id AS precio,
+      array_prepend(p.stripe_precio_id, coalesce((SELECT array_agg(pp.precio_id ORDER BY pp.meses) FROM planes_precios pp
+        WHERE pp.plan_id = p.id AND pp.modo = $1 AND pp.meses > 1 AND pp.archivado_en IS NULL), '{}')) AS precios
+    FROM planes p
+    WHERE p.visible AND NOT p.archivado AND p.stripe_sincronizado AND p.stripe_modo = $1 AND p.stripe_producto_id IS NOT NULL AND p.stripe_precio_id IS NOT NULL
+    ORDER BY p.orden, p.id`, [modo]);
   const aj = await uno<{ stripe_portal_id: string | null; stripe_portal_modo: string | null }>('SELECT stripe_portal_id, stripe_portal_modo FROM ajustes_pago WHERE id');
   try {
     const r = await p.configurarPortal({ productos: filas, actualId: aj?.stripe_portal_modo === modo ? aj.stripe_portal_id : null, retorno: `${stripeConfig().urlApp}/#/pago?estado=portal` });

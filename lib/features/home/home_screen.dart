@@ -90,6 +90,8 @@ class HomeScreen extends ConsumerWidget {
             ],
             if (!plan.tienePlan) _TrialBanner(restante: restante),
             if (!plan.tienePlan) const SizedBox(height: 16),
+            const _BotonPlanes(),
+            const SizedBox(height: 16),
             // Idiomas sin ruta nueva (hoy ninguno): curso en preparación.
             if (!idiomasConRuta.contains(s.idiomaMeta)) ...[
               TituloSeccion(tr('Tu camino de aprendizaje')),
@@ -129,6 +131,69 @@ class HomeScreen extends ConsumerWidget {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Acceso a los planes desde el inicio: invita a elegir uno o muestra el actual.
+class _BotonPlanes extends ConsumerWidget {
+  const _BotonPlanes();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final plan = ref.watch(estadoPlanProvider);
+    final interfaz = ref.watch(progressProvider.select((s) => s.interfaz));
+    final nombre = ref.watch(catalogoPlanesProvider).plan(plan.planId)?.nombreEn(interfaz);
+    return Semantics(
+      button: true,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          key: const ValueKey('inicio-planes'),
+          borderRadius: BorderRadius.circular(22),
+          onTap: () => context.push('/planes'),
+          child: Ink(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              gradient: const LinearGradient(
+                colors: [OL.rojo, Color(0xFFF2669A)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              boxShadow: OL.sombra(.10),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.workspace_premium_rounded, color: OL.blanco, size: 36),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tr('Planes'),
+                        style: const TextStyle(color: OL.blanco, fontSize: 18, fontWeight: FontWeight.w800),
+                      ),
+                      Text(
+                        plan.tienePlan && nombre != null
+                            ? tr('Tu plan: {plan}', {'plan': nombre})
+                            : tr('Elige tu plan y comienza hoy'),
+                        style: TextStyle(color: OL.blanco.withValues(alpha: .9), fontSize: 13),
+                      ),
+                    ],
+                  ),
+                ),
+                CircleAvatar(
+                  radius: 16,
+                  backgroundColor: OL.blanco.withValues(alpha: .22),
+                  child: const Icon(Icons.chevron_right_rounded, color: OL.blanco),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

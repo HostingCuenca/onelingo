@@ -46,6 +46,16 @@ Map<String, List<String>> _mapaListas(Object? j) => j is Map
     ? {'es': j.whereType<String>().toList()}
     : const {};
 
+/// Una opción de duración del plan: cobro cada [meses] meses.
+class DuracionPlan {
+  const DuracionPlan(this.meses, this.precio);
+  final int meses;
+  final double precio;
+
+  /// Precio equivalente por mes.
+  double get porMes => precio / meses;
+}
+
 class PlanServidor {
   const PlanServidor({
     required this.id,
@@ -58,6 +68,8 @@ class PlanServidor {
     this.intervalo = 'mes',
     this.destacado = false,
     this.orden = 0,
+    this.usuarios = 1,
+    this.listaDuraciones = const [],
   });
 
   final String id;
@@ -72,6 +84,28 @@ class PlanServidor {
   final String intervalo;
   final bool destacado;
   final int orden;
+
+  /// Personas que cubre (Familiar: 4, el titular incluido).
+  final int usuarios;
+
+  /// Duraciones del servidor (incluida la de 1 mes); vacía en servidores
+  /// anteriores a las duraciones.
+  final List<DuracionPlan> listaDuraciones;
+
+  bool get familiar => usuarios > 1;
+
+  /// Opciones de duración: las del servidor o, si no manda, solo el cobro
+  /// del plan (1 mes, o 12 si es anual).
+  List<DuracionPlan> get duraciones => listaDuraciones.isNotEmpty
+      ? listaDuraciones
+      : [DuracionPlan(intervalo == 'anio' ? 12 : 1, precio)];
+
+  /// Ahorro (0–100) de [d] frente a pagar mes a mes. 0 sin precio mensual.
+  int ahorro(DuracionPlan d) {
+    final mensual = duraciones.where((x) => x.meses == 1).firstOrNull;
+    if (mensual == null || d.meses == 1 || mensual.precio <= 0) return 0;
+    return ((1 - d.precio / (mensual.precio * d.meses)) * 100).round().clamp(0, 99);
+  }
 
   String nombreEn(String idioma) => textoEnIdioma(nombre, idioma);
   String descripcionEn(String idioma) => textoEnIdioma(descripcion, idioma);
@@ -103,6 +137,12 @@ class PlanServidor {
         intervalo: j['intervalo'] == 'anio' ? 'anio' : 'mes',
         destacado: j['destacado'] == true,
         orden: (j['orden'] as num?)?.round() ?? 0,
+        usuarios: (j['usuarios'] as num?)?.round().clamp(1, 10) ?? 1,
+        listaDuraciones: [
+          for (final d in (j['duraciones'] as List? ?? const []))
+            if (d is Map && d['meses'] is num && d['precio'] is num)
+              DuracionPlan((d['meses'] as num).round(), (d['precio'] as num).toDouble()),
+        ]..sort((a, b) => a.meses.compareTo(b.meses)),
       );
 }
 
@@ -269,6 +309,9 @@ class Suscripcion {
     this.cambioIdiomas = const CambioIdiomas(),
     this.accesoPorIdioma = const {},
     this.accesoPlan,
+    this.meses,
+    this.usuariosPlan,
+    this.familiar = false,
   });
 
   final String planId;
@@ -300,6 +343,18 @@ class Suscripcion {
 
   /// Acceso de pago en algún idioma (null si el servidor no lo manda).
   final bool? accesoPlan;
+
+  /// Meses del periodo que paga en Stripe (1, 3, 6, 12).
+  final int? meses;
+
+  /// Personas que cubre su plan (Familiar: 4).
+  final int? usuariosPlan;
+
+  /// Miembro de un plan familiar: lo paga otra persona.
+  final bool familiar;
+
+  /// Titular de un plan familiar con acceso: puede añadir personas.
+  bool get titularFamiliar => !familiar && vigente && (usuariosPlan ?? 1) > 1;
 
   /// Idiomas que incluye el plan (elegidos + por elegir); 0 = todos.
   int get idiomasDelPlan =>
@@ -343,6 +398,9 @@ class Suscripcion {
     _ => esCortesia ? tr('Cortesía') : tr('Sin plan'),
   };
 
+  /// «Cada 3 meses», «Mensual»… del periodo de Stripe (null si no se sabe).
+  String? get periodoTexto => meses == null ? null : textoDuracion(meses!);
+
   static Suscripcion fromJson(Map<String, dynamic> j) => Suscripcion(
     planId: j['planId'] as String? ?? '',
     estado: j['estado'] as String? ?? 'sin_plan',
@@ -366,6 +424,9 @@ class Suscripcion {
           }
         : const {},
     accesoPlan: j['accesoPlan'] is bool ? j['accesoPlan'] as bool : null,
+    meses: (j['meses'] as num?)?.round(),
+    usuariosPlan: (j['usuariosPlan'] as num?)?.round(),
+    familiar: j['familiar'] == true,
   );
 }
 
@@ -395,6 +456,57 @@ class EstadoPlan {
   final bool servidor;
 
   bool get tienePlan => planId.isNotEmpty;
+}
+
+/// «1 mes», «3 meses», «12 meses».
+String textoDuracion(int meses) =>
+    meses == 1 ? tr('1 mes') : tr('{n} meses', {'n': meses});
+
+/// Miembro o invitación de un plan familiar (`GET /usuarios/me/familia`).
+class MiembroFamilia {
+  const MiembroFamilia(this.email, this.nombre, {this.activo = false});
+  final String email, nombre;
+
+  /// Ya tiene cuenta con ese correo (si no, la invitación está pendiente).
+  final bool activo;
+}
+
+class Familia {
+  const Familia({this.rol, this.plazas = 0, this.miembros = const [], this.titular});
+
+  /// titular | miembro | null
+  final String? rol;
+
+  /// Personas que puede añadir el titular, además de él.
+  final int plazas;
+  final List<MiembroFamilia> miembros;
+
+  /// Nombre o correo de quien paga (para un miembro).
+  final String? titular;
+
+  bool get esTitular => rol == 'titular';
+  bool get esMiembro => rol == 'miembro';
+  bool get completa => miembros.length >= plazas;
+
+  static Familia fromJson(Map<String, dynamic> j) {
+    final t = j['titular'];
+    return Familia(
+      rol: j['rol'] as String?,
+      plazas: (j['plazas'] as num?)?.round() ?? 0,
+      miembros: [
+        for (final m in (j['miembros'] as List? ?? const []))
+          if (m is Map)
+            MiembroFamilia(
+              '${m['email'] ?? ''}',
+              '${m['nombre'] ?? ''}',
+              activo: m['estado'] == 'activo',
+            ),
+      ],
+      titular: t is Map
+          ? ('${t['nombre'] ?? ''}'.trim().isNotEmpty ? '${t['nombre']}' : '${t['email'] ?? ''}')
+          : null,
+    );
+  }
 }
 
 /// «20/11/2026» en hora local (igual en los dos idiomas de la interfaz).

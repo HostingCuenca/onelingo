@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react'
 import { api, ESTADOS, fecha, hace, IDIOMAS, num, usd } from '../api'
 
 type Fila = {
-  usuarioId: string; nombre: string; email: string; planId: string; planNombre: string; origen: 'stripe' | 'cortesia'; estado: string; acceso: boolean
-  cancelaAlFinal: boolean; periodoFin: string | null; modo: string | null; importe: number | null; moneda: string | null; intervalo: string | null; nota: string; actualizadoEn: string
+  usuarioId: string; nombre: string; email: string; planId: string; planNombre: string; origen: 'stripe' | 'cortesia' | 'familia'; estado: string; acceso: boolean
+  cancelaAlFinal: boolean; periodoFin: string | null; modo: string | null; importe: number | null; moneda: string | null; intervalo: string | null; meses?: number | null; titularEmail?: string | null; nota: string; actualizadoEn: string
   idiomas: string[]; todosLosIdiomas: boolean; idiomasPorElegir: number
 }
 type PorIdioma = { idioma: string; suscriptores: number; cortesias: number; mrr: number }
 type Datos = {
-  resumen: { modo: string | null; activas: number; mrr: number; otrasMonedas: number; nuevas30: number; canceladas30: number; impagos: number; cortesias: number; otroModo: number; porIdioma?: PorIdioma[] }
+  resumen: { modo: string | null; activas: number; mrr: number; otrasMonedas: number; nuevas30: number; canceladas30: number; impagos: number; cortesias: number; familia?: number; otroModo: number; porIdioma?: PorIdioma[] }
   filas: Fila[]; total: number
 }
 
 const FILTROS: [string, string][] = [['', 'Todos los estados'], ['con_acceso', 'Con acceso'], ['activa', 'Activas'], ['prueba_stripe', 'En prueba (Stripe)'], ['impago', 'Impago'],
-  ['cancela_al_final', 'Cancelan al final del periodo'], ['cancelada', 'Canceladas'], ['vencida', 'Vencidas'], ['cortesia', 'Cortesías']]
+  ['cancela_al_final', 'Cancelan al final del periodo'], ['cancelada', 'Canceladas'], ['vencida', 'Vencidas'], ['cortesia', 'Cortesías'], ['familia', 'Miembros de un plan familiar']]
 
 export default function Suscripciones({ abrir }: { abrir: (id: string) => void }) {
   const [q, setQ] = useState(''); const [estado, setEstado] = useState(''); const [idioma, setIdioma] = useState('')
@@ -28,11 +28,12 @@ export default function Suscripciones({ abrir }: { abrir: (id: string) => void }
       <div className="cab"><h1>Suscripciones</h1>{r?.modo && <span className={`pill ${r.modo === 'live' ? 'ok' : 'trial'}`}>{r.modo === 'live' ? 'MODO REAL' : 'MODO TEST'}</span>}</div>
       {r && <div className="kpis">
         <div className="kpi"><div className="v">{num(r.activas)}</div><div className="l">Activas (Stripe)</div></div>
-        <div className="kpi"><div className="v">{usd(r.mrr)}</div><div className="l">MRR (USD)</div><div className="nota">anuales ÷ 12{r.otrasMonedas ? ` · ${r.otrasMonedas} en otra moneda sin contar` : ''}</div></div>
+        <div className="kpi"><div className="v">{usd(r.mrr)}</div><div className="l">MRR (USD)</div><div className="nota">anuales ÷ 12, de N meses ÷ N{r.otrasMonedas ? ` · ${r.otrasMonedas} en otra moneda sin contar` : ''}</div></div>
         <div className="kpi"><div className="v">{num(r.nuevas30)}</div><div className="l">Nuevas 30 días</div></div>
         <div className="kpi"><div className="v">{num(r.canceladas30)}</div><div className="l">Canceladas 30 días</div></div>
         <div className="kpi"><div className="v" style={r.impagos ? { color: 'var(--rojo)' } : undefined}>{num(r.impagos)}</div><div className="l">Impagos</div></div>
         <div className="kpi"><div className="v">{num(r.cortesias)}</div><div className="l">Cortesías vigentes</div></div>
+        {r.familia !== undefined && <div className="kpi"><div className="v">{num(r.familia)}</div><div className="l">Miembros de planes familiares</div></div>}
       </div>}
       {r?.porIdioma && <div className="tarjeta">
         <h2>Por idioma</h2>
@@ -62,10 +63,12 @@ export default function Suscripciones({ abrir }: { abrir: (id: string) => void }
               <td><b>{f.nombre}</b><br /><span className="muted mono">{f.email}</span></td>
               <td>{f.planNombre}<br /><span className="muted mono">{f.planId}</span></td>
               <td>{f.todosLosIdiomas ? 'Todos' : f.idiomas.map((c) => IDIOMAS[c] ?? c).join(', ') || '—'}{f.idiomasPorElegir > 0 && <><br /><span className="muted">{f.idiomasPorElegir} por elegir</span></>}</td>
-              <td>{f.origen === 'cortesia' ? <span className="pill">Cortesía</span> : <>Stripe{f.modo && <span className="muted"> · {f.modo}</span>}</>}</td>
+              <td>{f.origen === 'cortesia' ? <span className="pill">Cortesía</span>
+                : f.origen === 'familia' ? <><span className="pill">Familia</span>{f.titularEmail && <><br /><span className="muted mono">paga {f.titularEmail}</span></>}</>
+                : <>Stripe{f.modo && <span className="muted"> · {f.modo}</span>}</>}</td>
               <td><span className={`pill ${clase}`}>{etq}</span>{f.cancelaAlFinal && <><br /><span className="muted">cancela al final</span></>}</td>
-              <td>{f.periodoFin ? fecha(f.periodoFin) : f.origen === 'cortesia' ? 'Sin fecha' : '—'}</td>
-              <td className="num">{f.importe !== null ? `${f.importe.toFixed(2)} ${(f.moneda ?? '').toUpperCase()}${f.intervalo === 'anio' ? '/año' : '/mes'}` : '—'}</td>
+              <td>{f.periodoFin ? fecha(f.periodoFin) : f.origen !== 'stripe' ? 'Sin fecha' : '—'}</td>
+              <td className="num">{f.importe !== null ? `${f.importe.toFixed(2)} ${(f.moneda ?? '').toUpperCase()}${(f.meses ?? 1) > 1 && f.meses !== 12 ? ` cada ${f.meses} meses` : f.intervalo === 'anio' || f.meses === 12 ? '/año' : '/mes'}` : '—'}</td>
               <td>{hace(f.actualizadoEn)}</td>
             </tr>
           })}</tbody>

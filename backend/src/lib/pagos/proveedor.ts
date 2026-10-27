@@ -14,22 +14,37 @@ export type FilaPlan = {
   id: string; nombre: Texto; descripcion: Texto; incluye: { es: string[]; en: string[] };
   idiomas: number; precio_centavos: number; moneda: string; intervalo: 'mes' | 'anio';
   destacado: boolean; visible: boolean; orden: number; archivado: boolean;
+  /** Duraciones extra (planes mensuales): cobro cada `meses` meses. */
+  duraciones: Duracion[]; usuarios: number;
   stripe_producto_id: string | null; stripe_precio_id: string | null; stripe_modo: string | null;
   stripe_precio_firma: string | null; stripe_sincronizado: boolean; stripe_error: string | null;
   actualizado_en?: string | Date;
 };
 
-/** Resultado (también parcial, si algo falla a medias) de sincronizar un plan. */
-export type SyncPlan = { productoId: string | null; precioId: string | null; firma: string | null; modo: ModoPago; precioNuevo: boolean; precioArchivado: string | null };
+export type Duracion = { meses: number; precio_centavos: number };
+/** Price de una duración en el proveedor (historial `planes_precios`, sin archivar). */
+export type PrecioDuracion = { precioId: string; firma: string; meses: number };
+
+/**
+ * Resultado (también parcial, si algo falla a medias) de sincronizar un plan.
+ * `duraciones`: los Price vigentes de las duraciones; `duracionesArchivadas`, los que dejaron de usarse.
+ */
+export type SyncPlan = {
+  productoId: string | null; precioId: string | null; firma: string | null; modo: ModoPago; precioNuevo: boolean; precioArchivado: string | null;
+  duraciones?: (PrecioDuracion & { nuevo: boolean })[]; duracionesArchivadas?: string[];
+};
 
 export interface ProveedorPagos {
   readonly id: string;
   disponible(): boolean;
   modo(): ModoPago | null;
-  /** Producto/precio del plan en el proveedor. Rellena `out` a medida que avanza. */
-  sincronizarPlan(plan: FilaPlan, out: SyncPlan): Promise<SyncPlan>;
-  /** URL de la página de pago alojada para suscribirse. */
-  crearCheckout(d: { usuarioId: string; email: string; clienteId: string | null; plan: FilaPlan; idiomas: string[]; exito: string; cancelar: string }): Promise<string>;
+  /**
+   * Producto/precio del plan en el proveedor y un precio por duración (`actuales`:
+   * los que ya tiene en este modo). Rellena `out` a medida que avanza.
+   */
+  sincronizarPlan(plan: FilaPlan, out: SyncPlan, actuales?: PrecioDuracion[]): Promise<SyncPlan>;
+  /** URL de la página de pago alojada para suscribirse al precio `precioId` (el mensual o el de una duración). */
+  crearCheckout(d: { usuarioId: string; email: string; clienteId: string | null; plan: FilaPlan; precioId: string; meses: number; idiomas: string[]; exito: string; cancelar: string }): Promise<string>;
   /** Sesión de pago y suscripción resultante (objeto del proveedor), para confirmar sin webhook. */
   obtenerCheckout(sessionId: string): Promise<{ usuarioId: string | null; completada: boolean; suscripcion: any | null; clienteId: string | null; idiomas: string | null }>;
   obtenerSuscripcion(id: string): Promise<any>;
@@ -40,6 +55,8 @@ export interface ProveedorPagos {
 }
 
 export const firmaPrecio = (p: Pick<FilaPlan, 'precio_centavos' | 'moneda' | 'intervalo'>) => `${p.precio_centavos}|${p.moneda}|${p.intervalo}`;
+/** Firma del Price de una duración: «5500|usd|mes:3». */
+export const firmaDuracion = (d: Duracion, moneda: string) => `${d.precio_centavos}|${moneda}|mes:${d.meses}`;
 export const intervaloStripe = (i: string) => (i === 'anio' ? 'year' : 'month');
 
 export const stripe: ProveedorPagos = {
@@ -55,7 +72,7 @@ export const stripe: ProveedorPagos = {
    * no se toca ninguna suscripción. Los ids de otro modo (test↔live) no sirven
    * y se crean de nuevo.
    */
-  async sincronizarPlan(plan, out) {
+  async sincronizarPlan(plan, out, actuales = []) {
     const s = stripeConfig();
     const modo = s.modo!;
     const mismoModo = plan.stripe_modo === modo;
@@ -85,6 +102,24 @@ export const stripe: ProveedorPagos = {
         out.precioArchivado = anterior;
       }
     }
+    // Duraciones: un Price recurrente cada N meses por duración; si cambia el importe, otro.
+    out.duraciones = []; out.duracionesArchivadas = [];
+    const usados = new Set<string>();
+    for (const d of plan.intervalo === 'mes' ? plan.duraciones : []) {
+      const f = firmaDuracion(d, plan.moneda);
+      const previo = actuales.find((a) => a.firma === f && a.meses === d.meses && !usados.has(a.precioId));
+      if (previo) { usados.add(previo.precioId); out.duraciones.push({ ...previo, nuevo: false }); continue; }
+      const pr = await llamarStripe(s.secretKey, 'POST', '/prices', {
+        product: out.productoId, unit_amount: d.precio_centavos, currency: plan.moneda,
+        recurring: { interval: 'month', interval_count: d.meses }, metadata: { plan_id: plan.id, meses: d.meses }, nickname: `${nombre} · ${f}`,
+      });
+      usados.add(pr.id); out.duraciones.push({ precioId: pr.id, firma: f, meses: d.meses, nuevo: true });
+    }
+    for (const a of actuales) {
+      if (usados.has(a.precioId)) continue;
+      await llamarStripe(s.secretKey, 'POST', `/prices/${a.precioId}`, { active: false });
+      out.duracionesArchivadas.push(a.precioId);
+    }
     return out;
   },
 
@@ -92,13 +127,13 @@ export const stripe: ProveedorPagos = {
     const s = stripeConfig();
     const ses = await llamarStripe(s.secretKey, 'POST', '/checkout/sessions', {
       mode: 'subscription',
-      line_items: [{ price: d.plan.stripe_precio_id, quantity: 1 }],
+      line_items: [{ price: d.precioId, quantity: 1 }],
       client_reference_id: d.usuarioId,
       ...(d.clienteId ? { customer: d.clienteId } : { customer_email: d.email }),
       success_url: d.exito, cancel_url: d.cancelar,
       // Idiomas elegidos ("en,fr"; vacío en un plan de todos los idiomas): el webhook y «Confirmar» los guardan.
-      metadata: { usuario_id: d.usuarioId, plan_id: d.plan.id, idiomas: d.idiomas.join(',') || undefined },
-      subscription_data: { metadata: { usuario_id: d.usuarioId, plan_id: d.plan.id, idiomas: d.idiomas.join(',') || undefined } },
+      metadata: { usuario_id: d.usuarioId, plan_id: d.plan.id, meses: d.meses, idiomas: d.idiomas.join(',') || undefined },
+      subscription_data: { metadata: { usuario_id: d.usuarioId, plan_id: d.plan.id, meses: d.meses, idiomas: d.idiomas.join(',') || undefined } },
     });
     if (!ses?.url) throw new Error('Stripe no devolvió la URL de pago.');
     return ses.url;

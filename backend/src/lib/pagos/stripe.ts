@@ -155,7 +155,8 @@ export async function configurarWebhook(clave: string, url: string, actual: Webh
 // ── Customer Portal ──────────────────────────────────────────────────────────
 /** Máximo de productos con cambio de plan en una configuración del portal (docs de Stripe). */
 export const MAX_PRODUCTOS_PORTAL = 10;
-export type ProductoPortal = { producto: string; precio: string };
+/** Producto con su Price mensual y, si tiene, los de sus duraciones (`precios`). */
+export type ProductoPortal = { producto: string; precio: string; precios?: string[] };
 
 /**
  * Cuerpo de la configuración del Customer Portal de OneLingo. Parámetros
@@ -176,7 +177,7 @@ export function cuerpoPortal(urlRetorno: string, productos: ProductoPortal[]) {
       payment_method_update: { enabled: true },
       subscription_cancel: { enabled: true, mode: 'at_period_end' },
       subscription_update: lista.length
-        ? { enabled: true, default_allowed_updates: ['price'], proration_behavior: 'create_prorations', products: lista.map((p) => ({ product: p.producto, prices: [p.precio] })) }
+        ? { enabled: true, default_allowed_updates: ['price'], proration_behavior: 'create_prorations', products: lista.map((p) => ({ product: p.producto, prices: p.precios?.length ? p.precios : [p.precio] })) }
         : { enabled: false },
     },
     metadata: { origen: 'onelingo' },

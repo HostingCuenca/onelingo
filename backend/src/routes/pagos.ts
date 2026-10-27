@@ -3,13 +3,14 @@ import { z } from 'zod';
 import { requiereAdmin, requiereAlumno, type Sesion } from '../lib/auth.js';
 import { uno } from '../lib/db.js';
 import { stripeConfig } from '../lib/conexiones.js';
-import { idPortal, plan, sincronizarPlan } from '../lib/pagos/planes.js';
+import { idPortal, plan, precioParaCheckout, sincronizarPlan } from '../lib/pagos/planes.js';
 import { proveedorActivo } from '../lib/pagos/proveedor.js';
 import { ErrorStripe, verificarFirma } from '../lib/pagos/stripe.js';
 import {
   cambiarIdiomas, CODIGOS_IDIOMA, darCortesia, ErrorSus, errorIdiomas, filaDe, FILTROS_ESTADO, quitarCortesia, resumenAdmin, sincronizarDesdeStripe, suscripcionDe,
 } from '../lib/pagos/suscripciones.js';
 import { procesarWebhook } from '../lib/pagos/webhook.js';
+import { familiaDe, invitarMiembro, quitarMiembro, salirDeFamilia, vincularInvitaciones } from '../lib/pagos/familia.js';
 
 const SIN_PAGOS = { error: 'Los pagos aún no están disponibles (Stripe no está vinculado).' };
 const EN_CURSO = ['activa', 'prueba_stripe', 'impago'];
@@ -25,7 +26,21 @@ const errorProveedor = (e: unknown) => ({ error: `Stripe: ${e instanceof Error ?
  */
 export default async function rutas(app: FastifyInstance) {
   // ── Alumno ─────────────────────────────────────────────────────────────────
-  app.get('/usuarios/me/suscripcion', { preHandler: requiereAlumno }, async (req) => suscripcionDe((req.user as Sesion).sub));
+  app.get('/usuarios/me/suscripcion', { preHandler: requiereAlumno }, async (req) => {
+    const uid = (req.user as Sesion).sub;
+    await vincularInvitaciones(uid); // invitación a un plan familiar hecha antes de que tuviera cuenta
+    return suscripcionDe(uid);
+  });
+
+  // Plan familiar: el titular añade o quita personas por correo; un miembro puede salir.
+  const Correo = z.object({ email: z.string().trim().email('Correo no válido').max(200) });
+  app.get('/usuarios/me/familia', { preHandler: requiereAlumno }, async (req) => familiaDe((req.user as Sesion).sub));
+  app.post('/usuarios/me/familia', { preHandler: requiereAlumno }, async (req, reply) =>
+    conErrorSus(reply, () => invitarMiembro((req.user as Sesion).sub, Correo.parse(req.body).email)));
+  app.post('/usuarios/me/familia/quitar', { preHandler: requiereAlumno }, async (req, reply) =>
+    conErrorSus(reply, () => quitarMiembro((req.user as Sesion).sub, Correo.parse(req.body).email)));
+  app.post('/usuarios/me/familia/salir', { preHandler: requiereAlumno }, async (req, reply) =>
+    conErrorSus(reply, () => salirDeFamilia((req.user as Sesion).sub)));
 
   /** Cambiar o completar los idiomas del plan (regla `cambioIdiomas`; 403 con `proximoCambio` si no toca). */
   app.put('/usuarios/me/suscripcion/idiomas', { preHandler: requiereAlumno }, async (req, reply) => {
@@ -35,7 +50,7 @@ export default async function rutas(app: FastifyInstance) {
 
   app.post('/pagos/checkout', { preHandler: requiereAlumno }, async (req, reply) => {
     const uid = (req.user as Sesion).sub;
-    const { planId, idiomas: elegidos } = z.object({ planId: z.string().min(1).max(40), idiomas: Idiomas.default([]) }).parse(req.body);
+    const { planId, idiomas: elegidos, meses } = z.object({ planId: z.string().min(1).max(40), idiomas: Idiomas.default([]), meses: z.number().int().min(1).max(24).default(1) }).parse(req.body);
     const idiomas = elegidos.map((c) => c.trim().toLowerCase());
     const p = proveedorActivo();
     if (!p) return reply.code(503).send(SIN_PAGOS);
@@ -45,17 +60,20 @@ export default async function rutas(app: FastifyInstance) {
     if (!pl || pl.archivado || !pl.visible) return reply.code(404).send({ error: 'Ese plan no está disponible.' });
     const malIdiomas = errorIdiomas(idiomas, Number(pl.idiomas), { exactos: true });
     if (malIdiomas) return reply.code(400).send({ error: malIdiomas });
-    if (!(pl.stripe_sincronizado && pl.stripe_modo === p.modo() && pl.stripe_precio_id)) {
+    if (meses > 1 && !pl.duraciones.some((d) => d.meses === meses)) return reply.code(400).send({ error: `Este plan no se ofrece por ${meses} meses.` });
+    let precioId = pl.stripe_sincronizado ? await precioParaCheckout(pl, meses, p.modo()!) : null;
+    if (!precioId) {
       await sincronizarPlan(planId);
       pl = await plan(planId);
-      if (!pl?.stripe_precio_id || pl.stripe_modo !== p.modo()) return reply.code(503).send({ error: 'El plan no está sincronizado con Stripe. Inténtalo más tarde.' });
+      precioId = pl ? await precioParaCheckout(pl, meses, p.modo()!) : null;
+      if (!precioId) return reply.code(503).send({ error: 'El plan no está sincronizado con Stripe. Inténtalo más tarde.' });
     }
     const u = await uno<{ email: string }>('SELECT email FROM usuarios WHERE id = $1', [uid]);
     if (!u) return reply.code(404).send({ error: 'Usuario no encontrado' });
     const urlApp = stripeConfig().urlApp;
     try {
       const url = await p.crearCheckout({
-        usuarioId: uid, email: u.email, clienteId: f?.stripe_cliente_id && f.modo === p.modo() ? f.stripe_cliente_id : null, plan: pl!, idiomas,
+        usuarioId: uid, email: u.email, clienteId: f?.stripe_cliente_id && f.modo === p.modo() ? f.stripe_cliente_id : null, plan: pl!, precioId, meses, idiomas,
         exito: `${urlApp}/#/pago?estado=ok&session_id={CHECKOUT_SESSION_ID}`, cancelar: `${urlApp}/#/pago?estado=cancelado`,
       });
       return { url };

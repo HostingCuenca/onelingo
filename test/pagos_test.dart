@@ -170,6 +170,18 @@ Future<void> _pantallaPlanes(WidgetTester tester, ProviderContainer c) async {
   await tester.pumpAndSettle();
 }
 
+/// Abre el detalle de un plan desde la lista.
+Future<void> _abrirPlan(WidgetTester tester, String id) async {
+  await tester.tap(find.byKey(ValueKey('plan-$id')));
+  await tester.pumpAndSettle();
+}
+
+/// Vuelve del detalle a la lista.
+Future<void> _volver(WidgetTester tester) async {
+  await tester.pageBack();
+  await tester.pumpAndSettle();
+}
+
 /// La subida del progreso deja un temporizador (Sync): se cancela al terminar.
 Future<void> _fin() => Sync.instancia.cerrarSesion();
 
@@ -354,17 +366,20 @@ void main() {
       await _pantallaPlanes(tester, c);
       expect(find.text('Two languages'), findsOneWidget);
       expect(find.text('One language'), findsOneWidget);
-      expect(find.text('Choose 2 languages'), findsOneWidget);
+      expect(find.text('2 languages'), findsOneWidget);
       expect(find.text('/ year'), findsOneWidget);
       expect(find.text('Test mode: use card 4242 4242 4242 4242'), findsOneWidget);
-      expect(find.text('Subscribe'), findsNWidgets(2));
-      await tester.tap(find.text('Subscribe').last);
+      expect(find.text('Business'), findsOneWidget);
+      // Detalle: lo que incluye y el botón para seguir.
+      await _abrirPlan(tester, 'p2');
+      expect(find.text('Choose 2 languages'), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('suscribirme')));
       await tester.pumpAndSettle();
       // Plan de 2 idiomas: selector con el idioma meta (inglés) ya marcado.
       expect(find.text("Choose your plan's 2 languages"), findsOneWidget);
       await tester.tap(find.byKey(const ValueKey('idioma-plan-fr')));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Continue'));
+      await tester.tap(find.text('Continue').last);
       await tester.pumpAndSettle();
       final checkout = servidor.peticiones.last;
       expect('${checkout.method} ${checkout.url.path}', 'POST /pagos/checkout');
@@ -381,10 +396,10 @@ void main() {
         'GET /usuarios/me/suscripcion': (200, _suscripcionJson()),
       }));
       await _pantallaPlanes(tester, c);
-      expect(find.text('Pagos próximamente'), findsNWidgets(2));
-      expect(_boton(tester, 'Pagos próximamente').onPressed, isNull);
-      expect(find.text('Suscribirme'), findsNothing);
       expect(find.textContaining('4242'), findsNothing);
+      await _abrirPlan(tester, 'p2');
+      expect(_boton(tester, 'Pagos próximamente').onPressed, isNull);
+      expect(find.byKey(const ValueKey('suscribirme')), findsNothing);
       await _fin();
     });
 
@@ -396,7 +411,8 @@ void main() {
       }));
       await _pantallaPlanes(tester, c);
       expect(find.textContaining('4242'), findsNothing);
-      expect(find.text('Suscribirme'), findsNWidgets(2));
+      await _abrirPlan(tester, 'p1');
+      expect(find.byKey(const ValueKey('suscribirme')), findsOneWidget);
       await _fin();
     });
 
@@ -416,11 +432,15 @@ void main() {
       expect(find.text('Tu suscripción'), findsOneWidget);
       expect(find.text('Activa'), findsOneWidget);
       expect(find.text('Se cancela el 20/11/2026'), findsOneWidget);
-      expect(find.text('PLAN ACTUAL'), findsOneWidget);
       expect(find.text('TU PLAN'), findsOneWidget);
-      expect(find.text('Cambiar de plan'), findsOneWidget);
       // Con suscripción activa no hay banner de prueba.
       expect(find.text('Prueba gratuita en curso'), findsNothing);
+      await _abrirPlan(tester, 'p2');
+      expect(find.text('PLAN ACTUAL'), findsOneWidget);
+      await _volver(tester);
+      await _abrirPlan(tester, 'p1');
+      expect(find.text('Cambiar de plan'), findsOneWidget);
+      await _volver(tester);
       await tester.tap(find.text('Gestionar suscripción'));
       await tester.pumpAndSettle();
       expect(servidor.rutasPedidas.last, 'POST /pagos/portal');
@@ -439,6 +459,7 @@ void main() {
       await _pantallaPlanes(tester, c);
       expect(find.text('Acceso otorgado por el administrador hasta el 31/12/2026'), findsOneWidget);
       expect(find.text('Gestionar suscripción'), findsNothing);
+      await _abrirPlan(tester, 'p1');
       expect(find.text('PLAN ACTUAL'), findsOneWidget);
       await _fin();
     });
@@ -452,11 +473,12 @@ void main() {
         'POST /pagos/checkout': (409, {'error': 'ya suscrito'}),
       }), abiertas: abiertas);
       await _pantallaPlanes(tester, c);
-      await tester.tap(find.text('Suscribirme').first);
+      await _abrirPlan(tester, 'p1');
+      await tester.tap(find.byKey(const ValueKey('suscribirme')));
       await tester.pumpAndSettle();
       // Plan de 1 idioma: el idioma meta ya basta.
       expect(find.text('Elige el idioma de tu plan'), findsOneWidget);
-      await tester.tap(find.text('Continuar'));
+      await tester.tap(find.text('Continuar').last);
       await tester.pumpAndSettle();
       expect(abiertas, isEmpty);
       expect(find.textContaining('Ya tienes una suscripción activa'), findsOneWidget);
@@ -468,8 +490,9 @@ void main() {
       final servidor = _Servidor({'GET /planes': (200, _planesJson())});
       final c = _contenedor(prefs, servidor);
       await _pantallaPlanes(tester, c);
-      expect(find.text('Suscribirme'), findsNothing);
       expect(find.textContaining('4242'), findsNothing);
+      await _abrirPlan(tester, 'p2');
+      expect(find.byKey(const ValueKey('suscribirme')), findsNothing);
       await tester.tap(find.text('ELEGIR DOS IDIOMAS'));
       await tester.pumpAndSettle();
       expect(c.read(progressProvider).planId, 'p2');
@@ -500,20 +523,24 @@ void main() {
       });
       final c = _contenedor(prefs, servidor, abiertas: []);
       await _pantallaPlanes(tester, c);
-      await tester.tap(find.text('Suscribirme').last);
+      await _abrirPlan(tester, 'p2');
+      await tester.tap(find.byKey(const ValueKey('suscribirme')));
       await tester.pumpAndSettle();
       expect(find.text('Elige los 2 idiomas de tu plan'), findsOneWidget);
       expect(find.text('1 de 2 elegidos'), findsOneWidget);
       CheckboxListTile casilla(String c) => tester.widget(find.byKey(ValueKey('idioma-plan-$c')));
       expect(casilla('en').value, isTrue);
-      expect(_boton(tester, 'Continuar').onPressed, isNull);
+      ElevatedButton continuar() => tester.widget<ElevatedButton>(
+        find.ancestor(of: find.text('Continuar').last, matching: find.byType(ElevatedButton)).first,
+      );
+      expect(continuar().onPressed, isNull);
       await tester.tap(find.byKey(const ValueKey('idioma-plan-de')));
       await tester.pumpAndSettle();
       expect(find.text('2 de 2 elegidos'), findsOneWidget);
       // Completo: los demás no se pueden marcar; desmarcar sí.
       expect(casilla('fr').onChanged, isNull);
       expect(casilla('en').onChanged, isNotNull);
-      await tester.tap(find.text('Continuar'));
+      await tester.tap(find.text('Continuar').last);
       await tester.pumpAndSettle();
       expect(jsonDecode(servidor.peticiones.last.body), {'planId': 'p2', 'idiomas': ['en', 'de']});
       await _fin();
@@ -535,7 +562,8 @@ void main() {
       final c = _contenedor(prefs, servidor, abiertas: abiertas);
       await _pantallaPlanes(tester, c);
       expect(find.text('Todos los idiomas'), findsOneWidget);
-      await tester.tap(find.text('Suscribirme').last);
+      await _abrirPlan(tester, 'p9');
+      await tester.tap(find.byKey(const ValueKey('suscribirme')));
       await tester.pumpAndSettle();
       expect(find.textContaining('idiomas de tu plan'), findsNothing);
       expect(jsonDecode(servidor.peticiones.last.body), {'planId': 'p9', 'idiomas': []});
@@ -824,6 +852,127 @@ void main() {
       expect(servidor.rutasPedidas, ['GET /usuarios/me/suscripcion']);
       expect(find.text('PLANES'), findsOneWidget);
       expect(c.read(estadoPlanProvider).planId, 'p3');
+      await _fin();
+    });
+  });
+
+  group('duraciones, familia y empresas', () {
+    Map<String, dynamic> conDuraciones() {
+      final j = _planesJson();
+      j['planes'] = <Object>[...j['planes'] as List, 
+        {
+          'id': 'p1m', 'nombre': {'es': 'Básico', 'en': 'Basic'}, 'incluye': {'es': ['1 idioma'], 'en': []},
+          'idiomas': 1, 'precio': 20, 'moneda': 'usd', 'intervalo': 'mes', 'orden': 3, 'usuarios': 1,
+          'duraciones': [
+            {'meses': 1, 'precio': 20}, {'meses': 3, 'precio': 55}, {'meses': 6, 'precio': 110}, {'meses': 12, 'precio': 220},
+          ],
+        },
+        {
+          'id': 'familiar', 'nombre': {'es': 'Familiar', 'en': 'Family'}, 'incluye': {'es': [], 'en': []},
+          'idiomas': 1, 'precio': 60, 'moneda': 'usd', 'intervalo': 'mes', 'orden': 4, 'usuarios': 4,
+          'duraciones': [{'meses': 1, 'precio': 60}, {'meses': 12, 'precio': 600}],
+        },
+      ];
+      return j;
+    }
+
+    test('ahorro frente a pagar mes a mes y respaldo sin duraciones', () {
+      final p = CatalogoPlanes.fromJson(conDuraciones());
+      final b = p.plan('p1m')!;
+      expect(b.duraciones.map((d) => d.meses), [1, 3, 6, 12]);
+      expect([for (final d in b.duraciones) b.ahorro(d)], [0, 8, 8, 8]);
+      expect(p.plan('familiar')!.familiar, isTrue);
+      // Servidor anterior a las duraciones: una sola opción, la del cobro del plan.
+      expect(p.plan('p1')!.duraciones.map((d) => d.meses), [12]);
+      expect(p.plan('p2')!.duraciones.map((d) => d.meses), [1]);
+    });
+
+    testWidgets('detalle: elegir 3 meses manda meses al checkout; «4 usuarios» en el Familiar', (tester) async {
+      final prefs = await _prefs();
+      final servidor = _Servidor({
+        'GET /planes': (200, conDuraciones()),
+        'GET /usuarios/me/suscripcion': (200, _suscripcionJson()),
+        'POST /pagos/checkout': (200, {'url': 'https://checkout.stripe.com/z'}),
+      });
+      final c = _contenedor(prefs, servidor, abiertas: []);
+      await _pantallaPlanes(tester, c);
+      expect(find.text('4 usuarios'), findsOneWidget);
+      await _abrirPlan(tester, 'p1m');
+      expect(find.text('Elige la duración de tu suscripción'), findsOneWidget);
+      expect(find.text('Sin descuento'), findsOneWidget);
+      expect(find.text('Ahorra 8 %'), findsNWidgets(3));
+      expect(find.text(r'$18.33 al mes'), findsNWidgets(3));
+      await tester.tap(find.byKey(const ValueKey('duracion-3')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('suscribirme')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Continuar').last);
+      await tester.pumpAndSettle();
+      expect(jsonDecode(servidor.peticiones.last.body), {'planId': 'p1m', 'idiomas': ['en'], 'meses': 3});
+      await _fin();
+    });
+
+    testWidgets('titular: ve su familia, añade por correo y quita', (tester) async {
+      final prefs = await _prefs();
+      final familia = {
+        'rol': 'titular', 'plazas': 3,
+        'miembros': [{'email': 'hijo@correo.com', 'nombre': 'Hijo', 'estado': 'activo'}],
+        'titular': null,
+      };
+      final servidor = _Servidor({
+        'GET /planes': (200, conDuraciones()),
+        'GET /usuarios/me/suscripcion': (200, _suscripcionJson(planId: 'familiar', estado: 'activa', origen: 'cortesia', acceso: true)..['usuariosPlan'] = 4),
+        'GET /usuarios/me/familia': (200, familia),
+        'POST /usuarios/me/familia': (200, {
+          ...familia,
+          'miembros': [...familia['miembros'] as List, {'email': 'tia@correo.com', 'nombre': '', 'estado': 'pendiente'}],
+        }),
+      });
+      final c = _contenedor(prefs, servidor);
+      await _pantallaPlanes(tester, c);
+      await tester.tap(find.byKey(const ValueKey('tarjeta-familia')));
+      await tester.pumpAndSettle();
+      expect(find.text('Personas en tu plan'), findsOneWidget);
+      expect(find.text('Hijo'), findsOneWidget);
+      expect(find.text('1 de 3 personas'), findsOneWidget);
+      await tester.enterText(find.byKey(const ValueKey('correo-familiar')), 'Tia@Correo.com');
+      await tester.tap(find.text('Añadir a mi plan'));
+      await tester.pumpAndSettle();
+      final p = servidor.peticiones.lastWhere((r) => r.method == 'POST');
+      expect(jsonDecode(p.body), {'email': 'tia@correo.com'});
+      expect(find.text('Pendiente'), findsOneWidget);
+      expect(find.text('2 de 3 personas'), findsOneWidget);
+      await _fin();
+    });
+
+    testWidgets('empresa: valida y envía la cotización', (tester) async {
+      final prefs = await _prefs();
+      final servidor = _Servidor({
+        'GET /planes': (200, conDuraciones()),
+        'GET /usuarios/me/suscripcion': (200, _suscripcionJson()),
+        'POST /cotizaciones': (201, {'id': 1}),
+      });
+      final c = _contenedor(prefs, servidor);
+      await _pantallaPlanes(tester, c);
+      await tester.tap(find.byKey(const ValueKey('plan-empresa')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('cot-enviar')));
+      await tester.pumpAndSettle();
+      expect(find.text('Campo obligatorio'), findsOneWidget);
+      expect(find.text('Elige al menos un idioma'), findsOneWidget);
+      expect(servidor.rutasPedidas, isNot(contains('POST /cotizaciones')));
+      await tester.enterText(find.byKey(const ValueKey('cot-empresa')), 'Acme');
+      await tester.enterText(find.byKey(const ValueKey('cot-empleados')), '50');
+      await tester.tap(find.byKey(const ValueKey('cot-idioma-fr')));
+      await tester.tap(find.byKey(const ValueKey('cot-idioma-en')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('cot-enviar')));
+      await tester.pumpAndSettle();
+      final p = servidor.peticiones.last;
+      expect('${p.method} ${p.url.path}', 'POST /cotizaciones');
+      final cuerpo = jsonDecode(p.body) as Map;
+      expect([cuerpo['empresa'], cuerpo['empleados'], cuerpo['idiomas'], cuerpo['email']], ['Acme', 50, ['en', 'fr'], 'alumna@correo.com']);
+      expect(find.byKey(const ValueKey('cotizacion-enviada')), findsOneWidget);
       await _fin();
     });
   });

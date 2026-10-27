@@ -82,13 +82,36 @@ class PagosApi {
   }
 
   /// `POST /pagos/checkout` → `{url}` de Stripe Checkout. [idiomas] lleva
-  /// exactamente los idiomas del plan (vacía si el plan es «todos»).
-  Future<RespuestaPago> checkout(String planId, List<String> idiomas) =>
-      _pedir(
-        'POST',
-        '/pagos/checkout',
-        cuerpo: {'planId': planId, 'idiomas': idiomas},
-      );
+  /// exactamente los idiomas del plan (vacía si el plan es «todos»); [meses],
+  /// la duración elegida (solo se envía si no es la mensual).
+  Future<RespuestaPago> checkout(
+    String planId,
+    List<String> idiomas, {
+    int meses = 1,
+  }) => _pedir(
+    'POST',
+    '/pagos/checkout',
+    cuerpo: {'planId': planId, 'idiomas': idiomas, if (meses != 1) 'meses': meses},
+  );
+
+  /// `GET /usuarios/me/familia`: titular con sus miembros, o miembro.
+  Future<RespuestaPago> familia() => _pedir('GET', '/usuarios/me/familia');
+
+  /// El titular añade a alguien por correo (`POST /usuarios/me/familia`).
+  Future<RespuestaPago> invitarFamiliar(String email) =>
+      _pedir('POST', '/usuarios/me/familia', cuerpo: {'email': email});
+
+  /// El titular quita a alguien o cancela una invitación.
+  Future<RespuestaPago> quitarFamiliar(String email) =>
+      _pedir('POST', '/usuarios/me/familia/quitar', cuerpo: {'email': email});
+
+  /// Un miembro deja el plan familiar.
+  Future<RespuestaPago> salirDeFamilia() =>
+      _pedir('POST', '/usuarios/me/familia/salir', cuerpo: const {});
+
+  /// Plan Empresarial: `POST /cotizaciones` (con sesión si la hay).
+  Future<RespuestaPago> cotizacion(Map<String, dynamic> datos) =>
+      _pedir('POST', '/cotizaciones', cuerpo: datos);
 
   /// `PUT /usuarios/me/suscripcion/idiomas`: cambia o completa los idiomas
   /// pagados. 403 con `proximoCambio` si la regla no lo permite.

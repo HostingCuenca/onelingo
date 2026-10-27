@@ -9,13 +9,14 @@ import Audios from './paginas/Audios'
 import Conexiones from './paginas/Conexiones'
 import Planes from './paginas/Planes'
 import Suscripciones from './paginas/Suscripciones'
+import Cotizaciones from './paginas/Cotizaciones'
 
 const LOGO = `${import.meta.env.BASE_URL}logo-panel.webp`
 
-type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string; desde?: 'usuarios' | 'suscripciones' } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' } | { p: 'planes' } | { p: 'suscripciones' }
+type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string; desde?: 'usuarios' | 'suscripciones' } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' } | { p: 'planes' } | { p: 'suscripciones' } | { p: 'cotizaciones' }
 
 const TITULOS: Record<Ruta['p'], string> = {
-  resumen: 'Resumen', usuarios: 'Alumnos', usuario: 'Alumno', planes: 'Planes', suscripciones: 'Suscripciones',
+  resumen: 'Resumen', usuarios: 'Alumnos', usuario: 'Alumno', planes: 'Planes', suscripciones: 'Suscripciones', cotizaciones: 'Cotizaciones',
   conversaciones: 'Conversaciones IA', audios: 'Voz y audios', conexiones: 'Conexiones', correos: 'Correos',
 }
 
@@ -75,6 +76,7 @@ export default function App() {
         <a className={ruta.p === 'usuarios' || ruta.p === 'usuario' ? 'activo' : ''} onClick={() => setRuta({ p: 'usuarios' })}>Alumnos</a>
         <a className={ruta.p === 'planes' ? 'activo' : ''} onClick={() => setRuta({ p: 'planes' })}>Planes</a>
         <a className={ruta.p === 'suscripciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'suscripciones' })}>Suscripciones</a>
+        <a className={ruta.p === 'cotizaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'cotizaciones' })}>Cotizaciones</a>
         <a className={ruta.p === 'conversaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conversaciones' })}>Conversaciones IA</a>
         <a className={ruta.p === 'audios' ? 'activo' : ''} onClick={() => setRuta({ p: 'audios' })}>Voz y audios</a>
         <a className={ruta.p === 'conexiones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conexiones' })}>Conexiones</a>
@@ -87,6 +89,7 @@ export default function App() {
         {ruta.p === 'usuario' && <UsuarioDetalle id={ruta.id} desde={ruta.desde ?? 'usuarios'} volver={() => setRuta({ p: ruta.desde ?? 'usuarios' })} />}
         {ruta.p === 'planes' && <Planes />}
         {ruta.p === 'suscripciones' && <Suscripciones abrir={(id) => setRuta({ p: 'usuario', id, desde: 'suscripciones' })} />}
+        {ruta.p === 'cotizaciones' && <Cotizaciones />}
         {ruta.p === 'correos' && <Correos />}
         {ruta.p === 'conversaciones' && <Conversaciones />}
         {ruta.p === 'audios' && <Audios />}

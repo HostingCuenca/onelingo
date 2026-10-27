@@ -8,11 +8,17 @@ import '../../core/i18n/i18n.dart';
 import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
+import 'empresa_screen.dart';
+import 'estilo_plan.dart';
+import 'familia_screen.dart';
 import 'idiomas_plan.dart';
+import 'plan_detalle_screen.dart';
+import 'tabla_precios_screen.dart';
 
 /// Prueba gratuita y planes (contrato de pagos, fase 1). Los planes y la
-/// suscripción salen del servidor; se paga en Stripe Checkout y se gestiona
-/// en el Customer Portal. DEMO y sin servidor eligen el plan en local.
+/// suscripción salen del servidor; cada plan abre su detalle con la duración
+/// ([PlanDetalleScreen]), se paga en Stripe Checkout y se gestiona en el
+/// Customer Portal. DEMO y sin servidor eligen el plan en local.
 class PlansScreen extends ConsumerStatefulWidget {
   const PlansScreen({super.key});
 
@@ -21,8 +27,8 @@ class PlansScreen extends ConsumerStatefulWidget {
 }
 
 class _PlansScreenState extends ConsumerState<PlansScreen> {
-  /// Plan cuyo botón espera al servidor ('portal' para «Gestionar»).
-  String? _esperando;
+  /// «Gestionar suscripción» espera al servidor.
+  bool _esperandoPortal = false;
 
   @override
   void initState() {
@@ -34,43 +40,14 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
     });
   }
 
-  Future<void> _abrir(Future<RespuestaPago> Function() pedir, String clave) async {
-    setState(() => _esperando = clave);
-    final r = await pedir();
-    if (!mounted) return;
-    final url = r.url;
-    if (r.ok && url != null && url.isNotEmpty) {
-      final abierta = await ref.read(abrirUrlProvider)(url);
-      if (!mounted) return;
-      setState(() => _esperando = null);
-      if (!abierta) _aviso(tr('No se pudo abrir la página de pago.'));
-      return;
-    }
-    setState(() => _esperando = null);
-    if (r.codigo == 409) ref.read(suscripcionProvider.notifier).refrescar();
-    _aviso(r.ok ? tr('No se pudo abrir la página de pago.') : r.error);
+  Future<void> _portal(PagosApi api) async {
+    setState(() => _esperandoPortal = true);
+    await abrirPagina(context, ref, api.portal);
+    if (mounted) setState(() => _esperandoPortal = false);
   }
 
-  /// Plan de N idiomas: primero se eligen (el idioma meta ya marcado); el plan
-  /// «todos» va directo a Checkout.
-  Future<void> _suscribirme(PlanServidor p, PagosApi api) async {
-    var elegidos = const <String>[];
-    if (!p.todosLosIdiomas) {
-      final r = await elegirIdiomasPlan(
-        context,
-        cantidad: p.idiomas,
-        marcados: [ref.read(progressProvider).idiomaMeta],
-      );
-      if (r == null || !mounted) return;
-      elegidos = r;
-    }
-    await _abrir(() => api.checkout(p.id, elegidos), p.id);
-  }
-
-  void _aviso(String texto, {Color color = OL.rojo}) =>
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(texto), backgroundColor: color),
-      );
+  void _ir(Widget pantalla) =>
+      Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => pantalla));
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +57,7 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
     final api = ref.watch(pagosApiProvider);
     final sus = ep.servidor ? ep.suscripcion : null;
     final restante = ep.trialRestante;
-    // Plan suscrito (aunque el idioma que se estudia no esté pagado).
-    final planSuscrito = sus != null && sus.enCurso && sus.planId.isNotEmpty ? sus.planId : ep.planId;
+    final planSuscrito = planSuscritoDe(ep);
     final planActual = catalogo.plan(planSuscrito);
     final idiomaNoPagado = !ep.tienePlan && sus != null && sus.vigente;
 
@@ -129,8 +105,8 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
               _TarjetaSuscripcion(
                 plan: catalogo.plan(sus.planId)?.nombreEn(interfaz) ?? sus.planId,
                 suscripcion: sus,
-                esperando: _esperando == 'portal',
-                onGestionar: sus.puedeGestionar ? () => _abrir(api.portal, 'portal') : null,
+                esperando: _esperandoPortal,
+                onGestionar: sus.puedeGestionar ? () => _portal(api) : null,
               ),
             ],
             if (sus != null && sus.esCortesia)
@@ -155,9 +131,39 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
                   ),
                 ]),
               ),
+            if (sus != null && (sus.titularFamiliar || (sus.familiar && sus.enCurso))) ...[
+              const SizedBox(height: 12),
+              Tarjeta(
+                key: const ValueKey('tarjeta-familia'),
+                color: OL.naranjaSuave,
+                sombra: false,
+                onTap: () => _ir(const FamiliaScreen()),
+                child: Row(children: [
+                  const Icon(Icons.family_restroom_rounded, color: OL.naranja, size: 30),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(sus.familiar ? tr('Formas parte de un plan familiar') : tr('Tu plan familiar'),
+                          style: const TextStyle(fontWeight: FontWeight.w800)),
+                      Text(
+                        sus.familiar
+                            ? tr('Tu acceso lo paga quien te invitó. Tu progreso es solo tuyo.')
+                            : tr('Añade hasta {n} personas: cada una con su propia cuenta y progreso.', {'n': (sus.usuariosPlan ?? 1) - 1}),
+                        style: const TextStyle(color: OL.gris, fontSize: 12, height: 1.4),
+                      ),
+                      if (sus.familiar) ...[
+                        const SizedBox(height: 8),
+                        IdiomasDePago(suscripcion: sus),
+                      ],
+                    ]),
+                  ),
+                  const Icon(Icons.chevron_right_rounded, color: OL.gris),
+                ]),
+              ),
+            ],
             const SizedBox(height: 18),
-            Text(tr('Desbloquea tu potencial'), style: Theme.of(context).textTheme.headlineMedium),
-            Text(tr('Elige cuántos idiomas quieres aprender. Todos los planes incluyen el curso completo, la práctica libre y la IA.'),
+            Text(tr('Elige tu plan'), style: Theme.of(context).textTheme.headlineMedium),
+            Text(tr('Aprende uno o varios idiomas y alcanza tus metas. Todos los planes incluyen el curso completo, la práctica libre y la IA.'),
                 style: const TextStyle(color: OL.gris, height: 1.4)),
             if (ep.servidor && catalogo.modoPrueba) ...[
               const SizedBox(height: 10),
@@ -177,43 +183,21 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
             const SizedBox(height: 16),
             for (final p in catalogo.planes)
               Padding(
-                padding: const EdgeInsets.only(bottom: 14),
-                child: Tarjeta(
-                  borde: p.id == planSuscrito ? OL.verde : (p.destacado ? OL.morado : null),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Row(children: [
-                      Expanded(child: Text(p.nombreEn(interfaz), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800))),
-                      if (p.destacado) Etiqueta(tr('POPULAR')),
-                      if (p.id == planSuscrito) Etiqueta(tr('TU PLAN'), color: OL.verde),
-                    ]),
-                    if (p.todosLosIdiomas) ...[
-                      const SizedBox(height: 4),
-                      Etiqueta(tr('Todos los idiomas'), color: OL.verde, icono: Icons.public),
-                    ],
-                    if (p.descripcionEn(interfaz).isNotEmpty) ...[
-                      const SizedBox(height: 4),
-                      Text(p.descripcionEn(interfaz), style: const TextStyle(color: OL.gris, fontSize: 13, height: 1.35)),
-                    ],
-                    const SizedBox(height: 6),
-                    Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                      Text(p.precioTexto, style: const TextStyle(fontSize: 34, fontWeight: FontWeight.w800, color: OL.morado, height: 1)),
-                      Padding(padding: const EdgeInsets.only(bottom: 4, left: 4), child: Text(p.intervaloTexto, style: const TextStyle(color: OL.gris))),
-                    ]),
-                    const SizedBox(height: 12),
-                    for (final i in p.incluyeEn(interfaz))
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 6),
-                        child: Row(children: [
-                          const Icon(Icons.check_circle, color: OL.verde, size: 18),
-                          const SizedBox(width: 8),
-                          Expanded(child: Text(i, style: const TextStyle(fontSize: 13))),
-                        ]),
-                      ),
-                    const SizedBox(height: 8),
-                    _botonPlan(p, ep, planSuscrito, catalogo, sus, api, interfaz),
-                  ]),
+                padding: const EdgeInsets.only(bottom: 12),
+                child: _TarjetaPlan(
+                  plan: p,
+                  interfaz: interfaz,
+                  actual: p.id == planSuscrito,
+                  onTap: () => _ir(PlanDetalleScreen(planId: p.id)),
                 ),
               ),
+            _TarjetaEmpresa(onTap: () => _ir(const EmpresaScreen())),
+            const SizedBox(height: 6),
+            TextButton.icon(
+              onPressed: () => _ir(const TablaPreciosScreen()),
+              icon: const Icon(Icons.table_chart_outlined, size: 18),
+              label: Text(tr('Ver la tabla de precios completa')),
+            ),
             Text(
               // Sin pagos activos los botones dicen «Pagos próximamente»: no
               // se promete Stripe.
@@ -228,54 +212,124 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
       ),
     );
   }
+}
 
-  Widget _botonPlan(
-    PlanServidor p,
-    EstadoPlan ep,
-    String planSuscrito,
-    CatalogoPlanes catalogo,
-    Suscripcion? sus,
-    PagosApi api,
-    String interfaz,
-  ) {
-    final estilo = ElevatedButton.styleFrom(backgroundColor: p.destacado ? OL.morado : OL.moradoOscuro);
-    if (p.id == planSuscrito) {
-      return ElevatedButton(style: estilo, onPressed: null, child: Text(tr('PLAN ACTUAL')));
-    }
-    // DEMO o sin servidor: se elige en el dispositivo, como antes.
-    if (!ep.servidor) {
-      return ElevatedButton(
-        style: estilo,
-        onPressed: () {
-          if (ref.read(progressProvider.notifier).elegirPlan(p.id)) {
-            _aviso(tr('Plan "{plan}" activado (pago real en la fase 2)', {'plan': p.nombreEn(interfaz)}), color: OL.verde);
-          }
-        },
-        child: Text(tr('ELEGIR {plan}', {'plan': p.nombreEn(interfaz).toUpperCase()})),
-      );
-    }
-    final cargando = _esperando == p.id;
-    // Morado: mientras espera el botón está deshabilitado (gris claro) y el
-    // contorneado es transparente sobre blanco; el blanco no se veía.
-    const indicador = SizedBox(
-      width: 18,
-      height: 18,
-      child: CircularProgressIndicator(strokeWidth: 2, color: OL.morado),
+/// Plan suscrito (aunque el idioma que se estudia no esté pagado).
+String planSuscritoDe(EstadoPlan ep) {
+  final sus = ep.servidor ? ep.suscripcion : null;
+  return sus != null && sus.enCurso && sus.planId.isNotEmpty ? sus.planId : ep.planId;
+}
+
+/// Abre Stripe (Checkout o portal) con la URL que devuelve [pedir]; avisa si falla.
+Future<void> abrirPagina(BuildContext context, WidgetRef ref, Future<RespuestaPago> Function() pedir) async {
+  final r = await pedir();
+  if (!context.mounted) return;
+  final url = r.url;
+  if (r.ok && url != null && url.isNotEmpty) {
+    final abierta = await ref.read(abrirUrlProvider)(url);
+    if (!abierta && context.mounted) avisoPago(context, tr('No se pudo abrir la página de pago.'));
+    return;
+  }
+  if (r.codigo == 409) ref.read(suscripcionProvider.notifier).refrescar();
+  avisoPago(context, r.ok ? tr('No se pudo abrir la página de pago.') : r.error);
+}
+
+void avisoPago(BuildContext context, String texto, {Color color = OL.rojo}) =>
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(texto), backgroundColor: color),
     );
-    // Ya paga con Stripe: los cambios de plan se hacen en el portal.
-    if (sus != null && sus.stripeVigente && sus.puedeGestionar) {
-      return OutlinedButton(
-        onPressed: _esperando != null ? null : () => _abrir(api.portal, p.id),
-        child: cargando ? indicador : Text(tr('Cambiar de plan')),
-      );
-    }
-    if (!catalogo.pagosDisponible) {
-      return ElevatedButton(style: estilo, onPressed: null, child: Text(tr('Pagos próximamente')));
-    }
-    return ElevatedButton(
-      style: estilo,
-      onPressed: _esperando != null ? null : () => _suscribirme(p, api),
-      child: cargando ? indicador : Text(tr('Suscribirme')),
+
+/// Plan en la lista: icono, nombre, idiomas o usuarios, precio y flecha.
+class _TarjetaPlan extends StatelessWidget {
+  const _TarjetaPlan({required this.plan, required this.interfaz, required this.actual, required this.onTap});
+  final PlanServidor plan;
+  final String interfaz;
+  final bool actual;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final p = plan;
+    final e = EstiloPlan.de(p);
+    final descripcion = p.descripcionEn(interfaz);
+    return Tarjeta(
+      key: ValueKey('plan-${p.id}'),
+      color: e.suave,
+      borde: actual ? OL.verde : (p.destacado ? e.color : Colors.transparent),
+      onTap: onTap,
+      padding: const EdgeInsets.fromLTRB(14, 14, 12, 14),
+      etiquetaSemantica: '${p.nombreEn(interfaz)}, ${subtituloPlan(p)}, ${p.precioTexto} ${p.intervaloTexto}',
+      child: Row(children: [
+        IconoPlan(e),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(p.nombreEn(interfaz), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, height: 1.15)),
+            Text(subtituloPlan(p), style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: e.color)),
+            if (descripcion.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Text(descripcion, maxLines: 2, overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: OL.gris, fontSize: 12.5, height: 1.3)),
+              ),
+            if (p.destacado || actual)
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Wrap(spacing: 6, runSpacing: 4, children: [
+                  if (p.destacado) Etiqueta(tr('POPULAR'), color: e.color),
+                  if (actual) Etiqueta(tr('TU PLAN'), color: OL.verde),
+                ]),
+              ),
+          ]),
+        ),
+        const SizedBox(width: 8),
+        Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+          Text(p.precioTexto, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800, height: 1)),
+          Text(p.intervaloTexto, style: const TextStyle(color: OL.gris, fontSize: 12)),
+          const SizedBox(height: 8),
+          CircleAvatar(
+            radius: 15,
+            backgroundColor: e.color,
+            child: const Icon(Icons.chevron_right_rounded, color: OL.blanco, size: 22),
+          ),
+        ]),
+      ]),
+    );
+  }
+}
+
+/// Plan Empresarial: cotización a medida.
+class _TarjetaEmpresa extends StatelessWidget {
+  const _TarjetaEmpresa({required this.onTap});
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    const e = EstiloPlan.empresa;
+    return Tarjeta(
+      key: const ValueKey('plan-empresa'),
+      color: e.suave,
+      borde: Colors.transparent,
+      onTap: onTap,
+      padding: const EdgeInsets.fromLTRB(14, 14, 12, 14),
+      child: Row(children: [
+        const IconoPlan(e),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(tr('Empresarial'), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, height: 1.15)),
+            Text(tr('Para empresas'), style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: e.color)),
+            Text(tr('Cotización personalizada para que tu equipo aprenda idiomas.'),
+                style: const TextStyle(color: OL.gris, fontSize: 12.5, height: 1.3)),
+          ]),
+        ),
+        const SizedBox(width: 8),
+        CircleAvatar(
+          radius: 15,
+          backgroundColor: e.color,
+          child: const Icon(Icons.chevron_right_rounded, color: OL.blanco, size: 22),
+        ),
+      ]),
     );
   }
 }
@@ -326,6 +380,8 @@ class _TarjetaSuscripcion extends StatelessWidget {
           const SizedBox(height: 8),
           Text(detalle, style: const TextStyle(color: OL.gris, fontSize: 13, height: 1.35)),
         ],
+        if ((s.meses ?? 1) > 1)
+          Text(tr('Pago cada {n} meses', {'n': s.meses!}), style: const TextStyle(color: OL.gris, fontSize: 13, height: 1.35)),
         const SizedBox(height: 8),
         IdiomasDePago(suscripcion: s),
         if (onGestionar != null) ...[

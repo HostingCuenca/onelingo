@@ -78,7 +78,7 @@ globalThis.fetch = (async (entrada: any, init: any = {}) => {
   if ((r = m(/^POST \/products\/(\w+)$/))) return json(200, st.productos.get(r[1]));
   if (m(/^POST \/prices$/)) {
     const p = { id: id('price'), product: datos.get('product'), unit_amount: Number(datos.get('unit_amount')), currency: datos.get('currency'),
-      recurring: { interval: datos.get('recurring[interval]') }, metadata: { plan_id: datos.get('metadata[plan_id]') }, active: true };
+      recurring: { interval: datos.get('recurring[interval]'), interval_count: Number(datos.get('recurring[interval_count]') ?? 1) }, metadata: { plan_id: datos.get('metadata[plan_id]') }, active: true };
     st.precios.set(p.id, p); return json(200, p);
   }
   if ((r = m(/^POST \/prices\/(\w+)$/))) { const p = st.precios.get(r[1]); if (datos.get('active') === 'false') p.active = false; return json(200, p); }
@@ -293,7 +293,7 @@ after(async () => {
   await c.query(`DROP DATABASE IF EXISTS ${NOMBRE_BD} WITH (FORCE)`); await c.end();
 });
 
-test('migraciones 006, 007 y 008: idempotentes, 3 planes semilla y p2 destacado', { skip: sinBd }, async () => {
+test('migraciones 006, 007 y 008: idempotentes, 3 planes semilla (y el Familiar de 010) y p2 destacado', { skip: sinBd }, async () => {
   const { readFile } = await import('node:fs/promises');
   await pool.query(await readFile(new URL('../sql/006_pagos.sql', import.meta.url), 'utf8')); // segunda vez: sin efecto ni error
   const r = await pool.query('SELECT id, precio_centavos, idiomas, nombre->>\'en\' AS en, jsonb_array_length(incluye->\'en\') AS ventajas FROM planes ORDER BY orden');
@@ -301,6 +301,7 @@ test('migraciones 006, 007 y 008: idempotentes, 3 planes semilla y p2 destacado'
     { id: 'p1', precio_centavos: 2000, idiomas: 1, en: 'One language', ventajas: 5 },
     { id: 'p2', precio_centavos: 3000, idiomas: 2, en: 'Two languages', ventajas: 4 },
     { id: 'p3', precio_centavos: 4000, idiomas: 3, en: 'Three languages', ventajas: 4 },
+    { id: 'familiar', precio_centavos: 6000, idiomas: 1, en: 'Family', ventajas: 4 },
   ]);
   assert.equal((await pool.query('SELECT prueba_minutos FROM ajustes_pago')).rows[0].prueba_minutos, 60);
   const destacados = async () => (await pool.query('SELECT id FROM planes WHERE destacado ORDER BY id')).rows.map((f) => f.id);
@@ -323,13 +324,17 @@ test('migraciones 006, 007 y 008: idempotentes, 3 planes semilla y p2 destacado'
   await assert.rejects(pool.query("UPDATE ajustes_pago SET cambio_idiomas = 'otra'"));
 });
 
-test('GET /planes sin Stripe: 3 planes, pagos no disponibles; checkout 503', { skip: sinBd }, async () => {
+test('GET /planes sin Stripe: 4 planes con duraciones, pagos no disponibles; checkout 503', { skip: sinBd }, async () => {
   const r = await app.inject({ url: '/planes' });
   assert.equal(r.statusCode, 200);
   const d = r.json();
   assert.deepEqual(d.pagos, { disponible: false, modo: null });
   assert.equal(d.pruebaMinutos, 60); assert.equal(d.moneda, 'usd');
-  assert.deepEqual(d.planes.map((p: any) => [p.id, p.precio, p.intervalo]), [['p1', 20, 'mes'], ['p2', 30, 'mes'], ['p3', 40, 'mes']]);
+  assert.deepEqual(d.planes.map((p: any) => [p.id, p.precio, p.intervalo]), [['p1', 20, 'mes'], ['p2', 30, 'mes'], ['p3', 40, 'mes'], ['familiar', 60, 'mes']]);
+  // Tabla de precios: 1, 3, 6 y 12 meses; el Familiar cubre 4 personas.
+  assert.deepEqual(d.planes.map((p: any) => [p.id, p.usuarios, p.duraciones.map((x: any) => `${x.meses}:${x.precio}`).join(' ')]), [
+    ['p1', 1, '1:20 3:55 6:110 12:220'], ['p2', 1, '1:30 3:85 6:170 12:320'], ['p3', 1, '1:40 3:110 6:220 12:450'], ['familiar', 4, '1:60 3:165 6:335 12:600'],
+  ]);
   assert.deepEqual(d.planes[0].nombre, { es: 'Un idioma', en: 'One language' });
   assert.equal((await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(U1), payload: { planId: 'p1' } })).statusCode, 503);
   assert.equal((await app.inject({ method: 'POST', url: '/pagos/checkout', payload: { planId: 'p1' } })).statusCode, 401);
@@ -411,7 +416,7 @@ test('Stripe en Conexiones: pk rechazada sin llamar; 401 «Clave inválida»; gu
   assert.equal(ok.statusCode, 200, ok.body);
   const det = ok.json().verificacion.detalles.join(' ');
   assert.match(det, /MODO TEST/); assert.match(det, /Webhook creado en https:\/\/app\.onelingo\.test\/api\/stripe\/webhook/);
-  assert.match(det, /Customer Portal configurado: .*cambio de plan entre 3 planes/); assert.match(det, /Planes sincronizados con Stripe: 3/);
+  assert.match(det, /Customer Portal configurado: .*cambio de plan entre 4 planes/); assert.match(det, /Planes sincronizados con Stripe: 4/);
   assert.equal(llamadasA(/^POST \/billing_portal\/configurations/).length, 1, 'una sola configuración del portal al vincular');
   const we = llamadasA(/^POST \/webhook_endpoints$/)[0].datos;
   assert.deepEqual(we.getAll('enabled_events[0]').concat(we.getAll('enabled_events[5]')), ['checkout.session.completed', 'invoice.payment_failed']);
@@ -591,20 +596,26 @@ test('cambio de precio: nuevo Price, el viejo se archiva y los suscriptores cons
 test('Customer Portal: se actualiza al archivar y restaurar un plan (solo planes visibles y sincronizados)', { skip: sinBd }, async () => {
   const productos = (d: URLSearchParams) => [0, 1, 2, 3].map((i) => d.get(`features[subscription_update][products][${i}][product]`)).filter(Boolean);
   const prod = async (id: string) => (await pool.query('SELECT stripe_producto_id FROM planes WHERE id = $1', [id])).rows[0].stripe_producto_id;
-  const [p1, p2, p3] = [await prod('p1'), await prod('p2'), await prod('p3')];
+  const [p1, p2, p3, fam] = [await prod('p1'), await prod('p2'), await prod('p3'), await prod('familiar')];
   st.llamadas = [];
   const a = await app.inject({ method: 'POST', url: '/admin/planes/p3/archivar', headers: admin(), payload: {} });
-  assert.equal(a.statusCode, 200); assert.equal(a.json().portal.ok, true); assert.equal(a.json().portal.productos, 2);
+  assert.equal(a.statusCode, 200); assert.equal(a.json().portal.ok, true); assert.equal(a.json().portal.productos, 3);
   const cfg = llamadasA(/^POST \/billing_portal\/configurations\/bpc_\w+$/);
   assert.equal(cfg.length, 1, 'actualiza la configuración guardada, no crea otra');
-  assert.deepEqual(productos(cfg[0].datos), [p1, p2]);
+  assert.deepEqual(productos(cfg[0].datos), [p1, p2, fam]);
+  // Cada producto ofrece su Price mensual y los de 3, 6 y 12 meses.
+  const precios = (d: URLSearchParams, i: number) => [0, 1, 2, 3, 4].map((j) => d.get(`features[subscription_update][products][${i}][prices][${j}]`)).filter(Boolean);
+  const p1Precios = [(await pool.query("SELECT stripe_precio_id FROM planes WHERE id = 'p1'")).rows[0].stripe_precio_id,
+    ...(await pool.query("SELECT precio_id FROM planes_precios WHERE plan_id = 'p1' AND meses > 1 AND archivado_en IS NULL ORDER BY meses")).rows.map((r) => r.precio_id)];
+  assert.equal(p1Precios.length, 4);
+  assert.deepEqual(precios(cfg[0].datos, 0), p1Precios);
   assert.equal(cfg[0].datos.get('features[subscription_update][default_allowed_updates][0]'), 'price');
   assert.equal(cfg[0].datos.get('features[subscription_update][proration_behavior]'), 'create_prorations');
   st.llamadas = [];
   await app.inject({ method: 'POST', url: '/admin/planes/p3/archivar', headers: admin(), payload: { archivado: false } });
   const v = await app.inject({ method: 'PUT', url: '/admin/planes/p3', headers: admin(), payload: { visible: true } });
-  assert.equal(v.json().portal.productos, 3);
-  assert.deepEqual(productos(llamadasA(/^POST \/billing_portal\/configurations\/bpc_\w+$/).at(-1)!.datos), [p1, p2, p3]);
+  assert.equal(v.json().portal.productos, 4);
+  assert.deepEqual(productos(llamadasA(/^POST \/billing_portal\/configurations\/bpc_\w+$/).at(-1)!.datos), [p1, p2, p3, fam]);
   assert.equal(st.portal.length, 1);
 });
 
@@ -814,4 +825,109 @@ test('tutor: 402 con la prueba agotada y sin plan; modo demo cerrado: sin regist
 
   await ajustes(true);
   await pool.query("DELETE FROM usuarios WHERE email IN ('dora@pagos.test', 'eva@onelingo.demo')");
+});
+
+const nuevoAlumno = (email: string, meta = 'en') => pool.query('INSERT INTO usuarios (email, nombre, trial_segundos, idioma_meta) VALUES ($1, $2, 600, $3) RETURNING id', [email, email.split('@')[0], meta]).then((r) => r.rows[0].id as string);
+
+test('duraciones: checkout por 3 meses con su Price (cada 3 meses), meses en la suscripción, MRR /3; panel valida y crea Price nuevo al cambiar el importe', { skip: sinBd }, async () => {
+  const u = await nuevoAlumno('dora@pagos.test');
+  st.llamadas = [];
+  assert.equal((await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(u), payload: { planId: 'p1', idiomas: ['en'], meses: 5 } })).statusCode, 400);
+  const r = await app.inject({ method: 'POST', url: '/pagos/checkout', headers: tok(u), payload: { planId: 'p1', idiomas: ['en'], meses: 3 } });
+  assert.equal(r.statusCode, 200, r.body);
+  const d = llamadasA(/^POST \/checkout\/sessions$/)[0].datos;
+  const precio = st.precios.get(d.get('line_items[0][price]')!);
+  assert.deepEqual([precio.unit_amount, precio.recurring.interval, precio.recurring.interval_count], [5500, 'month', 3]);
+  assert.equal(d.get('subscription_data[metadata][meses]'), '3');
+  const sesion = [...st.sesiones.values()].at(-1);
+  sesion.metadata = { usuario_id: u, plan_id: 'p1', idiomas: 'en' };
+  sesion.status = 'complete'; sesion.subscription = suscripcionStripe({ precio }).id;
+  const c = (await app.inject({ method: 'POST', url: '/pagos/confirmar', headers: tok(u), payload: { sessionId: sesion.id } })).json();
+  assert.deepEqual([c.planId, c.meses, c.acceso], ['p1', 3, true]);
+  assert.equal(Sus.calcularMrr([{ origen: 'stripe', estado: 'activa', importe_centavos: 5500, intervalo: 'mes', meses: 3, moneda: 'usd' }]).mrr, 18.33);
+  // Panel: un plan anual no lleva duraciones; meses repetidos, 400.
+  assert.equal((await app.inject({ method: 'PUT', url: '/admin/planes/p1', headers: admin(), payload: { intervalo: 'anio', duraciones: [{ meses: 3, precio: 50 }] } })).statusCode, 400);
+  assert.equal((await app.inject({ method: 'PUT', url: '/admin/planes/p1', headers: admin(), payload: { duraciones: [{ meses: 3, precio: 50 }, { meses: 3, precio: 52 }] } })).statusCode, 400);
+  // Cambiar el de 3 meses: Price nuevo, el anterior se archiva; los de 6 y 12 se conservan.
+  const antes = (await pool.query("SELECT precio_id, meses FROM planes_precios WHERE plan_id = 'p1' AND meses > 1 AND archivado_en IS NULL ORDER BY meses")).rows;
+  const e = await app.inject({ method: 'PUT', url: '/admin/planes/p1', headers: admin(), payload: { duraciones: [{ meses: 3, precio: 54 }, { meses: 6, precio: 110 }, { meses: 12, precio: 220 }] } });
+  assert.equal(e.statusCode, 200, e.body); assert.equal(e.json().sync.ok, true);
+  const despues = (await pool.query("SELECT precio_id, meses FROM planes_precios WHERE plan_id = 'p1' AND meses > 1 AND archivado_en IS NULL ORDER BY meses")).rows;
+  assert.notEqual(despues[0].precio_id, antes[0].precio_id);
+  assert.deepEqual(despues.slice(1), antes.slice(1));
+  assert.equal(st.precios.get(antes[0].precio_id).active, false);
+  // El webhook encuentra el plan por el Price archivado de 3 meses.
+  assert.equal(await Sus.planDeStripe({ stripe_precio_id: antes[0].precio_id, precioPlan: null, productoId: null, suscripcionPlan: null }), 'p1');
+  await app.inject({ method: 'PUT', url: '/admin/planes/p1', headers: admin(), payload: { duraciones: [{ meses: 3, precio: 55 }, { meses: 6, precio: 110 }, { meses: 12, precio: 220 }] } });
+});
+
+test('plan familiar: el titular añade por correo (con cuenta: acceso al momento; sin cuenta: al entrar), hasta 3; quitar, salir y fin del titular', { skip: sinBd }, async () => {
+  const titular = await nuevoAlumno('fam.titular@pagos.test');
+  const hijo = await nuevoAlumno('fam.hijo@pagos.test', 'fr');
+  const propia = await nuevoAlumno('fam.propia@pagos.test');
+  const fam = (u: string) => app.inject({ url: '/usuarios/me/familia', headers: tok(u) }).then((r) => r.json());
+  const invitar = (email: string) => app.inject({ method: 'POST', url: '/usuarios/me/familia', headers: tok(titular), payload: { email } });
+  assert.equal((await invitar('fam.hijo@pagos.test')).statusCode, 409, 'sin plan familiar');
+  assert.equal((await app.inject({ method: 'POST', url: `/admin/usuarios/${titular}/cortesia`, headers: admin(), payload: { planId: 'familiar' } })).statusCode, 200);
+  assert.deepEqual([(await fam(titular)).rol, (await fam(titular)).plazas], ['titular', 3]);
+  assert.equal((await invitar('FAM.titular@pagos.test')).statusCode, 400, 'su propio correo');
+  // Con cuenta: acceso inmediato, con su idioma meta y su propio progreso.
+  const a = await invitar(' Fam.Hijo@pagos.test ');
+  assert.equal(a.statusCode, 200, a.body);
+  assert.deepEqual(a.json().miembros.map((m: any) => [m.email, m.estado]), [['fam.hijo@pagos.test', 'activo']]);
+  const sh = await estadoDe(hijo);
+  assert.deepEqual([sh.planId, sh.origen, sh.familiar, sh.accesoPlan, sh.idiomas, sh.puedeGestionar, sh.usuariosPlan], ['familiar', 'familia', true, true, ['fr'], false, 4]);
+  assert.deepEqual([(await fam(hijo)).rol, (await fam(hijo)).titular.email], ['miembro', 'fam.titular@pagos.test']);
+  assert.equal((await pool.query('SELECT plan_id FROM usuarios WHERE id = $1', [hijo])).rows[0].plan_id, 'familiar');
+  // Quien ya paga lo suyo no entra; un correo en otra familia tampoco.
+  await app.inject({ method: 'POST', url: `/admin/usuarios/${propia}/cortesia`, headers: admin(), payload: { planId: 'p2' } });
+  assert.match((await invitar('fam.propia@pagos.test')).json().error, /ya tiene su propio plan/);
+  assert.equal((await invitar('fam.hijo@pagos.test')).statusCode, 409);
+  // Sin cuenta: queda pendiente y se activa cuando entra con ese correo.
+  assert.equal((await invitar('fam.nueva@pagos.test')).json().miembros[1].estado, 'pendiente');
+  assert.ok((await pool.query("SELECT 1 FROM correos WHERE para = 'fam.nueva@pagos.test'")).rowCount, 'invitación por correo');
+  const nueva = await nuevoAlumno('fam.nueva@pagos.test', 'de');
+  const sn = await estadoDe(nueva);
+  assert.deepEqual([sn.planId, sn.origen, sn.idiomas], ['familiar', 'familia', ['de']]);
+  // Hasta 3 personas además del titular.
+  assert.equal((await invitar('fam.tres@pagos.test')).statusCode, 200);
+  assert.match((await invitar('fam.cuatro@pagos.test')).json().error, /ya tiene a 3 personas/);
+  // Quitar a uno: pierde el acceso. Salir: también.
+  const q = await app.inject({ method: 'POST', url: '/usuarios/me/familia/quitar', headers: tok(titular), payload: { email: 'fam.nueva@pagos.test' } });
+  assert.equal(q.json().miembros.length, 2);
+  assert.equal((await estadoDe(nueva)).accesoPlan, false);
+  assert.equal((await app.inject({ method: 'POST', url: '/usuarios/me/familia/salir', headers: tok(nueva) })).statusCode, 404);
+  // El titular pierde su plan: los miembros también; al recuperarlo, vuelven.
+  await app.inject({ method: 'DELETE', url: `/admin/usuarios/${titular}/cortesia`, headers: admin() });
+  assert.equal((await estadoDe(hijo)).accesoPlan, false);
+  await app.inject({ method: 'POST', url: `/admin/usuarios/${titular}/cortesia`, headers: admin(), payload: { planId: 'familiar' } });
+  assert.equal((await estadoDe(hijo)).accesoPlan, true);
+  // Cambia a un plan de una persona: los miembros quedan sin plan.
+  await app.inject({ method: 'POST', url: `/admin/usuarios/${titular}/cortesia`, headers: admin(), payload: { planId: 'p1' } });
+  assert.equal((await estadoDe(hijo)).accesoPlan, false);
+  assert.equal((await fam(titular)).rol, null);
+  await app.inject({ method: 'POST', url: `/admin/usuarios/${titular}/cortesia`, headers: admin(), payload: { planId: 'familiar' } });
+  const s = await app.inject({ method: 'POST', url: '/usuarios/me/familia/salir', headers: tok(hijo) });
+  assert.equal(s.statusCode, 200); assert.equal(s.json().rol, null);
+  assert.equal((await estadoDe(hijo)).accesoPlan, false);
+  // Panel: filtro «familia».
+  const p = (await app.inject({ url: '/admin/suscripciones?estado=familia', headers: admin() })).json();
+  assert.ok(p.filas.every((f: any) => f.origen === 'familia'));
+});
+
+test('cotizaciones del plan Empresarial: con o sin sesión, validación, panel y límite por IP', { skip: sinBd }, async () => {
+  const datos = { empresa: 'Acme', empleados: 50, idiomas: ['en', 'fr'], mensaje: 'Para el equipo de ventas', email: 'rrhh@acme.test', nombre: 'Lía' };
+  const ip = { 'x-forwarded-for': '203.0.113.7' };
+  const r = await app.inject({ method: 'POST', url: '/cotizaciones', headers: ip, payload: datos });
+  assert.equal(r.statusCode, 201, r.body);
+  assert.equal((await app.inject({ method: 'POST', url: '/cotizaciones', headers: ip, payload: { ...datos, idiomas: [] } })).statusCode, 400);
+  assert.equal((await app.inject({ method: 'POST', url: '/cotizaciones', headers: { ...ip, ...tok(U2) }, payload: { ...datos, empresa: 'Beta' } })).statusCode, 201);
+  const l = (await app.inject({ url: '/admin/cotizaciones', headers: admin() })).json();
+  assert.equal(l.nuevas, 2);
+  assert.deepEqual(l.cotizaciones.map((c: any) => [c.empresa, c.usuarioId]), [['Beta', U2], ['Acme', null]]);
+  assert.equal((await app.inject({ url: '/admin/cotizaciones' })).statusCode, 401);
+  assert.equal((await app.inject({ method: 'PUT', url: `/admin/cotizaciones/${r.json().id}`, headers: admin(), payload: { estado: 'contactada', nota: 'Propuesta enviada' } })).statusCode, 200);
+  assert.equal((await app.inject({ url: '/admin/cotizaciones?estado=contactada', headers: admin() })).json().cotizaciones[0].nota, 'Propuesta enviada');
+  for (let i = 0; i < 3; i++) await app.inject({ method: 'POST', url: '/cotizaciones', headers: ip, payload: datos });
+  assert.equal((await app.inject({ method: 'POST', url: '/cotizaciones', headers: ip, payload: datos })).statusCode, 429);
 });

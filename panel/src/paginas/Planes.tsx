@@ -6,11 +6,16 @@ type Texto = { es: string; en: string }
 type Plan = {
   id: string; nombre: Texto; descripcion: Texto; incluye: { es: string[]; en: string[] }; idiomas: number; precio: number; moneda: string
   intervalo: 'mes' | 'anio'; destacado: boolean; orden: number; visible: boolean; archivado: boolean; suscriptores: number; actualizadoEn: string
+  usuarios?: number; duraciones?: { meses: number; precio: number }[]
   stripe: { estado: 'sincronizado' | 'sin sincronizar' | 'sin stripe'; error: string | null; productoId: string | null; precioId: string | null; modo: string | null }
 }
 type Regla = 'libre' | 'uno_por_periodo' | 'solo_admin'
 type Datos = { planes: Plan[]; ajustes: { pruebaMinutos: number; moneda: string; cambioIdiomas?: Regla; demoActivo?: boolean }; pagos: { disponible: boolean; modo: 'test' | 'live' | null } }
-type Form = { id: string; nombreEs: string; nombreEn: string; descEs: string; descEn: string; incluyeEs: string; incluyeEn: string; idiomas: string; precio: string; intervalo: 'mes' | 'anio'; orden: string; destacado: boolean; visible: boolean }
+type Form = { id: string; nombreEs: string; nombreEn: string; descEs: string; descEn: string; incluyeEs: string; incluyeEn: string; idiomas: string; precio: string; intervalo: 'mes' | 'anio'; orden: string; destacado: boolean; visible: boolean
+  usuarios: string; m3: string; m6: string; m12: string }
+/** Duraciones que se editan en el panel (además del cobro mensual). */
+const MESES = [3, 6, 12] as const
+const duracion = (p: Plan | undefined, m: number) => { const d = p?.duraciones?.find((x) => x.meses === m); return d ? String(d.precio) : '' }
 
 const INTERVALO: Record<string, string> = { mes: 'al mes', anio: 'al año' }
 const SYNC: Record<string, [string, string]> = { sincronizado: ['ok', 'Sincronizado'], 'sin sincronizar': ['mal', 'Sin sincronizar'], 'sin stripe': ['', 'Stripe sin vincular'] }
@@ -20,7 +25,9 @@ const formDe = (p?: Plan, orden = 1): Form => ({
   id: p?.id ?? '', nombreEs: p?.nombre.es ?? '', nombreEn: p?.nombre.en ?? '', descEs: p?.descripcion.es ?? '', descEn: p?.descripcion.en ?? '',
   incluyeEs: (p?.incluye.es ?? []).join('\n'), incluyeEn: (p?.incluye.en ?? []).join('\n'), idiomas: String(p?.idiomas ?? 1),
   precio: p ? String(p.precio) : '', intervalo: p?.intervalo ?? 'mes', orden: String(p?.orden ?? orden), destacado: p?.destacado ?? false, visible: p?.visible ?? true,
+  usuarios: String(p?.usuarios ?? 1), m3: duracion(p, 3), m6: duracion(p, 6), m12: duracion(p, 12),
 })
+const decimal = (s: string) => Number(String(s).replace(',', '.'))
 const lineas = (s: string) => s.split('\n').map((x) => x.trim()).filter(Boolean)
 
 /** El cambio de plan del Customer Portal se actualiza con cada plan sincronizado; un fallo no impide guardar. */
@@ -31,14 +38,15 @@ function Editor({ plan, orden, pagos, alGuardar, cancelar }: { plan?: Plan; orde
   const [err, setErr] = useState(''); const [ocupado, setOcupado] = useState(false)
   const c = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setF({ ...f, [k]: e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value })
-  const cambiaPrecio = !!plan && (Number(f.precio) !== plan.precio || f.intervalo !== plan.intervalo)
+  const cambiaPrecio = !!plan && (Number(f.precio) !== plan.precio || f.intervalo !== plan.intervalo || MESES.some((m) => f[`m${m}`] !== duracion(plan, m)))
   const guardar = async (e: React.FormEvent) => {
     e.preventDefault(); setErr(''); setOcupado(true)
     const cuerpo = {
       ...(plan || !f.id.trim() ? {} : { id: f.id.trim() }),
       nombre: { es: f.nombreEs, en: f.nombreEn }, descripcion: { es: f.descEs, en: f.descEn },
       incluye: { es: lineas(f.incluyeEs), en: lineas(f.incluyeEn) }, idiomas: Number(f.idiomas), precio: Number(String(f.precio).replace(',', '.')),
-      intervalo: f.intervalo, orden: Number(f.orden), destacado: f.destacado, visible: f.visible,
+      intervalo: f.intervalo, orden: Number(f.orden), destacado: f.destacado, visible: f.visible, usuarios: Number(f.usuarios),
+      duraciones: f.intervalo === 'mes' ? MESES.filter((m) => f[`m${m}`].trim()).map((m) => ({ meses: m, precio: decimal(f[`m${m}`]) })) : [],
     }
     try {
       const r = await api<{ sync: { ok: boolean; error?: string; precioNuevo?: boolean }; portal?: { ok: boolean; error?: string } }>(plan ? `/admin/planes/${plan.id}` : '/admin/planes', { metodo: plan ? 'PUT' : 'POST', cuerpo })
@@ -65,9 +73,16 @@ function Editor({ plan, orden, pagos, alGuardar, cancelar }: { plan?: Plan; orde
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => <option key={n} value={String(n)}>{n} {n === 1 ? 'idioma' : 'idiomas'} a elegir</option>)}
           <option value="0">Todos los idiomas</option>
         </select></label>
+        <label className="campo"><span>Personas que cubre</span><select value={f.usuarios} onChange={c('usuarios')}>
+          {[1, 2, 3, 4, 5, 6, 8, 10].map((n) => <option key={n} value={String(n)}>{n === 1 ? '1 persona' : `${n} personas (familiar)`}</option>)}
+        </select></label>
         <label className="campo"><span>Orden</span><input type="number" min={0} value={f.orden} onChange={c('orden')} /></label>
         {!plan && <label className="campo"><span>Id (opcional)</span><input value={f.id} onChange={c('id')} placeholder="se genera del nombre" pattern="[a-z0-9][a-z0-9-]{0,39}" /></label>}
       </div>
+      {f.intervalo === 'mes' && <div className="form-grid tres">
+        {MESES.map((m) => <label key={m} className="campo"><span>Precio por {m} meses ({(plan?.moneda ?? 'usd').toUpperCase()}, vacío = no se ofrece)</span>
+          <input inputMode="decimal" value={f[`m${m}`]} onChange={c(`m${m}`)} placeholder={f.precio ? (decimal(f.precio) * m).toFixed(2) : ''} /></label>)}
+      </div>}
       <div className="acciones">
         <label className="check-linea"><input type="checkbox" checked={f.visible} onChange={c('visible')} /> Visible en la app</label>
         <label className="check-linea"><input type="checkbox" checked={f.destacado} onChange={c('destacado')} /> Destacado</label>
@@ -149,13 +164,14 @@ export default function Planes() {
         alGuardar={(m) => { setEditando(null); setAviso(m); cargar() }} cancelar={() => setEditando(null)} />}
       <div className="tarjeta">
         <div className="desliza"><table>
-          <thead><tr><th>Plan</th><th className="num">Precio</th><th className="num">Idiomas</th><th>En la app</th><th className="num">Suscriptores</th><th>Stripe</th><th></th></tr></thead>
+          <thead><tr><th>Plan</th><th className="num">Precio</th><th>Duraciones</th><th className="num">Idiomas</th><th>En la app</th><th className="num">Suscriptores</th><th>Stripe</th><th></th></tr></thead>
           <tbody>{d.planes.map((p) => {
             const [clase, etq] = SYNC[p.stripe.estado]
             return <tr key={p.id} style={p.archivado ? { opacity: 0.6 } : undefined}>
               <td><b>{p.nombre.es}</b>{p.destacado && <> <span className="pill">Destacado</span></>}<br /><span className="muted">{p.nombre.en || '— sin inglés —'} · <span className="mono">{p.id}</span> · orden {p.orden}</span></td>
               <td className="num">{precio(p)}</td>
-              <td className="num">{p.idiomas === 0 ? 'Todos' : p.idiomas}</td>
+              <td>{(p.duraciones ?? []).filter((d) => d.meses > 1).map((d) => `${d.meses} m: ${d.precio.toLocaleString('es', { maximumFractionDigits: 2 })}`).join(' · ') || '—'}</td>
+              <td className="num">{p.idiomas === 0 ? 'Todos' : p.idiomas}{(p.usuarios ?? 1) > 1 && <><br /><span className="muted">{p.usuarios} personas</span></>}</td>
               <td>{p.archivado ? <span className="pill mal">Archivado</span> : p.visible ? <span className="pill ok">Visible</span> : <span className="pill trial">Oculto</span>}</td>
               <td className="num">{p.suscriptores}</td>
               <td><span className={`pill ${clase}`} title={p.stripe.error ?? p.stripe.precioId ?? ''}>{etq}</span>
@@ -169,7 +185,7 @@ export default function Planes() {
             </tr>
           })}</tbody>
         </table></div>
-        <p className="muted pie-nota">Ocultar = no se ofrece en la app. Archivar = además se desactiva en Stripe; no hay borrado si alguien lo usa. Cambiar el precio crea un precio nuevo en Stripe y archiva el anterior: quien ya paga conserva su precio. Última edición: {fecha(d.planes.map((p) => p.actualizadoEn).sort().at(-1))}</p>
+        <p className="muted pie-nota">Ocultar = no se ofrece en la app. Archivar = además se desactiva en Stripe; no hay borrado si alguien lo usa. Cambiar el precio crea un precio nuevo en Stripe y archiva el anterior: quien ya paga conserva su precio. Cada duración (3, 6, 12 meses) tiene su propio precio en Stripe, con cobro cada N meses. Un plan de varias personas es familiar: el titular añade a los demás por correo desde la app. Última edición: {fecha(d.planes.map((p) => p.actualizadoEn).sort().at(-1))}</p>
       </div>
       <Ajustes a={d.ajustes} alGuardar={cargar} />
     </>
