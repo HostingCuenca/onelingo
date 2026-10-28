@@ -92,7 +92,7 @@ Un plan incluye N idiomas (`planes.idiomas`, 1–10; **0 = todos**, «Todos los 
 |---|---|
 | `planes` | Nombre, descripción y ventajas en es/en, idiomas, `precio_centavos`, moneda, `intervalo` (`mes`/`anio`), destacado, visible, orden, archivado; ids de Stripe con su modo, firma del precio sincronizado (`importe|moneda|intervalo`), `stripe_sincronizado` y último error. Semilla: p1 $20, p2 $30 (destacado, «POPULAR» en la app), p3 $40 al mes (ventajas de `catalog.dart` y `en.json`). 007 destaca p2 en bases donde 006 se aplicó antes, solo si la fila no se editó y no hay otro destacado. |
 | `planes_precios` | Historial de Prices de Stripe de cada plan (con fecha de archivado): un suscriptor con un Price antiguo o archivado se asocia igualmente a su plan. |
-| `suscripciones` | Una fila por alumno: plan, `origen` (`stripe`/`cortesia`), `estado` (`activa`, `prueba_stripe`, `impago`, `cancelada`, `vencida`), `cancela_al_final`, `periodo_fin`, ids de cliente/suscripción/precio de Stripe, `modo`, nota, importe e intervalo reales del suscriptor (para el MRR), alta y cancelación; `idiomas text[]`, `todos_idiomas` (cortesía «todos»), `periodo_inicio` (inicio del periodo de Stripe) y `ultimo_cambio_idiomas`. |
+| `suscripciones` | Una fila por alumno: plan, `origen` (`stripe`/`google`/`cortesia`/`familia`), `estado` (`activa`, `prueba_stripe`, `impago`, `cancelada`, `vencida`), `cancela_al_final`, `periodo_fin`, ids de cliente/suscripción/precio de Stripe, `modo`, nota, importe e intervalo reales del suscriptor (para el MRR), alta y cancelación; `idiomas text[]`, `todos_idiomas` (cortesía «todos»), `periodo_inicio` (inicio del periodo de Stripe) y `ultimo_cambio_idiomas`. |
 | `pagos_eventos` | Id de cada evento de Stripe recibido (idempotencia), tipo, si se procesó y el error. |
 | `familia_miembros` | Plan familiar: titular, correo invitado (único) y `usuario_id` cuando existe la cuenta. |
 | `cotizaciones` | Solicitudes del plan Empresarial: empresa, empleados, idiomas, contacto, mensaje, alumno que la envió (si tenía sesión), estado y nota. |
@@ -133,6 +133,29 @@ Clave restringida recomendada (permisos mínimos; fuentes: docs.stripe.com/keys/
 - Si el webhook responde error, Stripe lo reintenta durante días; el motivo queda en `pagos_eventos.error` y en el log del servidor. En el Dashboard de Stripe (Developers → Webhooks → el endpoint de OneLingo) se ven los intentos y se pueden reenviar.
 - Si se cambió `JWT_SECRET` o se perdió el secreto del webhook, vuelve a guardar la clave en Conexiones: el webhook se recrea con un secreto nuevo.
 - Para probar en local sin webhook: Checkout con la tarjeta `4242 4242 4242 4242` y vuelta a la app con `session_id`.
+
+### Google Play (cobro dentro de la app Android)
+
+En Android la app **no usa Stripe**: compra con Google Play Billing (`in_app_purchase`). La web sigue con Stripe. Las dos conviven en la misma tabla: `suscripciones.origen = 'google'` (migración `backend/sql/011_google_play.sql`: `google_token`, `google_producto`, `google_plan_base`, `google_pedido`). Código: `backend/src/lib/pagos/google.ts` (API Google Play Developer sin SDK, JWT RS256 de la cuenta de servicio) y `sincronizarDesdeGoogle`/`refrescarGoogle` en `suscripciones.ts`; app: `lib/core/pagos/google_play.dart`. Pruebas: `backend/test/google-play.test.ts` y el grupo «Google Play (Android)» de `test/pagos_test.dart`.
+
+**Ids en Play Console** (deben coincidir exactamente): una suscripción por plan con id `plan_<id del plan>` (`plan_p1`, `plan_p2`, `plan_p3`, `plan_familiar`…; el panel no los crea) y dentro, un **plan base** por duración ofrecida: `mes-1` (mensual), `mes-3`, `mes-6` (cada 3 o 6 meses) y `mes-12` (anual), con renovación automática. El precio lo pone Play Console (la app muestra el precio localizado de Google, no el del panel). `GET /planes` devuelve en cada plan `google: { producto, planesBase }` y `google: { disponible, paquete }`.
+
+**Variables del servidor** (`backend/.env`):
+- `GOOGLE_PLAY_CUENTA_SERVICIO`: ruta al JSON de una cuenta de servicio de Google Cloud (o el JSON en una línea). Sin ella, `google.disponible=false` y la app muestra «Pagos próximamente».
+- `GOOGLE_PLAY_PAQUETE`: por defecto `com.torisoftt.onelingo`.
+- `GOOGLE_PLAY_RTDN_TOKEN`: secreto largo para la URL de notificaciones.
+
+**Puesta en marcha** (una vez):
+1. Google Cloud: crear un proyecto, habilitar «Google Play Android Developer API», crear una cuenta de servicio y descargar su clave JSON (va al servidor, nunca al repositorio).
+2. Play Console → Usuarios y permisos → invitar el correo de la cuenta de servicio con permiso de **ver información financiera y gestionar pedidos y suscripciones**.
+3. Pub/Sub: crear un tema, dar a `google-play-developer-notifications@system.gserviceaccount.com` el rol Publicador y una suscripción **push** a `https://<dominio>/api/pagos/google/rtdn?token=<GOOGLE_PLAY_RTDN_TOKEN>`. En Play Console → Monetización → Configuración de monetización, poner el tema y «Enviar notificación de prueba» (responde 200 `ignorado`).
+4. Subir un AAB con la biblioteca de facturación (pista de prueba interna o cerrada) y crear las suscripciones y planes base con los ids de arriba. Los testers de licencias compran sin cobro real (`modo = 'test'`).
+
+**Flujo**: la app compra con `obfuscatedAccountId` = id del alumno y envía el token a `POST /pagos/google/verificar { token, idiomas }`. El servidor consulta `purchases.subscriptionsv2`, comprueba que la compra es de ese alumno (403 si es de otro), guarda la suscripción y la **reconoce** (Google la reembolsa si nadie la reconoce en 3 días); solo entonces la app la completa. Si la app se cierra antes, la compra pendiente se reintenta al abrirla. Renovaciones, cancelaciones, impagos y reembolsos llegan por RTDN (`POST /pagos/google/rtdn`: 403 sin token válido, 500 si falla para que Pub/Sub reintente); además, `GET /usuarios/me/suscripcion` vuelve a consultar Google (como mucho cada 10 min) si el periodo pasó o está en impago, así funciona aunque falte la notificación. Cambio de plan o de duración: la app usa el reemplazo de Play con prorrateo y el token nuevo trae `linkedPurchaseToken` (una notificación atrasada del token viejo no pisa la fila).
+
+**Estados y acceso**: `ACTIVE` y `IN_GRACE_PERIOD` → activa (acceso hasta `periodo_fin` + 1 día de margen para la renovación); `CANCELED` → cancelada (acceso hasta `periodo_fin`); `ON_HOLD`/`PENDING` → impago; `EXPIRED`/`PAUSED` → vencida. Quien tiene una suscripción de Google en curso no puede pagar con Stripe ni recibir cortesía (409); la gestiona en Google Play (la app abre `play.google.com/store/account/subscriptions?sku=…&package=…`). Quien paga en la web ve en Android «Tu suscripción se gestiona en la web». El plan Familiar funciona igual: el titular paga en Play y los miembros reflejan su fila.
+
+**Panel**: Suscripciones muestra el origen «Google Play» con el número de pedido (`GPA.…`, se puede buscar), el filtro «Pagadas en Google Play» y el KPI «Activas (Google Play)»; su MRR suma al total (importe que informa Google, en su moneda).
 
 ## Lo que la app aún no registra
 

@@ -3,7 +3,7 @@
  * `usuarios - 1` personas (tabla `familia_miembros`). Cada miembro tiene su
  * propia fila en `suscripciones` con `origen = 'familia'`, reflejo de la del
  * titular: mismo plan y estado, sus propios idiomas y progreso.
- * - El reflejo se rehace con cada cambio del titular (Stripe, cortesía).
+ * - El reflejo se rehace con cada cambio del titular (Stripe, Google Play, cortesía).
  * - Un correo sin cuenta queda pendiente hasta que alguien entra con él.
  * - La fila de un miembro nunca pisa una suscripción o cortesía propia vigente.
  */
@@ -23,7 +23,7 @@ async function plazasDe(f: FilaSus | null | undefined): Promise<number> {
 }
 
 /**
- * Estado del reflejo a partir del titular. Stripe activa: sin fecha (lo
+ * Estado del reflejo a partir del titular. Stripe o Google activa: sin fecha (lo
  * mantiene al día el siguiente evento); cancelada: hasta el fin del periodo;
  * cortesía: hasta su fecha. Sin acceso, el miembro queda sin plan.
  */
@@ -57,6 +57,7 @@ export async function reflejarFamilia(titularId: string) {
         ON CONFLICT (usuario_id) DO UPDATE SET plan_id = EXCLUDED.plan_id, origen = 'familia', estado = EXCLUDED.estado, cancela_al_final = EXCLUDED.cancela_al_final,
           periodo_fin = EXCLUDED.periodo_fin, titular_id = EXCLUDED.titular_id, idiomas = EXCLUDED.idiomas, todos_idiomas = false, nota = '',
           stripe_suscripcion_id = NULL, stripe_precio_id = NULL, importe_centavos = NULL, moneda = NULL, intervalo = NULL, meses = NULL, periodo_inicio = NULL,
+          google_token = NULL, google_producto = NULL, google_plan_base = NULL, google_pedido = NULL,
           creado_en = CASE WHEN suscripciones.origen = 'familia' THEN suscripciones.creado_en ELSE now() END, cancelada_en = NULL, actualizado_en = now()`,
         [uid, t!.plan_id, r.estado, r.cancela, r.fin, titularId, ajustarAlPlan(idiomas, nPlan)]);
     }

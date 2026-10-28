@@ -1,7 +1,8 @@
 /**
  * Suscripciones (tabla `suscripciones`): el servidor es la autoridad del plan.
  * - Estado y acceso (funciones puras, testeables).
- * - Sincronización desde objetos de Stripe (webhook o «Confirmar» al volver de Checkout).
+ * - Sincronización desde objetos de Stripe (webhook o «Confirmar» al volver de Checkout)
+ *   y desde compras de Google Play (verificación de la app y notificaciones RTDN).
  * - Cortesía del administrador.
  * - `usuarios.plan_id` se mantiene como dato derivado (lo usan las analíticas).
  */
@@ -11,10 +12,11 @@ import { ajustesPago, type ReglaCambioIdiomas } from './planes.js';
 import { proveedorActivo } from './proveedor.js';
 import type { ModoPago } from './stripe.js';
 import { reflejarFamilia, salirDeFamilia } from './familia.js';
+import { datosDeGoogle, obtenerCompra, productoDePlan, reconocerCompra } from './google.js';
 
 export type EstadoSus = 'activa' | 'prueba_stripe' | 'impago' | 'cancelada' | 'vencida';
 export type FilaSus = {
-  usuario_id: string; plan_id: string; origen: 'stripe' | 'cortesia' | 'familia'; estado: EstadoSus; cancela_al_final: boolean;
+  usuario_id: string; plan_id: string; origen: 'stripe' | 'google' | 'cortesia' | 'familia'; estado: EstadoSus; cancela_al_final: boolean;
   periodo_fin: string | Date | null; stripe_cliente_id: string | null; stripe_suscripcion_id: string | null; stripe_precio_id: string | null;
   modo: ModoPago | null; nota: string; importe_centavos: number | null; moneda: string | null; intervalo: 'mes' | 'anio' | null;
   creado_en?: string | Date; cancelada_en?: string | Date | null; actualizado_en?: string | Date;
@@ -23,7 +25,17 @@ export type FilaSus = {
   meses?: number | null;
   /** Miembro de un plan familiar (`origen = 'familia'`): quién paga. */
   titular_id?: string | null;
+  /** Compra de Google Play (`origen = 'google'`): token, producto, plan base y último pedido. */
+  google_token?: string | null; google_producto?: string | null; google_plan_base?: string | null; google_pedido?: string | null;
 };
+
+/** Suscripción que se paga sola (Stripe o Google Play), frente a cortesía y familia. */
+export const esDePago = (origen: string | null | undefined) => origen === 'stripe' || origen === 'google';
+/**
+ * Google activa sigue dando acceso un día después de `periodo_fin`: la renovación
+ * llega por RTDN o al consultar la compra (`refrescarGoogle`), no siempre al instante.
+ */
+const MARGEN_GOOGLE_MS = 86_400_000;
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const fecha = (v: string | Date | null | undefined) => (v ? new Date(v) : null);
@@ -92,7 +104,7 @@ export function reglaCambioIdiomas(regla: ReglaCambioIdiomas, f: FilaSus | null 
   if (regla === 'solo_admin') return r(false);
   const ultimo = fecha(f.ultimo_cambio_idiomas);
   const inicio = fecha(f.periodo_inicio), fin = fecha(f.periodo_fin);
-  if (f.origen === 'stripe' && inicio && fin) return !ultimo || ultimo < inicio ? r(true) : r(false, fin);
+  if (esDePago(f.origen) && inicio && fin) return !ultimo || ultimo < inicio ? r(true) : r(false, fin);
   const proximo = ultimo ? new Date(ultimo.getTime() + DIAS_CAMBIO_SIN_PERIODO * 86_400_000) : null;
   return !proximo || proximo <= ahora ? r(true) : r(false, proximo);
 }
@@ -119,6 +131,7 @@ export function tieneAcceso(f: Pick<FilaSus, 'origen' | 'estado' | 'periodo_fin'
   const fin = fecha(f.periodo_fin);
   if (f.origen === 'cortesia') return !fin || fin > ahora;
   if (f.origen === 'familia') return f.estado === 'cancelada' ? !!fin && fin > ahora : (f.estado === 'activa' || f.estado === 'prueba_stripe') && (!fin || fin > ahora);
+  if (f.origen === 'google' && f.estado === 'activa') return !fin || fin.getTime() > ahora.getTime() - MARGEN_GOOGLE_MS;
   if (f.estado === 'activa' || f.estado === 'prueba_stripe') return true;
   if (f.estado === 'cancelada') return !!fin && fin > ahora;
   return false;
@@ -128,6 +141,7 @@ export function estadoEfectivo(f: FilaSus | null | undefined, ahora = new Date()
   if (!f) return 'sin_plan';
   if (f.origen === 'cortesia') return tieneAcceso(f, ahora) ? 'activa' : 'vencida';
   if (f.origen === 'familia') return tieneAcceso(f, ahora) ? f.estado : 'vencida';
+  if (f.origen === 'google' && f.estado === 'activa' && !tieneAcceso(f, ahora)) return 'vencida';
   return f.estado;
 }
 
@@ -176,11 +190,11 @@ export function debeAplicar(actual: FilaSus | null | undefined, nueva: Pick<Fila
   return !tieneAcceso(actual, ahora);
 }
 
-/** MRR en USD de las suscripciones de Stripe que pagan (los anuales cuentan /12; los de N meses, /N). */
+/** MRR en USD (bruto) de las suscripciones de Stripe y Google Play que pagan (los anuales cuentan /12; los de N meses, /N). */
 export function calcularMrr(filas: (Partial<FilaSus> & { plan_precio_centavos?: number | null; plan_intervalo?: string | null; plan_moneda?: string | null })[]) {
   let centavos = 0, otras = 0;
   for (const f of filas) {
-    if (f.origen !== 'stripe' || f.estado !== 'activa') continue;
+    if (!esDePago(f.origen) || f.estado !== 'activa') continue;
     const importe = f.importe_centavos ?? f.plan_precio_centavos ?? 0;
     const intervalo = f.intervalo ?? f.plan_intervalo ?? 'mes';
     const moneda = (f.moneda ?? f.plan_moneda ?? 'usd').toLowerCase();
@@ -204,6 +218,7 @@ export async function actualizarPlanDerivado(usuarioId: string) {
 /** Acceso en SQL (alias `s`), igual que `tieneAcceso`. */
 export const ACCESO_SQL = `(s.origen = 'cortesia' AND (s.periodo_fin IS NULL OR s.periodo_fin > now()))
   OR (s.origen = 'stripe' AND (s.estado IN ('activa', 'prueba_stripe') OR (s.estado = 'cancelada' AND s.periodo_fin > now())))
+  OR (s.origen = 'google' AND ((s.estado = 'activa' AND (s.periodo_fin IS NULL OR s.periodo_fin > now() - interval '1 day')) OR (s.estado = 'cancelada' AND s.periodo_fin > now())))
   OR (s.origen = 'familia' AND ((s.estado IN ('activa', 'prueba_stripe') AND (s.periodo_fin IS NULL OR s.periodo_fin > now())) OR (s.estado = 'cancelada' AND s.periodo_fin > now())))`;
 
 /**
@@ -273,7 +288,7 @@ export async function sincronizarDesdeStripe(sub: any, op: { usuarioId?: string 
       ON CONFLICT (usuario_id) DO UPDATE SET plan_id=EXCLUDED.plan_id, origen='stripe', estado=EXCLUDED.estado, cancela_al_final=EXCLUDED.cancela_al_final,
         periodo_fin=EXCLUDED.periodo_fin, stripe_cliente_id=EXCLUDED.stripe_cliente_id, stripe_suscripcion_id=EXCLUDED.stripe_suscripcion_id,
         stripe_precio_id=EXCLUDED.stripe_precio_id, modo=EXCLUDED.modo, nota='', importe_centavos=EXCLUDED.importe_centavos, moneda=EXCLUDED.moneda,
-        intervalo=EXCLUDED.intervalo, meses=EXCLUDED.meses, titular_id=NULL,
+        intervalo=EXCLUDED.intervalo, meses=EXCLUDED.meses, titular_id=NULL, google_token=NULL, google_producto=NULL, google_plan_base=NULL, google_pedido=NULL,
         creado_en = CASE WHEN suscripciones.origen = 'stripe' AND suscripciones.stripe_suscripcion_id = EXCLUDED.stripe_suscripcion_id THEN suscripciones.creado_en ELSE now() END,
         cancelada_en = CASE WHEN EXCLUDED.estado = 'cancelada' THEN coalesce(suscripciones.cancelada_en, EXCLUDED.cancelada_en) END,
         idiomas = EXCLUDED.idiomas, todos_idiomas = false,
@@ -287,6 +302,77 @@ export async function sincronizarDesdeStripe(sub: any, op: { usuarioId?: string 
   if (actual?.origen === 'familia') await salirDeFamilia(uid, { conservarFila: true });
   await reflejarFamilia(uid);
   return { aplicada: true, usuarioId: uid, estado: d.estado, planId: plan, idiomas };
+}
+
+/** Plan de un producto de Google Play (`plan_<id>`, ver google.ts). */
+export async function planDeGoogle(producto: string | null): Promise<string | null> {
+  if (!producto) return null;
+  const ids = await query<{ id: string }>('SELECT id FROM planes');
+  return ids.find((p) => productoDePlan(p.id) === producto)?.id ?? null;
+}
+
+/**
+ * Sincroniza una compra de Google Play (consultada en la API con su token) con la
+ * fila del alumno. El alumno sale de `obfuscatedExternalAccountId` (la app lo pone
+ * al comprar), de `usuarioId` (quien la verifica) o de la fila con este token o el
+ * anterior (`linkedPurchaseToken`, tras un cambio de plan). Si la compra es de otra
+ * cuenta, 403. Al aplicarla con acceso, se reconoce (acknowledge) si hacía falta.
+ */
+export async function sincronizarDesdeGoogle(token: string, op: { usuarioId?: string | null; idiomas?: unknown } = {}) {
+  const d = datosDeGoogle(await obtenerCompra(token));
+  if (d.usuarioPista && op.usuarioId && d.usuarioPista !== op.usuarioId) throw new ErrorSus('Esta compra pertenece a otra cuenta de OneLingo.', 403);
+  let uid = [d.usuarioPista, op.usuarioId].find((x) => x && UUID.test(x)) ?? null;
+  if (!uid) uid = (await uno<{ usuario_id: string }>('SELECT usuario_id FROM suscripciones WHERE google_token = ANY($1) LIMIT 1', [[token, d.tokenAnterior].filter(Boolean)]))?.usuario_id ?? null;
+  if (!uid || !(await uno('SELECT 1 FROM usuarios WHERE id = $1', [uid]))) return { aplicada: false, motivo: 'alumno desconocido' };
+  const actual = await filaDe(uid);
+  const plan = (await planDeGoogle(d.google_producto)) ?? (actual?.origen === 'google' ? actual.plan_id : null);
+  if (!plan) return { aplicada: false, motivo: 'producto desconocido', usuarioId: uid };
+  const misma = actual?.origen === 'google' && (actual.google_token === token || (!!d.tokenAnterior && actual.google_token === d.tokenAnterior));
+  // Un aviso tardío de una compra vieja no pisa otra suscripción o cortesía con acceso.
+  if (actual && !misma && !tieneAcceso({ origen: 'google', estado: d.estado, periodo_fin: d.periodo_fin }) && tieneAcceso(actual))
+    return { aplicada: false, motivo: 'otra suscripción o cortesía vigente', usuarioId: uid };
+  const deApp = leerIdiomas(op.idiomas);
+  const base = misma && actual!.idiomas?.length ? actual!.idiomas : deApp?.length ? deApp : misma ? actual!.idiomas ?? [] : [];
+  const idiomas = ajustarAlPlan(base, await idiomasDelPlan(plan));
+  await query(`INSERT INTO suscripciones (usuario_id, plan_id, origen, estado, cancela_al_final, periodo_fin, modo, nota, importe_centavos, moneda, intervalo,
+        creado_en, cancelada_en, actualizado_en, idiomas, periodo_inicio, todos_idiomas, meses, titular_id, google_token, google_producto, google_plan_base, google_pedido)
+      VALUES ($1,$2,'google',$3,$4,$5,$6,'',$7,$8,$9, now(), CASE WHEN $3 = 'cancelada' THEN now() END, now(), $10, $11, false, $12, NULL, $13, $14, $15, $16)
+      ON CONFLICT (usuario_id) DO UPDATE SET plan_id=EXCLUDED.plan_id, origen='google', estado=EXCLUDED.estado, cancela_al_final=EXCLUDED.cancela_al_final,
+        periodo_fin=EXCLUDED.periodo_fin, modo=EXCLUDED.modo, nota='', importe_centavos=EXCLUDED.importe_centavos, moneda=EXCLUDED.moneda,
+        intervalo=EXCLUDED.intervalo, meses=EXCLUDED.meses, titular_id=NULL, stripe_suscripcion_id=NULL, stripe_precio_id=NULL,
+        google_token=EXCLUDED.google_token, google_producto=EXCLUDED.google_producto, google_plan_base=EXCLUDED.google_plan_base,
+        google_pedido=coalesce(EXCLUDED.google_pedido, suscripciones.google_pedido),
+        creado_en = CASE WHEN $17 THEN suscripciones.creado_en ELSE now() END,
+        cancelada_en = CASE WHEN EXCLUDED.estado = 'cancelada' THEN coalesce(suscripciones.cancelada_en, now()) END,
+        idiomas = EXCLUDED.idiomas, todos_idiomas = false,
+        periodo_inicio = coalesce(EXCLUDED.periodo_inicio, CASE WHEN $17 THEN suscripciones.periodo_inicio END),
+        ultimo_cambio_idiomas = CASE WHEN $17 THEN suscripciones.ultimo_cambio_idiomas END,
+        actualizado_en = now()`,
+    [uid, plan, d.estado, d.cancela_al_final, d.periodo_fin, d.modo, d.importe_centavos, d.moneda, d.intervalo, idiomas, d.periodo_inicio, d.meses,
+      token, d.google_producto, d.google_plan_base, d.google_pedido, misma]);
+  await actualizarPlanDerivado(uid);
+  if (actual?.origen === 'familia') await salirDeFamilia(uid, { conservarFila: true });
+  await reflejarFamilia(uid);
+  let reconocida = d.reconocida;
+  if (!reconocida && d.estado === 'activa' && d.google_producto) {
+    // Si falla, la app la reconoce al completar la compra; la siguiente sincronización lo reintenta.
+    reconocida = await reconocerCompra(d.google_producto, token).then(() => true, () => false);
+  }
+  return { aplicada: true, usuarioId: uid, estado: d.estado, planId: plan, idiomas, reconocida };
+}
+
+/**
+ * Compra de Google con el periodo ya vencido o en impago: se vuelve a consultar
+ * (sin RTDN, así se entera de la renovación). Como mucho una vez cada 10 minutos.
+ */
+export async function refrescarGoogle(usuarioId: string, ahora = new Date()) {
+  const f = await filaDe(usuarioId);
+  if (f?.origen !== 'google' || !f.google_token) return false;
+  const fin = fecha(f.periodo_fin), tocado = fecha(f.actualizado_en);
+  const vencida = (f.estado === 'activa' || f.estado === 'impago') && (!fin || fin <= ahora);
+  if (!vencida || (tocado && ahora.getTime() - tocado.getTime() < 600_000)) return false;
+  await sincronizarDesdeGoogle(f.google_token, { usuarioId });
+  return true;
 }
 
 /** `invoice.payment_failed`: la suscripción pasa a impago (sin acceso). */
@@ -326,11 +412,13 @@ export async function suscripcionDe(usuarioId: string, ahora = new Date()) {
     cancelaAlFinal: !!f?.cancela_al_final,
     modo: f?.modo ?? null,
     /** Meses del periodo que paga (1, 3, 6, 12) y personas que cubre su plan. */
-    meses: f?.origen === 'stripe' ? Number(f.meses ?? (f.intervalo === 'anio' ? 12 : 1)) : null,
+    meses: esDePago(f?.origen) ? Number(f!.meses ?? (f!.intervalo === 'anio' ? 12 : 1)) : null,
     usuariosPlan,
     /** Miembro de un plan familiar: lo paga otra persona. */
     familiar: f?.origen === 'familia',
     puedeGestionar: !!(p && f?.origen === 'stripe' && f.stripe_cliente_id && f.modo === p.modo()),
+    /** Compra de Google Play: producto y plan base (la app la gestiona y la cambia en Play). */
+    google: f?.origen === 'google' ? { producto: f.google_producto ?? null, planBase: f.google_plan_base ?? null } : null,
     prueba: { minutos: a.pruebaMinutos, segundosUsados: usados, restanteSegundos: Math.max(0, total - usados), agotada: usados >= total },
   };
 }
@@ -408,13 +496,15 @@ export async function darCortesia(usuarioId: string, d: { planId: string; idioma
   const actual = await filaDe(usuarioId);
   if (actual?.origen === 'stripe' && ['activa', 'prueba_stripe', 'impago'].includes(actual.estado))
     throw new ErrorSus('El alumno tiene una suscripción de Stripe en curso: gestiónala en Stripe antes de dar cortesía.', 409);
+  if (actual?.origen === 'google' && (tieneAcceso(actual, ahora) || actual.estado === 'impago'))
+    throw new ErrorSus('El alumno tiene una suscripción de Google Play en curso: se cancela o reembolsa desde Play Console antes de dar cortesía.', 409);
   // Se conserva el cliente de Stripe (si lo hubo) para reutilizarlo en un pago futuro.
   await query(`INSERT INTO suscripciones (usuario_id, plan_id, origen, estado, cancela_al_final, periodo_fin, nota, creado_en, actualizado_en, idiomas, todos_idiomas)
       VALUES ($1,$2,'cortesia','activa',false,$3,$4, now(), now(), $5, $6)
       ON CONFLICT (usuario_id) DO UPDATE SET plan_id=EXCLUDED.plan_id, origen='cortesia', estado='activa', cancela_al_final=false, periodo_fin=EXCLUDED.periodo_fin,
         nota=EXCLUDED.nota, stripe_suscripcion_id=NULL, stripe_precio_id=NULL, importe_centavos=NULL, moneda=NULL, intervalo=NULL,
         idiomas=EXCLUDED.idiomas, todos_idiomas=EXCLUDED.todos_idiomas, periodo_inicio=NULL, ultimo_cambio_idiomas=NULL,
-        meses=NULL, titular_id=NULL, creado_en=now(), cancelada_en=NULL, actualizado_en=now()`,
+        meses=NULL, titular_id=NULL, google_token=NULL, google_producto=NULL, google_plan_base=NULL, google_pedido=NULL, creado_en=now(), cancelada_en=NULL, actualizado_en=now()`,
     [usuarioId, d.planId, hasta, (d.nota ?? '').slice(0, 500), idiomas, todos]);
   await actualizarPlanDerivado(usuarioId);
   if (actual?.origen === 'familia') await salirDeFamilia(usuarioId, { conservarFila: true });
@@ -431,7 +521,7 @@ export async function quitarCortesia(usuarioId: string) {
 }
 
 // ── Panel ────────────────────────────────────────────────────────────────────
-export const FILTROS_ESTADO = ['', 'con_acceso', 'activa', 'prueba_stripe', 'impago', 'cancelada', 'vencida', 'cortesia', 'familia', 'cancela_al_final'] as const;
+export const FILTROS_ESTADO = ['', 'con_acceso', 'activa', 'prueba_stripe', 'impago', 'cancelada', 'vencida', 'cortesia', 'familia', 'google', 'cancela_al_final'] as const;
 
 /**
  * Desglose por idioma: suscriptores de Stripe con acceso y cortesías vigentes por
@@ -446,7 +536,7 @@ export function desglosePorIdioma(filas: any[], ahora = new Date()) {
     if (!tieneAcceso(f, ahora)) continue;
     const { idiomas, todos } = idiomasDe(f, Number(f.plan_idiomas ?? 1));
     const destino = todos ? ['todos'] : idiomas.length ? idiomas : ['por_elegir'];
-    const mrr = f.origen === 'stripe' ? calcularMrr([f]).mrr : 0;
+    const mrr = esDePago(f.origen) ? calcularMrr([f]).mrr : 0;
     for (const k of destino) {
       if (f.origen === 'cortesia') t[k].cortesias++; else t[k].suscriptores++;
       t[k].mrr += mrr / destino.length;
@@ -464,18 +554,20 @@ export async function resumenAdmin(filtro: { estado?: string; q?: string; idioma
     ORDER BY s.actualizado_en DESC LIMIT 5000`);
   const modo = proveedorActivo()?.modo() ?? null;
   const delModo = todas.filter((f) => f.origen !== 'stripe' || !modo || f.modo === modo);
+  const googleM = delModo.filter((f) => f.origen === 'google');
   const hace30 = new Date(ahora.getTime() - 30 * 86_400_000);
   const stripeM = delModo.filter((f) => f.origen === 'stripe');
-  const { mrr, otrasMonedas } = calcularMrr(stripeM);
+  const { mrr, otrasMonedas } = calcularMrr([...stripeM, ...googleM]);
   const resumen = {
     modo,
     activas: stripeM.filter((f) => f.estado === 'activa' || f.estado === 'prueba_stripe').length,
     mrr, otrasMonedas,
     nuevas30: stripeM.filter((f) => f.creado_en && new Date(f.creado_en) >= hace30).length,
     canceladas30: stripeM.filter((f) => f.cancelada_en && new Date(f.cancelada_en) >= hace30).length,
-    impagos: stripeM.filter((f) => f.estado === 'impago').length,
+    impagos: [...stripeM, ...googleM].filter((f) => f.estado === 'impago').length,
     cortesias: todas.filter((f) => f.origen === 'cortesia' && tieneAcceso(f, ahora)).length,
     familia: todas.filter((f) => f.origen === 'familia' && tieneAcceso(f, ahora)).length,
+    google: googleM.filter((f) => tieneAcceso(f, ahora)).length,
     otroModo: todas.length - delModo.length,
     porIdioma: desglosePorIdioma(delModo, ahora),
   };
@@ -488,12 +580,13 @@ export async function resumenAdmin(filtro: { estado?: string; q?: string; idioma
       origen: f.origen, estado: estadoEfectivo(f, ahora), acceso: tieneAcceso(f, ahora), cancelaAlFinal: f.cancela_al_final,
       periodoFin: f.periodo_fin, modo: f.modo, importe: f.importe_centavos !== null ? f.importe_centavos / 100 : null, moneda: f.moneda,
       intervalo: f.intervalo ?? f.plan_intervalo, meses: f.meses ?? null, titularEmail: f.titular_email ?? null, nota: f.nota, stripeClienteId: f.stripe_cliente_id, stripeSuscripcionId: f.stripe_suscripcion_id,
+      googlePedido: f.google_pedido ?? null,
       creadoEn: f.creado_en, actualizadoEn: f.actualizado_en,
       idiomas, todosLosIdiomas: todos, idiomasPorElegir: porElegir, idiomasPlan: Number(f.plan_idiomas ?? 1),
     }))
-    .filter((f) => !q || `${f.nombre} ${f.email} ${f.planId} ${f.stripeClienteId ?? ''}`.toLowerCase().includes(q))
+    .filter((f) => !q || `${f.nombre} ${f.email} ${f.planId} ${f.stripeClienteId ?? ''} ${f.googlePedido ?? ''}`.toLowerCase().includes(q))
     .filter((f) => !filtro.idioma || f.todosLosIdiomas || f.idiomas.includes(filtro.idioma))
-    .filter((f) => !e || (e === 'con_acceso' ? f.acceso : e === 'cortesia' || e === 'familia' ? f.origen === e : e === 'cancela_al_final' ? f.cancelaAlFinal : f.estado === e));
+    .filter((f) => !e || (e === 'con_acceso' ? f.acceso : e === 'cortesia' || e === 'familia' || e === 'google' ? f.origen === e : e === 'cancela_al_final' ? f.cancelaAlFinal : f.estado === e));
   return { resumen, filas: filas.slice(0, 500), total: filas.length };
 }
 

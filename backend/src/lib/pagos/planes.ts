@@ -9,6 +9,7 @@ import { query, uno } from '../db.js';
 import { registrarAlGuardarStripe, stripeConfig } from '../conexiones.js';
 import { PRUEBA_MINUTOS_POR_DEFECTO } from '../analitica.js';
 import { firmaDuracion, proveedorActivo, stripe, type Duracion, type FilaPlan, type PrecioDuracion, type SyncPlan } from './proveedor.js';
+import { googleConfig, googleDisponible, planBaseDeMeses, productoDePlan } from './google.js';
 
 // ── Ajustes ──────────────────────────────────────────────────────────────────
 /** Regla para que el alumno cambie un idioma de su plan por otro (anexo de idiomas). */
@@ -56,6 +57,8 @@ export function aPublico(f: FilaPlan) {
     usuarios: f.usuarios,
     duraciones: [...(f.intervalo === 'mes' ? [{ meses: 1, precio: Math.round(f.precio_centavos) / 100 }] : []),
       ...f.duraciones.map((d) => ({ meses: d.meses, precio: Math.round(d.precio_centavos) / 100 }))],
+    /** Producto de Google Play y un plan base por duración (`mes-1`, `mes-3`…; el anual, `mes-12`). */
+    google: { producto: productoDePlan(f.id), planesBase: (f.intervalo === 'anio' ? [12] : [1, ...f.duraciones.map((d) => d.meses)]).map(planBaseDeMeses) },
   };
 }
 /** Estado de sincronización para el panel. */
@@ -70,7 +73,12 @@ export function estadoSync(f: FilaPlan) {
 export async function planesPublicos() {
   const [a, filas] = await Promise.all([ajustesPago(), query('SELECT * FROM planes WHERE visible AND NOT archivado ORDER BY orden, id')]);
   const p = proveedorActivo();
-  return { moneda: a.moneda, pruebaMinutos: a.pruebaMinutos, demoActivo: a.demoActivo, pagos: { disponible: !!p, modo: p?.modo() ?? null }, planes: filas.map((f) => aPublico(normalizar(f))) };
+  return {
+    moneda: a.moneda, pruebaMinutos: a.pruebaMinutos, demoActivo: a.demoActivo, pagos: { disponible: !!p, modo: p?.modo() ?? null },
+    /** Compras dentro de la app Android (Google Play Billing): el servidor puede verificarlas. */
+    google: { disponible: googleDisponible(), paquete: googleConfig().paquete },
+    planes: filas.map((f) => aPublico(normalizar(f))),
+  };
 }
 export async function plan(id: string): Promise<FilaPlan | null> {
   const f = await uno('SELECT * FROM planes WHERE id = $1', [id]);

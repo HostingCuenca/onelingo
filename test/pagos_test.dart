@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -14,6 +15,7 @@ import 'package:onelingo/core/api/sync.dart';
 import 'package:onelingo/core/diagnostico.dart' show escalaDiagnosticoCliente;
 import 'package:onelingo/core/efectos.dart';
 import 'package:onelingo/core/i18n/i18n.dart';
+import 'package:onelingo/core/pagos/google_play.dart';
 import 'package:onelingo/core/pagos/providers.dart';
 import 'package:onelingo/core/state/providers.dart';
 import 'package:onelingo/features/plans/idiomas_plan.dart';
@@ -137,10 +139,45 @@ Future<SharedPreferences> _prefs({
   return prefs;
 }
 
+/// Google Play simulado: registra las compras abiertas y completadas; las
+/// compras llegan con [entregar], como las manda el plugin.
+class _TiendaFalsa implements TiendaPlay {
+  _TiendaFalsa({this.preciosFalsos = const {}, this.pendientes = const []});
+  final Map<String, PrecioPlay> preciosFalsos;
+  final List<CompraPlay> pendientes;
+  final _flujo = StreamController<List<CompraPlay>>.broadcast();
+  final abiertas = <String>[];
+  final completadas = <String>[];
+  String? anterior;
+
+  void entregar(CompraPlay c) => _flujo.add([c]);
+
+  @override
+  Stream<List<CompraPlay>> get compras => _flujo.stream;
+  @override
+  Future<bool> disponible() async => true;
+  @override
+  Future<Map<String, PrecioPlay>> precios(Set<String> productos) async => preciosFalsos;
+  @override
+  Future<bool> comprar({required String producto, required String planBase, required String cuenta, String? productoAnterior}) async {
+    abiertas.add('$producto|$planBase|$cuenta');
+    anterior = productoAnterior;
+    return true;
+  }
+
+  @override
+  Future<List<CompraPlay>> sinCompletar() async => pendientes;
+  @override
+  Future<void> completar(CompraPlay c) async => completadas.add(c.token);
+}
+
+/// [enApp]: Android con Google Play (por defecto, la web con Stripe).
 ProviderContainer _contenedor(
   SharedPreferences prefs,
   _Servidor servidor, {
   List<String>? abiertas,
+  bool enApp = false,
+  TiendaPlay? tienda,
 }) {
   final c = ProviderContainer(
     overrides: [
@@ -150,6 +187,8 @@ ProviderContainer _contenedor(
         abiertas?.add(url);
         return true;
       }),
+      pagoEnAppProvider.overrideWithValue(enApp),
+      tiendaPlayProvider.overrideWithValue(tienda ?? _TiendaFalsa()),
     ],
   );
   addTearDown(c.dispose);
@@ -973,6 +1012,171 @@ void main() {
       final cuerpo = jsonDecode(p.body) as Map;
       expect([cuerpo['empresa'], cuerpo['empleados'], cuerpo['idiomas'], cuerpo['email']], ['Acme', 50, ['en', 'fr'], 'alumna@correo.com']);
       expect(find.byKey(const ValueKey('cotizacion-enviada')), findsOneWidget);
+      await _fin();
+    });
+  });
+
+  group('Google Play (Android)', () {
+    Map<String, dynamic> conGoogle({bool disponible = true}) {
+      final j = _planesJson(disponible: false);
+      j['google'] = {'disponible': disponible, 'paquete': 'com.torisoftt.onelingo'};
+      j['planes'] = <Object>[
+        for (final p in j['planes'] as List) {...p as Map<String, dynamic>, 'google': {'producto': 'plan_${p['id']}'}},
+        {
+          'id': 'p1m', 'nombre': {'es': 'Básico', 'en': 'Basic'}, 'incluye': {'es': ['1 idioma'], 'en': []},
+          'idiomas': 1, 'precio': 20, 'moneda': 'usd', 'intervalo': 'mes', 'orden': 3, 'usuarios': 1,
+          'duraciones': [{'meses': 1, 'precio': 20}, {'meses': 3, 'precio': 55}],
+          'google': {'producto': 'plan_p1m', 'planesBase': ['mes-1', 'mes-3']},
+        },
+      ];
+      return j;
+    }
+
+    Map<String, dynamic> deGoogle({String planId = 'p1m', String planBase = 'mes-3', String estado = 'activa'}) => {
+      ..._suscripcionJson(planId: planId, estado: estado, origen: 'google', acceso: true, periodoFin: '2027-01-15T00:00:00Z', idiomas: ['en']),
+      'accesoPlan': true,
+      'meses': 3,
+      'google': {'producto': 'plan_$planId', 'planBase': planBase},
+    };
+
+    test('catálogo: Google Play disponible y producto de cada plan; suscripción de Play', () {
+      final cat = CatalogoPlanes.fromJson(conGoogle());
+      expect(cat.googleDisponible, isTrue);
+      expect(cat.googlePaquete, 'com.torisoftt.onelingo');
+      expect(cat.plan('p1m')!.googleProducto, 'plan_p1m');
+      expect(CatalogoPlanes.fromJson(_planesJson()).googleDisponible, isFalse);
+      final s = Suscripcion.fromJson(deGoogle());
+      expect(s.esGoogle && s.googleVigente && s.pagoVigente, isTrue);
+      expect(s.stripeVigente, isFalse);
+      expect(s.googlePlanBase, 'mes-3');
+    });
+
+    testWidgets('comprar: precios de Play, idiomas, compra en Play, verifica en el servidor y la completa', (tester) async {
+      final prefs = await _prefs();
+      final tienda = _TiendaFalsa(preciosFalsos: {
+        'plan_p1m|mes-1': const PrecioPlay(texto: r'US$20.00', valor: 20, moneda: 'USD'),
+        'plan_p1m|mes-3': const PrecioPlay(texto: r'US$55.00', valor: 55, moneda: 'USD'),
+      });
+      final servidor = _Servidor({
+        'GET /planes': (200, conGoogle()),
+        'GET /usuarios/me/suscripcion': (200, _suscripcionJson()),
+        'POST /pagos/google/verificar': (200, deGoogle()),
+      });
+      final c = _contenedor(prefs, servidor, enApp: true, tienda: tienda);
+      c.read(comprasPlayProvider);
+      await _pantallaPlanes(tester, c);
+      expect(find.text('Pago seguro con Google Play. Cancela cuando quieras desde Google Play.'), findsOneWidget);
+      await _abrirPlan(tester, 'p1m');
+      expect(find.text(r'US$55.00'), findsOneWidget, reason: 'precio de Google en la moneda del alumno');
+      expect(find.text(r'$18.33 al mes'), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('duracion-3')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('suscribirme')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Continuar').last);
+      // Google abre su hoja de pago: mientras, el botón espera (no se asienta).
+      await tester.pump();
+      await tester.pump();
+      expect(tienda.abiertas, ['plan_p1m|mes-3|u1']);
+      expect(servidor.rutasPedidas, isNot(contains('POST /pagos/checkout')));
+      tienda.entregar(const CompraPlay(estado: EstadoCompraPlay.comprada, token: 'tok-play-1', producto: 'plan_p1m'));
+      await tester.pumpAndSettle();
+      final v = servidor.peticiones.lastWhere((r) => r.url.path == '/pagos/google/verificar');
+      expect(jsonDecode(v.body), {'token': 'tok-play-1', 'idiomas': ['en']});
+      expect(tienda.completadas, ['tok-play-1']);
+      expect(c.read(suscripcionProvider)!.esGoogle, isTrue);
+      expect(find.text('¡Listo! Tu plan ya está activo.'), findsOneWidget);
+      expect(find.byKey(const ValueKey('plan-p1m')), findsOneWidget, reason: 'vuelve a la lista');
+      await _fin();
+    });
+
+    testWidgets('verificación fallida: no completa la compra y avisa', (tester) async {
+      final prefs = await _prefs();
+      final tienda = _TiendaFalsa();
+      final servidor = _Servidor({
+        'GET /planes': (200, conGoogle()),
+        'GET /usuarios/me/suscripcion': (200, _suscripcionJson()),
+        'POST /pagos/google/verificar': (502, {'error': 'Google Play: caído'}),
+      });
+      final c = _contenedor(prefs, servidor, enApp: true, tienda: tienda);
+      c.read(comprasPlayProvider);
+      await _pantallaPlanes(tester, c);
+      await _abrirPlan(tester, 'p2');
+      tienda.entregar(const CompraPlay(estado: EstadoCompraPlay.comprada, token: 'tok-play-2', producto: 'plan_p2'));
+      await tester.pumpAndSettle();
+      expect(tienda.completadas, isEmpty);
+      expect(find.text('Recibimos tu pago, pero aún no pudimos confirmarlo. Lo intentaremos de nuevo al abrir la app.'), findsOneWidget);
+      await _fin();
+    });
+
+    testWidgets('al arrancar: verifica en silencio las compras cobradas sin completar', (tester) async {
+      final prefs = await _prefs();
+      final tienda = _TiendaFalsa(pendientes: const [CompraPlay(estado: EstadoCompraPlay.comprada, token: 'tok-viejo', producto: 'plan_p1m')]);
+      final servidor = _Servidor({'POST /pagos/google/verificar': (200, deGoogle())});
+      final c = _contenedor(prefs, servidor, enApp: true, tienda: tienda);
+      c.read(catalogoPlanesProvider.notifier).state = CatalogoPlanes.fromJson(conGoogle());
+      await c.read(comprasPlayProvider.notifier).reintentarPendientes();
+      expect(tienda.completadas, ['tok-viejo']);
+      expect(c.read(suscripcionProvider)!.planId, 'p1m');
+      await _fin();
+    });
+
+    testWidgets('suscrito en Play: «Gestionar en Google Play», cambiar duración o plan reemplaza la compra', (tester) async {
+      final prefs = await _prefs();
+      final abiertas = <String>[];
+      final tienda = _TiendaFalsa();
+      final servidor = _Servidor({'GET /planes': (200, conGoogle()), 'GET /usuarios/me/suscripcion': (200, deGoogle())});
+      final c = _contenedor(prefs, servidor, enApp: true, tienda: tienda, abiertas: abiertas);
+      await _pantallaPlanes(tester, c);
+      expect(find.text('Pago cada 3 meses'), findsOneWidget);
+      await tester.tap(find.text('Gestionar en Google Play'));
+      await tester.pumpAndSettle();
+      expect(abiertas, ['https://play.google.com/store/account/subscriptions?sku=plan_p1m&package=com.torisoftt.onelingo']);
+      // Mismo plan y duración: PLAN ACTUAL; otra duración: cambiarla en Play, sin volver a elegir idiomas.
+      await _abrirPlan(tester, 'p1m');
+      await tester.tap(find.byKey(const ValueKey('duracion-3')));
+      await tester.pumpAndSettle();
+      expect(_boton(tester, 'PLAN ACTUAL').onPressed, isNull);
+      await tester.tap(find.byKey(const ValueKey('duracion-1')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Cambiar la duración'));
+      await tester.pump();
+      await tester.pump();
+      expect(tienda.abiertas, ['plan_p1m|mes-1|u1']);
+      expect(tienda.anterior, 'plan_p1m');
+      // El alumno cierra la hoja de Google sin pagar: el botón vuelve.
+      tienda.entregar(const CompraPlay(estado: EstadoCompraPlay.cancelada, producto: 'plan_p1m'));
+      await tester.pumpAndSettle();
+      await _volver(tester);
+      await _abrirPlan(tester, 'p2');
+      await tester.tap(find.text('Cambiar a este plan'));
+      await tester.pump();
+      await tester.pump();
+      expect(tienda.abiertas.last, 'plan_p2|mes-1|u1');
+      tienda.entregar(const CompraPlay(estado: EstadoCompraPlay.cancelada, producto: 'plan_p2'));
+      await tester.pumpAndSettle();
+      await _fin();
+    });
+
+    testWidgets('Android sin Google Play en el servidor: «Pagos próximamente»; pagada en la web: sin Stripe', (tester) async {
+      final prefs = await _prefs();
+      var servidor = _Servidor({'GET /planes': (200, conGoogle(disponible: false)), 'GET /usuarios/me/suscripcion': (200, _suscripcionJson())});
+      var c = _contenedor(prefs, servidor, enApp: true);
+      await _pantallaPlanes(tester, c);
+      await _abrirPlan(tester, 'p2');
+      expect(_boton(tester, 'Pagos próximamente').onPressed, isNull);
+      await _fin();
+      final web = _suscripcionJson(planId: 'p1', estado: 'activa', origen: 'stripe', acceso: true, puedeGestionar: true, periodoFin: '2027-01-01T00:00:00Z');
+      servidor = _Servidor({'GET /planes': (200, conGoogle()), 'GET /usuarios/me/suscripcion': (200, web)});
+      c = _contenedor(await _prefs(), servidor, enApp: true);
+      await tester.pumpWidget(const SizedBox()); // pantalla nueva: vuelve a pedir la suscripción
+      await _pantallaPlanes(tester, c);
+      expect(find.text('Pagada en la web: se gestiona desde onelingo.org.'), findsOneWidget);
+      expect(find.text('Gestionar suscripción'), findsNothing);
+      expect(find.text('Modo de prueba: usa la tarjeta 4242 4242 4242 4242'), findsNothing);
+      await _abrirPlan(tester, 'p2');
+      expect(find.text('Tu suscripción se gestiona en la web'), findsOneWidget);
+      expect(servidor.rutasPedidas, isNot(contains('POST /pagos/portal')));
       await _fin();
     });
   });

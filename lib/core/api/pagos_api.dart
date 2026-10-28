@@ -128,4 +128,9 @@ class PagosApi {
   /// `POST /pagos/portal` → `{url}` del Customer Portal.
   Future<RespuestaPago> portal() =>
       _pedir('POST', '/pagos/portal', cuerpo: const {});
+
+  /// `POST /pagos/google/verificar`: el servidor consulta la compra de Google
+  /// Play, la guarda con [idiomas] y la reconoce. Responde la suscripción.
+  Future<RespuestaPago> verificarGoogle(String token, List<String> idiomas) =>
+      _pedir('POST', '/pagos/google/verificar', cuerpo: {'token': token, 'idiomas': idiomas});
 }

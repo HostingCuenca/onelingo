@@ -4,15 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/theme.dart';
 import '../../core/api/pagos_api.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/pagos/google_play.dart';
 import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 import 'estilo_plan.dart';
 import 'idiomas_plan.dart';
-import 'plans_screen.dart' show abrirPagina, avisoPago, planSuscritoDe;
+import 'plans_screen.dart' show abrirPagina, avisoPago, planSuscritoDe, textoPago;
 
 /// Detalle de un plan: qué incluye, la duración (1, 3, 6 o 12 meses, con el
-/// ahorro frente a pagar mes a mes) y el botón para suscribirse.
+/// ahorro frente a pagar mes a mes) y el botón para suscribirse: en Android,
+/// con Google Play dentro de la app; en la web, con Stripe Checkout.
 class PlanDetalleScreen extends ConsumerStatefulWidget {
   const PlanDetalleScreen({super.key, required this.planId});
   final String planId;
@@ -27,19 +29,29 @@ class _PlanDetalleScreenState extends ConsumerState<PlanDetalleScreen> {
   bool _esperando = false;
 
   /// Plan de N idiomas: primero se eligen (el idioma meta ya marcado); el plan
-  /// «todos» va directo a Checkout.
+  /// «todos» va directo al pago. null si el alumno cerró la elección.
+  Future<List<String>?> _elegirIdiomas(PlanServidor p) async {
+    if (p.todosLosIdiomas) return const [];
+    final r = await elegirIdiomasPlan(
+      context,
+      cantidad: p.idiomas,
+      marcados: [ref.read(progressProvider).idiomaMeta],
+    );
+    return mounted ? r : null;
+  }
+
   Future<void> _suscribirme(PlanServidor p, PagosApi api, int meses) async {
-    var elegidos = const <String>[];
-    if (!p.todosLosIdiomas) {
-      final r = await elegirIdiomasPlan(
-        context,
-        cantidad: p.idiomas,
-        marcados: [ref.read(progressProvider).idiomaMeta],
-      );
-      if (r == null || !mounted) return;
-      elegidos = r;
-    }
+    final elegidos = await _elegirIdiomas(p);
+    if (elegidos == null) return;
     await _abrir(() => api.checkout(p.id, elegidos, meses: meses));
+  }
+
+  /// Google Play: compra nueva (con idiomas) o cambio de una suscripción de
+  /// Play (conserva sus idiomas; los que falten quedan por elegir).
+  Future<void> _comprarPlay(PlanServidor p, int meses, {required bool cambio}) async {
+    final elegidos = cambio ? const <String>[] : await _elegirIdiomas(p);
+    if (elegidos == null) return;
+    await ref.read(comprasPlayProvider.notifier).comprar(p, meses, elegidos);
   }
 
   Future<void> _abrir(Future<RespuestaPago> Function() pedir) async {
@@ -66,6 +78,14 @@ class _PlanDetalleScreenState extends ConsumerState<PlanDetalleScreen> {
     final elegida = duraciones.where((d) => d.meses == _meses).firstOrNull ?? duraciones.first;
     final sus = ep.servidor ? ep.suscripcion : null;
     final planSuscrito = planSuscritoDe(ep);
+    final enApp = ref.watch(pagoEnAppProvider);
+    final precios = enApp ? ref.watch(preciosPlayProvider).valueOrNull ?? const <String, PrecioPlay>{} : const <String, PrecioPlay>{};
+    ref.listen(comprasPlayProvider.select((s) => s.n), (_, _) {
+      final s = ref.read(comprasPlayProvider);
+      if (s.aviso == null) return;
+      avisoPago(context, s.aviso!, color: s.exito ? OL.verde : OL.rojo);
+      if (s.exito) Navigator.of(context).maybePop();
+    });
 
     return Scaffold(
       appBar: AppBar(title: Text(p.nombreEn(interfaz))),
@@ -116,6 +136,7 @@ class _PlanDetalleScreenState extends ConsumerState<PlanDetalleScreen> {
                   child: _OpcionDuracion(
                     duracion: d,
                     moneda: p.moneda,
+                    precioPlay: precios['${p.googleProducto}|${planBaseDeMeses(d.meses)}'],
                     ahorro: p.ahorro(d),
                     estilo: e,
                     elegida: d.meses == elegida.meses,
@@ -124,12 +145,10 @@ class _PlanDetalleScreenState extends ConsumerState<PlanDetalleScreen> {
                 ),
             ],
             const SizedBox(height: 8),
-            _boton(p, ep, planSuscrito, catalogo, sus, api, interfaz, elegida),
+            _boton(p, ep, planSuscrito, catalogo, sus, api, interfaz, elegida, enApp),
             const SizedBox(height: 12),
             Text(
-              ep.servidor && catalogo.pagosDisponible
-                  ? tr('Pago con tarjeta en la página segura de Stripe. Cancela cuando quieras desde «Gestionar suscripción».')
-                  : tr('Pago mensual, cancela cuando quieras.'),
+              textoPago(ep, catalogo, enApp),
               textAlign: TextAlign.center,
               style: const TextStyle(color: OL.gris, fontSize: 11),
             ),
@@ -148,9 +167,13 @@ class _PlanDetalleScreenState extends ConsumerState<PlanDetalleScreen> {
     PagosApi api,
     String interfaz,
     DuracionPlan duracion,
+    bool enApp,
   ) {
     final estilo = ElevatedButton.styleFrom(backgroundColor: EstiloPlan.de(p).color);
-    if (p.id == planSuscrito) {
+    final compra = ref.watch(comprasPlayProvider);
+    // En Play se puede cambiar de duración dentro del mismo plan.
+    final otraDuracion = enApp && sus != null && sus.googleVigente && sus.googlePlanBase != planBaseDeMeses(duracion.meses);
+    if (p.id == planSuscrito && !otraDuracion) {
       return ElevatedButton(style: estilo, onPressed: null, child: Text(tr('PLAN ACTUAL')));
     }
     // DEMO o sin servidor: se elige en el dispositivo, como antes.
@@ -170,6 +193,24 @@ class _PlanDetalleScreenState extends ConsumerState<PlanDetalleScreen> {
       height: 18,
       child: CircularProgressIndicator(strokeWidth: 2, color: OL.morado),
     );
+    if (enApp) {
+      // Android: solo Google Play. Una suscripción pagada en la web se gestiona allí.
+      if (sus != null && sus.stripeVigente) {
+        return OutlinedButton(onPressed: null, child: Text(tr('Tu suscripción se gestiona en la web')));
+      }
+      if (!catalogo.googleDisponible || p.googleProducto == null) {
+        return ElevatedButton(style: estilo, onPressed: null, child: Text(tr('Pagos próximamente')));
+      }
+      final cambio = sus != null && sus.googleVigente;
+      return ElevatedButton(
+        key: const ValueKey('suscribirme'),
+        style: estilo,
+        onPressed: compra.procesando ? null : () => _comprarPlay(p, duracion.meses, cambio: cambio),
+        child: compra.procesando
+            ? indicador
+            : Text(cambio ? (p.id == planSuscrito ? tr('Cambiar la duración') : tr('Cambiar a este plan')) : tr('Continuar')),
+      );
+    }
     // Ya paga con Stripe: los cambios de plan y de duración se hacen en el portal.
     if (sus != null && sus.stripeVigente && sus.puedeGestionar) {
       return OutlinedButton(
@@ -194,6 +235,7 @@ class _OpcionDuracion extends StatelessWidget {
   const _OpcionDuracion({
     required this.duracion,
     required this.moneda,
+    this.precioPlay,
     required this.ahorro,
     required this.estilo,
     required this.elegida,
@@ -201,6 +243,9 @@ class _OpcionDuracion extends StatelessWidget {
   });
   final DuracionPlan duracion;
   final String moneda;
+
+  /// Precio de Google Play en la moneda del alumno (Android); si no, el del catálogo.
+  final PrecioPlay? precioPlay;
   final int ahorro;
   final EstiloPlan estilo;
   final bool elegida;
@@ -227,8 +272,9 @@ class _OpcionDuracion extends StatelessWidget {
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(textoDuracion(d.meses), style: TextStyle(fontWeight: FontWeight.w800, color: texto)),
-              Text(formatoPrecio(d.precio, moneda), style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: texto, height: 1.1)),
-              Text(tr('{precio} al mes', {'precio': formatoPrecio((d.porMes * 100).round() / 100, moneda)}),
+              Text(precioPlay?.texto ?? formatoPrecio(d.precio, moneda),
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: texto, height: 1.1)),
+              Text(tr('{precio} al mes', {'precio': precioPlay?.porMes(d.meses) ?? formatoPrecio((d.porMes * 100).round() / 100, moneda)}),
                   style: TextStyle(fontSize: 12, color: suave)),
             ]),
           ),

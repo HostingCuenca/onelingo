@@ -70,6 +70,7 @@ class PlanServidor {
     this.orden = 0,
     this.usuarios = 1,
     this.listaDuraciones = const [],
+    this.googleProducto,
   });
 
   final String id;
@@ -91,6 +92,9 @@ class PlanServidor {
   /// Duraciones del servidor (incluida la de 1 mes); vacía en servidores
   /// anteriores a las duraciones.
   final List<DuracionPlan> listaDuraciones;
+
+  /// Producto de Google Play (`plan_p1`); null en servidores anteriores.
+  final String? googleProducto;
 
   bool get familiar => usuarios > 1;
 
@@ -143,8 +147,14 @@ class PlanServidor {
             if (d is Map && d['meses'] is num && d['precio'] is num)
               DuracionPlan((d['meses'] as num).round(), (d['precio'] as num).toDouble()),
         ]..sort((a, b) => a.meses.compareTo(b.meses)),
+        googleProducto: j['google'] is Map && j['google']['producto'] is String
+            ? j['google']['producto'] as String
+            : null,
       );
 }
+
+/// Plan base de Google Play de una duración: `mes-1`, `mes-3`…
+String planBaseDeMeses(int meses) => 'mes-$meses';
 
 /// Símbolo y cifra sin decimales cuando el precio es entero.
 String formatoPrecio(double precio, String moneda) {
@@ -183,6 +193,8 @@ class CatalogoPlanes {
     this.listaPlanes,
     this.origen = OrigenCatalogo.respaldo,
     this.demoActivo = true,
+    this.googleDisponible = false,
+    this.googlePaquete = 'com.torisoftt.onelingo',
   });
 
   final String moneda;
@@ -198,6 +210,10 @@ class CatalogoPlanes {
   /// Usuarios demo (@onelingo.demo) habilitados en el servidor (Panel → Pagos).
   final bool demoActivo;
 
+  /// El servidor verifica compras de Google Play (cobro dentro de la app Android).
+  final bool googleDisponible;
+  final String googlePaquete;
+
   List<PlanServidor> get planes => listaPlanes ?? planesRespaldo();
   int get pruebaSegundos => pruebaMinutos * 60;
   bool get modoPrueba => pagosDisponible && pagosModo == 'test';
@@ -211,6 +227,7 @@ class CatalogoPlanes {
   }) {
     final moneda = (j['moneda'] as String?)?.toLowerCase() ?? 'usd';
     final pagos = j['pagos'] is Map ? j['pagos'] as Map : const {};
+    final google = j['google'] is Map ? j['google'] as Map : const {};
     final lista = [
       for (final p in (j['planes'] as List? ?? const []))
         if (p is Map) PlanServidor.fromJson(p.cast<String, dynamic>(), moneda: moneda),
@@ -224,6 +241,8 @@ class CatalogoPlanes {
       listaPlanes: lista,
       origen: origen,
       demoActivo: j['demoActivo'] != false,
+      googleDisponible: google['disponible'] == true,
+      googlePaquete: google['paquete'] is String ? google['paquete'] as String : 'com.torisoftt.onelingo',
     );
   }
 }
@@ -312,6 +331,8 @@ class Suscripcion {
     this.meses,
     this.usuariosPlan,
     this.familiar = false,
+    this.googleProducto,
+    this.googlePlanBase,
   });
 
   final String planId;
@@ -319,7 +340,7 @@ class Suscripcion {
   /// activa | prueba_stripe | impago | cancelada | vencida | sin_plan
   final String estado;
 
-  /// stripe | cortesia | null
+  /// stripe | google | cortesia | familia | null
   final String? origen;
 
   /// Acceso de pago en el idioma meta que el servidor tiene guardado.
@@ -353,6 +374,10 @@ class Suscripcion {
   /// Miembro de un plan familiar: lo paga otra persona.
   final bool familiar;
 
+  /// Compra de Google Play: producto (`plan_p2`) y plan base (`mes-3`).
+  final String? googleProducto;
+  final String? googlePlanBase;
+
   /// Titular de un plan familiar con acceso: puede añadir personas.
   bool get titularFamiliar => !familiar && vigente && (usuariosPlan ?? 1) > 1;
 
@@ -382,12 +407,19 @@ class Suscripcion {
   String planEfectivoEn(String idioma) => accesoEn(idioma) ? planId : '';
 
   bool get esStripe => origen == 'stripe';
+  bool get esGoogle => origen == 'google';
   bool get esCortesia => origen == 'cortesia' && enCurso;
 
   /// Suscripción de Stripe que el alumno puede ver y gestionar (incluido un
   /// impago, para que actualice su tarjeta).
   bool get stripeVigente =>
       esStripe && enCurso;
+
+  /// Suscripción de Google Play en curso: se gestiona y se cambia en Play.
+  bool get googleVigente => esGoogle && enCurso;
+
+  /// Suscripción que se paga sola (Stripe o Google Play) en curso.
+  bool get pagoVigente => stripeVigente || googleVigente;
 
   String get estadoTexto => switch (estado) {
     'activa' => tr('Activa'),
@@ -427,6 +459,8 @@ class Suscripcion {
     meses: (j['meses'] as num?)?.round(),
     usuariosPlan: (j['usuariosPlan'] as num?)?.round(),
     familiar: j['familiar'] == true,
+    googleProducto: j['google'] is Map ? j['google']['producto'] as String? : null,
+    googlePlanBase: j['google'] is Map ? j['google']['planBase'] as String? : null,
   );
 }
 

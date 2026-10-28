@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/theme.dart';
 import '../../core/api/pagos_api.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/pagos/google_play.dart';
 import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
@@ -17,8 +18,9 @@ import 'tabla_precios_screen.dart';
 
 /// Prueba gratuita y planes (contrato de pagos, fase 1). Los planes y la
 /// suscripción salen del servidor; cada plan abre su detalle con la duración
-/// ([PlanDetalleScreen]), se paga en Stripe Checkout y se gestiona en el
-/// Customer Portal. DEMO y sin servidor eligen el plan en local.
+/// ([PlanDetalleScreen]) y se paga con Google Play en Android (se gestiona en
+/// Play) o con Stripe Checkout en la web (se gestiona en el Customer Portal).
+/// DEMO y sin servidor eligen el plan en local.
 class PlansScreen extends ConsumerStatefulWidget {
   const PlansScreen({super.key});
 
@@ -60,6 +62,7 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
     final planSuscrito = planSuscritoDe(ep);
     final planActual = catalogo.plan(planSuscrito);
     final idiomaNoPagado = !ep.tienePlan && sus != null && sus.vigente;
+    final enApp = ref.watch(pagoEnAppProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -100,13 +103,19 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
                   ),
                 ]),
               ),
-            if (sus != null && sus.stripeVigente) ...[
+            if (sus != null && sus.pagoVigente) ...[
               if (!ep.tienePlan) const SizedBox(height: 12),
               _TarjetaSuscripcion(
                 plan: catalogo.plan(sus.planId)?.nombreEn(interfaz) ?? sus.planId,
                 suscripcion: sus,
                 esperando: _esperandoPortal,
-                onGestionar: sus.puedeGestionar ? () => _portal(api) : null,
+                // Play: la gestión (cancelar, tarjeta) es de Google. Stripe: su portal, solo en la web.
+                onGestionar: sus.googleVigente
+                    ? () => ref.read(abrirUrlProvider)(urlGestionPlay(catalogo.googlePaquete, sus.googleProducto))
+                    : sus.puedeGestionar && !enApp
+                    ? () => _portal(api)
+                    : null,
+                nota: sus.stripeVigente && enApp ? tr('Pagada en la web: se gestiona desde onelingo.org.') : null,
               ),
             ],
             if (sus != null && sus.esCortesia)
@@ -165,7 +174,7 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
             Text(tr('Elige tu plan'), style: Theme.of(context).textTheme.headlineMedium),
             Text(tr('Aprende uno o varios idiomas y alcanza tus metas. Todos los planes incluyen el curso completo, la práctica libre y la IA.'),
                 style: const TextStyle(color: OL.gris, height: 1.4)),
-            if (ep.servidor && catalogo.modoPrueba) ...[
+            if (ep.servidor && catalogo.modoPrueba && !enApp) ...[
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -199,11 +208,7 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
               label: Text(tr('Ver la tabla de precios completa')),
             ),
             Text(
-              // Sin pagos activos los botones dicen «Pagos próximamente»: no
-              // se promete Stripe.
-              ep.servidor && catalogo.pagosDisponible
-                  ? tr('Pago con tarjeta en la página segura de Stripe. Cancela cuando quieras desde «Gestionar suscripción».')
-                  : tr('Pago mensual, cancela cuando quieras.'),
+              textoPago(ep, catalogo, enApp),
               textAlign: TextAlign.center,
               style: const TextStyle(color: OL.gris, fontSize: 11),
             ),
@@ -213,6 +218,25 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
     );
   }
 }
+
+/// Cómo se paga, bajo los planes. Sin pagos activos los botones dicen «Pagos
+/// próximamente»: no se promete ningún medio de pago.
+String textoPago(EstadoPlan ep, CatalogoPlanes catalogo, bool enApp) => !ep.servidor
+    ? tr('Pago mensual, cancela cuando quieras.')
+    : enApp
+    ? catalogo.googleDisponible
+          ? tr('Pago seguro con Google Play. Cancela cuando quieras desde Google Play.')
+          : tr('Pago mensual, cancela cuando quieras.')
+    : catalogo.pagosDisponible
+    ? tr('Pago con tarjeta en la página segura de Stripe. Cancela cuando quieras desde «Gestionar suscripción».')
+    : tr('Pago mensual, cancela cuando quieras.');
+
+/// Página de Google Play para gestionar (cancelar, cambiar el medio de pago)
+/// la suscripción [producto] de la app.
+String urlGestionPlay(String paquete, String? producto) => Uri.https('play.google.com', '/store/account/subscriptions', {
+  'sku': ?producto,
+  'package': paquete,
+}).toString();
 
 /// Plan suscrito (aunque el idioma que se estudia no esté pagado).
 String planSuscritoDe(EstadoPlan ep) {
@@ -341,18 +365,24 @@ class _TarjetaSuscripcion extends StatelessWidget {
     required this.suscripcion,
     required this.esperando,
     required this.onGestionar,
+    this.nota,
   });
   final String plan;
   final Suscripcion suscripcion;
   final bool esperando;
   final VoidCallback? onGestionar;
 
+  /// Aviso bajo los idiomas (p. ej. suscripción de la web vista en Android).
+  final String? nota;
+
   @override
   Widget build(BuildContext context) {
     final s = suscripcion;
     final fin = s.periodoFin == null ? null : fechaCorta(s.periodoFin!);
     final detalle = s.estado == 'impago'
-        ? tr('No se pudo cobrar la última cuota. Actualiza tu tarjeta.')
+        ? (s.esGoogle
+              ? tr('Google Play no pudo cobrar la última cuota. Actualiza tu medio de pago en Google Play.')
+              : tr('No se pudo cobrar la última cuota. Actualiza tu tarjeta.'))
         : fin == null
         ? null
         : s.cancelaAlFinal
@@ -384,6 +414,10 @@ class _TarjetaSuscripcion extends StatelessWidget {
           Text(tr('Pago cada {n} meses', {'n': s.meses!}), style: const TextStyle(color: OL.gris, fontSize: 13, height: 1.35)),
         const SizedBox(height: 8),
         IdiomasDePago(suscripcion: s),
+        if (nota != null) ...[
+          const SizedBox(height: 8),
+          Text(nota!, style: const TextStyle(color: OL.gris, fontSize: 12, height: 1.35)),
+        ],
         if (onGestionar != null) ...[
           const SizedBox(height: 10),
           OutlinedButton.icon(
@@ -391,7 +425,7 @@ class _TarjetaSuscripcion extends StatelessWidget {
             icon: esperando
                 ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
                 : const Icon(Icons.open_in_new_rounded, size: 18),
-            label: Text(tr('Gestionar suscripción')),
+            label: Text(s.esGoogle ? tr('Gestionar en Google Play') : tr('Gestionar suscripción')),
           ),
         ],
       ]),

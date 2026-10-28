@@ -7,8 +7,10 @@ import { idPortal, plan, precioParaCheckout, sincronizarPlan } from '../lib/pago
 import { proveedorActivo } from '../lib/pagos/proveedor.js';
 import { ErrorStripe, verificarFirma } from '../lib/pagos/stripe.js';
 import {
-  cambiarIdiomas, CODIGOS_IDIOMA, darCortesia, ErrorSus, errorIdiomas, filaDe, FILTROS_ESTADO, quitarCortesia, resumenAdmin, sincronizarDesdeStripe, suscripcionDe,
+  cambiarIdiomas, CODIGOS_IDIOMA, darCortesia, ErrorSus, errorIdiomas, filaDe, FILTROS_ESTADO, quitarCortesia, refrescarGoogle, resumenAdmin,
+  sincronizarDesdeGoogle, sincronizarDesdeStripe, suscripcionDe, tieneAcceso,
 } from '../lib/pagos/suscripciones.js';
+import { ErrorGoogle, googleConfig, googleDisponible, tokenDeRtdn, tokenRtdnValido } from '../lib/pagos/google.js';
 import { procesarWebhook } from '../lib/pagos/webhook.js';
 import { familiaDe, invitarMiembro, quitarMiembro, salirDeFamilia, vincularInvitaciones } from '../lib/pagos/familia.js';
 
@@ -21,14 +23,16 @@ const conErrorSus = async (reply: FastifyReply, fn: () => Promise<unknown>) => {
 const errorProveedor = (e: unknown) => ({ error: `Stripe: ${e instanceof Error ? e.message : String(e)}`.slice(0, 400) });
 
 /**
- * Suscripciones del alumno, Checkout, Customer Portal, webhook de Stripe y
- * suscripciones/cortesías en el panel (docs/PANEL_ADMIN.md → «Planes y suscripciones»).
+ * Suscripciones del alumno, Checkout, Customer Portal, webhook de Stripe, compras
+ * de Google Play (verificación y RTDN) y suscripciones/cortesías en el panel
+ * (docs/PANEL_ADMIN.md → «Planes y suscripciones» y «Google Play»).
  */
 export default async function rutas(app: FastifyInstance) {
   // ── Alumno ─────────────────────────────────────────────────────────────────
   app.get('/usuarios/me/suscripcion', { preHandler: requiereAlumno }, async (req) => {
     const uid = (req.user as Sesion).sub;
     await vincularInvitaciones(uid); // invitación a un plan familiar hecha antes de que tuviera cuenta
+    await refrescarGoogle(uid).catch((e) => req.log.warn({ err: String(e?.message ?? e) }, 'no se pudo refrescar la compra de Google Play'));
     return suscripcionDe(uid);
   });
 
@@ -56,6 +60,7 @@ export default async function rutas(app: FastifyInstance) {
     if (!p) return reply.code(503).send(SIN_PAGOS);
     const f = await filaDe(uid);
     if (f?.origen === 'stripe' && EN_CURSO.includes(f.estado)) return reply.code(409).send({ error: 'Ya tienes una suscripción activa: gestiónala desde el portal.', portal: true });
+    if (f?.origen === 'google' && (tieneAcceso(f) || f.estado === 'impago')) return reply.code(409).send({ error: 'Ya tienes una suscripción de Google Play: gestiónala desde la app en Android.' });
     let pl = await plan(planId);
     if (!pl || pl.archivado || !pl.visible) return reply.code(404).send({ error: 'Ese plan no está disponible.' });
     const malIdiomas = errorIdiomas(idiomas, Number(pl.idiomas), { exactos: true });
@@ -103,6 +108,50 @@ export default async function rutas(app: FastifyInstance) {
     const configuracion = await idPortal().catch(() => null);
     try { return { url: await p.crearPortal(f.stripe_cliente_id, `${stripeConfig().urlApp}/#/pago?estado=portal`, configuracion) }; }
     catch (e) { return reply.code(502).send(errorProveedor(e)); }
+  });
+
+  // ── Google Play ────────────────────────────────────────────────────────────
+  /**
+   * La app Android compró una suscripción: el servidor consulta la compra en Google,
+   * la guarda con los idiomas elegidos y la reconoce. Solo si responde 200 la app
+   * completa la compra (si nadie la reconoce en 3 días, Google la reembolsa).
+   */
+  app.post('/pagos/google/verificar', { preHandler: requiereAlumno }, async (req, reply) => {
+    const uid = (req.user as Sesion).sub;
+    const { token, idiomas } = z.object({
+      token: z.string().min(10).max(4096).regex(/^[A-Za-z0-9._:-]+$/, 'Token de compra no válido'), idiomas: Idiomas.default([]),
+    }).parse(req.body);
+    if (!googleDisponible()) return reply.code(503).send({ error: 'Los pagos con Google Play aún no están disponibles.' });
+    try {
+      const r = await sincronizarDesdeGoogle(token, { usuarioId: uid, idiomas: idiomas.map((c) => c.trim().toLowerCase()) });
+      if (!r.aplicada) return reply.code(409).send({ error: 'La compra no está activa.', motivo: r.motivo });
+    } catch (e) {
+      if (e instanceof ErrorSus) return reply.code(e.status).send({ error: e.message });
+      if (e instanceof ErrorGoogle && (e.status === 404 || e.status === 410 || e.status === 400)) return reply.code(404).send({ error: 'Google Play no reconoce esta compra.' });
+      req.log.warn({ err: e instanceof Error ? e.message : String(e) }, 'verificar compra de Google Play falló');
+      return reply.code(502).send({ error: `Google Play: ${e instanceof Error ? e.message : String(e)}`.slice(0, 400) });
+    }
+    return suscripcionDe(uid);
+  });
+
+  /**
+   * Notificaciones en tiempo real (RTDN) de Google Play: push de Pub/Sub a
+   * `/pagos/google/rtdn?token=<GOOGLE_PLAY_RTDN_TOKEN>`. Se vuelve a consultar la
+   * compra en Google (el aviso solo dice cuál cambió). Un 5xx hace que Pub/Sub reintente.
+   */
+  app.post('/pagos/google/rtdn', async (req, reply) => {
+    const { token: secreto } = z.object({ token: z.string().max(200).default('') }).parse(req.query ?? {});
+    if (!tokenRtdnValido(secreto)) return reply.code(403).send({ error: 'Token no válido' });
+    const n = tokenDeRtdn(req.body, googleConfig().paquete);
+    if (!n.token) return { recibido: true, ignorado: n.motivo };
+    try {
+      const r = await sincronizarDesdeGoogle(n.token);
+      return { recibido: true, aplicada: r.aplicada, ...(r.aplicada ? { estado: (r as any).estado } : { motivo: (r as any).motivo }) };
+    } catch (e) {
+      if (e instanceof ErrorGoogle && (e.status === 404 || e.status === 410)) return { recibido: true, ignorado: 'compra desconocida' };
+      req.log.error({ err: e instanceof Error ? e.message : String(e) }, 'RTDN de Google Play: error al procesar');
+      return reply.code(500).send({ error: 'No se pudo procesar; Pub/Sub lo reintentará.' });
+    }
   });
 
   // ── Webhook (cuerpo crudo: parser propio solo en este contexto) ────────────

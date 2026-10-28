@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react'
 import { api, ESTADOS, fecha, hace, IDIOMAS, num, usd } from '../api'
 
 type Fila = {
-  usuarioId: string; nombre: string; email: string; planId: string; planNombre: string; origen: 'stripe' | 'cortesia' | 'familia'; estado: string; acceso: boolean
-  cancelaAlFinal: boolean; periodoFin: string | null; modo: string | null; importe: number | null; moneda: string | null; intervalo: string | null; meses?: number | null; titularEmail?: string | null; nota: string; actualizadoEn: string
+  usuarioId: string; nombre: string; email: string; planId: string; planNombre: string; origen: 'stripe' | 'google' | 'cortesia' | 'familia'; estado: string; acceso: boolean
+  cancelaAlFinal: boolean; periodoFin: string | null; modo: string | null; importe: number | null; moneda: string | null; intervalo: string | null; meses?: number | null; titularEmail?: string | null; googlePedido?: string | null; nota: string; actualizadoEn: string
   idiomas: string[]; todosLosIdiomas: boolean; idiomasPorElegir: number
 }
 type PorIdioma = { idioma: string; suscriptores: number; cortesias: number; mrr: number }
 type Datos = {
-  resumen: { modo: string | null; activas: number; mrr: number; otrasMonedas: number; nuevas30: number; canceladas30: number; impagos: number; cortesias: number; familia?: number; otroModo: number; porIdioma?: PorIdioma[] }
+  resumen: { modo: string | null; activas: number; mrr: number; otrasMonedas: number; nuevas30: number; canceladas30: number; impagos: number; cortesias: number; familia?: number; google?: number; otroModo: number; porIdioma?: PorIdioma[] }
   filas: Fila[]; total: number
 }
 
 const FILTROS: [string, string][] = [['', 'Todos los estados'], ['con_acceso', 'Con acceso'], ['activa', 'Activas'], ['prueba_stripe', 'En prueba (Stripe)'], ['impago', 'Impago'],
-  ['cancela_al_final', 'Cancelan al final del periodo'], ['cancelada', 'Canceladas'], ['vencida', 'Vencidas'], ['cortesia', 'Cortesías'], ['familia', 'Miembros de un plan familiar']]
+  ['cancela_al_final', 'Cancelan al final del periodo'], ['cancelada', 'Canceladas'], ['vencida', 'Vencidas'], ['cortesia', 'Cortesías'], ['familia', 'Miembros de un plan familiar'], ['google', 'Pagadas en Google Play']]
 
 export default function Suscripciones({ abrir }: { abrir: (id: string) => void }) {
   const [q, setQ] = useState(''); const [estado, setEstado] = useState(''); const [idioma, setIdioma] = useState('')
@@ -32,6 +32,7 @@ export default function Suscripciones({ abrir }: { abrir: (id: string) => void }
         <div className="kpi"><div className="v">{num(r.nuevas30)}</div><div className="l">Nuevas 30 días</div></div>
         <div className="kpi"><div className="v">{num(r.canceladas30)}</div><div className="l">Canceladas 30 días</div></div>
         <div className="kpi"><div className="v" style={r.impagos ? { color: 'var(--rojo)' } : undefined}>{num(r.impagos)}</div><div className="l">Impagos</div></div>
+        {r.google !== undefined && <div className="kpi"><div className="v">{num(r.google)}</div><div className="l">Activas (Google Play)</div></div>}
         <div className="kpi"><div className="v">{num(r.cortesias)}</div><div className="l">Cortesías vigentes</div></div>
         {r.familia !== undefined && <div className="kpi"><div className="v">{num(r.familia)}</div><div className="l">Miembros de planes familiares</div></div>}
       </div>}
@@ -48,7 +49,7 @@ export default function Suscripciones({ abrir }: { abrir: (id: string) => void }
       </div>}
       {r && r.otroModo > 0 && <p className="muted pie-nota" style={{ margin: '-8px 0 12px' }}>{r.otroModo} suscripciones del otro modo de Stripe no cuentan en el resumen.</p>}
       <div className="filtros">
-        <input placeholder="Buscar por nombre, correo, plan o cliente de Stripe…" value={q} onChange={(e) => setQ(e.target.value)} />
+        <input placeholder="Buscar por nombre, correo, plan, cliente de Stripe o pedido de Google…" value={q} onChange={(e) => setQ(e.target.value)} />
         <select value={estado} onChange={(e) => setEstado(e.target.value)} aria-label="Estado">{FILTROS.map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
         <select value={idioma} onChange={(e) => setIdioma(e.target.value)} aria-label="Idioma"><option value="">Todos los idiomas</option>{Object.entries(IDIOMAS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
       </div>
@@ -65,9 +66,10 @@ export default function Suscripciones({ abrir }: { abrir: (id: string) => void }
               <td>{f.todosLosIdiomas ? 'Todos' : f.idiomas.map((c) => IDIOMAS[c] ?? c).join(', ') || '—'}{f.idiomasPorElegir > 0 && <><br /><span className="muted">{f.idiomasPorElegir} por elegir</span></>}</td>
               <td>{f.origen === 'cortesia' ? <span className="pill">Cortesía</span>
                 : f.origen === 'familia' ? <><span className="pill">Familia</span>{f.titularEmail && <><br /><span className="muted mono">paga {f.titularEmail}</span></>}</>
+                : f.origen === 'google' ? <>Google Play{f.modo === 'test' && <span className="muted"> · test</span>}{f.googlePedido && <><br /><span className="muted mono">{f.googlePedido}</span></>}</>
                 : <>Stripe{f.modo && <span className="muted"> · {f.modo}</span>}</>}</td>
               <td><span className={`pill ${clase}`}>{etq}</span>{f.cancelaAlFinal && <><br /><span className="muted">cancela al final</span></>}</td>
-              <td>{f.periodoFin ? fecha(f.periodoFin) : f.origen !== 'stripe' ? 'Sin fecha' : '—'}</td>
+              <td>{f.periodoFin ? fecha(f.periodoFin) : f.origen !== 'stripe' && f.origen !== 'google' ? 'Sin fecha' : '—'}</td>
               <td className="num">{f.importe !== null ? `${f.importe.toFixed(2)} ${(f.moneda ?? '').toUpperCase()}${(f.meses ?? 1) > 1 && f.meses !== 12 ? ` cada ${f.meses} meses` : f.intervalo === 'anio' || f.meses === 12 ? '/año' : '/mes'}` : '—'}</td>
               <td>{hace(f.actualizadoEn)}</td>
             </tr>

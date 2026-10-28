@@ -13,6 +13,7 @@ import 'core/api/sync.dart';
 import 'core/conexion.dart';
 import 'core/efectos.dart';
 import 'core/i18n/i18n.dart';
+import 'core/pagos/google_play.dart';
 import 'core/pagos/providers.dart';
 import 'core/voz.dart';
 import 'shared/widgets/connection_banner.dart';
@@ -142,11 +143,18 @@ class _UsoTrackerState extends ConsumerState<_UsoTracker>
   }
 
   /// Planes y suscripción del servidor: al arrancar y al volver a primer
-  /// plano (en Android, al volver del navegador tras pagar o gestionar).
+  /// plano (al volver de Google Play o del navegador tras pagar o gestionar).
+  /// En Android, además, las compras de Play cobradas sin verificar.
   void _refrescarPlanes() {
     if (!mounted) return;
-    ref.read(catalogoPlanesProvider.notifier).refrescar();
+    final catalogo = ref.read(catalogoPlanesProvider.notifier).refrescar();
     ref.read(suscripcionProvider.notifier).refrescar();
+    if (ref.read(pagoEnAppProvider)) {
+      final compras = ref.read(comprasPlayProvider.notifier);
+      catalogo.then((_) {
+        if (mounted && usaServidorPagos(ref.read(progressProvider).email)) compras.reintentarPendientes();
+      });
+    }
   }
 
   void _iniciar() {
