@@ -8,9 +8,9 @@ Estado al 29-10-2026. onelingo.org es el entorno previo al lanzamiento: no hay a
 |---|-----|-------|--------|
 | 1 | **Política de privacidad y términos de uso** publicados en onelingo.org (Google Play exige la URL de la política; también Stripe). | Torisoftt redacta, Bryan aprueba | No existen |
 | 2 | **Borrar la cuenta** desde la app y desde una página web (Google Play lo exige a toda app con registro). | Torisoftt | No existe |
-| 3 | **Respaldos automáticos de la base de datos** (pg_dump diario fuera del servidor, con retención). | Torisoftt | No hay ninguno programado |
+| 3 | **Respaldos automáticos de la base de datos** (pg_dump diario fuera del servidor, con retención). | Torisoftt | Diario en el VPS (14 días) + semanal de Hostinger; falta copia fuera del VPS |
 | 4 | **Panel de administración**: cuentas por persona y límite de intentos (hoy, usuario único y PIN genérico 2345). | Torisoftt | Pendiente |
-| 5 | **http → https** en onelingo.org (hoy http responde 200 sin redirigir). | Torisoftt | Pendiente |
+| 5 | **http → https** en onelingo.org. | Torisoftt | Hecho (VPS nuevo) |
 | 6 | **Modo demo apagado** (Panel → Planes → «Usuarios demo»). | Bryan o Torisoftt, al lanzar | Activo |
 | 7 | **Prueba gratuita** con su duración real (Panel → Planes; hoy 1 minuto). | Bryan decide | 1 minuto |
 | 8 | **Cobro real**: Stripe en modo real (¿dónde está registrada la cuenta? Stripe no acepta empresas de Ecuador) y Google Play Billing configurado (docs/PANEL_ADMIN.md → «Google Play»). | Bryan + Torisoftt | Stripe en test; Play sin app |
@@ -35,6 +35,7 @@ Estado al 29-10-2026. onelingo.org es el entorno previo al lanzamiento: no hay a
 
 ## Hecho
 
+- Servidor propio: VPS Hostinger KVM 2 `179.197.89.105` desde el 29-10-2026 (`docs/DEPLOYMENT_RUNBOOK.md`).
 - Íconos de OneLingo en Android (adaptativo), web, favicon y página de descarga (`tools/imagenes/iconos_app.py`); nombre «OneLingo» en la app y en la web; íconos web en `web/iconos/` (Apache reserva `/icons/`).
 - Shorebird configurado: la APK 0.5.4 en adelante recibe parches de código sin reinstalar.
 - Planes con duraciones, Familiar, Empresarial; cobro en Android por Google Play y en la web por Stripe.

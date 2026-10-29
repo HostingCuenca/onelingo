@@ -944,3 +944,19 @@ Fecha: 2026-10-29 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Verificado:** `/api/planes` devuelve p1, p2, p3 y familiar con productos de Google; `/version.json` 0.5.4; el APK servido tiene el mismo sha que el local y `content-type` `application/vnd.android.package-archive`; las 5 apps de PM2 en línea; `.env` sin cambios (sha); lock liberado.
 
 **Rollback:** `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; K=backups/20261029-edu-75-pagos; S=staging/20261029-edu-75-pagos; mv web $S/web-retirada-post && cp -al $K/web-anterior web; mv panel $S/panel-retirado-post && cp -a $K/panel-anterior panel; cp -r $K/backend/. backend/; (cd backend && xargs rm -f < ../$K/backend-nuevos.txt); pm2 restart onelingo-api'`. Las tablas y columnas de 010/011 se pueden quedar; si hiciera falta, la base se restaura con `pg_restore` desde `onelingo-antes.dump`.
+
+## Release: 20261029-migracion-vps
+
+Fecha: 2026-10-29 · Responsable: Claude (Claude Code), por pedido del usuario («ya migrar todo al servidor de produccion completamente … incluido los dns»). OneLingo pasa de Hetzner (`167.235.20.41`, compartido) al VPS Hostinger KVM 2 `179.197.89.105` (`ssh onelingo`). Detalle del servidor en `docs/DEPLOYMENT_RUNBOOK.md`.
+
+**Preparación:** Ubuntu 26.04 con Apache 2.4.66, PostgreSQL 18, Node 22, ffmpeg 8, PM2 6 (usuario de servicio `onelingo`, servicio `pm2-onelingo`), certbot, ufw, fail2ban, actualizaciones automáticas, swap de 2 GB y SSH solo con llave. Web, panel, audios y backend (con `.env`, copiado de servidor a servidor sin leerlo) copiados por `tar`; `npm ci` y `tsc --noEmit` limpios. Certificado de `onelingo.hostingcuenca.com` (incluye onelingo.org y www, vence 2027-01-18) copiado. Vhost nuevo: http redirige a https para todos los nombres. Respaldo diario de la base a las 03:15 (14 días).
+
+**Corte (16:36–16:38 hora de Ecuador, unos 2 minutos sin API):** `tools/servidor/corte.sh` comprobó que web, panel y backend fueran idénticos en los dos lados (huella sha256), paró `onelingo-api` en Hetzner, copió la base (`pg_dump -Fc` → `/var/backups/onelingo/hetzner-corte.dump` → `pg_restore`) y los audios (`rsync`). Conteos iguales: usuarios 25, progreso 23, suscripciones 3, eventos 265, conversaciones 179, errores 40, audios 527, migraciones 11. En Hetzner quedó `onelingo-puente` (PM2, `puente.mjs`) en el puerto 8091 reenviando al VPS; probado con GET y POST.
+
+**DNS:** Porkbun, registros A de `onelingo.org` y `www` → `179.197.89.105` (TTL 600); Cloudflare y Google ya lo resolvían así minutos después. `onelingo.hostingcuenca.com` (Cloudflare) quedó pendiente de guardar.
+
+**Verificado:** `/`, `/main.dart.js`, `/version.json`, `/descargas/version.json`, `/descargar/`, `/api/salud`, `/api/planes`, `/avatar/index.html`, `/panel/`, `/iconos/Icon-192.png` y `/manifest.json` responden 200 desde el VPS; el APK con `content-type` de Android; `http://` responde 301 a https.
+
+**Pendiente:** retirar el puente y OneLingo de Hetzner cuando deje de llegar tráfico (lock de Hetzner puesto a propósito); `certbot renew --dry-run` cuando `onelingo.hostingcuenca.com` apunte al VPS; copia de los respaldos fuera del VPS.
+
+**Rollback:** cambiar en Porkbun los A de `onelingo.org` y `www` a `167.235.20.41` y, en Hetzner, `pm2 delete onelingo-puente; pm2 start onelingo-api`. Lo escrito en el VPS después del corte habría que llevarlo de vuelta con `pg_dump`/`pg_restore`.

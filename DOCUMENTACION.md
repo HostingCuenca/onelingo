@@ -266,50 +266,20 @@ API en `/api`).
 
 ## 11. Producción
 
-Servidor: `167.235.20.41` (Hetzner, Ubuntu 22.04), dominio
-`onelingo.hostingcuenca.com`. Acceso por SSH con clave (`root`). Comparte máquina con
-otros servicios (Apache en 80/443, otros pm2). Todo lo de OneLingo vive en
-`/var/www/onelingo/`:
+Servidor propio desde el 29-10-2026: VPS Hostinger KVM 2 (Boston) `179.197.89.105`,
+Ubuntu 26.04, dominio `onelingo.org` (DNS en Porkbun). Acceso: `ssh onelingo`.
+Rutas, servicios, respaldos y reglas de publicación: `docs/DEPLOYMENT_RUNBOOK.md`;
+historial y rollbacks: `docs/claude-educacion/DESPLIEGUES.md`.
 
 ```
-/var/www/onelingo/backend   código del backend + .env de producción (pm2 "onelingo-api", puerto 8091)
+/var/www/onelingo/backend   backend + .env (PM2 "onelingo-api" como usuario onelingo, puerto 8091)
 /var/www/onelingo/panel     build del panel (Apache Alias /panel)
-/var/www/onelingo/web       build web de Flutter (DocumentRoot) + /apk/ con las APK
+/var/www/onelingo/web       build web de Flutter (DocumentRoot) + /descargas/ con la APK
 /var/www/onelingo/audio     MP3 generados por ElevenLabs
 ```
 
-- Apache: vhost `onelingo.hostingcuenca.com` (+ `-le-ssl` con certificado Let's Encrypt).
-  `/api/` → `http://127.0.0.1:8091/`, `/panel` → carpeta del panel, `/` → web. Cabecera
-  `Cache-Control: no-cache` en los archivos de arranque de Flutter para que cada
-  despliegue se vea al recargar.
-- Base de datos `onelingo` en el PostgreSQL 17 del servidor (rol `onelingo`).
-- pm2: `pm2 restart onelingo-api`, `pm2 logs onelingo-api`.
-
-URLs:
-- Web: https://onelingo.hostingcuenca.com
-- Panel: https://onelingo.hostingcuenca.com/panel (admin + PIN)
-- API: https://onelingo.hostingcuenca.com/api/salud
-- APK de prueba: https://onelingo.hostingcuenca.com/apk/onelingo-prueba.apk
-- APK con todo desbloqueado: https://onelingo.hostingcuenca.com/apk/onelingo-abierto.apk
-
-### Desplegar cambios
-```bash
-# Backend
-rsync -az --delete --exclude node_modules --exclude .env --exclude audio backend/ root@167.235.20.41:/var/www/onelingo/backend/
-ssh root@167.235.20.41 "cd /var/www/onelingo/backend && npm ci && npm run migrate && pm2 restart onelingo-api"
-
-# Panel
-cd panel && npm run build && rsync -az --delete dist/ root@167.235.20.41:/var/www/onelingo/panel/
-
-# Web (ojo: --exclude apk para no borrar las APK publicadas)
-flutter build web --release --dart-define=API_URL=https://onelingo.hostingcuenca.com/api
-rsync -az --delete --exclude apk build/web/ root@167.235.20.41:/var/www/onelingo/web/
-
-# APK
-flutter build apk --release --dart-define=API_URL=https://onelingo.hostingcuenca.com/api
-flutter build apk --release --dart-define=API_URL=https://onelingo.hostingcuenca.com/api --dart-define=DESBLOQUEAR_TODO=true
-scp build/app/outputs/flutter-apk/app-release.apk root@167.235.20.41:/var/www/onelingo/web/apk/onelingo-prueba.apk
-```
+URLs: https://onelingo.org, https://onelingo.org/panel, https://onelingo.org/api/salud,
+https://onelingo.org/descargar/ (APK).
 
 ---
 

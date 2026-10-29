@@ -46,7 +46,7 @@ VOZ_MAX_CARACTERES
 
 ## Servidor
 
-- SSH documentado: `ssh -F /dev/null root@167.235.20.41`.
+- SSH: `ssh onelingo` (VPS Hostinger `179.197.89.105`, llave `~/.ssh/id_ed25519_onelingo`). Hetzner `167.235.20.41` ya no atiende OneLingo.
 - El acceso depende de la clave ya instalada en la máquina, no de la cuenta de Codex.
 - Antes de usarlo, comprobar alcance y seguir `docs/DEPLOYMENT_RUNBOOK.md`.
 
