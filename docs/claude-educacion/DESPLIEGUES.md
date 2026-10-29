@@ -918,3 +918,29 @@ Fecha: 2026-10-26 · Responsable: Claude (Claude Code), por pedido del usuario (
 - **Servidor:** las 5 apps de PM2 en línea y `.env` sin cambios.
 
 **Rollback:** `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; K=backups/20261026-edu-74-situaciones; S=staging/20261026-edu-74-situaciones; mv web $S/web-retirada-post && cp -al $K/web-anterior web; cp -r $K/backend/. backend/; (cd backend && xargs rm -f < ../$K/backend-nuevos.txt); pm2 restart onelingo-api'`. La columna `demo_activo` se puede quedar, porque es inocua. Los audios se restauran con `cp -al $K/audios-antes/. audio/` solo si hiciera falta.
+
+## Release: 20261029-edu-75-pagos
+
+Fecha: 2026-10-29 · Responsable: Claude (Claude Code), por pedido del usuario («dale, despliega»). Web 0.5.4 + panel + 9 archivos del backend (2 migraciones) + APK 0.5.4+2010 con Shorebird; PM2 `onelingo-api` reiniciado (solo esa app).
+
+**Contenido:**
+- `48da744`: cobro dentro de la app Android con Google Play Billing (`/pagos/google/verificar`, `/pagos/google/rtdn`), planes con duraciones 1/3/6/12 meses y plan Familiar; panel de suscripciones con origen Google Play.
+- `9606ed7`: Shorebird (app `fdede793…`); la APK recibe parches de código sin reinstalar.
+- `3341c65`: íconos nuevos de OneLingo (Android adaptativo, web, favicon, descarga), permiso del micrófono obligatorio para entrar al tutor, recuadro «Tutores en vivo», tutores 3D ocultos, solo las demos Ana y Bryan, errores de micrófono explicados con reintento.
+
+**Backend:**
+- **Modificados:** `lib/pagos/planes.ts`, `lib/pagos/proveedor.ts`, `lib/pagos/stripe.ts`, `lib/pagos/suscripciones.ts`, `routes/pagos.ts`, `routes/planes.ts`.
+- **Nuevos:** `lib/pagos/cotizaciones.ts`, `lib/pagos/familia.ts`, `lib/pagos/google.ts`, `sql/010_planes_duraciones_familia.sql`, `sql/011_google_play.sql`.
+- **Migraciones:** 010 y 011 aplicadas con `npm run migrate`. `config.ts` de prod sin tocar. Google Play queda apagado hasta configurar `GOOGLE_PLAY_*` en `.env` (`google.disponible: false`).
+
+**Cuentas:** Ana y Bryan con cortesía p3 «todos» hasta 2026-10-30T19:34Z (la prueba de prod sigue en 1 minuto).
+
+**APK:**
+- **Build:** `shorebird release android --artifact apk --target-platform android-arm,android-arm64 --build-number=2010` desde un árbol limpio de `3341c65` con `API_URL=https://onelingo.org/api`. La release 0.5.4+2009 quedó registrada a medias en Shorebird por una corrida interrumpida; por eso se publicó la 2010.
+- **`/descargas/onelingo.apk` y `/descargas/onelingo-armv7.apk`:** la misma APK universal (arm + arm64), 163 MB, sha256 `b890ccc08deeeef1…`; `/descargas/version.json` 0.5.4. Se escribieron con nombre temporal y `mv`, para no tocar los enlaces duros de los respaldos.
+
+**Backup:** `backups/20261029-edu-75-pagos/` (`web-anterior`, `panel-anterior`, `backend/` con los 6 archivos previos, `backend-nuevos.txt`, `onelingo-antes.dump`, `env.sha`).
+
+**Verificado:** `/api/planes` devuelve p1, p2, p3 y familiar con productos de Google; `/version.json` 0.5.4; el APK servido tiene el mismo sha que el local y `content-type` `application/vnd.android.package-archive`; las 5 apps de PM2 en línea; `.env` sin cambios (sha); lock liberado.
+
+**Rollback:** `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; K=backups/20261029-edu-75-pagos; S=staging/20261029-edu-75-pagos; mv web $S/web-retirada-post && cp -al $K/web-anterior web; mv panel $S/panel-retirado-post && cp -a $K/panel-anterior panel; cp -r $K/backend/. backend/; (cd backend && xargs rm -f < ../$K/backend-nuevos.txt); pm2 restart onelingo-api'`. Las tablas y columnas de 010/011 se pueden quedar; si hiciera falta, la base se restaura con `pg_restore` desde `onelingo-antes.dump`.
