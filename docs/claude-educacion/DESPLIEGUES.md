@@ -957,6 +957,8 @@ Fecha: 2026-10-29 · Responsable: Claude (Claude Code), por pedido del usuario (
 
 **Verificado:** `/`, `/main.dart.js`, `/version.json`, `/descargas/version.json`, `/descargar/`, `/api/salud`, `/api/planes`, `/avatar/index.html`, `/panel/`, `/iconos/Icon-192.png` y `/manifest.json` responden 200 desde el VPS; el APK con `content-type` de Android; `http://` responde 301 a https.
 
-**Pendiente:** retirar el puente y OneLingo de Hetzner cuando deje de llegar tráfico (lock de Hetzner puesto a propósito); copia de los respaldos fuera del VPS.
+**Limpieza de Hetzner (mismo día, 17:10):** sin tráfico por Hetzner desde el corte, se retiraron el puente, `onelingo-api`, los vhosts (incluida una copia real del vhost SSL en `sites-enabled` que habría roto la siguiente recarga de Apache), el certificado, la base y el rol `onelingo` y `/var/www/onelingo` (18 GB: 12 GB de respaldos de releases y 4,8 GB de staging). Disco de Hetzner del 85 % al 37 %; `apache2ctl configtest` correcto y los demás sitios responden 200. Respaldo esencial previo en el VPS y en local (ver `docs/DEPLOYMENT_RUNBOOK.md`).
 
-**Rollback:** cambiar en Porkbun los A de `onelingo.org` y `www` a `167.235.20.41` y, en Hetzner, `pm2 delete onelingo-puente; pm2 start onelingo-api`. Lo escrito en el VPS después del corte habría que llevarlo de vuelta con `pg_dump`/`pg_restore`.
+**Pendiente:** copia de los respaldos fuera del VPS.
+
+**Rollback:** ya no hay OneLingo en Hetzner; ante una caída del VPS se reconstruye desde el repo, el respaldo esencial y los volcados diarios.

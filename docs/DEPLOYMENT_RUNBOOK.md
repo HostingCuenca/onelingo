@@ -41,7 +41,7 @@ Antes de mutar, comprobar que no exista un lock activo. Crear el lock con releas
 
 ### Corte desde Hetzner (29-10-2026)
 
-`tools/servidor/corte.sh` paró la API de Hetzner, copió la base y los audios al VPS y dejó en Hetzner el proceso PM2 `onelingo-puente` (`/var/www/onelingo/puente.mjs`) en el puerto 8091, que reenvía `/api` al VPS mientras haya caché de DNS vieja. Hetzner conserva su lock puesto: no desplegar allí. Retirar el puente y los archivos de OneLingo de Hetzner cuando su `onelingo-access.log` deje de recibir tráfico.
+`tools/servidor/corte.sh` paró la API de Hetzner y copió la base y los audios al VPS; un puente temporal cubrió la caché de DNS. El mismo día se retiró todo OneLingo de Hetzner (archivos, base, vhost, certificado, procesos PM2). Respaldo esencial de lo que había allí (base final y dos volcados anteriores, backend con `.env`, panel, vhosts, log de la API e índice de releases): `/var/backups/onelingo/hetzner-final/onelingo-esencial-20261029.tar.gz` en el VPS (sha256 `720faf6d…`) y copia en la máquina de Torisoftt (`~/Documentos/respaldos/onelingo/`).
 
 ## Reglas de publicación
 
