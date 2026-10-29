@@ -20,7 +20,6 @@ class TutorsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
     final idioma = nombreIdiomaEnFrase(s.idiomaMeta);
-    final recomendados = recomendados3d(s.idiomaMeta);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -52,35 +51,32 @@ class TutorsScreen extends ConsumerWidget {
               // Tutores realistas en vivo: ellas arriba, ellos abajo; al
               // tocar una cara se ve su ficha y el botón para llamarla.
               _ElencoEnVivo(idioma: s.idiomaMeta),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  const Expanded(child: Divider(color: OL.grisClaro)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      tr('Más tutores'),
+                      style: const TextStyle(
+                        color: OL.gris,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  const Expanded(child: Divider(color: OL.grisClaro)),
+                ],
+              ),
+              const SizedBox(height: 12),
               _TarjetaDestacada(
                 tutor: lumoTutor,
                 titulo: tr('Habla con Lumo'),
                 etiqueta: tr('Nuevo'),
                 onTap: () => _abrirVideollamada(context, 'lumo'),
               ),
-              const SizedBox(height: 12),
-              LayoutBuilder(
-                builder: (context, c) {
-                  final columnas = c.maxWidth > 560 ? 3 : 2;
-                  return GridView.count(
-                    crossAxisCount: columnas,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 12,
-                    crossAxisSpacing: 12,
-                    childAspectRatio: .66,
-                    children: [
-                      for (final t in tutores3dPara(s.idiomaMeta))
-                        _TarjetaTutor3d(
-                          tutor: t,
-                          recomendado: recomendados.contains(t.id),
-                          onTap: () => _abrirVideollamada(context, t.id),
-                        ),
-                    ],
-                  );
-                },
-              ),
+              // Los tutores 3D de MakeHuman (tutores3d) están ocultos por ahora.
               const SizedBox(height: 28),
               _Seccion(
                 icono: Icons.forum_rounded,
@@ -310,92 +306,103 @@ class _ElencoEnVivoState extends State<_ElencoEnVivo> {
   @override
   Widget build(BuildContext context) {
     final t = elegido;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          children: [
-            Text(
-              tr('Tutores en vivo'),
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
-            ),
-            const SizedBox(width: 8),
-            Etiqueta(tr('En vivo'), color: OL.blanco, fondo: OL.morado),
-          ],
-        ),
-        const SizedBox(height: 10),
-        _fila(tutorasVivo),
-        const SizedBox(height: 10),
-        _fila(tutoresVivoHombres),
-        const SizedBox(height: 12),
-        Tarjeta(
-          color: OL.moradoSuave,
-          borde: OL.moradoClaro,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    // Recuadro propio: separa a los tutores en vivo (nuevos) de Lumo y los 3D.
+    return Tarjeta(
+      padding: const EdgeInsets.all(14),
+      borde: OL.morado,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Wrap(
-                spacing: 8,
-                runSpacing: 4,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Text(
-                    t.nombre,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  if (t.idiomaEspecial == widget.idioma)
-                    Etiqueta(
-                      tr('Especialista en {idioma}', {
-                        'idioma': nombreIdiomaEnFrase(widget.idioma),
-                      }),
-                      color: OL.blanco,
-                      fondo: OL.naranja,
-                    ),
-                ],
-              ),
               Text(
-                t.rasgo,
+                tr('Tutores en vivo'),
                 style: const TextStyle(
-                  color: OL.morado,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
-              const SizedBox(height: 4),
-              Text(
-                t.especialidad,
-                style: const TextStyle(
-                  color: OL.gris,
-                  fontSize: 13,
-                  height: 1.3,
-                ),
-              ),
-              if (t.idiomaEspecial case final l? when l != widget.idioma) ...[
-                const SizedBox(height: 4),
-                Text(
-                  tr('Conoce de primera mano el {idioma}.', {
-                    'idioma': nombreIdiomaEnFrase(l),
-                  }),
-                  style: const TextStyle(color: OL.gris, fontSize: 12),
-                ),
-              ],
-              const SizedBox(height: 12),
-              FilledButton.icon(
-                style: FilledButton.styleFrom(
-                  minimumSize: const Size.fromHeight(48),
-                ),
-                onPressed: () => _abrirVideollamada(context, t.id),
-                icon: const Icon(Icons.videocam_rounded),
-                label: Text(
-                  tr('Videollamada con {tutor}', {'tutor': t.nombre}),
-                ),
-              ),
+              Etiqueta(tr('En vivo'), color: OL.blanco, fondo: OL.morado),
+              Etiqueta(tr('Nuevo'), color: OL.blanco, fondo: OL.naranja),
             ],
           ),
-        ),
-      ],
+          const SizedBox(height: 10),
+          _fila(tutorasVivo),
+          const SizedBox(height: 10),
+          _fila(tutoresVivoHombres),
+          const SizedBox(height: 12),
+          Tarjeta(
+            color: OL.moradoSuave,
+            borde: OL.moradoClaro,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 4,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      t.nombre,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    if (t.idiomaEspecial == widget.idioma)
+                      Etiqueta(
+                        tr('Especialista en {idioma}', {
+                          'idioma': nombreIdiomaEnFrase(widget.idioma),
+                        }),
+                        color: OL.blanco,
+                        fondo: OL.naranja,
+                      ),
+                  ],
+                ),
+                Text(
+                  t.rasgo,
+                  style: const TextStyle(
+                    color: OL.morado,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  t.especialidad,
+                  style: const TextStyle(
+                    color: OL.gris,
+                    fontSize: 13,
+                    height: 1.3,
+                  ),
+                ),
+                if (t.idiomaEspecial case final l? when l != widget.idioma) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    tr('Conoce de primera mano el {idioma}.', {
+                      'idioma': nombreIdiomaEnFrase(l),
+                    }),
+                    style: const TextStyle(color: OL.gris, fontSize: 12),
+                  ),
+                ],
+                const SizedBox(height: 12),
+                FilledButton.icon(
+                  style: FilledButton.styleFrom(
+                    minimumSize: const Size.fromHeight(48),
+                  ),
+                  onPressed: () => _abrirVideollamada(context, t.id),
+                  icon: const Icon(Icons.videocam_rounded),
+                  label: Text(
+                    tr('Videollamada con {tutor}', {'tutor': t.nombre}),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -499,90 +506,6 @@ class _Seccion extends StatelessWidget {
           ),
         ),
       ],
-    ),
-  );
-}
-
-class _TarjetaTutor3d extends StatelessWidget {
-  const _TarjetaTutor3d({
-    required this.tutor,
-    required this.recomendado,
-    required this.onTap,
-  });
-  final Tutor3d tutor;
-  final bool recomendado;
-
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) => Semantics(
-    button: true,
-    label: tr('Videollamada con {tutor}', {'tutor': tutor.nombre}),
-    child: Tarjeta(
-      onTap: onTap,
-      padding: EdgeInsets.zero,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(18),
-                  ),
-                  child: ColoredBox(
-                    color: OL.moradoSuave,
-                    child: Image.asset(
-                      tutor.retrato,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.topCenter,
-                      excludeFromSemantics: true,
-                    ),
-                  ),
-                ),
-                if (recomendado)
-                  Positioned(
-                    top: 8,
-                    left: 8,
-                    child: Etiqueta(
-                      tr('Recomendado'),
-                      color: OL.blanco,
-                      fondo: OL.naranja,
-                    ),
-                  ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  tutor.nombre,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  tutor.estilo,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: OL.gris,
-                    fontSize: 12,
-                    height: 1.25,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     ),
   );
 }

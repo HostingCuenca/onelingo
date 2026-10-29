@@ -94,10 +94,29 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     if (mounted) setState(() => _web = c);
   }
 
+  /// El visor no pudo abrir el micrófono: se pide el permiso de Android (si ya
+  /// se negó para siempre no sale el diálogo y el visor indica Ajustes).
+  Future<void> _pedirMicrofono() async {
+    final grabadora = AudioRecorder();
+    var ok = false;
+    try {
+      ok = await grabadora.hasPermission();
+    } catch (_) {
+      ok = false;
+    } finally {
+      await grabadora.dispose();
+    }
+    await _web?.runJavaScript('window.onelingoMicrofono?.($ok)');
+  }
+
   void _mensaje(JavaScriptMessage m) {
     final c = _web;
     if (m.message == 'onelingo-avatar-salir') {
       if (mounted) context.canPop() ? context.pop() : context.go('/tutores');
+      return;
+    }
+    if (m.message == 'onelingo-avatar-permiso-microfono') {
+      _pedirMicrofono();
       return;
     }
     if (m.message != 'onelingo-avatar-ready' || c == null) return;

@@ -16,6 +16,7 @@ import '../features/library/grammar_screen.dart';
 import '../features/library/learning_unit_screen.dart';
 import '../features/chat/chat_screen.dart';
 import '../features/avatar/avatar_screen.dart';
+import '../features/avatar/puerta_microfono.dart';
 import '../core/content/situaciones.dart';
 import '../core/i18n/i18n.dart';
 import '../features/situations/prueba_situacion_screen.dart';
@@ -256,13 +257,16 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
               GoRoute(
                 path: '/chat',
-                builder: (_, s) => ChatScreen(
-                  situacionId: int.tryParse(
-                    s.uri.queryParameters['situacion'] ?? '',
+                // Sin permiso del micrófono no se entra al tutor.
+                builder: (_, s) => PuertaMicrofono(
+                  child: ChatScreen(
+                    situacionId: int.tryParse(
+                      s.uri.queryParameters['situacion'] ?? '',
+                    ),
+                    leccionId: s.uri.queryParameters['leccion'],
+                    objetivoId: s.uri.queryParameters['objetivo'],
+                    modo: s.uri.queryParameters['modo'] ?? 'practica',
                   ),
-                  leccionId: s.uri.queryParameters['leccion'],
-                  objetivoId: s.uri.queryParameters['objetivo'],
-                  modo: s.uri.queryParameters['modo'] ?? 'practica',
                 ),
               ),
               // La galería de tutores es nativa (/tutores); /avatar/:id abre la
@@ -271,10 +275,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/avatar/:id',
                 // ?tema=<situación>&objetivo=<id>: la llamada empieza ahí.
-                builder: (_, s) => AvatarScreen(
-                  tutorId: s.pathParameters['id'] ?? 'amara',
-                  tema: int.tryParse(s.uri.queryParameters['tema'] ?? ''),
-                  objetivoId: s.uri.queryParameters['objetivo'],
+                builder: (_, s) => PuertaMicrofono(
+                  child: AvatarScreen(
+                    tutorId: s.pathParameters['id'] ?? 'amara',
+                    tema: int.tryParse(s.uri.queryParameters['tema'] ?? ''),
+                    objetivoId: s.uri.queryParameters['objetivo'],
+                  ),
                 ),
               ),
               GoRoute(

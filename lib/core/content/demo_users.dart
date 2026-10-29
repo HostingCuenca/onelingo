@@ -3,8 +3,8 @@ import '../state/providers.dart';
 import 'curriculum.dart';
 
 /// Usuarios de prueba para recorrer los flujos sin backend (fase 1).
-/// Todos usan la contraseña `1234`. Cada uno arranca en un punto distinto del
-/// camino para poder probar desbloqueo, examen, trial agotado y programa completo.
+/// Todos usan la contraseña `1234`. Solo quedan Ana (usuaria nueva) y Bryan
+/// (nivel 1 en curso).
 class DemoUser {
   const DemoUser({
     required this.email,
@@ -22,10 +22,6 @@ class DemoUser {
 
 Set<String> _lecciones(int nivel, int hasta) =>
     leccionesDe(nivel).take(hasta).map((l) => l.id).toSet();
-
-Set<String> _nivelesCompletos(int hastaNivel) => {
-      for (var n = 1; n <= hastaNivel; n++) ..._lecciones(n, 100),
-    };
 
 List<Mistake> _errores() => [
       Mistake(
@@ -91,68 +87,6 @@ final demoUsers = <DemoUser>[
       trialInicio: DateTime.now().subtract(const Duration(days: 2)),
       trialSegundos: 1500,
       tutorId: 'mia',
-    ),
-  ),
-  DemoUser(
-    email: 'carla@onelingo.demo',
-    nombre: 'Carla Méndez',
-    descripcion: 'Nivel 3 completo · examen final desbloqueado · plan 2 idiomas',
-    estado: () => ProgressState(
-      onboardingDone: true,
-      nombre: 'Carla Méndez',
-      idiomaNativo: 'es',
-      idiomaMeta: 'en',
-      nivelInicial: 1,
-      completadas: _nivelesCompletos(3),
-      examenes: const {1: 88, 2: 74},
-      errores: _errores().take(2).toList(),
-      xp: 6800,
-      racha: 21,
-      segundosEstudio: 3600 * 41,
-      trialInicio: DateTime.now().subtract(const Duration(days: 60)),
-      trialSegundos: 3600,
-      tutorId: 'sofia',
-      planId: 'p2',
-    ),
-  ),
-  DemoUser(
-    email: 'diego@onelingo.demo',
-    nombre: 'Diego Ruiz',
-    descripcion: 'Hora gratis agotada · debe elegir plan',
-    estado: () => ProgressState(
-      onboardingDone: true,
-      nombre: 'Diego Ruiz',
-      idiomaNativo: 'es',
-      idiomaMeta: 'en',
-      nivelInicial: 1,
-      completadas: _lecciones(1, 5),
-      xp: 120,
-      racha: 1,
-      segundosEstudio: 3600,
-      trialInicio: DateTime.now().subtract(const Duration(days: 1)),
-      trialSegundos: 3600,
-      tutorId: 'leo',
-    ),
-  ),
-  DemoUser(
-    email: 'lucia@onelingo.demo',
-    nombre: 'Lucía Fernández',
-    descripcion: 'Nivel 10 · 100/100 · lista para el examen de Dominio',
-    estado: () => ProgressState(
-      onboardingDone: true,
-      nombre: 'Lucía Fernández',
-      idiomaNativo: 'es',
-      idiomaMeta: 'en',
-      nivelInicial: 1,
-      completadas: _nivelesCompletos(10),
-      examenes: const {1: 90, 2: 85, 3: 92, 4: 78, 5: 81, 6: 88, 7: 79, 8: 84, 9: 91},
-      xp: 24500,
-      racha: 120,
-      segundosEstudio: 3600 * 380,
-      trialInicio: DateTime.now().subtract(const Duration(days: 400)),
-      trialSegundos: 3600,
-      tutorId: 'max',
-      planId: 'p3',
     ),
   ),
 ];

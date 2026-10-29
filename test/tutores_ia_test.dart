@@ -39,11 +39,13 @@ void main() {
     expect(find.text('Tutores con IA'), findsOneWidget);
     expect(find.text('Videollamada con un tutor'), findsOneWidget);
     expect(find.text('Chat de voz y texto'), findsOneWidget);
-    for (final t in tutores3d) {
-      expect(find.text(t.nombre), findsWidgets, reason: t.id);
+    // Los tutores 3D de MakeHuman están ocultos por ahora.
+    // (Sofía y otros nombres también son tutores del chat: se miran los únicos.)
+    for (final n in ['Amara', 'Owen', 'Malik', 'Kenji', 'Mei']) {
+      expect(find.text(n), findsNothing, reason: n);
     }
-    expect(find.text('Recomendado'), findsNWidgets(3));
-    // Lumo que habla, destacado antes de los tutores 3D.
+    expect(find.text('Recomendado'), findsNothing);
+    // Lumo que habla, destacado.
     expect(find.text('Habla con Lumo'), findsOneWidget);
     expect(find.bySemanticsLabel('Videollamada con Lumo'), findsOneWidget);
     // Tutores en vivo: 6 × 2, ellas arriba y ellos abajo, antes de Lumo.
@@ -104,12 +106,10 @@ void main() {
     expect(find.text('Relajado y curioso'), findsOneWidget);
     expect(find.text('Conoce de primera mano el japonés.'), findsOneWidget);
     expect(find.text('Videollamada con Erik'), findsOneWidget);
-    expect(
-      tester.getTopLeft(find.text('Habla con Lumo')).dy,
-      lessThan(
-        tester.getTopLeft(find.text(tutores3dPara('en').first.nombre).first).dy,
-      ),
-    );
+    expect(find.text('Habla con Lumo'), findsOneWidget);
+    expect(find.text('Más tutores'), findsOneWidget);
+    // Los tutores 3D de MakeHuman están ocultos por ahora.
+    expect(find.text(tutores3dPara('en').first.nombre), findsNothing);
     expect(find.text('Hablar con mi tutor'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

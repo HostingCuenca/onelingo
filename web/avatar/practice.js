@@ -33,22 +33,12 @@ const parametros = new URLSearchParams(location.search), embebido = parametros.h
 if (embebido) document.body.classList.add('embebido');
 const languages = {en: 'inglés', es: 'español', fr: 'francés', de: 'alemán', pt: 'portugués', it: 'italiano', zh: 'chino', ja: 'japonés', ko: 'coreano', ru: 'ruso'};
 // Tutores en vivo (6 × 2, ellas y ellos) con los especialistas del idioma primero
-// (idioma de primera mano: personajes.ts), luego Lumo y los tutores 3D sugeridos.
+// (idioma de primera mano: personajes.ts) y luego Lumo.
 const VIVOS = ['ana', 'elena', 'julia', 'chloe', 'nora', 'hana', 'lucas', 'tomas', 'frank', 'diego', 'erik', 'andre'];
 const ESPECIALISTAS = {en: ['frank'], es: ['diego', 'tomas'], fr: ['lucas', 'andre'], de: ['nora'], pt: ['julia'], it: ['elena'], zh: ['ana'], ja: ['erik'], ko: ['hana'], ru: ['chloe']};
-const TRES_D = {
-  en: ['amara', 'sofia', 'clara'],
-  es: ['lucia', 'mateo'],
-  fr: ['clara', 'sofia'],
-  de: ['daniel', 'owen'],
-  pt: ['amara', 'mateo'],
-  it: ['sofia', 'mateo'],
-  zh: ['mei', 'kenji'],
-  ja: ['kenji', 'mei'],
-  ko: ['mei', 'kenji'],
-  ru: ['owen', 'clara'],
-};
-const preferred = Object.fromEntries(Object.entries(TRES_D).map(([l, otros]) => [l, [...ESPECIALISTAS[l], ...VIVOS.filter(t => !ESPECIALISTAS[l].includes(t)), 'lumo', ...otros]]));
+// Los tutores 3D de MakeHuman (amara, sofia…) están ocultos por ahora: no salen en la
+// galería, aunque /avatar/<id> todavía los abre (tutores_3d.dart).
+const preferred = Object.fromEntries(Object.entries(ESPECIALISTAS).map(([l, esp]) => [l, [...esp, ...VIVOS.filter(t => !esp.includes(t)), 'lumo']]));
 const language = () => config?.idiomaMeta || 'en', languageName = () => languages[language()] || languages.en;
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const headers = () => ({Authorization: `Bearer ${config.token}`});
@@ -56,11 +46,11 @@ const conLimite = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms)
 
 function phase(label, value = 'ready') { $('state').textContent = label; $('stage').dataset.phase = value; }
 function status(t) { $('status').textContent = t; }
-function error(e, reintentar) {
+function error(e, reintentar, etiqueta = 'Reintentar') {
   const box = $('error'); box.replaceChildren();
   if (!e) return;
   box.append(e?.message || String(e));
-  if (reintentar) { const b = el('button', null, 'Reintentar'); b.type = 'button'; b.onclick = reintentar; box.append(b); }
+  if (reintentar) { const b = el('button', null, etiqueta); b.type = 'button'; b.onclick = reintentar; box.append(b); }
 }
 function controls() {
   const listo = !!config?.token && !!avatar && !!$('stage').dataset.loaded;
@@ -97,7 +87,7 @@ avisarApp('onelingo-avatar-ready');
 
 function renderGallery() {
   const recommendations = preferred[language()] || preferred.en;
-  const ordered = [...roster.tutors].sort((a, b) => { const ai = recommendations.indexOf(a.id), bi = recommendations.indexOf(b.id); return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi); });
+  const ordered = roster.tutors.filter(t => recommendations.includes(t.id) || t.id === tutorInicial).sort((a, b) => { const ai = recommendations.indexOf(a.id), bi = recommendations.indexOf(b.id); return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi); });
   $('gallery').replaceChildren();
   for (const t of ordered) {
     const b = el('button', 'tutor'), portrait = el('div', 'portrait'), img = el('img');
@@ -477,6 +467,47 @@ $('teclado').onclick = () => { const f = $('form'); f.hidden = !f.hidden; if (!f
 
 // ---------- Mantener pulsado para hablar ----------
 const hablar = $('hablar');
+// Por qué no se abrió el micrófono, dicho al alumno (el nombre lo da el navegador).
+function avisoMicrofono(e) {
+  switch (e?.name) {
+    case 'NotAllowedError': case 'SecurityError':
+      return window.OneLingo ? 'OneLingo no tiene permiso del micrófono: actívalo en Ajustes › Apps › OneLingo › Permisos, o escribe con ⌨️.'
+        : 'Activa el permiso del micrófono para hablar, o escribe con ⌨️.';
+    case 'NotFoundError': return 'No encontramos un micrófono en este dispositivo. Puedes escribir con ⌨️.';
+    case 'NotReadableError': case 'AbortError':
+      return 'Otra app está usando el micrófono (una llamada o una grabadora). Ciérrala y vuelve a intentarlo, o escribe con ⌨️.';
+    default: return 'No se pudo abrir el micrófono. Puedes escribir con ⌨️.';
+  }
+}
+// Sin micrófono se pide el permiso: en la app Android, el diálogo del sistema
+// (la app responde con onelingoMicrofono); en el navegador, un botón, porque su
+// aviso de permiso solo aparece tras un toque.
+let permisoPedido = false; // el diálogo sale solo una vez; luego, con el botón
+function faltaMicrofono(e) {
+  const permiso = e?.name === 'NotAllowedError' || e?.name === 'SecurityError';
+  if (permiso && window.OneLingo && !permisoPedido) { permisoPedido = true; avisarApp('onelingo-avatar-permiso-microfono'); }
+  error(avisoMicrofono(e), e?.name === 'NotFoundError' ? undefined : pedirPermisoMicrofono, 'Permitir micrófono');
+}
+function microfonoListo() {
+  error(''); status('Micrófono listo: mantén pulsado 🎙 para hablar.');
+  if (enLlamada && !modoVivo && vivoDisponible()) abrirVivo();
+}
+function pedirPermisoMicrofono() {
+  if (window.OneLingo) { avisarApp('onelingo-avatar-permiso-microfono'); return; }
+  pedirMicrofono().then(s => { s.getTracks().forEach(t => t.stop()); microfonoListo(); }).catch(e => error(avisoMicrofono(e)));
+}
+window.onelingoMicrofono = ok => ok ? microfonoListo()
+  : error('OneLingo no tiene permiso del micrófono: actívalo en Ajustes › Apps › OneLingo › Permisos, o escribe con ⌨️.', pedirPermisoMicrofono, 'Permitir micrófono');
+// Android tarda un instante en soltar el micrófono (al cerrar la escucha en vivo
+// o colgar otra app): «ocupado» se reintenta una vez antes de avisar.
+function pedirMicrofono() {
+  const pedir = () => navigator.mediaDevices.getUserMedia({audio: {echoCancellation: true, noiseSuppression: true, autoGainControl: true}});
+  return Promise.resolve().then(pedir).catch(e => {
+    if (e?.name === 'OverconstrainedError') return navigator.mediaDevices.getUserMedia({audio: true});
+    if (e?.name !== 'NotReadableError' && e?.name !== 'AbortError') throw e;
+    return new Promise(r => setTimeout(r, 500)).then(pedir);
+  });
+}
 function empezarGrabacion(x) {
   if (!enLlamada || grab) return;
   if (sonando || busy) stop(); // hablar interrumpe al tutor
@@ -486,7 +517,7 @@ function empezarGrabacion(x) {
   phase('Te escucho…', 'listening'); limpiarTurno(); status('');
   $('hablarTexto').textContent = 'Habla… suelta para enviar · ← desliza para cancelar';
   controls();
-  navigator.mediaDevices.getUserMedia({audio: {echoCancellation: true, noiseSuppression: true, autoGainControl: true}}).then(stream => {
+  pedirMicrofono().then(stream => {
     if (grab !== mio || mio.soltado) { stream.getTracks().forEach(t => t.stop()); if (grab === mio) terminarSinEnviar('Mantén pulsado 🎙 mientras hablas.'); return; }
     mio.stream = stream;
     const mime = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm'].find(t => MediaRecorder.isTypeSupported(t));
@@ -497,8 +528,9 @@ function empezarGrabacion(x) {
     mio.limite = setTimeout(soltar, 60000);
     mio.cuenta = setInterval(() => { if (mio.cancelado) return; const s = Math.floor((performance.now() - mio.desde) / 1000); $('hablarTexto').textContent = `● 0:${String(s).padStart(2, '0')} · suelta para enviar · ← desliza para cancelar`; }, 250);
   }).catch(e => {
+    console.warn('micrófono', e?.name, e?.message);
     if (grab === mio) terminarSinEnviar('');
-    error(e?.name === 'NotAllowedError' ? 'Activa el permiso del micrófono para hablar, o escribe con ⌨️.' : 'No se pudo abrir el micrófono. Puedes escribir con ⌨️.');
+    faltaMicrofono(e);
   });
 }
 function terminarSinEnviar(pista) {
@@ -577,7 +609,7 @@ async function abrirVivo() {
     console.warn('escucha en vivo', e?.name, e?.message);
     if (!modoVivo || !enLlamada) return;
     volverAPulsar('Mantén pulsado 🎙 para hablar.');
-    if (e?.name === 'NotAllowedError') error('Activa el permiso del micrófono para hablar, o escribe con ⌨️.');
+    if (e instanceof DOMException) faltaMicrofono(e); // fallo del micrófono, no del servidor
   }
 }
 function cerrarVivo() {

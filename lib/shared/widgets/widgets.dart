@@ -144,12 +144,15 @@ class Etiqueta extends StatelessWidget {
           Icon(icono, size: 14, color: color),
           const SizedBox(width: 5),
         ],
-        Text(
-          texto,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
-            color: color,
+        // Flexible: en un espacio estrecho el texto pasa a otra línea.
+        Flexible(
+          child: Text(
+            texto,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: color,
+            ),
           ),
         ),
       ],
