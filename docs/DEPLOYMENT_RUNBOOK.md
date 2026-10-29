@@ -31,7 +31,7 @@ Rutas y servicios:
 - todo pertenece al usuario de servicio `onelingo`; tras copiar archivos como root: `chown -R onelingo:onelingo <ruta>`
 - PM2 corre como `onelingo` (servicio `pm2-onelingo`, arranca solo): `sudo -u onelingo -H pm2 restart onelingo-api`, `sudo -u onelingo -H pm2 logs onelingo-api`
 - dependencias y migraciones también como `onelingo`: `cd /var/www/onelingo/backend && sudo -u onelingo -H npm ci && sudo -u onelingo -H npm run migrate`
-- Apache: `sites-available/onelingo.conf` (80 → https) y `onelingo-ssl.conf` (`/api/` → `127.0.0.1:8091`); certificado `/etc/letsencrypt/live/onelingo.hostingcuenca.com` (onelingo.org, www y onelingo.hostingcuenca.com). En este servidor solo vive OneLingo: `systemctl reload apache2` está permitido.
+- Apache: `sites-available/onelingo.conf` (80 → https) y `onelingo-ssl.conf` (`/api/` → `127.0.0.1:8091`); certificado propio `/etc/letsencrypt/live/onelingo.org` (onelingo.org y www, renovación automática con `certbot.timer`; el subdominio de hostingcuenca ya no se usa). En este servidor solo vive OneLingo: `systemctl reload apache2` está permitido.
 - respaldos de la base: `/usr/local/bin/onelingo-respaldo-db` cada día a las 03:15 (cron `/etc/cron.d/onelingo-respaldo`) en `/var/backups/onelingo`, 14 días; además backup semanal de Hostinger
 - respaldos de despliegues: `/var/www/onelingo/backups`
 - seguridad: ufw (22, 80, 443), fail2ban, actualizaciones automáticas, SSH solo con llave

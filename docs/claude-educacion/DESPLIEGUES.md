@@ -953,10 +953,10 @@ Fecha: 2026-10-29 · Responsable: Claude (Claude Code), por pedido del usuario (
 
 **Corte (16:36–16:38 hora de Ecuador, unos 2 minutos sin API):** `tools/servidor/corte.sh` comprobó que web, panel y backend fueran idénticos en los dos lados (huella sha256), paró `onelingo-api` en Hetzner, copió la base (`pg_dump -Fc` → `/var/backups/onelingo/hetzner-corte.dump` → `pg_restore`) y los audios (`rsync`). Conteos iguales: usuarios 25, progreso 23, suscripciones 3, eventos 265, conversaciones 179, errores 40, audios 527, migraciones 11. En Hetzner quedó `onelingo-puente` (PM2, `puente.mjs`) en el puerto 8091 reenviando al VPS; probado con GET y POST.
 
-**DNS:** Porkbun, registros A de `onelingo.org` y `www` → `179.197.89.105` (TTL 600); Cloudflare y Google ya lo resolvían así minutos después. `onelingo.hostingcuenca.com` (Cloudflare) quedó pendiente de guardar.
+**DNS:** Porkbun, registros A de `onelingo.org` y `www` → `179.197.89.105` (TTL 600); Cloudflare y Google ya lo resolvían así minutos después. Certificado propio emitido en el VPS para `onelingo.org` y `www` (vence 2027-01-27, `certbot renew --dry-run` correcto); el subdominio `onelingo.hostingcuenca.com` se retiró del vhost y su certificado copiado se borró.
 
 **Verificado:** `/`, `/main.dart.js`, `/version.json`, `/descargas/version.json`, `/descargar/`, `/api/salud`, `/api/planes`, `/avatar/index.html`, `/panel/`, `/iconos/Icon-192.png` y `/manifest.json` responden 200 desde el VPS; el APK con `content-type` de Android; `http://` responde 301 a https.
 
-**Pendiente:** retirar el puente y OneLingo de Hetzner cuando deje de llegar tráfico (lock de Hetzner puesto a propósito); `certbot renew --dry-run` cuando `onelingo.hostingcuenca.com` apunte al VPS; copia de los respaldos fuera del VPS.
+**Pendiente:** retirar el puente y OneLingo de Hetzner cuando deje de llegar tráfico (lock de Hetzner puesto a propósito); copia de los respaldos fuera del VPS.
 
 **Rollback:** cambiar en Porkbun los A de `onelingo.org` y `www` a `167.235.20.41` y, en Hetzner, `pm2 delete onelingo-puente; pm2 start onelingo-api`. Lo escrito en el VPS después del corte habría que llevarlo de vuelta con `pg_dump`/`pg_restore`.
