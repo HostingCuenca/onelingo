@@ -21,8 +21,8 @@ button:disabled{opacity:.45;cursor:default}
 .recommended{position:absolute;top:9px;left:9px;background:var(--naranja);color:#fff;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
 body.embebido #selection{display:none}
 
-/* Llamada: pantalla completa, el tutor centrado, controles abajo. */
-.llamada{position:fixed;inset:0;display:flex;flex-direction:column;background:linear-gradient(180deg,#fff 0%,var(--morado-suave) 55%,var(--morado-claro) 100%);overflow:hidden}
+/* Llamada: pantalla completa; el tutor va en una tarjeta (como una videollamada), controles abajo. */
+.llamada{position:fixed;inset:0;display:flex;flex-direction:column;background:var(--fondo);overflow:hidden}
 .llamada[hidden]{display:none}
 .columna{width:100%;max-width:560px;margin:0 auto;padding:0 16px}
 .cabecera{display:flex;align-items:center;gap:10px;padding-top:12px}
@@ -35,7 +35,21 @@ body.embebido #selection{display:none}
 .contador[hidden]{display:none}
 .tema{display:flex;align-items:center;gap:6px;margin:8px auto 0;padding:7px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--morado-claro);color:var(--morado);font-weight:800;font-size:14px;max-width:calc(100% - 32px)}
 .tema span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#stage{position:relative;flex:1;min-height:150px}
+#stage{position:relative;flex:1;min-height:150px;width:calc(100% - 32px);max-width:528px;margin:10px auto 0;border-radius:28px;overflow:hidden;isolation:isolate;
+  background:linear-gradient(180deg,#fff 0%,var(--morado-suave) 58%,var(--morado-claro) 100%);border:2px solid #fff;box-shadow:0 0 0 1px var(--borde),0 12px 32px #4519bb1f;transition:box-shadow .35s}
+/* El borde de la tarjeta dice de quién es el turno: morado si habla el tutor, verde si te escucha. */
+body.en-llamada #stage[data-phase=speaking]{box-shadow:0 0 0 3px var(--morado),0 12px 32px #4519bb33}
+body.en-llamada #stage[data-phase=listening]{box-shadow:0 0 0 3px var(--verde),0 12px 32px #40a65233}
+.insignia{position:absolute;top:12px;left:12px;z-index:3;display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:#ffffffe6;box-shadow:0 2px 10px #4519bb1a;font-size:13px;font-weight:800;color:var(--texto)}
+.insignia::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--gris)}
+.insignia[data-fase=speaking]::before{background:var(--morado);animation:latido 1s ease-in-out infinite}
+.insignia[data-fase=listening]::before{background:var(--verde);animation:latido 1s ease-in-out infinite}
+.insignia[data-fase=ready]::before{background:var(--verde)}
+.insignia[data-fase=thinking]::before,.insignia[data-fase=voice-loading]::before{background:var(--naranja);animation:latido 1.4s ease-in-out infinite}
+.insignia[hidden],.pedir-pista[hidden]{display:none}
+.pedir-pista{position:absolute;right:12px;bottom:12px;z-index:3;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:#fff;color:var(--morado);font-size:14px;font-weight:900;box-shadow:0 4px 14px #4519bb2e;border:1.5px solid var(--morado-claro)}
+.pedir-pista:hover{background:var(--morado-suave)}
+@keyframes latido{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
 #stage canvas{position:absolute;inset:0;width:100%!important;height:100%!important;display:block}
 .lumo2d{position:absolute;inset:4% 0 0;pointer-events:none;transform-origin:50% 75%;transition:transform .45s ease}
 .lumo2d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 50%}
@@ -57,10 +71,8 @@ body.en-llamada .abajo,body.puede-llamar .abajo{flex:none;height:clamp(250px,44v
 .sub-alumno{margin:8px auto 0;display:table;max-width:92%;background:var(--morado);color:#fff;border-radius:16px 16px 4px 16px;padding:7px 12px;font-size:15px;font-weight:700}
 .sub-acciones{display:flex;justify-content:center;gap:14px;margin-top:4px}
 .enlace{color:var(--morado);font-weight:800;font-size:13px;padding:4px}
-.nota{display:block;margin:8px auto 0;padding:6px 12px;border-radius:12px;background:#FFF4E5;border:1.5px solid #F7941D55;font-size:14px;font-weight:700;color:#7A4300}
-.nota s{color:var(--rojo)}.nota b{color:#197D58}
 .ideas{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}
-.ideas[hidden],.sub-traduccion[hidden],.sub-alumno[hidden],.nota[hidden],.enlace[hidden]{display:none}
+.ideas[hidden],.sub-traduccion[hidden],.sub-alumno[hidden],.enlace[hidden]{display:none}
 .ideas-titulo{width:100%;text-align:center;font-size:12px;font-weight:900;color:var(--gris);letter-spacing:.04em;text-transform:uppercase}
 .idea{padding:7px 12px;border-radius:999px;background:#fff;border:1.5px solid var(--morado-claro);color:var(--morado);font-size:14px;font-weight:700}
 .pista{margin:8px 0 0;text-align:center;font-size:13px;color:var(--gris);font-weight:700;min-height:18px}
@@ -117,7 +129,7 @@ body.vivo.mudo .hablar{background:var(--gris);animation:none}
 body.vivo .hablar-texto{color:var(--verde,#14a37f)}
 body.vivo.mudo .hablar-texto{color:var(--gris)}
 @keyframes pulso{0%,100%{box-shadow:0 0 0 0 #14a37f55}50%{box-shadow:0 0 0 12px #14a37f00}}
-@media(prefers-reduced-motion:reduce){.lumo2d,.hablar{transition:none;animation:none}}
+@media(prefers-reduced-motion:reduce){.lumo2d,.hablar,#stage,.insignia::before{transition:none;animation:none}}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/build/three.module.js","three/addons/":"./vendor/examples/jsm/"}}</script>
 <section id="selection"><p id="eyebrow">ONELINGO · TUTOR CON IA</p><h1>Una conversación, a tu ritmo.</h1><p id="selectionCopy">Elige a tu tutor.</p><p id="authStatus" role="status">Conectando con tu sesión…</p><div id="gallery"></div></section>
@@ -128,7 +140,10 @@ body.vivo.mudo .hablar-texto{color:var(--gris)}
   <button id="verConversacion" class="icono" type="button" aria-label="Ver la conversación">💬<span id="contador" class="contador" hidden></span></button>
  </header>
  <button id="tema" class="tema" type="button" aria-label="Cambiar el tema de la conversación"><span id="temaNombre">Conversación libre</span><b aria-hidden="true">▾</b></button>
- <div id="stage" data-phase="loading"><div id="loading" class="cargando">Cargando…</div></div>
+ <div id="stage" data-phase="loading"><div id="loading" class="cargando">Cargando…</div>
+  <div id="insignia" class="insignia" aria-hidden="true" hidden></div>
+  <button id="pedirPista" class="pedir-pista" type="button" aria-label="Pedir una pista al tutor" hidden><span aria-hidden="true">💡</span>Pista</button>
+ </div>
  <div class="abajo columna">
   <div class="zona-texto">
   <div class="subtitulos" aria-live="polite">
@@ -136,7 +151,6 @@ body.vivo.mudo .hablar-texto{color:var(--gris)}
    <p id="subTraduccion" class="sub-traduccion" hidden></p>
    <div class="sub-acciones"><button id="replay" class="enlace" type="button" hidden>↻ Repetir</button><button id="verTraduccion" class="enlace" type="button" hidden>Ver traducción</button></div>
    <p id="subAlumno" class="sub-alumno" hidden></p>
-   <button id="nota" class="nota" type="button" hidden></button>
   </div>
   <div id="ideas" class="ideas" hidden></div>
   <p id="status" class="pista" role="status"></p>
@@ -158,4 +172,4 @@ body.vivo.mudo .hablar-texto{color:var(--gris)}
  </div>
  <audio id="audio" preload="auto" playsinline></audio>
 </section>
-<script type="module" src="./practice.js?v=52"></script></html>
+<script type="module" src="./practice.js?v=53"></script></html>

@@ -28,6 +28,15 @@ let grab = null;
 // Llamada en vivo: micrófono abierto con transcripción en tiempo real; si no
 // se puede (navegador, red, servidor sin clave) se vuelve a mantener pulsado.
 let vivo = null, modoVivo = false, mudo = false, arrastre = '', finVozEn = 0, lineaActual = null;
+// Si el alumno se queda en blanco, el tutor le ayuda hablando (como un profesor):
+// primero repite la pregunta más fácil y con opciones; después, una pista. Luego espera.
+const ESPERAS_SILENCIO = [9000, 12000];
+let silencioTimer = null, silencios = 0;
+// Mientras piensa, una muletilla corta en su idioma si tarda: sin silencios muertos.
+const RELLENOS = {en: ['Okay…', 'I see…', 'Right…'], es: ['A ver…', 'Ajá…', 'Entiendo…'], fr: ['D’accord…', 'Je vois…', 'Ah, oui…'], de: ['Okay…', 'Verstehe…', 'Ach so…'],
+  pt: ['Entendi…', 'Certo…', 'Ah, sim…'], it: ['Capisco…', 'Allora…', 'Ah, sì…'], zh: ['好的…', '这样啊…', '我明白了…'], ja: ['そうですね…', 'なるほど…', 'ええと…'],
+  ko: ['아, 그렇군요…', '네…', '그렇군요…'], ru: ['Так…', 'Понятно…', 'Ага…']};
+let relleno = '', rellenos = 0;
 
 const parametros = new URLSearchParams(location.search), embebido = parametros.has('embebido'), tutorInicial = parametros.get('tutor');
 if (embebido) document.body.classList.add('embebido');
@@ -44,7 +53,12 @@ const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls)
 const headers = () => ({Authorization: `Bearer ${config.token}`});
 const conLimite = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms))]);
 
-function phase(label, value = 'ready') { $('state').textContent = label; $('stage').dataset.phase = value; }
+const INSIGNIAS = {speaking: 'Hablando', 'voice-loading': 'Pensando…', thinking: 'Pensando…', listening: 'Te escucho', ready: 'Tu turno'};
+function phase(label, value = 'ready') {
+  $('state').textContent = label; $('stage').dataset.phase = value;
+  const i = $('insignia'); i.textContent = enLlamada ? (value === 'ready' && mudo ? 'Micrófono en silencio' : INSIGNIAS[value] ?? '') : ''; i.hidden = !i.textContent;
+  $('pedirPista').hidden = !(enLlamada && value === 'ready');
+}
 function status(t) { $('status').textContent = t; }
 function error(e, reintentar, etiqueta = 'Reintentar') {
   const box = $('error'); box.replaceChildren();
@@ -191,6 +205,7 @@ function iniciarLlamada() {
   enLlamada = true; inicioLlamada = Date.now(); iniciarReloj(); controls(); error('');
   phase('Conectando…', 'thinking');
   vigilarConexion(epoch);
+  setTimeout(calentarRellenos, 4000);
   if (cola.length) siguiente(epoch);
   else if (respuestaCompleta && !busy) { if (lastReply) encolar(lastReply, epoch); else void requestTutor(null, true); }
 }
@@ -212,6 +227,16 @@ function vigilarConexion(version, intento = 1) {
     if (lastReply && saludo) encolar(lastReply, epoch); else void requestTutor(saludo ? null : {continuar: true}, saludo);
     vigilarConexion(epoch, intento + 1);
   }, 7000);
+}
+
+// Las muletillas quedan en la caché de voz del servidor: después suenan al instante.
+function calentarRellenos() {
+  if (!enLlamada || !tutor) return;
+  for (const f of RELLENOS[language()] || []) fetch(urlVoz(f, '', avatar?.alineado ? '/voz/alineada' : '/voz/stream'), {headers: headers()}).catch(() => {});
+}
+function ponerRelleno(version) {
+  const lista = RELLENOS[language()] || []; if (!lista.length) return;
+  relleno = lista[rellenos++ % lista.length]; encolar(relleno, version);
 }
 
 function iniciarReloj() {
@@ -326,10 +351,22 @@ function finTurno() {
   phase(`En llamada · ${$('stage').dataset.reloj || '00:00'}`, 'ready');
   if (modoVivo) status(mudo ? 'Micrófono silenciado: toca 🎙 para hablar.' : 'Tu turno: habla cuando quieras.');
   else status(history.some(t => t.rol === 'alumno') ? 'Tu turno: mantén pulsado 🎙 para responder.' : 'Mantén pulsado 🎙 y responde en voz alta.');
+  vigilarSilencio();
 }
+function vigilarSilencio() {
+  clearTimeout(silencioTimer);
+  if (!enLlamada || mudo || !lastReply || silencios >= ESPERAS_SILENCIO.length) return;
+  silencioTimer = setTimeout(() => {
+    // Escribiendo, leyendo la conversación o ya hablando: no se le interrumpe.
+    if (!enLlamada || mudo || sonando || busy || grab || !$('form').hidden || !$('panel').hidden || $('stage').dataset.phase !== 'ready') return;
+    void requestTutor({aviso: silencios++ ? 'pista' : 'silencio'}, false);
+  }, ESPERAS_SILENCIO[silencios]);
+}
+$('pedirPista').onclick = () => { if (!enLlamada || busy) return; silencios = ESPERAS_SILENCIO.length; void requestTutor({aviso: 'pista'}, false); };
 $('replay').onclick = () => { if (!lastReply || busy || !enLlamada) return; detenerVoz(); encolar(lastReply, epoch); };
 
 function stop() {
+  clearTimeout(silencioTimer);
   epoch++; controller?.abort(); controller = null; detenerVoz();
   busy = false; respuestaCompleta = true; controls();
 }
@@ -337,7 +374,7 @@ function stop() {
 // ---------- Subtítulos, correcciones e ideas ----------
 function limpiarTurno() {
   $('subTutor').textContent = ''; $('subTraduccion').hidden = true; $('verTraduccion').hidden = true; $('replay').hidden = true;
-  $('subAlumno').hidden = true; $('nota').hidden = true; ideas([]);
+  $('subAlumno').hidden = true; ideas([]);
 }
 function mostrarAlumno(texto) { $('subAlumno').textContent = texto; $('subAlumno').hidden = !texto; }
 function burbuja(text, kind = '') { const e = el('div', 'bubble ' + kind, text); $('messages').append(e); return e; }
@@ -350,10 +387,6 @@ function correccion(c) {
   $('messages').append(card);
   return card;
 }
-function nota(c, card) {
-  const n = $('nota'); n.replaceChildren('✏️ ', el('s', null, c.original), ' → ', el('b', null, c.correcto));
-  n.hidden = false; n.onclick = () => { abrirPanel('conversacion'); card.scrollIntoView({block: 'center'}); };
-}
 // Ideas para responder: tocar una la envía como respuesta.
 function ideas(lista) {
   const box = $('ideas'); box.replaceChildren(); box.hidden = !lista.length;
@@ -365,6 +398,7 @@ $('verTraduccion').onclick = () => { const t = $('subTraduccion'); t.hidden = !t
 
 // ---------- Turno: texto o voz → respuesta por frases ----------
 // entrada: null (saludo) · {texto} · {audio, tipo} · {continuar: true} (reintento sin turno nuevo)
+// · {aviso: 'silencio'|'pista'} (el alumno se quedó en blanco o pidió ayuda: no es un turno suyo)
 async function requestTutor(entrada, opening = false) {
   if (busy || !config?.token || !tutor || !avatar) return;
   if (!opening) stop();
@@ -372,6 +406,7 @@ async function requestTutor(entrada, opening = false) {
   fraseAnterior = {version: -1, texto: ''}; // turno nuevo: sin frase anterior
   busy = true; respuestaCompleta = false; controls(); error(''); ultimoFallo = null;
   let frases = 0, final = false, transcrito = false;
+  if (entrada?.texto || entrada?.audio) silencios = 0;
   if (!opening) {
     limpiarTurno();
     if (entrada?.texto) { mostrarAlumno(entrada.texto); burbuja(entrada.texto, 'mine'); history.push({rol: 'alumno', texto: entrada.texto}); }
@@ -382,7 +417,9 @@ async function requestTutor(entrada, opening = false) {
   const current = controller, timeout = setTimeout(() => current.abort(), 45000);
   try {
     const u = units.find(x => x.id === temaId);
-    const datos = {idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-30), objetivo: config.contexto, ...(u ? {situacionId: u.id, situacion: u.nombre} : {}), ...(u && objetivoId ? {objetivoId} : {})};
+    const datos = {idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-30), objetivo: config.contexto, ...(u ? {situacionId: u.id, situacion: u.nombre} : {}), ...(u && objetivoId ? {objetivoId} : {}), ...(entrada?.aviso ? {aviso: entrada.aviso} : {})};
+    // Si la primera frase tarda, una muletilla («A ver…») llena el hueco como en una llamada real.
+    if (enLlamada && (entrada?.texto || entrada?.audio)) setTimeout(() => { if (version === epoch && busy && !frases && !sonando && !cola.length) ponerRelleno(version); }, entrada.audio ? 1800 : 1000);
     let response;
     if (entrada?.audio) {
       const form = new FormData();
@@ -433,9 +470,10 @@ async function requestTutor(entrada, opening = false) {
           const d = el('details', 'traduccion'); d.append(el('summary', null, 'Ver traducción'), el('span', null, r.traduccion)); b.append(d);
         }
         const cs = r.corrections || [];
-        cs.forEach((c, i) => { const card = correccion(c); if (i === 0) nota(c, card); });
+        // El tutor la dice en voz alta; por escrito queda en la conversación (💬).
+        cs.forEach(correccion);
         correcciones += cs.length; actualizarContador();
-        ideas((r.suggestions || []).slice(0, 3));
+        if (entrada?.aviso) ideas((r.suggestions || []).slice(0, 3));
       }
     };
     while (true) {
@@ -447,7 +485,8 @@ async function requestTutor(entrada, opening = false) {
     }
     if (!final) throw Error('La respuesta quedó incompleta.');
   } catch (e) {
-    if (version === epoch) {
+    if (version === epoch && entrada?.aviso) console.warn('ayuda del tutor', e?.message); // sin aviso: el alumno sigue con su turno
+    else if (version === epoch) {
       // Nunca dejar al alumno esperando: se explica y se ofrece reintentar.
       const msg = e.name === 'AbortError' ? 'El tutor tardó demasiado.' : (e.message || 'No se pudo responder.');
       if (entrada?.audio && !transcrito) { mostrarAlumno(''); ultimoFallo = entrada; }
@@ -624,7 +663,8 @@ function alternarMudo() { mudo = !mudo; vivo?.silenciar(mudo); textoVivo(); if (
 // estaba hablando o pensando, se le interrumpe.
 function oirParcial(texto) {
   if (!enLlamada || mudo || !texto.trim()) return;
-  if (tutorAudible() && esEco(texto, $('subTutor').textContent)) return;
+  if (tutorAudible() && esEco(texto, `${$('subTutor').textContent} ${relleno}`)) return;
+  clearTimeout(silencioTimer);
   if (sonando || busy) {
     if (palabras(texto) < 2) return;
     // Seguía hablando tras una pausa: lo que ya se había enviado se junta con lo nuevo.
@@ -636,7 +676,7 @@ function oirParcial(texto) {
 }
 function oirFinal(texto) {
   if (!enLlamada || mudo) return;
-  if (tutorAudible() && esEco(texto, $('subTutor').textContent || lastReply)) return;
+  if (tutorAudible() && esEco(texto, `${$('subTutor').textContent || lastReply} ${relleno}`)) return;
   if (busy && !sonando) recuperarTurno();
   const todo = (arrastre ? arrastre + ' ' : '') + texto; arrastre = '';
   stop();

@@ -12,6 +12,8 @@ const EsquemaChat = z.object({
   idiomaMeta: z.string(), idiomaNativo: z.string().default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().default('mia'),
   situacionId: z.number().int().min(1).max(50).optional(), situacion: z.string().max(4000).optional(), objetivo: z.string().max(4000).optional(),
   objetivoId: z.string().max(24).optional(), modo: z.enum(['practica', 'prueba']).default('practica'),
+  // Videollamada: silencio largo o botón «Pista» (no es un turno del alumno).
+  aviso: z.enum(['silencio', 'pista']).optional(),
   // Topes: sin ellos, el límite de 2 MB del cuerpo dejaba mandar prompts enormes.
   historial: z.array(z.object({ rol: z.enum(['tutor', 'alumno']), texto: z.string().max(4000) })).max(30),
 });
@@ -21,7 +23,7 @@ const objetivoInvalido = (d: DatosChat) =>
   !!d.objetivoId && !objetivoValido(d.idiomaMeta, d.situacionId, d.objetivoId);
 
 async function guardarTurno(s: Sesion, d: DatosChat, r: Awaited<ReturnType<typeof responder>>) {
-  const ultimo = [...d.historial].reverse().find(t => t.rol === 'alumno')?.texto ?? '';
+  const ultimo = d.aviso ? `[${d.aviso}]` : [...d.historial].reverse().find(t => t.rol === 'alumno')?.texto ?? '';
   await query('INSERT INTO conversaciones (usuario_id, situacion_id, nivel, idioma, tutor_id, mensaje_alumno, respuesta, modelo, tokens_entrada, tokens_salida) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
     [s.sub, d.situacionId ?? null, d.nivel, d.idiomaMeta, d.tutorId, ultimo, JSON.stringify(r.respuesta), r.modelo, r.entrada, r.salida]);
   await query('UPDATE usuarios SET ultima_actividad = now() WHERE id = $1', [s.sub]);

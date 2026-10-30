@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { frasesCompletas, generarJsonOpenAI, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
 import { correccionesPrevias, resumirHechos, tipoCambio } from '../src/lib/situaciones.js';
-import { depurarCorrecciones, promptCorrector, systemPrompt } from '../src/lib/ia.js';
+import { depurarCorrecciones, notaAviso, promptCorrector, systemPrompt } from '../src/lib/ia.js';
 const originalFetch = globalThis.fetch;
 const encoder = new TextEncoder();
 const event = (j: unknown) => encoder.encode(`data: ${JSON.stringify(j)}\n\n`);
@@ -153,4 +153,18 @@ test('the tutor keeps its limits and the corrector knows each language traps', (
   assert.match(promptCorrector('ja', 'es', 2), /会う・乗る・なる・似る llevan に/);
   assert.match(promptCorrector('zh', 'es', 2), /我很高兴/);
   assert.doesNotMatch(promptCorrector('xx', 'es', 2), /Trampas típicas/);
+});
+
+test('in a video call the avatar corrects out loud and gives spoken hints', () => {
+  const p = systemPrompt({ idiomaMeta: 'en', idiomaNativo: 'es', nivel: 3, tutorId: 'avatar_frank' });
+  assert.match(p, /CORREGIR EN VOZ ALTA/);
+  assert.match(p, /pídele que diga él la frase completa/);
+  // Con pocas frases se cae el porqué, nunca la petición de repetir; en niveles 1-2, sin reglas.
+  assert.match(p, /nunca la petición de repetir/);
+  assert.match(p, /En niveles 1 y 2 NO expliques el porqué/);
+  assert.match(p, /PISTAS/);
+  assert.doesNotMatch(p, /NO lo expliques en 'reply'/);
+  assert.match(notaAviso('silencio'), /dos opciones/);
+  assert.match(notaAviso('pista'), /pista hablada/);
+  assert.match(notaAviso('silencio'), /^\[Nota de la app/);
 });

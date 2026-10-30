@@ -48,15 +48,28 @@ const cliente = () => new Anthropic({ apiKey: config.anthropicApiKey });
 export type Turno = { rol: 'tutor' | 'alumno'; texto: string };
 
 /** Reglas de la videollamada: la reply se convierte en voz y la boca del tutor la sigue. */
-const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz al instante.
-- Empieza con una reacción corta (una frase breve) y después la pregunta o el siguiente paso: la voz arranca con la primera frase.
-- Lenguaje hablado y natural; sin listas, sin markdown, sin paréntesis ni emojis.
-- Si el alumno cometió un error, NO lo expliques en 'reply' (nada de "you said…", "the right way is…", "the correct form…"): la app ya muestra una tarjeta de corrección con 'corrections'. En su lugar, reformula su idea de forma natural usando la forma correcta, como haría un nativo (alumno: "I goed to the beach" → tú: "Oh, you went to the beach! …").
-- Tampoco cites su frase ("Dices: …", "You said…") ni la repitas corregida entera: la reformulación va dentro de tu reacción, con naturalidad.
-- Excepción: si vuelve a cometer el MISMO tipo de error que ya reformulaste antes en esta llamada (p. ej. otra vez presente en lugar de pasado), no reformules: dale una pista corta para que lo arregle él mismo, como pregunta natural con la forma «…, ¿[lo que dijo] o [la forma buena]?» dicha en el idioma de la llamada. La pregunta de dos opciones solo sirve cuando el error es la forma de UNA palabra (tiempo, persona, género, artículo, partícula) y las dos opciones son formas reales de esa palabra; con errores de orden de palabras o de varias palabras, reformula como siempre. La pista debe sonar natural en el idioma de la llamada, como la diría un nativo, no traducida palabra por palabra del ejemplo. Aun así, anota el error en 'corrections'. Si en el turno siguiente lo dice bien, celébralo en pocas palabras.
-- Máximo 2 frases por turno en niveles 1-4 y 3 en los demás; la última suele ser una pregunta.
+const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz al instante. Eres un tutor que conversa y enseña hablando, como un buen profesor particular: la corrección y las pistas las das TÚ, en voz alta; la app solo las apunta por escrito.
+- Todo en el idioma de la llamada. Los ejemplos de abajo están en inglés solo como modelo: dilo como lo diría un nativo de ese idioma, no traducido palabra por palabra.
+- Habla como una persona en una llamada: frases cortas, contracciones y reacciones naturales del idioma ("Oh, nice!", "Hmm, wait…"); sin listas, markdown, paréntesis ni emojis. Empieza con una reacción breve: la voz arranca con la primera frase.
+- CORREGIR EN VOZ ALTA. Si el último mensaje del alumno tiene un error que vale la pena (impide entender, es del objetivo de la sesión o ya lo había cometido), corrígelo tú en 'reply', amable y directo, en este orden: (1) una reacción corta a lo que quiso decir; (2) la forma correcta, dicha con claridad y contrastada con la suya si ayuda ("Just a small thing: we say «I went», not «I goed»."); (3) el porqué en pocas palabras fáciles, solo desde el nivel 3 y si cabe en una frase corta ("because it's in the past"); (4) SIEMPRE, como última frase, pídele que diga él la frase completa ya corregida ("Can you say the whole sentence?"). Ahí termina el turno: sin otra pregunta. En niveles 1 y 2 NO expliques el porqué ni nombres tiempos o reglas ("passé composé", "past tense"): solo reacción, forma correcta y petición de repetir. Si no te caben las frases, quita el porqué, nunca la petición de repetir.
+- Una sola corrección hablada por turno, la más importante; las demás van solo en 'corrections'. Si ya corregiste en voz alta en el turno anterior, o el error es pequeño y no estorba, no lo señales: reformúlalo dentro de tu reacción con la forma buena ("Oh, you went to the beach!"). Que no parezca un examen.
+- Si le pediste repetir: cuando lo dice bien, celébralo corto y concreto ("Perfect, «I went»!") y vuelve a la conversación justo donde iba, con una pregunta sobre lo que te contó. Si lo dice mal otra vez, dale la forma buena una vez más, despacio y por partes, y sigue adelante sin insistir (máximo dos intentos). Si en vez de repetir sigue con otra cosa, no insistas.
+- Si pregunta por qué, explícalo en voz alta con una frase sencilla y dos ejemplos que contrasten, y pídele que lo use.
+- ENSEÑAR. Cada 3 o 4 turnos regálale de forma natural UNA palabra o expresión útil para lo que está contando ("You know what we say for that? «…». Try it!"), úsala tú después y procura que la use.
+- PISTAS. Si se bloquea, dice que no sabe o pide ayuda: no le traduzcas todo ni respondas por él. Dale una pista hablada (dos opciones para elegir, o el comienzo de una respuesta que pueda completar: "You can start with «I usually…»") y anímalo a intentarlo.
+- Máximo 2 frases por turno en niveles 1-4 y 3 en los demás; un turno con corrección puede llevar una frase corta más y siempre termina con la petición de repetir. Si no, la última frase suele ser una pregunta.
 - CONVERSA de verdad, como un amigo en una llamada: reacciona a lo que el alumno acaba de decir (con interés concreto, no "great!" genérico), comparte algo breve tuyo relacionado y haz UNA pregunta de seguimiento sobre lo mismo. No cambies de tema ni encadenes preguntas tipo examen; recuerda y retoma lo que el alumno contó antes en la llamada (alumno: "I like to read books" → tú: "Me too! I love adventure books. What book are you reading now?").
 - Estructura de la llamada: saludo y una primera pregunta preparada según el contexto; conversación con una pregunta por turno; si el alumno quiere terminar, despídete resumiendo en una frase lo que practicó.`;
+
+/**
+ * Avisos de la app en la videollamada (no son turnos del alumno): silencio
+ * largo tras la pregunta del tutor o el botón «Pista». El tutor responde
+ * hablando, como un profesor que ve que el alumno se quedó en blanco.
+ */
+export type Aviso = 'silencio' | 'pista';
+export const notaAviso = (a: Aviso) => a === 'silencio'
+  ? '[Nota de la app, no del alumno: lleva unos segundos sin responder a tu última pregunta. No digas que está callado ni le metas prisa. Ayúdalo con naturalidad: repite tu pregunta más corta y sencilla y ofrécele dos opciones concretas para elegir. 1-2 frases.]'
+  : '[Nota de la app, no del alumno: pidió una pista (o sigue sin poder responder). Dale una pista hablada para tu última pregunta: el comienzo de una respuesta que pueda completar o una palabra clave útil, a su nivel; no respondas por él del todo y anímalo a intentarlo. 1-2 frases. \'corrections\' vacío.]';
 
 export function systemPrompt(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string }) {
   // Tres capas como los tutores de referencia: personaje · diseño pedagógico · alumno.
@@ -180,6 +193,10 @@ async function corregirUltimo(p: { idiomaMeta: string; idiomaNativo: string; niv
 }
 
 export async function responder(p: Parameters<typeof responderModelo>[0], onReply?: (texto: string) => void, signal?: AbortSignal, onFrase?: (texto: string, indice: number) => void) {
+  if (p.aviso) {
+    const r = await responderModelo(p, onReply, signal, onFrase);
+    return { ...r, respuesta: { ...r.respuesta, corrections: [] } };
+  }
   // En paralelo con la respuesta: no añade espera al alumno. Cuando responde,
   // mandan sus correcciones (las del tutor traían falsos errores); si falla, quedan las del tutor.
   const corrector = corregirUltimo(p).catch((e) => { console.warn('corrector:', String(e).slice(0, 200)); return null; });
@@ -194,10 +211,11 @@ export async function responder(p: Parameters<typeof responderModelo>[0], onRepl
 /** Lo que el modelo olvidaba con el mensaje del alumno delante. */
 const recordatorio = (meta: string) => `[Nota de la app, no del alumno: 'reply' va en ${IDIOMAS[meta] ?? meta} pase lo que pase. Si el alumno habla de hacerse daño o de no querer vivir, aplica la regla de LÍMITES.]`;
 
-async function responderModelo(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string; historial: Turno[] }, onReply?: (texto: string) => void, signal?: AbortSignal, onFrase?: (texto: string, indice: number) => void) {
+async function responderModelo(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string; historial: Turno[]; aviso?: Aviso }, onReply?: (texto: string) => void, signal?: AbortSignal, onFrase?: (texto: string, indice: number) => void) {
   if (config.iaProveedor === 'openai') {
     const mensajes = p.historial.map((t) => ({ role: (t.rol === 'alumno' ? 'user' : 'assistant') as 'user' | 'assistant', content: t.texto }));
     if (mensajes.length === 0 || mensajes[0].role !== 'user') mensajes.unshift({ role: 'user', content: '(El alumno abre la conversación. Saluda y empieza la situación.)' });
+    if (p.aviso) mensajes.push({ role: 'user', content: notaAviso(p.aviso) });
     // Junto al último mensaje: lejos, en el prompt, el modelo cedía si el alumno pedía otro idioma o se decía en crisis.
     const u = mensajes[mensajes.length - 1];
     if (u.role === 'user') mensajes[mensajes.length - 1] = { ...u, content: `${u.content}\n\n${recordatorio(p.idiomaMeta)}` };
@@ -210,6 +228,7 @@ async function responderModelo(p: { idiomaMeta: string; idiomaNativo: string; ni
   if (config.iaProveedor === 'gemini') {
     const turnos = p.historial.map((t) => ({ role: (t.rol === 'alumno' ? 'user' : 'model') as 'user' | 'model', text: t.texto }));
     if (turnos.length === 0 || turnos[0].role !== 'user') turnos.unshift({ role: 'user', text: '(El alumno abre la conversación. Saluda y empieza la situación.)' });
+    if (p.aviso) turnos.push({ role: 'user', text: notaAviso(p.aviso) });
     const r = await generarJsonGemini(systemPrompt(p), turnos);
     const parsed = RespuestaTutor.parse({ ...r.json, suggestions: (r.json.suggestions ?? []).slice(0, 3) });
     return { respuesta: parsed, modelo: r.modelo, entrada: r.entrada, salida: r.salida };
@@ -217,6 +236,7 @@ async function responderModelo(p: { idiomaMeta: string; idiomaNativo: string; ni
   const c = cliente();
   const mensajes: Anthropic.MessageParam[] = p.historial.map((t) => ({ role: t.rol === 'alumno' ? 'user' : 'assistant', content: t.texto }));
   if (mensajes.length === 0 || mensajes[0].role !== 'user') mensajes.unshift({ role: 'user', content: '(El alumno abre la conversación. Saluda y empieza la situación.)' });
+  if (p.aviso) mensajes.push({ role: 'user', content: notaAviso(p.aviso) });
   const r = await c.messages.parse({
     model: config.iaModelo,
     max_tokens: 4096,
