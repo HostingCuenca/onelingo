@@ -962,3 +962,19 @@ Fecha: 2026-10-29 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Pendiente:** copia de los respaldos fuera del VPS.
 
 **Rollback:** ya no hay OneLingo en Hetzner; ante una caída del VPS se reconstruye desde el repo, el respaldo esencial y los volcados diarios.
+
+## Release: 20261030-edu-76-tutores
+
+Fecha: 2026-10-30 · Responsable: Claude (Claude Code), por pedido del usuario («dale despliega»). Primer despliegue en el VPS `onelingo` (179.197.89.105): 2 archivos del backend + página del avatar; PM2 `onelingo-api` reiniciado (solo esa app). Sin APK: la app carga `/avatar` desde onelingo.org con `Cache-Control: no-cache`.
+
+**Contenido (`bf5efd2`):** el avatar corrige en voz alta al estilo Praktika (reacción, forma correcta y siempre pide repetir; en niveles 1-2 sin reglas), pistas habladas (botón «Pista» y avisos de silencio a los 9 s y 12 s más, `aviso: silencio|pista` en `/chat`), rellenos hablados si la primera frase tarda, avatar en una card con insignia de estado.
+
+**Archivos:** `backend/src/lib/ia.ts`, `backend/src/routes/chat.ts`, `web/avatar/index.html`, `web/avatar/practice.js`. Antes de copiar, los de prod coincidían con `bf5efd2~1` (sha). Sin migraciones; `.env` sin tocar.
+
+**Probado antes:** backend 134/134 y typecheck; local con `/chat` (fr/en, niveles 1, 2 y 5); emulador Android (`pruebas_general`, APK debug contra el backend local): saludo, silencio, pista, corrección hablada con petición de repetir, resumen al colgar, sin errores en logcat.
+
+**Backup:** `backups/20261030-edu-76-tutores/antes.tar.gz` (los 4 archivos previos).
+
+**Verificado:** `tsc` en el servidor OK; `onelingo-api` en línea; `/api/salud` ok; `/avatar/index.html` con `pedirPista` y `practice.js?v=53` (200); lock liberado.
+
+**Rollback:** `ssh onelingo 'cd /var/www/onelingo && tar xzf backups/20261030-edu-76-tutores/antes.tar.gz && chown onelingo:onelingo backend/src/lib/ia.ts backend/src/routes/chat.ts web/avatar/index.html web/avatar/practice.js && sudo -u onelingo -H pm2 restart onelingo-api'`.
