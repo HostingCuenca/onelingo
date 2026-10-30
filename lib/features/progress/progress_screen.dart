@@ -18,6 +18,7 @@ import '../../core/nivel0/nivel0.dart';
 import '../../core/pagos/providers.dart';
 import '../plans/idiomas_plan.dart';
 import '../../core/state/providers.dart';
+import '../../core/version.dart';
 import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -420,6 +421,16 @@ class ProgressScreen extends ConsumerWidget {
             label: Text(
               demo ? tr('Cerrar sesión / reiniciar demo') : tr('Cerrar sesión'),
               style: const TextStyle(color: OL.rojo),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Center(
+            child: Text(
+              tr('OneLingo · versión {v} ({n})', {
+                'v': versionApp,
+                'n': compilacionApp,
+              }),
+              style: const TextStyle(color: OL.gris, fontSize: 12),
             ),
           ),
         ],
