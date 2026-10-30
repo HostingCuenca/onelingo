@@ -83,25 +83,40 @@ class Sync {
 
   /// Resultado de una autenticación: sesión guardada y, si el servidor lo tenía, el progreso.
   Map<String, dynamic>? ultimoEstadoServidor;
+
+  /// Nombre de la cuenta en el último inicio de sesión (el servidor lo manda).
+  String? ultimoNombre;
   String ultimoError = '';
+
+  /// Segundos que faltan para poder pedir otro código (último 429 del servidor).
+  int? reenviarEn;
 
   Future<Map<String, dynamic>?> _postConError(
     String ruta,
-    Map<String, dynamic> cuerpo,
-  ) async {
+    Map<String, dynamic> cuerpo, {
+    bool auth = false,
+    bool put = false,
+  }) async {
     ultimoError = '';
+    reenviarEn = null;
     try {
-      final r = await http
-          .post(
-            Uri.parse('$baseUrl$ruta'),
-            headers: {'content-type': 'application/json'},
-            body: jsonEncode(cuerpo),
-          )
-          .timeout(const Duration(seconds: 10));
+      final headers = {
+        'content-type': 'application/json',
+        // Idioma de los mensajes y correos del servidor (español o inglés).
+        'x-idioma': I18n.idioma.value,
+        if (auth && token != null) 'authorization': 'Bearer $token',
+      };
+      final url = Uri.parse('$baseUrl$ruta');
+      final r =
+          await (put
+                  ? http.put(url, headers: headers, body: jsonEncode(cuerpo))
+                  : http.post(url, headers: headers, body: jsonEncode(cuerpo)))
+              .timeout(const Duration(seconds: 15));
       final j = r.body.isEmpty
           ? <String, dynamic>{}
           : jsonDecode(r.body) as Map<String, dynamic>;
       if (r.statusCode >= 200 && r.statusCode < 300) return j;
+      reenviarEn = (j['reenviarEn'] as num?)?.toInt();
       ultimoError =
           (j['error'] ?? tr('Error {codigo}', {'codigo': r.statusCode}))
               .toString();
@@ -143,6 +158,7 @@ class Sync {
     if (r == null) return false;
     await _guardarSesion(r, email);
     ultimoEstadoServidor = r['estado'] as Map<String, dynamic>?;
+    ultimoNombre = r['nombre'] as String?;
     return true;
   }
 
@@ -165,6 +181,78 @@ class Sync {
     ultimoEstadoServidor = r['estado'] as Map<String, dynamic>?;
     return r;
   }
+
+  /// Registro con código (paso 1): valida los datos y manda el código al correo.
+  Future<bool> pedirCodigoRegistro({
+    required String email,
+    required String password,
+    required String nombre,
+    required String apellido,
+    required String telefono,
+    required String idiomaNativo,
+    required String idiomaMeta,
+    required int nivelInicial,
+  }) async {
+    final r = await _postConError('/auth/registro/codigo', {
+      'email': email,
+      'password': password,
+      'nombre': nombre,
+      'apellido': apellido,
+      'telefono': telefono,
+      'idiomaNativo': idiomaNativo,
+      'idiomaMeta': idiomaMeta,
+      'nivelInicial': nivelInicial,
+      'plataforma': _plataforma,
+    });
+    return r != null;
+  }
+
+  /// Registro con código (paso 2): con el código correcto la cuenta queda creada y verificada.
+  Future<bool> verificarCodigoRegistro(String email, String codigo) async {
+    final r = await _postConError('/auth/registro/verificar', {
+      'email': email,
+      'codigo': codigo,
+    });
+    if (r == null) return false;
+    await _guardarSesion(r, email);
+    return true;
+  }
+
+  /// Olvidé mi contraseña (paso 1): manda un código si el correo tiene cuenta.
+  Future<bool> pedirCodigoClave(String email) async =>
+      await _postConError('/auth/clave/codigo', {'email': email}) != null;
+
+  /// Olvidé mi contraseña (paso 2): código + contraseña nueva; deja la sesión iniciada.
+  Future<bool> restablecerConCodigo(
+    String email,
+    String codigo,
+    String password,
+  ) async {
+    final r = await _postConError('/auth/clave/restablecer', {
+      'email': email,
+      'codigo': codigo,
+      'password': password,
+    });
+    if (r == null) return false;
+    await _guardarSesion(r, email);
+    ultimoEstadoServidor = r['estado'] as Map<String, dynamic>?;
+    ultimoNombre = r['nombre'] as String?;
+    return true;
+  }
+
+  /// Nombre, apellido y teléfono (las cuentas de Google llegan sin teléfono).
+  Future<bool> guardarContacto({
+    required String nombre,
+    required String apellido,
+    required String telefono,
+  }) async =>
+      await _postConError(
+        '/usuarios/me/contacto',
+        {'nombre': nombre, 'apellido': apellido, 'telefono': telefono},
+        auth: true,
+        put: true,
+      ) !=
+      null;
 
   Future<String?> recuperarPassword(String email) async {
     final r = await _postConError('/auth/recuperar', {'email': email});

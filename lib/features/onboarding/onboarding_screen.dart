@@ -19,6 +19,7 @@ import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
+import 'codigo_correo.dart';
 
 /// Flujo de primera experiencia (REQUERIMIENTOS §10):
 /// cuenta → idioma nativo → idioma a aprender → nivel → prueba gratuita.
@@ -34,6 +35,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final nombre = TextEditingController(text: '');
   final correo = TextEditingController();
   final clave = TextEditingController();
+  final apellido = TextEditingController();
+  final telefono = TextEditingController();
+  final codigo = TextEditingController();
+  String prefijo = prefijosTelefono.first.$1;
+
+  /// Paso 1 en dos tiempos: datos → código de 6 dígitos enviado al correo.
+  bool codigoEnviado = false;
   String? errorRegistro;
   String nativo = 'es';
   String meta = 'en';
@@ -94,6 +102,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     nombre.dispose();
     correo.dispose();
     clave.dispose();
+    apellido.dispose();
+    telefono.dispose();
+    codigo.dispose();
     super.dispose();
   }
 
@@ -110,9 +121,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   bool get _puedeSeguir => switch (paso) {
     0 =>
       sesionPreparada ||
-          nombre.text.trim().isNotEmpty &&
-              correo.text.contains('@') &&
-              clave.text.length >= 6,
+          (codigoEnviado
+              ? codigo.text.length == 6
+              : nombre.text.trim().isNotEmpty &&
+                    apellido.text.trim().isNotEmpty &&
+                    correo.text.contains('@') &&
+                    telefonoCompleto(prefijo, telefono.text).isNotEmpty &&
+                    clave.text.length >= 6),
     2 => meta != nativo,
     3 => sectores.isNotEmpty,
     4 => objetivos.isNotEmpty,
@@ -132,27 +147,29 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         creando = true;
         errorRegistro = null;
       });
-      final ok = await Sync.instancia.registrarConPassword(
-        email: correo.text.trim().toLowerCase(),
-        password: clave.text,
-        nombre: nombre.text.trim(),
-        idiomaNativo: nativo,
-        idiomaMeta: meta,
-        nivelInicial: nivelInicial.clamp(1, 10),
+      // Primero se manda el código; la cuenta se crea al verificarlo.
+      if (!codigoEnviado) {
+        final enviado = await _pedirCodigo();
+        if (!mounted) return;
+        setState(() {
+          creando = false;
+          codigoEnviado = enviado;
+          if (!enviado) errorRegistro = _errorServidor();
+        });
+        return;
+      }
+      final ok = await Sync.instancia.verificarCodigoRegistro(
+        correo.text.trim().toLowerCase(),
+        codigo.text,
       );
       if (!mounted) return;
       setState(() {
         creando = false;
         sesionPreparada = ok;
+        if (!ok) codigo.clear();
       });
       if (!ok) {
-        setState(
-          () => errorRegistro = Sync.instancia.ultimoError.isEmpty
-              ? tr(
-                  'No pudimos crear la cuenta. Comprueba la conexión e inténtalo otra vez.',
-                )
-              : Sync.instancia.ultimoError,
-        );
+        setState(() => errorRegistro = _errorServidor());
         return;
       }
     }
@@ -210,6 +227,23 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     if (mounted) context.go('/inicio');
   }
 
+  Future<bool> _pedirCodigo() => Sync.instancia.pedirCodigoRegistro(
+    email: correo.text.trim().toLowerCase(),
+    password: clave.text,
+    nombre: nombre.text.trim(),
+    apellido: apellido.text.trim(),
+    telefono: telefonoCompleto(prefijo, telefono.text),
+    idiomaNativo: nativo,
+    idiomaMeta: meta,
+    nivelInicial: nivelInicial.clamp(1, 10),
+  );
+
+  String _errorServidor() => Sync.instancia.ultimoError.isEmpty
+      ? tr(
+          'No pudimos crear la cuenta. Comprueba la conexión e inténtalo otra vez.',
+        )
+      : Sync.instancia.ultimoError;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -217,7 +251,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         leading: paso == 0
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => context.go('/bienvenida'),
+                // Desde el código se vuelve a los datos (p. ej. correo mal escrito).
+                onPressed: codigoEnviado && !sesionPreparada
+                    ? () => setState(() {
+                        codigoEnviado = false;
+                        codigo.clear();
+                        errorRegistro = null;
+                      })
+                    : () => context.go('/bienvenida'),
               )
             : IconButton(
                 icon: const Icon(Icons.arrow_back),
@@ -278,7 +319,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 onPressed: _puedeSeguir && !creando ? _siguiente : null,
                 child: Text(
                   creando
-                      ? tr('CREANDO TU CUENTA…')
+                      ? (paso == 0 && !codigoEnviado
+                            ? tr('ENVIANDO EL CÓDIGO…')
+                            : tr('CREANDO TU CUENTA…'))
+                      : paso == 0 && codigoEnviado && !sesionPreparada
+                      ? tr('VERIFICAR Y CREAR MI CUENTA')
                       : (paso == 6
                             ? tr('COMENZAR MI HORA GRATIS')
                             : paso == 5 && _haraPrueba
@@ -323,19 +368,91 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     _ => _trial(),
   };
 
-  Widget _cuenta() => ListView(
+  Widget _cuenta() => codigoEnviado && !sesionPreparada
+      ? _codigo()
+      : _datosCuenta();
+
+  /// Segundo tiempo del paso 1: el código que llegó al correo.
+  Widget _codigo() => ListView(
     children: [
       Text(
-        tr('Nombre completo'),
-        style: const TextStyle(fontWeight: FontWeight.w600),
+        tr(
+          'Te enviamos un código de 6 dígitos a {correo}. Escríbelo para crear tu cuenta.',
+          {'correo': correo.text.trim().toLowerCase()},
+        ),
+        style: const TextStyle(height: 1.4),
       ),
+      const SizedBox(height: 16),
+      CampoCodigo(
+        controller: codigo,
+        onChanged: () => setState(() => errorRegistro = null),
+        onCompleto: () {
+          if (!creando) _siguiente();
+        },
+      ),
+      if (errorRegistro != null) ...[
+        const SizedBox(height: 8),
+        Text(
+          errorRegistro!,
+          style: const TextStyle(
+            color: OL.rojo,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+      const SizedBox(height: 8),
+      ReenviarCodigo(
+        reenviar: () async {
+          final ok = await _pedirCodigo();
+          if (mounted && !ok) setState(() => errorRegistro = _errorServidor());
+          return Sync.instancia.reenviarEn ?? 60;
+        },
+      ),
+      Text(
+        tr('¿No llega? Revisa la carpeta de spam o promociones.'),
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: OL.gris, fontSize: 12),
+      ),
+      TextButton(
+        onPressed: () => setState(() {
+          codigoEnviado = false;
+          codigo.clear();
+          errorRegistro = null;
+        }),
+        child: Text(tr('Cambiar mis datos o el correo')),
+      ),
+    ],
+  );
+
+  Widget _datosCuenta() => ListView(
+    children: [
+      Text(tr('Nombre'), style: const TextStyle(fontWeight: FontWeight.w600)),
       const SizedBox(height: 6),
       TextField(
         controller: nombre,
+        textCapitalization: TextCapitalization.words,
+        autofillHints: const [AutofillHints.givenName],
         onChanged: (_) => setState(() {}),
         decoration: InputDecoration(
           hintText: tr('Tu nombre'),
           prefixIcon: const Icon(Icons.person_outline),
+        ),
+      ),
+      const SizedBox(height: 14),
+      Text(
+        tr('Apellido'),
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      ),
+      const SizedBox(height: 6),
+      TextField(
+        controller: apellido,
+        textCapitalization: TextCapitalization.words,
+        autofillHints: const [AutofillHints.familyName],
+        onChanged: (_) => setState(() {}),
+        decoration: InputDecoration(
+          hintText: tr('Tu apellido'),
+          prefixIcon: const Icon(Icons.badge_outlined),
         ),
       ),
       const SizedBox(height: 14),
@@ -352,6 +469,18 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           hintText: tr('tu@email.com'),
           prefixIcon: const Icon(Icons.mail_outline),
         ),
+      ),
+      const SizedBox(height: 14),
+      Text(
+        tr('Teléfono'),
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      ),
+      const SizedBox(height: 6),
+      CampoTelefono(
+        prefijo: prefijo,
+        numero: telefono,
+        onPrefijo: (v) => setState(() => prefijo = v),
+        onChanged: () => setState(() {}),
       ),
       const SizedBox(height: 14),
       Text(
@@ -390,7 +519,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           label: Text(tr('Rellenar usuario demo de pruebas')),
           onPressed: () => setState(() {
             final id = DateTime.now().microsecondsSinceEpoch;
-            nombre.text = 'Demo onboarding';
+            nombre.text = 'Demo';
+            apellido.text = 'Onboarding';
+            telefono.text = '555 010 2000';
             correo.text = 'demo.$id@onelingo.test';
             clave.text = 'Demo-local-$id!';
           }),

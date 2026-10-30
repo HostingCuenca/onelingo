@@ -168,8 +168,8 @@ test('/admin/usuarios.csv: descarga con cabecera y una fila por alumno', async (
     assert.match(String(r.headers['content-disposition']), /attachment; filename="alumnos-onelingo-\d{4}-\d{2}-\d{2}\.csv"/);
     const lineas = r.body.replace(/^﻿/, '').split('\n');
     assert.equal(lineas.length, 3);
-    assert.ok(lineas[0].startsWith('nombre;email;idioma_meta'));
-    assert.ok(lineas.some((l) => l.startsWith('Beto;beto@ejemplo.test;en')));
+    assert.ok(lineas[0].startsWith('nombre;apellido;email;email_verificado;telefono;idioma_meta'));
+    assert.ok(lineas.some((l) => l.startsWith('Beto;;beto@ejemplo.test;;;en')), lineas.join('\n'));
   } finally { await app.close(); (pool as any).query = original; }
 });
 

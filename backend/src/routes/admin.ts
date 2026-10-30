@@ -67,7 +67,7 @@ const vacio = (v?: string) => (v?.trim() ? v.trim() : null);
 async function listarUsuarios(f: z.infer<typeof FiltrosUsuarios>) {
   await refrescarPlanesDerivados(); // cortesías o periodos que caducaron
   const filas = await query(
-    `SELECT u.id, u.email, u.nombre, u.idioma_nativo, u.idioma_meta, u.plan_id, u.tutor_id, u.trial_segundos,
+    `SELECT u.id, u.email, u.nombre, u.apellido, u.telefono, u.email_verificado, u.idioma_nativo, u.idioma_meta, u.plan_id, u.tutor_id, u.trial_segundos,
             CASE WHEN u.plataforma = '' THEN 'desconocida' ELSE u.plataforma END AS plataforma, u.es_demo,
             u.creado_en, u.ultima_actividad, coalesce(p.nivel_actual, u.nivel_inicial) AS nivel_actual,
             coalesce(p.xp, 0) AS xp, coalesce(p.racha, 0) AS racha, coalesce(p.segundos_estudio, 0) AS segundos,
@@ -75,7 +75,7 @@ async function listarUsuarios(f: z.infer<typeof FiltrosUsuarios>) {
             (SELECT count(*)::int FROM conversaciones c WHERE c.usuario_id = u.id) AS conversaciones,
             u.ultima_actividad > now() - interval '7 days' AS activo
      FROM usuarios u LEFT JOIN progreso p ON p.usuario_id = u.id
-     WHERE ($1::text IS NULL OR u.nombre ILIKE '%'||$1||'%' OR u.email ILIKE '%'||$1||'%')
+     WHERE ($1::text IS NULL OR (u.nombre || ' ' || u.apellido) ILIKE '%'||$1||'%' OR u.email ILIKE '%'||$1||'%' OR u.telefono ILIKE '%'||replace($1, ' ', '')||'%')
        AND ($2::text IS NULL OR u.idioma_meta = $2)
        AND ($3::text IS NULL OR (CASE WHEN u.plataforma = '' THEN 'desconocida' ELSE u.plataforma END) = $3)
        AND ($4::text IS NULL OR ($4 = 'activos') = (u.ultima_actividad > now() - interval '7 days'))
@@ -99,7 +99,7 @@ async function listarUsuarios(f: z.infer<typeof FiltrosUsuarios>) {
   return { total: filas.length, filas: filas.slice(0, f.limite) };
 }
 
-export const COLUMNAS_CSV = ['nombre', 'email', 'idioma_meta', 'idioma_nativo', 'plataforma', 'plan_id', 'creado_en', 'ultima_actividad',
+export const COLUMNAS_CSV = ['nombre', 'apellido', 'email', 'email_verificado', 'telefono', 'idioma_meta', 'idioma_nativo', 'plataforma', 'plan_id', 'creado_en', 'ultima_actividad',
   'activo', 'clases', 'nivel_clases', 'ultima_clase', 'xp', 'racha', 'segundos', 'conversaciones', 'errores_pendientes', 'trial_segundos'];
 
 export default async function rutas(app: FastifyInstance) {

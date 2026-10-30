@@ -25,7 +25,7 @@ export default function Usuarios({ abrir }: { abrir: (id: string) => void }) {
     <>
       <div className="cab"><h1>Alumnos</h1><button className="sec" onClick={exportar}>Exportar CSV</button></div>
       <div className="filtros">
-        <input placeholder="Buscar por nombre o correo…" value={f.q} onChange={(e) => cambiar('q', e.target.value)} />
+        <input placeholder="Buscar por nombre, correo o teléfono…" value={f.q} onChange={(e) => cambiar('q', e.target.value)} />
         <select value={f.idioma} onChange={(e) => cambiar('idioma', e.target.value)} aria-label="Idioma"><option value="">Todos los idiomas</option>{Object.entries(IDIOMAS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
         <select value={f.plataforma} onChange={(e) => cambiar('plataforma', e.target.value)} aria-label="Plataforma"><option value="">Todas las plataformas</option>{Object.entries(PLATAFORMAS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
         <select value={f.estado} onChange={(e) => cambiar('estado', e.target.value)} aria-label="Actividad"><option value="">Activos e inactivos</option><option value="activos">Activos (7 días)</option><option value="inactivos">Inactivos (más de 7 días)</option></select>
@@ -40,7 +40,7 @@ export default function Usuarios({ abrir }: { abrir: (id: string) => void }) {
           <tbody>
             {d?.filas.map((u) => (
               <tr key={u.id} className="click" onClick={() => abrir(u.id)}>
-                <td><b>{u.nombre}</b><br /><span className="muted mono">{u.email}</span></td>
+                <td><b>{[u.nombre, u.apellido].filter(Boolean).join(' ')}</b><br /><span className="muted mono">{u.email}</span>{u.email_verificado ? <span className="ok-texto" title="Correo verificado"> ✓</span> : <span className="muted" title="Correo sin verificar"> · sin verificar</span>}{u.telefono && <><br /><span className="muted mono">{u.telefono}</span></>}</td>
                 <td>{IDIOMAS[u.idioma_meta] ?? u.idioma_meta}{u.nivel_clases !== null && <> <span className="pill">{nivelCorto(u.nivel_clases)}</span></>}</td>
                 <td>{PLATAFORMAS[u.plataforma] ?? u.plataforma}</td>
                 <td className="num"><b>{u.clases}</b>{u.ultima_clase && <><br /><span className="muted" style={{ fontSize: 11 }}>{hace(u.ultima_clase)}</span></>}</td>

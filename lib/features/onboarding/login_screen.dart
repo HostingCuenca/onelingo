@@ -12,6 +12,7 @@ import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/descarga_android.dart';
 import '../../shared/widgets/widgets.dart';
+import 'codigo_correo.dart';
 
 /// Inicio de sesión: cuenta real (correo + contraseña o Google) contra el
 /// backend, y usuarios de prueba para recorrer la demo sin servidor.
@@ -67,7 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
     ref.read(progressProvider.notifier).iniciarSesionReal(
           email: correo,
-          nombre: correo.split('@').first,
+          nombre: Sync.instancia.ultimoNombre ?? correo.split('@').first,
           estadoServidor: Sync.instancia.ultimoEstadoServidor,
         );
     context.go('/inicio');
@@ -87,6 +88,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         setState(() => error = Sync.instancia.ultimoError);
         return;
       }
+      // Google no da el teléfono: se pide una vez (también apellido).
+      if (r['faltaTelefono'] == true) {
+        await pedirContacto(context, nombre: r['nombre'] as String? ?? '');
+        if (!mounted) return;
+      }
       ref.read(progressProvider.notifier).iniciarSesionReal(
             email: r['email'] as String? ?? cuenta.email,
             nombre: r['nombre'] as String? ?? cuenta.displayName ?? cuenta.email,
@@ -104,19 +110,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
   }
 
+  /// Olvidé mi contraseña: código por correo + contraseña nueva, y entra.
   Future<void> _recuperar() async {
+    setState(() { error = null; aviso = null; });
     final correo = email.text.trim().toLowerCase();
-    if (correo.isEmpty || !correo.contains('@')) {
-      setState(() => error = tr('Escribe tu correo para enviarte el enlace.'));
-      return;
-    }
-    setState(() { cargando = true; error = null; });
-    final msg = await Sync.instancia.recuperarPassword(correo);
-    if (!mounted) return;
-    setState(() {
-      cargando = false;
-      aviso = msg ?? (Sync.instancia.ultimoError.isEmpty ? tr('No se pudo enviar el correo.') : Sync.instancia.ultimoError);
-    });
+    if (!await recuperarConCodigo(context, correo) || !mounted) return;
+    ref.read(progressProvider.notifier).iniciarSesionReal(
+          email: Sync.instancia.email ?? correo,
+          nombre: Sync.instancia.ultimoNombre ?? (Sync.instancia.email ?? correo).split('@').first,
+          estadoServidor: Sync.instancia.ultimoEstadoServidor,
+        );
+    context.go('/inicio');
   }
 
   void _usar(DemoUser u) => setState(() {
