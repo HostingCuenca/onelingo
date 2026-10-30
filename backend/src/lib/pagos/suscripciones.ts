@@ -426,14 +426,20 @@ export async function suscripcionDe(usuarioId: string, ahora = new Date()) {
 /**
  * ¿Puede el alumno usar al tutor (chat, voz, videollamada)? Con plan, sí; sin plan,
  * mientras le quede prueba (`usuarios.trial_segundos`, lo que reporta la app). Los
- * usuarios demo, además, solo con el modo demo abierto (Panel → Pagos).
+ * usuarios demo, además, solo con el modo demo abierto (Panel → Pagos) o con una
+ * cortesía vigente: así la demo de pruebas (Ana) sigue entrando tras el lanzamiento.
  */
 export async function bloqueoPractica(usuarioId: string, ahora = new Date()): Promise<{ status: 402 | 403; error: 'prueba_agotada' | 'demo_cerrado' } | null> {
   const [f, a, u] = await Promise.all([filaDe(usuarioId), ajustesPago(), uno<{ trial_segundos: number; es_demo: boolean }>('SELECT trial_segundos, es_demo FROM usuarios WHERE id = $1', [usuarioId])]);
-  if (u?.es_demo && !a.demoActivo) return { status: 403, error: 'demo_cerrado' };
+  if (u?.es_demo && !a.demoActivo && !tieneAcceso(f, ahora)) return { status: 403, error: 'demo_cerrado' };
   if (tieneAcceso(f, ahora)) return null;
   if (Number(u?.trial_segundos ?? 0) >= a.pruebaMinutos * 60) return { status: 402, error: 'prueba_agotada' };
   return null;
+}
+/** ¿Puede entrar esta cuenta demo? Con el modo demo abierto, o con cortesía vigente. */
+export async function demoPermitido(usuarioId: string | undefined, ahora = new Date()): Promise<boolean> {
+  if ((await ajustesPago()).demoActivo) return true;
+  return !!usuarioId && tieneAcceso(await filaDe(usuarioId), ahora);
 }
 /** preHandler tras `requiereAlumno` en las rutas que gastan IA. */
 export async function requierePractica(req: FastifyRequest, reply: FastifyReply) {

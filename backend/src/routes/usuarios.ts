@@ -2,8 +2,7 @@ import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { query, uno } from '../lib/db.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
-import { planEfectivo } from '../lib/pagos/suscripciones.js';
-import { ajustesPago } from '../lib/pagos/planes.js';
+import { demoPermitido, planEfectivo } from '../lib/pagos/suscripciones.js';
 
 const Registro = z.object({
   email: z.string().email(),
@@ -56,8 +55,8 @@ export default async function rutas(app: FastifyInstance) {
     const d = Registro.parse(req.body);
     const email = d.email.toLowerCase();
     if (!esDemo(email)) return reply.code(403).send({ error: 'Regístrate con correo y contraseña' });
-    if (!(await ajustesPago()).demoActivo) return reply.code(403).send({ error: 'demo_cerrado' });
-    const existente = await uno('SELECT id FROM usuarios WHERE email = $1', [email]);
+    const existente = await uno<{ id: string }>('SELECT id FROM usuarios WHERE email = $1', [email]);
+    if (!(await demoPermitido(existente?.id))) return reply.code(403).send({ error: 'demo_cerrado' });
     const u = existente
       ? await uno('UPDATE usuarios SET nombre=$2, idioma_nativo=$3, idioma_meta=$4, nivel_inicial=$5, plataforma=$6, ultima_actividad=now() WHERE email=$1 RETURNING id', [email, d.nombre, d.idiomaNativo, d.idiomaMeta, d.nivelInicial, d.plataforma])
       : await uno('INSERT INTO usuarios (email, nombre, idioma_nativo, idioma_meta, nivel_inicial, plataforma, trial_inicio, es_demo) VALUES ($1,$2,$3,$4,$5,$6, now(), true) RETURNING id', [email, d.nombre, d.idiomaNativo, d.idiomaMeta, d.nivelInicial, d.plataforma]);
@@ -70,7 +69,7 @@ export default async function rutas(app: FastifyInstance) {
     const { email } = z.object({ email: z.string().email() }).parse(req.body);
     const u = esDemo(email.toLowerCase()) ? await uno('SELECT id FROM usuarios WHERE email = $1', [email.toLowerCase()]) : null;
     if (!u) return reply.code(404).send({ error: 'Usuario no encontrado' });
-    if (!(await ajustesPago()).demoActivo) return reply.code(403).send({ error: 'demo_cerrado' });
+    if (!(await demoPermitido(u.id))) return reply.code(403).send({ error: 'demo_cerrado' });
     await query('UPDATE usuarios SET ultima_actividad = now() WHERE id = $1', [u.id]);
     await query('INSERT INTO eventos (usuario_id, tipo) VALUES ($1, $2)', [u.id, 'login']);
     return { id: u.id, token: app.jwt.sign({ sub: u.id, rol: 'alumno' } satisfies Sesion) };

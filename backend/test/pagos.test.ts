@@ -823,6 +823,12 @@ test('tutor: 402 con la prueba agotada y sin plan; modo demo cerrado: sin regist
   const r = await app.inject({ method: 'POST', url: '/chat', headers: tDemo, payload: {} });
   assert.equal(r.statusCode, 403); assert.equal(r.json().error, 'demo_cerrado');
 
+  // La demo de pruebas con cortesía sin vencimiento sigue entrando tras el lanzamiento.
+  await pool.query("INSERT INTO suscripciones (usuario_id, plan_id, origen, estado, todos_idiomas) SELECT id, 'p3', 'cortesia', 'activa', true FROM usuarios WHERE email = $1", [demo.email]);
+  assert.equal((await app.inject({ method: 'POST', url: '/usuarios/login', payload: { email: demo.email } })).statusCode, 200);
+  assert.notEqual((await app.inject({ method: 'POST', url: '/chat', headers: tDemo, payload: {} })).statusCode, 403);
+  assert.equal((await app.inject({ method: 'POST', url: '/usuarios/registro', payload: { ...demo, email: 'otra@onelingo.demo' } })).statusCode, 403, 'una demo nueva sigue cerrada');
+
   await ajustes(true);
   await pool.query("DELETE FROM usuarios WHERE email IN ('dora@pagos.test', 'eva@onelingo.demo')");
 });
