@@ -978,3 +978,33 @@ Fecha: 2026-10-30 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Verificado:** `tsc` en el servidor OK; `onelingo-api` en línea; `/api/salud` ok; `/avatar/index.html` con `pedirPista` y `practice.js?v=53` (200); lock liberado.
 
 **Rollback:** `ssh onelingo 'cd /var/www/onelingo && tar xzf backups/20261030-edu-76-tutores/antes.tar.gz && chown onelingo:onelingo backend/src/lib/ia.ts backend/src/routes/chat.ts web/avatar/index.html web/avatar/practice.js && sudo -u onelingo -H pm2 restart onelingo-api'`.
+
+## Release: 20261030-edu-77-registro
+
+Fecha: 2026-10-30 · Responsable: Claude (Claude Code), por pedido del usuario («Todo junto»). Backend (5 archivos modificados, 2 nuevos, migración 012) + `.env` (correo) + panel + web 0.5.5 + APK 0.5.5+2011 con Shorebird; PM2 `onelingo-api` reiniciado (solo esa app).
+
+**Contenido:**
+- `e280889`: registro con código de 6 dígitos por correo (nombre, apellido, correo, teléfono), «olvidé mi contraseña» con código, Google pide el teléfono si falta, mensajes del servidor en es/en (`x-idioma`); panel con apellido, teléfono y correo verificado.
+- `7d3418f`: versión de la app al pie de Perfil.
+- `dca9284`: una cuenta demo con cortesía vigente sigue entrando con el modo demo apagado (Ana).
+- `47077a2`: permiso `MODIFY_AUDIO_SETTINGS`: sin él, el WebView de la videollamada no abría el micrófono (`NotReadableError`, «Otra app está usando el micrófono») y caía al modo de mantener pulsado. Exige reinstalar la APK.
+- `b69058f`: el panel muestra los minutos de prueba restantes según el ajuste vigente.
+
+**Backend:**
+- **Modificados:** `lib/correo.ts`, `lib/pagos/suscripciones.ts`, `routes/admin.ts`, `routes/auth.ts`, `routes/usuarios.ts`.
+- **Nuevos:** `lib/codigos.ts`, `sql/012_registro_codigo.sql`.
+- **Migración:** 012 aplicada con `npm run migrate`.
+- **`.env`:** `SMTP_HOST=127.0.0.1`, `SMTP_PORT=25`, `SMTP_FROM=OneLingo <no-reply@onelingo.org>`, `PUBLIC_URL=https://onelingo.org/api` (Postfix + DKIM del propio VPS, ver runbook). Copia anterior en el backup (`env.anterior`, 600).
+
+**Cuentas:** Ana (`ana@onelingo.demo`) con cortesía p3 «todos» sin vencimiento (antes vencía 2026-10-30 14:34). Bryan sin cambios (su cortesía venció).
+
+**APK:**
+- **Build:** `shorebird release android --artifact apk --target-platform android-arm,android-arm64 --build-number=2011 -- --dart-define=API_URL=https://onelingo.org/api` desde un worktree limpio de `b69058f`; Shorebird publicó la release 0.5.5+2011. Comprobado con `aapt2`: versionCode 2011, permisos RECORD_AUDIO y MODIFY_AUDIO_SETTINGS; `libapp.so` con `https://onelingo.org/api`.
+- **`/descargas/onelingo.apk` y `/descargas/onelingo-armv7.apk`:** 163 MB, sha256 `b88e160b682a391a…`; `/descargas/version.json` 0.5.5. Escritas con nombre temporal y `mv`.
+- Probado antes en el emulador (build debug contra producción, cuenta Ana): sin el permiso, `getUserMedia` daba `NotReadableError` y logcat «Requires MODIFY_AUDIO_SETTINGS and RECORD_AUDIO»; con el permiso, la llamada abre «Micrófono abierto» y pide `/llamada/token`.
+
+**Backup:** `backups/20261030-edu-77-registro/` (`web-anterior`, `panel-anterior`, `backend/` con los 5 archivos previos, `backend-nuevos.txt`, `env.anterior`, `env.sha`, `onelingo-antes.dump`). Retirados en `staging/20261030-edu-77-registro/` (`web-retirada`, `panel-retirado`).
+
+**Verificado:** `/api/salud` 200; `/auth/registro/codigo` responde con validación en español; entrada demo de Ana 200; `nodemailer.verify()` contra 127.0.0.1:25 correcto; panel, web, `/avatar/index.html` y la APK responden; `/version.json` 0.5.5; PM2 `onelingo-api` en línea sin errores; lock liberado.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261030-edu-77-registro; S=staging/20261030-edu-77-registro; mv web $S/web-retirada-post && mv $S/web-retirada web; mv panel $S/panel-retirado-post && mv $S/panel-retirado panel; cp -r $K/backend/. backend/; (cd backend && xargs rm -f < ../$K/backend-nuevos.txt); install -m 600 -o onelingo -g onelingo $K/env.anterior backend/.env; sudo -u onelingo -H pm2 restart onelingo-api'`. Las columnas y la tabla de 012 pueden quedarse. La APK 0.5.4 anterior sigue en `web-anterior/descargas` (enlace duro).
