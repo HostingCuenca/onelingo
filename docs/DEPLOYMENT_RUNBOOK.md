@@ -36,6 +36,7 @@ Rutas y servicios:
 - respaldos de despliegues: `/var/www/onelingo/backups`
 - seguridad: ufw (22, 80, 443), fail2ban, actualizaciones automáticas, SSH solo con llave
 - lock: `/tmp/onelingo-deploy.lock`
+- correo saliente (30-10-2026): Postfix solo envío (`inet_interfaces = loopback-only`, `myhostname`/`myorigin` = onelingo.org) firmando con OpenDKIM (`inet:127.0.0.1:8891`, selector `ol2026`, llave en `/etc/opendkim/keys/onelingo.org/`). DNS en Porkbun: SPF `v=spf1 ip4:179.197.89.105 ~all`, `ol2026._domainkey` y `_dmarc` (`p=none`). PTR de la IP en hPanel → VPS → Dirección IP: `onelingo.org`. El backend envía con `SMTP_HOST=127.0.0.1`, `SMTP_PORT=25`, sin usuario (`ignoreTLS` en local) y remitente `no-reply@onelingo.org`. Revisar: `opendkim-testkey -d onelingo.org -s ol2026 -vvv`, `journalctl -u postfix@- -n 50`, `mailq`. Ningún otro servidor (tori incluido) interviene en el correo de OneLingo.
 
 Antes de mutar, comprobar que no exista un lock activo. Crear el lock con release, responsable y fecha. Si existe, detenerse y determinar quién despliega.
 
