@@ -96,7 +96,8 @@ async function listarUsuarios(f: z.infer<typeof FiltrosUsuarios>) {
     const x = valor(a), y = valor(b);
     return signo * (typeof x === 'string' ? x.localeCompare(y, 'es') : Number(x) - Number(y));
   });
-  return { total: filas.length, filas: filas.slice(0, f.limite) };
+  // Minutos de prueba vigentes (Panel → Planes) para mostrar lo que le queda a cada alumno.
+  return { total: filas.length, filas: filas.slice(0, f.limite), pruebaMinutos: (await ajustesPago()).pruebaMinutos };
 }
 
 export const COLUMNAS_CSV = ['nombre', 'apellido', 'email', 'email_verificado', 'telefono', 'idioma_meta', 'idioma_nativo', 'plataforma', 'plan_id', 'creado_en', 'ultima_actividad',

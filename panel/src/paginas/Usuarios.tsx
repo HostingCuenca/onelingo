@@ -12,7 +12,7 @@ const COLUMNAS: { clave?: string; titulo: string }[] = [
 
 export default function Usuarios({ abrir }: { abrir: (id: string) => void }) {
   const [f, setF] = useState<Filtros>(INICIAL)
-  const [d, setD] = useState<{ total: number; filas: any[] } | null>(null)
+  const [d, setD] = useState<{ total: number; filas: any[]; pruebaMinutos?: number } | null>(null)
   const [err, setErr] = useState('')
   const cambiar = (k: keyof Filtros, v: string) => setF((x) => ({ ...x, [k]: v }))
   const ordenar = (clave: string) => setF((x) => ({ ...x, orden: clave, dir: x.orden === clave && x.dir === 'desc' ? 'asc' : 'desc' }))
@@ -45,7 +45,7 @@ export default function Usuarios({ abrir }: { abrir: (id: string) => void }) {
                 <td>{PLATAFORMAS[u.plataforma] ?? u.plataforma}</td>
                 <td className="num"><b>{u.clases}</b>{u.ultima_clase && <><br /><span className="muted" style={{ fontSize: 11 }}>{hace(u.ultima_clase)}</span></>}</td>
                 <td className="num">{u.xp}</td><td className="num">{minutos(u.segundos)}</td><td className="num">{u.conversaciones}</td>
-                <td>{u.plan_id ? <span className="pill ok">{PLANES[u.plan_id] ?? u.plan_id}</span> : <span className="pill trial">{Math.max(0, 60 - Math.round(u.trial_segundos / 60))} min gratis</span>}</td>
+                <td>{u.plan_id ? <span className="pill ok">{PLANES[u.plan_id] ?? u.plan_id}</span> : <span className="pill trial">{Math.max(0, (d.pruebaMinutos ?? 60) - Math.round(u.trial_segundos / 60))} min gratis</span>}</td>
                 <td title={u.creado_en}>{hace(u.creado_en)}</td>
                 <td title={u.ultima_actividad}><span className={`punto ${u.activo ? 'ok' : ''}`} />{hace(u.ultima_actividad)}</td>
               </tr>
