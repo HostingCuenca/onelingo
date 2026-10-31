@@ -7,6 +7,8 @@
 // Audio: PCM 16 kHz mono en trozos de 100 ms desde un AudioWorklet.
 
 const TROZO = 1600; // 100 ms a 16 kHz
+// Errores de Scribe que reconectar no arregla (los demás vienen seguidos del cierre).
+const FATALES = new Set(['auth_error', 'quota_exceeded', 'unaccepted_terms']);
 const WORKLET = `class Captura extends AudioWorkletProcessor {
   constructor() { super(); this.buf = new Float32Array(${TROZO}); this.n = 0; }
   process(entradas) {
@@ -27,15 +29,20 @@ function aBase64(f32) {
 export const vivoDisponible = () => !!(window.AudioWorkletNode && window.WebSocket && navigator.mediaDevices?.getUserMedia);
 
 /**
- * Abre micrófono + transcripción. `pedirToken()` → {token, url, modelo}.
- * Eventos: onParcial(texto), onFinal(texto), onEstado('escuchando'|'cerrado'|'error', detalle).
+ * Abre micrófono + transcripción. `pedirToken(cierre)` → {token, url, modelo};
+ * `cierre` es null al empezar y, al reconectar, cómo se cortó la sesión
+ * anterior (código, motivo, segundos abierta, estado del audio, último aviso
+ * del servidor): el servidor lo guarda para saber por qué se corta en móviles.
+ * Eventos: onParcial(texto), onFinal(texto), onEstado('escuchando'|'reconectando'|'cerrado'|'error', detalle).
  */
 export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEstado}) {
   let cerrado = false, silenciado = false, ws = null, ctx = null, stream = null, nodo = null, reintentos = 0, analizador = null, muestras = null;
+  let espera = null, abiertaEn = 0, parcial = '', aviso = '', cierre = null;
+  const cola = []; // audio dicho mientras se reconecta (hasta 3 s), se manda al abrir
   stream = await navigator.mediaDevices.getUserMedia({audio: {echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1}});
   // Si algo falla antes de devolver el control (token 429/503, worklet), se
   // suelta el micrófono: si no, quedaba encendido el resto de la llamada.
-  const soltar = () => { cerrado = true; try { ws?.close(); } catch {} stream?.getTracks().forEach(t => t.stop()); try { nodo?.disconnect(); } catch {} ctx?.close().catch(() => {}); };
+  const soltar = () => { cerrado = true; clearTimeout(espera); try { ws?.close(); } catch {} stream?.getTracks().forEach(t => t.stop()); try { nodo?.disconnect(); } catch {} ctx?.close().catch(() => {}); };
   try {
   ctx = new AudioContext({sampleRate: 16000});
   const url = URL.createObjectURL(new Blob([WORKLET], {type: 'text/javascript'}));
@@ -49,29 +56,46 @@ export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEs
   muestras = new Float32Array(analizador.fftSize);
   // El nodo no suena: se conecta a un destino mudo para que el navegador lo procese.
   const mudo = ctx.createGain(); mudo.gain.value = 0; nodo.connect(mudo).connect(ctx.destination);
+  const enviar = datos => ws.send(JSON.stringify({message_type: 'input_audio_chunk', audio_base_64: aBase64(datos), commit: false, sample_rate: 16000}));
   nodo.port.onmessage = e => {
-    if (cerrado || !ws || ws.readyState !== 1) return;
+    if (cerrado) return;
     const datos = silenciado ? new Float32Array(TROZO) : e.data; // silenciado: se manda silencio (la sesión sigue viva)
-    ws.send(JSON.stringify({message_type: 'input_audio_chunk', audio_base_64: aBase64(datos), commit: false, sample_rate: 16000}));
+    if (ws?.readyState === 1) enviar(datos);
+    else if (!silenciado) { cola.push(datos); if (cola.length > 30) cola.shift(); }
   };
+  // Un AudioContext suspendido (llamada entrante, foco de audio) deja de mandar audio sin avisar.
+  ctx.onstatechange = () => { if (!cerrado && ctx.state !== 'running' && ctx.state !== 'closed') ctx.resume().catch(() => {}); };
 
   async function conectar() {
-    const t = await pedirToken();
+    if (cerrado) return;
+    const t = await pedirToken(cierre);
     if (cerrado) return;
     const q = new URLSearchParams({model_id: t.modelo || 'scribe_v2_realtime', token: t.token, audio_format: 'pcm_16000', commit_strategy: 'vad',
       vad_silence_threshold_secs: '0.5', min_speech_duration_ms: '250', ...(idioma ? {language_code: idioma} : {})});
     ws = new WebSocket(`${t.url}?${q}`);
-    ws.onopen = () => { reintentos = 0; onEstado?.('escuchando'); };
+    ws.onopen = () => { abiertaEn = performance.now(); aviso = ''; while (cola.length) enviar(cola.shift()); onEstado?.('escuchando'); };
     ws.onmessage = e => {
       let m; try { m = JSON.parse(e.data); } catch { return; }
-      if (m.message_type === 'partial_transcript') onParcial?.(m.text || '');
-      else if (m.message_type === 'committed_transcript' || m.message_type === 'committed_transcript_with_timestamps') { if ((m.text || '').trim()) onFinal?.(m.text.trim()); }
-      else if (m.error) onEstado?.('error', `${m.message_type}: ${m.error}`);
+      if (m.message_type === 'partial_transcript') { parcial = m.text || ''; onParcial?.(parcial); }
+      else if (m.message_type === 'committed_transcript' || m.message_type === 'committed_transcript_with_timestamps') { parcial = ''; if ((m.text || '').trim()) onFinal?.(m.text.trim()); }
+      else if (m.message_type !== 'session_started') {
+        aviso = `${m.message_type}${m.error ? ': ' + m.error : ''}`.slice(0, 160);
+        // Solo lo que no se arregla reconectando apaga la escucha; lo demás, si
+        // el servidor corta la sesión, lo resuelve onclose.
+        if (FATALES.has(m.message_type)) { soltar(); onEstado?.('error', aviso); }
+      }
     };
-    ws.onclose = () => {
+    ws.onclose = e => {
       if (cerrado) return;
-      // La sesión se corta (límite de tiempo, red): se reabre con otro token.
-      if (reintentos++ < 3) { onEstado?.('reconectando'); setTimeout(() => conectar().catch(err => onEstado?.('error', String(err?.message || err))), 600 * reintentos); }
+      const segundos = abiertaEn ? Math.round((performance.now() - abiertaEn) / 1000) : 0;
+      cierre = {codigo: e.code, razon: (e.reason || '').slice(0, 120), segundos, audio: ctx.state, aviso};
+      abiertaEn = 0;
+      // Lo que iba diciendo ya no lo confirmará el servidor: se entrega tal cual.
+      if (parcial.trim()) { onFinal?.(parcial.trim()); parcial = ''; }
+      // La cuenta solo vuelve a cero tras una sesión larga: un corte en bucle
+      // (cada 20 s en algunos móviles) pedía tokens sin fin.
+      if (segundos >= 60) reintentos = 0;
+      if (reintentos++ < 3) { onEstado?.('reconectando'); espera = setTimeout(() => conectar().catch(err => onEstado?.('error', String(err?.message || err))), 1000 * 2 ** (reintentos - 1)); }
       else onEstado?.('error', 'Se perdió la conexión de la transcripción.');
     };
   }
@@ -90,7 +114,7 @@ export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEs
     },
     get silenciado() { return silenciado; },
     cerrar() {
-      cerrado = true;
+      cerrado = true; clearTimeout(espera);
       try { ws?.close(); } catch { /* ya cerrado */ }
       nodo?.disconnect(); stream?.getTracks().forEach(t => t.stop()); ctx?.close().catch(() => {});
       onEstado?.('cerrado');
