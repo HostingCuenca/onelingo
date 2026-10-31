@@ -4,6 +4,7 @@
 Fuente (docs/claude-educacion/SITUACIONES_V2.md):
   assets/contenido/situaciones/catalogo.json       las 50 (nombre, categoría, icono, color)
   assets/contenido/<idioma>/situaciones.json       contenido por tramo
+  assets/i18n/en.json                              nombres en inglés (temas de la videollamada)
 
 Genera (no editar a mano):
   lib/core/content/catalogo_situaciones.g.dart     lista de la app
@@ -56,8 +57,15 @@ def dart(catalogo):
 
 
 def temas(catalogo):
+    # `en`: el nombre para la interfaz en inglés (?ui=en), del mismo diccionario
+    # que usa la app (assets/i18n/en.json); `nombre` sigue siendo el que se
+    # manda al servidor.
+    en = cargar(RAIZ / 'assets/i18n/en.json')
     return json.dumps(
-        [{'id': s['id'], 'nombre': s['nombre']} for s in catalogo['situaciones']],
+        [
+            {'id': s['id'], 'nombre': s['nombre'], 'en': en.get(s['nombre'], s['nombre'])}
+            for s in catalogo['situaciones']
+        ],
         ensure_ascii=False,
     ) + '\n'
 

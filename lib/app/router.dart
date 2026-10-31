@@ -320,7 +320,10 @@ final routerProvider = Provider<GoRouter>((ref) {
   );
 });
 
-class _Shell extends StatelessWidget {
+/// Menú inferior. Las páginas del router quedan en caché (no se reconstruyen
+/// al cambiar el idioma de la app), así que observa el idioma de la interfaz
+/// para que las etiquetas cambien al momento.
+class _Shell extends ConsumerWidget {
   const _Shell({required this.shell, required this.menu});
   final StatefulNavigationShell shell;
   final bool menu;
@@ -335,7 +338,10 @@ class _Shell extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Solo para reconstruirse: los textos leen I18n.idioma, que OneLingoApp (más
+    // arriba en el árbol, se construye antes) ya actualizó.
+    ref.watch(progressProvider.select((s) => s.interfaz));
     return Scaffold(
       body: Movil(child: shell),
       bottomNavigationBar: !menu

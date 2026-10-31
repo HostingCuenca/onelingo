@@ -35,6 +35,9 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: ListView(
+          // Inicio queda montada (pestaña en caché) y sus partes `const` no se
+          // reconstruyen solas: al cambiar el idioma de la app se rehace todo.
+          key: ValueKey(s.interfaz),
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 28),
           children: [
             _HomeHeader(

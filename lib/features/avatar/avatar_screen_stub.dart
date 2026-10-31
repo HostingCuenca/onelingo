@@ -29,8 +29,15 @@ Uri urlVisor(String tutorId) {
       : api.path.endsWith('/api')
       ? api.replace(path: '/avatar/index.html')
       : Uri.parse('https://onelingo.org/avatar/index.html');
+  // `ui`: idioma de la interfaz (I18n.idioma), para que la página de la
+  // llamada hable el mismo idioma que la app.
   return base.replace(
-    queryParameters: {'v': 'avatar31', 'embebido': '1', 'tutor': tutorId},
+    queryParameters: {
+      'v': 'avatar32',
+      'embebido': '1',
+      'tutor': tutorId,
+      'ui': I18n.idioma.value,
+    },
   );
 }
 

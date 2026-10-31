@@ -7,13 +7,16 @@ import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
 import {createAvatarTH} from './avatar-th.js?v=14';
 import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
 import {abrirEscucha, esEco, vivoDisponible} from './vivo.js?v=5';
+import {t, nombreTema, traducirPagina} from './textos.js?v=1';
 
 const $ = id => document.getElementById(id), audio = $('audio');
+// Idioma de la interfaz (?ui=en|es, el de la app): antes de cargar nada.
+traducirPagina();
 // Todo lo que usa la conversación se carga ANTES de avisar a la app: si el
 // aviso llegaba antes que topics.json, el saludo fallaba en silencio.
 const [roster, units] = await Promise.all([
   fetch('./roster.json?v=34').then(r => r.json()),
-  fetch('./topics.json?v=26').then(r => r.json()),
+  fetch('./topics.json?v=27').then(r => r.json()),
 ]);
 
 let config = null, tutor = null, avatar = null, history = [], epoch = 0, selection = 0, busy = false, controller = null;
@@ -82,22 +85,23 @@ const ESPECIALISTAS = {en: ['frank'], es: ['diego', 'tomas'], fr: ['lucas', 'and
 // Los tutores 3D de MakeHuman (amara, sofia…) están ocultos por ahora: no salen en la
 // galería, aunque /avatar/<id> todavía los abre (tutores_3d.dart).
 const preferred = Object.fromEntries(Object.entries(ESPECIALISTAS).map(([l, esp]) => [l, [...esp, ...VIVOS.filter(t => !esp.includes(t)), 'lumo']]));
-const language = () => config?.idiomaMeta || 'en', languageName = () => languages[language()] || languages.en;
+const language = () => config?.idiomaMeta || 'en', languageName = () => t(languages[language()] || languages.en);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const headers = () => ({Authorization: `Bearer ${config.token}`});
 const conLimite = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms))]);
 
-const INSIGNIAS = {speaking: 'Hablando', 'voice-loading': 'Pensando…', thinking: 'Pensando…', listening: 'Te escucho', ready: 'Tu turno'};
+const INSIGNIAS = {speaking: t('Hablando'), 'voice-loading': t('Pensando…'), thinking: t('Pensando…'), listening: t('Te escucho'), ready: t('Tu turno')};
 function phase(label, value = 'ready') {
   $('state').textContent = label; $('stage').dataset.phase = value;
-  const i = $('insignia'); i.textContent = enLlamada ? (value === 'ready' && mudo ? 'Micrófono en silencio' : INSIGNIAS[value] ?? '') : ''; i.hidden = !i.textContent;
+  const i = $('insignia'); i.textContent = enLlamada ? (value === 'ready' && mudo ? t('Micrófono en silencio') : INSIGNIAS[value] ?? '') : ''; i.hidden = !i.textContent;
   $('pedirPista').hidden = !(enLlamada && value === 'ready');
 }
 function status(t) { $('status').textContent = t; }
-function error(e, reintentar, etiqueta = 'Reintentar') {
+function error(e, reintentar, etiqueta = t('Reintentar')) {
   const box = $('error'); box.replaceChildren();
   if (!e) return;
-  box.append(e?.message || String(e));
+  // Los mensajes de los módulos (lumo.js, avatar.js) también se traducen.
+  box.append(t(e?.message || String(e)));
   if (reintentar) { const b = el('button', null, etiqueta); b.type = 'button'; b.onclick = reintentar; box.append(b); }
 }
 function controls() {
@@ -124,9 +128,9 @@ window.addEventListener('message', event => {
     config = c;
     // Abierta desde una situación: empieza con su tema y objetivo.
     const temaInicial = units.find(x => x.id === c.tema);
-    if (temaInicial) { temaId = temaInicial.id; objetivoId = c.objetivoId || null; $('temaNombre').textContent = temaInicial.nombre; }
-    $('authStatus').textContent = c.token ? `Nivel ${c.nivel} · tutores para practicar ${languageName()}` : 'Inicia sesión en OneLingo para conversar con los tutores.';
-    $('text').placeholder = `Escribe en ${languageName()}…`;
+    if (temaInicial) { temaId = temaInicial.id; objetivoId = c.objetivoId || null; $('temaNombre').textContent = nombreTema(temaInicial); }
+    $('authStatus').textContent = c.token ? t('Nivel {nivel} · tutores para practicar {idioma}', {nivel: c.nivel, idioma: languageName()}) : t('Inicia sesión en OneLingo para conversar con los tutores.');
+    $('text').placeholder = t('Escribe en {idioma}…', {idioma: languageName()});
     if (!embebido) renderGallery();
     controls();
     if (embebido && tutorInicial && !tutor) { const t = roster.tutors.find(x => x.id === tutorInicial); if (t) select(t); }
@@ -140,12 +144,12 @@ function renderGallery() {
   const recommendations = preferred[language()] || preferred.en;
   const ordered = roster.tutors.filter(t => recommendations.includes(t.id) || t.id === tutorInicial).sort((a, b) => { const ai = recommendations.indexOf(a.id), bi = recommendations.indexOf(b.id); return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi); });
   $('gallery').replaceChildren();
-  for (const t of ordered) {
+  for (const tu of ordered) {
     const b = el('button', 'tutor'), portrait = el('div', 'portrait'), img = el('img');
-    img.src = t.portrait; img.alt = `Retrato de ${t.name}`; img.loading = 'lazy'; portrait.append(img);
-    b.append(portrait, el('strong', null, t.name), el('small', null, t.tipo === '2d' ? 'Tu compañero de OneLingo' : `Tutor de ${languageName()} · ${t.voice_direction.split(' · ')[2] || 'conversacional'}`));
-    if (recommendations.includes(t.id)) b.append(el('span', 'recommended', 'Recomendado'));
-    b.onclick = () => select(t);
+    img.src = tu.portrait; img.alt = t('Retrato de {nombre}', {nombre: tu.name}); img.loading = 'lazy'; portrait.append(img);
+    b.append(portrait, el('strong', null, tu.name), el('small', null, tu.tipo === '2d' ? t('Tu compañero de OneLingo') : t('Tutor de {idioma} · {estilo}', {idioma: languageName(), estilo: tu.voice_direction.split(' · ')[2] || 'conversacional'})));
+    if (recommendations.includes(tu.id)) b.append(el('span', 'recommended', t('Recomendado')));
+    b.onclick = () => select(tu);
     $('gallery').append(b);
   }
 }
@@ -171,26 +175,26 @@ const fuente = {
 
 function sinSesion() {
   if (config?.token) return false;
-  phase('Inicia sesión para conversar', 'error');
-  status('Inicia sesión en OneLingo para conversar con tu tutor.');
+  phase(t('Inicia sesión para conversar'), 'error');
+  status(t('Inicia sesión en OneLingo para conversar con tu tutor.'));
   return true;
 }
 
-async function select(t) {
+async function select(tu) {
   colgar(false);
   document.body.classList.remove('puede-llamar');
-  avatar?.dispose(); avatar = null; tutor = t; history = []; lastReply = ''; correcciones = 0;
+  avatar?.dispose(); avatar = null; tutor = tu; history = []; lastReply = ''; correcciones = 0;
   limpiarTurno(); $('messages').replaceChildren(); actualizarContador();
-  $('name').textContent = t.name;
+  $('name').textContent = tu.name;
   $('selection').hidden = true; $('session').hidden = false;
-  $('loading').hidden = false; $('loading').textContent = `Cargando a ${t.name}…`;
-  error(''); phase('Preparando…', 'loading'); controls();
+  $('loading').hidden = false; $('loading').textContent = t('Cargando a {nombre}…', {nombre: tu.name});
+  error(''); phase(t('Preparando…'), 'loading'); controls();
   const version = ++selection;
   try {
-    avatar = t.tipo === '2d' ? createLumo($('stage'), fuente) : t.tipo === 'th' ? createAvatarTH($('stage'), fuente, t.th) : createAvatar($('stage'), fuente);
+    avatar = tu.tipo === '2d' ? createLumo($('stage'), fuente) : tu.tipo === 'th' ? createAvatarTH($('stage'), fuente, tu.th) : createAvatar($('stage'), fuente);
     // El saludo (texto y voz) se prepara mientras carga el personaje: al
     // contestar, el tutor habla al instante.
-    const carga = avatar.load(t.model, e => { if (version === selection && e.total) $('loading').textContent = `Cargando a ${t.name} · ${Math.round(e.loaded / e.total * 100)} %`; });
+    const carga = avatar.load(tu.model, e => { if (version === selection && e.total) $('loading').textContent = t('Cargando a {nombre} · {pct} %', {nombre: tu.name, pct: Math.round(e.loaded / e.total * 100)}); });
     if (!sinSesion()) void requestTutor(null, true);
     await carga;
     if (version !== selection) return;
@@ -198,7 +202,7 @@ async function select(t) {
     if (!sinSesion()) void autoiniciar(version);
   } catch (e) {
     if (version !== selection) return;
-    avatar?.dispose(); avatar = null; error(e); status('No se pudo cargar el tutor. Regresa y vuelve a intentarlo.'); controls();
+    avatar?.dispose(); avatar = null; error(e); status(t('No se pudo cargar el tutor. Regresa y vuelve a intentarlo.')); controls();
   }
 }
 
@@ -224,9 +228,9 @@ async function autoiniciar(version) {
 }
 function llamadaEntrante() {
   document.body.classList.add('puede-llamar');
-  phase('Te está llamando…', 'ringing');
-  $('llamaTexto').textContent = `${tutor.name} te está llamando…`;
-  $('llamarTexto').textContent = 'Contestar';
+  phase(t('Te está llamando…'), 'ringing');
+  $('llamaTexto').textContent = t('{nombre} te está llamando…', {nombre: tutor.name});
+  $('llamarTexto').textContent = t('Contestar');
   status('');
 }
 
@@ -241,7 +245,7 @@ function iniciarLlamada() {
   document.body.classList.remove('puede-llamar');
   enLlamada = true; inicioLlamada = Date.now(); iniciarReloj(); controls(); error('');
   mantenerPantalla();
-  phase('Conectando…', 'thinking');
+  phase(t('Conectando…'), 'thinking');
   vigilarConexion(epoch);
   setTimeout(calentarRellenos, 4000);
   if (cola.length) siguiente(epoch);
@@ -260,13 +264,13 @@ function vigilarConexion(version, intento = 1) {
   setTimeout(() => {
     if (!enLlamada || version !== epoch || $('stage').dataset.phase !== 'thinking' || sonando || grab) return;
     if (intento > 2) {
-      colgar(false); phase('No se pudo conectar', 'error');
-      $('llamaTexto').textContent = 'No se pudo conectar'; $('llamarTexto').textContent = 'Volver a llamar';
-      error('El tutor no responde. Revisa tu conexión y vuelve a llamar.');
+      colgar(false); phase(t('No se pudo conectar'), 'error');
+      $('llamaTexto').textContent = t('No se pudo conectar'); $('llamarTexto').textContent = t('Volver a llamar');
+      error(t('El tutor no responde. Revisa tu conexión y vuelve a llamar.'));
       return;
     }
     const saludo = !history.some(t => t.rol === 'alumno');
-    stop(); phase('Conectando…', 'thinking'); status(`Reconectando con ${tutor.name}…`);
+    stop(); phase(t('Conectando…'), 'thinking'); status(t('Reconectando con {nombre}…', {nombre: tutor.name}));
     if (lastReply && saludo) encolar(lastReply, epoch); else void requestTutor(saludo ? null : {continuar: true}, saludo);
     vigilarConexion(epoch, intento + 1);
   }, 7000);
@@ -289,7 +293,7 @@ function iniciarReloj() {
     if (!enLlamada) return;
     const s = Math.floor((Date.now() - inicioLlamada) / 1000);
     $('stage').dataset.reloj = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
-    if ($('stage').dataset.phase === 'ready') $('state').textContent = `En llamada · ${$('stage').dataset.reloj}`;
+    if ($('stage').dataset.phase === 'ready') $('state').textContent = t('En llamada · {tiempo}', {tiempo: $('stage').dataset.reloj});
   }, 1000);
 }
 
@@ -304,9 +308,9 @@ function colgar(resumen = true) {
   $('form').hidden = true;
   if (habia && tutor) {
     document.body.classList.add('puede-llamar');
-    phase('Llamada terminada', 'ready');
-    $('llamaTexto').textContent = 'Llamada terminada';
-    $('llamarTexto').textContent = 'Volver a llamar';
+    phase(t('Llamada terminada'), 'ready');
+    $('llamaTexto').textContent = t('Llamada terminada');
+    $('llamarTexto').textContent = t('Volver a llamar');
     status('');
     if (resumen && history.some(t => t.rol === 'alumno')) void mostrarResumen();
   }
@@ -344,14 +348,14 @@ function prepararFrase(text, version, indice) {
   // Con visemas: el MP3 llega junto con el tiempo de cada letra.
   if (avatar?.alineado) {
     const pedir = () => fetch(urlVoz(text, previo, '/voz/alineada'), {headers: headers(), signal: senalVoz()})
-      .then(r => { if (!r.ok) throw Error(`La voz no está disponible (${r.status}).`); return r.json(); });
+      .then(r => { if (!r.ok) throw Error(t('La voz no está disponible ({estado}).', {estado: r.status})); return r.json(); });
     const delStream = vozDelStream(indice);
     // Si la voz no llega en el stream (servidor viejo o fallo), se pide aparte.
     const datos = delStream ? conLimite(delStream.p, 4000).then(d => d?.audio ? d : pedir()) : pedir();
     return datos.then(d => fraseAlineada(d, text));
   }
   return fetch(urlVoz(text, previo), {headers: headers(), signal: senalVoz()})
-    .then(r => { if (!r.ok) throw Error(`La voz no está disponible (${r.status}).`); return r.arrayBuffer(); })
+    .then(r => { if (!r.ok) throw Error(t('La voz no está disponible ({estado}).', {estado: r.status})); return r.arrayBuffer(); })
     .then(async bytes => ({url: URL.createObjectURL(new Blob([bytes], {type: 'audio/mpeg'})), env: await envolvente(bytes).catch(() => null)}));
 }
 // Cada frase se descarga en cuanto llega (en paralelo a la que suena). Antes
@@ -366,7 +370,7 @@ async function siguiente(version) {
   const item = cola.shift();
   if (!item || version !== epoch) return;
   sonando = true; enPuerta = true;
-  if ($('stage').dataset.phase !== 'speaking') phase('Preparando voz…', 'voice-loading');
+  if ($('stage').dataset.phase !== 'speaking') phase(t('Preparando voz…'), 'voice-loading');
   try {
     const f = await item.listo;
     window.__marca?.('frase_lista');
@@ -409,8 +413,8 @@ audio.onplaying = () => {
   if (audio.src === SILENCIO) return;
   // La muletilla («Okay…») no es la respuesta: el alumno puede seguir y se deshace igual.
   if (turno && !itemActual?.relleno) turno.oido = true;
-  phase('Hablando…', 'speaking');
-  status(modoVivo ? (mudo ? 'Micrófono silenciado: toca 🎙 para hablar.' : 'Puedes interrumpir hablando.') : 'Mantén pulsado 🎙 para interrumpir y responder.');
+  phase(t('Hablando…'), 'speaking');
+  status(t(modoVivo ? (mudo ? 'Micrófono silenciado: toca 🎙 para hablar.' : 'Puedes interrumpir hablando.') : 'Mantén pulsado 🎙 para interrumpir y responder.'));
 };
 audio.onended = () => { if (audio.src !== SILENCIO) terminarFrase(itemActual, true); };
 audio.onerror = () => {
@@ -420,9 +424,9 @@ audio.onerror = () => {
 // El tutor terminó y no quedan frases por llegar: turno del alumno.
 function finTurno() {
   if (!enLlamada || sonando || cola.length || !respuestaCompleta || busy || grab) return;
-  phase(`En llamada · ${$('stage').dataset.reloj || '00:00'}`, 'ready');
-  if (modoVivo) status(mudo ? 'Micrófono silenciado: toca 🎙 para hablar.' : 'Tu turno: habla cuando quieras.');
-  else status(history.some(t => t.rol === 'alumno') ? 'Tu turno: mantén pulsado 🎙 para responder.' : 'Mantén pulsado 🎙 y responde en voz alta.');
+  phase(t('En llamada · {tiempo}', {tiempo: $('stage').dataset.reloj || '00:00'}), 'ready');
+  if (modoVivo) status(t(mudo ? 'Micrófono silenciado: toca 🎙 para hablar.' : 'Tu turno: habla cuando quieras.'));
+  else status(t(history.some(h => h.rol === 'alumno') ? 'Tu turno: mantén pulsado 🎙 para responder.' : 'Mantén pulsado 🎙 y responde en voz alta.'));
   vigilarSilencio();
 }
 function vigilarSilencio() {
@@ -454,7 +458,7 @@ function actualizarContador() { $('contador').hidden = !correcciones; $('contado
 function correccion(c) {
   const card = el('div', 'correccion'), fila = el('div', 'correccion-fila');
   fila.append(el('s', null, c.original), el('span', 'flecha', '→'), el('strong', null, c.correcto));
-  card.append(el('span', 'correccion-titulo', 'Corrección'), fila);
+  card.append(el('span', 'correccion-titulo', t('Corrección')), fila);
   if (c.explicacion) card.append(el('small', null, c.explicacion));
   $('messages').append(card);
   return card;
@@ -463,10 +467,10 @@ function correccion(c) {
 function ideas(lista) {
   const box = $('ideas'); box.replaceChildren(); box.hidden = !lista.length;
   if (!lista.length) return;
-  box.append(el('span', 'ideas-titulo', 'Puedes decir'));
+  box.append(el('span', 'ideas-titulo', t('Puedes decir')));
   for (const s of lista) { const b = el('button', 'idea', s); b.type = 'button'; b.onclick = () => requestTutor({texto: s}, false); box.append(b); }
 }
-$('verTraduccion').onclick = () => { const t = $('subTraduccion'); t.hidden = !t.hidden; $('verTraduccion').textContent = t.hidden ? 'Ver traducción' : 'Ocultar traducción'; };
+$('verTraduccion').onclick = () => { const sub = $('subTraduccion'); sub.hidden = !sub.hidden; $('verTraduccion').textContent = t(sub.hidden ? 'Ver traducción' : 'Ocultar traducción'); };
 
 // ---------- Turno: texto o voz → respuesta por frases ----------
 // entrada: null (saludo) · {texto} · {audio, tipo} · {continuar: true} (reintento sin turno nuevo)
@@ -484,8 +488,8 @@ async function requestTutor(entrada, opening = false) {
     limpiarTurno();
     if (entrada?.texto) { mostrarAlumno(entrada.texto); burbuja(entrada.texto, 'mine'); history.push({rol: 'alumno', texto: entrada.texto}); }
     else if (entrada?.audio) mostrarAlumno('…');
-    phase('Pensando…', 'thinking'); status('');
-  } else if (enLlamada) phase('Conectando…', 'thinking');
+    phase(t('Pensando…'), 'thinking'); status('');
+  } else if (enLlamada) phase(t('Conectando…'), 'thinking');
   controller = new AbortController();
   const current = controller, timeout = setTimeout(() => current.abort(), 45000);
   vozEnLinea = avatar?.alineado ? new Map() : null; vozActiva = false;
@@ -505,16 +509,16 @@ async function requestTutor(entrada, opening = false) {
       if (response.status === 404) {
         const f2 = new FormData(); f2.append('idioma', language()); f2.append('audio', entrada.audio, entrada.tipo?.includes('mp4') ? 'turno.m4a' : 'turno.webm');
         const tr = await fetch(config.api + '/transcribir', {method: 'POST', headers: headers(), body: f2, signal: current.signal});
-        if (!tr.ok) throw Error('No se pudo transcribir. Vuelve a intentarlo o escribe con ⌨️.');
+        if (!tr.ok) throw Error(t('No se pudo transcribir. Vuelve a intentarlo o escribe con ⌨️.'));
         const texto = ((await tr.json()).texto || '').trim();
-        if (!texto) throw Error('No te escuché bien. Mantén pulsado el micrófono mientras hablas.');
+        if (!texto) throw Error(t('No te escuché bien. Mantén pulsado el micrófono mientras hablas.'));
         transcrito = true; mostrarAlumno(texto); burbuja(texto, 'mine'); history.push({rol: 'alumno', texto});
         response = await fetch(config.api + '/chat' + conVoz, {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json', Accept: 'text/event-stream'}, body: JSON.stringify({...datos, historial: history.slice(-30)}), signal: current.signal});
       }
     } else {
       response = await fetch(config.api + '/chat' + conVoz, {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json', Accept: 'text/event-stream'}, body: JSON.stringify(datos), signal: current.signal});
     }
-    if (!response.ok) throw Error(await bloqueoTutor(response) ?? (response.status === 401 ? 'Tu sesión ha caducado. Vuelve a iniciar sesión.' : `No se pudo conectar con el tutor (${response.status}).`));
+    if (!response.ok) throw Error(await bloqueoTutor(response) ?? (response.status === 401 ? t('Tu sesión ha caducado. Vuelve a iniciar sesión.') : t('No se pudo conectar con el tutor ({estado}).', {estado: response.status})));
     const reader = response.body.getReader(), decoder = new TextDecoder();
     let pending = '';
     const evento = raw => {
@@ -543,8 +547,8 @@ async function requestTutor(entrada, opening = false) {
         if (r.romanizacion) b.append(el('span', 'romanizacion', r.romanizacion));
         if (r.traduccion) {
           $('subTraduccion').textContent = r.traduccion; $('subTraduccion').hidden = true;
-          $('verTraduccion').hidden = false; $('verTraduccion').textContent = 'Ver traducción';
-          const d = el('details', 'traduccion'); d.append(el('summary', null, 'Ver traducción'), el('span', null, r.traduccion)); b.append(d);
+          $('verTraduccion').hidden = false; $('verTraduccion').textContent = t('Ver traducción');
+          const d = el('details', 'traduccion'); d.append(el('summary', null, t('Ver traducción')), el('span', null, r.traduccion)); b.append(d);
         }
         const cs = r.corrections || [];
         // El tutor la dice en voz alta; por escrito queda en la conversación (💬).
@@ -561,18 +565,18 @@ async function requestTutor(entrada, opening = false) {
       for (const p of parts) evento(p);
     }
     if (pending.trim()) evento(pending);
-    if (!final) throw Error('La respuesta quedó incompleta.');
+    if (!final) throw Error(t('La respuesta quedó incompleta.'));
   } catch (e) {
     if (version === epoch && entrada?.aviso) console.warn('ayuda del tutor', e?.message); // sin aviso: el alumno sigue con su turno
     else if (version === epoch) {
       // Nunca dejar al alumno esperando: se explica y se ofrece reintentar.
-      const msg = e.name === 'AbortError' ? 'El tutor tardó demasiado.' : (e.message || 'No se pudo responder.');
+      const msg = e.name === 'AbortError' ? t('El tutor tardó demasiado.') : t(e.message || 'No se pudo responder.');
       if (entrada?.audio && !transcrito) { mostrarAlumno(''); ultimoFallo = entrada; }
       else if (!opening && !frases) ultimoFallo = {continuar: true};
       if (entrada?.texto && !frases) ultimoFallo = {continuar: true};
       // Lo que el tutor ya dijo cuenta para el siguiente turno (si no, no sabe que lo dijo).
       if (frases && !final && $('subTutor').textContent) { lastReply = $('subTutor').textContent; history.push({rol: 'tutor', texto: lastReply}); burbuja(lastReply); }
-      phase('No se pudo responder', 'error');
+      phase(t('No se pudo responder'), 'error');
       const reintento = ultimoFallo;
       error(msg, reintento || opening ? () => requestTutor(reintento, opening) : null);
     }
@@ -590,12 +594,12 @@ const hablar = $('hablar');
 function avisoMicrofono(e) {
   switch (e?.name) {
     case 'NotAllowedError': case 'SecurityError':
-      return window.OneLingo ? 'OneLingo no tiene permiso del micrófono: actívalo en Ajustes › Apps › OneLingo › Permisos, o escribe con ⌨️.'
-        : 'Activa el permiso del micrófono para hablar, o escribe con ⌨️.';
-    case 'NotFoundError': return 'No encontramos un micrófono en este dispositivo. Puedes escribir con ⌨️.';
+      return t(window.OneLingo ? 'OneLingo no tiene permiso del micrófono: actívalo en Ajustes › Apps › OneLingo › Permisos, o escribe con ⌨️.'
+        : 'Activa el permiso del micrófono para hablar, o escribe con ⌨️.');
+    case 'NotFoundError': return t('No encontramos un micrófono en este dispositivo. Puedes escribir con ⌨️.');
     case 'NotReadableError': case 'AbortError':
-      return 'Otra app está usando el micrófono (una llamada o una grabadora). Ciérrala y vuelve a intentarlo, o escribe con ⌨️.';
-    default: return 'No se pudo abrir el micrófono. Puedes escribir con ⌨️.';
+      return t('Otra app está usando el micrófono (una llamada o una grabadora). Ciérrala y vuelve a intentarlo, o escribe con ⌨️.');
+    default: return t('No se pudo abrir el micrófono. Puedes escribir con ⌨️.');
   }
 }
 // Sin micrófono se pide el permiso: en la app Android, el diálogo del sistema
@@ -605,10 +609,10 @@ let permisoPedido = false; // el diálogo sale solo una vez; luego, con el botó
 function faltaMicrofono(e) {
   const permiso = e?.name === 'NotAllowedError' || e?.name === 'SecurityError';
   if (permiso && window.OneLingo && !permisoPedido) { permisoPedido = true; avisarApp('onelingo-avatar-permiso-microfono'); }
-  error(avisoMicrofono(e), e?.name === 'NotFoundError' ? undefined : pedirPermisoMicrofono, 'Permitir micrófono');
+  error(avisoMicrofono(e), e?.name === 'NotFoundError' ? undefined : pedirPermisoMicrofono, t('Permitir micrófono'));
 }
 function microfonoListo() {
-  error(''); status('Micrófono listo: mantén pulsado 🎙 para hablar.');
+  error(''); status(t('Micrófono listo: mantén pulsado 🎙 para hablar.'));
   if (enLlamada && !modoVivo && vivoDisponible()) abrirVivo();
 }
 function pedirPermisoMicrofono() {
@@ -616,7 +620,7 @@ function pedirPermisoMicrofono() {
   pedirMicrofono().then(s => { s.getTracks().forEach(t => t.stop()); microfonoListo(); }).catch(e => error(avisoMicrofono(e)));
 }
 window.onelingoMicrofono = ok => ok ? microfonoListo()
-  : error('OneLingo no tiene permiso del micrófono: actívalo en Ajustes › Apps › OneLingo › Permisos, o escribe con ⌨️.', pedirPermisoMicrofono, 'Permitir micrófono');
+  : error(t('OneLingo no tiene permiso del micrófono: actívalo en Ajustes › Apps › OneLingo › Permisos, o escribe con ⌨️.'), pedirPermisoMicrofono, t('Permitir micrófono'));
 // Android tarda un instante en soltar el micrófono (al cerrar la escucha en vivo
 // o colgar otra app): «ocupado» se reintenta una vez antes de avisar.
 function pedirMicrofono() {
@@ -633,11 +637,11 @@ function empezarGrabacion(x) {
   const mio = {x0: x, chunks: [], cancelado: false, soltado: false};
   grab = mio; error('');
   document.body.classList.add('grabando'); document.body.classList.remove('cancelando');
-  phase('Te escucho…', 'listening'); limpiarTurno(); status('');
-  $('hablarTexto').textContent = 'Habla… suelta para enviar · ← desliza para cancelar';
+  phase(t('Te escucho…'), 'listening'); limpiarTurno(); status('');
+  $('hablarTexto').textContent = t('Habla… suelta para enviar · ← desliza para cancelar');
   controls();
   pedirMicrofono().then(stream => {
-    if (grab !== mio || mio.soltado) { stream.getTracks().forEach(t => t.stop()); if (grab === mio) terminarSinEnviar('Mantén pulsado 🎙 mientras hablas.'); return; }
+    if (grab !== mio || mio.soltado) { stream.getTracks().forEach(t => t.stop()); if (grab === mio) terminarSinEnviar(t('Mantén pulsado 🎙 mientras hablas.')); return; }
     mio.stream = stream;
     const mime = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm'].find(t => MediaRecorder.isTypeSupported(t));
     mio.rec = new MediaRecorder(stream, mime ? {mimeType: mime} : {});
@@ -645,7 +649,7 @@ function empezarGrabacion(x) {
     mio.rec.onstop = () => finGrabacion(mio);
     mio.rec.start(250); mio.desde = performance.now();
     mio.limite = setTimeout(soltar, 60000);
-    mio.cuenta = setInterval(() => { if (mio.cancelado) return; const s = Math.floor((performance.now() - mio.desde) / 1000); $('hablarTexto').textContent = `● 0:${String(s).padStart(2, '0')} · suelta para enviar · ← desliza para cancelar`; }, 250);
+    mio.cuenta = setInterval(() => { if (mio.cancelado) return; const s = Math.floor((performance.now() - mio.desde) / 1000); $('hablarTexto').textContent = t('● 0:{s} · suelta para enviar · ← desliza para cancelar', {s: String(s).padStart(2, '0')}); }, 250);
   }).catch(e => {
     console.warn('micrófono', e?.name, e?.message);
     if (grab === mio) terminarSinEnviar('');
@@ -656,8 +660,8 @@ function terminarSinEnviar(pista) {
   const mio = grab; grab = null;
   if (mio) { clearTimeout(mio.limite); clearInterval(mio.cuenta); mio.stream?.getTracks().forEach(t => t.stop()); }
   document.body.classList.remove('grabando', 'cancelando');
-  $('hablarTexto').textContent = 'Mantén pulsado para hablar';
-  controls(); phase(`En llamada · ${$('stage').dataset.reloj || '00:00'}`, 'ready'); status(pista);
+  $('hablarTexto').textContent = t('Mantén pulsado para hablar');
+  controls(); phase(t('En llamada · {tiempo}', {tiempo: $('stage').dataset.reloj || '00:00'}), 'ready'); status(pista);
 }
 function soltar() {
   const mio = grab;
@@ -672,10 +676,10 @@ function cancelarGrabacion() { const mio = grab; if (!mio) return; mio.cancelado
 function finGrabacion(mio) {
   const dur = performance.now() - mio.desde;
   if (grab === mio) terminarSinEnviar('');
-  if (mio.cancelado) { status('Mensaje cancelado.'); return; }
-  if (dur < 700) { status('Mantén pulsado 🎙 mientras hablas y suelta al terminar.'); return; }
+  if (mio.cancelado) { status(t('Mensaje cancelado.')); return; }
+  if (dur < 700) { status(t('Mantén pulsado 🎙 mientras hablas y suelta al terminar.')); return; }
   const blob = new Blob(mio.chunks, {type: mio.rec.mimeType || 'audio/webm'});
-  if (blob.size < 500) { status('No te escuché. Acércate al micrófono y vuelve a intentarlo.'); return; }
+  if (blob.size < 500) { status(t('No te escuché. Acércate al micrófono y vuelve a intentarlo.')); return; }
   void requestTutor({audio: blob, tipo: blob.type}, false);
 }
 hablar.addEventListener('pointerdown', e => {
@@ -686,7 +690,7 @@ hablar.addEventListener('pointerdown', e => {
   empezarGrabacion(e.clientX);
 });
 hablar.addEventListener('pointermove', e => {
-  if (grab && !grab.cancelado && grab.x0 - e.clientX > 80) { grab.cancelado = true; document.body.classList.add('cancelando'); $('hablarTexto').textContent = 'Suelta para cancelar'; }
+  if (grab && !grab.cancelado && grab.x0 - e.clientX > 80) { grab.cancelado = true; document.body.classList.add('cancelando'); $('hablarTexto').textContent = t('Suelta para cancelar'); }
 });
 hablar.addEventListener('pointerup', soltar);
 hablar.addEventListener('pointercancel', () => { if (grab) grab.cancelado = true; soltar(); });
@@ -705,11 +709,11 @@ const tutorAudible = () => tutorSuena() || performance.now() - finVozEn < 1200;
 // audio, una respuesta de 1–2 palabras («Tea», «Yes») es del alumno aunque
 // repita la pregunta.
 const pareceEco = texto => tutorAudible() && (tutorSuena() || palabras(texto) > 2) && esEco(texto, `${dichoReciente} ${relleno}`);
-function textoVivo() { $('hablarTexto').textContent = mudo ? 'Silenciado · toca 🎙 para hablar' : 'Micrófono abierto · habla cuando quieras'; document.body.classList.toggle('mudo', mudo); }
+function textoVivo() { $('hablarTexto').textContent = t(mudo ? 'Silenciado · toca 🎙 para hablar' : 'Micrófono abierto · habla cuando quieras'); document.body.classList.toggle('mudo', mudo); }
 // El servidor no deja usar al tutor: prueba gratuita agotada (402) o modo demo cerrado (403).
 async function bloqueoTutor(r) {
-  if (r.status === 402) return 'Tu prueba gratuita terminó. Elige un plan para seguir practicando con el tutor.';
-  if (r.status === 403 && (await r.json().catch(() => ({}))).error === 'demo_cerrado') return 'El acceso de demostración está cerrado.';
+  if (r.status === 402) return t('Tu prueba gratuita terminó. Elige un plan para seguir practicando con el tutor.');
+  if (r.status === 403 && (await r.json().catch(() => ({}))).error === 'demo_cerrado') return t('El acceso de demostración está cerrado.');
   return null;
 }
 async function abrirVivo(motivo = 'inicio') {
@@ -729,9 +733,9 @@ async function abrirVivo(motivo = 'inicio') {
       onParcial: oirParcial, onFinal: oirFinal,
       onEstado: (e, detalle) => {
         if (gen !== genVivo) return;
-        if (e === 'reconectando') status('Reconectando el micrófono…');
+        if (e === 'reconectando') status(t('Reconectando el micrófono…'));
         if (e === 'escuchando' && $('stage').dataset.phase === 'ready') finTurno(); // quita «Reconectando…»
-        if (e === 'error') { console.warn('escucha en vivo', detalle); volverAPulsar('Se cortó la escucha en vivo: mantén pulsado 🎙 para hablar.'); }
+        if (e === 'error') { console.warn('escucha en vivo', detalle); volverAPulsar(t('Se cortó la escucha en vivo: mantén pulsado 🎙 para hablar.')); }
       },
     });
     // Se colgó, se cerró o se volvió a abrir mientras esta apertura esperaba: se descarta.
@@ -740,14 +744,14 @@ async function abrirVivo(motivo = 'inicio') {
   } catch (e) {
     console.warn('escucha en vivo', e?.name, e?.message);
     if (gen !== genVivo || !modoVivo || !enLlamada) return;
-    volverAPulsar(/Demasiadas/.test(e?.message) ? 'La escucha en vivo vuelve en unos minutos: mientras, mantén pulsado 🎙 para hablar.' : 'Mantén pulsado 🎙 para hablar.');
+    volverAPulsar(t(/Demasiadas/.test(e?.message) ? 'La escucha en vivo vuelve en unos minutos: mientras, mantén pulsado 🎙 para hablar.' : 'Mantén pulsado 🎙 para hablar.'));
     if (e instanceof DOMException) faltaMicrofono(e); // fallo del micrófono, no del servidor
   }
 }
 function cerrarVivo() {
   const h = vivo; vivo = null; modoVivo = false; arrastre = ''; genVivo++;
   document.body.classList.remove('vivo', 'mudo');
-  $('hablarTexto').textContent = 'Mantén pulsado para hablar';
+  $('hablarTexto').textContent = t('Mantén pulsado para hablar');
   h?.cerrar();
 }
 function volverAPulsar(pista) { cerrarVivo(); if (enLlamada) { status(pista); controls(); } }
@@ -773,7 +777,7 @@ function oirParcial(texto) {
     clearTimeout(rescate);
     rescate = setTimeout(() => { if (arrastre && !busy && enLlamada && !mudo) { const t = arrastre; arrastre = ''; void requestTutor({texto: t}, false); } }, 3500);
   }
-  if ($('stage').dataset.phase !== 'listening') { phase('Te escucho…', 'listening'); limpiarTurno(); status(''); }
+  if ($('stage').dataset.phase !== 'listening') { phase(t('Te escucho…'), 'listening'); limpiarTurno(); status(''); }
   mostrarAlumno((arrastre ? arrastre + ' ' : '') + texto);
 }
 function oirFinal(texto) {
@@ -813,8 +817,8 @@ function animarNivel() {
     if (audio.volume < 1) audio.volume = 1;
     // Retomó antes de que el tutor se oyera: «Te escucho» (el subtítulo se
     // queda por si solo fue una tos y el tutor sigue).
-    if (hablando && enPuerta && $('stage').dataset.phase !== 'listening') phase('Te escucho…', 'listening');
-    if (hablando && !busy && $('stage').dataset.phase === 'ready') { clearTimeout(silencioTimer); phase('Te escucho…', 'listening'); status(''); }
+    if (hablando && enPuerta && $('stage').dataset.phase !== 'listening') phase(t('Te escucho…'), 'listening');
+    if (hablando && !busy && $('stage').dataset.phase === 'ready') { clearTimeout(silencioTimer); phase(t('Te escucho…'), 'listening'); status(''); }
     // Era ruido (una tos, un golpe) y no llegó nada que transcribir: vuelve su turno.
     if ($('stage').dataset.phase === 'listening' && !busy && !sonando && !cola.length && !arrastre && !grab
       && ahora - Math.max(ultimaVoz, ultimoParcialEn) > 2500) finTurno();
@@ -842,13 +846,13 @@ function abrirPanel(cual) {
   $('messages').hidden = cual !== 'conversacion';
   $('temas').hidden = cual !== 'temas';
   $('reporte').hidden = cual !== 'reporte';
-  $('panelTitulo').textContent = cual === 'temas' ? '¿Qué quieres practicar?' : cual === 'reporte' ? 'Reportar respuesta' : 'Conversación';
+  $('panelTitulo').textContent = t(cual === 'temas' ? '¿Qué quieres practicar?' : cual === 'reporte' ? 'Reportar respuesta' : 'Conversación');
   if (cual === 'temas') pintarTemas();
   else if (cual === 'conversacion') $('messages').lastElementChild?.scrollIntoView({block: 'end'});
 }
 // ---------- Reportar la última respuesta del tutor (política de IA de Google Play) ----------
 // Misma API que la app (POST /reportes-ia) con el token de la sesión.
-const MOTIVOS = [['ofensivo', 'Ofensiva'], ['incorrecto', 'Incorrecta'], ['inapropiado', 'Inapropiada'], ['otro', 'Otro motivo']];
+const MOTIVOS = [['ofensivo', t('Ofensiva')], ['incorrecto', t('Incorrecta')], ['inapropiado', t('Inapropiada')], ['otro', t('Otro motivo')]];
 let reporte = null;
 function abrirReporte() {
   if (!lastReply || !config?.token) return;
@@ -863,26 +867,26 @@ function abrirReporte() {
     b.onclick = () => { reporte.motivo = id; for (const x of box.children) x.setAttribute('aria-pressed', String(x === b)); $('reporteEnviar').disabled = false; };
     box.append(b);
   }
-  $('reporteEnviar').disabled = true; $('reporteEnviar').textContent = 'Enviar reporte';
+  $('reporteEnviar').disabled = true; $('reporteEnviar').textContent = t('Enviar reporte');
   abrirPanel('reporte');
 }
 $('reportar').onclick = abrirReporte;
 $('reporte').onsubmit = async e => {
   e.preventDefault();
   if (!reporte?.motivo || reporte.enviando) return;
-  reporte.enviando = true; $('reporteEnviar').disabled = true; $('reporteEnviar').textContent = 'Enviando…'; $('reporteAviso').textContent = '';
+  reporte.enviando = true; $('reporteEnviar').disabled = true; $('reporteEnviar').textContent = t('Enviando…'); $('reporteAviso').textContent = '';
   const u = units.find(x => x.id === temaId);
   const cuerpo = {origen: 'llamada', texto: reporte.texto.slice(0, 2000), motivo: reporte.motivo, comentario: $('reporteComentario').value.trim().slice(0, 500),
     contexto: {idioma: language(), ...(tutor ? {tutorId: 'avatar_' + tutor.id} : {}), ...(u ? {situacion: String(u.nombre ?? u.id).slice(0, 200)} : {})}};
   try {
     const r = await fetch(config.api + '/reportes-ia', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify(cuerpo)});
-    if (!r.ok) throw new Error(r.status === 429 ? 'Enviaste muchos reportes. Inténtalo de nuevo más tarde.' : 'No se pudo enviar el reporte. Inténtalo de nuevo.');
+    if (!r.ok) throw new Error(t(r.status === 429 ? 'Enviaste muchos reportes. Inténtalo de nuevo más tarde.' : 'No se pudo enviar el reporte. Inténtalo de nuevo.'));
     for (const n of $('reporte').children) n.hidden = true;
-    $('reporte').append(el('p', 'reporte-gracias', 'Gracias, lo revisaremos.'));
+    $('reporte').append(el('p', 'reporte-gracias', t('Gracias, lo revisaremos.')));
     const enviado = reporte; setTimeout(() => { if (reporte === enviado) $('panel').hidden = true; }, 1800);
   } catch (x) {
-    $('reporteAviso').textContent = x instanceof TypeError ? 'No se pudo conectar. Revisa tu conexión.' : x.message;
-    reporte.enviando = false; $('reporteEnviar').disabled = false; $('reporteEnviar').textContent = 'Enviar reporte';
+    $('reporteAviso').textContent = x instanceof TypeError ? t('No se pudo conectar. Revisa tu conexión.') : x.message;
+    reporte.enviando = false; $('reporteEnviar').disabled = false; $('reporteEnviar').textContent = t('Enviar reporte');
   }
 };
 $('verConversacion').onclick = () => abrirPanel('conversacion');
@@ -890,8 +894,8 @@ $('cerrarPanel').onclick = () => { $('panel').hidden = true; };
 $('tema').onclick = () => abrirPanel('temas');
 function pintarTemas() {
   const box = $('temas'); box.replaceChildren();
-  for (const u of [{id: null, nombre: 'Conversación libre'}, ...units]) {
-    const b = el('button', 'opcion-tema', u.nombre); b.type = 'button';
+  for (const u of [{id: null, nombre: 'Conversación libre', en: t('Conversación libre')}, ...units]) {
+    const b = el('button', 'opcion-tema', nombreTema(u)); b.type = 'button';
     b.setAttribute('aria-pressed', String(u.id === temaId));
     b.onclick = () => elegirTema(u);
     box.append(b);
@@ -901,34 +905,34 @@ function pintarTemas() {
 function elegirTema(u) {
   $('panel').hidden = true;
   if (u.id === temaId) return;
-  temaId = u.id; objetivoId = null; $('temaNombre').textContent = u.nombre;
+  temaId = u.id; objetivoId = null; $('temaNombre').textContent = nombreTema(u);
   stop(); if (grab) cancelarGrabacion();
   history = []; lastReply = ''; limpiarTurno();
-  burbuja(`Nuevo tema: ${u.nombre}`, 'feedback');
+  burbuja(t('Nuevo tema: {tema}', {tema: nombreTema(u)}), 'feedback');
   void requestTutor(null, true);
 }
 
 // ---------- Resumen al colgar ----------
 async function mostrarResumen() {
   abrirPanel('conversacion');
-  const card = el('div', 'resumen'); card.append(el('h3', null, 'Resumen de la llamada'), el('p', null, 'Preparando…'));
+  const card = el('div', 'resumen'); card.append(el('h3', null, t('Resumen de la llamada')), el('p', null, t('Preparando…')));
   $('messages').append(card); card.scrollIntoView({block: 'end'});
   try {
     const r = await fetch(config.api + '/chat/resumen', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify({idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-40)})});
-    if (!r.ok) throw Error('No se pudo preparar el resumen.');
+    if (!r.ok) throw Error(t('No se pudo preparar el resumen.'));
     const d = await r.json();
-    card.replaceChildren(el('h3', null, 'Resumen de la llamada'));
+    card.replaceChildren(el('h3', null, t('Resumen de la llamada')));
     const seccion = (titulo, items) => { if (!items.length) return; card.append(el('h4', null, titulo)); const ul = el('ul'); for (const i of items) ul.append(i); card.append(ul); };
-    seccion('Lo hiciste bien', (d.logros || []).map(t => el('li', null, t)));
-    seccion('Para mejorar', (d.mejorar || []).map(m => { const li = el('li'); li.append(el('s', null, m.original), ' → ', el('strong', null, m.correcto), el('small', null, m.explicacion)); return li; }));
-    seccion('Vocabulario de hoy', (d.vocabulario || []).map(v => { const li = el('li'); li.append(el('strong', null, v.palabra), ' · ' + v.significado); return li; }));
+    seccion(t('Lo hiciste bien'), (d.logros || []).map(t => el('li', null, t)));
+    seccion(t('Para mejorar'), (d.mejorar || []).map(m => { const li = el('li'); li.append(el('s', null, m.original), ' → ', el('strong', null, m.correcto), el('small', null, m.explicacion)); return li; }));
+    seccion(t('Vocabulario de hoy'), (d.vocabulario || []).map(v => { const li = el('li'); li.append(el('strong', null, v.palabra), ' · ' + v.significado); return li; }));
     if (d.siguientePaso) card.append(el('p', 'siguiente', d.siguientePaso));
-    card.append(el('p', null, `${tutor.name} recordará esto en tu próxima llamada.`));
+    card.append(el('p', null, t('{nombre} recordará esto en tu próxima llamada.', {nombre: tutor.name})));
     card.scrollIntoView({block: 'end'});
-  } catch (e) { card.replaceChildren(el('h3', null, 'Resumen de la llamada'), el('p', null, e.message)); }
+  } catch (e) { card.replaceChildren(el('h3', null, t('Resumen de la llamada')), el('p', null, t(e.message))); }
 }
 
-window.addEventListener('offline', () => { stop(); error('No hay conexión. Vuelve a intentarlo cuando tengas internet.'); });
+window.addEventListener('offline', () => { stop(); error(t('No hay conexión. Vuelve a intentarlo cuando tengas internet.')); });
 window.addEventListener('pagehide', () => { colgar(false); avatar?.dispose(); });
 // En segundo plano (o en otra pestaña de la app) ni se escucha ni habla el
 // tutor; al volver, el micrófono en vivo se reabre.
