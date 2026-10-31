@@ -58,4 +58,10 @@ Requiere además la cuenta de servicio y Pub/Sub del servidor (pasos 1–3 de PA
 Antes de producción: prueba cerrada con al menos 12 verificadores que acepten y mantengan la app 14 días seguidos. Grupo de verificadores en Administra la cuenta → Grupos de verificadores (lista de correos de Gmail).
 
 ## Estado (31-10-2026)
-App creada (id de consola 4976299517917417654). Completos: contenido de la app (todas las declaraciones), categoría Educación, contacto, fichas es-419 y en-US con gráficos. Falta: subir el AAB 0.5.8+2014 a prueba interna/cerrada, verificadores y suscripciones.
+App creada (id de consola 4976299517917417654). Completos: contenido de la app (todas las declaraciones), categoría Educación, contacto, fichas es-419 y en-US con gráficos.
+- AAB 2014 (0.5.8) subido. Se subió desde el navegador con fetch + DataTransfer (el archivo pesa 175 MB y la herramienta solo admite 10 MB); el AAB se expuso unos minutos en onelingo.org con CORS temporal, que ya se retiró.
+- Prueba interna: publicada y activa, sin revisión. Enlace: https://play.google.com/apps/internaltest/4698621163456524849
+- Prueba cerrada «Alpha»: 178 países, versión 2014 y lista de verificadores. Enviada a revisión de Google el 31-10 (suele tardar hasta 7 días). Enlace: https://play.google.com/apps/testing/com.torisoftt.onelingo
+- Lista de correos «Verificadores OneLingo»: 15 Gmail (12 del chat de WhatsApp más hostingcuenca, torisoftt y torisofttcuenca), asignada a las dos pruebas. Comentarios a infoonelingo@gmail.com.
+- Los 14 días de la prueba cerrada empiezan a contar cuando Google la apruebe y al menos 12 verificadores se unan.
+- Falta: suscripciones (cuenta de servicio + Pub/Sub) y darle contraseña a Ana antes de apagar el modo demo.
