@@ -10,13 +10,14 @@ import '../../core/i18n/i18n.dart';
 import '../../shared/widgets/widgets.dart';
 
 /// Pide el permiso del micrófono (el diálogo de Android o del navegador) y dice
-/// si quedó concedido. Sin plugin (pruebas de widgets) no se bloquea.
-final permisoMicrofonoProvider = Provider<Future<bool> Function()>(
-  (_) => () async {
+/// si quedó concedido; con `pedir: false` solo lo consulta, sin diálogo. Sin
+/// plugin (pruebas de widgets) no se bloquea.
+final permisoMicrofonoProvider = Provider<Future<bool> Function({bool pedir})>(
+  (_) => ({pedir = true}) async {
     AudioRecorder? grabadora;
     try {
       grabadora = AudioRecorder();
-      return await grabadora.hasPermission();
+      return await grabadora.hasPermission(request: pedir);
     } on MissingPluginException {
       return true;
     } catch (_) {
@@ -58,13 +59,17 @@ class _PuertaMicrofonoState extends ConsumerState<PuertaMicrofono>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState estado) {
-    if (estado == AppLifecycleState.resumed && _permitido == false) _pedir();
+    // Al volver (de Ajustes, o justo tras negar el diálogo) solo se consulta:
+    // pedirlo aquí volvía a sacar el diálogo nada más negarlo.
+    if (estado == AppLifecycleState.resumed && _permitido == false) {
+      _pedir(pedir: false);
+    }
   }
 
-  Future<void> _pedir() async {
+  Future<void> _pedir({bool pedir = true}) async {
     if (_pidiendo) return;
     _pidiendo = true;
-    final ok = await ref.read(permisoMicrofonoProvider)();
+    final ok = await ref.read(permisoMicrofonoProvider)(pedir: pedir);
     _pidiendo = false;
     if (mounted) setState(() => _permitido = ok);
   }

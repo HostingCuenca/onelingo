@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:record/record.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 import '../../core/api/sync.dart';
@@ -47,17 +49,75 @@ class AvatarScreen extends ConsumerStatefulWidget {
   ConsumerState<AvatarScreen> createState() => _AvatarScreenState();
 }
 
-class _AvatarScreenState extends ConsumerState<AvatarScreen> {
+class _AvatarScreenState extends ConsumerState<AvatarScreen>
+    with WidgetsBindingObserver {
   WebViewController? _web;
   String? _error;
+  bool _abriendo = false;
+  // Si la página no avisa que está lista (falló un script, un 502 de nginx),
+  // se muestra «Reintentar» en vez de una pantalla en blanco para siempre.
+  Timer? _vigiaCarga;
+  // La pantalla sigue montada en otra pestaña (IndexedStack) o con la app en
+  // segundo plano: la llamada se pausa y no se mantiene la pantalla encendida.
+  bool _visible = true, _enPrimerPlano = true, _pausada = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     if (Sync.instancia.token != null) _abrir();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final visible = TickerMode.valuesOf(context).enabled;
+    if (visible != _visible) {
+      _visible = visible;
+      _actualizarPausa();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState estado) {
+    // «inactive» (cortina de notificaciones, diálogo del sistema) no pausa.
+    final primerPlano = estado == AppLifecycleState.resumed
+        ? true
+        : estado == AppLifecycleState.inactive
+        ? _enPrimerPlano
+        : false;
+    if (primerPlano != _enPrimerPlano) {
+      _enPrimerPlano = primerPlano;
+      _actualizarPausa();
+    }
+  }
+
+  void _actualizarPausa() {
+    final pausar = !(_visible && _enPrimerPlano);
+    // En vivo se habla sin tocar la pantalla: si se apagaba, se cortaba la llamada.
+    WakelockPlus.toggle(enable: !pausar).catchError((_) {});
+    if (pausar == _pausada) return;
+    _pausada = pausar;
+    _web
+        ?.runJavaScript(
+          pausar ? 'window.onelingoPausa?.()' : 'window.onelingoReanudar?.()',
+        )
+        .catchError((_) {});
+  }
+
   Future<void> _abrir() async {
+    if (_abriendo) return;
+    _abriendo = true;
+    try {
+      await _crearVisor();
+    } catch (e) {
+      if (mounted) setState(() => _error = '$e');
+    } finally {
+      _abriendo = false;
+    }
+  }
+
+  Future<void> _crearVisor() async {
     // El WebView solo puede dar el micrófono si la app ya tiene el permiso.
     final grabadora = AudioRecorder();
     try {
@@ -78,9 +138,26 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     await c.addJavaScriptChannel('OneLingo', onMessageReceived: _mensaje);
     await c.setNavigationDelegate(
       NavigationDelegate(
+        // Solo el visor: otra página que cargara aquí recibiría la sesión.
+        onNavigationRequest: (r) {
+          final u = Uri.tryParse(r.url);
+          final visor = urlVisor(widget.tutorId);
+          return u != null &&
+                  (r.url == 'about:blank' || u.origin == visor.origin)
+              ? NavigationDecision.navigate
+              : NavigationDecision.prevent;
+        },
         onWebResourceError: (e) {
           if (e.isForMainFrame == true && mounted) {
             setState(() => _error = e.description);
+          }
+        },
+        onHttpError: (e) {
+          final url = e.request?.uri;
+          if (url != null &&
+              url.path == urlVisor(widget.tutorId).path &&
+              mounted) {
+            setState(() => _error = 'HTTP ${e.response?.statusCode}');
           }
         },
       ),
@@ -91,7 +168,15 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
       await android.setMediaPlaybackRequiresUserGesture(false);
     }
     await c.loadRequest(urlVisor(widget.tutorId));
+    _vigiaCarga?.cancel();
+    // Con 3G lento la página (three.js incluido) puede tardar: 30 s de margen.
+    _vigiaCarga = Timer(const Duration(seconds: 30), () {
+      if (mounted && _error == null) {
+        setState(() => _error = 'La página no respondió');
+      }
+    });
     if (mounted) setState(() => _web = c);
+    _actualizarPausa();
   }
 
   /// El visor no pudo abrir el micrófono: se pide el permiso de Android (si ya
@@ -120,6 +205,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
       return;
     }
     if (m.message != 'onelingo-avatar-ready' || c == null) return;
+    _vigiaCarga?.cancel();
     final datos = datosVisor(
       ref.read(progressProvider),
       tema: widget.tema,
@@ -133,6 +219,9 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _vigiaCarga?.cancel();
+    WakelockPlus.disable().catchError((_) {});
     _web?.loadRequest(Uri.parse('about:blank'));
     super.dispose();
   }
@@ -175,6 +264,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
                     setState(() {
                       _error = null;
                       _web = null;
+                      _pausada = false;
                     });
                     _abrir();
                   },
@@ -189,6 +279,12 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
       );
     }
     final c = _web;
+    // Inició sesión después de abrir esta pantalla: la llamada se abre ahora.
+    if (c == null && !_abriendo) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _web == null) _abrir();
+      });
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

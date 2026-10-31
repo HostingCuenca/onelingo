@@ -76,6 +76,20 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     ui_web.platformViewRegistry.registerViewFactory(viewType, (_) => frame);
   }
 
+  // En otra pestaña de la app el visor sigue montado (IndexedStack): se pausa.
+  bool _visible = true;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final visible = TickerMode.valuesOf(context).enabled;
+    if (visible == _visible) return;
+    _visible = visible;
+    frame.contentWindow?.postMessage(
+      '{"type":"onelingo-avatar-${visible ? 'reanudar' : 'pausa'}"}'.toJS,
+      web.window.location.origin.toJS,
+    );
+  }
+
   @override
   void dispose() {
     web.window.removeEventListener('message', listener);

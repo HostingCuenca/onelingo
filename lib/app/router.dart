@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/api/sync.dart';
 import '../core/state/providers.dart';
 import '../core/voz.dart';
 import '../shared/widgets/app_navigation_icon.dart';
@@ -17,6 +18,7 @@ import '../features/library/learning_unit_screen.dart';
 import '../features/chat/chat_screen.dart';
 import '../features/avatar/avatar_screen.dart';
 import '../features/avatar/puerta_microfono.dart';
+import '../features/avatar/tutores_3d.dart';
 import '../core/content/situaciones.dart';
 import '../core/i18n/i18n.dart';
 import '../features/situations/prueba_situacion_screen.dart';
@@ -56,8 +58,13 @@ final routerProvider = Provider<GoRouter>((ref) {
           state.matchedLocation.startsWith('/login') ||
           state.matchedLocation.startsWith('/prueba-nivel');
       if (!onboardingDone && !enOnboarding) return '/bienvenida';
+      // Sin sesión, «Iniciar sesión» (p. ej. desde la videollamada) sí abre el login.
+      final loginSinSesion =
+          state.matchedLocation.startsWith('/login') &&
+          Sync.instancia.token == null;
       if (onboardingDone &&
           enOnboarding &&
+          !loginSinSesion &&
           !state.matchedLocation.startsWith('/prueba-nivel')) {
         return '/inicio';
       }
@@ -274,6 +281,11 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(path: '/avatar', redirect: (_, _) => '/tutores'),
               GoRoute(
                 path: '/avatar/:id',
+                // Un tutor retirado (enlace viejo) dejaba la página en blanco.
+                redirect: (_, s) =>
+                    tutor3d(s.pathParameters['id'] ?? '') == null
+                    ? '/tutores'
+                    : null,
                 // ?tema=<situación>&objetivo=<id>: la llamada empieza ahí.
                 builder: (_, s) => PuertaMicrofono(
                   child: AvatarScreen(
