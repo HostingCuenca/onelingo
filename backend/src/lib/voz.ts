@@ -570,26 +570,34 @@ export function unirAlineaciones(partes: (Alineacion | null)[]): Alineacion | nu
 }
 
 const enCursoAlineado = new Map<string, Promise<{ buffer: Buffer; alineacion: Alineacion | null }>>();
+const guardando = new Set<Promise<unknown>>();
+/** Termina de guardar en disco y en `audios` lo ya entregado (pruebas, apagado). */
+export const esperarGuardados = () => Promise.all([...guardando]);
 /**
  * Un trozo con su alineación. Si el MP3 ya estaba en caché se reutiliza (no se
  * vuelve a pagar) y la alineación sale de `<hash>.json` si existe; si no, va
  * `null` y el cliente reparte las letras a lo largo del audio.
  */
-async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: string) {
+async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: string, rapido = false) {
   const hit = await buscarTrozo(t, idioma, rol, vozId);
-  if (hit) { await registrarUso(hit.hash); return { hash: hit.hash, buffer: hit.buffer, alineacion: await leerAlineacion(hit.hash), cache: true }; }
+  if (hit) { void registrarUso(hit.hash); return { hash: hit.hash, buffer: hit.buffer, alineacion: await leerAlineacion(hit.hash), cache: true }; }
   if (!vozDisponible()) throw new Error('voz_no_configurada');
   let pendiente = enCursoAlineado.get(t.hash);
   if (!pendiente) {
     pendiente = (async () => {
-      await mkdir(dir(), { recursive: true });
       const crudo = await sintetizarAlineado(t.texto, vozId, idioma, t.previo, ajustesDeVoz(rol));
-      const r = { ...crudo, buffer: await normalizarVolumen(crudo.buffer, rol) };
+      return { ...crudo, buffer: await normalizarVolumen(crudo.buffer, rol, rapido) };
+    })();
+    // Guardar en disco y en `audios` no retrasa la entrega; la entrada en curso
+    // sigue hasta que termina, así una petición igual no vuelve a pagar la síntesis.
+    const guardado = pendiente.then(async (r) => {
+      await mkdir(dir(), { recursive: true });
       await writeFile(path.join(dir(), `${t.hash}.mp3`), r.buffer);
       if (r.alineacion) await writeFile(path.join(dir(), `${t.hash}.json`), JSON.stringify(r.alineacion)).catch(() => {});
       await registrarAudio(t.hash, idioma, rol, vozId, t.texto, r.buffer.length);
-      return r;
-    })().finally(() => enCursoAlineado.delete(t.hash));
+    });
+    const fin = guardado.catch(() => {}).finally(() => { enCursoAlineado.delete(t.hash); guardando.delete(fin); });
+    guardando.add(fin);
     enCursoAlineado.set(t.hash, pendiente);
   }
   const r = await pendiente;
@@ -597,10 +605,10 @@ async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: strin
 }
 
 /** Como `obtenerAudio`, pero con el tiempo de cada letra (videollamada en vivo). */
-export async function obtenerAudioAlineado(p: PeticionVoz): Promise<AudioAlineado> {
+export async function obtenerAudioAlineado(p: PeticionVoz, rapido = false): Promise<AudioAlineado> {
   const q = preparar(p);
   const partes = [];
-  for (const t of q.trozos) partes.push(await trozoAlineado(t, p.idioma, q.rol, q.v.id));
+  for (const t of q.trozos) partes.push(await trozoAlineado(t, p.idioma, q.rol, q.v.id, rapido));
   const hash = partes.length === 1 ? partes[0].hash : sha(`trozos|${q.trozos.map((t) => t.hash).join('|')}`);
   return {
     hash, voz: q.rol, caracteres: q.texto.length, cache: partes.every((x) => x.cache),

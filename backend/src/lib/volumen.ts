@@ -68,11 +68,13 @@ export async function medirLufs(mp3: Buffer): Promise<number | null> {
 /**
  * El clip a OBJETIVO_LUFS. Si no se puede medir (clip muy corto), usa la
  * ganancia de la voz. Ante cualquier fallo devuelve el audio original.
+ * `rapido` (videollamada) no mide: usa la ganancia de la voz en una sola
+ * pasada. Medir costaba ~75 ms por frase en el VPS, casi lo que tarda ElevenLabs.
  */
-export async function normalizarVolumen(mp3: Buffer, voz?: string): Promise<Buffer> {
+export async function normalizarVolumen(mp3: Buffer, voz?: string, rapido = false): Promise<Buffer> {
   if (!(await ffmpegDisponible())) return mp3;
   try {
-    const lufs = await medirLufs(mp3);
+    const lufs = rapido && LUFS_VOZ[voz ?? ''] !== undefined ? null : await medirLufs(mp3);
     const db = lufs === null ? gananciaVoz(voz ?? '') : limitar(OBJETIVO_LUFS - lufs);
     if (Math.abs(db) < 1) return mp3;
     const { salida } = await ffmpeg(filtro(db), mp3);

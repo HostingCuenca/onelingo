@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, rm, writeFile, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { obtenerAudio, obtenerAudioAlineado, unirAlineaciones } from '../src/lib/voz.js';
+import { esperarGuardados, obtenerAudio, obtenerAudioAlineado, unirAlineaciones } from '../src/lib/voz.js';
 import { puedeEmitir, TOKENS_POR_HORA } from '../src/routes/llamada.js';
 import { config } from '../src/lib/config.js';
 import { pool } from '../src/lib/db.js';
@@ -28,6 +28,7 @@ async function conMock(fn: (urls: string[], dir: string) => Promise<void>) {
     return new Response(`[${b.text}]`);
   };
   try { await fn(urls, dir); } finally {
+    await esperarGuardados();
     globalThis.fetch = originalFetch; pool.query = query;
     config.audioDir = prev.dir; config.elevenApiKey = prev.key; config.vozMaxCaracteres = prev.max;
     await rm(dir, { recursive: true });
@@ -46,6 +47,7 @@ test('unirAlineaciones: cada trozo empieza donde acabó el anterior; si falta un
 test('voz alineada: se genera una vez con tiempos, se guarda junto al MP3 y luego sale de la caché', () => conMock(async (urls, dir) => {
   const a = await obtenerAudioAlineado({ texto: 'Hola, ¿cómo estás?', idioma: 'es' });
   assert.equal(a.cache, false);
+  await esperarGuardados(); // se entrega antes de guardar
   assert.match(urls[0], /\/with-timestamps\?/);
   assert.equal(a.buffer.toString(), '[Hola, ¿cómo estás?]');
   assert.equal(a.alineacion?.characters.join(''), 'Hola, ¿cómo estás?');

@@ -7,6 +7,7 @@ import { iaDisponible, responder, resumirSesion } from '../lib/ia.js';
 import { openaiDisponible, transcribirOpenAI } from '../lib/ia_openai.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { requierePractica } from '../lib/pagos/suscripciones.js';
+import { obtenerAudioAlineado, vozDisponible } from '../lib/voz.js';
 
 const EsquemaChat = z.object({
   idiomaMeta: z.string(), idiomaNativo: z.string().default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().default('mia'),
@@ -34,6 +35,9 @@ async function guardarTurno(s: Sesion, d: DatosChat, r: Awaited<ReturnType<typeo
  * stream (p. ej. la transcripción de /chat/voz) y puede completar los datos.
  * Si el proveedor falla antes de emitir nada se reintenta una vez: un fallo
  * pasajero dejaba al alumno esperando sin respuesta.
+ * Con `?voz=1` (videollamada) la voz de cada frase se genera en cuanto la frase
+ * existe y viaja en el mismo stream (evento `voz`): ahorra la ida y vuelta de
+ * pedirla aparte y la síntesis corre mientras el modelo sigue escribiendo.
  */
 function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, preparar: (emit: (tipo: string, data: unknown) => void) => Promise<DatosChat | null>) {
   const output = new PassThrough();
@@ -44,6 +48,11 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
   reply.raw.on('close', () => { if (!output.readableEnded) controller.abort(); });
   reply.type('text/event-stream').header('cache-control', 'no-cache, no-transform').header('x-accel-buffering', 'no');
   const heartbeat = setInterval(() => { if (!output.destroyed) output.write(': keepalive\n\n'); }, 5000);
+  const conVoz = (req.query as { voz?: string })?.voz === '1' && vozDisponible();
+  const voces: Promise<void>[] = [];
+  let fraseAnterior = '';
+  // La página sabe así que la voz vendrá en el stream (si no, la pide aparte sin esperar).
+  if (conVoz) output.write(`data: ${JSON.stringify({ tipo: 'voz_activa', data: true })}\n\n`);
   void (async () => {
     try {
       const d = await preparar(emit);
@@ -62,6 +71,15 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
             emitido = true;
             if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_primera_frase');
             emit('frase', { indice, texto });
+            if (conVoz && !controller.signal.aborted) {
+              const previo = fraseAnterior; fraseAnterior = texto;
+              voces.push(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined }, true)
+                .then((a) => {
+                  if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started), cache: a.cache }, 'chat_primera_voz');
+                  emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion });
+                })
+                .catch((e) => { req.log.warn({ err: String(e) }, 'chat_voz'); emit('voz', { indice, error: true }); }));
+            }
           });
         } catch (e) {
           if (emitido || controller.signal.aborted || intento >= 2) throw e;
@@ -69,6 +87,7 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
         }
       }
       emit('final', r.respuesta);
+      await Promise.all(voces);
       output.end();
       await guardarTurno(s, d, r);
       req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_complete');
