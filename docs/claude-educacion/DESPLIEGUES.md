@@ -1008,3 +1008,25 @@ Fecha: 2026-10-30 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Verificado:** `/api/salud` 200; `/auth/registro/codigo` responde con validación en español; entrada demo de Ana 200; `nodemailer.verify()` contra 127.0.0.1:25 correcto; panel, web, `/avatar/index.html` y la APK responden; `/version.json` 0.5.5; PM2 `onelingo-api` en línea sin errores; lock liberado.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261030-edu-77-registro; S=staging/20261030-edu-77-registro; mv web $S/web-retirada-post && mv $S/web-retirada web; mv panel $S/panel-retirado-post && mv $S/panel-retirado panel; cp -r $K/backend/. backend/; (cd backend && xargs rm -f < ../$K/backend-nuevos.txt); install -m 600 -o onelingo -g onelingo $K/env.anterior backend/.env; sudo -u onelingo -H pm2 restart onelingo-api'`. Las columnas y la tabla de 012 pueden quedarse. La APK 0.5.4 anterior sigue en `web-anterior/descargas` (enlace duro).
+
+## Release: 20261030-edu-78-llamada
+
+Fecha: 2026-10-30 · Responsable: Claude (Claude Code), por pedido del usuario («sube el apk actualizado … mandas a producción»). Backend (3 archivos) + web 0.5.6 (incluye `web/avatar`) + APK 0.5.6+2012 con Shorebird; PM2 `onelingo-api` reiniciado (solo esa app). Sin migraciones ni cambios de `.env` (hash igual antes y después).
+
+**Contenido:**
+- `cc242eb`: `/chat?voz=1` manda la voz de cada frase en el mismo stream (evento `voz`, MP3 + tiempos de letras). En la llamada no se mide la sonoridad (ganancia fija de la voz, una pasada de ffmpeg) y guardar en disco/`audios` ya no retrasa la entrega. Medido en el VPS: ElevenLabs 0,25 s; medir+recodificar costaba ~0,2 s extra por frase.
+- `8334bd5`: turnos de la videollamada. El tutor no arranca mientras el micrófono capta voz del alumno (tope 2,5 s); si el alumno sigue antes de oír al tutor, se une lo dicho y se borra la respuesta que no sonó; espera tras cerrar la frase 450 ms (1,7 s si queda colgando) + 250 ms en niveles 1–2; corte de frase de Scribe a 0,5 s. Halo/borde/«Te escucho» al ritmo de la voz, anillo mientras piensa, cursor en la transcripción, subtítulos que se desplazan en lugar de cortarse. Arreglo: `vivo.js` `nivel()` lanzaba siempre `ReferenceError` (analizador dentro del `try`): ningún efecto por energía funcionaba.
+- `382fd1e`: `tools/pruebas/llamada_simulada.py` (alumno IA contra el tutor real en el emulador).
+- `76e8a98`: app 0.5.6+2012.
+
+**Pruebas:** backend 140/140 (`npx tsx --test test/*.test.ts`), `tsc` y typecheck en el VPS. Flutter 498 pruebas en verde (una primera corrida con el emulador encendido se cortó por tiempo, sin fallos de lógica). Simulación de 6 turnos en el emulador contra el backend local (alumno con pausas de 300–900 ms): 0 veces el tutor encima del alumno, una burbuja por turno, respuesta en 1,95–3,7 s (antes 2,7–4,4 s; el emulador suma 0,5–1,4 s al arrancar el audio porque dibuja el avatar por software). Producción, desde que llega el mensaje: primera frase 0,68–1,03 s, voz de esa frase +0,25–0,33 s.
+
+**APK:** `shorebird release android --artifact apk --target-platform android-arm,android-arm64 --build-number=2012 -- --dart-define=API_URL=https://onelingo.org/api` desde un worktree limpio de `76e8a98`; Shorebird publicó la release 0.5.6+2012. `aapt2`: versionCode 2012, RECORD_AUDIO y MODIFY_AUDIO_SETTINGS; `libapp.so` con `https://onelingo.org/api`; firma igual a la 0.5.5 (se instala encima). `/descargas/onelingo.apk` y `onelingo-armv7.apk` (enlace duro): 171 MB, sha256 `a61c4dce7e21d24b…`; `/descargas/version.json` 0.5.6. Escritas con nombre temporal y `mv`. La página de la llamada no exige reinstalar: `index.html` va con `Cache-Control: no-cache` y la app 0.5.5 ya carga la nueva.
+
+**Verificado:** `/api/salud` 200; `/version.json` 0.5.6; `/avatar/index.html` con `practice.js?v=61`; `/chat?voz=1` con Ana en producción manda `voz_activa`, `frase` y `voz`; PM2 `onelingo-api` en línea sin errores; `.env` sin cambios; lock liberado.
+
+**Nota:** `/llamada/token` admite 30 tokens por alumno y hora (en memoria). Si el teléfono reconecta la transcripción cada ~20 s, se agota en ~10 min: pendiente la telemetría de cierres del WebSocket.
+
+**Backup:** `backups/20261030-edu-78-llamada/` (`web-anterior` con enlaces duros, `backend/src/{lib/volumen.ts,lib/voz.ts,routes/chat.ts}` previos, `env.sha`, `onelingo-antes.dump`). Web retirada en `staging/20261030-edu-78-llamada/web-retirada`.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261030-edu-78-llamada; S=staging/20261030-edu-78-llamada; mv web $S/web-retirada-post && mv $S/web-retirada web; cp -p $K/backend/src/lib/volumen.ts $K/backend/src/lib/voz.ts backend/src/lib/; cp -p $K/backend/src/routes/chat.ts backend/src/routes/; chown onelingo:onelingo backend/src/lib/volumen.ts backend/src/lib/voz.ts backend/src/routes/chat.ts; sudo -u onelingo -H pm2 restart onelingo-api'`. La APK 0.5.5 anterior queda en `web-anterior/descargas` (enlace duro).
