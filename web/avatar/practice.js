@@ -6,7 +6,7 @@ import {createLumo} from './lumo.js?v=27';
 import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
 import {createAvatarTH} from './avatar-th.js?v=14';
 import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
-import {abrirEscucha, esEco, vivoDisponible} from './vivo.js?v=1';
+import {abrirEscucha, esEco, vivoDisponible} from './vivo.js?v=4';
 
 const $ = id => document.getElementById(id), audio = $('audio');
 // Todo lo que usa la conversación se carga ANTES de avisar a la app: si el
@@ -28,6 +28,37 @@ let grab = null;
 // Llamada en vivo: micrófono abierto con transcripción en tiempo real; si no
 // se puede (navegador, red, servidor sin clave) se vuelve a mantener pulsado.
 let vivo = null, modoVivo = false, mudo = false, arrastre = '', finVozEn = 0, lineaActual = null;
+// El tutor no empieza a hablar antes de esta hora: si el alumno hace una pausa
+// a mitad de frase, la respuesta se prepara pero espera (y se descarta si sigue).
+let retenerHasta = 0, rescate = null;
+// Turno en curso: dónde empezó (historial, conversación, correcciones) para
+// deshacerlo si el alumno sigue hablando antes de que el tutor se oiga.
+let turno = null, enPuerta = false, ultimaVoz = 0;
+const alumnoSuena = () => performance.now() - ultimaVoz < 600;
+// Respuesta en camino que aún no se oye (esperando o arrancando el audio).
+const noSeOye = () => sonando && (turno ? !turno.oido : enPuerta);
+// Última palabra que deja la frase colgando: el alumno está pensando, no terminó.
+const COLGANTES = {
+  en: 'the a an and but or so because to of in on at with for from my your his her our their uh um er very',
+  es: 'el la los las un una y pero o porque que de del en con para por mi tu su eh muy cuando',
+  fr: 'le la les un une et mais ou parce que de du des en avec pour par mon ma mes euh très quand',
+  de: 'der die das den dem ein eine und aber oder weil dass mit für von mein meine äh ähm sehr wenn',
+  pt: 'o a os as um uma e mas ou porque que de do da em com para por meu minha hum muito quando',
+  it: 'il lo la i gli le un una e ma o perché che di del in con per mio mia ehm molto quando',
+  ru: 'и но или потому что в на с для мой э ну очень когда',
+};
+function fraseIncompleta(texto) {
+  const t = texto.trim();
+  if (!t || /(,|;|:|…|-|–|\.\.\.)$/.test(t)) return true;
+  // La transcripción pone punto aunque la frase quede colgando («I went to the.»): se mira la palabra.
+  const ultima = (t.toLowerCase().replace(/[.!?。！？]+$/u, '').match(/[\p{L}']+$/u) || [''])[0];
+  return (COLGANTES[language()] || '').split(' ').includes(ultima);
+}
+// Silencio que se le da al alumno tras cerrar la frase: más si quedó colgando y en niveles bajos.
+function paciencia(texto) {
+  const bajo = (config?.nivel ?? 1) <= 2 ? 250 : 0;
+  return (fraseIncompleta(texto) ? 1700 : 450) + bajo;
+}
 // Si el alumno se queda en blanco, el tutor le ayuda hablando (como un profesor):
 // primero repite la pregunta más fácil y con opciones; después, una pista. Luego espera.
 const ESPERAS_SILENCIO = [9000, 12000];
@@ -235,6 +266,7 @@ function calentarRellenos() {
   for (const f of RELLENOS[language()] || []) fetch(urlVoz(f, '', avatar?.alineado ? '/voz/alineada' : '/voz/stream'), {headers: headers()}).catch(() => {});
 }
 function ponerRelleno(version) {
+  if (performance.now() < retenerHasta) return; // el alumno quizá sigue: nada de muletillas encima
   const lista = RELLENOS[language()] || []; if (!lista.length) return;
   relleno = lista[rellenos++ % lista.length]; encolar(relleno, version);
 }
@@ -281,15 +313,28 @@ function urlVoz(text, previo = '', ruta = '/voz/stream') {
   return url;
 }
 let fraseAnterior = {version: -1, texto: ''};
-function prepararFrase(text, version) {
+// Voz que el servidor manda dentro de la respuesta (evento `voz`), por índice de frase.
+let vozEnLinea = null;
+let vozActiva = false; // el servidor confirmó que manda la voz en el stream
+function vozDelStream(indice) {
+  if (!vozEnLinea || !vozActiva || indice == null) return null;
+  let item = vozEnLinea.get(indice);
+  if (!item) { let ok; const p = new Promise(r => { ok = r; }); item = {p, ok}; vozEnLinea.set(indice, item); }
+  return item;
+}
+const fraseAlineada = (d, text) => ({url: URL.createObjectURL(new Blob([Uint8Array.from(atob(d.audio), c => c.charCodeAt(0))], {type: 'audio/mpeg'})), env: null, texto: text,
+  linea: d.alineacion ? lineaDeVisemas(d.alineacion, language()) : null});
+function prepararFrase(text, version, indice) {
   const previo = fraseAnterior.version === version ? fraseAnterior.texto : '';
   fraseAnterior = {version, texto: text};
   // Con visemas: el MP3 llega junto con el tiempo de cada letra.
   if (avatar?.alineado) {
-    return fetch(urlVoz(text, previo, '/voz/alineada'), {headers: headers(), signal: senalVoz()})
-      .then(r => { if (!r.ok) throw Error(`La voz no está disponible (${r.status}).`); return r.json(); })
-      .then(d => ({url: URL.createObjectURL(new Blob([Uint8Array.from(atob(d.audio), c => c.charCodeAt(0))], {type: 'audio/mpeg'})), env: null, texto: text,
-        linea: d.alineacion ? lineaDeVisemas(d.alineacion, language()) : null}));
+    const pedir = () => fetch(urlVoz(text, previo, '/voz/alineada'), {headers: headers(), signal: senalVoz()})
+      .then(r => { if (!r.ok) throw Error(`La voz no está disponible (${r.status}).`); return r.json(); });
+    const delStream = vozDelStream(indice);
+    // Si la voz no llega en el stream (servidor viejo o fallo), se pide aparte.
+    const datos = delStream ? conLimite(delStream.p, 4000).then(d => d?.audio ? d : pedir()) : pedir();
+    return datos.then(d => fraseAlineada(d, text));
   }
   return fetch(urlVoz(text, previo), {headers: headers(), signal: senalVoz()})
     .then(r => { if (!r.ok) throw Error(`La voz no está disponible (${r.status}).`); return r.arrayBuffer(); })
@@ -297,8 +342,8 @@ function prepararFrase(text, version) {
 }
 // Cada frase se descarga en cuanto llega (en paralelo a la que suena). Antes
 // de contestar solo se descargan: suenan al empezar la llamada.
-function encolar(text, version) {
-  const listo = prepararFrase(text, version);
+function encolar(text, version, indice) {
+  const listo = prepararFrase(text, version, indice);
   listo.catch(() => {});
   cola.push({text, listo});
   if (enLlamada && !sonando) siguiente(version);
@@ -306,19 +351,27 @@ function encolar(text, version) {
 async function siguiente(version) {
   const item = cola.shift();
   if (!item || version !== epoch) return;
-  sonando = true;
+  sonando = true; enPuerta = true;
   if ($('stage').dataset.phase !== 'speaking') phase('Preparando voz…', 'voice-loading');
   try {
     const f = await item.listo;
+    window.__marca?.('frase_lista');
+    if (version !== epoch) { URL.revokeObjectURL(f.url); return; }
+    // Pausa del alumno: la respuesta está lista pero se espera por si sigue
+    // hablando. Si su voz suena (el micrófono lo sabe antes que la transcripción),
+    // se sigue esperando; con ruido constante, como mucho 2,5 s más.
+    const tope = Math.max(retenerHasta, performance.now()) + 2500;
+    while (version === epoch && (performance.now() < retenerHasta || (alumnoSuena() && !turno?.oido && performance.now() < tope))) await new Promise(r => setTimeout(r, 40));
+    enPuerta = false;
     if (version !== epoch) { URL.revokeObjectURL(f.url); return; }
     soltarURL(); urlActual = f.url; envActual = f.env; lineaActual = f.linea || null;
-    audio.src = f.url;
+    window.__marca?.('play'); audio.src = f.url;
     // Audio guardado antes de existir la alineación: tiempos repartidos por la duración.
     if (f.texto && !f.linea) audio.addEventListener('loadedmetadata', () => { if (urlActual === f.url && isFinite(audio.duration)) lineaActual = lineaDeVisemas(alineacionEstimada(f.texto, audio.duration), language()); }, {once: true});
     await audio.play();
   } catch (e) {
     if (version !== epoch || vozController?.signal.aborted) return;
-    sonando = false; envActual = null;
+    sonando = false; enPuerta = false; envActual = null;
     if (cola.length) siguiente(version); else finTurno();
   }
 }
@@ -326,11 +379,12 @@ function soltarURL() { if (urlActual) { URL.revokeObjectURL(urlActual); urlActua
 function detenerVoz() {
   vozController?.abort(); vozController = null; fraseAnterior = {version: -1, texto: ''};
   for (const item of cola) item.listo.then(f => URL.revokeObjectURL(f.url), () => {});
-  cola = []; sonando = false; envActual = null; lineaActual = null;
+  cola = []; sonando = false; enPuerta = false; envActual = null; lineaActual = null;
   audio.pause(); audio.removeAttribute('src'); audio.load(); soltarURL();
 }
 audio.onplaying = () => {
   if (audio.src === SILENCIO) return;
+  if (turno) turno.oido = true;
   phase('Hablando…', 'speaking');
   status(modoVivo ? (mudo ? 'Micrófono silenciado: toca 🎙 para hablar.' : 'Puedes interrumpir hablando.') : 'Mantén pulsado 🎙 para interrumpir y responder.');
 };
@@ -407,6 +461,7 @@ async function requestTutor(entrada, opening = false) {
   busy = true; respuestaCompleta = false; controls(); error(''); ultimoFallo = null;
   let frases = 0, final = false, transcrito = false;
   if (entrada?.texto || entrada?.audio) silencios = 0;
+  turno = opening || entrada?.aviso ? null : {hist: history.length, dom: $('messages').childElementCount, corr: correcciones, oido: false};
   if (!opening) {
     limpiarTurno();
     if (entrada?.texto) { mostrarAlumno(entrada.texto); burbuja(entrada.texto, 'mine'); history.push({rol: 'alumno', texto: entrada.texto}); }
@@ -415,6 +470,8 @@ async function requestTutor(entrada, opening = false) {
   } else if (enLlamada) phase('Conectando…', 'thinking');
   controller = new AbortController();
   const current = controller, timeout = setTimeout(() => current.abort(), 45000);
+  vozEnLinea = avatar?.alineado ? new Map() : null; vozActiva = false;
+  const conVoz = vozEnLinea ? '?voz=1' : '';
   try {
     const u = units.find(x => x.id === temaId);
     const datos = {idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-30), objetivo: config.contexto, ...(u ? {situacionId: u.id, situacion: u.nombre} : {}), ...(u && objetivoId ? {objetivoId} : {}), ...(entrada?.aviso ? {aviso: entrada.aviso} : {})};
@@ -425,7 +482,7 @@ async function requestTutor(entrada, opening = false) {
       const form = new FormData();
       form.append('datos', JSON.stringify(datos));
       form.append('audio', entrada.audio, entrada.tipo?.includes('mp4') ? 'turno.m4a' : 'turno.webm');
-      response = await fetch(config.api + '/chat/voz', {method: 'POST', headers: headers(), body: form, signal: current.signal});
+      response = await fetch(config.api + '/chat/voz' + conVoz, {method: 'POST', headers: headers(), body: form, signal: current.signal});
       // Servidor sin /chat/voz: transcribir y responder en dos pasos.
       if (response.status === 404) {
         const f2 = new FormData(); f2.append('idioma', language()); f2.append('audio', entrada.audio, entrada.tipo?.includes('mp4') ? 'turno.m4a' : 'turno.webm');
@@ -434,10 +491,10 @@ async function requestTutor(entrada, opening = false) {
         const texto = ((await tr.json()).texto || '').trim();
         if (!texto) throw Error('No te escuché bien. Mantén pulsado el micrófono mientras hablas.');
         transcrito = true; mostrarAlumno(texto); burbuja(texto, 'mine'); history.push({rol: 'alumno', texto});
-        response = await fetch(config.api + '/chat', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json', Accept: 'text/event-stream'}, body: JSON.stringify({...datos, historial: history.slice(-30)}), signal: current.signal});
+        response = await fetch(config.api + '/chat' + conVoz, {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json', Accept: 'text/event-stream'}, body: JSON.stringify({...datos, historial: history.slice(-30)}), signal: current.signal});
       }
     } else {
-      response = await fetch(config.api + '/chat', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json', Accept: 'text/event-stream'}, body: JSON.stringify(datos), signal: current.signal});
+      response = await fetch(config.api + '/chat' + conVoz, {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json', Accept: 'text/event-stream'}, body: JSON.stringify(datos), signal: current.signal});
     }
     if (!response.ok) throw Error(await bloqueoTutor(response) ?? (response.status === 401 ? 'Tu sesión ha caducado. Vuelve a iniciar sesión.' : `No se pudo conectar con el tutor (${response.status}).`));
     const reader = response.body.getReader(), decoder = new TextDecoder();
@@ -454,7 +511,9 @@ async function requestTutor(entrada, opening = false) {
         history.push({rol: 'alumno', texto: e.data.texto});
       }
       // Cada frase terminada se muestra y se dice sin esperar al resto.
-      if (e.tipo === 'frase') { $('subTutor').textContent = (frases ? $('subTutor').textContent + ' ' : '') + e.data.texto; frases++; encolar(e.data.texto, version); }
+      if (e.tipo === 'frase') { $('subTutor').textContent = (frases ? $('subTutor').textContent + ' ' : '') + e.data.texto; frases++; encolar(e.data.texto, version, e.data.indice); }
+      if (e.tipo === 'voz_activa') vozActiva = true;
+      if (e.tipo === 'voz') { window.__marca?.('voz_llega', e.data.indice); vozDelStream(e.data.indice)?.ok(e.data); }
       if (e.tipo === 'reply' && !frases) { $('subTutor').textContent = e.data; frases++; encolar(e.data, version); }
       if (e.tipo === 'final') {
         final = true;
@@ -665,10 +724,15 @@ function oirParcial(texto) {
   if (!enLlamada || mudo || !texto.trim()) return;
   if (tutorAudible() && esEco(texto, `${$('subTutor').textContent} ${relleno}`)) return;
   clearTimeout(silencioTimer);
-  if (sonando || busy) {
+  if ((busy && !sonando) || noSeOye()) {
+    // Seguía hablando tras una pausa: la respuesta en preparación se descarta y
+    // lo ya dicho se junta con lo nuevo.
+    recuperarTurno(); stop();
+    // Si lo nuevo no llega a cerrarse (ruido, una tos), se responde a lo que ya había.
+    clearTimeout(rescate);
+    rescate = setTimeout(() => { if (arrastre && !busy && enLlamada) { const t = arrastre; arrastre = ''; void requestTutor({texto: t}, false); } }, 3500);
+  } else if (sonando) {
     if (palabras(texto) < 2) return;
-    // Seguía hablando tras una pausa: lo que ya se había enviado se junta con lo nuevo.
-    if (busy && !sonando) recuperarTurno();
     stop();
   }
   if ($('stage').dataset.phase !== 'listening') { phase('Te escucho…', 'listening'); limpiarTurno(); status(''); }
@@ -677,17 +741,54 @@ function oirParcial(texto) {
 function oirFinal(texto) {
   if (!enLlamada || mudo) return;
   if (tutorAudible() && esEco(texto, `${$('subTutor').textContent || lastReply} ${relleno}`)) return;
-  if (busy && !sonando) recuperarTurno();
+  if ((busy && !sonando) || noSeOye()) recuperarTurno();
+  clearTimeout(rescate);
   const todo = (arrastre ? arrastre + ' ' : '') + texto; arrastre = '';
   stop();
+  retenerHasta = performance.now() + paciencia(todo);
   void requestTutor({texto: todo}, false);
 }
+// Cada cuadro: el halo late con la voz del alumno; «Te escucho» aparece en cuanto
+// suena su voz (sin esperar a la transcripción) y, si arranca mientras el tutor
+// habla, el tutor baja la voz al instante. El eco del propio tutor (si el
+// teléfono no lo cancela del todo) se estima mientras habla para no confundirlo.
+let nivelSuave = 0, vozDesde = 0, calmaDesde = 0, ecoMedio = 0;
+function animarNivel() {
+  requestAnimationFrame(animarNivel);
+  const n = enLlamada && vivo && !mudo ? vivo.nivel() : 0;
+  nivelSuave = Math.max(n, nivelSuave * 0.86);
+  document.body.style.setProperty('--nivel', Math.min(1, nivelSuave * 10).toFixed(3));
+  const ahora = performance.now();
+  // Solo con el tutor sonando de verdad se descuenta su eco (mientras se
+  // descarga su voz, lo que entra por el micrófono es el alumno).
+  const audible = sonando && !enPuerta && !audio.paused && !audio.ended && audio.src !== SILENCIO;
+  const umbral = Math.max(0.035, audible ? ecoMedio * 3 : 0);
+  if (n > umbral) { vozDesde ||= ahora; calmaDesde = 0; ultimaVoz = ahora; } else { vozDesde = 0; calmaDesde ||= ahora; }
+  const hablando = vozDesde && ahora - vozDesde > 160;
+  if (audible) {
+    if (!hablando && audio.volume === 1) ecoMedio = ecoMedio * 0.97 + n * 0.03;
+    if (hablando) audio.volume = 0.3;
+    else if (audio.volume < 1 && ahora - calmaDesde > 500) audio.volume = 1;
+  } else {
+    if (audio.volume < 1) audio.volume = 1;
+    // Retomó antes de que el tutor se oyera: «Te escucho» (el subtítulo se
+    // queda por si solo fue una tos y el tutor sigue).
+    if (hablando && enPuerta && $('stage').dataset.phase !== 'listening') phase('Te escucho…', 'listening');
+    if (hablando && !busy && $('stage').dataset.phase === 'ready') { clearTimeout(silencioTimer); phase('Te escucho…', 'listening'); limpiarTurno(); status(''); }
+  }
+}
+requestAnimationFrame(animarNivel);
+// El alumno siguió hablando antes de oír al tutor: lo que dijo se junta con lo
+// nuevo y la respuesta que no llegó a sonar se borra (historial, burbujas y
+// correcciones), como si no hubiera existido.
 function recuperarTurno() {
-  const ultimo = history[history.length - 1];
-  if (ultimo?.rol !== 'alumno') return;
-  history.pop(); arrastre = ultimo.texto;
-  const b = $('messages').lastElementChild;
-  if (b?.classList.contains('mine') && b.textContent === ultimo.texto) b.remove();
+  if (!turno || turno.oido || history[turno.hist]?.rol !== 'alumno') return;
+  arrastre = history[turno.hist].texto;
+  history.length = turno.hist;
+  const m = $('messages');
+  while (m.childElementCount > turno.dom) m.lastElementChild.remove();
+  correcciones = turno.corr; actualizarContador();
+  turno = null;
 }
 
 // ---------- Hoja inferior: conversación y temas ----------

@@ -31,7 +31,7 @@ export const vivoDisponible = () => !!(window.AudioWorkletNode && window.WebSock
  * Eventos: onParcial(texto), onFinal(texto), onEstado('escuchando'|'cerrado'|'error', detalle).
  */
 export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEstado}) {
-  let cerrado = false, silenciado = false, ws = null, ctx = null, stream = null, nodo = null, reintentos = 0;
+  let cerrado = false, silenciado = false, ws = null, ctx = null, stream = null, nodo = null, reintentos = 0, analizador = null, muestras = null;
   stream = await navigator.mediaDevices.getUserMedia({audio: {echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1}});
   // Si algo falla antes de devolver el control (token 429/503, worklet), se
   // suelta el micrófono: si no, quedaba encendido el resto de la llamada.
@@ -41,7 +41,12 @@ export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEs
   const url = URL.createObjectURL(new Blob([WORKLET], {type: 'text/javascript'}));
   await ctx.audioWorklet.addModule(url); URL.revokeObjectURL(url);
   nodo = new AudioWorkletNode(ctx, 'captura-16k');
-  ctx.createMediaStreamSource(stream).connect(nodo);
+  const fuente = ctx.createMediaStreamSource(stream);
+  fuente.connect(nodo);
+  // Volumen de la voz para el efecto visual y para callar al tutor al instante.
+  // Fuera del try: nivel() lo lee después (antes era const aquí y nivel() fallaba siempre).
+  analizador = ctx.createAnalyser(); analizador.fftSize = 512; fuente.connect(analizador);
+  muestras = new Float32Array(analizador.fftSize);
   // El nodo no suena: se conecta a un destino mudo para que el navegador lo procese.
   const mudo = ctx.createGain(); mudo.gain.value = 0; nodo.connect(mudo).connect(ctx.destination);
   nodo.port.onmessage = e => {
@@ -54,7 +59,7 @@ export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEs
     const t = await pedirToken();
     if (cerrado) return;
     const q = new URLSearchParams({model_id: t.modelo || 'scribe_v2_realtime', token: t.token, audio_format: 'pcm_16000', commit_strategy: 'vad',
-      vad_silence_threshold_secs: '0.8', min_speech_duration_ms: '250', ...(idioma ? {language_code: idioma} : {})});
+      vad_silence_threshold_secs: '0.5', min_speech_duration_ms: '250', ...(idioma ? {language_code: idioma} : {})});
     ws = new WebSocket(`${t.url}?${q}`);
     ws.onopen = () => { reintentos = 0; onEstado?.('escuchando'); };
     ws.onmessage = e => {
@@ -76,6 +81,13 @@ export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEs
 
   return {
     silenciar(v) { silenciado = v; },
+    /** RMS de la voz en este instante (0 silenciado). */
+    nivel() {
+      if (silenciado || cerrado) return 0;
+      analizador.getFloatTimeDomainData(muestras);
+      let suma = 0; for (const x of muestras) suma += x * x;
+      return Math.sqrt(suma / muestras.length);
+    },
     get silenciado() { return silenciado; },
     cerrar() {
       cerrado = true;

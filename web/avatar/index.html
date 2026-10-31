@@ -35,7 +35,7 @@ body.embebido #selection{display:none}
 .contador[hidden]{display:none}
 .tema{display:flex;align-items:center;gap:6px;margin:8px auto 0;padding:7px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--morado-claro);color:var(--morado);font-weight:800;font-size:14px;max-width:calc(100% - 32px)}
 .tema span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#stage{position:relative;flex:1;min-height:150px;width:calc(100% - 32px);max-width:528px;margin:10px auto 0;border-radius:28px;overflow:hidden;isolation:isolate;
+#stage{position:relative;flex:1;min-height:170px;width:calc(100% - 32px);max-width:528px;margin:10px auto 0;border-radius:28px;overflow:hidden;isolation:isolate;
   background:linear-gradient(180deg,#fff 0%,var(--morado-suave) 58%,var(--morado-claro) 100%);border:2px solid #fff;box-shadow:0 0 0 1px var(--borde),0 12px 32px #4519bb1f;transition:box-shadow .35s}
 /* El borde de la tarjeta dice de quién es el turno: morado si habla el tutor, verde si te escucha. */
 body.en-llamada #stage[data-phase=speaking]{box-shadow:0 0 0 3px var(--morado),0 12px 32px #4519bb33}
@@ -60,13 +60,14 @@ body.en-llamada #stage[data-phase=listening]{box-shadow:0 0 0 3px var(--verde),0
 .abajo{padding-bottom:max(14px,env(safe-area-inset-bottom))}
 /* Zona inferior de alto FIJO: el tutor y el micrófono no se mueven aunque
    cambie el largo de los subtítulos (el texto se desplaza dentro). */
-body.en-llamada .abajo,body.puede-llamar .abajo{flex:none;height:clamp(250px,44vh,340px);display:flex;flex-direction:column}
-.zona-texto{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-top:4px}
+/* La zona de abajo crece con el texto (la tarjeta del avatar se encoge) para que nada quede cortado; con mucho texto, se desplaza. */
+body.en-llamada .abajo,body.puede-llamar .abajo{flex:none;height:auto;min-height:clamp(240px,40vh,320px);max-height:66vh;display:flex;flex-direction:column;transition:min-height .2s}
+.zona-texto{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:4px 0 6px;-webkit-mask-image:linear-gradient(#000 calc(100% - 14px),transparent);mask-image:linear-gradient(#000 calc(100% - 14px),transparent)}
 .llamada-inicio,.controles,.hablar-texto{flex:none}
 
 /* Subtítulos */
 .subtitulos{text-align:center;min-height:24px}
-.sub-tutor{margin:0;font-size:19px;font-weight:800;line-height:1.35}
+.sub-tutor{margin:0;font-size:clamp(16px,4.5vw,19px);font-weight:800;line-height:1.32}
 .sub-traduccion{margin:4px 0 0;color:var(--gris);font-size:14px}
 .sub-alumno{margin:8px auto 0;display:table;max-width:92%;background:var(--morado);color:#fff;border-radius:16px 16px 4px 16px;padding:7px 12px;font-size:15px;font-weight:700}
 .sub-acciones{display:flex;justify-content:center;gap:14px;margin-top:4px}
@@ -129,6 +130,16 @@ body.vivo.mudo .hablar{background:var(--gris);animation:none}
 body.vivo .hablar-texto{color:var(--verde,#14a37f)}
 body.vivo.mudo .hablar-texto{color:var(--gris)}
 @keyframes pulso{0%,100%{box-shadow:0 0 0 0 #14a37f55}50%{box-shadow:0 0 0 12px #14a37f00}}
+/* Escucha en vivo: el botón y el marco laten con la voz del alumno (--nivel, 0–1, lo pone practice.js);
+   mientras el tutor piensa, un aro gira; lo que dice el alumno aparece con un cursor que parpadea. */
+.hablar{position:relative}
+.hablar::after{content:'';position:absolute;inset:-9px;border-radius:50%;border:3px solid transparent;opacity:0;transition:opacity .2s}
+body.vivo:not(.mudo) .hablar{animation:none;transform:scale(calc(1 + var(--nivel,0) * .14));box-shadow:0 0 0 calc(4px + var(--nivel,0) * 18px) #14a37f30,0 0 0 calc(var(--nivel,0) * 34px) #14a37f14;transition:transform .08s linear,box-shadow .08s linear}
+body.en-llamada:has(#stage[data-phase=thinking]) .hablar::after,body.en-llamada:has(#stage[data-phase=voice-loading]) .hablar::after{opacity:1;border-top-color:var(--naranja);border-right-color:#f59e0b55;animation:girar .9s linear infinite}
+body.en-llamada #stage[data-phase=listening]{box-shadow:0 0 0 calc(3px + var(--nivel,0) * 7px) var(--verde),0 12px 32px #40a65233;transition:box-shadow .08s linear}
+body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inline-block;width:2px;height:1em;margin-left:4px;background:currentColor;vertical-align:-2px;animation:cursor .9s steps(2,start) infinite}
+@keyframes girar{to{transform:rotate(360deg)}}
+@keyframes cursor{to{visibility:hidden}}
 @media(prefers-reduced-motion:reduce){.lumo2d,.hablar,#stage,.insignia::before{transition:none;animation:none}}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/build/three.module.js","three/addons/":"./vendor/examples/jsm/"}}</script>
@@ -172,4 +183,4 @@ body.vivo.mudo .hablar-texto{color:var(--gris)}
  </div>
  <audio id="audio" preload="auto" playsinline></audio>
 </section>
-<script type="module" src="./practice.js?v=53"></script></html>
+<script type="module" src="./practice.js?v=61"></script></html>
