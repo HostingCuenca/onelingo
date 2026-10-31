@@ -16,6 +16,11 @@ export const config = {
   iaProveedor: ((process.env.IA_PROVEEDOR as Proveedor) || proveedorPorDefecto()) as Proveedor,
   openaiApiKey: process.env.OPENAI_API_KEY ?? '',
   openaiModelo: process.env.OPENAI_MODELO ?? 'gpt-4.1-mini',
+  // Tutor que habla (chat y videollamada). En la evaluación del 31-10-2026 (45 escenarios,
+  // juez gpt-6-sol) gpt-5.6-luna sin razonamiento sacó 3,4/5 frente a 3,0 de gpt-4.1-mini,
+  // sin errores inventados, a mitad de coste y +170 ms en la primera frase.
+  openaiModeloTutor: process.env.OPENAI_MODELO_TUTOR ?? 'gpt-5.6-luna',
+  openaiEsfuerzoTutor: process.env.OPENAI_ESFUERZO_TUTOR ?? 'none',
   // Evaluación de escritura del diagnóstico: modelo más capaz (una llamada por diagnóstico).
   openaiModeloEvaluacion: process.env.OPENAI_MODELO_EVALUACION ?? 'gpt-4.1',
   openaiModeloTranscripcion: process.env.OPENAI_MODELO_TRANSCRIPCION ?? 'gpt-4o-mini-transcribe',

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { frasesCompletas, generarJsonOpenAI, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
 import { correccionesPrevias, resumirHechos, tipoCambio } from '../src/lib/situaciones.js';
-import { depurarCorrecciones, notaAviso, promptCorrector, systemPrompt } from '../src/lib/ia.js';
+import { depurarCorrecciones, estadoTurno, notaAviso, promptCorrector, systemPrompt } from '../src/lib/ia.js';
 const originalFetch = globalThis.fetch;
 const encoder = new TextEncoder();
 const event = (j: unknown) => encoder.encode(`data: ${JSON.stringify(j)}\n\n`);
@@ -103,6 +103,10 @@ test('the safety net drops corrections that teach nothing', () => {
   assert.deepEqual(quedan('Et dimanche je suis allé à le... au parc.', c('à le parc', 'au parc')), []);
   assert.deepEqual(quedan('Et dimanche je suis allé à le... au parc.', c('à le... au parc', 'au parc')), []);
   assert.deepEqual(quedan('This one is more better', c('more better', 'better')), ['better']);
+  // Repara solo la palabra cambiada tras la pausa.
+  assert.deepEqual(quedan("She don't… doesn't like coffee", c("She don't", "She doesn't")), []);
+  assert.deepEqual(quedan('Yesterday I go, I mean went to the park', c('I go', 'I went')), []);
+  assert.deepEqual(quedan("She don't like coffee, she doesn't", c("She don't", "She doesn't")), ["She doesn't"]);
   // Errores reales se quedan, aunque la forma buena aparezca más adelante en otro sitio.
   assert.deepEqual(quedan('Yesterday I go to the cinema', c('I go', 'I went')), ['I went']);
   assert.deepEqual(quedan('I am agree, is more comfortable', c('I am agree', 'I agree'), c('is more', 'it is more')), ['I agree', 'it is more']);
@@ -163,14 +167,28 @@ test('the tutor keeps its limits and the corrector knows each language traps', (
 
 test('in a video call the avatar corrects out loud and gives spoken hints', () => {
   const p = systemPrompt({ idiomaMeta: 'en', idiomaNativo: 'es', nivel: 3, tutorId: 'avatar_frank' });
-  assert.match(p, /CORREGIR EN VOZ ALTA/);
+  assert.match(p, /DECIDE QUÉ HACER CON SU ÚLTIMO MENSAJE/);
   assert.match(p, /pídele que diga él la frase completa/);
+  assert.match(p, /Se autocorrigió en el mismo mensaje/);
+  assert.match(p, /Haz que la encuentre él/);
+  assert.match(p, /NO le pidas repetir de nuevo/);
   // Con pocas frases se cae el porqué, nunca la petición de repetir; en niveles 1-2, sin reglas.
   assert.match(p, /nunca la petición de repetir/);
-  assert.match(p, /En niveles 1 y 2 NO expliques el porqué/);
+  assert.match(p, /En niveles 1 y 2 no uses términos de gramática/);
   assert.match(p, /PISTAS/);
   assert.doesNotMatch(p, /NO lo expliques en 'reply'/);
   assert.match(notaAviso('silencio'), /dos opciones/);
   assert.match(notaAviso('pista'), /pista hablada/);
   assert.match(notaAviso('silencio'), /^\[Nota de la app/);
+});
+
+test('turn state flags repetition attempts and very short answers', () => {
+  const t = (rol: 'tutor' | 'alumno', texto: string) => ({ rol, texto });
+  const corregido = [t('tutor', 'What did you do?'), t('alumno', 'Yesterday I go to the park'), t('tutor', 'Nice! We say «I went to the park». Can you say it?')];
+  assert.match(estadoTurno([...corregido, t('alumno', 'Yesterday I goed to the park')]), /repitiendo su frase anterior/);
+  assert.match(estadoTurno([...corregido, t('alumno', 'Yesterday I goed to the park'), t('tutor', 'Almost! Can you try again?'), t('alumno', 'Yesterday I go to park')]), /SEGUNDO intento/);
+  assert.equal(estadoTurno([...corregido, t('alumno', 'I played football with my friends')]), '');
+  assert.match(estadoTurno([t('tutor', 'Where did you eat?'), t('alumno', 'Home.'), t('tutor', 'What did you eat?'), t('alumno', 'Pizza')]), /muy pocas palabras/);
+  assert.match(estadoTurno([t('tutor', '何をしましたか？'), t('alumno', '公園を行きました'), t('tutor', '「公園に行きました」ですね。言ってみてください。'), t('alumno', '公園を行きました')]), /repitiendo/);
+  assert.equal(estadoTurno([t('alumno', 'Hi'), t('tutor', 'Hello!')]), '');
 });

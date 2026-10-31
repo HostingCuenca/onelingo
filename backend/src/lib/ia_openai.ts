@@ -46,6 +46,8 @@ async function conReintentos(hacer: () => Promise<Response>, intentos = 3): Prom
 }
 
 // gpt-4.1-mini a veces deja la respuesta normal en `refusal` (1 de ~200 turnos): un reintento lo arregla.
+const esRazonador = (modelo: string) => /^(gpt-5|gpt-6|o\d)/.test(modelo);
+
 export async function generarJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown = ESQUEMA_TUTOR_OPENAI, modelo = config.openaiModelo, intento = 1): Promise<{ json: any; modelo: string; entrada: number; salida: number }> {
   try { return await pedirJsonOpenAI(system, mensajes, esquema, modelo); }
   catch (e) {
@@ -67,7 +69,7 @@ async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assis
       messages: [{ role: 'system', content: system }, ...mensajes],
       response_format: { type: 'json_schema', json_schema: { name: 'respuesta_tutor', strict: true, schema: esquema } },
       // Los modelos con razonamiento no aceptan temperatura y cuentan lo que piensan en la salida.
-      ...(/^(gpt-5|gpt-6|o\d)/.test(modelo) ? { reasoning_effort: 'low', max_completion_tokens: 3000 } : { temperature: 0.7, max_tokens: 700 }),
+      ...(esRazonador(modelo) ? { reasoning_effort: 'low', max_completion_tokens: 3000 } : { temperature: 0.7, max_tokens: 700 }),
     }),
   }));
   const m = j?.choices?.[0]?.message;
@@ -149,10 +151,12 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
   const conectar = () => fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST', signal,
     headers: { 'content-type': 'application/json', authorization: `Bearer ${config.openaiApiKey}` },
-    body: JSON.stringify({ model: config.openaiModelo,
+    body: JSON.stringify({ model: config.openaiModeloTutor,
       messages: [{ role: 'system', content: system + '\nEscribe reply primero; máximo 600 caracteres y una primera respuesta breve.' }, ...mensajes],
       response_format: { type: 'json_schema', json_schema: { name: 'respuesta_tutor', strict: true, schema: ESQUEMA_TUTOR_OPENAI } },
-      temperature: 0.7, max_tokens: 700, stream: true, stream_options: { include_usage: true } }),
+      // Los modelos de razonamiento no aceptan temperature ni max_tokens.
+      ...(esRazonador(config.openaiModeloTutor) ? { reasoning_effort: config.openaiEsfuerzoTutor, max_completion_tokens: 3000 } : { temperature: 0.7, max_tokens: 700 }),
+      stream: true, stream_options: { include_usage: true } }),
   });
   let r!: Response;
   for (let i = 0; i < 3; i++) {
@@ -166,7 +170,7 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
   if (!r.ok || !r.body) throw new Error(`OpenAI ${r.status}`);
   const reader = r.body.getReader(); const decoder = new TextDecoder();
   let pending = '', texto = '', enviado = false, done = false, frasesEnviadas = 0;
-  let modelo = config.openaiModelo, entrada = 0, salida = 0;
+  let modelo = config.openaiModeloTutor, entrada = 0, salida = 0;
   try {
     while (true) {
       const next = await reader.read();

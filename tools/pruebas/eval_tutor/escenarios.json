@@ -1,0 +1,544 @@
+{
+ "version": 1,
+ "nota": "Banco de evaluación del tutor de videollamada (tools/pruebas/eval_tutor/evaluar.mts). Cada escenario: historial previo + último mensaje del alumno + lo que haría un buen profesor particular. 'error' es el error que importa en el último mensaje (null si no hay). 'ya_corregido' se pasa al tutor igual que en producción (correccionesPrevias de lib/situaciones.ts).",
+ "categorias": {
+  "error_claro": "Error claro que conviene corregir: reacción corta a lo que quiso decir, forma correcta dicha con claridad (contraste opcional), porqué en pocas palabras solo desde nivel 3, y SIEMPRE termina pidiendo que repita la frase completa, sin otra pregunta. En niveles 1-2, sin jerga gramatical ni porqué.",
+  "correcta": "Frase correcta o variante válida: NO corregir ni sugerir que hay error. Reaccionar con interés concreto y seguir con UNA pregunta.",
+  "error_menor": "Error menor que no estorba: no señalarlo ni pedir repetir; a lo sumo reformular con la forma buena dentro de la reacción (recast) y seguir conversando.",
+  "repite_bien": "El alumno repite bien tras la corrección: celebrar corto y concreto (citando la forma) y volver a la conversación donde iba, con una pregunta sobre lo que contó.",
+  "vuelve_a_fallar": "El alumno vuelve a fallar lo mismo tras la corrección: segunda ayuda, más despacio y por partes, sin regañar ni explicación larga, y seguir adelante (puede invitar una última vez; no abrir un tercer ciclo de insistencia).",
+  "error_repetido": "Mismo tipo de error ya corregido antes en la charla: idealmente hacer que se autocorrija (pregunta con dos opciones «¿X o Y?» o una pista) en vez de darle la respuesta hecha.",
+  "autocorreccion": "El alumno se autocorrige en el mismo mensaje («I go… I went»): elogiar la autocorrección de forma concreta, no corregir nada, seguir la charla.",
+  "por_que": "El alumno pregunta por qué: explicación simple (en el idioma meta, muy corta en niveles bajos; la explicación completa puede ir en 'traduccion'), dos ejemplos que contrasten y pedirle que lo use.",
+  "como_se_dice": "Pregunta «¿cómo se dice X?» o mete una palabra de su idioma: dar la palabra explícitamente (pronto en el turno), con un ejemplo corto, y pedir que la use.",
+  "bloqueo": "Bloqueo / «no sé»: no responder por él ni traducir todo; pista hablada con dos opciones o un comienzo de frase que pueda completar, y animar.",
+  "monosilabos": "Respuestas muy cortas o monosílabos: no exigir ni interrogar; reformular lo que dijo en frase completa, pregunta más fácil y abierta pero con apoyo (opciones o modelo de respuesta), quizá compartir algo propio.",
+  "nivel_alto": "El alumno muestra un nivel claramente superior al configurado: subir un poco el nivel (frases más ricas, una expresión útil, pregunta abierta de más profundidad) sin dejar de ser claro; no corregir lo que está bien."
+ },
+ "escenarios": [
+  {
+   "id": "E01", "categoria": "error_claro", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Hi! I'm Frank. How are you today?"},
+    {"rol": "alumno", "texto": "I'm good, thank you. And you?"},
+    {"rol": "tutor", "texto": "I'm great, thanks! So, what did you do last weekend?"}
+   ],
+   "ultimo": "Last weekend I go to the beach with my family.",
+   "error": {"original": "I go", "correcto": "I went"},
+   "esperado": "Reacción breve a la playa/familia; «I went» dicho con claridad (contraste con «I go» opcional); sin porqué ni 'past tense' (nivel 1); termina pidiendo que repita la frase completa, sin otra pregunta."
+  },
+  {
+   "id": "E02", "categoria": "error_claro", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Hey! Nice to see you again. Do you have brothers or sisters?"},
+    {"rol": "alumno", "texto": "Yes, I have two brothers and one sister."},
+    {"rol": "tutor", "texto": "Oh, a big family! What does your sister do?"}
+   ],
+   "ultimo": "My sister work in a hospital, she is a nurse.",
+   "error": {"original": "My sister work", "correcto": "My sister works"},
+   "esperado": "Reacción concreta (enfermera, hospital); «she works» con claridad; porqué opcional en pocas palabras fáciles (nivel 3); termina pidiendo repetir la frase completa."
+  },
+  {
+   "id": "E03", "categoria": "error_claro", "idiomaMeta": "es", "idiomaNativo": "en", "nivel": 3, "tutorId": "avatar_tomas",
+   "historial": [
+    {"rol": "tutor", "texto": "¡Hola! ¿Qué tal tu día?"},
+    {"rol": "alumno", "texto": "Hola, mi día fue largo."},
+    {"rol": "tutor", "texto": "¿Largo? ¿Por qué? ¿Qué pasó?"}
+   ],
+   "ultimo": "Hoy soy muy cansado porque trabajé diez horas.",
+   "error": {"original": "soy muy cansado", "correcto": "estoy muy cansado"},
+   "esperado": "Reply en español: empatía por las diez horas; «estoy muy cansado» con claridad; porqué opcional muy corto en español fácil (cómo te sientes → estar); pide repetir la frase completa. La explicación de la tarjeta, en inglés."
+  },
+  {
+   "id": "E04", "categoria": "error_claro", "idiomaMeta": "ja", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_erik",
+   "historial": [
+    {"rol": "tutor", "texto": "こんにちは！エリックです。週末は何をしましたか。"},
+    {"rol": "alumno", "texto": "渋谷で買い物をしました。"},
+    {"rol": "tutor", "texto": "渋谷ですか、楽しそうですね！昨日は何をしましたか。"}
+   ],
+   "ultimo": "昨日、友達を会いました。",
+   "error": {"original": "友達を会いました", "correcto": "友達に会いました"},
+   "esperado": "Forma です/ます; reacción breve; «友達に会いました» con claridad (contraste を/に opcional) sin nombrar reglas ni la palabra 'partícula' (nivel 1); pide repetir la frase completa."
+  },
+  {
+   "id": "E05", "categoria": "error_claro", "idiomaMeta": "de", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_nora",
+   "historial": [
+    {"rol": "tutor", "texto": "Hallo! Schön, dich zu sehen. Was hast du am Wochenende gemacht?"},
+    {"rol": "alumno", "texto": "Am Samstag habe ich viel gearbeitet."},
+    {"rol": "tutor", "texto": "Oh nein, am Samstag arbeiten ist hart! Und gestern?"}
+   ],
+   "ultimo": "Gestern ich bin ins Kino gegangen, mit meinem Bruder.",
+   "error": {"original": "Gestern ich bin", "correcto": "Gestern bin ich"},
+   "esperado": "Reacción (cine, hermano); «Gestern bin ich ins Kino gegangen» moviendo el verbo, no el adverbio; porqué opcional en pocas palabras (das Verb kommt an Position 2); pide repetir la frase completa."
+  },
+  {
+   "id": "E06", "categoria": "error_claro", "idiomaMeta": "fr", "idiomaNativo": "es", "nivel": 6, "tutorId": "avatar_lucas",
+   "historial": [
+    {"rol": "tutor", "texto": "Salut ! Alors, raconte-moi, tu as fait quoi hier ?"},
+    {"rol": "alumno", "texto": "Hier, c'était une journée très tranquille."},
+    {"rol": "tutor", "texto": "Tranquille, c'est bien de temps en temps ! Tu es sorti un peu ?"}
+   ],
+   "ultimo": "Oui, le matin j'ai allé au marché avec ma sœur pour acheter des légumes.",
+   "error": {"original": "j'ai allé", "correcto": "je suis allé"},
+   "esperado": "Reacción (marché, sœur); «je suis allé» con claridad; porqué en una frase corta (aller se conjuga con être); pide repetir la frase completa."
+  },
+  {
+   "id": "C01", "categoria": "correcta", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Hi! Today let's talk about where you live. Where are you from?"},
+    {"rol": "alumno", "texto": "I'm from Ecuador, from Quito."},
+    {"rol": "tutor", "texto": "Quito! Up in the mountains, right? How long have you lived there?"}
+   ],
+   "ultimo": "I've lived in Quito since 2015, but I was born in Loja.",
+   "error": null,
+   "esperado": "Nada que corregir (present perfect + since correcto). Reacción concreta (Loja/Quito) y una pregunta de seguimiento. Tarjeta vacía."
+  },
+  {
+   "id": "C02", "categoria": "correcta", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 6, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Let's dream a bit. If you could change one thing about your daily routine, what would it be?"},
+    {"rol": "alumno", "texto": "Probably I would sleep more, I always wake up at five."},
+    {"rol": "tutor", "texto": "Five?! That's brutal. And what about hobbies? Is there something you'd love to learn?"}
+   ],
+   "ultimo": "If I had more time, I would learn to play the guitar. My dad used to play it when I was a kid.",
+   "error": null,
+   "esperado": "Nada que corregir (second conditional y used to correctos). Reacción concreta al padre/la guitarra y una pregunta de seguimiento."
+  },
+  {
+   "id": "C03", "categoria": "correcta", "idiomaMeta": "pt", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_julia",
+   "historial": [
+    {"rol": "tutor", "texto": "Oi! Tudo bem? O que você fez ontem à noite?"},
+    {"rol": "alumno", "texto": "Tudo bem! Ontem eu saí com a minha namorada."},
+    {"rol": "tutor", "texto": "Que legal! E aonde vocês foram?"}
+   ],
+   "ultimo": "Jantamos em um restaurante japonês no centro. Estava muito bom!",
+   "error": null,
+   "esperado": "Nada que corregir («em um» es válido en Brasil; «no centro» correcto). Reacción concreta (comida japonesa) y una pregunta."
+  },
+  {
+   "id": "C04", "categoria": "correcta", "idiomaMeta": "de", "idiomaNativo": "es", "nivel": 6, "tutorId": "avatar_nora",
+   "historial": [
+    {"rol": "tutor", "texto": "Hast du schon Pläne fürs Wochenende?"},
+    {"rol": "alumno", "texto": "Noch nicht so richtig. Vielleicht fahre ich zu meinen Eltern."},
+    {"rol": "tutor", "texto": "Klingt gemütlich! Wohnen deine Eltern weit weg?"}
+   ],
+   "ultimo": "Ungefähr zwei Stunden mit dem Zug. Aber ich weiß noch nicht, ob ich am Samstag Zeit habe, weil ich vielleicht arbeiten muss.",
+   "error": null,
+   "esperado": "Nada que corregir (verbo al final tras ob y weil correcto). Reacción concreta y una pregunta."
+  },
+  {
+   "id": "C05", "categoria": "correcta", "idiomaMeta": "fr", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_lucas",
+   "historial": [
+    {"rol": "tutor", "texto": "Bonjour ! Je m'appelle Lucas. Et toi, comment tu t'appelles ?"},
+    {"rol": "alumno", "texto": "Je m'appelle Andrea."},
+    {"rol": "tutor", "texto": "Enchanté, Andrea ! Tu habites où ?"}
+   ],
+   "ultimo": "J'habite à Cuenca avec ma mère et mon chat.",
+   "error": null,
+   "esperado": "Nada que corregir. Reacción concreta (el gato, Cuenca) y una pregunta sencilla, idealmente con dos opciones (nivel 1)."
+  },
+  {
+   "id": "M01", "categoria": "error_menor", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Have you seen any good movies lately?"},
+    {"rol": "alumno", "texto": "Yes, I love movies."},
+    {"rol": "tutor", "texto": "Me too! What was the last one you watched?"}
+   ],
+   "ultimo": "I watched a really good movie in the weekend, it was about a dog who travels to find his family.",
+   "error": {"original": "in the weekend", "correcto": "on the weekend"},
+   "esperado": "No parar la charla por «in the weekend»: a lo sumo reformular («on the weekend») dentro de la reacción, sin señalarlo ni pedir repetir. Interés concreto por la película del perro y una pregunta."
+  },
+  {
+   "id": "M02", "categoria": "error_menor", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 6, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Let's talk about social media. Do you use it a lot?"},
+    {"rol": "alumno", "texto": "Yes, too much, I think. Mostly Instagram and TikTok."},
+    {"rol": "tutor", "texto": "Same here, honestly! Do you think it's good or bad for young people?"}
+   ],
+   "ultimo": "I think it can be quite toxic for teenagers, specially for their self-esteem, because they compare themselves all the time.",
+   "error": {"original": "specially", "correcto": "especially"},
+   "esperado": "No interrumpir la opinión por «specially»: a lo sumo reformular con «especially». Reaccionar a la idea (autoestima, compararse) con algo propio y una pregunta de nivel 6."
+  },
+  {
+   "id": "M03", "categoria": "error_menor", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Tell me about your family. Do you have a big family?"},
+    {"rol": "alumno", "texto": "No, small family. My mother, my father and me."},
+    {"rol": "tutor", "texto": "Nice, just the three of you! What does your mom do?"}
+   ],
+   "ultimo": "My mother is teacher in a school.",
+   "error": {"original": "is teacher", "correcto": "is a teacher"},
+   "esperado": "Reformular sin señalar («Oh, your mom is a teacher!») y seguir con una pregunta sencilla (opciones en nivel 1). No detener la charla para pedir repetir."
+  },
+  {
+   "id": "R01", "categoria": "repite_bien", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Hi! Let's talk about food today. What did you eat yesterday?"},
+    {"rol": "alumno", "texto": "Yesterday I eat pizza."},
+    {"rol": "tutor", "texto": "Mmm, pizza! Just a small thing: we say «I ate», not «I eat». Can you say the whole sentence?"}
+   ],
+   "ultimo": "Yesterday I ate pizza.",
+   "ya_corregido": [{"original": "Yesterday I eat pizza", "correcto": "Yesterday I ate pizza", "skill": "conjugacion"}],
+   "error": null,
+   "esperado": "Celebrar corto y concreto («Perfect, «I ate»!») y volver a la pizza con una pregunta sencilla. Sin nueva corrección."
+  },
+  {
+   "id": "R02", "categoria": "repite_bien", "idiomaMeta": "fr", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_lucas",
+   "historial": [
+    {"rol": "tutor", "texto": "Alors, qu'est-ce que tu as fait samedi ?"},
+    {"rol": "alumno", "texto": "Samedi, j'ai allé au cinéma avec mes amis."},
+    {"rol": "tutor", "texto": "Oh, sympa, le ciné ! Petite chose : on dit « je suis allé », pas « j'ai allé ». Tu peux redire toute la phrase ?"}
+   ],
+   "ultimo": "Samedi, je suis allé au cinéma avec mes amis.",
+   "ya_corregido": [{"original": "j'ai allé", "correcto": "je suis allé", "skill": "conjugacion"}],
+   "error": null,
+   "esperado": "Celebrar concreto («je suis allé») y volver al cine con una pregunta (qué película, qué tal)."
+  },
+  {
+   "id": "R03", "categoria": "repite_bien", "idiomaMeta": "ja", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_erik",
+   "historial": [
+    {"rol": "tutor", "texto": "毎朝、どうやって会社に行きますか。"},
+    {"rol": "alumno", "texto": "毎朝、電車を乗ります。"},
+    {"rol": "tutor", "texto": "電車ですか、混んでいそうですね！ちょっとだけ。「電車を乗ります」じゃなくて「電車に乗ります」と言います。もう一度、全部言ってみてください。"}
+   ],
+   "ultimo": "毎朝、電車に乗ります。",
+   "ya_corregido": [{"original": "電車を乗ります", "correcto": "電車に乗ります", "skill": "gramatica"}],
+   "error": null,
+   "esperado": "Forma です/ます. Celebrar concreto («電車に乗ります») y volver al tema (cuánto tarda, si va lleno) con una pregunta."
+  },
+  {
+   "id": "V01", "categoria": "vuelve_a_fallar", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Hi! Tell me about your sister. Does she have a job?"},
+    {"rol": "alumno", "texto": "Yes, she work in a bank."},
+    {"rol": "tutor", "texto": "Oh, a bank! Small thing: we say «she works», not «she work». Can you say the whole sentence?"}
+   ],
+   "ultimo": "Yes, she work in a bank.",
+   "ya_corregido": [{"original": "she work", "correcto": "she works", "skill": "conjugacion"}],
+   "error": {"original": "she work", "correcto": "she works"},
+   "esperado": "Segunda ayuda despacio y por partes («She… works… in a bank»), amable, sin regla ni jerga (nivel 1), y seguir adelante; puede invitar una última vez pero sin exigir ni abrir un tercer ciclo."
+  },
+  {
+   "id": "V02", "categoria": "vuelve_a_fallar", "idiomaMeta": "de", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_nora",
+   "historial": [
+    {"rol": "tutor", "texto": "Und was machst du morgen?"},
+    {"rol": "alumno", "texto": "Morgen ich gehe ins Fitnessstudio."},
+    {"rol": "tutor", "texto": "Super, Sport! Nur eine Kleinigkeit: Man sagt «Morgen gehe ich», nicht «Morgen ich gehe». Sag mal den ganzen Satz!"}
+   ],
+   "ultimo": "Morgen ich gehe ins Fitnessstudio.",
+   "ya_corregido": [{"original": "Morgen ich gehe", "correcto": "Morgen gehe ich", "skill": "gramatica"}],
+   "error": {"original": "Morgen ich gehe", "correcto": "Morgen gehe ich"},
+   "esperado": "Segunda ayuda despacio y por partes («Morgen… gehe ich… ins Fitnessstudio»), sin explicación larga, y seguir adelante sin un tercer ciclo de insistencia."
+  },
+  {
+   "id": "V03", "categoria": "vuelve_a_fallar", "idiomaMeta": "es", "idiomaNativo": "en", "nivel": 1, "tutorId": "avatar_tomas",
+   "historial": [
+    {"rol": "tutor", "texto": "¡Hola! ¿Cómo te llamas?"},
+    {"rol": "alumno", "texto": "Me llamo Jake."},
+    {"rol": "tutor", "texto": "¡Mucho gusto, Jake! ¿Cuántos años tienes?"},
+    {"rol": "alumno", "texto": "Soy veinte años."},
+    {"rol": "tutor", "texto": "¡Qué joven! Una cosita: decimos «Tengo veinte años», no «Soy veinte años». ¿Puedes decir la frase completa?"}
+   ],
+   "ultimo": "Soy... veinte años.",
+   "ya_corregido": [{"original": "Soy veinte años", "correcto": "Tengo veinte años", "skill": "gramatica"}],
+   "error": {"original": "Soy veinte años", "correcto": "Tengo veinte años"},
+   "esperado": "Reply en español. Segunda ayuda despacio («Tengo… veinte años»), sin jerga, y seguir adelante (nueva pregunta sencilla o última invitación breve), sin un tercer ciclo."
+  },
+  {
+   "id": "X01", "categoria": "error_repetido", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Hi! What did you do yesterday?"},
+    {"rol": "alumno", "texto": "Yesterday I go to the park."},
+    {"rol": "tutor", "texto": "The park, nice! Small thing: we say «I went», not «I go». Can you say the whole sentence?"},
+    {"rol": "alumno", "texto": "Yesterday I went to the park."},
+    {"rol": "tutor", "texto": "Perfect, «I went»! What did you do at the park?"}
+   ],
+   "ultimo": "I play soccer with my friends.",
+   "ya_corregido": [{"original": "Yesterday I go to the park", "correcto": "Yesterday I went to the park", "skill": "conjugacion"}],
+   "error": {"original": "I play", "correcto": "I played"},
+   "esperado": "Hacer que se autocorrija: pregunta con las dos formas («I play or I played?») o pista breve («Remember, it was yesterday…»), sin darle la forma hecha; sin jerga (nivel 1)."
+  },
+  {
+   "id": "X02", "categoria": "error_repetido", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Tell me about your parents. What does your mom do?"},
+    {"rol": "alumno", "texto": "My mom work in a school."},
+    {"rol": "tutor", "texto": "Oh, a school! Quick thing: we say «she works», with an s, because it's she. Can you say it again?"},
+    {"rol": "alumno", "texto": "My mom works in a school."},
+    {"rol": "tutor", "texto": "Exactly, «works»! And your dad?"}
+   ],
+   "ultimo": "My dad drive a taxi in Guayaquil.",
+   "ya_corregido": [{"original": "My mom work", "correcto": "My mom works", "skill": "conjugacion"}],
+   "error": {"original": "My dad drive", "correcto": "My dad drives"},
+   "esperado": "Hacer que se autocorrija: «drive or drives?» o pista («remember the s?»), sin darle la forma hecha; interés por el taxi."
+  },
+  {
+   "id": "X03", "categoria": "error_repetido", "idiomaMeta": "pt", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_julia",
+   "historial": [
+    {"rol": "tutor", "texto": "Oi! Como você está hoje?"},
+    {"rol": "alumno", "texto": "Eu sou cansado."},
+    {"rol": "tutor", "texto": "Ah, que pena! Só um detalhe: dizemos «estou cansado», não «sou cansado». Pode repetir a frase?"},
+    {"rol": "alumno", "texto": "Eu estou cansado."},
+    {"rol": "tutor", "texto": "Isso, «estou cansado»! E a sua família, como está?"}
+   ],
+   "ultimo": "Minha mãe é doente esta semana, ela tem gripe.",
+   "ya_corregido": [{"original": "Eu sou cansado", "correcto": "Eu estou cansado", "skill": "gramatica"}],
+   "error": {"original": "é doente", "correcto": "está doente"},
+   "esperado": "Empatía por la gripe y hacer que se autocorrija: «é ou está?» o pista, sin darle la forma hecha."
+  },
+  {
+   "id": "X04", "categoria": "error_repetido", "idiomaMeta": "de", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_nora",
+   "historial": [
+    {"rol": "tutor", "texto": "Wann stehst du normalerweise auf?"},
+    {"rol": "alumno", "texto": "Normalerweise ich stehe um sechs Uhr auf."},
+    {"rol": "tutor", "texto": "Puh, früh! Kleine Sache: «Normalerweise stehe ich um sechs Uhr auf», das Verb kommt direkt nach «normalerweise». Sag den ganzen Satz!"},
+    {"rol": "alumno", "texto": "Normalerweise stehe ich um sechs Uhr auf."},
+    {"rol": "tutor", "texto": "Perfekt! Und wie lange arbeitest du heute?"}
+   ],
+   "ultimo": "Heute ich arbeite bis acht Uhr abends.",
+   "ya_corregido": [{"original": "Normalerweise ich stehe", "correcto": "Normalerweise stehe ich", "skill": "gramatica"}],
+   "error": {"original": "Heute ich arbeite", "correcto": "Heute arbeite ich"},
+   "esperado": "Idealmente una pista para que lo arregle él («Heute… wo kommt das Verb hin?», «Heute arbeite…?», «wie bei normalerweise») en vez de dar la frase hecha; aceptable como mínimo: reformulación breve con énfasis en el orden. Sin explicación larga."
+  },
+  {
+   "id": "A01", "categoria": "autocorreccion", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Hello! How are you?"},
+    {"rol": "alumno", "texto": "I'm fine, thanks."},
+    {"rol": "tutor", "texto": "Good! What did you do yesterday afternoon?"}
+   ],
+   "ultimo": "Yesterday I go... I went to the park with my dog.",
+   "error": null,
+   "esperado": "Elogiar la autocorrección de forma concreta («Yes, «I went», you fixed it yourself!»), sin corregir nada; pregunta sobre el perro."
+  },
+  {
+   "id": "A02", "categoria": "autocorreccion", "idiomaMeta": "fr", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_lucas",
+   "historial": [
+    {"rol": "tutor", "texto": "Salut ! Tu as passé un bon dimanche ?"},
+    {"rol": "alumno", "texto": "Oui, très bon."},
+    {"rol": "tutor", "texto": "Super ! Qu'est-ce que tu as fait ?"}
+   ],
+   "ultimo": "Je suis allé à le... au parc avec mes enfants.",
+   "error": null,
+   "esperado": "Elogiar la autocorrección («au parc») de forma concreta, sin corregir; pregunta sobre los niños o el parque."
+  },
+  {
+   "id": "A03", "categoria": "autocorreccion", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "What kind of food do you and your partner like?"},
+    {"rol": "alumno", "texto": "I love spicy food, like Mexican food."},
+    {"rol": "tutor", "texto": "Oh, me too! And your partner?"}
+   ],
+   "ultimo": "She don't... doesn't like spicy food at all, she prefers Italian.",
+   "error": null,
+   "esperado": "Elogiar la autocorrección («doesn't») de forma concreta, sin corregir; pregunta sobre la comida italiana."
+  },
+  {
+   "id": "P01", "categoria": "por_que", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Hi! What did you do on Saturday?"},
+    {"rol": "alumno", "texto": "On Saturday I goed to the cinema."},
+    {"rol": "tutor", "texto": "The cinema, fun! Small thing: we say «I went», not «I goed». Can you say the whole sentence?"}
+   ],
+   "ultimo": "¿Por qué went y no goed?",
+   "ya_corregido": [{"original": "I goed", "correcto": "I went", "skill": "conjugacion"}],
+   "error": null,
+   "esperado": "Reply en inglés muy simple (nivel 1): una frase corta con contraste («Today I go, yesterday I went», «go is a special word»), sin términos como 'irregular verb' o 'past tense'; la explicación completa puede ir en 'traduccion'; pedirle que lo use («Now you: On Saturday I…»)."
+  },
+  {
+   "id": "P02", "categoria": "por_que", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Tell me about your best friend. What does he do?"},
+    {"rol": "alumno", "texto": "He work in a bank."},
+    {"rol": "tutor", "texto": "Oh, a bank! Quick thing: we say «he works», with an s. Can you say the whole sentence?"}
+   ],
+   "ultimo": "Why works with s? In Spanish we don't have that.",
+   "error": null,
+   "esperado": "Explicación simple: con he/she/it el verbo lleva -s en presente; contraste «I work / he works»; pedirle que lo use en una frase nueva (p. ej. sobre su madre)."
+  },
+  {
+   "id": "P03", "categoria": "por_que", "idiomaMeta": "de", "idiomaNativo": "es", "nivel": 6, "tutorId": "avatar_nora",
+   "historial": [
+    {"rol": "tutor", "texto": "Warum lernst du eigentlich Deutsch?"},
+    {"rol": "alumno", "texto": "Ich lerne Deutsch, weil ich möchte in Deutschland arbeiten."},
+    {"rol": "tutor", "texto": "Toll, das ist ein super Grund! Nur eine Sache: nach «weil» geht das Verb ans Ende: «weil ich in Deutschland arbeiten möchte». Kannst du den ganzen Satz sagen?"}
+   ],
+   "ultimo": "¿Pero por qué el verbo va al final? Con 'denn' me dijeron que no.",
+   "ya_corregido": [{"original": "weil ich möchte in Deutschland arbeiten", "correcto": "weil ich in Deutschland arbeiten möchte", "skill": "gramatica"}],
+   "error": null,
+   "esperado": "Reply en alemán (nivel 6, 1-2 frases claras): weil introduce una subordinada y manda el verbo al final; denn no, orden normal; contraste «…, weil ich müde bin» / «…, denn ich bin müde»; pedirle que haga una frase con weil. La explicación en español puede ir en 'traduccion'."
+  },
+  {
+   "id": "P04", "categoria": "por_que", "idiomaMeta": "fr", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_lucas",
+   "historial": [
+    {"rol": "tutor", "texto": "Tu es allé où pendant les vacances ?"},
+    {"rol": "alumno", "texto": "J'ai allé à la plage."},
+    {"rol": "tutor", "texto": "La plage, génial ! Petite chose : on dit « je suis allé », pas « j'ai allé ». Tu peux redire la phrase ?"}
+   ],
+   "ultimo": "¿Por qué 'je suis allé'? En español es 'he ido', con haber.",
+   "ya_corregido": [{"original": "J'ai allé", "correcto": "Je suis allé", "skill": "conjugacion"}],
+   "error": null,
+   "esperado": "Reply en francés, muy corto: aller (como venir, partir) va con être; contraste «j'ai mangé / je suis allé»; pedirle que lo use. La explicación en español puede ir en 'traduccion'."
+  },
+  {
+   "id": "H01", "categoria": "como_se_dice", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Tell me about your family. Who do you live with?"},
+    {"rol": "alumno", "texto": "I live with my sister and her daughter."},
+    {"rol": "tutor", "texto": "Oh, that's nice! How old is her daughter?"}
+   ],
+   "ultimo": "She is five. How do you say 'sobrina' in English?",
+   "error": null,
+   "esperado": "Dar «niece» en la primera frase, ejemplo corto («She's your niece!»), pedirle que la use («Can you tell me about your niece?»)."
+  },
+  {
+   "id": "H02", "categoria": "como_se_dice", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "What did you do on Sunday?"},
+    {"rol": "alumno", "texto": "I stayed home in the morning."},
+    {"rol": "tutor", "texto": "A lazy morning, love it! And in the afternoon?"}
+   ],
+   "ultimo": "In the afternoon I went to the mercado to buy fruit and vegetables.",
+   "error": {"original": "the mercado", "correcto": "the market"},
+   "esperado": "Dar la palabra «market» (o «farmers market») de forma clara y natural, y procurar que la use (pedirle que la diga o hacer una pregunta que la pida)."
+  },
+  {
+   "id": "H03", "categoria": "como_se_dice", "idiomaMeta": "fr", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_lucas", "situacion": "En un café",
+   "historial": [
+    {"rol": "tutor", "texto": "Bonjour et bienvenue ! Vous désirez ?"},
+    {"rol": "alumno", "texto": "Bonjour. Un moment, s'il vous plaît."},
+    {"rol": "tutor", "texto": "Bien sûr, prenez votre temps. Alors, qu'est-ce que vous voulez boire ?"}
+   ],
+   "ultimo": "Je voudrais un café con leche, s'il vous plaît.",
+   "error": {"original": "café con leche", "correcto": "café au lait"},
+   "esperado": "Dar «un café au lait» (o «un café crème») con claridad, pedirle que lo diga, sin salir de la escena del café; sin jerga (nivel 1)."
+  },
+  {
+   "id": "H04", "categoria": "como_se_dice", "idiomaMeta": "pt", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_julia",
+   "historial": [
+    {"rol": "tutor", "texto": "Você tem planos para este fim de semana?"},
+    {"rol": "alumno", "texto": "Sim, sábado é um dia especial."},
+    {"rol": "tutor", "texto": "Ah é? Por quê? O que vai acontecer?"}
+   ],
+   "ultimo": "É o meu... ¿cómo se dice 'cumpleaños' en portugués?",
+   "error": null,
+   "esperado": "Dar «aniversário» en la primera frase con un ejemplo («Sábado é o meu aniversário!») y pedirle que lo diga; después interés por la celebración."
+  },
+  {
+   "id": "B01", "categoria": "bloqueo", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Hello! How's your week going?"},
+    {"rol": "alumno", "texto": "Good, thank you."},
+    {"rol": "tutor", "texto": "Great! What do you usually do on Sundays?"}
+   ],
+   "ultimo": "Mmm... no sé. I don't know.",
+   "error": null,
+   "esperado": "No responder por él: pista con dos opciones («Do you rest at home or go out?») o comienzo de frase («On Sundays I usually…»), animar; breve."
+  },
+  {
+   "id": "B02", "categoria": "bloqueo", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Let's talk about travel! Have you traveled much?"},
+    {"rol": "alumno", "texto": "A little. I went to Peru and Colombia."},
+    {"rol": "tutor", "texto": "Oh, cool! What was your favorite place?"}
+   ],
+   "ultimo": "Hmm... I want to say something but I don't know how to say it.",
+   "error": null,
+   "esperado": "Pista: comienzo «My favorite place was… because…» u opciones («Peru or Colombia?»), animar a intentarlo; sin responder por él."
+  },
+  {
+   "id": "B03", "categoria": "bloqueo", "idiomaMeta": "es", "idiomaNativo": "en", "nivel": 3, "tutorId": "avatar_tomas",
+   "historial": [
+    {"rol": "tutor", "texto": "¡Hola! ¿Cómo estuvo tu fin de semana?"},
+    {"rol": "alumno", "texto": "Estuvo bien, gracias."},
+    {"rol": "tutor", "texto": "¡Qué bueno! ¿Qué hiciste el sábado?"}
+   ],
+   "ultimo": "Um... I don't know how to say it in Spanish.",
+   "error": null,
+   "esperado": "Reply en español: pista («Puedes empezar con: El sábado fui a…») u opciones («¿Saliste o te quedaste en casa?»); no traducir todo ni responder por él; animar."
+  },
+  {
+   "id": "B04", "categoria": "bloqueo", "idiomaMeta": "ja", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_erik",
+   "historial": [
+    {"rol": "tutor", "texto": "こんにちは！今日はいい天気ですね。"},
+    {"rol": "alumno", "texto": "はい、いい天気です。"},
+    {"rol": "tutor", "texto": "週末は何をしましたか。"}
+   ],
+   "ultimo": "えっと…わかりません。",
+   "error": null,
+   "esperado": "Forma です/ます. Pista con dos opciones («家で休みましたか。出かけましたか。») o comienzo («週末は…»), animar; no responder por él."
+  },
+  {
+   "id": "S01", "categoria": "monosilabos", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Hi! Let's talk about food. Do you like cooking?"},
+    {"rol": "alumno", "texto": "No."},
+    {"rol": "tutor", "texto": "Ha, okay! What's your favorite food?"},
+    {"rol": "alumno", "texto": "Pizza."},
+    {"rol": "tutor", "texto": "Pizza is great! Where do you eat pizza?"}
+   ],
+   "ultimo": "Home.",
+   "error": null,
+   "esperado": "Reformular en frase completa («At home, nice!»), sin exigir; pregunta fácil con apoyo (dos opciones o modelo «You can say: I eat pizza with…»); quizá compartir algo propio."
+  },
+  {
+   "id": "S02", "categoria": "monosilabos", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "How was your trip to Cuenca?"},
+    {"rol": "alumno", "texto": "Good."},
+    {"rol": "tutor", "texto": "Nice! What did you do there?"},
+    {"rol": "alumno", "texto": "Walk."},
+    {"rol": "tutor", "texto": "Walking around Cuenca sounds lovely! Where did you walk?"}
+   ],
+   "ultimo": "Center.",
+   "error": null,
+   "esperado": "Reformular en frase completa («Oh, you walked around the city center!»), compartir algo breve, pregunta fácil con apoyo (opciones o comienzo de frase); no interrogar ni exigir."
+  },
+  {
+   "id": "S03", "categoria": "monosilabos", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 6, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Let's talk about work. Do you enjoy your job?"},
+    {"rol": "alumno", "texto": "Yes."},
+    {"rol": "tutor", "texto": "That's great to hear! What do you like most about it?"},
+    {"rol": "alumno", "texto": "People."},
+    {"rol": "tutor", "texto": "The people, that's so important! What are your coworkers like?"}
+   ],
+   "ultimo": "Nice.",
+   "error": null,
+   "esperado": "Reformular/expandir, compartir algo propio y una pregunta más fácil y concreta con apoyo (opciones o un comienzo de respuesta), sin interrogar ni exigir."
+  },
+  {
+   "id": "L01", "categoria": "nivel_alto", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Hi! What do you do for work?"},
+    {"rol": "alumno", "texto": "I work in accounting."},
+    {"rol": "tutor", "texto": "Oh, accounting! Do you like it?"}
+   ],
+   "ultimo": "Honestly, not really. I've been thinking about switching careers because I'm kind of burned out, and I'd love to do something more creative, like graphic design.",
+   "error": null,
+   "esperado": "Subir un poco el nivel: frases naturales más ricas que A1 (sin infantilizar), interés concreto (diseño gráfico, burnout), una pregunta abierta de más profundidad, quizá una expresión útil. No corregir."
+  },
+  {
+   "id": "L02", "categoria": "nivel_alto", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 3, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "Where did you grow up?"},
+    {"rol": "alumno", "texto": "In Loja, a small city in the south of Ecuador."},
+    {"rol": "tutor", "texto": "Cool! Why did you move to Guayaquil?"}
+   ],
+   "ultimo": "Mainly for university. To be honest, if I hadn't moved here, I probably would've ended up studying law, which in hindsight wouldn't have suited me at all.",
+   "error": null,
+   "esperado": "Subir el nivel: respuesta más rica, pregunta abierta de más profundidad (qué estudió al final, por qué no le habría ido bien el derecho), quizá una expresión útil. No corregir."
+  },
+  {
+   "id": "L03", "categoria": "nivel_alto", "idiomaMeta": "de", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_nora",
+   "historial": [
+    {"rol": "tutor", "texto": "Hallo! Wo wohnst du?"},
+    {"rol": "alumno", "texto": "Ich wohne in Berlin."},
+    {"rol": "tutor", "texto": "Berlin, toll! Gefällt dir Berlin?"}
+   ],
+   "ultimo": "Ja, eigentlich sehr. Ich wohne seit drei Jahren hier, weil ich bei einer Softwarefirma arbeite, aber manchmal vermisse ich das Meer.",
+   "error": null,
+   "esperado": "Subir un poco el nivel: frases más completas que A1, interés concreto (echar de menos el mar, la empresa), pregunta abierta. No corregir."
+  }
+ ]
+}
