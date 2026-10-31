@@ -11,6 +11,7 @@ import '../../core/i18n/i18n.dart';
 import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/descarga_android.dart';
+import '../../shared/widgets/enlaces_legales.dart';
 import '../../shared/widgets/widgets.dart';
 import 'codigo_correo.dart';
 
@@ -185,6 +186,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               icon: const Icon(Icons.g_mobiledata, size: 26),
               label: const Text('Google'),
             ),
+            const SizedBox(height: 8),
+            const EnlacesLegales(registro: true),
             // Solo en la web: enlace al APK de Android.
             const SizedBox(height: 10),
             const DescargaAndroid(),

@@ -48,6 +48,8 @@ export interface ProveedorPagos {
   /** Sesión de pago y suscripción resultante (objeto del proveedor), para confirmar sin webhook. */
   obtenerCheckout(sessionId: string): Promise<{ usuarioId: string | null; completada: boolean; suscripcion: any | null; clienteId: string | null; idiomas: string | null }>;
   obtenerSuscripcion(id: string): Promise<any>;
+  /** Cancela la suscripción en el acto (sin más cobros). Se usa al eliminar la cuenta. */
+  cancelarSuscripcion(id: string): Promise<void>;
   /** URL del portal donde el alumno gestiona su suscripción (con `configuracion`, la de OneLingo). */
   crearPortal(clienteId: string, retorno: string, configuracion?: string | null): Promise<string>;
   /** Configuración del portal: cancelar, tarjeta, facturas y cambio de plan entre `productos`. */
@@ -155,6 +157,10 @@ export const stripe: ProveedorPagos = {
 
   async obtenerSuscripcion(id) {
     return llamarStripe(stripeConfig().secretKey, 'GET', `/subscriptions/${encodeURIComponent(id)}`);
+  },
+
+  async cancelarSuscripcion(id) {
+    await llamarStripe(stripeConfig().secretKey, 'DELETE', `/subscriptions/${encodeURIComponent(id)}`);
   },
 
   async crearPortal(clienteId, retorno, configuracion) {

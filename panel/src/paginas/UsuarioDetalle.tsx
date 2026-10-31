@@ -106,7 +106,7 @@ function Suscripcion({ id, s, alCambiar }: { id: string; s: any; alCambiar: () =
   )
 }
 
-export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id: string; volver: () => void; desde?: 'usuarios' | 'suscripciones' }) {
+export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id: string; volver: () => void; desde?: 'usuarios' | 'suscripciones' | 'reportes' }) {
   const [d, setD] = useState<any>(null)
   const [err, setErr] = useState('')
   const cargar = () => api(`/admin/usuarios/${id}`).then(setD).catch((e) => setErr(e.message))
@@ -118,7 +118,7 @@ export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id:
   const nivelMax = Math.max(-1, ...(d.progresoIdiomas.find((x: any) => x.idioma === u.idioma_meta)?.niveles ?? []).filter((n: any) => n.clases > 0).map((n: any) => n.nivel))
   return (
     <>
-      <div className="cab"><div><span className="volver" onClick={volver}>← {desde === 'suscripciones' ? 'Suscripciones' : 'Alumnos'}</span><h1>{[u.nombre, u.apellido].filter(Boolean).join(' ')}</h1>
+      <div className="cab"><div><span className="volver" onClick={volver}>← {desde === 'suscripciones' ? 'Suscripciones' : desde === 'reportes' ? 'Reportes IA' : 'Alumnos'}</span><h1>{[u.nombre, u.apellido].filter(Boolean).join(' ')}</h1>
         <span className="muted mono">{u.email}{u.email_verificado ? ' ✓ verificado' : ' · sin verificar'}{u.telefono ? ` · ${u.telefono}` : ''} · {PLATAFORMAS[u.plataforma || 'desconocida'] ?? u.plataforma} · registrado {fecha(u.creado_en)} · activo {hace(u.ultima_actividad)}</span></div>
         <div>{d.suscripcion.accesoPlan ? <span className="pill ok">Plan {d.suscripcion.planId}</span> : <span className="pill trial">Prueba gratuita · {Math.round(d.suscripcion.prueba.restanteSegundos / 60)} min</span>}</div></div>
       <div className="kpis">

@@ -140,6 +140,17 @@ body.en-llamada #stage[data-phase=listening]{box-shadow:0 0 0 calc(3px + var(--n
 body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inline-block;width:2px;height:1em;margin-left:4px;background:currentColor;vertical-align:-2px;animation:cursor .9s steps(2,start) infinite}
 @keyframes girar{to{transform:rotate(360deg)}}
 @keyframes cursor{to{visibility:hidden}}
+/* Reportar una respuesta de la IA: enlace discreto y formulario en la hoja inferior. */
+.enlace.discreto{color:var(--gris);font-weight:700}
+.reporte-ayuda{margin:0;color:var(--gris);font-size:14px}
+.reporte-cita{margin:0;padding:10px 12px;border-radius:12px;background:var(--morado-suave);white-space:pre-wrap;overflow-wrap:anywhere;max-height:7.5em;overflow:auto}
+.reporte-motivos{display:flex;flex-wrap:wrap;gap:8px}
+.reporte-motivos button{padding:8px 14px;border-radius:999px;border:1.5px solid var(--borde);font-weight:700;font-size:14px}
+.reporte-motivos button[aria-pressed="true"]{border-color:var(--morado);background:var(--morado-suave);color:var(--morado)}
+.reporte textarea{font:inherit;padding:10px 12px;border-radius:14px;border:1.5px solid var(--morado-claro);resize:vertical;min-height:64px}
+.reporte-enviar{padding:12px 18px;align-self:stretch}
+.reporte-gracias{margin:12px 0;text-align:center;font-weight:800;color:var(--verde)}
+.reporte [hidden]{display:none}
 @media(prefers-reduced-motion:reduce){.lumo2d,.hablar,#stage,.insignia::before{transition:none;animation:none}}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/build/three.module.js","three/addons/":"./vendor/examples/jsm/"}}</script>
@@ -160,7 +171,7 @@ body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inl
   <div class="subtitulos" aria-live="polite">
    <p id="subTutor" class="sub-tutor"></p>
    <p id="subTraduccion" class="sub-traduccion" hidden></p>
-   <div class="sub-acciones"><button id="replay" class="enlace" type="button" hidden>↻ Repetir</button><button id="verTraduccion" class="enlace" type="button" hidden>Ver traducción</button></div>
+   <div class="sub-acciones"><button id="replay" class="enlace" type="button" hidden>↻ Repetir</button><button id="verTraduccion" class="enlace" type="button" hidden>Ver traducción</button><button id="reportar" class="enlace discreto" type="button" hidden aria-label="Reportar la última respuesta del tutor"><span aria-hidden="true">⚑</span> Reportar</button></div>
    <p id="subAlumno" class="sub-alumno" hidden></p>
   </div>
   <div id="ideas" class="ideas" hidden></div>
@@ -180,7 +191,16 @@ body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inl
   <div class="hoja-cabecera"><strong id="panelTitulo">Conversación</strong><button id="cerrarPanel" class="icono" type="button" aria-label="Cerrar">✕</button></div>
   <div id="messages" class="hoja-cuerpo" role="log"></div>
   <div id="temas" class="hoja-cuerpo" hidden></div>
+  <form id="reporte" class="hoja-cuerpo reporte" hidden>
+   <p class="reporte-ayuda">Cuéntanos qué está mal en esta respuesta del tutor. Nuestro equipo la revisará.</p>
+   <p id="reporteCita" class="reporte-cita"></p>
+   <strong>¿Qué pasó?</strong>
+   <div id="reporteMotivos" class="reporte-motivos" role="group" aria-label="Motivo del reporte"></div>
+   <textarea id="reporteComentario" maxlength="500" rows="3" placeholder="Comentario (opcional)" aria-label="Comentario (opcional)"></textarea>
+   <p id="reporteAviso" class="aviso" role="alert"></p>
+   <button id="reporteEnviar" class="enviar reporte-enviar" type="submit" disabled>Enviar reporte</button>
+  </form>
  </div>
  <audio id="audio" preload="auto" playsinline></audio>
 </section>
-<script type="module" src="./practice.js?v=62"></script></html>
+<script type="module" src="./practice.js?v=63"></script></html>

@@ -17,8 +17,11 @@ import '../../core/lexico/lexico.dart';
 import '../../core/nivel0/nivel0.dart';
 import '../../core/pagos/providers.dart';
 import '../plans/idiomas_plan.dart';
+import 'eliminar_cuenta.dart';
+import '../../core/api/sync.dart';
 import '../../core/state/providers.dart';
 import '../../core/version.dart';
+import '../../shared/widgets/enlaces_legales.dart';
 import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -423,6 +426,22 @@ class ProgressScreen extends ConsumerWidget {
               style: const TextStyle(color: OL.rojo),
             ),
           ),
+          // Con cuenta en el servidor (las demo las rechaza el servidor).
+          if (Sync.instancia.conectado)
+            TextButton.icon(
+              onPressed: () => confirmarEliminarCuenta(context, ref),
+              icon: const Icon(
+                Icons.delete_forever_outlined,
+                color: OL.gris,
+                size: 18,
+              ),
+              label: Text(
+                tr('Eliminar cuenta'),
+                style: const TextStyle(color: OL.gris),
+              ),
+            ),
+          const SizedBox(height: 4),
+          const EnlacesLegales(),
           const SizedBox(height: 4),
           Center(
             child: Text(

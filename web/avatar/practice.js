@@ -445,7 +445,7 @@ function stop() {
 
 // ---------- Subtítulos, correcciones e ideas ----------
 function limpiarTurno() {
-  $('subTutor').textContent = ''; $('subTraduccion').hidden = true; $('verTraduccion').hidden = true; $('replay').hidden = true;
+  $('subTutor').textContent = ''; $('subTraduccion').hidden = true; $('verTraduccion').hidden = true; $('replay').hidden = true; $('reportar').hidden = true;
   $('subAlumno').hidden = true; ideas([]);
 }
 function mostrarAlumno(texto) { $('subAlumno').textContent = texto; $('subAlumno').hidden = !texto; }
@@ -537,7 +537,7 @@ async function requestTutor(entrada, opening = false) {
         final = true;
         const r = e.data;
         if (!frases) { frases++; encolar(r.reply, version); }
-        lastReply = r.reply; $('subTutor').textContent = r.reply; $('replay').hidden = false;
+        lastReply = r.reply; $('subTutor').textContent = r.reply; $('replay').hidden = false; $('reportar').hidden = false;
         history.push({rol: 'tutor', texto: r.reply});
         const b = burbuja(r.reply);
         if (r.romanizacion) b.append(el('span', 'romanizacion', r.romanizacion));
@@ -841,10 +841,50 @@ function abrirPanel(cual) {
   $('panel').hidden = false;
   $('messages').hidden = cual !== 'conversacion';
   $('temas').hidden = cual !== 'temas';
-  $('panelTitulo').textContent = cual === 'temas' ? '¿Qué quieres practicar?' : 'Conversación';
+  $('reporte').hidden = cual !== 'reporte';
+  $('panelTitulo').textContent = cual === 'temas' ? '¿Qué quieres practicar?' : cual === 'reporte' ? 'Reportar respuesta' : 'Conversación';
   if (cual === 'temas') pintarTemas();
-  else $('messages').lastElementChild?.scrollIntoView({block: 'end'});
+  else if (cual === 'conversacion') $('messages').lastElementChild?.scrollIntoView({block: 'end'});
 }
+// ---------- Reportar la última respuesta del tutor (política de IA de Google Play) ----------
+// Misma API que la app (POST /reportes-ia) con el token de la sesión.
+const MOTIVOS = [['ofensivo', 'Ofensiva'], ['incorrecto', 'Incorrecta'], ['inapropiado', 'Inapropiada'], ['otro', 'Otro motivo']];
+let reporte = null;
+function abrirReporte() {
+  if (!lastReply || !config?.token) return;
+  reporte = {texto: lastReply, motivo: null, enviando: false};
+  $('reporteCita').textContent = lastReply;
+  $('reporteComentario').value = ''; $('reporteAviso').textContent = '';
+  $('reporte').querySelector('.reporte-gracias')?.remove();
+  for (const n of $('reporte').children) n.hidden = false;
+  const box = $('reporteMotivos'); box.replaceChildren();
+  for (const [id, nombre] of MOTIVOS) {
+    const b = el('button', null, nombre); b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+    b.onclick = () => { reporte.motivo = id; for (const x of box.children) x.setAttribute('aria-pressed', String(x === b)); $('reporteEnviar').disabled = false; };
+    box.append(b);
+  }
+  $('reporteEnviar').disabled = true; $('reporteEnviar').textContent = 'Enviar reporte';
+  abrirPanel('reporte');
+}
+$('reportar').onclick = abrirReporte;
+$('reporte').onsubmit = async e => {
+  e.preventDefault();
+  if (!reporte?.motivo || reporte.enviando) return;
+  reporte.enviando = true; $('reporteEnviar').disabled = true; $('reporteEnviar').textContent = 'Enviando…'; $('reporteAviso').textContent = '';
+  const u = units.find(x => x.id === temaId);
+  const cuerpo = {origen: 'llamada', texto: reporte.texto.slice(0, 2000), motivo: reporte.motivo, comentario: $('reporteComentario').value.trim().slice(0, 500),
+    contexto: {idioma: language(), ...(tutor ? {tutorId: 'avatar_' + tutor.id} : {}), ...(u ? {situacion: String(u.nombre ?? u.id).slice(0, 200)} : {})}};
+  try {
+    const r = await fetch(config.api + '/reportes-ia', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify(cuerpo)});
+    if (!r.ok) throw new Error(r.status === 429 ? 'Enviaste muchos reportes. Inténtalo de nuevo más tarde.' : 'No se pudo enviar el reporte. Inténtalo de nuevo.');
+    for (const n of $('reporte').children) n.hidden = true;
+    $('reporte').append(el('p', 'reporte-gracias', 'Gracias, lo revisaremos.'));
+    const enviado = reporte; setTimeout(() => { if (reporte === enviado) $('panel').hidden = true; }, 1800);
+  } catch (x) {
+    $('reporteAviso').textContent = x instanceof TypeError ? 'No se pudo conectar. Revisa tu conexión.' : x.message;
+    reporte.enviando = false; $('reporteEnviar').disabled = false; $('reporteEnviar').textContent = 'Enviar reporte';
+  }
+};
 $('verConversacion').onclick = () => abrirPanel('conversacion');
 $('cerrarPanel').onclick = () => { $('panel').hidden = true; };
 $('tema').onclick = () => abrirPanel('temas');

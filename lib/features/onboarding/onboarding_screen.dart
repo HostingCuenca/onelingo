@@ -17,6 +17,7 @@ import '../../core/content/curriculum.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
+import '../../shared/widgets/enlaces_legales.dart';
 import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
 import 'codigo_correo.dart';
@@ -509,6 +510,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         ),
       ],
       const SizedBox(height: 16),
+      const EnlacesLegales(registro: true),
+      const SizedBox(height: 4),
       TextButton(
         onPressed: () => context.go('/login'),
         child: Text(tr('Ya tengo una cuenta · Iniciar sesión')),

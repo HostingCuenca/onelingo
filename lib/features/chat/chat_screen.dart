@@ -16,6 +16,7 @@ import '../../core/i18n/i18n.dart';
 import '../../core/voz.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
+import '../../shared/widgets/reportar_ia.dart';
 import '../../shared/widgets/widgets.dart';
 
 /// Conversación con el tutor de IA (situación o libre).
@@ -39,9 +40,18 @@ class ChatScreen extends ConsumerStatefulWidget {
 }
 
 class _Msg {
-  _Msg(this.texto, {required this.mio, this.sub, this.correccion});
+  _Msg(
+    this.texto, {
+    required this.mio,
+    this.sub,
+    this.correccion,
+    this.ia = false,
+  });
   final String texto;
   final bool mio;
+
+  /// Respuesta generada por la IA: se puede reportar (política de Google Play).
+  final bool ia;
   final String? sub;
   final (String, String, String)?
   correccion; // original, corregido, explicación
@@ -412,6 +422,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             rom.isEmpty ? texto : '$texto ($rom)',
             mio: false,
             sub: trad.isEmpty ? null : trad,
+            ia: true,
           ),
         );
         sugerenciasIA = (r['suggestions'] as List? ?? []).cast<String>();
@@ -635,6 +646,18 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   color: color,
                   tutor: t,
                   idm: _idm,
+                  onReportar: i < mensajes.length && mensajes[i].ia
+                      ? () => reportarRespuestaIA(
+                          context,
+                          origen: sit == null ? 'chat' : 'situacion',
+                          texto: mensajes[i].texto,
+                          contexto: {
+                            'idioma': _idm,
+                            'tutorId': t.id,
+                            'situacion': sit?.id,
+                          },
+                        )
+                      : null,
                 ),
               ),
             ),
@@ -752,11 +775,15 @@ class _Burbuja extends StatelessWidget {
     required this.color,
     required this.tutor,
     required this.idm,
+    this.onReportar,
   });
   final _Msg m;
   final Color color;
   final Tutor tutor;
   final String idm;
+
+  /// Reportar esta respuesta de la IA (solo en las del tutor).
+  final VoidCallback? onReportar;
 
   @override
   Widget build(BuildContext context) {
@@ -826,6 +853,36 @@ class _Burbuja extends StatelessWidget {
                     ],
                   ),
                 ),
+                if (onReportar != null)
+                  Tooltip(
+                    message: tr('Reportar respuesta'),
+                    child: InkWell(
+                      onTap: onReportar,
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(4, 6, 8, 2),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.outlined_flag,
+                              size: 14,
+                              color: OL.gris,
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              tr('Reportar'),
+                              style: const TextStyle(
+                                color: OL.gris,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 if (c != null)
                   Container(
                     margin: const EdgeInsets.only(top: 6),

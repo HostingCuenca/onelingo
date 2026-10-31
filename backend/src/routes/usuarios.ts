@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { query, uno } from '../lib/db.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { demoPermitido, planEfectivo } from '../lib/pagos/suscripciones.js';
+import { ErrorCuenta, eliminarCuenta } from '../lib/cuenta.js';
 
 const Registro = z.object({
   email: z.string().email(),
@@ -112,6 +113,22 @@ export default async function rutas(app: FastifyInstance) {
       );
     }
     return { ok: true, nivelActual: nivel, planId: estado.planId };
+  });
+
+  /**
+   * Eliminar la cuenta (Perfil → Eliminar cuenta). Demo: 403. Ver lib/cuenta.ts.
+   * Respuesta: `{ ok, stripeCancelada, googlePlay: { debeCancelar, producto } | null }`.
+   */
+  app.delete('/usuarios/me', { preHandler: requiereAlumno }, async (req, reply) => {
+    const s = req.user as Sesion;
+    try {
+      const r = await eliminarCuenta(s.sub);
+      req.log.info({ stripeCancelada: r.stripeCancelada, googlePlay: !!r.googlePlay?.debeCancelar }, 'cuenta_eliminada');
+      return r;
+    } catch (e) {
+      if (e instanceof ErrorCuenta) return reply.code(e.status).send({ error: e.message, codigo: e.codigo });
+      throw e;
+    }
   });
 
   app.post('/usuarios/me/eventos', { preHandler: requiereAlumno }, async (req) => {

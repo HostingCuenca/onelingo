@@ -616,6 +616,80 @@ class Sync {
     }, auth: true);
   }
 
+  /// Código del último error de [eliminarCuenta] (`cuenta_demo`,
+  /// `cancelacion_fallida`…), para mostrar un mensaje claro.
+  String? ultimoCodigo;
+
+  /// Elimina la cuenta en el servidor (Perfil → Eliminar cuenta). Devuelve la
+  /// respuesta (`googlePlay.debeCancelar`, `stripeCancelada`) o null con
+  /// [ultimoError] y [ultimoCodigo]. Si sale bien, cierra la sesión local y
+  /// descarta el progreso pendiente de subir.
+  Future<Map<String, dynamic>?> eliminarCuenta() async {
+    ultimoError = '';
+    ultimoCodigo = null;
+    final sesion = token;
+    final id = usuarioId;
+    if (sesion == null) {
+      ultimoError = tr('No hay una sesión iniciada.');
+      return null;
+    }
+    try {
+      // Sin content-type: Fastify rechaza un JSON vacío.
+      final r = await http
+          .delete(
+            Uri.parse('$baseUrl/usuarios/me'),
+            headers: {
+              'authorization': 'Bearer $sesion',
+              'x-idioma': I18n.idioma.value,
+            },
+          )
+          .timeout(const Duration(seconds: 30));
+      final j = r.body.isEmpty
+          ? <String, dynamic>{}
+          : jsonDecode(r.body) as Map<String, dynamic>;
+      if (r.statusCode >= 200 && r.statusCode < 300) {
+        if (id != null) await _prefs?.remove('onelingo.pending.$id');
+        await cerrarSesion();
+        return j;
+      }
+      ultimoCodigo = j['codigo'] as String?;
+      ultimoError =
+          (j['error'] ?? tr('Error {codigo}', {'codigo': r.statusCode}))
+              .toString();
+    } catch (_) {
+      ultimoError = tr('No se pudo conectar con el servidor');
+    }
+    return null;
+  }
+
+  /// Denuncia una respuesta de la IA (`POST /reportes-ia`). [origen]: chat,
+  /// llamada, situacion…; [motivo]: ofensivo, incorrecto, inapropiado, otro.
+  Future<bool> reportarIA({
+    required String origen,
+    required String texto,
+    required String motivo,
+    String comentario = '',
+    Map<String, Object?> contexto = const {},
+  }) async {
+    if (!conectado) {
+      ultimoError = tr('Inicia sesión para enviar el reporte.');
+      return false;
+    }
+    final t = texto.trim();
+    final c = comentario.trim();
+    final r = await _postConError('/reportes-ia', {
+      'origen': origen,
+      'texto': t.length > 2000 ? t.substring(0, 2000) : t,
+      'motivo': motivo,
+      'comentario': c.length > 500 ? c.substring(0, 500) : c,
+      'contexto': {
+        for (final e in contexto.entries)
+          if (e.value != null) e.key: e.value,
+      },
+    }, auth: true);
+    return r != null;
+  }
+
   Future<void> cerrarSesion() async {
     _debounce?.cancel();
     _pendiente = null;

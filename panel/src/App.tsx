@@ -10,13 +10,14 @@ import Conexiones from './paginas/Conexiones'
 import Planes from './paginas/Planes'
 import Suscripciones from './paginas/Suscripciones'
 import Cotizaciones from './paginas/Cotizaciones'
+import ReportesIA from './paginas/ReportesIA'
 
 const LOGO = `${import.meta.env.BASE_URL}logo-panel.webp`
 
-type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string; desde?: 'usuarios' | 'suscripciones' } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' } | { p: 'planes' } | { p: 'suscripciones' } | { p: 'cotizaciones' }
+type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string; desde?: 'usuarios' | 'suscripciones' | 'reportes' } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' } | { p: 'planes' } | { p: 'suscripciones' } | { p: 'cotizaciones' } | { p: 'reportes' }
 
 const TITULOS: Record<Ruta['p'], string> = {
-  resumen: 'Resumen', usuarios: 'Alumnos', usuario: 'Alumno', planes: 'Planes', suscripciones: 'Suscripciones', cotizaciones: 'Cotizaciones',
+  resumen: 'Resumen', usuarios: 'Alumnos', usuario: 'Alumno', planes: 'Planes', suscripciones: 'Suscripciones', cotizaciones: 'Cotizaciones', reportes: 'Reportes IA',
   conversaciones: 'Conversaciones IA', audios: 'Voz y audios', conexiones: 'Conexiones', correos: 'Correos',
 }
 
@@ -78,6 +79,7 @@ export default function App() {
         <a className={ruta.p === 'suscripciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'suscripciones' })}>Suscripciones</a>
         <a className={ruta.p === 'cotizaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'cotizaciones' })}>Cotizaciones</a>
         <a className={ruta.p === 'conversaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conversaciones' })}>Conversaciones IA</a>
+        <a className={ruta.p === 'reportes' ? 'activo' : ''} onClick={() => setRuta({ p: 'reportes' })}>Reportes IA</a>
         <a className={ruta.p === 'audios' ? 'activo' : ''} onClick={() => setRuta({ p: 'audios' })}>Voz y audios</a>
         <a className={ruta.p === 'conexiones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conexiones' })}>Conexiones</a>
         <a className={ruta.p === 'correos' ? 'activo' : ''} onClick={() => setRuta({ p: 'correos' })}>Correos</a>
@@ -92,6 +94,7 @@ export default function App() {
         {ruta.p === 'cotizaciones' && <Cotizaciones />}
         {ruta.p === 'correos' && <Correos />}
         {ruta.p === 'conversaciones' && <Conversaciones />}
+        {ruta.p === 'reportes' && <ReportesIA abrirAlumno={(id) => setRuta({ p: 'usuario', id, desde: 'reportes' })} />}
         {ruta.p === 'audios' && <Audios />}
         {ruta.p === 'conexiones' && <Conexiones />}
       </main>

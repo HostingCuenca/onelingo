@@ -18,6 +18,8 @@ Porcentaje aproximado: Fundamentos activos en 9 idiomas; portugués retirado y e
 
 ## Terminado recientemente
 
+- **Requisitos de Google Play (2026-10-31, sin desplegar):** páginas públicas `web/privacidad/`, `web/terminos/` y `web/eliminar-cuenta/` (ES + EN en `#en`); `DELETE /usuarios/me` (`backend/src/lib/cuenta.ts`: demo → 403, cancela Stripe en el acto, avisa de Google Play, deja en `cuentas_eliminadas` solo el registro de pago sin datos personales); `POST /reportes-ia` (30 por hora) + Panel → Reportes IA (`GET/PUT /admin/reportes-ia`); migración `013_cuenta_reportes_ia.sql`. App: Perfil → «Eliminar cuenta» (escribir ELIMINAR) y enlaces legales en Perfil, registro e inicio de sesión; «Reportar» en las respuestas del tutor del chat; videollamada con «⚑ Reportar» (practice.js v63). Pruebas: `backend/test/cuenta-reportes.test.ts`, `test/cuenta_reportes_test.dart`.
+
 - **Voces nativas por rol (2026-10-19, sin desplegar):** cinco roles por idioma en `NATIVAS` (selección del piloto: Liam sustituye a Chris en en, Sami a Luna en it, Caroline a Hélène en fr). Chat, videollamada y Lumo hablan con voz nativa del idioma practicado (mujer_b / hombre_b / lumo por género). Diálogos de la ruta con voz por personaje (`elenco.json` + `lib/core/elenco.dart`). style 0; la clave de caché incluye modelo y ajustes (v2); los cortos verificados se siguen sirviendo con su clave anterior. Textos > 600 caracteres: se dividen por frases en el servidor. Videollamada con `previous_text`. Pendiente: desplegar, cifras a palabras fuera del alemán, apellidos japoneses sin género (respaldo por orden).
 
 - **I2 y francés FR-1/FR-2 (2026-10-01, DEC-032):**
