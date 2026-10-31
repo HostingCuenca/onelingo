@@ -408,22 +408,42 @@ export const vozMaxTotal = () => config.vozMaxCaracteres * VOZ_MAX_TROZOS;
 const dir = () => path.resolve(config.audioDir);
 const enCurso = new Map<string, Promise<Buffer>>();
 
-async function sintetizar(texto: string, vozId: string, idioma: string, previo?: string, ajustes = AJUSTES_VOZ): Promise<Buffer> {
-  const url = `https://api.elevenlabs.io/v1/text-to-speech/${vozId}?output_format=mp3_44100_128`;
-  let r!: Response;
+/** Tope de cada intento: sin él, un ElevenLabs colgado dejaba al tutor mudo hasta 5 min. */
+const TIEMPO_SINTESIS_MS = 10_000;
+/**
+ * POST a ElevenLabs con reintentos (429, 5xx, red o tiempo agotado) y `leer`
+ * sobre la respuesta buena, dentro del mismo tope de tiempo.
+ */
+async function pedirSintesis<T>(url: string, cuerpo: unknown, leer: (r: Response) => Promise<T>): Promise<T> {
+  let ultimo: unknown;
   for (let i = 0; i < 3; i++) {
-    r = await fetch(url, {
-      method: 'POST',
-      headers: { 'xi-api-key': config.elevenApiKey, 'content-type': 'application/json' },
-      body: JSON.stringify(cuerpoSintesis(texto, idioma, config.elevenModelo, previo, ajustes)),
-    });
-    if (r.ok) return Buffer.from(await r.arrayBuffer());
-    if ((r.status === 429 || r.status >= 500) && i < 2) { await new Promise((res) => setTimeout(res, 1000 * (i + 1))); continue; }
-    break;
+    if (i) await new Promise((res) => setTimeout(res, 700 * i + Math.random() * 400));
+    let r: Response;
+    try {
+      r = await fetch(url, {
+        method: 'POST', signal: AbortSignal.timeout(TIEMPO_SINTESIS_MS),
+        headers: { 'xi-api-key': config.elevenApiKey, 'content-type': 'application/json' },
+        body: JSON.stringify(cuerpo),
+      });
+      if (r.ok) return await leer(r);
+    } catch (e) { ultimo = e; continue; }
+    const detalle = await r.text().catch(() => '');
+    ultimo = new Error(`ElevenLabs ${r.status}: ${detalle.slice(0, 200)}`);
+    if (r.status !== 429 && r.status < 500) break;
   }
-  const detalle = await r.text().catch(() => '');
-  throw new Error(`ElevenLabs ${r.status}: ${detalle.slice(0, 200)}`);
+  throw ultimo;
 }
+
+/** Escritura que nadie ve a medias: un lector simultáneo (o un apagado) veía un MP3 truncado como caché válida. */
+async function escribirEntero(ruta: string, datos: string | Buffer) {
+  const temp = `${ruta}.${process.pid}.${Math.random().toString(36).slice(2, 8)}.part`;
+  try { await writeFile(temp, datos); await rename(temp, ruta); }
+  finally { await unlink(temp).catch(() => {}); }
+}
+
+const sintetizar = (texto: string, vozId: string, idioma: string, previo?: string, ajustes = AJUSTES_VOZ) =>
+  pedirSintesis(`https://api.elevenlabs.io/v1/text-to-speech/${vozId}?output_format=mp3_44100_128`,
+    cuerpoSintesis(texto, idioma, config.elevenModelo, previo, ajustes), async (r) => Buffer.from(await r.arrayBuffer()));
 
 export type Audio = { hash: string; buffer: Buffer; cache: boolean; voz: string; caracteres: number };
 export type PeticionVoz = { texto: string; idioma: string; voz?: string; modo?: string; previo?: string };
@@ -450,7 +470,10 @@ function preparar(p: PeticionVoz) {
 async function leerCache(hashes: (string | undefined)[]) {
   for (const hash of hashes) {
     if (!hash) continue;
-    try { return { hash, buffer: await readFile(path.join(dir(), `${hash}.mp3`)) }; } catch { /* siguiente */ }
+    try {
+      const buffer = await readFile(path.join(dir(), `${hash}.mp3`));
+      if (buffer.length) return { hash, buffer }; // vacío: escritura de antes de que fuera atómica
+    } catch { /* siguiente */ }
   }
   return null;
 }
@@ -490,7 +513,7 @@ async function audioTrozo(t: Trozo, idioma: string, rol: string, vozId: string) 
     pendiente = (async () => {
       await mkdir(dir(), { recursive: true });
       const buffer = await normalizarVolumen(await sintetizar(t.texto, vozId, idioma, t.previo, ajustesDeVoz(rol)), rol);
-      await writeFile(path.join(dir(), `${t.hash}.mp3`), buffer);
+      await escribirEntero(path.join(dir(), `${t.hash}.mp3`), buffer);
       await registrarAudio(t.hash, idioma, rol, vozId, t.texto, buffer.length);
       return buffer;
     })().finally(() => enCurso.delete(t.hash));
@@ -520,7 +543,7 @@ export async function obtenerAudio(p: PeticionVoz): Promise<Audio> {
     partes.push(a.buffer); cache &&= a.cache;
   }
   const buffer = Buffer.concat(partes);
-  await mkdir(dir(), { recursive: true }).then(() => writeFile(path.join(dir(), `${hash}.mp3`), buffer)).catch(() => {});
+  await mkdir(dir(), { recursive: true }).then(() => escribirEntero(path.join(dir(), `${hash}.mp3`), buffer)).catch(() => {});
   return { hash, buffer, cache, voz: q.rol, caracteres: q.texto.length };
 }
 
@@ -532,24 +555,11 @@ export type Alineacion = { characters: string[]; character_start_times_seconds: 
 export type AudioAlineado = Audio & { alineacion: Alineacion | null };
 
 async function sintetizarAlineado(texto: string, vozId: string, idioma: string, previo?: string, ajustes = AJUSTES_VOZ) {
-  const url = `https://api.elevenlabs.io/v1/text-to-speech/${vozId}/with-timestamps?output_format=mp3_44100_128`;
-  let r!: Response;
-  for (let i = 0; i < 3; i++) {
-    r = await fetch(url, {
-      method: 'POST',
-      headers: { 'xi-api-key': config.elevenApiKey, 'content-type': 'application/json' },
-      body: JSON.stringify(cuerpoSintesis(texto, idioma, config.elevenModelo, previo, ajustes)),
-    });
-    if (r.ok) {
-      const d = await r.json() as { audio_base64?: string; alignment?: Alineacion | null; normalized_alignment?: Alineacion | null };
-      if (!d.audio_base64) throw new Error('audio_vacio');
-      return { buffer: Buffer.from(d.audio_base64, 'base64'), alineacion: d.alignment ?? d.normalized_alignment ?? null };
-    }
-    if ((r.status === 429 || r.status >= 500) && i < 2) { await new Promise((res) => setTimeout(res, 1000 * (i + 1))); continue; }
-    break;
-  }
-  const detalle = await r.text().catch(() => '');
-  throw new Error(`ElevenLabs ${r.status}: ${detalle.slice(0, 200)}`);
+  const d = await pedirSintesis(`https://api.elevenlabs.io/v1/text-to-speech/${vozId}/with-timestamps?output_format=mp3_44100_128`,
+    cuerpoSintesis(texto, idioma, config.elevenModelo, previo, ajustes),
+    (r) => r.json() as Promise<{ audio_base64?: string; alignment?: Alineacion | null; normalized_alignment?: Alineacion | null }>);
+  if (!d.audio_base64) throw new Error('audio_vacio');
+  return { buffer: Buffer.from(d.audio_base64, 'base64'), alineacion: d.alignment ?? d.normalized_alignment ?? null };
 }
 
 const leerAlineacion = (hash: string) =>
@@ -579,6 +589,8 @@ export const esperarGuardados = () => Promise.all([...guardando]);
  * `null` y el cliente reparte las letras a lo largo del audio.
  */
 async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: string, rapido = false) {
+  const enMarcha = enCursoAlineado.get(t.hash);
+  if (enMarcha) { const r = await enMarcha; return { hash: t.hash, buffer: r.buffer, alineacion: r.alineacion, cache: false }; }
   const hit = await buscarTrozo(t, idioma, rol, vozId);
   if (hit) { void registrarUso(hit.hash); return { hash: hit.hash, buffer: hit.buffer, alineacion: await leerAlineacion(hit.hash), cache: true }; }
   if (!vozDisponible()) throw new Error('voz_no_configurada');
@@ -592,8 +604,8 @@ async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: strin
     // sigue hasta que termina, así una petición igual no vuelve a pagar la síntesis.
     const guardado = pendiente.then(async (r) => {
       await mkdir(dir(), { recursive: true });
-      await writeFile(path.join(dir(), `${t.hash}.mp3`), r.buffer);
-      if (r.alineacion) await writeFile(path.join(dir(), `${t.hash}.json`), JSON.stringify(r.alineacion)).catch(() => {});
+      if (r.alineacion) await escribirEntero(path.join(dir(), `${t.hash}.json`), JSON.stringify(r.alineacion)).catch(() => {});
+      await escribirEntero(path.join(dir(), `${t.hash}.mp3`), r.buffer);
       await registrarAudio(t.hash, idioma, rol, vozId, t.texto, r.buffer.length);
     });
     const fin = guardado.catch(() => {}).finally(() => { enCursoAlineado.delete(t.hash); guardando.delete(fin); });
@@ -685,14 +697,15 @@ export async function obtenerAudioStream(p: PeticionVoz, signal: AbortSignal, on
         if (!all.length) throw new Error('audio_vacio');
         const buffer = await normalizarVolumen(Buffer.concat(all), rol);
         await mkdir(dir(), { recursive: true });
-        const temp = `${ruta}.${process.pid}.part`;
-        try { await writeFile(temp, buffer); await rename(temp, ruta); }
-        finally { await unlink(temp).catch(() => {}); }
+        await escribirEntero(ruta, buffer);
         complete = true; resolve(buffer);
         void registrarAudio(hash, p.idioma, rol, v.id, t.texto, buffer.length).catch(() => {});
       } catch (e) { reject(e); throw e; }
       finally { if (!complete) reject(new Error('audio_interrumpido')); await reader.cancel().catch(() => {}); reader.releaseLock(); }
     }
-    return { stream: Readable.from(chunks()), cache: false, hash };
+    const stream = Readable.from(chunks());
+    // Si se cierra antes de leer nada, el generador no llega a su finally.
+    stream.once('close', () => { reject(new Error('audio_interrumpido')); reader.cancel().catch(() => {}); });
+    return { stream, cache: false, hash };
   } catch (e) { reject(e); throw e; }
 }

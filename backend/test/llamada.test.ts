@@ -4,7 +4,7 @@ import { mkdtemp, rm, writeFile, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { esperarGuardados, obtenerAudio, obtenerAudioAlineado, unirAlineaciones } from '../src/lib/voz.js';
-import { puedeEmitir, TOKENS_POR_HORA } from '../src/routes/llamada.js';
+import { esperaCupo, puedeEmitir, TOKENS_POR_HORA } from '../src/routes/llamada.js';
 import { config } from '../src/lib/config.js';
 import { pool } from '../src/lib/db.js';
 
@@ -59,6 +59,16 @@ test('voz alineada: se genera una vez con tiempos, se guarda junto al MP3 y lueg
   assert.equal(c.cache, true); assert.equal(c.hash, a.hash); assert.equal(urls.length, 1);
 }));
 
+test('voz alineada: un fallo de red con ElevenLabs se reintenta (antes dejaba la frase sin voz)', () => conMock(async (urls) => {
+  const bueno = globalThis.fetch; let fallos = 0;
+  globalThis.fetch = async (url, init) => { if (!fallos++) throw new TypeError('fetch failed'); return bueno(url, init); };
+  const a = await obtenerAudioAlineado({ texto: 'Se reintenta tras un corte.', idioma: 'es' });
+  assert.equal(a.buffer.toString(), '[Se reintenta tras un corte.]'); assert.equal(fallos, 2); assert.equal(urls.length, 1);
+  // Cada intento lleva su tope de tiempo.
+  globalThis.fetch = async (url, init) => { assert.ok(init?.signal, 'sin tope de tiempo'); return bueno(url, init); };
+  await obtenerAudioAlineado({ texto: 'Con tope de tiempo.', idioma: 'es' });
+}));
+
 test('voz alineada: un MP3 que ya existía sin tiempos no se vuelve a pagar (alineación null)', () => conMock(async (urls) => {
   const viejo = await obtenerAudio({ texto: 'Ya estaba en caché.', idioma: 'es' });
   assert.equal(urls.length, 1);
@@ -80,5 +90,7 @@ test('token de llamada: como mucho TOKENS_POR_HORA por alumno y hora', () => {
   for (let i = 0; i < TOKENS_POR_HORA; i++) assert.equal(puedeEmitir('u-limite', t0 + i), true);
   assert.equal(puedeEmitir('u-limite', t0 + 100), false);
   assert.equal(puedeEmitir('otro', t0 + 100), true);
+  // El 429 dice cuándo se libera el más antiguo.
+  assert.equal(esperaCupo('u-limite', t0 + 1_800_000), 1800);
   assert.equal(puedeEmitir('u-limite', t0 + 3_600_001), true);
 });

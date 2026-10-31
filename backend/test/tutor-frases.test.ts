@@ -20,6 +20,12 @@ test('sentences split only when finished; short ones and abbreviations merge', (
   assert.deepEqual(frasesCompletas('Ok. That sounds lovely. And you?', true), ['Ok. That sounds lovely.', 'And you?']);
   assert.deepEqual(frasesCompletas('I met Mr. Smith at the station. Nice', false), ['I met Mr. Smith at the station.']);
   assert.deepEqual(frasesCompletas('今日はいい天気ですね。散歩しましょう', true), ['今日はいい天気ですね。', '散歩しましょう']);
+  // El cierre de cita va con su frase aunque llegue en el token siguiente.
+  assert.deepEqual(frasesCompletas('「おはよう。', false), []);
+  assert.deepEqual(frasesCompletas('「おはよう。」と言います。次は', false), ['「おはよう。」と言います。']);
+  // La reacción breve del principio sale sola; las cortas de después se siguen uniendo.
+  assert.deepEqual(frasesCompletas('¡Qué bien! Dices muy bien la frase. Ok. Y tú?', true), ['¡Qué bien!', 'Dices muy bien la frase.', 'Ok. Y tú?']);
+  assert.deepEqual(frasesCompletas('Oh, super ! Juste une chose', false), ['Oh, super !']);
   // Stable as text grows: earlier sentences never change.
   const full = 'That is a great question! Let me think about it. What do you prefer?';
   let seen: string[] = [];

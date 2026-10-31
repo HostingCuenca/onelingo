@@ -123,17 +123,21 @@ export function replyParcial(texto: string): { texto: string; cerrado: boolean }
 const ABREVIATURAS = /(?:^|\s)(?:Mr|Mrs|Ms|Dr|St|Sr|Sra|Dra|etc|e\.g|i\.e|vs|p\.ej|[A-Z])\.$/;
 /**
  * Frases terminadas dentro de `texto`: se corta tras . ! ? … (o sus formas
- * CJK) seguidos de espacio, o al final si la cadena está cerrada. Las frases
- * muy cortas («Ok.») se unen a la siguiente para no fragmentar la voz.
+ * CJK) seguidos de espacio u otro carácter, o al final si la cadena está
+ * cerrada: a mitad del stream un 。 al final todavía puede llevar detrás su 」,
+ * y 「…。」 dentro de una frase no la termina. Las frases muy cortas («Ok.») se unen a la
+ * siguiente para no fragmentar la voz; la primera admite una reacción breve
+ * («Oh, nice!», «¡Qué bien!»), que es la que hace arrancar antes la voz.
  */
 export function frasesCompletas(texto: string, cerrado: boolean): string[] {
   const frases: string[] = [];
   let inicio = 0;
-  const re = /[.!?…。！？]+["'”’)]*(?=\s)|[。！？]+/g;
+  const re = /[.!?…。！？]+["'”’)」』）]*(?=\s)|[。！？]+(?=[^\s。！？”’)」』）])/g;
   for (let m; (m = re.exec(texto));) {
     const fin = m.index + m[0].length;
     const trozo = texto.slice(inicio, fin).trim();
-    if (ABREVIATURAS.test(trozo) || trozo.length < (/[\u3040-\u9fff\uac00-\ud7af]/.test(trozo) ? 4 : 12)) continue;
+    const minimo = /[\u3040-\u9fff\uac00-\ud7af]/.test(trozo) ? 4 : frases.length ? 12 : 8;
+    if (ABREVIATURAS.test(trozo) || trozo.length < minimo) continue;
     frases.push(trozo); inicio = fin;
   }
   if (cerrado) { const resto = texto.slice(inicio).trim(); if (resto) frases.push(resto); }

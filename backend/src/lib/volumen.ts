@@ -40,9 +40,13 @@ export const gananciaVoz = (clave: string) => LUFS_VOZ[clave] === undefined ? 0 
 const filtro = (db: number) => ['-af', `volume=${db.toFixed(1)}dB,alimiter=limit=0.89:level=false`, '-c:a', 'libmp3lame', '-b:a', '128k', '-ar', '44100', '-f', 'mp3', 'pipe:1'];
 
 let hayFfmpeg: Promise<boolean> | undefined;
-export const ffmpegDisponible = () => hayFfmpeg ??= new Promise((ok) => {
+export const ffmpegDisponible = () => hayFfmpeg ??= new Promise<boolean>((ok) => {
   const p = spawn(FFMPEG, ['-version'], { stdio: 'ignore' });
   p.on('error', () => ok(false)); p.on('exit', (c) => ok(c === 0));
+}).then((hay) => {
+  // Un fallo pasajero (EAGAIN con carga) no deja la voz sin normalizar hasta reiniciar.
+  if (!hay) setTimeout(() => { hayFfmpeg = undefined; }, 60_000).unref();
+  return hay;
 });
 
 function ffmpeg(args: string[], entrada: Buffer): Promise<{ salida: Buffer; log: string }> {
@@ -52,7 +56,8 @@ function ffmpeg(args: string[], entrada: Buffer): Promise<{ salida: Buffer; log:
     p.stdout.on('data', (d: Buffer) => salida.push(d));
     p.stderr.on('data', (d: Buffer) => { log += d; });
     p.on('error', mal);
-    p.on('exit', (c) => c === 0 ? ok({ salida: Buffer.concat(salida), log }) : mal(new Error(`ffmpeg ${c}: ${log.slice(-200)}`)));
+    // «close» y no «exit»: con «exit» aún pueden quedar datos de stdout por llegar (MP3 cortado al final).
+    p.on('close', (c) => c === 0 ? ok({ salida: Buffer.concat(salida), log }) : mal(new Error(`ffmpeg ${c}: ${log.slice(-200)}`)));
     p.stdin.on('error', () => {});
     p.stdin.end(entrada);
   });

@@ -10,7 +10,7 @@ import { requierePractica } from '../lib/pagos/suscripciones.js';
 import { obtenerAudioAlineado, vozDisponible } from '../lib/voz.js';
 
 const EsquemaChat = z.object({
-  idiomaMeta: z.string(), idiomaNativo: z.string().default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().default('mia'),
+  idiomaMeta: z.string().max(5), idiomaNativo: z.string().max(5).default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().max(40).default('mia'),
   situacionId: z.number().int().min(1).max(50).optional(), situacion: z.string().max(4000).optional(), objetivo: z.string().max(4000).optional(),
   objetivoId: z.string().max(24).optional(), modo: z.enum(['practica', 'prueba']).default('practica'),
   // Videollamada: silencio largo o botón «Pista» (no es un turno del alumno).
@@ -19,6 +19,13 @@ const EsquemaChat = z.object({
   historial: z.array(z.object({ rol: z.enum(['tutor', 'alumno']), texto: z.string().max(4000) })).max(30),
 });
 type DatosChat = z.infer<typeof EsquemaChat>;
+
+/** Una voz que tarda más que esto va como error (la página la pide aparte) y no retiene el final del stream. */
+const VOZ_TOPE_MS = 8000;
+const conTope = <T>(p: Promise<T>, ms: number) => {
+  let t: NodeJS.Timeout | undefined;
+  return Promise.race([p, new Promise<never>((_, mal) => { t = setTimeout(() => mal(new Error('voz_tardo')), ms); })]).finally(() => clearTimeout(t));
+};
 
 const objetivoInvalido = (d: DatosChat) =>
   !!d.objetivoId && !objetivoValido(d.idiomaMeta, d.situacionId, d.objetivoId);
@@ -44,10 +51,10 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
   const started = performance.now();
   const controller = new AbortController();
   const deadline = setTimeout(() => controller.abort(), 45000);
-  const emit = (tipo: string, data: unknown) => { if (!output.destroyed) output.write(`data: ${JSON.stringify({ tipo, data })}\n\n`); };
+  const emit = (tipo: string, data: unknown) => { if (!output.destroyed && !output.writableEnded) output.write(`data: ${JSON.stringify({ tipo, data })}\n\n`); };
   reply.raw.on('close', () => { if (!output.readableEnded) controller.abort(); });
   reply.type('text/event-stream').header('cache-control', 'no-cache, no-transform').header('x-accel-buffering', 'no');
-  const heartbeat = setInterval(() => { if (!output.destroyed) output.write(': keepalive\n\n'); }, 5000);
+  const heartbeat = setInterval(() => { if (!output.destroyed && !output.writableEnded) output.write(': keepalive\n\n'); }, 5000);
   const conVoz = (req.query as { voz?: string })?.voz === '1' && vozDisponible();
   const voces: Promise<void>[] = [];
   let fraseAnterior = '';
@@ -73,7 +80,7 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
             emit('frase', { indice, texto });
             if (conVoz && !controller.signal.aborted) {
               const previo = fraseAnterior; fraseAnterior = texto;
-              voces.push(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined }, true)
+              voces.push(conTope(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined }, true), VOZ_TOPE_MS)
                 .then((a) => {
                   if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started), cache: a.cache }, 'chat_primera_voz');
                   emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion });
