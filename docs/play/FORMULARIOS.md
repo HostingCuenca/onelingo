@@ -11,8 +11,8 @@ Paquete: `com.torisoftt.onelingo`. Textos de la ficha en `textos.json`, gráfico
 ## Acceso a la app (revisores)
 Toda la app requiere iniciar sesión. Instrucciones para el revisor:
 - Usuario: `ana@onelingo.demo` (cuenta demo con plan completo y sin vencimiento; no se puede borrar).
-- Contraseña: la de las cuentas demo (`DemoUser.password` en `lib/core/content/demo_users.dart`); se escribe en la consola, no en este archivo.
-- Pasos: «Ya tengo cuenta» → correo y contraseña → Inicio. Videollamada: Inicio → «Tutor con IA» → «Videollamada con …» (pide el micrófono).
+- Contraseña: no se escribe en la consola. En producción Ana no tiene contraseña: entra por el panel DEMO del login (la tarjeta «Ana Torres» rellena correo y clave). Si se apaga el modo demo, darle antes una contraseña real y actualizar «Detalles de acceso».
+- Pasos: «Ya tengo una cuenta · Iniciar sesión» → recuadro amarillo DEMO → tarjeta «Ana Torres» → ENTRAR → Inicio. Videollamada: Inicio → «Tutor con IA» → «Videollamada con …» (pide el micrófono).
 
 ## Anuncios
 No contiene anuncios.
@@ -56,3 +56,6 @@ Requiere además la cuenta de servicio y Pub/Sub del servidor (pasos 1–3 de PA
 
 ## Prueba cerrada obligatoria (cuenta personal nueva)
 Antes de producción: prueba cerrada con al menos 12 verificadores que acepten y mantengan la app 14 días seguidos. Grupo de verificadores en Administra la cuenta → Grupos de verificadores (lista de correos de Gmail).
+
+## Estado (31-10-2026)
+App creada (id de consola 4976299517917417654). Completos: contenido de la app (todas las declaraciones), categoría Educación, contacto, fichas es-419 y en-US con gráficos. Falta: subir el AAB 0.5.8+2014 a prueba interna/cerrada, verificadores y suscripciones.
