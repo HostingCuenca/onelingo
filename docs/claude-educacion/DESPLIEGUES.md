@@ -1052,3 +1052,23 @@ Fecha: 2026-10-31 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261031-edu-79-auditoria; S=staging/20261031-edu-79-auditoria; mv web $S/web-retirada-post && mv $S/web-retirada web; cp -p $K/backend/src/lib/*.ts backend/src/lib/; cp -p $K/backend/src/routes/*.ts backend/src/routes/; chown onelingo:onelingo backend/src/lib/ia_openai.ts backend/src/lib/volumen.ts backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/routes/llamada.ts; sudo -u onelingo -H pm2 restart onelingo-api'`. La APK 0.5.6 anterior queda en `web-anterior/descargas` (enlace duro).
 
 **Pendiente:** leer `eventos` (`tipo='llamada_token'`, `datos->'cierre'`) tras unas llamadas reales en el teléfono para saber por qué Scribe se cortaba cada ~20 s.
+
+## Release: 20261031-edu-80-play
+
+Fecha: 2026-10-31 · Responsable: Claude (Claude Code), por pedido del usuario («si crea y sube todo»). Backend (6 archivos modificados, 2 nuevos, migración 013) + panel + web 0.5.8 + APK 0.5.8+2014 con Shorebird (y AAB para Google Play); PM2 `onelingo-api` reiniciado (solo esa app). Sin cambios de `.env` (hash igual antes y después).
+
+**Contenido:**
+- `a35e5c3`: tutor que decide como un profesor (jugadas A–F: autocorrección, repetición, error ya corregido, error importante, error menor, frase correcta), longitud por nivel, `estadoTurno()` (repite, segundo intento, respuestas muy cortas), corrector con tope de 8 s; modelo del tutor `OPENAI_MODELO_TUTOR` (por defecto `gpt-5.6-luna`, esfuerzo `none`). Evaluación en `docs/claude-educacion/auditoria/eval-tutor-2026-10-31.md` (2,89 → 3,62).
+- `8a2ba0a`: Google Play. `/privacidad/`, `/terminos/`, `/eliminar-cuenta/` (es + en); `DELETE /usuarios/me` (las demo responden 403 `cuenta_demo`; cancela Stripe antes); `POST /reportes-ia` y panel «Reportes IA»; en la app: Perfil → Eliminar cuenta, enlaces legales, «Reportar respuesta» en el chat. Migración `013_cuenta_reportes_ia.sql` (`reportes_ia`, `cuentas_eliminadas`).
+- `4749eb8`: la videollamada sale en inglés si la app está en inglés (`textos.js`, `practice.js?v=64`); las pestañas se traducen al momento.
+- `b14c71e`: `docs/play/` (textos, gráficos, capturas, formularios). `f3e70c6`: app 0.5.8+2014.
+
+**Nota:** en producción `config.ts` tenía `elevenModelo` por defecto `eleven_multilingual_v2` (el repo dice `eleven_flash_v2_5`); se conservó el de producción en el archivo desplegado. No cambia nada: `.env` fija `ELEVENLABS_MODELO`.
+
+**APK/AAB:** `shorebird release android --artifact apk --target-platform android-arm,android-arm64,android-x64 --build-number=2014 -- --dart-define=API_URL=https://onelingo.org/api` desde un worktree limpio de `f3e70c6`; Shorebird publicó la release 0.5.8+2014. Incluye x86_64 (las anteriores no, y fallaban en emuladores x86_64). `aapt2`: versionCode 2014, RECORD_AUDIO y MODIFY_AUDIO_SETTINGS; `libapp.so` con `https://onelingo.org/api`. `/descargas/onelingo.apk` y `onelingo-armv7.apk` (enlace duro): 188 MB, sha256 `bc2c55c66693ca6b…`; `/descargas/version.json` 0.5.8. AAB 175 MB para Play (`build/app/outputs/bundle/release/app-release.aab` del worktree).
+
+**Verificado:** `/api/salud` 200; `/version.json` 0.5.8; `/privacidad/`, `/terminos/`, `/eliminar-cuenta/` y `/panel/` 200; `/avatar/index.html` con `practice.js?v=64`; con Ana: `DELETE /usuarios/me` 403 `cuenta_demo`, `/chat` 200 (recast «I go → I went» y pregunta de seguimiento), `/reportes-ia` sin datos 400; tablas `reportes_ia` y `cuentas_eliminadas` creadas; PM2 en línea sin errores; `.env` sin cambios; lock liberado.
+
+**Backup:** `backups/20261031-edu-80-play/` (`web-anterior` y `panel-anterior` con enlaces duros, `backend/src/...` previos, `backend-nuevos.txt`, `env.sha`, `onelingo-antes.dump`). Retirados en `staging/20261031-edu-80-play/{web-retirada,panel-retirado}`.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261031-edu-80-play; S=staging/20261031-edu-80-play; mv web $S/web-post && mv $S/web-retirada web; mv panel $S/panel-post && mv $S/panel-retirado panel; for f in src/app.ts src/lib/config.ts src/lib/ia.ts src/lib/ia_openai.ts src/lib/pagos/proveedor.ts src/routes/usuarios.ts; do cp -p $K/backend/$f backend/$f; done; rm backend/src/lib/cuenta.ts backend/src/routes/reportes.ts; sudo -u onelingo -H pm2 restart onelingo-api'`. Las tablas de la 013 pueden quedarse (nadie las usa sin el código). La APK 0.5.7 queda en `web-anterior/descargas`.
