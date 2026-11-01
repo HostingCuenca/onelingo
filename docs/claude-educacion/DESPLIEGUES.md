@@ -1087,3 +1087,19 @@ Fecha: 2026-11-01 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Alcance:** el AAB de Google Play es la misma release de Shorebird (`libapp.so` y `libflutter.so` idénticos a la APK 2014). El parche llega a la app de Play y a la APK de onelingo.org al abrirla, y se aplica en el siguiente arranque. La web (Flutter web) sigue sin desplegar: allí la llamada situada abre directamente con Lumo hasta el próximo despliegue web.
 
 **Rollback:** `shorebird patches rollback --release-version=0.5.8+2014` (vuelta atrás con `patches rollforward`). Las apps vuelven al código de la release en el siguiente arranque.
+
+## Release: 20261101-edu-81-web
+
+Fecha: 2026-11-01 · Responsable: Claude (Claude Code), por pedido del usuario («si despliega también la web y habilitemos ana torres como si tuviera el plan de 20»). Web 0.5.8 con `c9c13f4` y `b6cc28b` (lo mismo del parche 1 de Android) + cambio de plan de Ana. Sin cambios en el backend, `.env` ni PM2.
+
+**Web:** `flutter build web --release --dart-define=API_URL=https://onelingo.org/api` desde un worktree limpio de `1e48776`. Staging con enlaces duros de `web/` y `rsync -rlc` encima (3 archivos cambiados; `descargas/` intacta). Cambio atómico con `mv`. Ahora, en la web, la videollamada de una situación también abre la galería de tutores y empieza en la situación elegida.
+
+**Ana (`ana@onelingo.demo`):** pasa de cortesía `p3` con todos los idiomas a cortesía `p1` (un idioma, el plan de 20 USD) con inglés, sin vencimiento, vía `darCortesia()`. Sigue siendo `es_demo` y entra por el panel demo.
+
+**Verificado:** `/`, `/main.dart.js` (con `/tutores?tema=` y sin el aviso «disponible en la versión web»), `/avatar/index.html`, `/descargas/version.json`, `/privacidad/` y `/api/salud` en 200. Ana: `usuarios.plan_id = p1`, cortesía activa, `idiomas = {en}`, sin `periodo_fin`.
+
+**Backup:** `backups/20261101-edu-81-web/web-anterior` (enlaces duros) y `backups/20261101-ana-p1/ana-suscripcion-antes.csv`. Web retirada en `staging/20261101-edu-81-web/web-retirada`.
+
+**Rollback:**
+- **Web:** `ssh onelingo 'set -e; cd /var/www/onelingo; S=staging/20261101-edu-81-web; mv web $S/web-post && mv $S/web-retirada web'`.
+- **Ana:** volver a darle cortesía `p3` con `idiomas: 'todos'`, sin fecha, desde Panel → Suscripciones o con `darCortesia()`.
