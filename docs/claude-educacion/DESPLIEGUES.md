@@ -1086,4 +1086,4 @@ Fecha: 2026-11-01 · Responsable: Claude (Claude Code), por pedido del usuario (
 
 **Alcance:** el AAB de Google Play es la misma release de Shorebird (`libapp.so` y `libflutter.so` idénticos a la APK 2014). El parche llega a la app de Play y a la APK de onelingo.org al abrirla, y se aplica en el siguiente arranque. La web (Flutter web) sigue sin desplegar: allí la llamada situada abre directamente con Lumo hasta el próximo despliegue web.
 
-**Rollback:** `shorebird patches set-track --release-version=0.5.8+2014 --patch-number=1 --track=staging` (o desde la consola de Shorebird). Las apps vuelven al código de la release en el siguiente arranque.
+**Rollback:** `shorebird patches rollback --release-version=0.5.8+2014` (vuelta atrás con `patches rollforward`). Las apps vuelven al código de la release en el siguiente arranque.
