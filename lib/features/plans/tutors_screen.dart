@@ -64,7 +64,12 @@ class TutorsScreen extends ConsumerWidget {
                   sombra: false,
                   child: Row(
                     children: [
-                      const Icon(Icons.place_rounded, color: OL.morado),
+                      // El icono de la situación (ya está en la fuente de
+                      // la release: un icono nuevo sería un asset nuevo).
+                      Icon(
+                        situacion(t.clamp(1, situaciones.length)).icono,
+                        color: OL.morado,
+                      ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
