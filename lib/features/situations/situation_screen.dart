@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -42,17 +41,10 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
     '/chat?situacion=${widget.id}&objetivo=${o.id}&modo=practica',
   );
 
-  void _llamada(ObjetivoSituacion o) {
-    if (!kIsWeb) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(tr('La videollamada está disponible en la versión web.')),
-        ),
-      );
-      return;
-    }
-    context.push('/avatar/lumo?tema=${widget.id}&objetivo=${o.id}');
-  }
+  // Videollamada situada (web y Android): el alumno elige el tutor y la
+  // llamada empieza en esta situación y este objetivo.
+  void _llamada(ObjetivoSituacion o) =>
+      context.push('/tutores?tema=${widget.id}&objetivo=${o.id}');
 
   @override
   Widget build(BuildContext context) {

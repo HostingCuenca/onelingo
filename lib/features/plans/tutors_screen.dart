@@ -14,7 +14,20 @@ import '../avatar/tutores_3d.dart';
 /// Tutores con IA: una sola pantalla para la videollamada con un tutor 3D y
 /// el chat de voz y texto (antes eran dos experiencias separadas).
 class TutorsScreen extends ConsumerWidget {
-  const TutorsScreen({super.key});
+  const TutorsScreen({super.key, this.tema, this.objetivoId});
+
+  /// Situación y objetivo de donde viene el alumno: la videollamada (y el
+  /// chat) empiezan ahí con el tutor que elija.
+  final int? tema;
+  final String? objetivoId;
+
+  String get _objetivo => objetivoId == null
+      ? ''
+      : '&objetivo=${Uri.encodeQueryComponent(objetivoId!)}';
+
+  void _llamar(BuildContext context, String id) => context.push(
+    tema == null ? '/avatar/$id' : '/avatar/$id?tema=$tema$_objetivo',
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,6 +55,32 @@ class TutorsScreen extends ConsumerWidget {
                 ),
                 style: const TextStyle(color: OL.gris, height: 1.4),
               ),
+              if (tema case final t?) ...[
+                const SizedBox(height: 14),
+                // Viene de una situación: la llamada o el chat empiezan ahí.
+                // Solo textos ya traducidos (un parche no lleva assets/i18n).
+                Tarjeta(
+                  color: OL.moradoSuave,
+                  sombra: false,
+                  child: Row(
+                    children: [
+                      const Icon(Icons.place_rounded, color: OL.morado),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          trDato(
+                            situacion(t.clamp(1, situaciones.length)).nombre,
+                          ),
+                          style: const TextStyle(
+                            color: OL.morado,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
               const SizedBox(height: 20),
               _Seccion(
                 icono: Icons.videocam_rounded,
@@ -50,7 +89,10 @@ class TutorsScreen extends ConsumerWidget {
               ),
               // Tutores realistas en vivo: ellas arriba, ellos abajo; al
               // tocar una cara se ve su ficha y el botón para llamarla.
-              _ElencoEnVivo(idioma: s.idiomaMeta),
+              _ElencoEnVivo(
+                idioma: s.idiomaMeta,
+                onLlamar: (id) => _llamar(context, id),
+              ),
               const SizedBox(height: 20),
               Row(
                 children: [
@@ -74,7 +116,7 @@ class TutorsScreen extends ConsumerWidget {
                 tutor: lumoTutor,
                 titulo: tr('Habla con Lumo'),
                 etiqueta: tr('Nuevo'),
-                onTap: () => _abrirVideollamada(context, 'lumo'),
+                onTap: () => _llamar(context, 'lumo'),
               ),
               // Los tutores 3D de MakeHuman (tutores3d) están ocultos por ahora.
               const SizedBox(height: 28),
@@ -157,7 +199,11 @@ class TutorsScreen extends ConsumerWidget {
                 style: FilledButton.styleFrom(
                   minimumSize: const Size.fromHeight(52),
                 ),
-                onPressed: () => context.push('/chat'),
+                onPressed: () => context.push(
+                  tema == null
+                      ? '/chat'
+                      : '/chat?situacion=$tema$_objetivo&modo=practica',
+                ),
                 icon: const Icon(Icons.mic_rounded),
                 label: Text(tr('Hablar con mi tutor')),
               ),
@@ -192,16 +238,14 @@ class TutorsScreen extends ConsumerWidget {
   }
 }
 
-void _abrirVideollamada(BuildContext context, String id) =>
-    context.push('/avatar/$id');
-
 /// Cuadrícula 5 × 2 de los tutores en vivo y la ficha del elegido.
 class _ElencoEnVivo extends StatefulWidget {
-  const _ElencoEnVivo({required this.idioma});
+  const _ElencoEnVivo({required this.idioma, required this.onLlamar});
 
   /// Idioma que se estudia: sus especialistas llevan una marca y uno de ellos
   /// aparece elegido.
   final String idioma;
+  final void Function(String id) onLlamar;
 
   @override
   State<_ElencoEnVivo> createState() => _ElencoEnVivoState();
@@ -392,7 +436,7 @@ class _ElencoEnVivoState extends State<_ElencoEnVivo> {
                   style: FilledButton.styleFrom(
                     minimumSize: const Size.fromHeight(48),
                   ),
-                  onPressed: () => _abrirVideollamada(context, t.id),
+                  onPressed: () => widget.onLlamar(t.id),
                   icon: const Icon(Icons.videocam_rounded),
                   label: Text(
                     tr('Videollamada con {tutor}', {'tutor': t.nombre}),

@@ -297,7 +297,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
               GoRoute(
                 path: '/tutores',
-                builder: (_, _) => const TutorsScreen(),
+                // ?tema=<situación>&objetivo=<id>: viene de una situación y
+                // la videollamada con el tutor elegido empieza ahí.
+                builder: (_, s) => TutorsScreen(
+                  tema: int.tryParse(s.uri.queryParameters['tema'] ?? ''),
+                  objetivoId: s.uri.queryParameters['objetivo'],
+                ),
               ),
             ],
           ),
