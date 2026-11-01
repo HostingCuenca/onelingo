@@ -10,7 +10,7 @@ Paquete: `com.torisoftt.onelingo`. Textos de la ficha en `textos.json`, gráfico
 
 ## Acceso a la app (revisores)
 Toda la app requiere iniciar sesión. Instrucciones para el revisor:
-- Usuario: `ana@onelingo.demo` (cuenta demo con el plan de un idioma, `p1`, en inglés y sin vencimiento desde el 01-11-2026; no se puede borrar).
+- Usuario: `ana@onelingo.demo` (cortesía del plan de un idioma, `p1`, con los 10 idiomas abiertos y sin vencimiento desde el 01-11-2026; ya no figura como demo, pero entra igual por el panel DEMO; no se puede borrar).
 - Contraseña: no se escribe en la consola. En producción Ana no tiene contraseña: entra por el panel DEMO del login (la tarjeta «Ana Torres» rellena correo y clave). Si se apaga el modo demo, darle antes una contraseña real y actualizar «Detalles de acceso».
 - Pasos: «Ya tengo una cuenta · Iniciar sesión» → recuadro amarillo DEMO → tarjeta «Ana Torres» → ENTRAR → Inicio. Videollamada: Inicio → «Tutor con IA» → «Videollamada con …» (pide el micrófono).
 

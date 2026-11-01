@@ -1103,3 +1103,10 @@ Fecha: 2026-11-01 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Rollback:**
 - **Web:** `ssh onelingo 'set -e; cd /var/www/onelingo; S=staging/20261101-edu-81-web; mv web $S/web-post && mv $S/web-retirada web'`.
 - **Ana:** volver a darle cortesía `p3` con `idiomas: 'todos'`, sin fecha, desde Panel → Suscripciones o con `darCortesia()`.
+
+**Ajuste de Ana (mismo día, por pedido del usuario: «demos acceso para probar todos los idiomas, y cambia de demo a usuario con suscripción»):**
+- Cortesía `p1` con `todos_idiomas = true`: los 10 idiomas abiertos, sin vencimiento.
+- `usuarios.es_demo = false`: cuenta como usuaria normal en las analíticas y en el panel.
+- Sigue entrando por el panel DEMO, porque `/usuarios/login` mira el dominio `@onelingo.demo` y no `es_demo`. Con la cortesía vigente también entra con el modo demo cerrado, y sigue sin poder borrarse por el dominio.
+- Verificado por la API: login demo correcto, `GET /usuarios/me/suscripcion` devuelve `p1`, `cortesia`, `activa` y 10 de 10 idiomas abiertos.
+- Respaldos: `backups/20261101-ana-p1/ana-suscripcion-antes-todos.csv` y `ana-es-demo-antes.txt`.
