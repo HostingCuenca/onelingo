@@ -64,4 +64,12 @@ App creada (id de consola 4976299517917417654). Completos: contenido de la app (
 - Prueba cerrada «Alpha»: 178 países, versión 2014 y lista de verificadores. Enviada a revisión de Google el 31-10 (suele tardar hasta 7 días). Enlace: https://play.google.com/apps/testing/com.torisoftt.onelingo
 - Lista de correos «Verificadores OneLingo»: 15 Gmail (12 del chat de WhatsApp más hostingcuenca, torisoftt y torisofttcuenca), asignada a las dos pruebas. Comentarios a infoonelingo@gmail.com.
 - Los 14 días de la prueba cerrada empiezan a contar cuando Google la apruebe y al menos 12 verificadores se unan.
-- Falta: suscripciones (cuenta de servicio + Pub/Sub) y darle contraseña a Ana antes de apagar el modo demo.
+- Falta: darle contraseña a Ana antes de apagar el modo demo.
+
+## Pagos con Google Play (01-11-2026)
+- Suscripciones `plan_p1`, `plan_p2`, `plan_p3`, `plan_familiar`, cada una con `mes-1`, `mes-3`, `mes-6`, `mes-12` (renovación automática, 178 países, precio base en USD). Las 16 están activas.
+- Corea del Sur tiene un tope de 600.000 KRW: en `plan_p3/mes-12` y `plan_familiar/mes-12` se dejó ese precio a mano (lápiz en la fila del país).
+- Cuenta de servicio `play-pagos@onelingo-513218.iam.gserviceaccount.com` (proyecto de Cloud `onelingo-513218`, API Google Play Android Developer activada), invitada en Usuarios y permisos como Administrador. La llave está solo en el servidor (`/var/www/onelingo/secretos/`, ruta en `GOOGLE_PLAY_CUENTA_SERVICIO`). Comprobado desde el servidor: lista las 16 bases activas.
+- Prueba de licencia (Administra la cuenta → Prueba de licencia): lista «Verificadores OneLingo» marcada, respuesta RESPOND_NORMALLY. Esos correos compran en la prueba sin cargo.
+- Sin hacer (opcional): Pub/Sub para notificaciones en tiempo real (RTDN). Sin ellas, `GET /usuarios/me/suscripcion` vuelve a consultar a Google cada 10 minutos como máximo.
+- Pagos web con Stripe: `/api/planes` sigue con `pagos.disponible: false`.
