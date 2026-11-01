@@ -16,6 +16,7 @@ import '../../core/voz.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/lumo.dart';
+import '../../shared/widgets/onda_voz.dart';
 import '../../shared/widgets/widgets.dart';
 import '../ruta/opcion_respuesta.dart';
 
@@ -271,6 +272,7 @@ class _StepViewState extends State<_StepView> {
   }
 
   Future<void> _grabar() async {
+    if (Oido.instancia.procesando.value) return;
     if (grabando) {
       await Oido.instancia.parar();
       if (!mounted) return;
@@ -298,8 +300,11 @@ class _StepViewState extends State<_StepView> {
           }
         });
       },
-      segundos: 60,
-      silencio: const Duration(seconds: 3),
+      segundos: 15,
+      silencio: const Duration(milliseconds: 1500),
+      onProcesando: () {
+        if (mounted) setState(() => grabando = false);
+      },
       onFin: () {
         if (!mounted) return;
         setState(() {
@@ -846,11 +851,7 @@ class _StepViewState extends State<_StepView> {
     final String mensaje = sinMicro
         ? tr('Micrófono no disponible en este dispositivo. Puedes continuar.')
         : grabando
-        ? (Oido.instancia.modo == 'nube'
-              ? tr(
-                  'Grabando… toca detener al terminar o deja 3 segundos de silencio',
-                )
-              : tr('Escuchando… repite la frase'))
+        ? tr('Te escucho…')
         : parecido == null
         ? tr('Toca el micrófono y repite la frase')
         : parecido! >= 0.9
@@ -924,6 +925,15 @@ class _StepViewState extends State<_StepView> {
                 ],
               ),
               const SizedBox(height: 12),
+              ValueListenableBuilder<bool>(
+                valueListenable: Oido.instancia.procesando,
+                builder: (_, procesando, _) => grabando || procesando
+                    ? const Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: OndaVoz(),
+                      )
+                    : const SizedBox.shrink(),
+              ),
               Text(
                 mensaje,
                 style: TextStyle(

@@ -31,4 +31,29 @@ void main() {
       expect(d.actualizar(-90, const Duration(seconds: 43)), true);
     },
   );
+  test('a short "hello" in a noisy room ends after the pause', () {
+    // Auto gain keeps the room at -40 dBFS, above the fixed -50 bar.
+    final d = FinPorSilencio(pausa: const Duration(milliseconds: 1500));
+    var t = 0;
+    bool muestra(double db) =>
+        d.actualizar(db, Duration(milliseconds: t += 200));
+    for (var i = 0; i < 3; i++) {
+      expect(muestra(-40), false);
+    }
+    for (var i = 0; i < 3; i++) {
+      expect(muestra(-18), false);
+    }
+    var fin = false;
+    for (var i = 0; i < 9 && !fin; i++) {
+      fin = muestra(-40);
+    }
+    expect(fin, true);
+  });
+  test('nivelDeDb maps dBFS to the meter', () {
+    expect(nivelDeDb(double.negativeInfinity), 0);
+    expect(nivelDeDb(-60), 0);
+    expect(nivelDeDb(-35), closeTo(.5, .001));
+    expect(nivelDeDb(0), 1);
+    expect(nivelDeDb(double.nan), 0);
+  });
 }

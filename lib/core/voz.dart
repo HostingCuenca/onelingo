@@ -4,7 +4,7 @@ import 'dart:io' show File;
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:crypto/crypto.dart';
-import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
+import 'package:flutter/foundation.dart' show ValueNotifier, debugPrint, kIsWeb;
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -302,6 +302,12 @@ class Oido {
   /// Último modo usado: 'nube' o 'sistema' (para mostrarlo en la interfaz).
   String modo = 'sistema';
 
+  /// Nivel del micrófono 0..1 mientras se escucha (medidor de voz).
+  final nivel = ValueNotifier<double>(0);
+
+  /// La grabación terminó y se está transcribiendo en el servidor.
+  final procesando = ValueNotifier<bool>(false);
+
   Future<bool> preparar() async {
     if (_inicializado) return disponible;
     _inicializado = true;
@@ -312,7 +318,10 @@ class Oido {
           _onFin?.call();
         },
         onStatus: (st) {
-          if (st == 'notListening' || st == 'done') _onFin?.call();
+          if (st == 'notListening' || st == 'done') {
+            nivel.value = 0;
+            _onFin?.call();
+          }
         },
       );
     } catch (_) {
@@ -398,24 +407,25 @@ class Oido {
         );
         await _amplitud?.cancel();
         if (sesion != _sesion) return false;
-        if (silencio != null) {
-          final detector = FinPorSilencio(pausa: silencio);
-          final reloj = Stopwatch()..start();
-          _amplitud = _grabadora
-              .onAmplitudeChanged(const Duration(milliseconds: 200))
-              .listen(
-                (a) {
-                  if (sesion == _sesion &&
-                      _grabando &&
-                      detector.actualizar(a.current, reloj.elapsed)) {
-                    parar();
-                  }
-                },
-                onError: (Object _) {
-                  /* Manual stop remains available. */
-                },
-              );
-        }
+        // El medidor de voz siempre; el fin por silencio, si se pidió.
+        final detector = silencio == null
+            ? null
+            : FinPorSilencio(pausa: silencio);
+        final reloj = Stopwatch()..start();
+        _amplitud = _grabadora
+            .onAmplitudeChanged(const Duration(milliseconds: 120))
+            .listen(
+              (a) {
+                if (sesion != _sesion || !_grabando) return;
+                nivel.value = nivelDeDb(a.current);
+                if (detector?.actualizar(a.current, reloj.elapsed) ?? false) {
+                  parar();
+                }
+              },
+              onError: (Object _) {
+                /* Manual stop remains available. */
+              },
+            );
         return true;
       } catch (e) {
         ultimoError = '$e';
@@ -442,6 +452,10 @@ class Oido {
           listenFor: Duration(seconds: segundos),
           pauseFor: silencio ?? const Duration(seconds: 3),
         ),
+        // Android da el nivel en dB aproximados de -2 a 10.
+        onSoundLevelChange: (l) {
+          if (sesion == _sesion) nivel.value = ((l + 2) / 12).clamp(0.0, 1.0);
+        },
         onResult: (r) {
           if (sesion == _sesion) onTexto(r.recognizedWords, r.finalResult);
         },
@@ -462,6 +476,8 @@ class Oido {
     _onTexto = null;
     _onFin = null;
     _grabando = false;
+    nivel.value = 0;
+    procesando.value = false;
     await amplitud?.cancel();
     try {
       await _grabadora.cancel();
@@ -478,6 +494,8 @@ class Oido {
       _limite?.cancel();
       final onTexto = _onTexto;
       final onFin = _onFin;
+      nivel.value = 0;
+      procesando.value = true;
       _onProcesando?.call();
       _onProcesando = null;
       final amplitud = _amplitud;
@@ -515,6 +533,8 @@ class Oido {
         }
       } catch (e) {
         ultimoError = '$e';
+      } finally {
+        if (sesion == _sesion) procesando.value = false;
       }
       if (sesion != _sesion) return;
       if (texto != null && texto.isNotEmpty) onTexto?.call(texto, true);
@@ -524,6 +544,7 @@ class Oido {
     try {
       await _stt.stop();
     } catch (_) {}
+    nivel.value = 0;
     _onFin?.call();
     _onFin = null;
   }

@@ -12,6 +12,7 @@ import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/feedback_experience.dart';
 import '../../shared/widgets/lumo.dart';
+import '../../shared/widgets/onda_voz.dart';
 import '../../shared/widgets/widgets.dart';
 import '../../shared/widgets/romanizacion.dart';
 import 'palabra_color.dart';
@@ -607,6 +608,7 @@ class _PasoRepiteState extends State<_PasoRepite> {
   }
 
   Future<void> grabar() async {
+    if (Oido.instancia.procesando.value) return;
     if (grabando) {
       await Oido.instancia.parar();
       return;
@@ -632,8 +634,21 @@ class _PasoRepiteState extends State<_PasoRepite> {
       },
       segundos: 10,
       silencio: const Duration(milliseconds: 1500),
-      onFin: () {
+      // Al cerrar la grabación el botón deja de estar en rojo: la onda pasa
+      // a «Transcribiendo…» y luego llega el resultado.
+      onProcesando: () {
         if (mounted) setState(() => grabando = false);
+      },
+      onFin: () {
+        if (!mounted) return;
+        setState(() {
+          grabando = false;
+          if (parecido == null && dicho.isEmpty) {
+            aviso = tr(
+              'No se entendió bien. Escucha el modelo y vuelve a intentarlo.',
+            );
+          }
+        });
       },
     );
     if (!ok && mounted) {
@@ -693,11 +708,33 @@ class _PasoRepiteState extends State<_PasoRepite> {
           ),
         ),
         const SizedBox(height: 10),
-        Text(
-          grabando ? tr('Te escucho…') : tr('Toca el micrófono y dilo'),
-          textAlign: TextAlign.center,
-          style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
+        ValueListenableBuilder<bool>(
+          valueListenable: Oido.instancia.procesando,
+          builder: (_, procesando, _) => Column(
+            children: [
+              if (grabando || procesando) const OndaVoz(),
+              if (!procesando)
+                Text(
+                  grabando ? tr('Te escucho…') : tr('Toca el micrófono y dilo'),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: OL.gris,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+            ],
+          ),
         ),
+        // Lo que va entendiendo (parciales del reconocedor del sistema).
+        if (grabando && dicho.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              '«$dicho»',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
+          ),
         if (parecido != null) ...[
           const SizedBox(height: 14),
           Tarjeta(
