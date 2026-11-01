@@ -119,6 +119,11 @@ body.grabando .hablar-texto{color:var(--rojo)}
 .romanizacion{display:block;margin-top:4px;font-size:13px;color:var(--gris)}
 .correccion{background:#FFF4E5;border:1.5px solid #F7941D55;border-radius:14px;padding:10px 12px;display:grid;gap:4px}
 .correccion-titulo{font-size:11px;font-weight:900;color:#B25E00;letter-spacing:.04em;text-transform:uppercase}
+/* La corrección del turno bajo los subtítulos, mientras el alumno la repite. */
+.sub-correccion{margin:8px auto 0;display:table;max-width:92%;background:#FFF4E5;border:1.5px solid #F7941D55;border-radius:12px;padding:6px 12px;font-size:15px}
+.sub-correccion[hidden]{display:none}
+.sub-correccion .correccion-fila{justify-content:center;font-weight:800}.sub-correccion s{color:var(--rojo)}.sub-correccion strong{color:#197D58}
+.sub-correccion small{display:block;margin-top:2px;color:var(--gris);font-size:13px}
 .correccion-fila{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}.correccion s{color:var(--rojo)}.correccion strong{color:#197D58}.correccion small{color:var(--gris)}.flecha{color:var(--gris)}
 .resumen{border:2px solid var(--morado-claro);border-radius:18px;padding:12px 14px}.resumen h3{margin:0 0 6px;color:var(--morado)}.resumen h4{margin:10px 0 4px;font-size:14px}.resumen ul{margin:0;padding-left:18px;display:grid;gap:4px}.resumen li small{display:block;color:var(--gris)}.resumen s{color:var(--rojo)}.resumen strong{color:#197D58}.resumen .siguiente{margin:10px 0 0;padding:10px 12px;border-radius:14px;background:var(--verde-suave);color:#1F5A2B;font-weight:700}
 .opcion-tema{text-align:left;padding:12px 14px;border-radius:14px;border:1.5px solid var(--borde);font-weight:700}
@@ -172,6 +177,7 @@ body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inl
    <p id="subTutor" class="sub-tutor"></p>
    <p id="subTraduccion" class="sub-traduccion" hidden></p>
    <div class="sub-acciones"><button id="replay" class="enlace" type="button" hidden>↻ Repetir</button><button id="verTraduccion" class="enlace" type="button" hidden>Ver traducción</button><button id="reportar" class="enlace discreto" type="button" hidden aria-label="Reportar la última respuesta del tutor"><span aria-hidden="true">⚑</span> Reportar</button></div>
+   <div id="subCorreccion" class="sub-correccion" hidden></div>
    <p id="subAlumno" class="sub-alumno" hidden></p>
   </div>
   <div id="ideas" class="ideas" hidden></div>
@@ -203,4 +209,4 @@ body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inl
  </div>
  <audio id="audio" preload="auto" playsinline></audio>
 </section>
-<script type="module" src="./practice.js?v=64"></script></html>
+<script type="module" src="./practice.js?v=65"></script></html>

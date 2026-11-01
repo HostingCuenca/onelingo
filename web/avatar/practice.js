@@ -305,7 +305,7 @@ function colgar(resumen = true) {
   enLlamada = false; clearInterval(reloj); controls();
   turno = null; arrastre = ''; clearTimeout(rescate);
   bloqueoPantalla?.release().catch(() => {}); bloqueoPantalla = null;
-  $('form').hidden = true;
+  $('form').hidden = true; mostrarCorreccion(null);
   if (habia && tutor) {
     document.body.classList.add('puede-llamar');
     phase(t('Llamada terminada'), 'ready');
@@ -443,7 +443,10 @@ $('replay').onclick = () => { if (!lastReply || busy || !enLlamada) return; stop
 
 function stop() {
   clearTimeout(silencioTimer);
-  epoch++; controller?.abort(); controller = null; detenerVoz();
+  // Si el tutor ya dio su respuesta entera, la petición sigue en segundo plano:
+  // así llegan su corrección escrita y el servidor guarda el turno (sin guardar,
+  // la llamada siguiente no sabía qué errores ya se habían corregido).
+  epoch++; if (!controller?.respondida) controller?.abort(); controller = null; detenerVoz();
   busy = false; respuestaCompleta = true; controls();
 }
 
@@ -452,15 +455,25 @@ function limpiarTurno() {
   $('subTutor').textContent = ''; $('subTraduccion').hidden = true; $('verTraduccion').hidden = true; $('replay').hidden = true; $('reportar').hidden = true;
   $('subAlumno').hidden = true; ideas([]);
 }
+// La corrección del turno, en pantalla y no solo en 💬: se queda mientras el
+// alumno repite la frase y se va cuando el tutor vuelve a hablar.
+function mostrarCorreccion(c) {
+  const box = $('subCorreccion'); box.replaceChildren(); box.hidden = !c;
+  if (!c) return;
+  const fila = el('div', 'correccion-fila');
+  fila.append(el('s', null, c.original), el('span', 'flecha', '→'), el('strong', null, c.correcto));
+  box.append(fila);
+  if (c.explicacion) box.append(el('small', null, c.explicacion));
+}
 function mostrarAlumno(texto) { $('subAlumno').textContent = texto; $('subAlumno').hidden = !texto; }
 function burbuja(text, kind = '') { const e = el('div', 'bubble ' + kind, text); $('messages').append(e); return e; }
 function actualizarContador() { $('contador').hidden = !correcciones; $('contador').textContent = correcciones; }
-function correccion(c) {
+function correccion(c, despues) {
   const card = el('div', 'correccion'), fila = el('div', 'correccion-fila');
   fila.append(el('s', null, c.original), el('span', 'flecha', '→'), el('strong', null, c.correcto));
   card.append(el('span', 'correccion-titulo', t('Corrección')), fila);
   if (c.explicacion) card.append(el('small', null, c.explicacion));
-  $('messages').append(card);
+  if (despues) despues.after(card); else $('messages').append(card);
   return card;
 }
 // Ideas para responder: tocar una la envía como respuesta.
@@ -481,7 +494,7 @@ async function requestTutor(entrada, opening = false) {
   const version = epoch;
   fraseAnterior = {version: -1, texto: ''}; // turno nuevo: sin frase anterior
   busy = true; respuestaCompleta = false; controls(); error(''); ultimoFallo = null;
-  let frases = 0, final = false, transcrito = false;
+  let frases = 0, final = false, transcrito = false, burbujaTutor = null;
   if (entrada?.texto || entrada?.audio) silencios = 0;
   turno = opening || entrada?.aviso ? null : {hist: history.length, dom: $('messages').childElementCount, corr: correcciones, oido: false, lastReply};
   if (!opening) {
@@ -521,11 +534,29 @@ async function requestTutor(entrada, opening = false) {
     if (!response.ok) throw Error(await bloqueoTutor(response) ?? (response.status === 401 ? t('Tu sesión ha caducado. Vuelve a iniciar sesión.') : t('No se pudo conectar con el tutor ({estado}).', {estado: response.status})));
     const reader = response.body.getReader(), decoder = new TextDecoder();
     let pending = '';
+    // Lo que el tutor dijo entra al historial en cuanto llega su texto entero
+    // (evento `reply`), no al final: el final espera al corrector y, si el
+    // alumno contestaba antes, el tutor olvidaba que le había pedido repetir.
+    const anotarTutor = texto => {
+      if (burbujaTutor) return burbujaTutor;
+      lastReply = texto; history.push({rol: 'tutor', texto}); burbujaTutor = burbuja(texto);
+      $('replay').hidden = false; $('reportar').hidden = false;
+      current.respondida = true;
+      return burbujaTutor;
+    };
+    // El alumno ya habló encima: solo se apuntan la corrección y la traducción de ese turno.
+    const enSegundoPlano = e => {
+      if (e.tipo !== 'final' || !burbujaTutor?.isConnected) return;
+      const cs = e.data.corrections || [];
+      let ref = burbujaTutor; for (const c of cs) ref = correccion(c, ref);
+      correcciones += cs.length; actualizarContador();
+      if (turno) { turno.dom += cs.length; turno.corr += cs.length; }
+    };
     const evento = raw => {
-      if (version !== epoch) return;
       const line = raw.split('\n').find(l => l.startsWith('data: '));
       if (!line) return;
       const e = JSON.parse(line.slice(6));
+      if (version !== epoch) { enSegundoPlano(e); return; }
       if (e.tipo === 'error') throw Error(e.data);
       if (e.tipo === 'transcripcion' && (e.data.texto || '').trim()) {
         transcrito = true;
@@ -533,17 +564,17 @@ async function requestTutor(entrada, opening = false) {
         history.push({rol: 'alumno', texto: e.data.texto});
       }
       // Cada frase terminada se muestra y se dice sin esperar al resto.
-      if (e.tipo === 'frase') { $('subTutor').textContent = (frases ? $('subTutor').textContent + ' ' : '') + e.data.texto; frases++; encolar(e.data.texto, version, e.data.indice); }
+      if (e.tipo === 'frase') { if (!frases) mostrarCorreccion(null); $('subTutor').textContent = (frases ? $('subTutor').textContent + ' ' : '') + e.data.texto; frases++; encolar(e.data.texto, version, e.data.indice); }
       if (e.tipo === 'voz_activa') vozActiva = true;
       if (e.tipo === 'voz') { window.__marca?.('voz_llega', e.data.indice); vozDelStream(e.data.indice)?.ok(e.data); }
-      if (e.tipo === 'reply' && !frases) { $('subTutor').textContent = e.data; frases++; encolar(e.data, version); }
+      if (e.tipo === 'reply') { if (!frases) { mostrarCorreccion(null); $('subTutor').textContent = e.data; frases++; encolar(e.data, version); } anotarTutor(e.data); }
       if (e.tipo === 'final') {
         final = true;
         const r = e.data;
-        if (!frases) { frases++; encolar(r.reply, version); }
-        lastReply = r.reply; $('subTutor').textContent = r.reply; $('replay').hidden = false; $('reportar').hidden = false;
-        history.push({rol: 'tutor', texto: r.reply});
-        const b = burbuja(r.reply);
+        if (!frases) { mostrarCorreccion(null); frases++; encolar(r.reply, version); }
+        $('subTutor').textContent = r.reply;
+        const b = anotarTutor(r.reply);
+        if (lastReply !== r.reply) { lastReply = r.reply; b.textContent = r.reply; const h = history.findLastIndex(x => x.rol === 'tutor'); if (h >= 0) history[h].texto = r.reply; }
         if (r.romanizacion) b.append(el('span', 'romanizacion', r.romanizacion));
         if (r.traduccion) {
           $('subTraduccion').textContent = r.traduccion; $('subTraduccion').hidden = true;
@@ -552,8 +583,9 @@ async function requestTutor(entrada, opening = false) {
         }
         const cs = r.corrections || [];
         // El tutor la dice en voz alta; por escrito queda en la conversación (💬).
-        cs.forEach(correccion);
+        let ref = b; for (const c of cs) ref = correccion(c, ref);
         correcciones += cs.length; actualizarContador();
+        if (enLlamada) mostrarCorreccion(cs[0] || null);
         if (entrada?.aviso) ideas((r.suggestions || []).slice(0, 3));
       }
     };
@@ -575,7 +607,7 @@ async function requestTutor(entrada, opening = false) {
       else if (!opening && !frases) ultimoFallo = {continuar: true};
       if (entrada?.texto && !frases) ultimoFallo = {continuar: true};
       // Lo que el tutor ya dijo cuenta para el siguiente turno (si no, no sabe que lo dijo).
-      if (frases && !final && $('subTutor').textContent) { lastReply = $('subTutor').textContent; history.push({rol: 'tutor', texto: lastReply}); burbuja(lastReply); }
+      if (frases && !burbujaTutor && $('subTutor').textContent) { lastReply = $('subTutor').textContent; history.push({rol: 'tutor', texto: lastReply}); burbuja(lastReply); }
       phase(t('No se pudo responder'), 'error');
       const reintento = ultimoFallo;
       error(msg, reintento || opening ? () => requestTutor(reintento, opening) : null);
@@ -708,7 +740,9 @@ const tutorAudible = () => tutorSuena() || performance.now() - finVozEn < 1200;
 // ¿Es eco? Contra lo que suena (no contra frases aún sin decir). Pasado el
 // audio, una respuesta de 1–2 palabras («Tea», «Yes») es del alumno aunque
 // repita la pregunta.
-const pareceEco = texto => tutorAudible() && (tutorSuena() || palabras(texto) > 2) && esEco(texto, `${dichoReciente} ${relleno}`);
+// Ya callado, solo cuenta su última frase: tras «We say «I went to the park». Can you say it?»,
+// el alumno que repite el modelo enseguida no es eco (antes se descartaba y la llamada se quedaba esperando).
+const pareceEco = texto => tutorAudible() && (tutorSuena() || palabras(texto) > 2) && esEco(texto, `${tutorSuena() ? dichoReciente : itemActual?.text || ''} ${relleno}`);
 function textoVivo() { $('hablarTexto').textContent = t(mudo ? 'Silenciado · toca 🎙 para hablar' : 'Micrófono abierto · habla cuando quieras'); document.body.classList.toggle('mudo', mudo); }
 // El servidor no deja usar al tutor: prueba gratuita agotada (402) o modo demo cerrado (403).
 async function bloqueoTutor(r) {
@@ -830,6 +864,8 @@ requestAnimationFrame(animarNivel);
 // correcciones), como si no hubiera existido.
 function recuperarTurno() {
   if (!turno || turno.oido || history[turno.hist]?.rol !== 'alumno') return;
+  // No llegó a oírse: se cancela de verdad (ni tarjeta ni turno guardado).
+  if (controller) controller.respondida = false;
   arrastre = history[turno.hist].texto;
   history.length = turno.hist;
   const m = $('messages');

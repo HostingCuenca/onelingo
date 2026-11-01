@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { frasesCompletas, generarJsonOpenAI, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
 import { correccionesPrevias, resumirHechos, tipoCambio } from '../src/lib/situaciones.js';
-import { depurarCorrecciones, estadoTurno, notaAviso, promptCorrector, systemPrompt } from '../src/lib/ia.js';
+import { corrigeEnVoz, depurarCorrecciones, estadoTurno, notaAviso, promptCorrector, promptVeredicto, systemPrompt } from '../src/lib/ia.js';
 const originalFetch = globalThis.fetch;
 const encoder = new TextEncoder();
 const event = (j: unknown) => encoder.encode(`data: ${JSON.stringify(j)}\n\n`);
@@ -171,9 +171,12 @@ test('in a video call the avatar corrects out loud and gives spoken hints', () =
   assert.match(p, /pídele que diga él la frase completa/);
   assert.match(p, /Se autocorrigió en el mismo mensaje/);
   assert.match(p, /Haz que la encuentre él/);
-  assert.match(p, /NO le pidas repetir de nuevo/);
-  // Con pocas frases se cae el porqué, nunca la petición de repetir; en niveles 1-2, sin reglas.
-  assert.match(p, /nunca la petición de repetir/);
+  assert.match(p, /máximo dos intentos por error/);
+  // Todo error real se corrige en voz alta, con su porqué; con pocas frases se acorta la reacción.
+  assert.match(p, /Cualquier error real de gramática/);
+  assert.match(p, /nunca la forma correcta ni la petición de repetir/);
+  assert.match(p, /ese veredicto manda sobre tu propio juicio/);
+  assert.doesNotMatch(p, /este turno usa E/);
   assert.match(p, /En niveles 1 y 2 no uses términos de gramática/);
   assert.match(p, /PISTAS/);
   assert.doesNotMatch(p, /NO lo expliques en 'reply'/);
@@ -191,4 +194,30 @@ test('turn state flags repetition attempts and very short answers', () => {
   assert.match(estadoTurno([t('tutor', 'Where did you eat?'), t('alumno', 'Home.'), t('tutor', 'What did you eat?'), t('alumno', 'Pizza')]), /muy pocas palabras/);
   assert.match(estadoTurno([t('tutor', '何をしましたか？'), t('alumno', '公園を行きました'), t('tutor', '「公園に行きました」ですね。言ってみてください。'), t('alumno', '公園を行きました')]), /repitiendo/);
   assert.equal(estadoTurno([t('alumno', 'Hi'), t('tutor', 'Hello!')]), '');
+});
+
+test('the quick verdict tells the tutor what to correct out loud', () => {
+  const t = (rol: 'tutor' | 'alumno', texto: string) => ({ rol, texto });
+  const corregido = [t('tutor', 'What did you do?'), t('alumno', 'Yesterday I go to the park'), t('tutor', 'Nice! We say «I went to the park». Can you say it?')];
+  const fallo = [{ original: 'I go', correcto: 'I went' }];
+  // Error nuevo: corregirlo en voz alta, con la forma exacta.
+  assert.match(estadoTurno([t('tutor', 'What did you do?'), t('alumno', 'Yesterday I go to the park')], fallo), /«I go» → «I went»[\s\S]*EN VOZ ALTA/);
+  // Frase correcta: nada que corregir.
+  assert.match(estadoTurno([t('tutor', 'What did you do?'), t('alumno', 'I went to the park')], []), /está bien: no corrijas nada/);
+  // Repetición: bien → celebrar; mal → por partes y un intento más; segundo fallo → seguir.
+  assert.match(estadoTurno([...corregido, t('alumno', 'Yesterday I went to the park')], []), /ahora está BIEN/);
+  assert.match(estadoTurno([...corregido, t('alumno', 'Yesterday I goed to the park')], [{ original: 'I goed', correcto: 'I went' }]), /intente una vez más/);
+  assert.match(estadoTurno([...corregido, t('alumno', 'Yesterday I goed to the park'), t('tutor', 'I… went… Try again!'), t('alumno', 'Yesterday I go to park')], fallo), /SEGUNDO intento[\s\S]*No pidas repetir otra vez/);
+  // Sin veredicto (tardó más del tope): el tutor decide solo, como antes.
+  assert.equal(estadoTurno([t('tutor', 'What did you do?'), t('alumno', 'Yesterday I go to the park')]), '');
+  assert.match(promptVeredicto('en', 'es', 2), /inglés estadounidense[\s\S]*como máximo 1/);
+});
+
+test('a spoken correction quotes the right form; a recast does not count', () => {
+  assert.equal(corrigeEnVoz('Oh, nice! We say «I went to the park». Can you say it?', 'I went'), true);
+  assert.equal(corrigeEnVoz('Oh, a nurse! We say, “My sister works in a hospital.”', 'sister works'), true);
+  assert.equal(corrigeEnVoz('あ、いいですね！「友達に会いました」と言います。', '友達に会いました'), true);
+  // Reformular sin señalarlo no es corregir en voz alta; tampoco citar otra cosa.
+  assert.equal(corrigeEnVoz('Oh, you went to the beach with your family! What did you do?', 'I went'), false);
+  assert.equal(corrigeEnVoz('Do you like «Star Wars»? I doesn’t know it.', 'I went'), false);
 });

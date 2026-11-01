@@ -350,3 +350,21 @@ Repetir la evaluación tras cada cambio (unas 90 llamadas y 0,4 US$ por modelo).
 
 Cambios: jugadas A–F en la videollamada (autocorrección, repetición, error ya corregido, corregir, reformular, no corregir), sin jerga en niveles 1-2, longitud por nivel, reacción concreta, ajuste de nivel; `estadoTurno()` (repite su frase / segundo intento / monosílabos, sin IA); tutor `OPENAI_MODELO_TUTOR` = gpt-5.6-luna con `reasoning_effort` none en streaming; corrector con tope de 8 s, respuestas cortas válidas y autocorrecciones; `depurarCorrecciones` detecta «She don't… doesn't».
 «vuelve_a_fallar» pasó de 0 % a 67 % de movimiento correcto (nota 2,33 → 4,00). Siguen flojos «error_repetido» (0 %: en la evaluación no llega el bloque YA CORREGIDO que producción sí arma desde la base) y «error_menor» (a veces aún lo señala). Diferencias < 0,2 en la media son ruido.
+
+## Veredicto antes de hablar (01-11-2026)
+
+**Problema.** En llamadas reales el tutor no corregía en voz alta: decidía solo y el corrector bueno llegaba después, cuando la voz ya había sonado (solo cambiaba la tarjeta escrita). Además, la jugada E reformulaba en silencio los errores «menores» y, tras una corrección, el turno siguiente nunca corregía.
+
+**Cambio.**
+
+- `veredictoRapido()`: el corrector en versión corta (gpt-5.6-luna, `reasoning_effort` none, sin análisis escrito, máximo 1 error). Sobre los 45 escenarios: p50 1,0 s, p90 1,3 s, y los mismos errores que el corrector completo (que tarda 1,8 s con `none` y 2,1 s con `low`).
+- `hablarConVeredicto()`: el tutor arranca a la vez y sus frases esperan al veredicto (tope 1,5 s). Sin error, o si el tutor ya cita la forma buena entre comillas (`corrigeEnVoz`), sale su respuesta. Si se saltó el error, se descarta antes de sonar y se pide otra con el veredicto en `estadoTurno`.
+- Política de la videollamada (decidida por el producto): todo error real se corrige en voz alta, con la forma buena, el porqué en palabras fáciles (en N1-2 con un contraste, sin jerga) y la petición de decir la frase completa. Si la repetición falla, por partes y un intento más; al segundo fallo, la frase bien y seguir. Ya no hay «error menor» reformulado en silencio, así que la categoría `error_menor` del banco espera ahora corrección en voz.
+
+**Resultado (sin juez, `resultados/v5-veredicto-gpt-5.6-luna-none.json`).** Los 16 turnos con error del banco se corrigen en voz alta con porqué y petición de repetir; las 5 frases correctas, las 3 repeticiones bien hechas y las 3 autocorrecciones no reciben corrección.
+
+| Versión | 1.ª frase p50 / p90 (ms) | Total p50 / p90 (ms) |
+|---|---|---|
+| v3 (producción hasta hoy) | 867 / 1073 | 2245 / 3240 |
+| Esperar siempre al veredicto | 2120 / 2517 | 3172 / 3964 |
+| v5: tutor en paralelo + veredicto | 1213 / 1964 | 2298 / 3598 |

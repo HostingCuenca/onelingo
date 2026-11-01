@@ -48,19 +48,19 @@ async function conReintentos(hacer: () => Promise<Response>, intentos = 3): Prom
 // gpt-4.1-mini a veces deja la respuesta normal en `refusal` (1 de ~200 turnos): un reintento lo arregla.
 const esRazonador = (modelo: string) => /^(gpt-5|gpt-6|o\d)/.test(modelo);
 
-export async function generarJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown = ESQUEMA_TUTOR_OPENAI, modelo = config.openaiModelo, intento = 1): Promise<{ json: any; modelo: string; entrada: number; salida: number }> {
-  try { return await pedirJsonOpenAI(system, mensajes, esquema, modelo); }
+export async function generarJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown = ESQUEMA_TUTOR_OPENAI, modelo = config.openaiModelo, esfuerzo = 'low', intento = 1): Promise<{ json: any; modelo: string; entrada: number; salida: number }> {
+  try { return await pedirJsonOpenAI(system, mensajes, esquema, modelo, esfuerzo); }
   catch (e) {
     const refusal = (e as { refusal?: string }).refusal;
     if (!refusal) throw e;
-    if (intento < 2) return generarJsonOpenAI(system, mensajes, esquema, modelo, intento + 1);
+    if (intento < 2) return generarJsonOpenAI(system, mensajes, esquema, modelo, esfuerzo, intento + 1);
     // Si vuelve a pasar con el tutor, el texto es su respuesta normal: mejor eso que un error.
     if (esquema === ESQUEMA_TUTOR_OPENAI) return { json: { reply: refusal, romanizacion: '', traduccion: '', corrections: [], suggestions: [] }, modelo, entrada: 0, salida: 0 };
     throw e;
   }
 }
 
-async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown, modelo: string) {
+async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown, modelo: string, esfuerzo: string) {
   const { j } = await conReintentos(() => fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${config.openaiApiKey}` },
@@ -69,7 +69,7 @@ async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assis
       messages: [{ role: 'system', content: system }, ...mensajes],
       response_format: { type: 'json_schema', json_schema: { name: 'respuesta_tutor', strict: true, schema: esquema } },
       // Los modelos con razonamiento no aceptan temperatura y cuentan lo que piensan en la salida.
-      ...(esRazonador(modelo) ? { reasoning_effort: 'low', max_completion_tokens: 3000 } : { temperature: 0.7, max_tokens: 700 }),
+      ...(esRazonador(modelo) ? { reasoning_effort: esfuerzo, max_completion_tokens: 3000 } : { temperature: 0.7, max_tokens: 700 }),
     }),
   }));
   const m = j?.choices?.[0]?.message;
