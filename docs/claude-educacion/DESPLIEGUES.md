@@ -1072,3 +1072,18 @@ Fecha: 2026-10-31 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Backup:** `backups/20261031-edu-80-play/` (`web-anterior` y `panel-anterior` con enlaces duros, `backend/src/...` previos, `backend-nuevos.txt`, `env.sha`, `onelingo-antes.dump`). Retirados en `staging/20261031-edu-80-play/{web-retirada,panel-retirado}`.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261031-edu-80-play; S=staging/20261031-edu-80-play; mv web $S/web-post && mv $S/web-retirada web; mv panel $S/panel-post && mv $S/panel-retirado panel; for f in src/app.ts src/lib/config.ts src/lib/ia.ts src/lib/ia_openai.ts src/lib/pagos/proveedor.ts src/routes/usuarios.ts; do cp -p $K/backend/$f backend/$f; done; rm backend/src/lib/cuenta.ts backend/src/routes/reportes.ts; sudo -u onelingo -H pm2 restart onelingo-api'`. Las tablas de la 013 pueden quedarse (nadie las usa sin el código). La APK 0.5.7 queda en `web-anterior/descargas`.
+
+## Release: 20261101-edu-81-parche-llamada-situada
+
+Fecha: 2026-11-01 · Responsable: Claude (Claude Code), por pedido del usuario («dale, sube el parche cuando terminen»). Solo parche Shorebird de Android (Patch 1 sobre 0.5.8+2014, canal stable). Sin cambios en el servidor, la web ni el panel.
+
+**Contenido:**
+- `c9c13f4`: en Android, la «Videollamada» de un objetivo de situación ya no avisa «solo en la versión web». Abre `/tutores?tema=&objetivo=` con el nombre y el icono de la situación arriba. La llamada con el tutor elegido (en vivo o Lumo) y el «Hablar con mi tutor» empiezan en esa situación y ese objetivo.
+- `b6cc28b`: el aviso usa el icono de la situación. Un icono nuevo cambiaba `MaterialIcons-Regular.otf` (asset), y los parches no llevan assets.
+- Sin textos nuevos: los parches no llevan `assets/i18n`.
+
+**Build:** `shorebird patch android --release-version=0.5.8+2014 --no-confirm -- --dart-define=API_URL=https://onelingo.org/api` desde un worktree limpio de `b6cc28b`, con `key.properties` y el wrapper de Gradle copiados del worktree de la release. Los parches van firmados con la llave que administra Shorebird, la misma que la release. arm32 440 KB, arm64 375 KB, x86_64 420 KB. Pruebas antes: `flutter test` completo (504 en verde) y `extraer.py --comprobar` (0 errores).
+
+**Alcance:** el AAB de Google Play es la misma release de Shorebird (`libapp.so` y `libflutter.so` idénticos a la APK 2014). El parche llega a la app de Play y a la APK de onelingo.org al abrirla, y se aplica en el siguiente arranque. La web (Flutter web) sigue sin desplegar: allí la llamada situada abre directamente con Lumo hasta el próximo despliegue web.
+
+**Rollback:** `shorebird patches set-track --release-version=0.5.8+2014 --patch-number=1 --track=staging` (o desde la consola de Shorebird). Las apps vuelven al código de la release en el siguiente arranque.
