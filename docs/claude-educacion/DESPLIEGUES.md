@@ -1136,3 +1136,27 @@ Fecha: 2026-11-01 · Responsable: Claude (Claude Code), por pedido del usuario (
 - **Android:** `shorebird patches rollback --release-version=0.5.8+2014` vuelve al parche 1 (vuelta atrás con `patches rollforward`).
 
 **Parche 2 de Android** (sobre 0.5.8+2014, canal stable): lleva «Escucha y repite» (`07541ee`) a la app de Play y a la APK. Sin assets nuevos: «Transcribiendo tu respuesta…» ya estaba en `assets/i18n` de la release. Comando: `shorebird patch android --release-version=0.5.8+2014 --no-confirm -- --dart-define=API_URL=https://onelingo.org/api`, lanzado desde un worktree limpio de `ee8019d` en `~/.cache/onelingo-build/edu82`. Allí se copiaron `key.properties` y el wrapper de Gradle. El primer intento falló en `/tmp`: el tmpfs se quedó sin espacio. Por eso el build va en el disco principal, con `TMPDIR` y `java.io.tmpdir` ahí. Tamaño: arm32 888 KB, arm64 871 KB, x86_64 862 KB. Se aplica al abrir la app y cobra efecto en el siguiente arranque.
+
+## Release: 20261102-edu-83-espera
+
+Fecha: 2026-11-02 · Responsable: Claude (Claude Code), por pedido del usuario («si continua»). Backend (3 archivos) + web (solo cambian `web/avatar/index.html` y `practice.js`, más los archivos de build). PM2 `onelingo-api` reiniciado (solo esa app). Sin migraciones ni cambios de `.env` (hash igual). Sin parche de Android: la app carga la llamada desde `onelingo.org/avatar`.
+
+**Contenido (`2aaf96f`):** en la videollamada, el tutor declara qué espera en cada turno: `espera` = `repetir` (con la frase), `elegir` (con las opciones) o `responder`. El servidor la manda en el evento SSE `espera` en cuanto el tutor termina. La página (`practice.js?v=66`) la guarda en el turno del tutor y la devuelve en el historial. `estadoTurno()` evalúa la respuesta del alumno contra esa expectativa:
+- repetición parcial, intentos contados por la frase pedida;
+- «siguió con otra cosa: no insistas»;
+- opción en una palabra sin aviso de respuesta corta;
+- pregunta abierta nunca tomada por repetición.
+
+Sin `espera` se usa la heurística anterior. Evaluación en `docs/claude-educacion/auditoria/eval-tutor-2026-10-31.md` («Expectativa explícita»).
+
+**Pruebas:** backend 155/155 y typecheck en el VPS. Evaluación: 29 escenarios, 5 nuevos (Q01–Q05); la expectativa declarada es correcta en los 29. Navegador con respuestas simuladas: la expectativa viaja con el turno del tutor en la siguiente petición.
+
+**Verificado en producción** (Ana, `avatar_chloe`, inglés N2):
+- Error «I go»: corrige en voz alta y declara `repetir: Yesterday I went to the park with my sister.`
+- Repetición parcial «I went to the park.» tras pedir la frase entera: «Perfect, «I went»!» y sigue.
+- Respuesta parecida a una pregunta abierta: conversa sin tratarla como repetición y declara `elegir` para su siguiente pregunta.
+- `/`, `/main.dart.js`, `/avatar/index.html` (`practice.js?v=66`), `/descargas/version.json`, `/privacidad/` y `/api/salud` en 200. PM2 en línea. Lock liberado.
+
+**Backup:** `backups/20261102-edu-83-espera/` (`web-anterior` con enlaces duros, `backend/src/lib/{ia.ts,ia_openai.ts}` y `backend/src/routes/chat.ts` previos, `env.sha`). Web retirada en `staging/20261102-edu-83-espera/web-retirada`.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261102-edu-83-espera; S=staging/20261102-edu-83-espera; mv web $S/web-post && mv $S/web-retirada web; cp -p $K/backend/src/lib/*.ts backend/src/lib/; cp -p $K/backend/src/routes/chat.ts backend/src/routes/; sudo -u onelingo -H pm2 restart onelingo-api'`.
