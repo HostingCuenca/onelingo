@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { frasesCompletas, generarJsonOpenAI, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
+import { ESQUEMA_TUTOR_OPENAI, frasesCompletas, generarJsonOpenAI, generarTutorStream, replyParcial } from '../src/lib/ia_openai.js';
 import { correccionesPrevias, resumirHechos, tipoCambio } from '../src/lib/situaciones.js';
 import { corrigeEnVoz, depurarCorrecciones, estadoTurno, notaAviso, promptCorrector, promptVeredicto, systemPrompt } from '../src/lib/ia.js';
 const originalFetch = globalThis.fetch;
@@ -188,7 +188,7 @@ test('in a video call the avatar corrects out loud and gives spoken hints', () =
 test('turn state flags repetition attempts and very short answers', () => {
   const t = (rol: 'tutor' | 'alumno', texto: string) => ({ rol, texto });
   const corregido = [t('tutor', 'What did you do?'), t('alumno', 'Yesterday I go to the park'), t('tutor', 'Nice! We say «I went to the park». Can you say it?')];
-  assert.match(estadoTurno([...corregido, t('alumno', 'Yesterday I goed to the park')]), /repitiendo su frase anterior/);
+  assert.match(estadoTurno([...corregido, t('alumno', 'Yesterday I goed to the park')]), /repitiendo su frase tras/);
   assert.match(estadoTurno([...corregido, t('alumno', 'Yesterday I goed to the park'), t('tutor', 'Almost! Can you try again?'), t('alumno', 'Yesterday I go to park')]), /SEGUNDO intento/);
   assert.equal(estadoTurno([...corregido, t('alumno', 'I played football with my friends')]), '');
   assert.match(estadoTurno([t('tutor', 'Where did you eat?'), t('alumno', 'Home.'), t('tutor', 'What did you eat?'), t('alumno', 'Pizza')]), /muy pocas palabras/);
@@ -211,6 +211,37 @@ test('the quick verdict tells the tutor what to correct out loud', () => {
   // Sin veredicto (tardó más del tope): el tutor decide solo, como antes.
   assert.equal(estadoTurno([t('tutor', 'What did you do?'), t('alumno', 'Yesterday I go to the park')]), '');
   assert.match(promptVeredicto('en', 'es', 2), /inglés estadounidense[\s\S]*como máximo 1/);
+});
+
+test('the tutor\'s declared expectation decides whether the learner is repeating', () => {
+  type Espera = { tipo: 'repetir' | 'elegir' | 'responder'; modelo: string };
+  const t = (rol: 'tutor' | 'alumno', texto: string, espera?: Espera) => ({ rol, texto, ...(espera ? { espera } : {}) });
+  const repetir = (modelo: string): Espera => ({ tipo: 'repetir', modelo });
+  const pedido = [t('tutor', 'What did you do?'), t('alumno', 'Yesterday I go to the park with my sister'), t('tutor', 'Nice! We say «Yesterday I went to the park». Can you say it?', repetir('Yesterday I went to the park.'))];
+  // Repetición parcial: antes, con dos palabras, no contaba como repetir.
+  assert.match(estadoTurno([...pedido, t('alumno', 'I went to the park')], []), /repitiendo la frase que le pediste \(«Yesterday I went to the park\.»\)[\s\S]*ahora está BIEN/);
+  // Segundo intento: el tutor volvió a pedir la misma frase.
+  const otra = [...pedido, t('alumno', 'Yesterday I goed to the park'), t('tutor', 'I… went… Try once more!', repetir('Yesterday I went to the park.'))];
+  assert.match(estadoTurno([...otra, t('alumno', 'Yesterday I go to the park')], [{ original: 'I go', correcto: 'I went' }]), /SEGUNDO intento[\s\S]*No pidas repetir otra vez/);
+  // Siguió con otra cosa: no insistir.
+  assert.match(estadoTurno([...pedido, t('alumno', 'Do you have brothers or sisters?')], []), /siguió con otra cosa: no insistas/);
+  // Pregunta abierta: una respuesta parecida a su frase anterior no es una repetición.
+  const abierta = [t('tutor', 'Do you like pizza?'), t('alumno', 'I like pizza a lot'), t('tutor', 'Me too! What kind of pizza do you like?', { tipo: 'responder', modelo: '' })];
+  assert.match(estadoTurno([...abierta, t('alumno', 'I like pizza with cheese a lot')], []), /está bien: no corrijas nada/);
+  assert.doesNotMatch(estadoTurno([...abierta, t('alumno', 'I like pizza with cheese a lot')], []), /repitiendo/);
+  // Opciones: una palabra es lo esperado, no «respuestas muy cortas».
+  const opciones = [t('tutor', 'Where do you eat?'), t('alumno', 'Home.'), t('tutor', 'Yesterday you…? «go» or «went»?', { tipo: 'elegir', modelo: 'go / went' })];
+  const eligio = estadoTurno([...opciones, t('alumno', 'Went')], []);
+  assert.match(eligio, /Le diste a elegir \(go \/ went\)/);
+  assert.doesNotMatch(eligio, /muy pocas palabras/);
+  // Si eligió con un error, se corrige como cualquier error.
+  assert.match(estadoTurno([...opciones, t('alumno', 'I goed')], [{ original: 'I goed', correcto: 'I went' }]), /EN VOZ ALTA/);
+});
+
+test('the tutor answer declares what it expects, right after reply', () => {
+  assert.deepEqual(Object.keys((ESQUEMA_TUTOR_OPENAI as any).properties).slice(0, 2), ['reply', 'espera']);
+  assert.ok((ESQUEMA_TUTOR_OPENAI as any).required.includes('espera'));
+  assert.match(systemPrompt({ idiomaMeta: 'en', idiomaNativo: 'es', nivel: 2, tutorId: 'avatar_chloe' }), /'espera'[\s\S]*'repetir'[\s\S]*'elegir'[\s\S]*'responder'/);
 });
 
 test('a spoken correction quotes the right form; a recast does not count', () => {

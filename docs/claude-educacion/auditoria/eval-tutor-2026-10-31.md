@@ -368,3 +368,40 @@ Cambios: jugadas A–F en la videollamada (autocorrección, repetición, error y
 | v3 (producción hasta hoy) | 867 / 1073 | 2245 / 3240 |
 | Esperar siempre al veredicto | 2120 / 2517 | 3172 / 3964 |
 | v5: tutor en paralelo + veredicto | 1213 / 1964 | 2298 / 3598 |
+
+## Expectativa explícita (02-11-2026)
+
+**Problema.** `estadoTurno()` adivinaba si el alumno estaba repitiendo comparando su frase con la anterior suya (≥ 60 % de palabras en común y al menos 3). Fallaba en tres casos:
+- una repetición parcial («I went to the park» tras pedir la frase entera con «with my sister»);
+- una respuesta a una pregunta abierta parecida a lo que ya dijo («I like pizza a lot» → «I like pizza with cheese and ham a lot»): se tomaba por repetición y el tutor la celebraba como corrección;
+- una opción elegida en una palabra («Ate.»): contaba como «respuestas muy cortas».
+
+**Cambio.** El tutor declara en cada turno qué espera (`espera`, justo después de `reply` en el JSON):
+- `repetir`, con la frase exacta en `modelo`;
+- `elegir`, con las opciones en `modelo`, separadas por « / »;
+- `responder`.
+
+El servidor la manda en el evento SSE `espera` en cuanto el tutor termina, sin esperar al corrector. La página la guarda en el turno del tutor y la devuelve en el historial. `estadoTurno()` la usa así:
+- **`repetir`:** compara con la frase pedida, cuenta los intentos por las veces que el tutor pidió la misma frase, y si el alumno siguió con otra cosa avisa de no insistir.
+- **`elegir`:** acepta una respuesta corta y celebra la opción.
+- **`responder`:** nunca la trata como repetición.
+- **Sin `espera`** (clientes viejos o aviso sin ella): la heurística de antes.
+
+**Resultado (sin juez).** En `resultados/v6-espera-b.json`, 29 escenarios: los 24 de antes más 5 nuevos (Q01–Q05, categoría «expectativa»).
+- El tutor declaró la expectativa correcta en los 29: `repetir` con la frase en cada corrección, `elegir` en «¿X o Y?» y `responder` en las preguntas abiertas.
+- Q01 celebra la repetición parcial.
+- Q02 conversa, sin «Perfect».
+- Q03 celebra «ate».
+- Q04 responde a su pregunta, sin insistir.
+- Q05 (segundo fallo) dice la frase bien y sigue.
+- Los 24 de antes, sin cambios de conducta.
+
+Latencia en los mismos 24 escenarios:
+
+| Versión | 1.ª frase p50 / p90 (ms) | Total p50 / p90 (ms) |
+|---|---|---|
+| v5 | 1233 / 1716 | 2248 / 3240 |
+| v6, corrida 1 | 1285 / 2165 | 2450 / 3932 |
+| v6, corrida 2 | 1453 / 1636 | 2610 / 3383 |
+
+La primera frase no espera al campo nuevo (va después de `reply`); la diferencia está dentro del ruido de la API. El final del JSON se alarga ~15 tokens.

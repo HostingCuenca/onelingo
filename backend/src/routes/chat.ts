@@ -16,7 +16,10 @@ const EsquemaChat = z.object({
   // Videollamada: silencio largo o botón «Pista» (no es un turno del alumno).
   aviso: z.enum(['silencio', 'pista']).optional(),
   // Topes: sin ellos, el límite de 2 MB del cuerpo dejaba mandar prompts enormes.
-  historial: z.array(z.object({ rol: z.enum(['tutor', 'alumno']), texto: z.string().max(4000) })).max(30),
+  historial: z.array(z.object({
+    rol: z.enum(['tutor', 'alumno']), texto: z.string().max(4000),
+    espera: z.object({ tipo: z.enum(['repetir', 'elegir', 'responder']), modelo: z.string().max(400) }).optional(),
+  })).max(30),
 });
 type DatosChat = z.infer<typeof EsquemaChat>;
 
@@ -87,7 +90,7 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
                 })
                 .catch((e) => { req.log.warn({ err: String(e) }, 'chat_voz'); emit('voz', { indice, error: true }); }));
             }
-          });
+          }, (espera) => emit('espera', espera));
         } catch (e) {
           if (emitido || controller.signal.aborted || intento >= 2) throw e;
           req.log.warn({ err: String(e) }, 'chat_reintento');

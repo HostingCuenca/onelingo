@@ -8,6 +8,8 @@ import { fichaTutor } from './personajes.js';
 
 export const RespuestaTutor = z.object({
   reply: z.string().describe('Respuesta del tutor en el idioma meta, adecuada al nivel'),
+  // Opcional: Gemini y respuestas de reserva no lo traen.
+  espera: z.object({ tipo: z.enum(['repetir', 'elegir', 'responder']), modelo: z.string() }).optional().describe('Qué espera el tutor del alumno tras este turno'),
   romanizacion: z.string().describe('Romanización de la respuesta si el idioma no usa alfabeto latino; vacío si no aplica'),
   traduccion: z.string().describe('Traducción de la respuesta al idioma nativo del alumno'),
   corrections: z.array(z.object({
@@ -45,7 +47,9 @@ export const iaNombre = () =>
   config.iaProveedor === 'openai' ? config.openaiModelo : config.iaProveedor === 'gemini' ? config.geminiModelo : config.iaModelo;
 const cliente = () => new Anthropic({ apiKey: config.anthropicApiKey });
 
-export type Turno = { rol: 'tutor' | 'alumno'; texto: string };
+/** Lo que el tutor espera del alumno tras su turno: repetir una frase, elegir entre opciones o responder libre. */
+export type Espera = { tipo: 'repetir' | 'elegir' | 'responder'; modelo: string };
+export type Turno = { rol: 'tutor' | 'alumno'; texto: string; espera?: Espera };
 
 /** Reglas de la videollamada: la reply se convierte en voz y la boca del tutor la sigue. */
 const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz al instante. Eres un tutor que conversa y enseña hablando, como un buen profesor particular: la corrección y las pistas las das TÚ, en voz alta; la app solo las apunta por escrito.
@@ -109,6 +113,7 @@ CÓMO ENSEÑAR.
 FORMA.
 - 'reply' SIEMPRE en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} y solo en ese idioma, natural como un nativo: ninguna palabra suelta de otro idioma${p.idiomaMeta === 'es' ? ' y sin regionalismos marcados (nada de "qué padre", "chévere", "guay")' : ''}. El ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo} va solo en 'traduccion' y en las explicaciones de 'corrections'.
 ${REGISTRO[p.idiomaMeta] ? `- Registro: ${REGISTRO[p.idiomaMeta]}\n` : ''}${NOTA_IDIOMA[p.idiomaMeta] ? `- Regla que se explica mal: ${NOTA_IDIOMA[p.idiomaMeta]}\n` : ''}- Ajusta longitud, vocabulario y velocidad al nivel; en niveles 1-3 usa frases muy cortas.
+- 'espera': lo que esperas que haga el alumno con tu turno. 'repetir' si le pides decir una frase (jugadas B y D): 'modelo' es esa frase exacta, tal como quieres que la diga. 'elegir' si le das opciones para escoger: 'modelo' son las opciones separadas por « / ». 'responder' en cualquier otro caso (pregunta abierta, charla): 'modelo' vacío.
 - ${ROM[p.idiomaMeta] ? `Incluye la romanización (${ROM[p.idiomaMeta]}) en 'romanizacion'.` : "Deja 'romanizacion' vacío."}
 - Sin emojis. Sé breve: ${p.nivel <= 2 ? 'máximo 2 frases cortas' : p.nivel <= 6 ? 'máximo 3 frases' : 'máximo 4 frases'} por turno${p.tutorId.startsWith('avatar_') ? ' (al corregir, lo que diga LONGITUD)' : ''}.
 LÍMITES.
@@ -240,9 +245,10 @@ async function veredictoRapido(p: { idiomaMeta: string; idiomaNativo: string; ni
   return { corrections: ((r.json.corrections ?? []) as Veredicto).slice(0, 1), entrada: r.entrada, salida: r.salida };
 }
 
-export async function responder(p: Parameters<typeof responderModelo>[0], onReply?: (texto: string) => void, signal?: AbortSignal, onFrase?: (texto: string, indice: number) => void) {
+export async function responder(p: Parameters<typeof responderModelo>[0], onReply?: (texto: string) => void, signal?: AbortSignal, onFrase?: (texto: string, indice: number) => void, onEspera?: (e: Espera) => void) {
   if (p.aviso) {
     const r = await responderModelo(p, onReply, signal, onFrase);
+    if (r.respuesta.espera) onEspera?.(r.respuesta.espera);
     return { ...r, respuesta: { ...r.respuesta, corrections: [] } };
   }
   // En paralelo con la respuesta: no añade espera al alumno. Cuando responde,
@@ -262,6 +268,8 @@ export async function responder(p: Parameters<typeof responderModelo>[0], onRepl
     new Promise<null>((ok) => setTimeout(() => ok(null), TOPE_VEREDICTO_MS).unref()),
   ]) : Promise.resolve(null);
   const r = p.tutorId.startsWith('avatar_') ? await hablarConVeredicto(p, v, onReply, signal, onFrase) : await responderModelo(p, onReply, signal, onFrase);
+  // La página la guarda en el turno del tutor antes de que el alumno conteste; el corrector puede tardar hasta 8 s.
+  if (r.respuesta.espera) onEspera?.(r.respuesta.espera);
   const c = await corrector;
   const tutor = depurarCorrecciones(ultimo, r.respuesta.corrections);
   const corrections = c ? depurarCorrecciones(ultimo, c.corrections).slice(0, p.nivel <= 2 ? 1 : 2) : tutor;
@@ -323,31 +331,61 @@ const parecido = (a: string, b: string) => {
   let comunes = 0; for (const w of x) if (y.has(w)) comunes++;
   return comunes / Math.min(x.size, y.size);
 };
+/** Cuántas veces seguidas, hasta el último turno del tutor, le pidió repetir esta misma frase. */
+function vecesPedida(historial: Turno[], modelo: string) {
+  let n = 0;
+  for (const t of [...historial].reverse()) {
+    if (t.rol !== 'tutor') continue;
+    if (t.espera?.tipo !== 'repetir' || parecido(t.espera.modelo, modelo) < 0.6) break;
+    n++;
+  }
+  return n;
+}
+
 export function estadoTurno(historial: Turno[], veredicto?: Veredicto): string {
   const alumno = historial.filter(t => t.rol === 'alumno').map(t => t.texto);
   const ultimo = alumno[alumno.length - 1], previo = alumno[alumno.length - 2], anterior = alumno[alumno.length - 3];
   if (!ultimo || historial[historial.length - 1]?.rol !== 'alumno') return '';
   const notas: string[] = [];
   const error = veredicto?.[0], forma = error ? `«${error.original}» → «${error.correcto}»` : '';
-  const repite = !!previo && piezas(ultimo).size >= 3 && parecido(ultimo, previo) >= 0.6;
-  const segundo = repite && !!anterior && parecido(previo, anterior) >= 0.6;
+  // Lo que el tutor declaró que esperaba manda. Sin eso (clientes viejos), se
+  // deduce comparando con su frase anterior, que fallaba con repeticiones
+  // parciales y con respuestas parecidas a una pregunta abierta.
+  const t = historial[historial.length - 2];
+  const pedido = t?.rol === 'tutor' ? t.espera : undefined;
+  const modelo = pedido?.tipo === 'repetir' ? pedido.modelo.trim() : '';
+  let repite: boolean, segundo: boolean;
+  if (modelo) {
+    repite = parecido(ultimo, modelo) >= 0.5;
+    segundo = repite && vecesPedida(historial, modelo) >= 2;
+    if (!repite) notas.push(`Le pediste decir «${modelo}», pero siguió con otra cosa: no insistas; responde a lo que dijo.`);
+  } else if (pedido) {
+    repite = segundo = false;
+  } else {
+    repite = !!previo && piezas(ultimo).size >= 3 && parecido(ultimo, previo) >= 0.6;
+    segundo = repite && !!anterior && parecido(previo, anterior) >= 0.6;
+  }
+  const frase = modelo ? `la frase que le pediste («${modelo}»)` : 'su frase';
   if (repite && veredicto) {
     notas.push(!error
-      ? 'Está repitiendo su frase tras tu corrección y el corrector de la app confirma que ahora está BIEN: celébralo concreto citando la forma buena y vuelve al hilo con una pregunta sobre lo que te contó. No corrijas nada.'
+      ? `Está repitiendo ${frase} tras tu corrección y el corrector de la app confirma que ahora está BIEN: celébralo concreto citando la forma buena y vuelve al hilo con una pregunta sobre lo que te contó. No corrijas nada.`
       : segundo
-        ? `Es su SEGUNDO intento de repetir la frase y aún tiene el error ${forma}: dile la frase bien una vez, reconoce el esfuerzo y sigue la conversación con una pregunta fácil. No pidas repetir otra vez ni preguntes con opciones.`
-        : `Está repitiendo su frase tras tu corrección, pero aún tiene el error ${forma}: dile la forma buena despacio y por partes y pídele que lo intente una vez más. No preguntes con opciones.`);
+        ? `Es su SEGUNDO intento de repetir ${frase} y aún tiene el error ${forma}: dile la frase bien una vez, reconoce el esfuerzo y sigue la conversación con una pregunta fácil. No pidas repetir otra vez ni preguntes con opciones.`
+        : `Está repitiendo ${frase} tras tu corrección, pero aún tiene el error ${forma}: dile la forma buena despacio y por partes y pídele que lo intente una vez más. No preguntes con opciones.`);
   } else if (repite) {
     notas.push(segundo
-      ? 'Es su SEGUNDO intento de repetir la misma frase: si aún tiene el error, no preguntes con opciones ni pidas repetir; dile la forma buena una vez, despacio y por partes, y sigue la conversación con una pregunta fácil.'
-      : 'Está repitiendo su frase anterior tras tu corrección (jugada B): si ahora está bien, celébralo concreto y vuelve al hilo; si sigue con el error, dile la forma buena despacio y por partes y pídele que lo intente una vez más.');
+      ? `Es su SEGUNDO intento de repetir ${frase}: si aún tiene el error, no preguntes con opciones ni pidas repetir; dile la forma buena una vez, despacio y por partes, y sigue la conversación con una pregunta fácil.`
+      : `Está repitiendo ${frase} tras tu corrección (jugada B): si ahora está bien, celébralo concreto y vuelve al hilo; si sigue con el error, dile la forma buena despacio y por partes y pídele que lo intente una vez más.`);
+  } else if (pedido?.tipo === 'elegir' && !error) {
+    notas.push(`Le diste a elegir (${pedido.modelo}): una respuesta corta es lo esperado. Si las opciones eran para encontrar la forma correcta, celébralo si eligió la buena o dile cuál es si no; si eran sobre sus gustos o planes, sigue la charla con lo que eligió.`);
   } else if (error) {
     notas.push(`El corrector de la app encontró un error en su frase: ${forma}. Corrígelo EN VOZ ALTA en este turno: si ya le corregiste ese mismo tipo de error antes en esta llamada, jugada C (que lo encuentre él); si no, jugada D (la forma buena con claridad, el porqué en pocas palabras fáciles y pídele que diga la frase completa).`);
   } else if (veredicto) {
     notas.push('El corrector de la app confirma que su frase está bien: no corrijas nada en voz alta.');
   }
   const cortos = alumno.slice(-2).filter(t => piezas(t).size <= 3).length;
-  if (alumno.length >= 2 && cortos === 2 && !repite && !error) notas.push('Lleva dos respuestas de muy pocas palabras: haz una pregunta más fácil con dos opciones o el comienzo de una frase para que se anime a decir más.');
+  // Tras dar opciones, una respuesta de una palabra es lo esperado.
+  if (alumno.length >= 2 && cortos === 2 && !repite && !error && pedido?.tipo !== 'elegir') notas.push('Lleva dos respuestas de muy pocas palabras: haz una pregunta más fácil con dos opciones o el comienzo de una frase para que se anime a decir más.');
   return notas.length ? `[Estado del turno, calculado por la app: ${notas.join(' ')}]` : '';
 }
 

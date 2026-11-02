@@ -240,7 +240,7 @@ for (const e of escenarios) {
     const tu = medida.tutor, co = medida.corrector;
     const msTutorFin = tu?.fin != null ? tu.fin - t0 : msTotalProceso;
     Object.assign(caso, {
-      reply: r.respuesta.reply, traduccion: r.respuesta.traduccion, corrections: r.respuesta.corrections, suggestions: r.respuesta.suggestions, modeloRespuesta: r.modelo, frases,
+      reply: r.respuesta.reply, espera: r.respuesta.espera, traduccion: r.respuesta.traduccion, corrections: r.respuesta.corrections, suggestions: r.respuesta.suggestions, modeloRespuesta: r.modelo, frases,
       ms: { primeraFrase: msFrase != null ? Math.round(msFrase) : null, reply: msReply != null ? Math.round(msReply) : null, tutorFin: Math.round(msTutorFin),
         // Total del turno en producción = max(tutor, corrector), que corren en paralelo. Con el corrector en caché se usa su latencia medida.
         total: Math.round(Math.max(msTutorFin, co?.ms ?? 0)), corrector: co?.ms ?? null, correctorCache: co?.cache ?? null },

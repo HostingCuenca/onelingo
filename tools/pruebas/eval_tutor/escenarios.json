@@ -13,7 +13,8 @@
   "como_se_dice": "Pregunta «¿cómo se dice X?» o mete una palabra de su idioma: dar la palabra explícitamente (pronto en el turno), con un ejemplo corto, y pedir que la use.",
   "bloqueo": "Bloqueo / «no sé»: no responder por él ni traducir todo; pista hablada con dos opciones o un comienzo de frase que pueda completar, y animar.",
   "monosilabos": "Respuestas muy cortas o monosílabos: no exigir ni interrogar; reformular lo que dijo en frase completa, pregunta más fácil y abierta pero con apoyo (opciones o modelo de respuesta), quizá compartir algo propio.",
-  "nivel_alto": "El alumno muestra un nivel claramente superior al configurado: subir un poco el nivel (frases más ricas, una expresión útil, pregunta abierta de más profundidad) sin dejar de ser claro; no corregir lo que está bien."
+  "nivel_alto": "El alumno muestra un nivel claramente superior al configurado: subir un poco el nivel (frases más ricas, una expresión útil, pregunta abierta de más profundidad) sin dejar de ser claro; no corregir lo que está bien.",
+  "expectativa": "El tutor declaró qué esperaba ('espera' en su turno): repetir una frase, elegir entre opciones o responder libre. Repetición parcial correcta: celebrar. Siguió con otra cosa: no insistir, responder. Respuesta a una pregunta abierta parecida a su frase anterior: conversar, no tratarla como repetición. Opción elegida en una palabra: celebrarla sin pedir que hable más."
  },
  "escenarios": [
   {
@@ -539,6 +540,67 @@
    "ultimo": "Ja, eigentlich sehr. Ich wohne seit drei Jahren hier, weil ich bei einer Softwarefirma arbeite, aber manchmal vermisse ich das Meer.",
    "error": null,
    "esperado": "Subir un poco el nivel: frases más completas que A1, interés concreto (echar de menos el mar, la empresa), pregunta abierta. No corregir."
+  },
+  {
+   "id": "Q01", "categoria": "expectativa", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "So, what did you do last weekend?"},
+    {"rol": "alumno", "texto": "Last weekend I go to the park with my sister."},
+    {"rol": "tutor", "texto": "Oh, the park with your sister! We say «I went to the park». Today I go, yesterday I went. Can you say it?", "espera": {"tipo": "repetir", "modelo": "I went to the park."}}
+   ],
+   "ultimo": "I went to the park.",
+   "error": null,
+   "esperado": "Repitió bien la frase pedida: celebrar corto citando «I went» y volver al hilo con una pregunta sobre el parque o su hermana. No corregir nada."
+  },
+  {
+   "id": "Q02", "categoria": "expectativa", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 2, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Do you like pizza?"},
+    {"rol": "alumno", "texto": "Yes, I like pizza a lot."},
+    {"rol": "tutor", "texto": "Me too, pizza night is the best! What kind of pizza do you like?", "espera": {"tipo": "responder", "modelo": ""}}
+   ],
+   "ultimo": "I like pizza with cheese and ham a lot.",
+   "error": null,
+   "esperado": "Respuesta a una pregunta abierta, correcta: conversar sobre el jamón y queso con una pregunta de seguimiento. NO celebrarlo como si repitiera una corrección («Perfect, …!»), no corregir."
+  },
+  {
+   "id": "Q03", "categoria": "expectativa", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 1, "tutorId": "avatar_frank",
+   "historial": [
+    {"rol": "tutor", "texto": "What did you do on Sunday?"},
+    {"rol": "alumno", "texto": "On Sunday I go to the beach."},
+    {"rol": "tutor", "texto": "The beach, nice! We say «I went». Can you say it?", "espera": {"tipo": "repetir", "modelo": "On Sunday I went to the beach."}},
+    {"rol": "alumno", "texto": "On Sunday I went to the beach."},
+    {"rol": "tutor", "texto": "Perfect! What did you eat there?", "espera": {"tipo": "responder", "modelo": ""}},
+    {"rol": "alumno", "texto": "I eat fish."},
+    {"rol": "tutor", "texto": "Fish, yum! Yesterday you…? «eat» or «ate»?", "espera": {"tipo": "elegir", "modelo": "eat / ate"}}
+   ],
+   "ultimo": "Ate.",
+   "error": null,
+   "esperado": "Eligió bien con una palabra: celebrar «ate» concreto y seguir la charla (puede pedir la frase completa «I ate fish»). No pedirle que hable más ni tratarlo como respuesta demasiado corta."
+  },
+  {
+   "id": "Q04", "categoria": "expectativa", "idiomaMeta": "fr", "idiomaNativo": "es", "nivel": 2, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Qu'est-ce que tu as fait samedi ?"},
+    {"rol": "alumno", "texto": "Samedi, j'ai allé au cinéma."},
+    {"rol": "tutor", "texto": "Oh, le ciné ! On dit « je suis allé au cinéma ». Tu peux le dire ?", "espera": {"tipo": "repetir", "modelo": "Samedi, je suis allé au cinéma."}}
+   ],
+   "ultimo": "Et toi, tu aimes le cinéma ?",
+   "error": null,
+   "esperado": "No repitió: hizo otra pregunta. No insistir en que repita; responder a su pregunta con algo breve propio y seguir la charla."
+  },
+  {
+   "id": "Q05", "categoria": "expectativa", "idiomaMeta": "en", "idiomaNativo": "es", "nivel": 2, "tutorId": "avatar_chloe",
+   "historial": [
+    {"rol": "tutor", "texto": "Tell me about your sister. Does she have a job?"},
+    {"rol": "alumno", "texto": "Yes, she work in a bank."},
+    {"rol": "tutor", "texto": "A bank, cool! We say «she works», because it's she. Can you say it?", "espera": {"tipo": "repetir", "modelo": "She works in a bank."}},
+    {"rol": "alumno", "texto": "She work in a bank."},
+    {"rol": "tutor", "texto": "Almost! She… works… in a bank. Try once more!", "espera": {"tipo": "repetir", "modelo": "She works in a bank."}}
+   ],
+   "ultimo": "She work in bank.",
+   "error": {"original": "She work", "correcto": "She works"},
+   "esperado": "Segundo intento fallido: decir la frase bien una vez («She works in a bank»), reconocer el esfuerzo y seguir con una pregunta fácil. No pedir repetir otra vez ni dar opciones."
   }
  ]
 }

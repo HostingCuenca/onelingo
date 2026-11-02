@@ -7,6 +7,11 @@ export const ESQUEMA_TUTOR_OPENAI = {
   additionalProperties: false,
   properties: {
     reply: { type: 'string', description: 'Respuesta del tutor en el idioma meta, adecuada al nivel' },
+    // Justo después de reply: llega con el texto, sin esperar a traducción ni correcciones.
+    espera: {
+      type: 'object', additionalProperties: false, required: ['tipo', 'modelo'],
+      properties: { tipo: { type: 'string', enum: ['repetir', 'elegir', 'responder'] }, modelo: { type: 'string' } },
+    },
     romanizacion: { type: 'string', description: 'Romanización si el idioma no usa alfabeto latino; vacío si no aplica' },
     traduccion: { type: 'string', description: 'Traducción de la respuesta al idioma nativo del alumno' },
     corrections: {
@@ -23,7 +28,7 @@ export const ESQUEMA_TUTOR_OPENAI = {
     },
     suggestions: { type: 'array', items: { type: 'string' }, description: '2-3 respuestas cortas que el alumno podría decir a continuación' },
   },
-  required: ['reply', 'romanizacion', 'traduccion', 'corrections', 'suggestions'],
+  required: ['reply', 'espera', 'romanizacion', 'traduccion', 'corrections', 'suggestions'],
 };
 
 export const openaiDisponible = () => config.openaiApiKey.length > 0;

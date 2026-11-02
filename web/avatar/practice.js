@@ -494,7 +494,7 @@ async function requestTutor(entrada, opening = false) {
   const version = epoch;
   fraseAnterior = {version: -1, texto: ''}; // turno nuevo: sin frase anterior
   busy = true; respuestaCompleta = false; controls(); error(''); ultimoFallo = null;
-  let frases = 0, final = false, transcrito = false, burbujaTutor = null;
+  let frases = 0, final = false, transcrito = false, burbujaTutor = null, turnoTutor = null, espera = null;
   if (entrada?.texto || entrada?.audio) silencios = 0;
   turno = opening || entrada?.aviso ? null : {hist: history.length, dom: $('messages').childElementCount, corr: correcciones, oido: false, lastReply};
   if (!opening) {
@@ -539,7 +539,7 @@ async function requestTutor(entrada, opening = false) {
     // alumno contestaba antes, el tutor olvidaba que le había pedido repetir.
     const anotarTutor = texto => {
       if (burbujaTutor) return burbujaTutor;
-      lastReply = texto; history.push({rol: 'tutor', texto}); burbujaTutor = burbuja(texto);
+      lastReply = texto; turnoTutor = {rol: 'tutor', texto, ...(espera ? {espera} : {})}; history.push(turnoTutor); burbujaTutor = burbuja(texto);
       $('replay').hidden = false; $('reportar').hidden = false;
       current.respondida = true;
       return burbujaTutor;
@@ -556,6 +556,9 @@ async function requestTutor(entrada, opening = false) {
       const line = raw.split('\n').find(l => l.startsWith('data: '));
       if (!line) return;
       const e = JSON.parse(line.slice(6));
+      // Lo que el tutor espera (repetir, elegir, responder) viaja con su turno
+      // en el historial: el servidor sabe así si el alumno está repitiendo.
+      if (e.tipo === 'espera') { espera = e.data; if (turnoTutor) turnoTutor.espera = e.data; return; }
       if (version !== epoch) { enSegundoPlano(e); return; }
       if (e.tipo === 'error') throw Error(e.data);
       if (e.tipo === 'transcripcion' && (e.data.texto || '').trim()) {
@@ -573,7 +576,9 @@ async function requestTutor(entrada, opening = false) {
         const r = e.data;
         if (!frases) { mostrarCorreccion(null); frases++; encolar(r.reply, version); }
         $('subTutor').textContent = r.reply;
+        if (r.espera) espera = r.espera;
         const b = anotarTutor(r.reply);
+        if (espera) turnoTutor.espera = espera;
         if (lastReply !== r.reply) { lastReply = r.reply; b.textContent = r.reply; const h = history.findLastIndex(x => x.rol === 'tutor'); if (h >= 0) history[h].texto = r.reply; }
         if (r.romanizacion) b.append(el('span', 'romanizacion', r.romanizacion));
         if (r.traduccion) {
