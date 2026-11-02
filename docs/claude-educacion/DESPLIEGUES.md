@@ -1110,3 +1110,29 @@ Fecha: 2026-11-01 · Responsable: Claude (Claude Code), por pedido del usuario (
 - Sigue entrando por el panel DEMO, porque `/usuarios/login` mira el dominio `@onelingo.demo` y no `es_demo`. Con la cortesía vigente también entra con el modo demo cerrado, y sigue sin poder borrarse por el dominio.
 - Verificado por la API: login demo correcto, `GET /usuarios/me/suscripcion` devuelve `p1`, `cortesia`, `activa` y 10 de 10 idiomas abiertos.
 - Respaldos: `backups/20261101-ana-p1/ana-suscripcion-antes-todos.csv` y `ana-es-demo-antes.txt`.
+
+## Release: 20261101-edu-82-correccion-voz
+
+Fecha: 2026-11-01 · Responsable: Claude (Claude Code), por pedido del usuario («si publica»). Backend (2 archivos) + web 0.5.8 (incluye `web/avatar`) + parche 2 de Shorebird. PM2 `onelingo-api` reiniciado (solo esa app). Sin migraciones ni cambios de `.env` (hash igual antes y después).
+
+**Contenido:**
+- `ee8019d`: videollamada. El tutor corrige en voz alta, explica el porqué (en N1–N2 con un contraste, p. ej. «Today I go, yesterday I went») y pide repetir; como máximo dos intentos por error. Un revisor rápido (`veredictoRapido`, `gpt-5.6-luna` sin razonamiento, tope 1,5 s) corre en paralelo con el tutor. Si encuentra un error que el tutor no corrigió en voz alta, se descarta el borrador y el tutor responde con el veredicto en la nota de estado. En la página (`practice.js?v=65`): tarjeta «original → correcto» bajo los subtítulos; el turno del tutor entra al historial con el texto completo (antes esperaba al corrector, hasta 8 s, y si el alumno contestaba antes se perdían la petición de repetir, la tarjeta y el turno guardado); la repetición de la frase modelo ya no se descarta como eco. Evaluación en `docs/claude-educacion/auditoria/eval-tutor-2026-10-31.md` («Veredicto antes de hablar»).
+- `07541ee`: «Escucha y repite». El fin por silencio se mide contra el pico de la voz (con ganancia automática el ruido quedaba sobre -50 dBFS y la grabación de un «hello» seguía abierta), medidor de voz y aviso «Transcribiendo tu respuesta…».
+
+**Pruebas:** backend 153/153 y typecheck en el VPS; Flutter 507 en verde; eval v5 con los 16 turnos con error corregidos en voz alta.
+
+**Verificado en producción** (Ana, `avatar_chloe`, inglés N2, `/chat` con SSE):
+- «Yesterday I go to the park…»: dice la forma correcta, da el contraste y pide repetirlo; tarjeta `I go → I went`; primera frase en 1,17 s.
+- Frase correcta: no corrige; 1,20 s.
+- Repetición correcta: lo celebra y sigue; 0,98 s.
+- `/`, `/main.dart.js`, `/avatar/index.html` (`practice.js?v=65`), `/descargas/version.json`, `/privacidad/` y `/api/salud` en 200. PM2 en línea. `.env` sin cambios. Lock liberado.
+
+**Web:** `flutter build web --release --dart-define=API_URL=https://onelingo.org/api` desde un worktree limpio de `ee8019d`. Staging con enlaces duros y `rsync -rlc` encima (5 archivos; `descargas/` intacta). Cambio con `mv`. Android carga la llamada desde `onelingo.org/avatar`, así que el arreglo de la llamada le llega sin parche.
+
+**Backup:** `backups/20261101-edu-82-correccion-voz/` (`web-anterior` con enlaces duros, `backend/src/lib/{ia.ts,ia_openai.ts}` previos, `env.sha`). Web retirada en `staging/20261101-edu-82-correccion-voz/web-retirada`.
+
+**Rollback:**
+- **Backend y web:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261101-edu-82-correccion-voz; S=staging/20261101-edu-82-correccion-voz; mv web $S/web-post && mv $S/web-retirada web; cp -p $K/backend/src/lib/*.ts backend/src/lib/; sudo -u onelingo -H pm2 restart onelingo-api'`.
+- **Android:** `shorebird patches rollback --release-version=0.5.8+2014` vuelve al parche 1 (vuelta atrás con `patches rollforward`).
+
+**Parche 2 de Android** (sobre 0.5.8+2014, canal stable): lleva «Escucha y repite» (`07541ee`) a la app de Play y a la APK. Sin assets nuevos: «Transcribiendo tu respuesta…» ya estaba en `assets/i18n` de la release. Comando: `shorebird patch android --release-version=0.5.8+2014 --no-confirm -- --dart-define=API_URL=https://onelingo.org/api`, lanzado desde un worktree limpio de `ee8019d` en `~/.cache/onelingo-build/edu82`. Allí se copiaron `key.properties` y el wrapper de Gradle. El primer intento falló en `/tmp`: el tmpfs se quedó sin espacio. Por eso el build va en el disco principal, con `TMPDIR` y `java.io.tmpdir` ahí. Tamaño: arm32 888 KB, arm64 871 KB, x86_64 862 KB. Se aplica al abrir la app y cobra efecto en el siguiente arranque.
