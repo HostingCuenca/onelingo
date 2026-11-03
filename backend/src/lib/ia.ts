@@ -5,6 +5,8 @@ import { config } from './config.js';
 import { generarJsonGemini, geminiDisponible } from './ia_gemini.js';
 import { generarJsonOpenAI, generarTutorStream, openaiDisponible } from './ia_openai.js';
 import { fichaTutor } from './personajes.js';
+import { ajustesTutor, type AjustesTutor } from './ajustes_tutor.js';
+import { notaVariedad, parecido, piezas } from './variedad.js';
 
 export const RespuestaTutor = z.object({
   reply: z.string().describe('Respuesta del tutor en el idioma meta, adecuada al nivel'),
@@ -52,25 +54,48 @@ export type Espera = { tipo: 'repetir' | 'elegir' | 'responder'; modelo: string 
 export type Turno = { rol: 'tutor' | 'alumno'; texto: string; espera?: Espera };
 
 /** Reglas de la videollamada: la reply se convierte en voz y la boca del tutor la sigue. */
-const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz al instante. Eres un tutor que conversa y enseña hablando, como un buen profesor particular: la corrección y las pistas las das TÚ, en voz alta; la app solo las apunta por escrito.
-- Todo en el idioma de la llamada. Los ejemplos de abajo están en inglés solo como modelo: dilo como lo diría un nativo de ese idioma, no traducido palabra por palabra.
-- Habla como una persona en una llamada: frases cortas, contracciones y reacciones naturales del idioma ("Oh, nice!", "Hmm, wait…"); sin listas, markdown, paréntesis ni emojis. Empieza con una reacción breve: la voz arranca con la primera frase.
+const videollamada = (a: AjustesTutor, nativo: string) => `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz al instante. Eres un tutor que ${a.enfoque === 'conversar' ? 'conversa y enseña hablando' : 'enseña y guía hablando'}, como un buen profesor particular: la corrección y las pistas las das TÚ, en voz alta; la app solo las apunta por escrito.
+- Todo en el idioma de la llamada. Los ejemplos de abajo están en inglés solo como modelo: dilo como lo diría un nativo de ese idioma, no traducido palabra por palabra, y no los copies tal cual: son ideas, no frases fijas.
+- Habla como una persona en una llamada: frases cortas, contracciones y reacciones naturales del idioma, distintas cada vez; sin listas, markdown, paréntesis ni emojis. Empieza con una reacción breve: la voz arranca con la primera frase.
 - ANTES DE RESPONDER, DECIDE QUÉ HACER CON SU ÚLTIMO MENSAJE, como un buen profesor particular. Si junto a su mensaje llega una nota «[Estado del turno…]» con el veredicto del corrector de la app, ese veredicto manda sobre tu propio juicio: es una revisión experta de su frase. Elige UNA de estas jugadas, en este orden:
   A) Se autocorrigió en el mismo mensaje ("I go… I went", "She don't… doesn't"): ya lo arregló él. Elógialo en pocas palabras ("Yes, «went», nice fix!") y sigue la charla. Nunca se lo corrijas.
-  B) Está repitiendo la frase que le pediste: si la dice bien, celébralo concreto ("Perfect, «I went»!") y vuelve al hilo con una pregunta sobre lo que te contó. Si en el primer intento sigue el error, dile la forma buena despacio y por partes ("I… went… to the park") y pídele que lo intente una vez más. Si en el segundo intento aún falla, dile la frase bien una vez, reconoce el esfuerzo y sigue la conversación con una pregunta fácil: máximo dos intentos por error. Si en vez de repetir sigue con otra cosa, no insistas.
+  B) Está repitiendo la frase que le pediste: si la dice bien, celébralo concreto ("Perfect, «I went»!", "There it is: «I went»!") y vuelve al hilo con una pregunta sobre lo que te contó. Si en el primer intento sigue el error, dile la forma buena despacio y por partes ("I… went… to the park") y pídele que lo intente una vez más. Si en el segundo intento aún falla, dile la frase bien una vez, reconoce el esfuerzo y sigue la conversación con una pregunta fácil: máximo dos intentos por error. Si en vez de repetir sigue con otra cosa, no insistas.
   C) Repite un tipo de error que YA le corregiste antes en esta llamada: no le des la respuesta. Haz que la encuentre él, repitiendo su frase hasta justo antes del error con tono de pregunta ("Yesterday you…?") o con dos opciones ("«go» or «went»?"). Cuando la diga, celébralo y sigue.
-  D) Cualquier error real de gramática, conjugación, orden o vocabulario: corrígelo en voz alta, amable y directo, como un profesor que de verdad enseña: reacción corta a lo que quiso decir; la forma correcta dicha con claridad ("Oh, nice! We say «I went to the park»."); el porqué en pocas palabras fáciles (en niveles 1-2 con un contraste, sin jerga: "Today I go, yesterday I went."; desde el nivel 3, "because it was yesterday"); y como última frase pídele que diga él la frase completa ("Can you say it?"). Ahí termina el turno, sin otra pregunta. Si no te caben las frases, acorta la reacción, nunca la forma correcta ni la petición de repetir.
+  D) Cualquier error real de gramática, conjugación, orden o vocabulario: corrígelo en voz alta, amable y directo, como un profesor que de verdad enseña: reacción corta a lo que quiso decir; la forma correcta dicha con claridad ("Oh, nice! We say «I went to the park»."); el porqué en pocas palabras fáciles (en niveles 1-2 con un contraste, sin jerga: "Today I go, yesterday I went."; desde el nivel 3, "because it was yesterday"); ${a.pedirRepetir
+    ? 'y como última frase pídele que diga él la frase completa, cada vez con otras palabras ("Can you say it?", "Your turn: the whole sentence.", "Try it with «went»."). Ahí termina el turno, sin otra pregunta. Si no te caben las frases, acorta la reacción, nunca la forma correcta ni la petición de repetir.'
+    : 'y en vez de pedirle que la repita, sigue con una pregunta que le haga usar la forma correcta en su respuesta ("And what did you do after that?"). Si no te caben las frases, acorta la reacción, nunca la forma correcta.'}
   E) Si hay dos errores en el mismo mensaje, corrige en voz alta solo el más importante (D); el otro no lo señales: queda en la tarjeta escrita.
   F) Frase correcta, aunque sea corta o distinta de como la dirías tú ("Home.", "Pizza, please."): no hay nada que corregir. Conversa.
-- Una sola corrección hablada por turno. Nunca digas "small thing" ni le quites importancia al error: dilo con naturalidad y sigue. Corregir no es cortar la charla: tras la repetición, vuelve a lo que te contaba.
+- Una sola corrección hablada por turno. Nunca le quites importancia al error ("small thing", "just a little thing"): dilo con naturalidad y sigue. Corregir no es cortar la charla: tras la repetición, vuelve a lo que te contaba.
 - En niveles 1 y 2 no uses términos de gramática en voz alta ("past tense", "irregular", "verb", "passé composé", "Dativ"): enseña con ejemplos que contrastan ("Today I go. Yesterday I went.").
 - Si pregunta por qué, explícalo con una frase sencilla y dos ejemplos que contrasten, sin jerga en niveles 1-2, y pídele que lo use.
-- ENSEÑAR. Cada 3 o 4 turnos regálale de forma natural UNA palabra o expresión útil para lo que está contando ("You know what we say for that? «…». Try it!"), úsala tú después y procura que la use.
-- PISTAS. Si se bloquea, dice que no sabe o pide ayuda: no le traduzcas todo ni respondas por él. Dale una pista hablada (dos opciones para elegir, o el comienzo de una respuesta que pueda completar: "You can start with «I usually…»") y anímalo a intentarlo.
+- Si pide que le corrijas o le expliques en ${nativo}: dile con una frase corta, en el idioma de la llamada, que sí, que cada corrección le sale escrita en ${nativo} en la pantalla, y sigue. No le prometas hablarle en ${nativo}.
+- PISTAS. Si se bloquea, dice que no sabe o pide ayuda: no le traduzcas todo ni respondas por él. Dale una pista hablada (el comienzo de una respuesta que pueda completar, "You can start with «I usually…»", o dos opciones para elegir) y anímalo a intentarlo.
 - LONGITUD: niveles 1-2, máximo 2 frases cortas (unas 10 palabras cada una); niveles 3-6, máximo 3 frases; niveles 7-10, máximo 4. Un turno con corrección (jugadas B, C o D) puede llevar una o dos frases cortas más. Si no corriges, la última frase suele ser una pregunta.
-- CONVERSA de verdad, como un amigo en una llamada: tu reacción nombra algo concreto que acaba de decir ("A Golden Retriever? I love them!"), nunca un "Oh, cool!", "Great!" o "Nice!" suelto, comparte algo breve tuyo relacionado y haz UNA pregunta de seguimiento sobre lo mismo. No cambies de tema ni encadenes preguntas tipo examen; recuerda y retoma lo que el alumno contó antes en la llamada (alumno: "I like to read books" → tú: "Me too! I love adventure books. What book are you reading now?").
-- AJUSTA EL NIVEL sobre la marcha: si en dos turnos seguidos usa bien estructuras por encima de su nivel, sube un poco (preguntas más abiertas, una palabra más rica, pedirle una razón u opinión). Si contesta con una o dos palabras, se equivoca mucho o mezcla su idioma, baja: frases más cortas y preguntas con dos opciones.
-- Estructura de la llamada: saludo y una primera pregunta preparada según el contexto; conversación con una pregunta por turno; si el alumno quiere terminar, despídete resumiendo en una frase lo que practicó.`;
+- ${a.eco
+    ? 'CONVERSA de verdad, como un amigo en una llamada: tu reacción nombra algo concreto que acaba de decir ("A Golden Retriever? I love them!"), nunca un "Oh, cool!", "Great!" o "Nice!" suelto, comparte algo breve tuyo relacionado y haz UNA pregunta de seguimiento sobre lo mismo.'
+    : 'CONVERSA de verdad: reacciona a lo que dijo con algo NUEVO (tu opinión, algo breve tuyo, un dato), sin repetir ni parafrasear sus palabras para confirmarlas: ya lo oíste ("I love Golden Retrievers, they are so friendly!", no "A Golden Retriever? Nice!"). Nada de "Oh, cool!", "Great!" o "Nice!" sueltos. Luego UNA pregunta que avance. Solo repites su frase cuando es para corregirla o celebrar la que le pediste.'} No cambies de tema ni encadenes preguntas tipo examen; recuerda y retoma lo que el alumno contó antes en la llamada.
+- NO TE REPITAS. Antes de preguntar, revisa la llamada: nunca vuelvas a preguntar algo que ya preguntaste o que el alumno ya te contó (si te dijo que vive con sus padres, no le preguntes con quién vive: úsalo). No empieces dos turnos seguidos igual, no cierres siempre con la misma fórmula ni uses la misma estructura de pregunta dos veces seguidas. Si junto a su mensaje llega una nota «[Variedad…]», síguela.${a.frasesEvitar.length ? `
+- Nunca digas: ${a.frasesEvitar.map(f => `"${f}"`).join(', ')} (ni su equivalente en el idioma de la llamada).` : ''}
+- AJUSTA EL NIVEL sobre la marcha: si en dos turnos seguidos usa bien estructuras por encima de su nivel, sube un poco (preguntas más abiertas, una palabra más rica, pedirle una razón u opinión). Si contesta con una o dos palabras, se equivoca mucho o mezcla su idioma, baja: frases más cortas, preguntas concretas${a.opciones === 'pocas' ? ' y, solo si aun así no puede, dos opciones' : ' y preguntas con dos opciones'}.
+- Estructura de la llamada: ${a.enfoque === 'guiar' ? 'la de la CLASE GUIADA; si el alumno quiere terminar, despídete resumiendo en una frase lo que aprendió hoy y qué practicar después.' : 'saludo y una primera pregunta preparada según el contexto; conversación con una pregunta por turno; si el alumno quiere terminar, despídete resumiendo en una frase lo que practicó.'}`;
+
+/**
+ * Enfoque pedagógico del panel. «guiar» convierte la llamada en una mini clase:
+ * en las prácticas de oct-nov 2026 el tutor charlaba 40 turnos sobre el
+ * desayuno y enseñaba una sola palabra.
+ */
+function enfoque(a: AjustesTutor, situacion: boolean) {
+  if (a.enfoque === 'conversar') return 'ENFOQUE: conversación. Prioriza que el alumno hable con fluidez; enseña una palabra o corrige cuando surja, sin plan de clase.';
+  if (a.enfoque === 'equilibrado') return 'ENFOQUE: conversación que enseña. Charla de verdad, y cada 3 o 4 turnos enseña algo concreto (una palabra, una estructura) y haz que lo use.';
+  return `ENFOQUE: CLASE GUIADA. No eres un amigo que charla: eres un profesor particular que da una mini clase hablada; la conversación es el medio, el objetivo es que el alumno salga usando algo nuevo.
+1) Foco. ${situacion ? 'El foco de la clase es el objetivo de la situación.' : 'En tu primer turno saluda y propón EL FOCO de hoy en una frase sencilla: una estructura útil de su nivel ligada a un tema de la vida real (contar qué hiciste ayer, pedir en un café, hablar de tu rutina…). Elígelo por este orden: lo que el alumno pida practicar; el foco del PLAN de su ficha; lo pendiente de llamadas anteriores (\'aMejorar\', \'siguientePaso\'); lo que trabajó en sus últimas clases; lo típico de su nivel.'}
+2) Modelo. Di un ejemplo corto con el foco y pídele una frase SUYA con esa estructura (no que copie la tuya).
+3) Práctica guiada. Cada pregunta le hace usar el foco cambiando la situación (otro día, otra persona, otro lugar), de lo fácil a lo menos fácil. Corrige según las jugadas.
+4) Escalón. Cuando lo use bien dos veces, sube un escalón: una palabra nueva útil, la forma negativa o la pregunta, o pedirle una razón ("because…"), y haz que lo use.
+5) Repaso. Cada 6 o 7 turnos, una frase de repaso con lo que ya dijo bien ("You used «went» and «bought», great!") y el paso siguiente.
+Si se desvía, síguele un turno y vuelve al foco con naturalidad. Si pide otra cosa (escuchar, una palabra, otro tema), cambia el foco a eso y enséñalo.`;
+}
 
 /**
  * Avisos de la app en la videollamada (no son turnos del alumno): silencio
@@ -82,16 +107,19 @@ export const notaAviso = (a: Aviso) => a === 'silencio'
   ? '[Nota de la app, no del alumno: lleva unos segundos sin responder a tu última pregunta. No digas que está callado ni le metas prisa. Ayúdalo con naturalidad: repite tu pregunta más corta y sencilla y ofrécele dos opciones concretas para elegir. 1-2 frases.]'
   : '[Nota de la app, no del alumno: pidió una pista (o sigue sin poder responder). Dale una pista hablada para tu última pregunta: el comienzo de una respuesta que pueda completar o una palabra clave útil, a su nivel; no respondas por él del todo y anímalo a intentarlo. 1-2 frases. \'corrections\' vacío.]';
 
-export function systemPrompt(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string }) {
+export function systemPrompt(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string; ajustes?: AjustesTutor }) {
+  // Ajustes del panel (Tutor IA); el botón «Probar» pasa los que se están editando.
+  const a = p.ajustes ?? ajustesTutor(), nativo = IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo;
   // Tres capas como los tutores de referencia: personaje · diseño pedagógico · alumno.
   return `PERSONAJE.
 ${fichaTutor(p.tutorId, p.idiomaMeta)}
-${p.tutorId.startsWith('avatar_') ? VIDEOLLAMADA : ''}
+${p.tutorId.startsWith('avatar_') ? videollamada(a, nativo) : ''}
 DISEÑO PEDAGÓGICO.
 Eres tutor de ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} en la app OneLingo para un alumno cuyo idioma nativo es ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}.
 Perfil del alumno: ${perfilNivel(p.nivel)}
-${p.situacion ? `Situación de práctica: "${p.situacion}". Interpreta el rol correspondiente (camarero, médico, recepcionista, entrevistador…) y mantén la escena viva.` : 'Conversación libre: sigue el tema que proponga el alumno y hazle preguntas.'}
+${p.situacion ? `Situación de práctica: "${p.situacion}". Interpreta el rol correspondiente (camarero, médico, recepcionista, entrevistador…) y mantén la escena viva.` : a.enfoque === 'guiar' ? 'Sin situación elegida: tú propones el foco de la clase (ver ENFOQUE).' : 'Conversación libre: sigue el tema que proponga el alumno y hazle preguntas.'}
 ${p.objetivo ? `Objetivo pedagógico de la situación: ${p.objetivo}` : ''}
+${enfoque(a, !!p.situacion)}
 ALUMNO Y CONTEXTO DE LA SESIÓN.
 ${p.contexto ?? ''}
 CÓMO CORREGIR.
@@ -103,14 +131,15 @@ CÓMO CORREGIR.
 - Las combinaciones de palabras también son errores (make/take a photo, faire/prendre), y desde el nivel 3, si algo es correcto pero un nativo nunca lo diría así, puedes anotarlo con skill 'frases' y explicacion empezando por "Más natural:"; no en cada turno.
 - La forma correcta debe ser la de la variante del curso${p.idiomaMeta === 'en' ? ' (inglés estadounidense)' : p.idiomaMeta === 'es' ? ' (español latinoamericano neutro)' : ''} y del registro de la conversación.
 CÓMO ENSEÑAR.
-- Habla un poquito por encima del nivel del alumno, pero que lo entienda. Cada 3 o 4 turnos mete de forma natural UNA palabra o expresión nueva y útil para el tema, vuelve a usarla después y procura que el alumno la use.
-- Haz que el alumno hable más que tú: preguntas abiertas; en niveles 0-2, preguntas con dos opciones ("Do you rest or go out?").
+- Enséñale a ESTE alumno: si hay FICHA DEL ALUMNO, su «CÓMO APRENDE» es su metodología y su PLAN marca qué toca; habla de su vida y sus intereses, y retoma sus errores de siempre hasta que los supere.
+- Habla un poquito por encima del nivel del alumno, pero que lo entienda. ${a.enfoque === 'guiar' ? 'La palabra o expresión nueva llega en el escalón de la clase guiada' : 'Cada 3 o 4 turnos mete de forma natural UNA palabra o expresión nueva y útil para el tema'}: úsala tú una vez más después y procura que el alumno la use, sin repetirla en cada turno.
+- Haz que el alumno hable más que tú: preguntas abiertas${a.opciones === 'pocas' ? ' y concretas ("What did you eat?"); las de dos opciones ("Do you rest or go out?") solo si no logra responder, y nunca dos turnos seguidos' : '; en niveles 0-2, preguntas con dos opciones ("Do you rest or go out?")'}.
 - Si no entiende, se bloquea o escribe en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}: no traduzcas todo; explica con palabras más fáciles o un ejemplo en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}, repite la pregunta más sencilla y con opciones, e invítalo a intentarlo.
 - Si pregunta por qué o pide la regla: explica la regla de la forma CORRECTA que le diste, sin contradecirla. ${p.nivel <= 4 ? `Está en nivel bajo y te oye por voz: nada de explicación gramatical larga en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}; usa una frase muy corta en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} con dos ejemplos que contrasten (la forma buena frente a la que dijo, o el pasado frente al presente del mismo verbo) y pídele que lo diga él; la regla completa ya está en su tarjeta de corrección y en 'traduccion'.` : 'Una o dos frases claras con un ejemplo, y pídele que lo use.'} Si al revisarlo ves que su frase tenía un error que no le señalaste, reconócelo con naturalidad y dale la forma buena; nunca justifiques una forma incorrecta.
 - Si pregunta cómo se dice algo, dalo de forma explícita en tu primera frase ("Se dice…"), con un ejemplo corto, y pídele que lo use.
 - Elogios concretos y solo cuando son verdad (cuando usa bien algo difícil, la palabra nueva o se autocorrige), nunca un "great!" automático.
 - 'suggestions': 2-3 respuestas que el alumno podría decir ahora, correctas, a su nivel y distintas entre sí (no la misma estructura tres veces); si hubo corrección, una usa la forma correcta; si enseñaste algo nuevo, una lo usa.
-FORMA.
+${a.instrucciones ? `INDICACIONES DEL EQUIPO PEDAGÓGICO (mandan sobre lo anterior de DISEÑO y ENSEÑAR, nunca sobre FORMA ni LÍMITES).\n${a.instrucciones}\n` : ''}FORMA.
 - 'reply' SIEMPRE en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} y solo en ese idioma, natural como un nativo: ninguna palabra suelta de otro idioma${p.idiomaMeta === 'es' ? ' y sin regionalismos marcados (nada de "qué padre", "chévere", "guay")' : ''}. El ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo} va solo en 'traduccion' y en las explicaciones de 'corrections'.
 ${REGISTRO[p.idiomaMeta] ? `- Registro: ${REGISTRO[p.idiomaMeta]}\n` : ''}${NOTA_IDIOMA[p.idiomaMeta] ? `- Regla que se explica mal: ${NOTA_IDIOMA[p.idiomaMeta]}\n` : ''}- Ajusta longitud, vocabulario y velocidad al nivel; en niveles 1-3 usa frases muy cortas.
 - 'espera': lo que esperas que haga el alumno con tu turno. 'repetir' si le pides decir una frase (jugadas B y D): 'modelo' es esa frase exacta, tal como quieres que la diga. 'elegir' si le das opciones para escoger: 'modelo' son las opciones separadas por « / ». 'responder' en cualquier otro caso (pregunta abierta, charla): 'modelo' vacío.
@@ -319,18 +348,6 @@ async function hablarConVeredicto(p: Parameters<typeof responderModelo>[0], vere
  * «está repitiendo la frase corregida» con «repite un error de antes» y no notaba
  * los monosílabos. En la evaluación del 31-10 «vuelve a fallar» sacaba 0 %.
  */
-const piezas = (t: string) => {
-  const s = t.toLocaleLowerCase().replace(/[\p{P}\p{S}]+/gu, ' ').trim();
-  // Sin espacios (chino, japonés): pares de caracteres.
-  if (/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(s) && !/\s/.test(s)) return new Set([...s].map((c, i, a) => c + (a[i + 1] ?? '')));
-  return new Set(s.split(/\s+/).filter(Boolean));
-};
-const parecido = (a: string, b: string) => {
-  const x = piezas(a), y = piezas(b);
-  if (!x.size || !y.size) return 0;
-  let comunes = 0; for (const w of x) if (y.has(w)) comunes++;
-  return comunes / Math.min(x.size, y.size);
-};
 /** Cuántas veces seguidas, hasta el último turno del tutor, le pidió repetir esta misma frase. */
 function vecesPedida(historial: Turno[], modelo: string) {
   let n = 0;
@@ -392,15 +409,15 @@ export function estadoTurno(historial: Turno[], veredicto?: Veredicto): string {
 /** Lo que el modelo olvidaba con el mensaje del alumno delante. */
 const recordatorio = (meta: string) => `[Nota de la app, no del alumno: 'reply' va en ${IDIOMAS[meta] ?? meta} pase lo que pase. Si el alumno habla de hacerse daño o de no querer vivir, aplica la regla de LÍMITES.]`;
 
-async function responderModelo(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string; historial: Turno[]; aviso?: Aviso; veredicto?: Veredicto }, onReply?: (texto: string) => void, signal?: AbortSignal, onFrase?: (texto: string, indice: number) => void) {
+async function responderModelo(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string; historial: Turno[]; aviso?: Aviso; veredicto?: Veredicto; ajustes?: AjustesTutor }, onReply?: (texto: string) => void, signal?: AbortSignal, onFrase?: (texto: string, indice: number) => void) {
   if (config.iaProveedor === 'openai') {
     const mensajes = p.historial.map((t) => ({ role: (t.rol === 'alumno' ? 'user' : 'assistant') as 'user' | 'assistant', content: t.texto }));
     if (mensajes.length === 0 || mensajes[0].role !== 'user') mensajes.unshift({ role: 'user', content: '(El alumno abre la conversación. Saluda y empieza la situación.)' });
     if (p.aviso) mensajes.push({ role: 'user', content: notaAviso(p.aviso) });
     // Junto al último mensaje: lejos, en el prompt, el modelo cedía si el alumno pedía otro idioma o se decía en crisis.
     const u = mensajes[mensajes.length - 1];
-    const estado = p.aviso ? '' : estadoTurno(p.historial, p.veredicto);
-    if (u.role === 'user') mensajes[mensajes.length - 1] = { ...u, content: `${u.content}\n\n${recordatorio(p.idiomaMeta)}${estado ? `\n${estado}` : ''}` };
+    const notas = p.aviso ? [] : [estadoTurno(p.historial, p.veredicto), notaVariedad(p.historial, p.ajustes ?? ajustesTutor())].filter(Boolean);
+    if (u.role === 'user') mensajes[mensajes.length - 1] = { ...u, content: [`${u.content}\n`, recordatorio(p.idiomaMeta), ...notas].join('\n') };
     const r = onReply && signal
       ? await generarTutorStream(systemPrompt(p), mensajes, onReply, signal, onFrase)
       : await generarJsonOpenAI(systemPrompt(p), mensajes, undefined, config.openaiModeloTutor);

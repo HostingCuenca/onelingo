@@ -7,6 +7,7 @@ import { iaDisponible, responder, resumirSesion } from '../lib/ia.js';
 import { openaiDisponible, transcribirOpenAI } from '../lib/ia_openai.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { requierePractica } from '../lib/pagos/suscripciones.js';
+import { actualizarFicha } from '../lib/ficha_alumno.js';
 import { obtenerAudioAlineado, vozDisponible } from '../lib/voz.js';
 
 const EsquemaChat = z.object({
@@ -38,6 +39,8 @@ async function guardarTurno(s: Sesion, d: DatosChat, r: Awaited<ReturnType<typeo
   await query('INSERT INTO conversaciones (usuario_id, situacion_id, nivel, idioma, tutor_id, mensaje_alumno, respuesta, modelo, tokens_entrada, tokens_salida) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
     [s.sub, d.situacionId ?? null, d.nivel, d.idiomaMeta, d.tutorId, ultimo, JSON.stringify(r.respuesta), r.modelo, r.entrada, r.salida]);
   await query('UPDATE usuarios SET ultima_actividad = now() WHERE id = $1', [s.sub]);
+  // Cada pocos turnos el tutor pone al día lo que sabe del alumno, sin hacerle esperar.
+  void actualizarFicha(s.sub, d.idiomaMeta, d.idiomaNativo, d.nivel).catch((e) => console.warn('ficha:', String(e).slice(0, 200)));
 }
 
 /**
@@ -124,6 +127,8 @@ export default async function rutas(app: FastifyInstance) {
     try {
       const r = await resumirSesion(d);
       await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1, $2, $3)', [s.sub, 'resumen_tutor', JSON.stringify({ idioma: d.idiomaMeta, tutorId: d.tutorId, nivel: d.nivel, turnos: d.historial.filter(t => t.rol === 'alumno').length, ...r })]);
+      // Al colgar, la ficha recoge la llamada entera aunque fuera corta.
+      void actualizarFicha(s.sub, d.idiomaMeta, d.idiomaNativo, d.nivel, 1).catch((e) => req.log.warn({ err: String(e) }, 'ficha'));
       return r;
     } catch (e) {
       req.log.error({ err: String(e) }, 'chat_resumen');

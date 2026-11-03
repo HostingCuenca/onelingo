@@ -30,6 +30,12 @@ y reiniciar el backend; la app no cambia.
   Hoy la app usa el reconocimiento del sistema (speech_to_text); este endpoint queda
   listo para cuando se grabe audio en el dispositivo (mejor precisión en chino/japonés/coreano).
 
+### Ajustes del tutor (Panel → Tutor IA) y ficha del alumno
+
+- **Ajustes** (`lib/ajustes_tutor.ts`, tabla `ajustes_tutor`, versionados): enfoque (clase guiada, conversación que enseña o conversación libre), preguntas de dos opciones (pocas o normal), eco (repetir lo que dijo el alumno), pedir repetir tras corregir, frases prohibidas e indicaciones extra. Se aplican desde el turno siguiente sin desplegar; «Probar» responde con el borrador y con lo guardado para comparar, opcionalmente como un alumno con ficha.
+- **No repetirse** (`lib/variedad.ts`): en cada turno la app le pasa al tutor, junto al mensaje del alumno, las preguntas que ya hizo, cómo empezaron sus últimos turnos y si hizo eco o encadenó preguntas «¿X o Y?». Las mismas medidas salen en Panel → Conversaciones IA por llamada.
+- **Ficha del alumno** (`lib/ficha_alumno.ts`, tabla `ficha_alumno`, una por alumno e idioma): quién es, intereses, objetivo, cómo habla, qué domina, errores que repite, **cómo aprende** (su metodología, en forma de instrucciones al tutor) y **plan** (foco actual, criterio de logro, siguientes). Se rehace en segundo plano cada 6 turnos nuevos del alumno y al colgar, con las conversaciones nuevas; va en el contexto de **cada** turno (antes los hechos de llamadas anteriores solo llegaban al primer turno). Sin ficha, el tutor lo conoce en los primeros turnos. Se ve y se puede actualizar en el detalle del alumno del panel.
+
 Cambiar de proveedor: `IA_PROVEEDOR=gemini` o `claude` (con `ANTHROPIC_API_KEY`).
 
 ## 2. Ejercicios (Gemini)

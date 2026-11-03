@@ -106,6 +106,38 @@ function Suscripcion({ id, s, alCambiar }: { id: string; s: any; alCambiar: () =
   )
 }
 
+/** Lo que el tutor IA sabe del alumno en cada idioma: su ficha de profesor particular. */
+function FichasTutor({ id, idiomaMeta }: { id: string; idiomaMeta: string }) {
+  const [fichas, setFichas] = useState<{ idioma: string; datos: any; actualizado_en: string }[] | null>(null)
+  const [msg, setMsg] = useState(''); const [ocupado, setOcupado] = useState(false)
+  const cargar = () => api(`/admin/usuarios/${id}/fichas`).then(setFichas).catch((x) => setMsg(x.message))
+  useEffect(() => { cargar() }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
+  const actualizar = async (idioma: string) => {
+    setOcupado(true); setMsg('')
+    try { await api(`/admin/usuarios/${id}/fichas/${idioma}`, { metodo: 'POST' }); await cargar(); setMsg('Ficha actualizada con sus últimas conversaciones.') }
+    catch (x: any) { setMsg(x.message) } finally { setOcupado(false) }
+  }
+  const linea = (t: string, v?: string | string[]) => (Array.isArray(v) ? v.length > 0 : !!v) && <p style={{ margin: '4px 0' }}><b>{t}:</b> {Array.isArray(v) ? v.join(' · ') : v}</p>
+  return (
+    <div className="tarjeta"><h2>Lo que el tutor sabe de este alumno</h2>
+      <p className="muted pie-nota" style={{ marginTop: -4 }}>Se actualiza sola cada pocos turnos y al colgar la llamada. El tutor la usa en cada turno para no repetir preguntas y enseñarle según su plan y su forma de aprender.</p>
+      {fichas?.length === 0 && <p className="muted">Todavía no hay ficha: se crea tras sus primeras conversaciones con el tutor.</p>}
+      {fichas?.map((f) => <div key={f.idioma} className="bloque-err">
+        <p style={{ margin: '0 0 6px' }}><span className="pill">{IDIOMAS[f.idioma] ?? f.idioma}</span> <span className="muted">actualizada {hace(f.actualizado_en)}</span></p>
+        {linea('Quién es', f.datos.sobreMi)}{linea('Le interesa', f.datos.intereses)}{linea('Para qué aprende', f.datos.objetivo)}{linea('Cómo habla hoy', f.datos.comoHabla)}{linea('Ya domina', f.datos.domina)}
+        {f.datos.errores?.length > 0 && <div style={{ margin: '6px 0' }}><b>Errores que repite:</b>{f.datos.errores.map((x: any, i: number) => <div key={i} className="errcard" style={{ margin: '4px 0' }}>{x.patron} · {x.veces} veces<br /><s>{x.ejemplo}</s> → <b>{x.correcto}</b></div>)}</div>}
+        {linea('Cómo aprende (su metodología)', f.datos.comoAprende)}
+        {f.datos.plan?.foco && <p style={{ margin: '4px 0' }}><b>Plan:</b> {f.datos.plan.foco} <span className="muted">— {f.datos.plan.porque}. Logrado cuando {f.datos.plan.avance}. Después: {(f.datos.plan.siguientes ?? []).join(' → ') || '—'}</span></p>}
+        {linea('Quedó pendiente', f.datos.pendiente)}
+      </div>)}
+      <div className="acciones" style={{ marginTop: 10 }}>
+        {[...new Set([idiomaMeta, ...(fichas ?? []).map((f) => f.idioma)])].filter(Boolean).map((i) => <button key={i} className="sec chico" style={{ marginLeft: 0 }} disabled={ocupado} onClick={() => actualizar(i)}>{ocupado ? 'Actualizando…' : `Actualizar ahora (${IDIOMAS[i] ?? i})`}</button>)}
+        {msg && <span className={msg.startsWith('Ficha') ? 'ok-texto' : 'muted'}>{msg}</span>}
+      </div>
+    </div>
+  )
+}
+
 export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id: string; volver: () => void; desde?: 'usuarios' | 'suscripciones' | 'reportes' }) {
   const [d, setD] = useState<any>(null)
   const [err, setErr] = useState('')
@@ -157,6 +189,7 @@ export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id:
           {d.empezadas.length > 0 && <><h2 style={{ marginTop: 14 }}>Empezadas sin terminar</h2>
             <table><tbody>{d.empezadas.map((c: any) => <tr key={c.unidad}><td><b>{c.titulo || c.unidad}</b> <span className="muted mono">{c.unidad}</span></td><td className="num">{fecha(c.fecha)}</td></tr>)}</tbody></table></>}
         </div>
+        <FichasTutor id={id} idiomaMeta={u.idioma_meta} />
         <div className="tarjeta"><h2>Conversaciones con el tutor</h2>
           <table><tbody>{d.conversaciones.map((c: any) => <tr key={c.id}><td><span className="muted">{IDIOMAS[c.idioma] ?? c.idioma} · N{c.nivel}{c.situacion_id ? ` · situación ${c.situacion_id}` : ''}</span><br />{c.mensaje_alumno}<br /><span className="muted">↳ {c.respuesta}</span></td><td className="num" style={{ width: 110 }}>{fecha(c.fecha)}<br /><span className="muted">{c.tokens_entrada + c.tokens_salida} tokens</span></td></tr>)}</tbody></table>
           {d.conversaciones.length === 0 && <p className="muted">Sin conversaciones.</p>}

@@ -65,7 +65,9 @@ test('authoritative objective, authenticated history scope and no provider call 
     assert.match(systemPrompt({idiomaMeta: 'en', idiomaNativo: 'es', nivel: 5, tutorId: 'mia', contexto: context}), /TURNOS ANTERIORES/);
     calls.length = 0;
     await contextoSituacion('student-a', {idiomaMeta:'en', situacionId: 1, historial: [{rol:'alumno'}, {rol:'alumno'}]});
-    assert.equal(calls.length, 1, 'do not reload past conversations each turn');
+    // Las conversaciones pasadas no se recargan en cada turno; lo que sabe del alumno (ficha y hechos) sí.
+    assert.ok(!calls.some(c => /FROM conversaciones/.test(c.sql)), 'do not reload past conversations each turn');
+    assert.ok(calls.some(c => /FROM ficha_alumno/.test(c.sql)) && calls.some(c => /resumen_tutor/.test(c.sql)), 'the learner profile reaches every turn');
     await assert.rejects(contextoSituacion('student-a', {idiomaMeta:'en', situacionId:1, objetivoId:'s2-o1', historial:[]}), /objetivo_invalido/);
   } finally { pool.query = original; }
 });

@@ -157,6 +157,12 @@ En Android la app **no usa Stripe**: compra con Google Play Billing (`in_app_pur
 
 **Panel**: Suscripciones muestra el origen «Google Play» con el número de pedido (`GPA.…`, se puede buscar), el filtro «Pagadas en Google Play» y el KPI «Activas (Google Play)»; su MRR suma al total (importe que informa Google, en su moneda).
 
+## Tutor IA y Conversaciones IA
+
+- **Tutor IA**: cómo enseña el tutor (enfoque, preguntas de dos opciones, eco, pedir repetir, frases prohibidas, indicaciones extra), con «Probar un turno» (compara borrador y guardado; puede responder como un alumno con ficha) e historial de versiones con «Cargar». Rutas: `GET/PUT /admin/tutor`, `POST /admin/tutor/probar`, `GET /admin/fichas`.
+- **Conversaciones IA**: los turnos agrupados por llamada (mismo alumno y tutor, sin pausas de más de 20 min) con preguntas repetidas, eco, misma apertura, muletillas y porcentaje de «¿X o Y?»; al tocar una llamada se ve con las repeticiones marcadas. Ruta: `GET /admin/practicas?dias=N`. Una respuesta que el alumno interrumpió se descarta en la app pero queda guardada.
+- **Detalle del alumno → Lo que el tutor sabe de este alumno**: su ficha por idioma y «Actualizar ahora». Rutas: `GET /admin/usuarios/:id/fichas`, `POST /admin/usuarios/:id/fichas/:idioma`.
+
 ## Lo que la app aún no registra
 
 - **Clase aprobada como evento**: la ruta nueva solo sincroniza `practicas`; un evento `clase_aprobada` (unidad, aciertos, total) daría historial exacto en hora del servidor.

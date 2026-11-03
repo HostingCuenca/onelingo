@@ -405,3 +405,33 @@ Latencia en los mismos 24 escenarios:
 | v6, corrida 2 | 1453 / 1636 | 2610 / 3383 |
 
 La primera frase no espera al campo nuevo (va después de `reply`); la diferencia está dentro del ruido de la API. El final del JSON se alarga ~15 tokens.
+
+## Clase guiada, sin repetirse y ficha del alumno (03-11-2026)
+
+**Qué se vio en producción.** Del 20-10 al 03-11 hubo 232 turnos. En 11 llamadas de 6 turnos o más, el tutor:
+- **Volvió a hacer preguntas ya respondidas.** «Do you live in Denver or another city?» salió tres veces y el alumno se quejó: «Why do you repeat?».
+- **Repitió lo que el alumno acababa de decir** («Coffee, yes»).
+- **Abusó de las preguntas «¿X o Y?».** Fueron 30 de 42 turnos en una llamada de español.
+- **Casi no enseñó.** Hubo 40 turnos sobre el desayuno con una sola palabra nueva.
+- **Prometió explicar en español** cuando el alumno lo pidió, pero no lo hizo.
+
+**Cambios.**
+- **Ajustes desde el panel:** clase guiada por defecto, pocas preguntas de opciones y sin eco.
+- **Nota de variedad en cada turno:** preguntas ya hechas, aperturas, eco y opciones.
+- **Ficha del alumno:** el tutor la ve en cada turno y le dice qué metodología y plan seguir con ese alumno.
+- **Si pide explicaciones en su idioma,** el tutor le dice que la corrección le sale escrita en pantalla.
+
+**Resultado (sin juez).** En `resultados/v7-guiada.json`, 50 escenarios:
+- **Correcciones (E, X, V):** iguales. Corrige en voz alta, pide repetir y declara `repetir`.
+- **Eco:** baja. En S01 el tutor dice «I like homemade pizza too» en vez de «Pizza at home—nice».
+- **Foco de clase:** el modo guiado lo propone ya en el turno 2 o 3 (C04, C05, Q02).
+- **Latencia de la 1.ª frase,** en los 29 escenarios comunes:
+
+| Versión | p50 (ms) | p90 (ms) |
+|---|---|---|
+| v6 | 1453 | 1791 |
+| v7 | 1051 | 1503 |
+
+**Prueba local con «Probar».**
+- **Llamada de Denver:** ya no repite la pregunta.
+- **Apertura con la ficha de un alumno real de la base local:** abre con el foco de su plan (pasado simple). Sin ficha, el foco es genérico (rutina).

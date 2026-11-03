@@ -11,13 +11,14 @@ import Planes from './paginas/Planes'
 import Suscripciones from './paginas/Suscripciones'
 import Cotizaciones from './paginas/Cotizaciones'
 import ReportesIA from './paginas/ReportesIA'
+import TutorIA from './paginas/TutorIA'
 
 const LOGO = `${import.meta.env.BASE_URL}logo-panel.webp`
 
-type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string; desde?: 'usuarios' | 'suscripciones' | 'reportes' } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' } | { p: 'planes' } | { p: 'suscripciones' } | { p: 'cotizaciones' } | { p: 'reportes' }
+type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string; desde?: 'usuarios' | 'suscripciones' | 'reportes' } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' } | { p: 'planes' } | { p: 'suscripciones' } | { p: 'cotizaciones' } | { p: 'reportes' } | { p: 'tutor' }
 
 const TITULOS: Record<Ruta['p'], string> = {
-  resumen: 'Resumen', usuarios: 'Alumnos', usuario: 'Alumno', planes: 'Planes', suscripciones: 'Suscripciones', cotizaciones: 'Cotizaciones', reportes: 'Reportes IA',
+  resumen: 'Resumen', usuarios: 'Alumnos', usuario: 'Alumno', planes: 'Planes', suscripciones: 'Suscripciones', cotizaciones: 'Cotizaciones', reportes: 'Reportes IA', tutor: 'Tutor IA',
   conversaciones: 'Conversaciones IA', audios: 'Voz y audios', conexiones: 'Conexiones', correos: 'Correos',
 }
 
@@ -78,6 +79,7 @@ export default function App() {
         <a className={ruta.p === 'planes' ? 'activo' : ''} onClick={() => setRuta({ p: 'planes' })}>Planes</a>
         <a className={ruta.p === 'suscripciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'suscripciones' })}>Suscripciones</a>
         <a className={ruta.p === 'cotizaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'cotizaciones' })}>Cotizaciones</a>
+        <a className={ruta.p === 'tutor' ? 'activo' : ''} onClick={() => setRuta({ p: 'tutor' })}>Tutor IA</a>
         <a className={ruta.p === 'conversaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conversaciones' })}>Conversaciones IA</a>
         <a className={ruta.p === 'reportes' ? 'activo' : ''} onClick={() => setRuta({ p: 'reportes' })}>Reportes IA</a>
         <a className={ruta.p === 'audios' ? 'activo' : ''} onClick={() => setRuta({ p: 'audios' })}>Voz y audios</a>
@@ -94,6 +96,7 @@ export default function App() {
         {ruta.p === 'cotizaciones' && <Cotizaciones />}
         {ruta.p === 'correos' && <Correos />}
         {ruta.p === 'conversaciones' && <Conversaciones />}
+        {ruta.p === 'tutor' && <TutorIA />}
         {ruta.p === 'reportes' && <ReportesIA abrirAlumno={(id) => setRuta({ p: 'usuario', id, desde: 'reportes' })} />}
         {ruta.p === 'audios' && <Audios />}
         {ruta.p === 'conexiones' && <Conexiones />}
