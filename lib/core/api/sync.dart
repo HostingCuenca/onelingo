@@ -616,6 +616,31 @@ class Sync {
     }, auth: true);
   }
 
+  /// Envía ya el progreso pendiente, sin esperar el retardo: el servidor lo
+  /// necesita para emitir el certificado de un nivel recién superado.
+  Future<void> enviarAhora() async {
+    _debounce?.cancel();
+    for (var i = 0; _enviando && i < 40; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 250));
+    }
+    await _enviarPendiente();
+  }
+
+  /// Certificado del nivel [nivel] (`n1`–`n10`) de [idioma]: el servidor lo
+  /// emite la primera vez y después devuelve el mismo. Con [nombre] corrige el
+  /// nombre impreso. Null con [ultimoError] (`nivel_no_superado` si el
+  /// servidor aún no tiene ese progreso).
+  Future<Map<String, dynamic>?> certificado(
+    String idioma,
+    String nivel, {
+    String? nombre,
+  }) => _postConError('/certificados', {
+    'idioma': idioma,
+    'nivel': nivel,
+    'lengua': I18n.idioma.value == 'en' ? 'en' : 'es',
+    'nombre': ?nombre,
+  }, auth: true);
+
   /// Código del último error de [eliminarCuenta] (`cuenta_demo`,
   /// `cancelacion_fallida`…), para mostrar un mensaje claro.
   String? ultimoCodigo;

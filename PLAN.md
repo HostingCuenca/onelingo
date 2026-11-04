@@ -50,7 +50,8 @@ Objetivo: que un usuario haga el Nivel 1 completo con contenido de calidad y voz
 - [ ] Confirmar la lista de 10 idiomas con el cliente y generar contenido por idioma con el pipeline.
 - [ ] Interfaz de la app traducida a los idiomas nativos soportados (l10n).
 - [ ] Voces neuronales por idioma (ElevenLabs / Azure / Google) para los tutores.
-- [ ] Certificados por nivel, ranking/liga semanal, amigos (opcional, tipo Duolingo).
+- [x] Certificados por nivel (04-11-2026): al superar N1–N10 (todas las clases o la prueba del nivel) el alumno ve su certificado con su nombre; el servidor lo emite solo si el progreso sincronizado lo confirma y da una página pública `/certificado/<código>` para verificarlo, descargarlo en PDF (imprimir) y compartirlo. Fundamentos no lleva certificado. No presenta el MCER como certificación oficial.
+- [ ] Ranking/liga semanal, amigos (opcional, tipo Duolingo).
 
 ## Preguntas abiertas para el cliente (bloquean sprints 2-4)
 Ver `REQUERIMIENTOS.md` · "Preguntas abiertas": lista de idiomas, definición de la hora gratis, reintentos del examen, prueba de nivel vs. niveles anteriores, cambio de idiomas en el plan, pasarela de pago.

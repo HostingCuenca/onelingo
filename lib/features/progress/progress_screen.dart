@@ -500,6 +500,8 @@ class _FilaNivel extends StatelessWidget {
     return ListTile(
       dense: true,
       contentPadding: EdgeInsets.zero,
+      // Cada nivel superado tiene su certificado con el nombre del alumno.
+      onTap: superado ? () => context.push('/certificado/${nivel.id}') : null,
       leading: Icon(
         primera == null
             ? Icons.schedule_rounded
@@ -518,20 +520,40 @@ class _FilaNivel extends StatelessWidget {
         ProgressScreen._tituloNivel(nivel),
         style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
       ),
-      trailing: Text(
-        primera == null
-            ? tr('Próximamente')
-            : superado
-            ? tr('Superado')
-            : convalidado
-            ? tr('Convalidado')
-            : '$aprobadas/${unidades.length}',
-        style: TextStyle(
-          color: hecho ? OL.verde : OL.gris,
-          fontWeight: FontWeight.w700,
-          fontSize: 14,
-        ),
-      ),
+      trailing: superado
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  tr('Certificado'),
+                  style: const TextStyle(
+                    color: OL.morado,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                const Icon(
+                  Icons.workspace_premium_rounded,
+                  color: OL.morado,
+                  size: 20,
+                ),
+              ],
+            )
+          : Text(
+              primera == null
+                  ? tr('Próximamente')
+                  : superado
+                  ? tr('Superado')
+                  : convalidado
+                  ? tr('Convalidado')
+                  : '$aprobadas/${unidades.length}',
+              style: TextStyle(
+                color: hecho ? OL.verde : OL.gris,
+                fontWeight: FontWeight.w700,
+                fontSize: 14,
+              ),
+            ),
     );
   }
 }

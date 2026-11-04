@@ -26,6 +26,7 @@ import '../features/situations/situation_screen.dart';
 import '../features/course/level_screen.dart';
 import '../features/course/levels_screen.dart';
 import '../features/exam/exam_screen.dart';
+import '../features/progress/certificado_screen.dart';
 import '../features/exam/program_complete_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/lesson/lesson_player_screen.dart';
@@ -82,6 +83,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           estado: s.uri.queryParameters['estado'] ?? '',
           sessionId: s.uri.queryParameters['session_id'],
         ),
+      ),
+      // Certificado de un nivel superado (desde el perfil o al terminarlo).
+      GoRoute(
+        path: '/certificado/:nivel',
+        builder: (_, s) => CertificadoScreen(nivel: s.pathParameters['nivel']!),
       ),
       StatefulShellRoute.indexedStack(
         // Sin menú mientras la prueba de nivel es parte del registro: sus

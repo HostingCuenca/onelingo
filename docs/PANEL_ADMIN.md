@@ -163,6 +163,10 @@ En Android la app **no usa Stripe**: compra con Google Play Billing (`in_app_pur
 - **Conversaciones IA**: los turnos agrupados por llamada (mismo alumno y tutor, sin pausas de más de 20 min) con preguntas repetidas, eco, misma apertura, muletillas y porcentaje de «¿X o Y?»; al tocar una llamada se ve con las repeticiones marcadas. Ruta: `GET /admin/practicas?dias=N`. Una respuesta que el alumno interrumpió se descarta en la app pero queda guardada.
 - **Detalle del alumno → Lo que el tutor sabe de este alumno**: su ficha por idioma y «Actualizar ahora». Rutas: `GET /admin/usuarios/:id/fichas`, `POST /admin/usuarios/:id/fichas/:idioma`.
 
+## Certificados de nivel
+
+En el detalle de cada alumno, «Certificados de nivel» lista los que recibió: idioma y nivel, el nombre impreso (el alumno puede corregirlo desde la app; el código y la fecha no cambian), si lo logró con todas las clases o con la prueba del nivel, y el enlace a su página pública de verificación (`/certificado/<código>`, sin indexar en buscadores). Se emiten desde la app (`POST /certificados`) y solo si el progreso guardado en el servidor confirma el nivel superado.
+
 ## Lo que la app aún no registra
 
 - **Clase aprobada como evento**: la ruta nueva solo sincroniza `practicas`; un evento `clase_aprobada` (unidad, aciertos, total) daría historial exacto en hora del servidor.

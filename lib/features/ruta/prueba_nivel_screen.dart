@@ -10,6 +10,7 @@ import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/efectos.dart';
 import '../../core/state/providers.dart';
+import '../progress/certificado_screen.dart';
 import '../../shared/widgets/widgets.dart';
 import 'item_view.dart';
 import '../../shared/widgets/romanizacion.dart';
@@ -58,6 +59,12 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
     }
     final aprobada =
         aciertos >= aciertosPruebaNivel * items.length / preguntasPruebaNivel;
+    final anterior =
+        ref.read(progressProvider).practicas[ClaveRuta.pruebaNivel(
+              ruta.curso.idioma,
+              widget.nivel,
+            )]
+            as Map?;
     ref.read(progressProvider.notifier).registrarPractica(
       ClaveRuta.pruebaNivel(ruta.curso.idioma, widget.nivel),
       {
@@ -78,6 +85,10 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
               widget.nivel,
             ),
         'correcta': aprobada,
+        // Fecha del certificado: la del primer aprobado, no la del último intento.
+        'aprobadaEn':
+            anterior?['aprobadaEn'] ??
+            (aprobada ? DateTime.now().toIso8601String() : null),
       },
     );
     aprobada ? Efectos.completado() : Efectos.incorrecto();
@@ -321,6 +332,18 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
             ),
           ),
         ),
+        if (aprobada && conCertificado(widget.nivel))
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: OutlinedButton.icon(
+              onPressed: () => context.push('/certificado/${widget.nivel}'),
+              icon: const Icon(Icons.workspace_premium_rounded),
+              label: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                child: Text(tr('VER MI CERTIFICADO')),
+              ),
+            ),
+          ),
       ],
     );
   }

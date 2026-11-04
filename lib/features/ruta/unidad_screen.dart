@@ -16,6 +16,7 @@ import '../../core/elenco.dart';
 import '../../core/lexico/imagenes.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
+import '../progress/certificado_screen.dart';
 import '../../shared/widgets/widgets.dart';
 import '../../core/efectos.dart';
 import 'celebracion.dart';
@@ -1296,6 +1297,14 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
             }),
           ),
         ),
+      if (nivelNuevo && conCertificado(u.nivel)) ...[
+        const SizedBox(height: 8),
+        BotonPrincipal(
+          color: OL.naranja,
+          onPressed: () => context.push('/certificado/${u.nivel}'),
+          child: Text(tr('VER MI CERTIFICADO')),
+        ),
+      ],
       const SizedBox(height: 8),
       OutlinedButton(
         onPressed: () => nivelNuevo

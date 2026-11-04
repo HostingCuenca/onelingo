@@ -107,6 +107,25 @@ function Suscripcion({ id, s, alCambiar }: { id: string; s: any; alCambiar: () =
 }
 
 /** Lo que el tutor IA sabe del alumno en cada idioma: su ficha de profesor particular. */
+/** Certificados de nivel que recibió: cada enlace es la página pública de verificación. */
+function Certificados({ id }: { id: string }) {
+  const [c, setC] = useState<{ codigo: string; idioma: string; nivel: string; nombre: string; via: string; logradoEn: string | null; emitidoEn: string; url: string }[] | null>(null)
+  useEffect(() => { api<{ certificados: NonNullable<typeof c> }>(`/admin/usuarios/${id}/certificados`).then((r) => setC(r.certificados)).catch(() => setC([])) }, [id])
+  if (!c?.length) return null
+  return (
+    <div className="tarjeta"><h2>Certificados de nivel</h2>
+      <div className="desliza"><table>
+        <thead><tr><th>Idioma · nivel</th><th>Nombre impreso</th><th>Cómo lo logró</th><th>Fecha</th><th>Código</th></tr></thead>
+        <tbody>{c.map((x) => <tr key={x.codigo}>
+          <td>{IDIOMAS[x.idioma] ?? x.idioma} · N{x.nivel.slice(1)}</td><td>{x.nombre}</td>
+          <td>{x.via === 'prueba' ? 'Prueba del nivel' : 'Todas las clases'}</td><td>{fecha(x.logradoEn ?? x.emitidoEn)}</td>
+          <td><a href={x.url} target="_blank" rel="noreferrer" className="mono">{x.codigo}</a></td>
+        </tr>)}</tbody>
+      </table></div>
+    </div>
+  )
+}
+
 function FichasTutor({ id, idiomaMeta }: { id: string; idiomaMeta: string }) {
   const [fichas, setFichas] = useState<{ idioma: string; datos: any; actualizado_en: string }[] | null>(null)
   const [msg, setMsg] = useState(''); const [ocupado, setOcupado] = useState(false)
@@ -190,6 +209,7 @@ export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id:
             <table><tbody>{d.empezadas.map((c: any) => <tr key={c.unidad}><td><b>{c.titulo || c.unidad}</b> <span className="muted mono">{c.unidad}</span></td><td className="num">{fecha(c.fecha)}</td></tr>)}</tbody></table></>}
         </div>
         <FichasTutor id={id} idiomaMeta={u.idioma_meta} />
+        <Certificados id={id} />
         <div className="tarjeta"><h2>Conversaciones con el tutor</h2>
           <table><tbody>{d.conversaciones.map((c: any) => <tr key={c.id}><td><span className="muted">{IDIOMAS[c.idioma] ?? c.idioma} · N{c.nivel}{c.situacion_id ? ` · situación ${c.situacion_id}` : ''}</span><br />{c.mensaje_alumno}<br /><span className="muted">↳ {c.respuesta}</span></td><td className="num" style={{ width: 110 }}>{fecha(c.fecha)}<br /><span className="muted">{c.tokens_entrada + c.tokens_salida} tokens</span></td></tr>)}</tbody></table>
           {d.conversaciones.length === 0 && <p className="muted">Sin conversaciones.</p>}
