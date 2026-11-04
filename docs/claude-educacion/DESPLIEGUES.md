@@ -1160,3 +1160,28 @@ Sin `espera` se usa la heurística anterior. Evaluación en `docs/claude-educaci
 **Backup:** `backups/20261102-edu-83-espera/` (`web-anterior` con enlaces duros, `backend/src/lib/{ia.ts,ia_openai.ts}` y `backend/src/routes/chat.ts` previos, `env.sha`). Web retirada en `staging/20261102-edu-83-espera/web-retirada`.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261102-edu-83-espera; S=staging/20261102-edu-83-espera; mv web $S/web-post && mv $S/web-retirada web; cp -p $K/backend/src/lib/*.ts backend/src/lib/; cp -p $K/backend/src/routes/chat.ts backend/src/routes/; sudo -u onelingo -H pm2 restart onelingo-api'`.
+
+## Release: 20261104-edu-84-tutor-certificados
+
+Fecha: 2026-11-04 · Responsable: Claude (Claude Code), por pedido del usuario («si publica todo»). Backend (5 archivos modificados, 5 nuevos, migraciones 014–016) + panel + web + parche 3 de Shorebird. PM2 `onelingo-api` reiniciado (solo esa app). Sin cambios de `.env` (hash igual antes y después).
+
+**Contenido:**
+- `4c37c70`: Tutor IA. Panel → Tutor IA (ajustes del tutor guardados en la base, prueba en vivo), clase guiada en vez de charla libre, anti-repetición (`lib/variedad.ts`) y ficha de cada alumno (`lib/ficha_alumno.ts`) que el tutor usa para adaptar su método. Conversaciones del panel con filtros de prácticas. Migraciones `014_ajustes_tutor.sql` y `015_ficha_alumno.sql`.
+- `963c428`: certificado de cada nivel superado (N1–N10) con el nombre del alumno. `POST /certificados` solo emite si el progreso sincronizado confirma el nivel (clases completas o prueba aprobada); código `XXXXX-XXXXX` fijo por alumno, idioma y nivel; página pública `https://onelingo.org/api/certificado/<código>` (es/en, «Descargar PDF» por impresión, noindex). En la app: Progreso → nivel superado → certificado, y «VER MI CERTIFICADO» al terminar un nivel o aprobar su prueba. Panel → alumno → «Certificados». Migración `016_certificados.sql`.
+- `696f3cf`: el botón «COPIAR ENLACE» usa `Icons.public_rounded`, que ya trae la release 0.5.8; con `Icons.link_rounded` el parche cambiaba la fuente de iconos.
+
+**Pruebas:** backend 166/166 en local; en el VPS `tsc --noEmit` limpio y las pruebas nuevas pasan (la de situaciones necesita `assets/contenido`, que no está en el servidor; la carpeta `test/` copiada se retiró). Flutter 510 en verde (1 omitida).
+
+**Verificado en producción:** migraciones 014, 015 y 016 aplicadas con `npm run migrate`; tabla `certificados` creada (0 filas). `/api/salud` 200; `POST /api/certificados` sin sesión 401; `/api/certificado/XXXXX-YYYYY` 404; `/api/admin/tutor` sin sesión 401. `/`, `/main.dart.js` (sha256 `858763ea57c3c6cf…`), `/avatar/index.html`, `/descargas/version.json`, `/privacidad/` y `/panel/` en 200. `web/descargas` intacta. PM2 en línea sin errores. `.env` sin cambios. Lock liberado.
+
+**Web:** `flutter build web --release --dart-define=API_URL=https://onelingo.org/api` desde un worktree limpio de `963c428` en `~/.cache/onelingo-build/edu84`. Staging con enlaces duros y `rsync -rlc` encima; cambio con `mv`. (La web lleva el icono `link_rounded`; solo cambia el icono respecto del parche.)
+
+**Panel:** `npm ci && npm run build` en el mismo worktree; cambio con `mv`.
+
+**Parche 3 de Android** (sobre 0.5.8+2014, canal stable), desde `696f3cf`: `shorebird patch android --release-version=0.5.8+2014 --no-confirm --allow-asset-diffs -- --dart-define=API_URL=https://onelingo.org/api`. Tamaño: arm32 1,04 MB, arm64 1011 KB, x86_64 1017 KB. **Limitación:** `assets/i18n/en.json` no viaja en un parche; en Android, con la interfaz en inglés, los textos nuevos (tutor y certificado) se ven en español hasta la próxima release completa. En la web sí están traducidos.
+
+**Backup:** `backups/20261104-edu-84-tutor-certificados/` (`web-anterior` y `panel-anterior` con enlaces duros, `backend/src/{app.ts,server.ts,lib/ia.ts,lib/situaciones.ts,routes/chat.ts}` previos, `env.sha`, `onelingo-antes.dump`). Retirados en `staging/20261104-edu-84-tutor-certificados/{web-retirada,panel-retirado}`.
+
+**Rollback:**
+- **Backend, web y panel:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261104-edu-84-tutor-certificados; S=staging/20261104-edu-84-tutor-certificados; mv web $S/web-post && mv $S/web-retirada web; mv panel $S/panel-post && mv $S/panel-retirado panel; for f in src/app.ts src/server.ts src/lib/ia.ts src/lib/situaciones.ts src/routes/chat.ts; do cp -p $K/backend/$f backend/$f; done; rm backend/src/lib/{ajustes_tutor,ficha_alumno,variedad}.ts backend/src/routes/{certificados,tutor_ia}.ts; sudo -u onelingo -H pm2 restart onelingo-api'`. Las tablas de 014–016 pueden quedarse.
+- **Android:** `shorebird patches rollback --release-version=0.5.8+2014` vuelve al parche 2.
