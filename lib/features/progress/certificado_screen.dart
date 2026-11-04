@@ -279,7 +279,7 @@ class _CertificadoScreenState extends ConsumerState<CertificadoScreen> {
                       ),
                     );
                   },
-                  icon: const Icon(Icons.link_rounded),
+                  icon: const Icon(Icons.public_rounded),
                   label: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     child: Text(tr('COPIAR ENLACE')),
