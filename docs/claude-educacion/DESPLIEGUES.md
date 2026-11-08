@@ -1185,3 +1185,24 @@ Fecha: 2026-11-04 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Rollback:**
 - **Backend, web y panel:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261104-edu-84-tutor-certificados; S=staging/20261104-edu-84-tutor-certificados; mv web $S/web-post && mv $S/web-retirada web; mv panel $S/panel-post && mv $S/panel-retirado panel; for f in src/app.ts src/server.ts src/lib/ia.ts src/lib/situaciones.ts src/routes/chat.ts; do cp -p $K/backend/$f backend/$f; done; rm backend/src/lib/{ajustes_tutor,ficha_alumno,variedad}.ts backend/src/routes/{certificados,tutor_ia}.ts; sudo -u onelingo -H pm2 restart onelingo-api'`. Las tablas de 014–016 pueden quedarse.
 - **Android:** `shorebird patches rollback --release-version=0.5.8+2014` vuelve al parche 2.
+
+## Release: 20261107-edu-85-explica-idioma
+
+Fecha: 2026-11-07 · Responsable: Claude (Claude Code), por pedido del usuario («en produccion ajusta el avatar para que pueda corregir tambien en el idioma nativo de la app»). Backend (5 archivos modificados, 1 nuevo) + `web/avatar` (`index.html`, `practice.js?v=67`, `textos.js?v=2`), copiados directamente sin recompilar la web. PM2 `onelingo-api` reiniciado (solo esa app). Sin migraciones ni cambios de `.env` (hash igual). Sin parche de Android: la app carga la llamada desde `onelingo.org/avatar`.
+
+**Contenido (`3005330`):** en la videollamada, el tutor puede explicar en el idioma del alumno (el de la app, p. ej. español) o en el de la llamada.
+- Botón «Explica en…» junto al del tema: por defecto en el idioma del alumno hasta el nivel 5 y en el de la llamada desde el 6; la elección se recuerda por idioma (`localStorage onelingo.explica.<idioma>`). La página manda `explica: 'nativo' | 'meta'` en cada turno.
+- Prompt (`ia.ts`): en modo `nativo`, el porqué de la corrección, la regla, las pistas y las respuestas a «¿por qué?» van en el idioma del alumno entre corchetes; la reacción, la frase correcta y la pregunta, en el idioma de la llamada. Ejemplo de turno por idioma meta (`ejemploExplica`); en japonés, las palabras citadas dentro de la explicación van en kana (con `language_code` de español los kanji se leían como chino: «sin kimashita»). El recordatorio junto al mensaje del alumno repite la regla con el ejemplo. En modo `meta`, todo como antes, y si pide explicaciones en su idioma el tutor le señala el botón.
+- Servidor (`lib/explicaciones.ts`, `routes/chat.ts`): cada frase se separa por los corchetes (con estado entre frases); las partes del alumno salen como frases propias con `habla` en el evento `frase` y su voz se sintetiza con la misma voz del tutor y el `language_code` del alumno (`PeticionVoz.habla`, también en `/voz/stream` y `/voz/alineada`). Los corchetes no llegan al alumno ni se guardan. Protección: en un curso de escritura no latina, una frase entre corchetes escrita en esa escritura suena como idioma meta, y una frase latina sin corchetes, como idioma del alumno.
+- `frasesCompletas`: el corchete de cierre termina la frase, y unos puntos suspensivos dentro de comillas francesas («j’aime… ») ya no la cortan.
+- Página: cada frase se pide, suena y mueve la boca (visemas) con su idioma; «Repetir» y la reconexión repiten la respuesta por partes.
+
+**Pruebas:** backend 172/172 (6 nuevas en `test/explicaciones.test.ts`). Voz real: «Como fue ayer, se dice «went», no «go».» con voz inglesa y «…se dice «いきました», no «いく».» con voz japonesa, transcritas bien con Whisper. Tutor real con `gpt-5.6-luna` en ja, ko, zh, ru, de, fr y en (N1–N3): la explicación sale en español entre corchetes; inglés en modo `meta` sin cambios. Navegador local: el botón alterna «Explica en español / japonés», se recuerda, en inglés «Explains in Spanish», y a 375 px no desborda (los dos botones se apilan).
+
+**Verificado en producción:** `/api/salud`, `/`, `/avatar/index.html` (`practice.js?v=67`, botón `explica`), `/avatar/textos.js?v=2` en 200; `/api/voz/alineada` sin sesión 401; turno real del tutor ejecutado en el servidor con el código desplegado (ja y en, N2, modo `nativo`): «Como fue ayer, se dice «いきました», no «いく».» y «Como fue ayer, se dice «went», no «go».» como partes en español. PM2 en línea sin errores. `.env` sin cambios. Lock liberado.
+
+**Limitación:** el micrófono sigue transcribiendo en el idioma de la llamada: si el alumno pregunta en español, Whisper puede transcribirlo mal.
+
+**Backup:** `backups/20261107-edu-85-explica-idioma/` (los 8 archivos previos y `env.sha`).
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261107-edu-85-explica-idioma; for f in backend/src/lib/ia.ts backend/src/lib/ia_openai.ts backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/routes/voz.ts web/avatar/index.html web/avatar/practice.js web/avatar/textos.js; do cp -p $K/$f $f; done; rm backend/src/lib/explicaciones.ts; sudo -u onelingo -H pm2 restart onelingo-api'`.
