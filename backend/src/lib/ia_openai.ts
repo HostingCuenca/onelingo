@@ -132,14 +132,16 @@ const ABREVIATURAS = /(?:^|\s)(?:Mr|Mrs|Ms|Dr|St|Sr|Sra|Dra|etc|e\.g|i\.e|vs|p\.
  * Frases terminadas dentro de `texto`: se corta tras . ! ? … (o sus formas
  * CJK) seguidos de espacio u otro carácter, o al final si la cadena está
  * cerrada: a mitad del stream un 。 al final todavía puede llevar detrás su 」,
- * y 「…。」 dentro de una frase no la termina. Las frases muy cortas («Ok.») se unen a la
+ * y 「…。」 dentro de una frase no la termina. El corchete de una explicación en
+ * el idioma del alumno («…ayer.] 言って») cierra con la frase, y unos puntos
+ * suspensivos dentro de comillas francesas («j’aime… ») no la terminan. Las frases muy cortas («Ok.») se unen a la
  * siguiente para no fragmentar la voz; la primera admite una reacción breve
  * («Oh, nice!», «¡Qué bien!»), que es la que hace arrancar antes la voz.
  */
 export function frasesCompletas(texto: string, cerrado: boolean): string[] {
   const frases: string[] = [];
   let inicio = 0;
-  const re = /[.!?…。！？]+["'”’)」』）]*(?=\s)|[。！？]+(?=[^\s。！？”’)」』）])/g;
+  const re = /[.!?…。！？]+["'”’)」』）\]]*(?=\s+(?![»”」』])|\[)|[。！？]+(?=[^\s。！？”’)」』）\]])/g;
   for (let m; (m = re.exec(texto));) {
     const fin = m.index + m[0].length;
     const trozo = texto.slice(inicio, fin).trim();

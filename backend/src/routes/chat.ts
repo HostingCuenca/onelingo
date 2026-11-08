@@ -9,6 +9,7 @@ import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { requierePractica } from '../lib/pagos/suscripciones.js';
 import { actualizarFicha } from '../lib/ficha_alumno.js';
 import { obtenerAudioAlineado, vozDisponible } from '../lib/voz.js';
+import { separadorDeLenguas, sinCorchetes } from '../lib/explicaciones.js';
 
 const EsquemaChat = z.object({
   idiomaMeta: z.string().max(5), idiomaNativo: z.string().max(5).default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().max(40).default('mia'),
@@ -16,6 +17,8 @@ const EsquemaChat = z.object({
   objetivoId: z.string().max(24).optional(), modo: z.enum(['practica', 'prueba']).default('practica'),
   // Videollamada: silencio largo o botón «Pista» (no es un turno del alumno).
   aviso: z.enum(['silencio', 'pista']).optional(),
+  // Videollamada: el porqué de las correcciones y las pistas en el idioma del alumno o en el de la llamada.
+  explica: z.enum(['nativo', 'meta']).optional(),
   // Topes: sin ellos, el límite de 2 MB del cuerpo dejaba mandar prompts enormes.
   historial: z.array(z.object({
     rol: z.enum(['tutor', 'alumno']), texto: z.string().max(4000),
@@ -63,7 +66,7 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
   const heartbeat = setInterval(() => { if (!output.destroyed && !output.writableEnded) output.write(': keepalive\n\n'); }, 5000);
   const conVoz = (req.query as { voz?: string })?.voz === '1' && vozDisponible();
   const voces: Promise<void>[] = [];
-  let fraseAnterior = '';
+  let fraseAnterior: { texto: string; habla?: string } = { texto: '' };
   // La página sabe así que la voz vendrá en el stream (si no, la pide aparte sin esperar).
   if (conVoz) output.write(`data: ${JSON.stringify({ tipo: 'voz_activa', data: true })}\n\n`);
   void (async () => {
@@ -72,6 +75,10 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
       if (!d) { output.end(); return; }
       const contexto = await contextoSituacion(s.sub, d);
       const peticion = { ...d, contexto };
+      // Las explicaciones en el idioma del alumno llegan entre corchetes: cada
+      // parte es una frase propia (otra pronunciación) y el alumno no ve los corchetes.
+      const separar = separadorDeLenguas(peticion.idiomaMeta);
+      let partes = 0;
       let r: Awaited<ReturnType<typeof responder>> | undefined;
       for (let intento = 1; !r; intento++) {
         let emitido = false;
@@ -79,19 +86,23 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
           r = await responder(peticion, texto => {
             emitido = true;
             req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_reply_ready');
-            emit('reply', texto);
-          }, controller.signal, (texto, indice) => {
+            emit('reply', sinCorchetes(texto));
+          }, controller.signal, (frase) => {
             emitido = true;
-            if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_primera_frase');
-            emit('frase', { indice, texto });
-            if (conVoz && !controller.signal.aborted) {
-              const previo = fraseAnterior; fraseAnterior = texto;
-              voces.push(conTope(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined }, true), VOZ_TOPE_MS)
-                .then((a) => {
-                  if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started), cache: a.cache }, 'chat_primera_voz');
-                  emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion });
-                })
-                .catch((e) => { req.log.warn({ err: String(e) }, 'chat_voz'); emit('voz', { indice, error: true }); }));
+            for (const { texto, nativo } of separar(frase)) {
+              const indice = partes++, habla = nativo ? peticion.idiomaNativo : undefined;
+              if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_primera_frase');
+              emit('frase', { indice, texto, ...(habla ? { habla } : {}) });
+              if (conVoz && !controller.signal.aborted) {
+                // La frase anterior orienta la entonación solo si es del mismo idioma.
+                const previo = fraseAnterior.habla === habla ? fraseAnterior.texto : ''; fraseAnterior = { texto, habla };
+                voces.push(conTope(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined, habla }, true), VOZ_TOPE_MS)
+                  .then((a) => {
+                    if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started), cache: a.cache }, 'chat_primera_voz');
+                    emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion });
+                  })
+                  .catch((e) => { req.log.warn({ err: String(e) }, 'chat_voz'); emit('voz', { indice, error: true }); }));
+              }
             }
           }, (espera) => emit('espera', espera));
         } catch (e) {
@@ -99,6 +110,7 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
           req.log.warn({ err: String(e) }, 'chat_reintento');
         }
       }
+      r = { ...r, respuesta: { ...r.respuesta, reply: sinCorchetes(r.respuesta.reply) } };
       emit('final', r.respuesta);
       await Promise.all(voces);
       output.end();
@@ -180,6 +192,7 @@ export default async function rutas(app: FastifyInstance) {
     let r;
     try { r = await responder({ ...d, contexto }); }
     catch (e) { req.log.error({ err: String(e) }, 'ia'); return reply.code(502).send({ error: 'ia_error', detalle: String(e).slice(0, 200) }); }
+    r = { ...r, respuesta: { ...r.respuesta, reply: sinCorchetes(r.respuesta.reply) } };
     await guardarTurno(s, d, r);
     return r.respuesta;
   });

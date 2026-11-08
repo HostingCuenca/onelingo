@@ -7,7 +7,7 @@ import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
 import {createAvatarTH} from './avatar-th.js?v=14';
 import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
 import {abrirEscucha, esEco, vivoDisponible} from './vivo.js?v=5';
-import {t, nombreTema, traducirPagina} from './textos.js?v=1';
+import {t, nombreTema, traducirPagina} from './textos.js?v=2';
 
 const $ = id => document.getElementById(id), audio = $('audio');
 // Idioma de la interfaz (?ui=en|es, el de la app): antes de cargar nada.
@@ -20,6 +20,8 @@ const [roster, units] = await Promise.all([
 ]);
 
 let config = null, tutor = null, avatar = null, history = [], epoch = 0, selection = 0, busy = false, controller = null;
+// Partes de la última respuesta con su idioma (las explicaciones en el idioma del alumno suenan con su pronunciación).
+let ultimasPartes = {texto: '', partes: []};
 let lastReply = '', ultimoFallo = null, temaId = null, objetivoId = null, enLlamada = false, inicioLlamada = 0, reloj = null, correcciones = 0;
 // Voz: cada frase se descarga como MP3 (con su envolvente para la boca) y
 // suena en orden por un <audio> normal. Sin WebAudio: en iPhone, al abrir el
@@ -112,7 +114,37 @@ function controls() {
   $('send').disabled = !enLlamada || busy;
   $('tema').disabled = !!grab;
   document.body.classList.toggle('en-llamada', enLlamada);
+  pintarExplica();
 }
+
+// ---------- Idioma de las explicaciones ----------
+// El porqué de las correcciones, la regla y las pistas: en el idioma del alumno
+// (el tutor las dice en su idioma, con la misma voz) o en el de la llamada.
+// Por defecto en el suyo hasta el nivel 5; la elección se recuerda por idioma.
+const claveExplica = () => `onelingo.explica.${language()}`;
+function explica() {
+  if (!config || !config.idiomaNativo || config.idiomaNativo === language()) return 'meta';
+  try { const v = localStorage.getItem(claveExplica()); if (v === 'nativo' || v === 'meta') return v; } catch { /* sin almacenamiento */ }
+  return (config.nivel || 1) <= 5 ? 'nativo' : 'meta';
+}
+function pintarExplica() {
+  const b = $('explica'), propio = config?.idiomaNativo;
+  b.hidden = !config || !propio || propio === language();
+  if (b.hidden) return;
+  const idioma = explicaActual() === 'nativo' ? t(languages[propio] || propio) : languageName();
+  $('explicaNombre').textContent = t('Explica en {idioma}', {idioma});
+  b.setAttribute('aria-label', t('El tutor te explica en {idioma}. Toca para cambiar.', {idioma}));
+}
+$('explica').onclick = () => {
+  const nuevo = explicaActual() === 'nativo' ? 'meta' : 'nativo';
+  try { localStorage.setItem(claveExplica(), nuevo); } catch { /* solo esta sesión */ }
+  sesionExplica = nuevo; pintarExplica();
+  const idioma = nuevo === 'nativo' ? t(languages[config.idiomaNativo] || config.idiomaNativo) : languageName();
+  status(t('Desde la próxima respuesta, el tutor te explica en {idioma}.', {idioma}));
+};
+// Sin localStorage la elección dura lo que la página.
+let sesionExplica = null;
+const explicaActual = () => sesionExplica || explica();
 
 // ---------- Arranque e integración con la app ----------
 window.addEventListener('message', event => {
@@ -249,7 +281,7 @@ function iniciarLlamada() {
   vigilarConexion(epoch);
   setTimeout(calentarRellenos, 4000);
   if (cola.length) siguiente(epoch);
-  else if (respuestaCompleta && !busy) { if (lastReply) encolar(lastReply, epoch); else void requestTutor(null, true); }
+  else if (respuestaCompleta && !busy) { if (lastReply) decirUltima(epoch); else void requestTutor(null, true); }
 }
 $('llamar').onclick = iniciarLlamada;
 // En vivo se habla sin tocar la pantalla: si se apagaba, la página quedaba oculta y se cortaba la llamada.
@@ -271,7 +303,7 @@ function vigilarConexion(version, intento = 1) {
     }
     const saludo = !history.some(t => t.rol === 'alumno');
     stop(); phase(t('Conectando…'), 'thinking'); status(t('Reconectando con {nombre}…', {nombre: tutor.name}));
-    if (lastReply && saludo) encolar(lastReply, epoch); else void requestTutor(saludo ? null : {continuar: true}, saludo);
+    if (lastReply && saludo) decirUltima(epoch); else void requestTutor(saludo ? null : {continuar: true}, saludo);
     vigilarConexion(epoch, intento + 1);
   }, 7000);
 }
@@ -325,12 +357,12 @@ function senalVoz() { if (!vozController) vozController = new AbortController();
 // (rolDeVoz en backend/src/lib/voz.ts). Un texto largo lo divide el servidor
 // por frases. `previo` (la frase anterior de la misma respuesta) va como
 // previous_text: cada frase no empieza con entonación de inicio.
-function urlVoz(text, previo = '', ruta = '/voz/stream') {
+function urlVoz(text, previo = '', ruta = '/voz/stream', habla = '') {
   const url = new URL(config.api + ruta);
-  url.search = new URLSearchParams({texto: text, idioma: language(), voz: 'avatar_' + tutor.id, ...(previo ? {previo} : {})});
+  url.search = new URLSearchParams({texto: text, idioma: language(), voz: 'avatar_' + tutor.id, ...(previo ? {previo} : {}), ...(habla ? {habla} : {})});
   return url;
 }
-let fraseAnterior = {version: -1, texto: ''};
+let fraseAnterior = {version: -1, texto: '', habla: ''};
 // Voz que el servidor manda dentro de la respuesta (evento `voz`), por índice de frase.
 let vozEnLinea = null;
 let vozActiva = false; // el servidor confirmó que manda la voz en el stream
@@ -340,28 +372,34 @@ function vozDelStream(indice) {
   if (!item) { let ok; const p = new Promise(r => { ok = r; }); item = {p, ok}; vozEnLinea.set(indice, item); }
   return item;
 }
-const fraseAlineada = (d, text) => ({url: URL.createObjectURL(new Blob([Uint8Array.from(atob(d.audio), c => c.charCodeAt(0))], {type: 'audio/mpeg'})), env: null, texto: text,
-  linea: d.alineacion ? lineaDeVisemas(d.alineacion, language()) : null});
-function prepararFrase(text, version, indice) {
-  const previo = fraseAnterior.version === version ? fraseAnterior.texto : '';
-  fraseAnterior = {version, texto: text};
+const fraseAlineada = (d, text, habla) => ({url: URL.createObjectURL(new Blob([Uint8Array.from(atob(d.audio), c => c.charCodeAt(0))], {type: 'audio/mpeg'})), env: null, texto: text, habla,
+  linea: d.alineacion ? lineaDeVisemas(d.alineacion, habla || language()) : null});
+// `habla`: la frase es una explicación en el idioma del alumno (misma voz, su pronunciación).
+function prepararFrase(text, version, indice, habla = '') {
+  const previo = fraseAnterior.version === version && fraseAnterior.habla === habla ? fraseAnterior.texto : '';
+  fraseAnterior = {version, texto: text, habla};
   // Con visemas: el MP3 llega junto con el tiempo de cada letra.
   if (avatar?.alineado) {
-    const pedir = () => fetch(urlVoz(text, previo, '/voz/alineada'), {headers: headers(), signal: senalVoz()})
+    const pedir = () => fetch(urlVoz(text, previo, '/voz/alineada', habla), {headers: headers(), signal: senalVoz()})
       .then(r => { if (!r.ok) throw Error(t('La voz no está disponible ({estado}).', {estado: r.status})); return r.json(); });
     const delStream = vozDelStream(indice);
     // Si la voz no llega en el stream (servidor viejo o fallo), se pide aparte.
     const datos = delStream ? conLimite(delStream.p, 4000).then(d => d?.audio ? d : pedir()) : pedir();
-    return datos.then(d => fraseAlineada(d, text));
+    return datos.then(d => fraseAlineada(d, text, habla));
   }
-  return fetch(urlVoz(text, previo), {headers: headers(), signal: senalVoz()})
+  return fetch(urlVoz(text, previo, '/voz/stream', habla), {headers: headers(), signal: senalVoz()})
     .then(r => { if (!r.ok) throw Error(t('La voz no está disponible ({estado}).', {estado: r.status})); return r.arrayBuffer(); })
     .then(async bytes => ({url: URL.createObjectURL(new Blob([bytes], {type: 'audio/mpeg'})), env: await envolvente(bytes).catch(() => null)}));
 }
 // Cada frase se descarga en cuanto llega (en paralelo a la que suena). Antes
 // de contestar solo se descargan: suenan al empezar la llamada.
-function encolar(text, version, indice, esRelleno = false) {
-  const listo = prepararFrase(text, version, indice);
+// Vuelve a decir la última respuesta frase a frase, cada una en su idioma.
+function decirUltima(version) {
+  if (ultimasPartes.texto === lastReply && ultimasPartes.partes.length) for (const p of ultimasPartes.partes) encolar(p.texto, version, undefined, false, p.habla);
+  else encolar(lastReply, version);
+}
+function encolar(text, version, indice, esRelleno = false, habla = '') {
+  const listo = prepararFrase(text, version, indice, habla);
   listo.catch(() => {});
   cola.push({text, listo, relleno: esRelleno});
   if (enLlamada && !sonando) siguiente(version);
@@ -386,7 +424,7 @@ async function siguiente(version) {
     dichoReciente = `${itemActual && !itemActual.relleno ? itemActual.text : ''} ${item.text}`; itemActual = item;
     window.__marca?.('play'); audio.src = f.url;
     // Audio guardado antes de existir la alineación: tiempos repartidos por la duración.
-    if (f.texto && !f.linea) audio.addEventListener('loadedmetadata', () => { if (urlActual === f.url && isFinite(audio.duration)) lineaActual = lineaDeVisemas(alineacionEstimada(f.texto, audio.duration), language()); }, {once: true});
+    if (f.texto && !f.linea) audio.addEventListener('loadedmetadata', () => { if (urlActual === f.url && isFinite(audio.duration)) lineaActual = lineaDeVisemas(alineacionEstimada(f.texto, audio.duration), f.habla || language()); }, {once: true});
     await audio.play();
   } catch (e) {
     if (version !== epoch || vozController?.signal.aborted) return;
@@ -439,7 +477,7 @@ function vigilarSilencio() {
   }, ESPERAS_SILENCIO[silencios]);
 }
 $('pedirPista').onclick = () => { if (!enLlamada || busy) return; silencios = ESPERAS_SILENCIO.length; void requestTutor({aviso: 'pista'}, false); };
-$('replay').onclick = () => { if (!lastReply || busy || !enLlamada) return; stop(); turno = null; encolar(lastReply, epoch); };
+$('replay').onclick = () => { if (!lastReply || busy || !enLlamada) return; stop(); turno = null; decirUltima(epoch); };
 
 function stop() {
   clearTimeout(silencioTimer);
@@ -495,6 +533,7 @@ async function requestTutor(entrada, opening = false) {
   fraseAnterior = {version: -1, texto: ''}; // turno nuevo: sin frase anterior
   busy = true; respuestaCompleta = false; controls(); error(''); ultimoFallo = null;
   let frases = 0, final = false, transcrito = false, burbujaTutor = null, turnoTutor = null, espera = null;
+  const partes = [];
   if (entrada?.texto || entrada?.audio) silencios = 0;
   turno = opening || entrada?.aviso ? null : {hist: history.length, dom: $('messages').childElementCount, corr: correcciones, oido: false, lastReply};
   if (!opening) {
@@ -509,7 +548,7 @@ async function requestTutor(entrada, opening = false) {
   const conVoz = vozEnLinea ? '?voz=1' : '';
   try {
     const u = units.find(x => x.id === temaId);
-    const datos = {idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-30), objetivo: config.contexto, ...(u ? {situacionId: u.id, situacion: u.nombre} : {}), ...(u && objetivoId ? {objetivoId} : {}), ...(entrada?.aviso ? {aviso: entrada.aviso} : {})};
+    const datos = {idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, explica: explicaActual(), historial: history.slice(-30), objetivo: config.contexto, ...(u ? {situacionId: u.id, situacion: u.nombre} : {}), ...(u && objetivoId ? {objetivoId} : {}), ...(entrada?.aviso ? {aviso: entrada.aviso} : {})};
     // Si la primera frase tarda, una muletilla («A ver…») llena el hueco como en una llamada real.
     if (enLlamada && (entrada?.texto || entrada?.audio)) setTimeout(() => { if (version === epoch && busy && !frases && !sonando && !cola.length) ponerRelleno(version); }, entrada.audio ? 1800 : 1000);
     let response;
@@ -539,7 +578,7 @@ async function requestTutor(entrada, opening = false) {
     // alumno contestaba antes, el tutor olvidaba que le había pedido repetir.
     const anotarTutor = texto => {
       if (burbujaTutor) return burbujaTutor;
-      lastReply = texto; turnoTutor = {rol: 'tutor', texto, ...(espera ? {espera} : {})}; history.push(turnoTutor); burbujaTutor = burbuja(texto);
+      lastReply = texto; ultimasPartes = {texto, partes}; turnoTutor = {rol: 'tutor', texto, ...(espera ? {espera} : {})}; history.push(turnoTutor); burbujaTutor = burbuja(texto);
       $('replay').hidden = false; $('reportar').hidden = false;
       current.respondida = true;
       return burbujaTutor;
@@ -567,7 +606,7 @@ async function requestTutor(entrada, opening = false) {
         history.push({rol: 'alumno', texto: e.data.texto});
       }
       // Cada frase terminada se muestra y se dice sin esperar al resto.
-      if (e.tipo === 'frase') { if (!frases) mostrarCorreccion(null); $('subTutor').textContent = (frases ? $('subTutor').textContent + ' ' : '') + e.data.texto; frases++; encolar(e.data.texto, version, e.data.indice); }
+      if (e.tipo === 'frase') { if (!frases) mostrarCorreccion(null); $('subTutor').textContent = (frases ? $('subTutor').textContent + ' ' : '') + e.data.texto; frases++; partes.push({texto: e.data.texto, habla: e.data.habla || ''}); encolar(e.data.texto, version, e.data.indice, false, e.data.habla || ''); }
       if (e.tipo === 'voz_activa') vozActiva = true;
       if (e.tipo === 'voz') { window.__marca?.('voz_llega', e.data.indice); vozDelStream(e.data.indice)?.ok(e.data); }
       if (e.tipo === 'reply') { if (!frases) { mostrarCorreccion(null); $('subTutor').textContent = e.data; frases++; encolar(e.data, version); } anotarTutor(e.data); }
@@ -579,7 +618,7 @@ async function requestTutor(entrada, opening = false) {
         if (r.espera) espera = r.espera;
         const b = anotarTutor(r.reply);
         if (espera) turnoTutor.espera = espera;
-        if (lastReply !== r.reply) { lastReply = r.reply; b.textContent = r.reply; const h = history.findLastIndex(x => x.rol === 'tutor'); if (h >= 0) history[h].texto = r.reply; }
+        if (lastReply !== r.reply) { if (ultimasPartes.texto === lastReply) ultimasPartes.texto = r.reply; lastReply = r.reply; b.textContent = r.reply; const h = history.findLastIndex(x => x.rol === 'tutor'); if (h >= 0) history[h].texto = r.reply; }
         if (r.romanizacion) b.append(el('span', 'romanizacion', r.romanizacion));
         if (r.traduccion) {
           $('subTraduccion').textContent = r.traduccion; $('subTraduccion').hidden = true;

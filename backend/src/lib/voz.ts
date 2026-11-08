@@ -446,12 +446,18 @@ const sintetizar = (texto: string, vozId: string, idioma: string, previo?: strin
     cuerpoSintesis(texto, idioma, config.elevenModelo, previo, ajustes), async (r) => Buffer.from(await r.arrayBuffer()));
 
 export type Audio = { hash: string; buffer: Buffer; cache: boolean; voz: string; caracteres: number };
-export type PeticionVoz = { texto: string; idioma: string; voz?: string; modo?: string; previo?: string };
+/**
+ * `idioma` elige la voz (la nativa del idioma practicado); `habla`, si viene, es
+ * el idioma en que está escrito el texto (una explicación en el idioma del
+ * alumno dentro de la videollamada): la misma voz, con esa pronunciación.
+ */
+export type PeticionVoz = { texto: string; idioma: string; voz?: string; modo?: string; previo?: string; habla?: string };
 type Trozo = { texto: string; hash: string; legado: string; previo?: string };
 
 /** Normaliza, elige la voz y divide en trozos con su clave de caché. */
 function preparar(p: PeticionVoz) {
-  const texto = textoParaVoz(p.texto, p.idioma, p.modo);
+  const lengua = p.habla ?? p.idioma;
+  const texto = textoParaVoz(p.texto, lengua, p.modo);
   if (!texto) throw new Error('texto_vacio');
   const partes = trocearTexto(texto, config.vozMaxCaracteres);
   if (partes.length > VOZ_MAX_TROZOS) throw new Error(`texto_demasiado_largo (${texto.length} > ${vozMaxTotal()})`);
@@ -459,12 +465,12 @@ function preparar(p: PeticionVoz) {
   const v = VOCES[rol];
   const ajustes = ajustesDeVoz(rol);
   const modelo = config.elevenModelo;
-  const previo = p.previo ? textoParaVoz(p.previo, p.idioma).slice(-config.vozMaxCaracteres) || undefined : undefined;
+  const previo = p.previo ? textoParaVoz(p.previo, lengua).slice(-config.vozMaxCaracteres) || undefined : undefined;
   const trozos: Trozo[] = partes.map((t, i) => ({
-    texto: t, hash: hashAudio(t, v.id, modelo, p.idioma, ajustes), legado: hashAudioLegado(t, v.id, modelo, p.idioma),
+    texto: t, hash: hashAudio(t, v.id, modelo, lengua, ajustes), legado: hashAudioLegado(t, v.id, modelo, lengua),
     previo: i === 0 ? previo : partes[i - 1],
   }));
-  return { texto, rol, v, ajustes, trozos };
+  return { texto, rol, v, ajustes, trozos, lengua };
 }
 
 async function leerCache(hashes: (string | undefined)[]) {
@@ -530,7 +536,7 @@ async function audioTrozo(t: Trozo, idioma: string, rol: string, vozId: string) 
 export async function obtenerAudio(p: PeticionVoz): Promise<Audio> {
   const q = preparar(p);
   if (q.trozos.length === 1) {
-    const a = await audioTrozo(q.trozos[0], p.idioma, q.rol, q.v.id);
+    const a = await audioTrozo(q.trozos[0], q.lengua, q.rol, q.v.id);
     return { hash: a.hash, buffer: a.buffer, cache: a.cache, voz: q.rol, caracteres: q.texto.length };
   }
   const hash = sha(`trozos|${q.trozos.map((t) => t.hash).join('|')}`);
@@ -539,7 +545,7 @@ export async function obtenerAudio(p: PeticionVoz): Promise<Audio> {
   const partes: Buffer[] = [];
   let cache = true;
   for (const t of q.trozos) {
-    const a = await audioTrozo(t, p.idioma, q.rol, q.v.id);
+    const a = await audioTrozo(t, q.lengua, q.rol, q.v.id);
     partes.push(a.buffer); cache &&= a.cache;
   }
   const buffer = Buffer.concat(partes);
@@ -620,7 +626,7 @@ async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: strin
 export async function obtenerAudioAlineado(p: PeticionVoz, rapido = false): Promise<AudioAlineado> {
   const q = preparar(p);
   const partes = [];
-  for (const t of q.trozos) partes.push(await trozoAlineado(t, p.idioma, q.rol, q.v.id, rapido));
+  for (const t of q.trozos) partes.push(await trozoAlineado(t, q.lengua, q.rol, q.v.id, rapido));
   const hash = partes.length === 1 ? partes[0].hash : sha(`trozos|${q.trozos.map((t) => t.hash).join('|')}`);
   return {
     hash, voz: q.rol, caracteres: q.texto.length, cache: partes.every((x) => x.cache),
@@ -660,7 +666,7 @@ export async function obtenerAudioStream(p: PeticionVoz, signal: AbortSignal, on
   }
   const t = q.trozos[0], rol = q.rol, v = q.v, hash = t.hash;
   const ruta = path.join(dir(), `${hash}.mp3`);
-  const hit = await buscarTrozo(t, p.idioma, rol, v.id);
+  const hit = await buscarTrozo(t, q.lengua, rol, v.id);
   if (hit) {
     void registrarUso(hit.hash);
     return { stream: Readable.from([hit.buffer]), cache: true, hash: hit.hash };
@@ -675,7 +681,7 @@ export async function obtenerAudioStream(p: PeticionVoz, signal: AbortSignal, on
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${v.id}/stream?output_format=mp3_44100_128`, {
       method: 'POST', signal,
       headers: { 'xi-api-key': config.elevenApiKey, 'content-type': 'application/json' },
-      body: JSON.stringify(cuerpoSintesis(t.texto, p.idioma, config.elevenModelo, t.previo, q.ajustes)),
+      body: JSON.stringify(cuerpoSintesis(t.texto, q.lengua, config.elevenModelo, t.previo, q.ajustes)),
     });
     if (!response.ok || !response.body) throw new Error(`ElevenLabs ${response.status}`);
     const reader = response.body.getReader();
@@ -699,7 +705,7 @@ export async function obtenerAudioStream(p: PeticionVoz, signal: AbortSignal, on
         await mkdir(dir(), { recursive: true });
         await escribirEntero(ruta, buffer);
         complete = true; resolve(buffer);
-        void registrarAudio(hash, p.idioma, rol, v.id, t.texto, buffer.length).catch(() => {});
+        void registrarAudio(hash, q.lengua, rol, v.id, t.texto, buffer.length).catch(() => {});
       } catch (e) { reject(e); throw e; }
       finally { if (!complete) reject(new Error('audio_interrumpido')); await reader.cancel().catch(() => {}); reader.releaseLock(); }
     }

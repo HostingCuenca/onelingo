@@ -29,7 +29,7 @@ export default async function rutas(app: FastifyInstance) {
   app.get('/voz/stream', { preHandler: alumnoOToken }, async (req, reply) => {
     // Más de vozMaxCaracteres: el servidor lo divide por frases (ver obtenerAudio).
     // `previo` = frase anterior de la misma respuesta (videollamada): mejor entonación.
-    const q = z.object({ texto: z.string().min(1).max(vozMaxTotal()), idioma: z.string().default('en'), voz: z.string().optional(), modo: z.enum(['letra']).optional(), previo: z.string().max(2000).optional() }).parse(req.query);
+    const q = z.object({ texto: z.string().min(1).max(vozMaxTotal()), idioma: z.string().default('en'), voz: z.string().optional(), modo: z.enum(['letra']).optional(), previo: z.string().max(2000).optional(), habla: z.string().max(5).optional() }).parse(req.query);
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 30000);
     const started = performance.now();
@@ -48,10 +48,11 @@ export default async function rutas(app: FastifyInstance) {
   /**
    * Videollamada en vivo: el MP3 (base64) y el tiempo de cada letra para mover la
    * boca del tutor con las sílabas reales. Misma caché que /voz (no se paga dos
-   * veces); `alineacion` es null si el audio ya existía sin ella.
+   * veces); `alineacion` es null si el audio ya existía sin ella. `habla`: la
+   * frase es una explicación en el idioma del alumno (misma voz, su pronunciación).
    */
   app.get('/voz/alineada', { preHandler: alumnoOToken }, async (req, reply) => {
-    const q = z.object({ texto: z.string().min(1).max(vozMaxTotal()), idioma: z.string().default('en'), voz: z.string().optional(), previo: z.string().max(2000).optional() }).parse(req.query);
+    const q = z.object({ texto: z.string().min(1).max(vozMaxTotal()), idioma: z.string().default('en'), voz: z.string().optional(), previo: z.string().max(2000).optional(), habla: z.string().max(5).optional() }).parse(req.query);
     const inicio = performance.now();
     try {
       const a = await obtenerAudioAlineado(q);

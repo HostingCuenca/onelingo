@@ -35,6 +35,8 @@ body.embebido #selection{display:none}
 .contador[hidden]{display:none}
 .tema{display:flex;align-items:center;gap:6px;margin:8px auto 0;padding:7px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--morado-claro);color:var(--morado);font-weight:800;font-size:14px;max-width:calc(100% - 32px)}
 .tema span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:8px auto 0;max-width:calc(100% - 32px)}
+.chips .tema{margin:0;max-width:100%;min-width:0}
 #stage{position:relative;flex:1;min-height:170px;width:calc(100% - 32px);max-width:528px;margin:10px auto 0;border-radius:28px;overflow:hidden;isolation:isolate;
   background:linear-gradient(180deg,#fff 0%,var(--morado-suave) 58%,var(--morado-claro) 100%);border:2px solid #fff;box-shadow:0 0 0 1px var(--borde),0 12px 32px #4519bb1f;transition:box-shadow .35s}
 /* El borde de la tarjeta dice de quién es el turno: morado si habla el tutor, verde si te escucha. */
@@ -166,7 +168,7 @@ body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inl
   <div class="quien"><strong id="name">Tutor</strong><span id="state">Preparando…</span></div>
   <button id="verConversacion" class="icono" type="button" aria-label="Ver la conversación">💬<span id="contador" class="contador" hidden></span></button>
  </header>
- <button id="tema" class="tema" type="button" aria-label="Cambiar el tema de la conversación"><span id="temaNombre">Conversación libre</span><b aria-hidden="true">▾</b></button>
+ <div class="chips"><button id="tema" class="tema" type="button" aria-label="Cambiar el tema de la conversación"><span id="temaNombre">Conversación libre</span><b aria-hidden="true">▾</b></button><button id="explica" class="tema" type="button" hidden><span id="explicaNombre"></span><b aria-hidden="true">⇄</b></button></div>
  <div id="stage" data-phase="loading"><div id="loading" class="cargando">Cargando…</div>
   <div id="insignia" class="insignia" aria-hidden="true" hidden></div>
   <button id="pedirPista" class="pedir-pista" type="button" aria-label="Pedir una pista al tutor" hidden><span aria-hidden="true">💡</span>Pista</button>
@@ -209,4 +211,4 @@ body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inl
  </div>
  <audio id="audio" preload="auto" playsinline></audio>
 </section>
-<script type="module" src="./practice.js?v=66"></script></html>
+<script type="module" src="./practice.js?v=67"></script></html>
