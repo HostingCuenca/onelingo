@@ -1206,3 +1206,21 @@ Fecha: 2026-11-07 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Backup:** `backups/20261107-edu-85-explica-idioma/` (los 8 archivos previos y `env.sha`).
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261107-edu-85-explica-idioma; for f in backend/src/lib/ia.ts backend/src/lib/ia_openai.ts backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/routes/voz.ts web/avatar/index.html web/avatar/practice.js web/avatar/textos.js; do cp -p $K/$f $f; done; rm backend/src/lib/explicaciones.ts; sudo -u onelingo -H pm2 restart onelingo-api'`.
+
+## Release: 20261108-edu-86-microfono-bilingue
+
+Fecha: 2026-11-08 · Responsable: Claude (Claude Code), por pedido del usuario («ajusta el micrófono para que entienda español también y despliega todo»). Backend (3 archivos) + `web/avatar` (`index.html`, `practice.js?v=68`), copiados directamente. PM2 `onelingo-api` reiniciado (solo esa app). Sin migraciones ni cambios de `.env` (hash igual). Sin parche de Android.
+
+**Contenido (`07c0363`):** en la videollamada, el micrófono entiende también el idioma del alumno.
+- Escucha en vivo (ElevenLabs Scribe v2 Realtime, en el navegador): si el idioma del alumno es distinto del de la llamada, ya no se manda `language_code`. Con el idioma fijo, Scribe **traducía** lo dicho en español («¿Qué significa went?» → «What does "went" mean?»; «¿Cómo se dice ayer en italiano?» → «Come si dice "ieri" in italiano?») o lo dejaba vacío.
+- Mantener pulsado (`/chat/voz`, OpenAI `gpt-4o-mini-transcribe`): se conserva el idioma fijo y se añade `prompt` con `pistaTranscripcion(meta, nativo)` («Clase de japonés. El alumno habla español: puede hablar en japonés, en español o mezclar ambos.»; en inglés si el alumno no es hispanohablante). `/transcribir` acepta un campo opcional `nativo` (la app Flutter no lo manda: sin cambios).
+
+**Pruebas:** backend 173/173 (1 nueva). Comparativa con 25 audios sintetizados (preguntas en español en cursos ja, en, it, ko, zh, fr, pt; frases del idioma meta largas y cortas en los 10 idiomas; acento español en inglés y japonés; frase mezclada). Scribe sin idioma fijo: español bien en todos salvo pt (idiomas muy cercanos, igual que con idioma fijo) y el idioma meta igual que antes en todos los casos. OpenAI con idioma fijo + pista: todo bien, incluida la frase mezclada «I went to the, ¿cómo se dice playa?» (en vivo sale «I went to the Playa.»).
+
+**Verificado en producción:** `/api/salud`, `/`, `/avatar/index.html` (`practice.js?v=68`, con el cambio) en 200; `/api/transcribir` sin sesión 401. Transcripción real en el servidor con el código desplegado (7 audios, los dos caminos): «¿Qué significa "went"?», «¿Cómo se dice "ayer" en italiano?», «¿Por qué se dice "ikimashita" y no "iku"?», «¿Qué significa "le" al final?» en español; «네, 좋아요.» y el japonés, en su idioma. PM2 en línea sin errores. `.env` sin cambios. Lock liberado.
+
+**Limitación:** en portugués, una frase en español puede salir mezclada con portugués (idiomas muy cercanos). Una frase mezclada en la escucha en vivo puede perder la parte en español.
+
+**Backup:** `backups/20261108-edu-86-microfono-bilingue/` (los 5 archivos previos y `env.sha`).
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261108-edu-86-microfono-bilingue; for f in backend/src/lib/ia_openai.ts backend/src/routes/chat.ts backend/src/routes/voz.ts web/avatar/index.html web/avatar/practice.js; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`.
