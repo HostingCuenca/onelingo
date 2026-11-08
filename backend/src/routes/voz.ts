@@ -107,18 +107,19 @@ export default async function rutas(app: FastifyInstance) {
     return reply.type('audio/mpeg').header('cache-control', 'public, max-age=31536000, immutable').send(b);
   });
 
-  /** Voz del alumno → texto (OpenAI). multipart: campo `audio` + campo `idioma`. */
+  /** Voz del alumno → texto (OpenAI). multipart: campo `audio` + campo `idioma` (+ `nativo` opcional: también lo entiende). */
   app.post('/transcribir', { preHandler: requiereAlumno }, async (req, reply) => {
     if (!openaiDisponible()) return reply.code(503).send({ error: 'transcripcion_no_configurada' });
     const s = req.user as Sesion;
-    let idioma = 'en'; let archivo: { buffer: Buffer; nombre: string; tipo: string } | null = null;
+    let idioma = 'en'; let nativo: string | undefined; let archivo: { buffer: Buffer; nombre: string; tipo: string } | null = null;
     for await (const parte of req.parts()) {
       if (parte.type === 'file') archivo = { buffer: await parte.toBuffer(), nombre: parte.filename || 'audio.m4a', tipo: parte.mimetype || 'audio/m4a' };
       else if (parte.fieldname === 'idioma') idioma = String(parte.value);
+      else if (parte.fieldname === 'nativo') nativo = String(parte.value).slice(0, 5);
     }
     if (!archivo || archivo.buffer.length === 0) return reply.code(400).send({ error: 'sin_audio' });
     try {
-      const r = await transcribirOpenAI(archivo.buffer, archivo.nombre, idioma, archivo.tipo);
+      const r = await transcribirOpenAI(archivo.buffer, archivo.nombre, idioma, archivo.tipo, nativo);
       await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1, $2, $3)', [s.sub, 'transcripcion', JSON.stringify({ idioma, caracteres: r.texto.length, bytes: archivo.buffer.length })]).catch(() => {});
       return r;
     } catch (e) {

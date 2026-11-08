@@ -559,7 +559,7 @@ async function requestTutor(entrada, opening = false) {
       response = await fetch(config.api + '/chat/voz' + conVoz, {method: 'POST', headers: headers(), body: form, signal: current.signal});
       // Servidor sin /chat/voz: transcribir y responder en dos pasos.
       if (response.status === 404) {
-        const f2 = new FormData(); f2.append('idioma', language()); f2.append('audio', entrada.audio, entrada.tipo?.includes('mp4') ? 'turno.m4a' : 'turno.webm');
+        const f2 = new FormData(); f2.append('idioma', language()); if (config.idiomaNativo) f2.append('nativo', config.idiomaNativo); f2.append('audio', entrada.audio, entrada.tipo?.includes('mp4') ? 'turno.m4a' : 'turno.webm');
         const tr = await fetch(config.api + '/transcribir', {method: 'POST', headers: headers(), body: f2, signal: current.signal});
         if (!tr.ok) throw Error(t('No se pudo transcribir. Vuelve a intentarlo o escribe con ⌨️.'));
         const texto = ((await tr.json()).texto || '').trim();
@@ -801,7 +801,11 @@ async function abrirVivo(motivo = 'inicio') {
   document.body.classList.add('vivo'); textoVivo();
   try {
     const h = await abrirEscucha({
-      idioma: language(),
+      // Con el idioma fijo, Scribe traducía lo dicho en el idioma del alumno
+      // («¿Qué significa went?» → «What does "went" mean?»). Sin fijarlo
+      // transcribe cada frase en la lengua en que se dijo, y el idioma meta
+      // sale igual de bien (probado en los 10 idiomas, frases cortas incluidas).
+      idioma: config.idiomaNativo && config.idiomaNativo !== language() ? undefined : language(),
       // Al reconectar se cuenta cómo se cortó la sesión anterior (telemetría del servidor).
       pedirToken: async cierre => {
         const r = await fetch(config.api + '/llamada/token', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify({motivo: cierre ? 'reconexion' : motivo, cierre})});

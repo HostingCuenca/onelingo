@@ -169,7 +169,7 @@ export default async function rutas(app: FastifyInstance) {
     const audio = archivo;
     return responderSse(req, reply, s, async emit => {
       const t0 = performance.now();
-      const { texto } = await transcribirOpenAI(audio.buffer, audio.nombre, d.idiomaMeta, audio.tipo);
+      const { texto } = await transcribirOpenAI(audio.buffer, audio.nombre, d.idiomaMeta, audio.tipo, d.idiomaNativo);
       req.log.info({ ms: Math.round(performance.now() - t0), bytes: audio.buffer.length }, 'chat_voz_transcripcion');
       await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1, $2, $3)', [s.sub, 'transcripcion', JSON.stringify({ idioma: d.idiomaMeta, caracteres: texto.length, bytes: audio.buffer.length, origen: 'videollamada' })]).catch(() => {});
       // Antes de emitirla: una transcripción vacía dejaba un turno del alumno

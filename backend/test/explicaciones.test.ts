@@ -58,3 +58,12 @@ test('only the video call in native mode asks for bracketed explanations', () =>
   assert.doesNotMatch(systemPrompt({ ...base, tutorId: 'mia', explica: 'nativo' }), /EXPLIQUES/, 'el chat escrito no cambia');
   assert.doesNotMatch(systemPrompt({ ...base, idiomaNativo: 'ja', explica: 'nativo' }), /EXPLIQUES/);
 });
+
+test('the transcription also expects the learner language', async () => {
+  const { pistaTranscripcion } = await import('../src/lib/ia_openai.js');
+  assert.equal(pistaTranscripcion('ja', 'es'), 'Clase de japonés. El alumno habla español: puede hablar en japonés, en español o mezclar ambos.');
+  assert.match(pistaTranscripcion('es', 'en') ?? '', /^Spanish class\. The learner's own language is English/);
+  assert.equal(pistaTranscripcion('ja', 'ja'), undefined);
+  assert.equal(pistaTranscripcion('ja'), undefined);
+  assert.equal(pistaTranscripcion('ja', 'xx'), undefined);
+});

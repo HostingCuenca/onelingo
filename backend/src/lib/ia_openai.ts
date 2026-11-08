@@ -86,13 +86,29 @@ async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assis
 
 const LOCALE_ISO: Record<string, string> = { en: 'en', es: 'es', fr: 'fr', de: 'de', pt: 'pt', it: 'it', zh: 'zh', ja: 'ja', ko: 'ko', ru: 'ru' };
 
-/** Transcribe audio (m4a/mp3/wav/webm) al texto en el idioma indicado. */
-export async function transcribirOpenAI(audio: Buffer, nombre: string, idioma: string, tipo = 'audio/m4a') {
+const NOMBRE_ES: Record<string, string> = { en: 'inglés', es: 'español', fr: 'francés', de: 'alemán', pt: 'portugués', it: 'italiano', zh: 'chino', ja: 'japonés', ko: 'coreano', ru: 'ruso' };
+const NOMBRE_EN: Record<string, string> = { en: 'English', es: 'Spanish', fr: 'French', de: 'German', pt: 'Portuguese', it: 'Italian', zh: 'Chinese', ja: 'Japanese', ko: 'Korean', ru: 'Russian' };
+
+/**
+ * Pista para la transcripción: el alumno también habla su idioma («¿por qué
+ * se dice así?») o mezcla los dos. Con el idioma fijo y sin pista, una pregunta
+ * en español a veces salía recortada o traducida.
+ */
+export function pistaTranscripcion(idioma: string, nativo?: string) {
+  if (!nativo || nativo === idioma || !NOMBRE_EN[nativo] || !NOMBRE_EN[idioma]) return undefined;
+  if (nativo === 'es') return `Clase de ${NOMBRE_ES[idioma]}. El alumno habla español: puede hablar en ${NOMBRE_ES[idioma]}, en español o mezclar ambos.`;
+  return `${NOMBRE_EN[idioma]} class. The learner's own language is ${NOMBRE_EN[nativo]}: they may speak ${NOMBRE_EN[idioma]}, ${NOMBRE_EN[nativo]} or mix both.`;
+}
+
+/** Transcribe audio (m4a/mp3/wav/webm): el idioma indicado y, si se da, también el del alumno. */
+export async function transcribirOpenAI(audio: Buffer, nombre: string, idioma: string, tipo = 'audio/m4a', nativo?: string) {
   const fd = new FormData();
   fd.append('file', new Blob([new Uint8Array(audio)], { type: tipo }), nombre);
   fd.append('model', config.openaiModeloTranscripcion);
   fd.append('response_format', 'json');
   if (LOCALE_ISO[idioma]) fd.append('language', LOCALE_ISO[idioma]);
+  const pista = pistaTranscripcion(idioma, nativo);
+  if (pista) fd.append('prompt', pista);
   const { j } = await conReintentos(() => fetch('https://api.openai.com/v1/audio/transcriptions', {
     method: 'POST', headers: { authorization: `Bearer ${config.openaiApiKey}` }, body: fd,
   }));
