@@ -21,6 +21,7 @@ import rutasPagos from './routes/pagos.js';
 import rutasReportes from './routes/reportes.js';
 import rutasTutorIa from './routes/tutor_ia.js';
 import rutasCertificados from './routes/certificados.js';
+import rutasReferidos from './routes/referidos.js';
 
 export async function crearApp() {
   const app = Fastify({ logger: { level: process.env.LOG_LEVEL ?? 'info' }, bodyLimit: 2 * 1024 * 1024 });
@@ -50,5 +51,6 @@ export async function crearApp() {
   await app.register(rutasReportes);
   await app.register(rutasTutorIa);
   await app.register(rutasCertificados);
+  await app.register(rutasReferidos);
   return app;
 }

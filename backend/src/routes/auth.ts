@@ -9,6 +9,7 @@ import { ErrorCodigo, emitirCodigo, idiomaDe, normalizarTelefono, verificarCodig
 import { query, uno } from '../lib/db.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { planEfectivo } from '../lib/pagos/suscripciones.js';
+import { normalizarCodigo } from './referidos.js';
 
 /**
  * Estado guardado con el plan del servidor (autoridad del plan) y la prueba
@@ -57,6 +58,7 @@ export default async function rutas(app: FastifyInstance) {
     email: z.string().trim().email(), password: z.string().min(6), nombre: z.string().trim().min(1).max(60), apellido: z.string().trim().min(1).max(60),
     telefono: z.string().trim().min(1),
     idiomaNativo: z.string().default('es'), idiomaMeta: z.string().default('en'), nivelInicial: z.number().int().min(1).max(10).default(1), plataforma: z.string().default(''),
+    codigoReferido: z.string().trim().max(40).default(''),
   });
   const T = {
     email: { es: 'Escribe un correo válido.', en: 'Enter a valid email.' },
@@ -64,6 +66,7 @@ export default async function rutas(app: FastifyInstance) {
     nombre: { es: 'Escribe tu nombre.', en: 'Enter your first name.' },
     apellido: { es: 'Escribe tu apellido.', en: 'Enter your last name.' },
     telefono: { es: 'Escribe tu teléfono con el código de país, por ejemplo +1 555 123 4567.', en: 'Enter your phone with the country code, for example +1 555 123 4567.' },
+    referido: { es: 'Ese código de referido no existe. Revísalo o deja el campo vacío.', en: 'That referral code does not exist. Check it or leave the field empty.' },
     ocupada: { es: 'Ya existe una cuenta con ese correo. Inicia sesión.', en: 'An account with this email already exists. Log in.' },
     antigua: { es: 'Ya existe una cuenta con ese correo. Usa «¿Olvidaste tu contraseña?» para entrar.', en: 'An account with this email already exists. Use "Forgot your password?" to get in.' },
     datos: { es: 'Datos inválidos.', en: 'Invalid data.' },
@@ -94,11 +97,14 @@ export default async function rutas(app: FastifyInstance) {
     if (!telefono) return reply.code(400).send({ error: T.telefono[idioma] });
     const { error } = await cuentaOcupada(email);
     if (error) return reply.code(409).send({ error: error[idioma] });
+    // Código de referido opcional: si viene mal escrito se avisa antes de mandar el correo.
+    const referido = d.codigoReferido ? normalizarCodigo(d.codigoReferido) : '';
+    if (d.codigoReferido && !(await uno('SELECT 1 FROM referidos WHERE codigo = $1 AND activo', [referido]))) return reply.code(400).send({ error: T.referido[idioma] });
     let codigo: string;
     try {
       codigo = await emitirCodigo(email, 'registro', {
         nombre: d.nombre, apellido: d.apellido, telefono, passwordHash: await bcrypt.hash(d.password, 10),
-        idiomaNativo: d.idiomaNativo, idiomaMeta: d.idiomaMeta, nivelInicial: d.nivelInicial, plataforma: d.plataforma,
+        idiomaNativo: d.idiomaNativo, idiomaMeta: d.idiomaMeta, nivelInicial: d.nivelInicial, plataforma: d.plataforma, referido,
       });
     } catch (e) { return errorCodigo(req, reply, e); }
     const c = correoCodigo(idioma, d.nombre, codigo, 'registro');
@@ -119,7 +125,9 @@ export default async function rutas(app: FastifyInstance) {
         [existe.id, d.passwordHash, d.nombre, d.apellido, d.telefono, d.idiomaNativo, d.idiomaMeta, d.nivelInicial, d.plataforma])
       : await uno('INSERT INTO usuarios (email, nombre, apellido, telefono, idioma_nativo, idioma_meta, nivel_inicial, plataforma, trial_inicio, password_hash, email_verificado) VALUES ($1,$2,$3,$4,$5,$6,$7,$8, now(), $9, true) RETURNING id',
         [email, d.nombre, d.apellido, d.telefono, d.idiomaNativo, d.idiomaMeta, d.nivelInicial, d.plataforma, d.passwordHash]);
-    await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1,$2,$3)', [u!.id, 'registro', JSON.stringify({ metodo: 'password', verificacion: 'codigo', idiomaMeta: d.idiomaMeta })]);
+    await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1,$2,$3)', [u!.id, 'registro', JSON.stringify({ metodo: 'password', verificacion: 'codigo', idiomaMeta: d.idiomaMeta, ...(d.referido ? { referido: d.referido } : {}) })]);
+    // Si el código se desactivó en estos minutos, la cuenta se crea igual, sin referido.
+    if (d.referido) await query(`UPDATE usuarios SET referido_codigo = $2, referido_en = now() WHERE id = $1 AND referido_codigo IS NULL AND EXISTS (SELECT 1 FROM referidos WHERE codigo = $2 AND activo)`, [u!.id, d.referido]);
     return reply.code(201).send({ id: u!.id, token: tokenDe(app, u!.id), verificado: true });
   });
 
