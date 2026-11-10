@@ -14,6 +14,7 @@ import { numerosEnPalabrasIt } from './numeros_it.js';
 import { numerosEnPalabrasPt } from './numeros_pt.js';
 import { numerosEnPalabrasRu } from './numeros_ru.js';
 import { normalizarParaVoz } from './voz_texto.js';
+import { anotarFalloEleven, elevenPausado, respaldoDisponible, sintetizarRespaldo, vozRespaldo } from './voz_respaldo.js';
 
 /**
  * Voces nativas de ElevenLabs, una clave por idioma y locutor. Selección del
@@ -508,11 +509,37 @@ const registrarAudio = (hash: string, idioma: string, rol: string, vozId: string
          ON CONFLICT (hash) DO UPDATE SET usos = audios.usos + 1, ultimo_uso = now()`,
     [hash, idioma, rol, vozId, config.elevenModelo, texto, texto.length, bytes]);
 
+/** Trozo con la voz de respaldo (OpenAI): ElevenLabs falló o está en pausa. */
+async function trozoRespaldo(t: Trozo, idioma: string, rol: string) {
+  const v = VOCES[rol];
+  const r = await sintetizarRespaldo(t.texto, idioma, vozRespaldo(rol, v?.nombre ?? '', v?.descripcion ?? ''), (b) => normalizarVolumen(b, rol));
+  return { hash: r.hash, buffer: r.buffer, cache: r.cache };
+}
+/**
+ * ElevenLabs y, si falla (cuota, clave, caída), la voz de respaldo. Con la
+ * cuota agotada se deja de preguntar a ElevenLabs 15 min (ver voz_respaldo.ts).
+ */
+async function conRespaldo<T extends { hash: string; buffer: Buffer; cache: boolean }>(t: Trozo, idioma: string, rol: string, eleven: () => Promise<T>, extra: Omit<T, 'hash' | 'buffer' | 'cache'>): Promise<T> {
+  if (!vozDisponible() || elevenPausado()) {
+    if (!respaldoDisponible()) throw new Error(vozDisponible() ? 'voz_sin_cuota' : 'voz_no_configurada');
+    return { ...(await trozoRespaldo(t, idioma, rol)), ...extra } as T;
+  }
+  try { return await eleven(); }
+  catch (e) {
+    anotarFalloEleven(e);
+    if (!respaldoDisponible() || /texto_vacio|demasiado_largo/.test(String(e))) throw e;
+    console.warn('voz: ElevenLabs falló, voz de respaldo:', String(e).slice(0, 160));
+    return { ...(await trozoRespaldo(t, idioma, rol)), ...extra } as T;
+  }
+}
+
 /** Un trozo: de la caché (disco + tabla `audios`) o generado una sola vez. */
 async function audioTrozo(t: Trozo, idioma: string, rol: string, vozId: string) {
   const hit = await buscarTrozo(t, idioma, rol, vozId);
   if (hit) { await registrarUso(hit.hash); return { ...hit, cache: true }; }
-  if (!vozDisponible()) throw new Error('voz_no_configurada');
+  return conRespaldo(t, idioma, rol, () => audioTrozoEleven(t, idioma, rol, vozId), {});
+}
+async function audioTrozoEleven(t: Trozo, idioma: string, rol: string, vozId: string) {
   // Generación con deduplicación de peticiones simultáneas.
   let pendiente = enCurso.get(t.hash);
   if (!pendiente) {
@@ -542,15 +569,17 @@ export async function obtenerAudio(p: PeticionVoz): Promise<Audio> {
   const hash = sha(`trozos|${q.trozos.map((t) => t.hash).join('|')}`);
   const unido = await leerCache([hash]);
   if (unido) return { hash, buffer: unido.buffer, cache: true, voz: q.rol, caracteres: q.texto.length };
-  const partes: Buffer[] = [];
+  const partes: Buffer[] = [], hashes: string[] = [];
   let cache = true;
   for (const t of q.trozos) {
     const a = await audioTrozo(t, q.lengua, q.rol, q.v.id);
-    partes.push(a.buffer); cache &&= a.cache;
+    partes.push(a.buffer); hashes.push(a.hash); cache &&= a.cache;
   }
+  // Con algún trozo de la voz de respaldo, el unido lleva otra clave (no ocupa la de ElevenLabs).
+  const real = sha(`trozos|${hashes.join('|')}`);
   const buffer = Buffer.concat(partes);
-  await mkdir(dir(), { recursive: true }).then(() => escribirEntero(path.join(dir(), `${hash}.mp3`), buffer)).catch(() => {});
-  return { hash, buffer, cache, voz: q.rol, caracteres: q.texto.length };
+  await mkdir(dir(), { recursive: true }).then(() => escribirEntero(path.join(dir(), `${real}.mp3`), buffer)).catch(() => {});
+  return { hash: real, buffer, cache, voz: q.rol, caracteres: q.texto.length };
 }
 
 /**
@@ -599,7 +628,10 @@ async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: strin
   if (enMarcha) { const r = await enMarcha; return { hash: t.hash, buffer: r.buffer, alineacion: r.alineacion, cache: false }; }
   const hit = await buscarTrozo(t, idioma, rol, vozId);
   if (hit) { void registrarUso(hit.hash); return { hash: hit.hash, buffer: hit.buffer, alineacion: await leerAlineacion(hit.hash), cache: true }; }
-  if (!vozDisponible()) throw new Error('voz_no_configurada');
+  // Respaldo sin alineación: el cliente reparte las letras a lo largo del audio.
+  return conRespaldo(t, idioma, rol, () => trozoAlineadoEleven(t, idioma, rol, vozId, rapido), { alineacion: null as Alineacion | null });
+}
+async function trozoAlineadoEleven(t: Trozo, idioma: string, rol: string, vozId: string, rapido: boolean) {
   let pendiente = enCursoAlineado.get(t.hash);
   if (!pendiente) {
     pendiente = (async () => {
@@ -627,7 +659,7 @@ export async function obtenerAudioAlineado(p: PeticionVoz, rapido = false): Prom
   const q = preparar(p);
   const partes = [];
   for (const t of q.trozos) partes.push(await trozoAlineado(t, q.lengua, q.rol, q.v.id, rapido));
-  const hash = partes.length === 1 ? partes[0].hash : sha(`trozos|${q.trozos.map((t) => t.hash).join('|')}`);
+  const hash = partes.length === 1 ? partes[0].hash : sha(`trozos|${partes.map((t) => t.hash).join('|')}`);
   return {
     hash, voz: q.rol, caracteres: q.texto.length, cache: partes.every((x) => x.cache),
     buffer: partes.length === 1 ? partes[0].buffer : Buffer.concat(partes.map((x) => x.buffer)),
@@ -673,6 +705,11 @@ export async function obtenerAudioStream(p: PeticionVoz, signal: AbortSignal, on
   }
   const pending = enCurso.get(hash);
   if (pending) return { stream: Readable.from([await pending]), cache: true, hash };
+  const respaldo = async () => { const r = await trozoRespaldo(t, q.lengua, rol); onFirst(); return { stream: Readable.from([r.buffer]), cache: false, hash: r.hash }; };
+  if (!vozDisponible() || elevenPausado()) {
+    if (!respaldoDisponible()) throw new Error('voz_no_configurada');
+    return respaldo();
+  }
   let resolve!: (b: Buffer) => void, reject!: (e: unknown) => void;
   const promise = new Promise<Buffer>((yes, no) => { resolve = yes; reject = no; });
   enCurso.set(hash, promise);
@@ -683,7 +720,14 @@ export async function obtenerAudioStream(p: PeticionVoz, signal: AbortSignal, on
       headers: { 'xi-api-key': config.elevenApiKey, 'content-type': 'application/json' },
       body: JSON.stringify(cuerpoSintesis(t.texto, q.lengua, config.elevenModelo, t.previo, q.ajustes)),
     });
-    if (!response.ok || !response.body) throw new Error(`ElevenLabs ${response.status}`);
+    if (!response.ok || !response.body) {
+      const e = new Error(`ElevenLabs ${response.status}: ${(await response.text().catch(() => '')).slice(0, 200)}`);
+      anotarFalloEleven(e);
+      if (!respaldoDisponible()) throw e;
+      reject(e);
+      console.warn('voz: ElevenLabs falló, voz de respaldo:', e.message.slice(0, 160));
+      return respaldo();
+    }
     const reader = response.body.getReader();
     async function* crudos() {
       while (true) {

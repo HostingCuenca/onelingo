@@ -24,6 +24,8 @@ export const config = {
   // Evaluación de escritura del diagnóstico: modelo más capaz (una llamada por diagnóstico).
   openaiModeloEvaluacion: process.env.OPENAI_MODELO_EVALUACION ?? 'gpt-4.1',
   openaiModeloTranscripcion: process.env.OPENAI_MODELO_TRANSCRIPCION ?? 'gpt-4o-mini-transcribe',
+  // Voz de respaldo cuando ElevenLabs falla (cuota agotada, caída).
+  openaiModeloVozRespaldo: process.env.OPENAI_MODELO_VOZ_RESPALDO ?? 'gpt-4o-mini-tts',
   anthropicApiKey: process.env.ANTHROPIC_API_KEY ?? '',
   iaModelo: process.env.IA_MODELO ?? 'claude-opus-5',
   geminiApiKey: process.env.GEMINI_API_KEY ?? '',
