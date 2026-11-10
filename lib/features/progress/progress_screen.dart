@@ -17,6 +17,7 @@ import '../../core/lexico/lexico.dart';
 import '../../core/nivel0/nivel0.dart';
 import '../../core/pagos/providers.dart';
 import '../plans/idiomas_plan.dart';
+import 'codigo_referido.dart';
 import 'eliminar_cuenta.dart';
 import '../../core/api/sync.dart';
 import '../../core/state/providers.dart';
@@ -386,6 +387,19 @@ class ProgressScreen extends ConsumerWidget {
           const SizedBox(height: 8),
           const EffectsSettings(),
           const SizedBox(height: 10),
+          if (Sync.instancia.conectado && !demo)
+            TextButton.icon(
+              onPressed: () => abrirCodigoReferido(context),
+              icon: const Icon(
+                Icons.handshake_outlined,
+                color: OL.gris,
+                size: 18,
+              ),
+              label: Text(
+                tr('Código de referido'),
+                style: const TextStyle(color: OL.gris),
+              ),
+            ),
           TextButton.icon(
             onPressed: () => showDialog(
               context: context,

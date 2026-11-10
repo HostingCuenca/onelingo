@@ -39,6 +39,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final apellido = TextEditingController();
   final telefono = TextEditingController();
   final codigo = TextEditingController();
+  final referido = TextEditingController();
   String prefijo = prefijosTelefono.first.$1;
 
   /// Paso 1 en dos tiempos: datos → código de 6 dígitos enviado al correo.
@@ -106,6 +107,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     apellido.dispose();
     telefono.dispose();
     codigo.dispose();
+    referido.dispose();
     super.dispose();
   }
 
@@ -237,6 +239,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     idiomaNativo: nativo,
     idiomaMeta: meta,
     nivelInicial: nivelInicial.clamp(1, 10),
+    codigoReferido: referido.text,
   );
 
   String _errorServidor() => Sync.instancia.ultimoError.isEmpty
@@ -496,6 +499,21 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         decoration: InputDecoration(
           hintText: tr('Mínimo 6 caracteres'),
           prefixIcon: const Icon(Icons.lock_outline),
+        ),
+      ),
+      const SizedBox(height: 14),
+      Text(
+        tr('Código de referido (opcional)'),
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      ),
+      const SizedBox(height: 6),
+      TextField(
+        controller: referido,
+        textCapitalization: TextCapitalization.characters,
+        autocorrect: false,
+        decoration: InputDecoration(
+          hintText: tr('Si alguien te recomendó OneLingo'),
+          prefixIcon: const Icon(Icons.handshake_outlined),
         ),
       ),
       if (errorRegistro != null) ...[

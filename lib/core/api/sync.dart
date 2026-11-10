@@ -192,6 +192,7 @@ class Sync {
     required String idiomaNativo,
     required String idiomaMeta,
     required int nivelInicial,
+    String codigoReferido = '',
   }) async {
     final r = await _postConError('/auth/registro/codigo', {
       'email': email,
@@ -203,8 +204,35 @@ class Sync {
       'idiomaMeta': idiomaMeta,
       'nivelInicial': nivelInicial,
       'plataforma': _plataforma,
+      if (codigoReferido.trim().isNotEmpty)
+        'codigoReferido': codigoReferido.trim(),
     });
     return r != null;
+  }
+
+  /// Código de referido de la cuenta (null si no tiene o sin conexión).
+  Future<String?> miReferido() async {
+    if (!conectado) return null;
+    try {
+      final r = await http
+          .get(
+            Uri.parse('$baseUrl/usuarios/me/referido'),
+            headers: {'authorization': 'Bearer $token'},
+          )
+          .timeout(const Duration(seconds: 8));
+      if (r.statusCode == 200)
+        return (jsonDecode(r.body) as Map<String, dynamic>)['codigo']
+            as String?;
+    } catch (_) {}
+    return null;
+  }
+
+  /// Guarda el código de referido (una sola vez por cuenta). Devuelve el código guardado.
+  Future<String?> ponerReferido(String codigo) async {
+    final r = await _postConError('/usuarios/me/referido', {
+      'codigo': codigo.trim(),
+    }, auth: true);
+    return r?['codigo'] as String?;
   }
 
   /// Registro con código (paso 2): con el código correcto la cuenta queda creada y verificada.
