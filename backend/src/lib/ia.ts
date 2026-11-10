@@ -98,6 +98,7 @@ ${explica === 'nativo' ? `- Si pide que le hables todo en ${nativo}: explícale 
 - ${a.eco
     ? 'CONVERSA de verdad, como un amigo en una llamada: tu reacción nombra algo concreto que acaba de decir ("A Golden Retriever? I love them!"), nunca un "Oh, cool!", "Great!" o "Nice!" suelto, comparte algo breve tuyo relacionado y haz UNA pregunta de seguimiento sobre lo mismo.'
     : 'CONVERSA de verdad: reacciona a lo que dijo con algo NUEVO (tu opinión, algo breve tuyo, un dato), sin repetir ni parafrasear sus palabras para confirmarlas: ya lo oíste ("I love Golden Retrievers, they are so friendly!", no "A Golden Retriever? Nice!"). Nada de "Oh, cool!", "Great!" o "Nice!" sueltos. Luego UNA pregunta que avance. Solo repites su frase cuando es para corregirla o celebrar la que le pediste.'} No cambies de tema ni encadenes preguntas tipo examen; recuerda y retoma lo que el alumno contó antes en la llamada.
+- TEMAS. El tema lo elige el alumno: no saques por tu cuenta temas que él no mencionó (fiestas, viajes, celebraciones…) ni le arrastres a uno de llamadas anteriores sin preguntarle; tus anécdotas, siempre sobre lo que él trae. Si hace falta un tema nuevo, pregúntale de qué quiere hablar con 2 o 3 opciones.
 - NO TE REPITAS. Antes de preguntar, revisa la llamada: nunca vuelvas a preguntar algo que ya preguntaste o que el alumno ya te contó (si te dijo que vive con sus padres, no le preguntes con quién vive: úsalo). No empieces dos turnos seguidos igual, no cierres siempre con la misma fórmula ni uses la misma estructura de pregunta dos veces seguidas. Si junto a su mensaje llega una nota «[Variedad…]», síguela.${a.frasesEvitar.length ? `
 - Nunca digas: ${a.frasesEvitar.map(f => `"${f}"`).join(', ')} (ni su equivalente en el idioma de la llamada).` : ''}
 - AJUSTA EL NIVEL sobre la marcha: si en dos turnos seguidos usa bien estructuras por encima de su nivel, sube un poco (preguntas más abiertas, una palabra más rica, pedirle una razón u opinión). Si contesta con una o dos palabras, se equivoca mucho o mezcla su idioma, baja: frases más cortas, preguntas concretas${a.opciones === 'pocas' ? ' y, solo si aun así no puede, dos opciones' : ' y preguntas con dos opciones'}.
@@ -125,9 +126,15 @@ Si se desvía, síguele un turno y vuelve al foco con naturalidad. Si pide otra 
  * largo tras la pregunta del tutor o el botón «Pista». El tutor responde
  * hablando, como un profesor que ve que el alumno se quedó en blanco.
  */
-export type Aviso = 'silencio' | 'pista';
+export type Aviso = 'silencio' | 'iniciativa' | 'pista';
 export const notaAviso = (a: Aviso) => a === 'silencio'
   ? '[Nota de la app, no del alumno: lleva unos segundos sin responder a tu última pregunta. No digas que está callado ni le metas prisa. Ayúdalo con naturalidad: repite tu pregunta más corta y sencilla y ofrécele dos opciones concretas para elegir. 1-2 frases.]'
+  : a === 'iniciativa'
+  ? '[Nota de la app, no del alumno: lleva unos 4 segundos callado tras tu último turno. No digas que está callado ni le metas prisa. Toma tú la iniciativa, como un buen profesor particular, y que sirva para aprender: '
+    + '1) Si hay una situación de práctica, no salgas de la escena: dentro de tu papel, hazla avanzar con una pregunta fácil y dos opciones. '
+    + '2) Si tu último turno le pedía repetir una frase o un ejercicio concreto, dile otra vez el modelo, despacio y por partes, y anímalo. '
+    + '3) Si no, pregúntale de qué le gustaría hablar o qué quiere practicar, con 2 o 3 temas concretos y cotidianos (de sus intereses si los conoces, o de su día, la comida, su trabajo o estudios, sus planes), y enséñale cómo contestar con una frase modelo corta en el idioma de la llamada que pueda completar ("I\'d like to talk about…"). Si ya estaban en un tema que él eligió, pregúntale lo mismo más fácil con dos opciones y ofrécele cambiar de tema. '
+    + 'Nunca impongas tú un tema que él no mencionó. 1-3 frases. \'corrections\' vacío.]'
   : '[Nota de la app, no del alumno: pidió una pista (o sigue sin poder responder). Dale una pista hablada para tu última pregunta: el comienzo de una respuesta que pueda completar o una palabra clave útil, a su nivel; no respondas por él del todo y anímalo a intentarlo. 1-2 frases. \'corrections\' vacío.]';
 
 export function systemPrompt(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string; ajustes?: AjustesTutor; explica?: Explica }) {

@@ -67,9 +67,11 @@ function paciencia(texto) {
   const bajo = (config?.nivel ?? 1) <= 2 ? 250 : 0;
   return (fraseIncompleta(texto) ? 1700 : 450) + bajo;
 }
-// Si el alumno se queda en blanco, el tutor le ayuda hablando (como un profesor):
-// primero repite la pregunta más fácil y con opciones; después, una pista. Luego espera.
-const ESPERAS_SILENCIO = [9000, 12000];
+// Si el alumno se queda en blanco, el tutor toma la iniciativa hablando (como un
+// profesor): a los ~4 s le pregunta de qué quiere hablar con temas y una frase
+// modelo (o, en una situación o una repetición, se lo pone más fácil); si sigue
+// callado, una pista. Luego espera. Antes eran 9 s y el tutor elegía el tema.
+const ESPERAS_SILENCIO = [4000, 9000], AVISOS_SILENCIO = ['iniciativa', 'pista'];
 let silencioTimer = null, silencios = 0;
 // Mientras piensa, una muletilla corta en su idioma si tarda: sin silencios muertos.
 const RELLENOS = {en: ['Okay…', 'I see…', 'Right…'], es: ['A ver…', 'Ajá…', 'Entiendo…'], fr: ['D’accord…', 'Je vois…', 'Ah, oui…'], de: ['Okay…', 'Verstehe…', 'Ach so…'],
@@ -473,7 +475,7 @@ function vigilarSilencio() {
   silencioTimer = setTimeout(() => {
     // Escribiendo, leyendo la conversación o ya hablando: no se le interrumpe.
     if (!enLlamada || mudo || sonando || busy || grab || !$('form').hidden || !$('panel').hidden || $('stage').dataset.phase !== 'ready') return;
-    void requestTutor({aviso: silencios++ ? 'pista' : 'silencio'}, false);
+    void requestTutor({aviso: AVISOS_SILENCIO[silencios++]}, false);
   }, ESPERAS_SILENCIO[silencios]);
 }
 $('pedirPista').onclick = () => { if (!enLlamada || busy) return; silencios = ESPERAS_SILENCIO.length; void requestTutor({aviso: 'pista'}, false); };
@@ -525,7 +527,7 @@ $('verTraduccion').onclick = () => { const sub = $('subTraduccion'); sub.hidden 
 
 // ---------- Turno: texto o voz → respuesta por frases ----------
 // entrada: null (saludo) · {texto} · {audio, tipo} · {continuar: true} (reintento sin turno nuevo)
-// · {aviso: 'silencio'|'pista'} (el alumno se quedó en blanco o pidió ayuda: no es un turno suyo)
+// · {aviso: 'iniciativa'|'pista'} (el alumno se quedó en blanco o pidió ayuda: no es un turno suyo)
 async function requestTutor(entrada, opening = false) {
   if (busy || !config?.token || !tutor || !avatar) return;
   if (!opening) stop();

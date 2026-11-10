@@ -67,3 +67,13 @@ test('the transcription also expects the learner language', async () => {
   assert.equal(pistaTranscripcion('ja'), undefined);
   assert.equal(pistaTranscripcion('ja', 'xx'), undefined);
 });
+
+test('after about 4 silent seconds the tutor takes the initiative and asks the learner for the topic', async () => {
+  const { notaAviso } = await import('../src/lib/ia.js');
+  const n = notaAviso('iniciativa');
+  assert.match(n, /pregúntale de qué le gustaría hablar/);
+  assert.match(n, /frase modelo/);
+  assert.match(n, /situación de práctica, no salgas de la escena/);
+  assert.match(n, /Nunca impongas tú un tema/);
+  assert.match(systemPrompt({ idiomaMeta: 'en', idiomaNativo: 'es', nivel: 2, tutorId: 'avatar_chloe' }), /TEMAS\. El tema lo elige el alumno/);
+});

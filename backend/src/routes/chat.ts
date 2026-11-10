@@ -16,7 +16,7 @@ const EsquemaChat = z.object({
   situacionId: z.number().int().min(1).max(50).optional(), situacion: z.string().max(4000).optional(), objetivo: z.string().max(4000).optional(),
   objetivoId: z.string().max(24).optional(), modo: z.enum(['practica', 'prueba']).default('practica'),
   // Videollamada: silencio largo o botón «Pista» (no es un turno del alumno).
-  aviso: z.enum(['silencio', 'pista']).optional(),
+  aviso: z.enum(['silencio', 'iniciativa', 'pista']).optional(),
   // Videollamada: el porqué de las correcciones y las pistas en el idioma del alumno o en el de la llamada.
   explica: z.enum(['nativo', 'meta']).optional(),
   // Topes: sin ellos, el límite de 2 MB del cuerpo dejaba mandar prompts enormes.
