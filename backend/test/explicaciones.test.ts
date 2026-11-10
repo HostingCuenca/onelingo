@@ -77,3 +77,13 @@ test('after about 4 silent seconds the tutor takes the initiative and asks the l
   assert.match(n, /Nunca impongas tú un tema/);
   assert.match(systemPrompt({ idiomaMeta: 'en', idiomaNativo: 'es', nivel: 2, tutorId: 'avatar_chloe' }), /TEMAS\. El tema lo elige el alumno/);
 });
+
+test('beginners in native mode get every question translated; topics are offered, not imposed', async () => {
+  const base = { idiomaMeta: 'en', idiomaNativo: 'es', tutorId: 'avatar_chloe', explica: 'nativo' as const };
+  assert.match(systemPrompt({ ...base, nivel: 1 }), /NIVEL INICIAL: casi no entiende inglés/);
+  assert.doesNotMatch(systemPrompt({ ...base, nivel: 4 }), /NIVEL INICIAL/);
+  assert.doesNotMatch(systemPrompt({ ...base, nivel: 1, explica: 'meta' }), /NIVEL INICIAL/);
+  const { textoFicha } = await import('../src/lib/ficha_alumno.js');
+  const f = { sobreMi: [], intereses: [], objetivo: '', comoHabla: '', domina: [], errores: [], comoAprende: [], plan: { foco: '', porque: '', siguientes: [], avance: '' }, pendiente: ['Decir qué celebra en su fiesta'] };
+  assert.match(textoFicha(f), /nunca lo impongas/);
+});

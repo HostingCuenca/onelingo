@@ -6,7 +6,7 @@ import {createLumo} from './lumo.js?v=27';
 import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
 import {createAvatarTH} from './avatar-th.js?v=14';
 import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
-import {abrirEscucha, esEco, vivoDisponible} from './vivo.js?v=5';
+import {abrirEscucha, esEco, escrituraAjena, vivoDisponible} from './vivo.js?v=6';
 import {t, nombreTema, traducirPagina} from './textos.js?v=2';
 
 const $ = id => document.getElementById(id), audio = $('audio');
@@ -814,7 +814,9 @@ async function abrirVivo(motivo = 'inicio') {
         if (!r.ok) throw Error(r.status === 429 ? 'Demasiadas llamadas seguidas.' : await bloqueoTutor(r) ?? `Sin escucha en vivo (${r.status}).`);
         return r.json();
       },
-      onParcial: oirParcial, onFinal: oirFinal,
+      // Lo escrito en otro alfabeto (ruido que Scribe tomó por hindi, árabe…) no es del alumno.
+      onParcial: tx => { if (!escrituraAjena(tx, language(), config.idiomaNativo)) oirParcial(tx); },
+      onFinal: tx => { if (escrituraAjena(tx, language(), config.idiomaNativo)) console.info('escucha: descartado, otro alfabeto'); else oirFinal(tx); },
       onEstado: (e, detalle) => {
         if (gen !== genVivo) return;
         if (e === 'reconectando') status(t('Reconectando el micrófono…'));

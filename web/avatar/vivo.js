@@ -35,6 +35,26 @@ export const vivoDisponible = () => !!(window.AudioWorkletNode && window.WebSock
  * del servidor): el servidor lo guarda para saber por qué se corta en móviles.
  * Eventos: onParcial(texto), onFinal(texto), onEstado('escuchando'|'reconectando'|'cerrado'|'error', detalle).
  */
+/**
+ * Sin idioma fijo, Scribe a veces convierte ruido (un alumno que conducía) en
+ * frases en hindi o árabe. Se descarta lo que esté escrito sobre todo en un
+ * alfabeto que no es ni el del idioma de la clase ni el del alumno.
+ */
+const ESCRITURAS = {
+  latin: /\p{Script=Latin}/u, han: /\p{Script=Han}/u, kana: /[\p{Script=Hiragana}\p{Script=Katakana}]/u,
+  hangul: /\p{Script=Hangul}/u, cirilico: /\p{Script=Cyrillic}/u,
+};
+const ESCRITURA_DE = {zh: ['han'], ja: ['kana', 'han'], ko: ['hangul'], ru: ['cirilico']};
+export function escrituraAjena(texto, ...idiomas) {
+  const permitidas = new Set(idiomas.filter(Boolean).flatMap(i => ESCRITURA_DE[i] ?? ['latin']));
+  // Las siglas y nombres en letras latinas son normales en cualquier idioma.
+  permitidas.add('latin');
+  const letras = [...String(texto)].filter(c => /\p{L}/u.test(c));
+  if (!letras.length) return false;
+  const propias = letras.filter(c => [...permitidas].some(e => ESCRITURAS[e].test(c))).length;
+  return propias / letras.length < 0.5;
+}
+
 export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEstado}) {
   let cerrado = false, silenciado = false, ws = null, ctx = null, stream = null, nodo = null, reintentos = 0, analizador = null, muestras = null;
   let espera = null, abiertaEn = 0, parcial = '', aviso = '', cierre = null;
