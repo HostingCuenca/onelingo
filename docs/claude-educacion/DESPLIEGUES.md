@@ -1304,3 +1304,13 @@ Fecha: 2026-11-11 · Responsable: Claude (Claude Code), tras la prueba en produc
 **Prueba en producción** (simulador en el servidor, sin escribir en la base; informes en `/tmp/onelingo-prueba-prod/` del servidor): 12 avatares con voz real, 41 frases con ElevenLabs y 0 de respaldo, latencia media 494 ms, nota 8/10. Tras edu-92/93: volumen de −19,0 a −18,2 LUFS en todas las frases (incluido el saludo que venía de caché) y latencia media 443-607 ms.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; cp -p backups/20261111-edu-93-cache-volumen/backend/src/lib/voz.ts backend/src/lib/voz.ts; K=backups/20261111-edu-92-volumen; for f in backend/src/routes/chat.ts backend/src/lib/informe_llamada.ts backend/src/herramientas/probar_avatares.ts; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`
+
+## Release: 20261111-edu-94-voz-nativa
+
+Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario («que se escuche con voz nativa en español» y «que no sea tan sensible con el ruido»). Commit `7abcba8`. `lib/voz.ts`, `routes/chat.ts`, `lib/ia.ts`, `lib/informe_llamada.ts`, `herramientas/probar_avatares.ts` + `web/avatar` (`index.html`, `practice.js?v=74`, `vivo.js?v=7`). PM2 reiniciado. `.env` igual. `config.ts` sin tocar. Hashes de prod iguales a `7eaa19f` antes de copiar.
+
+**Contenido:** la ayuda en el idioma del alumno vuelve a sonar, con la voz nativa de ese idioma del mismo tutor (`VOZ_TUTOR[idiomaNativo][avatar]`: Chloe → es_lina, Julia → es_sofia, Hana → es_lumina, Diego → es_antonio; Elena con alumno de inglés → en_matilda) y se lee aparte en el subtítulo pequeño. Escucha en vivo menos sensible: Scribe con `vad_threshold` 0,6 (antes 0,4), `min_speech_duration_ms` 400 (antes 250) y `filter_background_audio` (aceptados en una sesión real abierta desde el servidor); página con umbral de nivel 0,05 (antes 0,035), 250 ms para «Te escucho» y 3 palabras para cortar al tutor mientras habla.
+
+**Prueba en producción** (simulador en el servidor, sin escribir en la base): 5 avatares, 46 frases con ElevenLabs, 0 de respaldo, latencia media 456 ms; volumen de −18,8 a −17,2 LUFS en todas, también entre la voz del idioma y la voz nativa; nota 8,6/10.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261111-edu-94-voz-nativa; for f in backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/lib/ia.ts backend/src/lib/informe_llamada.ts backend/src/herramientas/probar_avatares.ts web/avatar/practice.js web/avatar/vivo.js web/avatar/index.html; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`
