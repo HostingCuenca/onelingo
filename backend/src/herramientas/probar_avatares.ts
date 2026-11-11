@@ -14,7 +14,7 @@ import path from 'node:path';
 import { responder, type Turno } from '../lib/ia.js';
 import { generarJsonOpenAI } from '../lib/ia_openai.js';
 import { evaluarLlamada, CRITERIOS, type Evaluacion } from '../lib/informe_llamada.js';
-import { separadorDeLenguas, sinCorchetes } from '../lib/explicaciones.js';
+import { indicacionEnSuIdioma, separadorDeLenguas, sinCorchetes } from '../lib/explicaciones.js';
 import { obtenerAudioAlineado, rolDeVoz, VOCES } from '../lib/voz.js';
 import { config } from '../lib/config.js';
 import { query, uno } from '../lib/db.js';
@@ -57,7 +57,11 @@ Responde SOLO lo que dirías en voz alta, una o dos frases, sin comillas.`, msgs
 
 type Voz = { texto: string; habla: string; vozClave: string; vozNombre: string; respaldo: boolean; ms: number; lufs?: number | null; error?: string };
 async function vozDe(c: Caso, reply: string): Promise<Voz[]> {
-  const partes = c.explica === 'nativo' ? separadorDeLenguas(c.idioma)(reply) : [{ texto: sinCorchetes(reply), nativo: false }];
+  const sueltas = c.explica === 'nativo' ? separadorDeLenguas(c.idioma)(reply) : [{ texto: sinCorchetes(reply), nativo: false }];
+  // Como chat.ts: la ayuda en su idioma, junta y al final del turno.
+  const juntas = sueltas.filter(p => p.nativo || p.corchete).map(p => p.texto).join(' ');
+  const ayuda = juntas ? await indicacionEnSuIdioma(juntas, c.idioma, c.nativo) : '';
+  const partes = [...sueltas.filter(p => !p.nativo && !p.corchete), ...(ayuda ? [{ texto: ayuda, nativo: true }] : [])];
   const out: Voz[] = [];
   for (const p of partes) {
     // La ayuda en su idioma la dice la voz nativa de ese idioma del mismo tutor.

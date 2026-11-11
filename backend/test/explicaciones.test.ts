@@ -8,12 +8,12 @@ test('explanations in brackets are split by language, even across sentences', ()
   const separar = separadorDeLenguas('ja');
   assert.deepEqual(separar('いいですね！[Como fue ayer, se dice «行きました», no «行く».] 昨日、公園に行きました。'), [
     { texto: 'いいですね！', nativo: false },
-    { texto: 'Como fue ayer, se dice «行きました», no «行く».', nativo: true },
+    { texto: 'Como fue ayer, se dice «行きました», no «行く».', nativo: true, corchete: true },
     { texto: '昨日、公園に行きました。', nativo: false },
   ]);
   const otra = separadorDeLenguas('en');
-  assert.deepEqual(otra('Nice! [Como fue ayer,'), [{ texto: 'Nice!', nativo: false }, { texto: 'Como fue ayer,', nativo: true }]);
-  assert.deepEqual(otra('se dice «went».] Say it?'), [{ texto: 'se dice «went».', nativo: true }, { texto: 'Say it?', nativo: false }]);
+  assert.deepEqual(otra('Nice! [Como fue ayer,'), [{ texto: 'Nice!', nativo: false }, { texto: 'Como fue ayer,', nativo: true, corchete: true }]);
+  assert.deepEqual(otra('se dice «went».] Say it?'), [{ texto: 'se dice «went».', nativo: true, corchete: true }, { texto: 'Say it?', nativo: false }]);
   assert.deepEqual(otra('[ ]'), []);
 });
 
@@ -27,6 +27,8 @@ test('without brackets, a Latin sentence in a non-Latin course is the learner la
 test('a bracketed sentence in the course script is spoken as the course language', () => {
   const separar = separadorDeLenguas('ja');
   assert.equal(separar('[昨日のことなので「いきました」と言います。]')[0].nativo, false);
+  // Pero sigue siendo una indicación: va al final y se pasa a su idioma (indicacionEnSuIdioma).
+  assert.equal(separadorDeLenguas('ja')('[昨日のことなので「いきました」と言います。]')[0].corchete, true);
   assert.equal(separar('[Se dice «いきました».]')[0].nativo, true);
   assert.equal(separadorDeLenguas('en')('[Because it was yesterday.]')[0].nativo, true, 'mismo alfabeto: manda el corchete');
 });
@@ -48,8 +50,10 @@ test('only the video call in native mode asks for bracketed explanations', () =>
   const nativo = systemPrompt({ ...base, explica: 'nativo' });
   assert.match(nativo, /eligió que le EXPLIQUES en español/);
   assert.match(nativo, /entre corchetes/);
-  assert.match(nativo, /\[Como fue ayer, se dice «いきました», no «いく».\]/);
-  assert.match(systemPrompt({ ...base, idiomaMeta: 'es', idiomaNativo: 'en', explica: 'nativo' }), /\[Because it was yesterday, we say «fui», not «voy».\]/);
+  // La indicación en su idioma va al final del turno, en un solo bloque.
+  assert.match(nativo, /昨日、公園に行きました。 言ってみて！ \[Como fue ayer, se dice «いきました», no «いく». Di la frase completa.\]»/);
+  assert.match(nativo, /INDICACIONES, no para traducir/);
+  assert.match(systemPrompt({ ...base, idiomaMeta: 'es', idiomaNativo: 'en', explica: 'nativo' }), /Your turn!|¡Te toca! \[It was yesterday, so we say «fui», not «voy». Say the whole sentence.\]/);
   assert.doesNotMatch(nativo, /tu voz solo habla japonés/);
   const meta = systemPrompt({ ...base, explica: 'meta' });
   assert.doesNotMatch(meta, /EXPLIQUES/);
@@ -86,4 +90,11 @@ test('beginners in native mode get every question translated; topics are offered
   const { textoFicha } = await import('../src/lib/ficha_alumno.js');
   const f = { sobreMi: [], intereses: [], objetivo: '', comoHabla: '', domina: [], errores: [], comoAprende: [], plan: { foco: '', porque: '', siguientes: [], avance: '' }, pendiente: ['Decir qué celebra en su fiesta'] };
   assert.match(textoFicha(f), /nunca lo impongas/);
+});
+
+test('solo se traduce la indicación si puede estar en el idioma meta', async () => {
+  const { indicacionDudosa } = await import('../src/lib/explicaciones.js');
+  assert.equal(indicacionDudosa('Repite la frase completa.', 'ja'), false);
+  assert.equal(indicacionDudosa('もう一度言ってください。', 'ja'), true);
+  assert.equal(indicacionDudosa('Rispondi: sì o no.', 'it'), true, 'con letras latinas no se puede saber');
 });

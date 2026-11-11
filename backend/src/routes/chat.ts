@@ -10,7 +10,7 @@ import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { requierePractica } from '../lib/pagos/suscripciones.js';
 import { actualizarFicha } from '../lib/ficha_alumno.js';
 import { obtenerAudioAlineado, vozDisponible } from '../lib/voz.js';
-import { separadorDeLenguas, sinCorchetes } from '../lib/explicaciones.js';
+import { indicacionEnSuIdioma, separadorDeLenguas, sinCorchetes } from '../lib/explicaciones.js';
 
 const EsquemaChat = z.object({
   idiomaMeta: z.string().max(5), idiomaNativo: z.string().max(5).default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().max(40).default('mia'),
@@ -80,9 +80,31 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
       // parte es una frase propia (otra pronunciación) y el alumno no ve los corchetes.
       const separar = separadorDeLenguas(peticion.idiomaMeta);
       let partes = 0;
+      const emitirFrase = (texto: string, habla?: string) => {
+        const indice = partes++;
+        if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_primera_frase');
+        emit('frase', { indice, texto, ...(habla ? { habla } : {}) });
+        if (conVoz && !controller.signal.aborted) {
+          // Cada frase se mide y se lleva al mismo volumen (~75 ms): con la ganancia fija de la
+          // voz, en prod variaban hasta 7 dB entre turnos (prueba del 11-11).
+          // La frase anterior orienta la entonación solo si es del mismo idioma.
+          const previo = fraseAnterior.habla === habla ? fraseAnterior.texto : ''; fraseAnterior = { texto, habla };
+          voces.push(conTope(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined, habla }), VOZ_TOPE_MS)
+            .then((a) => {
+              if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started), cache: a.cache }, 'chat_primera_voz');
+              emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion, respaldo: !!a.respaldo });
+            })
+            .catch((e) => { req.log.warn({ err: String(e) }, 'chat_voz'); emit('voz', { indice, error: true }); }));
+        }
+      };
+      // La ayuda en el idioma del alumno se junta y suena una sola vez al final del
+      // turno, con la voz nativa de ese idioma del mismo tutor: frase a frase,
+      // alternando idiomas, se oía raro (11-11).
+      let ayuda: string[] = [];
       let r: Awaited<ReturnType<typeof responder>> | undefined;
       for (let intento = 1; !r; intento++) {
         let emitido = false;
+        ayuda = [];
         try {
           r = await responder(peticion, texto => {
             emitido = true;
@@ -90,24 +112,9 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
             emit('reply', sinCorchetes(texto));
           }, controller.signal, (frase) => {
             emitido = true;
-            for (const { texto, nativo } of separar(frase)) {
-              // La ayuda en el idioma del alumno la dice la voz nativa de ese idioma del
-              // mismo tutor (ver PeticionVoz.habla) y la página la muestra aparte.
-              const indice = partes++, habla = nativo ? peticion.idiomaNativo : undefined;
-              if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_primera_frase');
-              emit('frase', { indice, texto, ...(habla ? { habla } : {}) });
-              if (conVoz && !controller.signal.aborted) {
-                // Cada frase se mide y se lleva al mismo volumen (~75 ms): con la ganancia fija de la
-                // voz, en prod variaban hasta 7 dB entre turnos (prueba del 11-11).
-                // La frase anterior orienta la entonación solo si es del mismo idioma.
-                const previo = fraseAnterior.habla === habla ? fraseAnterior.texto : ''; fraseAnterior = { texto, habla };
-                voces.push(conTope(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined, habla }), VOZ_TOPE_MS)
-                  .then((a) => {
-                    if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started), cache: a.cache }, 'chat_primera_voz');
-                    emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion, respaldo: !!a.respaldo });
-                  })
-                  .catch((e) => { req.log.warn({ err: String(e) }, 'chat_voz'); emit('voz', { indice, error: true }); }));
-              }
+            for (const { texto, nativo, corchete } of separar(frase)) {
+              // Lo que iba entre corchetes es una indicación, aunque viniera en el idioma meta.
+              if (nativo || corchete) ayuda.push(texto); else emitirFrase(texto);
             }
           }, (espera) => emit('espera', espera));
         } catch (e) {
@@ -115,6 +122,7 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
           req.log.warn({ err: String(e) }, 'chat_reintento');
         }
       }
+      if (ayuda.length) emitirFrase(await indicacionEnSuIdioma(ayuda.join(' '), peticion.idiomaMeta, peticion.idiomaNativo), peticion.idiomaNativo);
       r = { ...r, respuesta: { ...r.respuesta, reply: sinCorchetes(r.respuesta.reply) } };
       emit('final', r.respuesta);
       await Promise.all(voces);

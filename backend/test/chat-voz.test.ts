@@ -72,14 +72,14 @@ test('/chat retries once when the provider fails before emitting anything', asyn
   } finally { globalThis.fetch = originalFetch; config.iaProveedor = prev.p; config.openaiApiKey = prev.k; pool.query = query; await app.close(); }
 });
 
-test('/chat: la ayuda en el idioma del alumno llega como frase aparte, marcada con su idioma', async () => {
+test('/chat: la ayuda en el idioma del alumno se junta en una sola frase al final del turno', async () => {
   const app = await montar();
   const prev = { p: config.iaProveedor, k: config.openaiApiKey }; config.iaProveedor = 'openai'; config.openaiApiKey = 'test';
   const query = pool.query; (pool as any).query = async () => ({ rows: [] });
   globalThis.fetch = async (url, options) => {
     if (!String(url).includes('/chat/completions')) return originalFetch(url, options);
     if (!JSON.parse(String(options?.body)).stream) return Response.json({ choices: [{ message: { content: '{"analisis":"","corrections":[]}' } }] });
-    return sse('{"reply":"I eat with my family. [«With» significa «con».] Your turn!",', RESTO);
+    return sse('{"reply":"I eat with my family. [«With» significa «con».] Your turn! [Repite la frase.]",', RESTO);
   };
   try {
     const address = await app.listen({ host: '127.0.0.1', port: 0 });
@@ -91,6 +91,9 @@ test('/chat: la ayuda en el idioma del alumno llega como frase aparte, marcada c
     assert.match(frases, /I eat with my family/);
     assert.match(frases, /Your turn/);
     assert.doesNotMatch(frases, /significa/);
-    assert.match(ayudas, /significa/);
+    assert.match(ayudas, /significa[\s\S]*Repite la frase/);
+    const fs = eventos.filter(e => e.tipo === 'frase');
+    assert.equal(fs.filter(e => e.data.habla).length, 1, 'una sola frase en su idioma');
+    assert.equal(fs.at(-1).data.habla, 'es', 'y va al final');
   } finally { globalThis.fetch = originalFetch; config.iaProveedor = prev.p; config.openaiApiKey = prev.k; pool.query = query; await app.close(); }
 });
