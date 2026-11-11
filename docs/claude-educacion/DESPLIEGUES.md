@@ -1274,3 +1274,33 @@ Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Backup:** `backups/20261111-edu-89-informes-llamada/` (los 9 archivos previos y `env.sha`). Panel anterior en `staging/20261111-edu-89-informes-llamada/panel-retirado`.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261111-edu-89-informes-llamada; S=staging/20261111-edu-89-informes-llamada; for f in backend/src/app.ts backend/src/lib/ia.ts backend/src/lib/ia_openai.ts backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/routes/tutor_ia.ts backend/src/routes/voz.ts web/avatar/index.html web/avatar/practice.js; do cp -p $K/$f $f; done; rm backend/src/lib/informe_llamada.ts backend/src/routes/informes.ts; mv panel $S/panel-post && mv $S/panel-retirado panel; sudo -u onelingo -H pm2 restart onelingo-api'`. La tabla `informes_llamada` puede quedarse.
+
+## Release: 20261111-edu-90-web
+
+Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario («sube los commits a github y a producción en general»). Rama subida a GitHub (143 commits, hasta `b14d7c6`). Comparación de todo lo desplegable con prod: backend, `web/avatar` y páginas estáticas iguales al repo (salvo `config.ts`, diferencia intencional del modelo de voz por defecto); la app web de Flutter era del 04-11.
+
+**Web:** `flutter build web --release --dart-define=API_URL=https://onelingo.org/api` desde un worktree limpio de `b14d7c6` en `~/.cache/onelingo-build/edu90` (`web/avatar` del build igual al repo). Staging con enlaces duros de `web/` y `rsync -rlc` encima excluyendo `descargas/`, `apk/` y `avatar/models` (5 archivos); cambio con `mv`. Lleva a la web el código de referido en registro y perfil y lo demás de la app desde el 04-11. `main.dart.js` sha256 `361f6dc4e7344962…`.
+
+**Verificado:** `/`, `/main.dart.js`, `/avatar/index.html`, `/descargas/version.json`, `/privacidad/`, `/panel/` y `/api/salud` en 200; `web/descargas` intacta.
+
+**Rollback:** `ssh onelingo 'cd /var/www/onelingo && R=20261111-edu-90-web && mv web staging/$R/web-post && mv staging/$R/web-retirada web'` (copia también en `backups/20261111-edu-90-web/web-anterior`).
+
+## Release: 20261111-edu-91-fluidez
+
+Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario (no explicar todo en español, el español sonaba «como un gringo», volumen distinto entre idiomas, ruidos que paraban al avatar y expresiones para pedir que repita). Commit `f8f5d87`. `routes/chat.ts`, `lib/ia.ts`, `lib/informe_llamada.ts`, herramientas `probar_avatares.ts` y `medir_volumen_voces.ts` (nueva, solo lectura) + `web/avatar` (`index.html`, `practice.js?v=73`). PM2 reiniciado. `.env` igual. `config.ts` sin tocar. Hashes de prod iguales a `b14d7c6` antes de copiar.
+
+**Contenido:** la ayuda en el idioma del alumno (corchetes) llega como evento `ayuda` y se muestra como subtítulo (`#subAyuda`), sin voz: la voz del tutor habla solo el idioma de la clase. Menos idioma del alumno en el prompt (N1-2: solo lo nuevo o lo que no entendió). Expresiones de llamada real para pedir que repita y para comprobar que le sigue. Página: muletillas y etiquetas de sonido no son turno; una palabra suelta no descarta la respuesta en preparación; la voz del tutor baja solo con voz sostenida (350 ms). Respuesta corta sin la escritura del idioma (ja, zh, ko, ru): puede ser ruido; tras dos intentos no se pide repetir otra vez.
+
+**Pruebas:** backend 182/182. 12 llamadas simuladas con un turno de ruido (`pruebas-tutor/2026-11-11-fluidez2.md`): 8,9/10 de media (correcciones 3,3 → 4,2); 9 de 12 piden repetir con naturalidad ante el ruido.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261111-edu-91-fluidez; for f in backend/src/routes/chat.ts backend/src/lib/ia.ts backend/src/lib/informe_llamada.ts backend/src/herramientas/probar_avatares.ts web/avatar/practice.js web/avatar/index.html; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`
+
+## Release: 20261111-edu-92-volumen y 20261111-edu-93-cache-volumen
+
+Fecha: 2026-11-11 · Responsable: Claude (Claude Code), tras la prueba en producción del mismo pedido. Commits `575dd47` (chat.ts, informe_llamada.ts, probar_avatares.ts) y el siguiente (`lib/voz.ts`). PM2 reiniciado en cada uno. `.env` igual. Hashes de prod comprobados antes de copiar.
+
+**Contenido:** cada frase de la llamada se mide y se lleva a −18 LUFS (antes solo con la ganancia fija de la voz: en prod variaba de −20,8 a −13,2). Los clips de la llamada ya en caché se miden la primera vez que se reutilizan y, si se alejan más de 1,5 dB, se nivelan y se reescriben con la misma clave. El evaluador reintenta con 16 000 tokens si se corta por longitud.
+
+**Prueba en producción** (simulador en el servidor, sin escribir en la base; informes en `/tmp/onelingo-prueba-prod/` del servidor): 12 avatares con voz real, 41 frases con ElevenLabs y 0 de respaldo, latencia media 494 ms, nota 8/10. Tras edu-92/93: volumen de −19,0 a −18,2 LUFS en todas las frases (incluido el saludo que venía de caché) y latencia media 443-607 ms.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; cp -p backups/20261111-edu-93-cache-volumen/backend/src/lib/voz.ts backend/src/lib/voz.ts; K=backups/20261111-edu-92-volumen; for f in backend/src/routes/chat.ts backend/src/lib/informe_llamada.ts backend/src/herramientas/probar_avatares.ts; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`
