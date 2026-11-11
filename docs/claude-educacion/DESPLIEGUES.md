@@ -1244,3 +1244,33 @@ Fecha: 2026-11-10 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Backup:** `backups/20261110-edu-87-respaldo-voz-referidos/` (los 11 archivos previos y `env.sha`). Panel anterior en `staging/20261110-edu-87-respaldo-voz-referidos/panel-retirado`.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261110-edu-87-respaldo-voz-referidos; S=staging/20261110-edu-87-respaldo-voz-referidos; for f in backend/src/lib/config.ts backend/src/lib/ficha_alumno.ts backend/src/lib/ia.ts backend/src/lib/situaciones.ts backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/routes/auth.ts backend/src/app.ts web/avatar/index.html web/avatar/practice.js web/avatar/vivo.js; do cp -p $K/$f $f; done; rm backend/src/lib/voz_respaldo.ts backend/src/routes/referidos.ts; mv panel $S/panel-post && mv $S/panel-retirado panel; sudo -u onelingo -H pm2 restart onelingo-api'`. La tabla `referidos` y las columnas nuevas de `usuarios` pueden quedarse.
+
+## Release: 20261111-edu-88-voces-escucha
+
+Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario (volver a ElevenLabs con la cuenta Creator, voces distintas por avatar y que la escucha en vivo no obligue a pulsar el micrófono). Commit `0728d0c`. Backend (`lib/voz.ts`, `lib/voz_respaldo.ts`, `routes/llamada.ts`) + `web/avatar` (`index.html`, `practice.js?v=71`). PM2 `onelingo-api` reiniciado (solo esa app). `.env` sin cambios (hash igual). `config.ts` de prod sin tocar.
+
+**Contenido:** ElevenLabs vuelve solo en cuanto hay cuota (plan Creator, 121 000 créditos/mes, renueva el 11-12); la voz de respaldo de OpenAI ahora es distinta para cada uno de los 12 avatares (`VOZ_AVATAR`); si la escucha en vivo se corta, la página reintenta sola a los 15, 30, 60 y 120 s (motivo `reintento` en la telemetría) en vez de quedarse en «pulsa para hablar».
+
+**Verificado en producción:** `/api/salud` 200, `/avatar/index.html` con `practice.js?v=71`, Scribe en vivo con token válido desde el servidor, `.env` con el mismo hash.
+
+**Backup:** `backups/20261111-edu-88-voces-escucha/` (los 5 archivos previos y `env.sha`).
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261111-edu-88-voces-escucha; for f in backend/src/lib/voz.ts backend/src/lib/voz_respaldo.ts backend/src/routes/llamada.ts web/avatar/index.html web/avatar/practice.js; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`
+
+## Release: 20261111-edu-89-informes-llamada
+
+Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario («despliega completamente y realiza varias pruebas… debe guardarse informativamente para retroalimentación de cada usuario»). Commit `3f9913f`. Backend (7 archivos modificados, 3 nuevos + `herramientas/probar_avatares.ts`, migración 018) + `web/avatar` (`index.html`, `practice.js?v=72`) + panel. PM2 `onelingo-api` reiniciado (solo esa app). `.env` sin cambios (hash igual). `config.ts` de prod sin tocar. Hashes de prod iguales a `0728d0c` antes de copiar.
+
+**Contenido:**
+- Informe de cada videollamada (`informes_llamada`, migración `018`): al colgar, después de mostrar el resumen al alumno (no le suma espera), un revisor de IA puntúa al tutor de 1 a 5 en habla, enseña, correcciones, apoyo, tema y escucha, con citas y cómo debió decirlo, el nivel real del alumno y una recomendación para la próxima llamada. Se guardan también los datos técnicos de la página: turnos en vivo / pulsando, cortes y reintentos de la escucha, frases con ElevenLabs o con la voz de respaldo, silencios y duración.
+- Panel: «Informes de sus videollamadas» en la ficha de cada alumno y página nueva «Calidad de llamadas» (promedios por tutor, % en vivo, % de voz de respaldo, problemas más repetidos con ejemplos y últimas llamadas).
+- Tutor: jugada F (si responde en su idioma o con una frase rota, darle el modelo completo y que lo diga él, sin celebrarlo como suyo), elogios solo sobre lo que dijo de verdad, y detección sin IA de respuestas sin la escritura del idioma (ja, zh, ko, ru). El evaluador tiene 8000 tokens de salida (con 3000 se cortaba en una llamada de japonés).
+- `/voz/stream` y `/voz/alineada` dicen si el audio salió de ElevenLabs o del respaldo.
+
+**Pruebas:** backend 181/181, `tsc` limpio (también en prod antes del reinicio), panel compila. 12 llamadas simuladas, una por avatar, con voz real en las dos primeras respuestas (`docs/claude-educacion/pruebas-tutor/2026-11-11.md`): nota media 8,1/10, 57 frases con ElevenLabs y 0 de respaldo, latencia media 652 ms; el punto flojo eran las correcciones (3,3/5). Tras el ajuste, los 6 tutores más bajos pasaron de 7,3 a 8,8 de media (`2026-11-11-ajuste.md`), y Hana (ja N1), Lucas y Ana a 10, 9,3 y 9,6 (`ajuste2`, `ajuste3`). Rutas del panel probadas en local con un token de admin.
+
+**Verificado en producción:** «Migración aplicada: 018_informes_llamada.sql»; `/api/salud`, `/avatar/index.html` (`practice.js?v=72`) y `/panel/` en 200; el bundle del panel trae «Calidad de llamadas»; `/api/admin/informes-llamada` y `/api/admin/usuarios/:id/informes` sin sesión → 401. ElevenLabs: plan Creator, 803 de 121 000 créditos usados.
+
+**Backup:** `backups/20261111-edu-89-informes-llamada/` (los 9 archivos previos y `env.sha`). Panel anterior en `staging/20261111-edu-89-informes-llamada/panel-retirado`.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261111-edu-89-informes-llamada; S=staging/20261111-edu-89-informes-llamada; for f in backend/src/app.ts backend/src/lib/ia.ts backend/src/lib/ia_openai.ts backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/routes/tutor_ia.ts backend/src/routes/voz.ts web/avatar/index.html web/avatar/practice.js; do cp -p $K/$f $f; done; rm backend/src/lib/informe_llamada.ts backend/src/routes/informes.ts; mv panel $S/panel-post && mv $S/panel-retirado panel; sudo -u onelingo -H pm2 restart onelingo-api'`. La tabla `informes_llamada` puede quedarse.
