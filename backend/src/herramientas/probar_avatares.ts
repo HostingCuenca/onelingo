@@ -60,9 +60,9 @@ async function vozDe(c: Caso, reply: string): Promise<Voz[]> {
   const partes = c.explica === 'nativo' ? separadorDeLenguas(c.idioma)(reply) : [{ texto: sinCorchetes(reply), nativo: false }];
   const out: Voz[] = [];
   for (const p of partes) {
-    if (p.nativo) continue; // la ayuda en su idioma va escrita, sin voz
-    const habla = '';
-    const clave = rolDeVoz(c.avatar, c.idioma), t0 = Date.now();
+    // La ayuda en su idioma la dice la voz nativa de ese idioma del mismo tutor.
+    const habla = p.nativo ? c.nativo : '';
+    const clave = rolDeVoz(c.avatar, habla || c.idioma), t0 = Date.now();
     try {
       // Como chat.ts: cada frase medida y llevada al mismo volumen.
       const a = await obtenerAudioAlineado({ texto: p.texto, idioma: c.idioma, voz: c.avatar, habla: habla || undefined });

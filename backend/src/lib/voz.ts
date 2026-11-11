@@ -451,7 +451,9 @@ export type Audio = { hash: string; buffer: Buffer; cache: boolean; voz: string;
 /**
  * `idioma` elige la voz (la nativa del idioma practicado); `habla`, si viene, es
  * el idioma en que está escrito el texto (una explicación en el idioma del
- * alumno dentro de la videollamada): la misma voz, con esa pronunciación.
+ * alumno dentro de la videollamada): la dice la voz nativa de ese idioma del
+ * mismo tutor (VOZ_TUTOR). Con la voz del idioma practicado sonaba con acento
+ * extranjero y a otro volumen (11-11).
  */
 export type PeticionVoz = { texto: string; idioma: string; voz?: string; modo?: string; previo?: string; habla?: string };
 type Trozo = { texto: string; hash: string; legado: string; previo?: string; pedido?: string };
@@ -463,7 +465,7 @@ function preparar(p: PeticionVoz) {
   if (!texto) throw new Error('texto_vacio');
   const partes = trocearTexto(texto, config.vozMaxCaracteres);
   if (partes.length > VOZ_MAX_TROZOS) throw new Error(`texto_demasiado_largo (${texto.length} > ${vozMaxTotal()})`);
-  const rol = rolDeVoz(p.voz, p.idioma);
+  const rol = rolDeVoz(p.voz, p.habla && p.habla !== p.idioma ? p.habla : p.idioma);
   const v = VOCES[rol];
   const ajustes = ajustesDeVoz(rol);
   const modelo = config.elevenModelo;

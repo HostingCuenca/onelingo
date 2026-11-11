@@ -91,10 +91,8 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
           }, controller.signal, (frase) => {
             emitido = true;
             for (const { texto, nativo } of separar(frase)) {
-              // La ayuda en el idioma del alumno va como subtítulo, sin voz: dicha por
-              // la voz del tutor (nativa del otro idioma) sonaba con acento extranjero,
-              // a otro volumen, y cortaba la fluidez de la charla (11-11).
-              if (nativo) { emit('ayuda', { texto }); continue; }
+              // La ayuda en el idioma del alumno la dice la voz nativa de ese idioma del
+              // mismo tutor (ver PeticionVoz.habla) y la página la muestra aparte.
               const indice = partes++, habla = nativo ? peticion.idiomaNativo : undefined;
               if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_primera_frase');
               emit('frase', { indice, texto, ...(habla ? { habla } : {}) });

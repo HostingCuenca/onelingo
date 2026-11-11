@@ -72,7 +72,7 @@ test('/chat retries once when the provider fails before emitting anything', asyn
   } finally { globalThis.fetch = originalFetch; config.iaProveedor = prev.p; config.openaiApiKey = prev.k; pool.query = query; await app.close(); }
 });
 
-test('/chat: la ayuda en el idioma del alumno llega como subtítulo, sin frase de voz', async () => {
+test('/chat: la ayuda en el idioma del alumno llega como frase aparte, marcada con su idioma', async () => {
   const app = await montar();
   const prev = { p: config.iaProveedor, k: config.openaiApiKey }; config.iaProveedor = 'openai'; config.openaiApiKey = 'test';
   const query = pool.query; (pool as any).query = async () => ({ rows: [] });
@@ -86,8 +86,8 @@ test('/chat: la ayuda en el idioma del alumno llega como subtítulo, sin frase d
     const r = await originalFetch(address + '/chat', { method: 'POST', headers: { authorization: `Bearer ${app.jwt.sign({ sub: 'test', rol: 'alumno' })}`, 'content-type': 'application/json', accept: 'text/event-stream' },
       body: JSON.stringify({ idiomaMeta: 'en', idiomaNativo: 'es', explica: 'nativo', nivel: 1, tutorId: 'avatar_chloe', historial: [{ rol: 'alumno', texto: 'What is with?' }] }) });
     const eventos = (await r.text()).split('\n\n').filter(l => l.startsWith('data: ')).map(l => JSON.parse(l.slice(6)));
-    const frases = eventos.filter(e => e.tipo === 'frase').map(e => e.data.texto).join(' ');
-    const ayudas = eventos.filter(e => e.tipo === 'ayuda').map(e => e.data.texto).join(' ');
+    const frases = eventos.filter(e => e.tipo === 'frase' && !e.data.habla).map(e => e.data.texto).join(' ');
+    const ayudas = eventos.filter(e => e.tipo === 'frase' && e.data.habla === 'es').map(e => e.data.texto).join(' ');
     assert.match(frases, /I eat with my family/);
     assert.match(frases, /Your turn/);
     assert.doesNotMatch(frases, /significa/);

@@ -91,7 +91,8 @@ export async function abrirEscucha({pedirToken, idioma, onParcial, onFinal, onEs
     const t = await pedirToken(cierre);
     if (cerrado) return;
     const q = new URLSearchParams({model_id: t.modelo || 'scribe_v2_realtime', token: t.token, audio_format: 'pcm_16000', commit_strategy: 'vad',
-      vad_silence_threshold_secs: '0.5', min_speech_duration_ms: '250', ...(idioma ? {language_code: idioma} : {})});
+      // Menos sensible al ruido (11-11): umbral de voz 0,6 (por defecto 0,4), voz mínima 400 ms y filtro de fondo de Scribe.
+      vad_silence_threshold_secs: '0.5', vad_threshold: '0.6', min_speech_duration_ms: '400', filter_background_audio: 'true', ...(idioma ? {language_code: idioma} : {})});
     ws = new WebSocket(`${t.url}?${q}`);
     ws.onopen = () => { abiertaEn = performance.now(); aviso = ''; while (cola.length) enviar(cola.shift()); onEstado?.('escuchando'); };
     ws.onmessage = e => {

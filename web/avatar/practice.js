@@ -6,7 +6,7 @@ import {createLumo} from './lumo.js?v=27';
 import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
 import {createAvatarTH} from './avatar-th.js?v=14';
 import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
-import {abrirEscucha, esEco, escrituraAjena, vivoDisponible} from './vivo.js?v=6';
+import {abrirEscucha, esEco, escrituraAjena, vivoDisponible} from './vivo.js?v=7';
 import {t, nombreTema, traducirPagina} from './textos.js?v=2';
 
 const $ = id => document.getElementById(id), audio = $('audio');
@@ -614,7 +614,8 @@ async function requestTutor(entrada, opening = false) {
         history.push({rol: 'alumno', texto: e.data.texto});
       }
       // Cada frase terminada se muestra y se dice sin esperar al resto.
-      if (e.tipo === 'frase') { if (!frases) mostrarCorreccion(null); $('subTutor').textContent = (frases ? $('subTutor').textContent + ' ' : '') + e.data.texto; frases++; partes.push({texto: e.data.texto, habla: e.data.habla || ''}); encolar(e.data.texto, version, e.data.indice, false, e.data.habla || ''); }
+      // La ayuda en su idioma (habla) suena con la voz nativa del tutor y se lee aparte, más pequeña.
+      if (e.tipo === 'frase') { if (!frases) mostrarCorreccion(null); const sub = e.data.habla ? $('subAyuda') : $('subTutor'); if (e.data.habla) { ayudas++; sub.hidden = false; } sub.textContent = (sub.textContent ? sub.textContent + ' ' : '') + e.data.texto; frases++; partes.push({texto: e.data.texto, habla: e.data.habla || ''}); encolar(e.data.texto, version, e.data.indice, false, e.data.habla || ''); }
       // Ayuda en el idioma del alumno: subtítulo, sin voz (la voz del tutor solo habla el idioma de la clase).
       if (e.tipo === 'ayuda') { if (!frases && !ayudas) mostrarCorreccion(null); ayudas++; const a = $('subAyuda'); a.textContent = (a.textContent ? a.textContent + ' ' : '') + e.data.texto; a.hidden = false; }
       if (e.tipo === 'voz_activa') vozActiva = true;
@@ -625,7 +626,7 @@ async function requestTutor(entrada, opening = false) {
         const r = e.data;
         if (!frases && !ayudas) { mostrarCorreccion(null); frases++; encolar(r.reply, version); }
         // Con ayuda en su idioma, el subtítulo grande muestra solo lo que dice la voz.
-        $('subTutor').textContent = ayudas ? partes.map(p => p.texto).join(' ') : r.reply;
+        $('subTutor').textContent = ayudas ? partes.filter(p => !p.habla).map(p => p.texto).join(' ') : r.reply;
         if (r.espera) espera = r.espera;
         const b = anotarTutor(r.reply);
         if (espera) turnoTutor.espera = espera;
@@ -791,6 +792,8 @@ hablar.addEventListener('click', e => e.preventDefault());
 // ---------- Llamada en vivo (micrófono abierto) ----------
 const palabras = s => (s.trim().match(/[\p{L}\p{N}]+/gu) || []).length + ((/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(s) && s.trim().length >= 3) ? 1 : 0);
 // Lo que el micrófono oye mientras el tutor habla (o justo después) puede ser su propia voz.
+// Para cortar al tutor mientras habla hacen falta 3 palabras: con 2 lo cortaba el ruido.
+const PALABRAS_PARA_CORTAR = 3;
 const tutorSuena = () => sonando && !enPuerta && !audio.paused && audio.src !== SILENCIO;
 const tutorAudible = () => tutorSuena() || performance.now() - finVozEn < 1200;
 // ¿Es eco? Contra lo que suena (no contra frases aún sin decir). Pasado el
@@ -888,8 +891,8 @@ function oirParcial(texto) {
     // lo ya dicho se junta con lo nuevo.
     recuperarTurno(); stop();
   } else if (sonando || busy) {
-    // Ya oyó al tutor: una palabra suelta («yeah», «mm») no lo corta.
-    if (palabras(texto) < 2) return;
+    // Ya oyó al tutor: pocas palabras («yeah», «I see», ruido) no lo cortan.
+    if (palabras(texto) < PALABRAS_PARA_CORTAR) return;
     clearTimeout(silencioTimer); ultimoParcialEn = performance.now();
     stop();
   } else { clearTimeout(silencioTimer); ultimoParcialEn = performance.now(); }
@@ -930,9 +933,10 @@ function animarNivel() {
   // Solo con el tutor sonando de verdad se descuenta su eco (mientras se
   // descarga su voz, lo que entra por el micrófono es el alumno).
   const audible = sonando && !enPuerta && !audio.paused && !audio.ended && audio.src !== SILENCIO;
-  const umbral = Math.max(0.035, audible ? ecoMedio * 3 : 0);
+  // Más alto que antes (0,035): el ruido de la casa ya no cuenta como voz.
+  const umbral = Math.max(0.05, audible ? ecoMedio * 3 : 0);
   if (n > umbral) { vozDesde ||= ahora; calmaDesde = 0; ultimaVoz = ahora; } else { vozDesde = 0; calmaDesde ||= ahora; }
-  const hablando = vozDesde && ahora - vozDesde > 160;
+  const hablando = vozDesde && ahora - vozDesde > 250;
   if (audible) {
     if (!hablando && audio.volume === 1) ecoMedio = ecoMedio * 0.97 + n * 0.03;
     // Bajar la voz del tutor solo con voz sostenida: un golpe o una tos no.
