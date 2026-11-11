@@ -99,9 +99,11 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
               if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_primera_frase');
               emit('frase', { indice, texto, ...(habla ? { habla } : {}) });
               if (conVoz && !controller.signal.aborted) {
+                // Cada frase se mide y se lleva al mismo volumen (~75 ms): con la ganancia fija de la
+                // voz, en prod variaban hasta 7 dB entre turnos (prueba del 11-11).
                 // La frase anterior orienta la entonación solo si es del mismo idioma.
                 const previo = fraseAnterior.habla === habla ? fraseAnterior.texto : ''; fraseAnterior = { texto, habla };
-                voces.push(conTope(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined, habla }, indice === 0), VOZ_TOPE_MS)
+                voces.push(conTope(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined, habla }), VOZ_TOPE_MS)
                   .then((a) => {
                     if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started), cache: a.cache }, 'chat_primera_voz');
                     emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion, respaldo: !!a.respaldo });

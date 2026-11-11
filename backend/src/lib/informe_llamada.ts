@@ -79,7 +79,9 @@ export const notaDe = (puntos: Record<Criterio, number>) =>
 
 export async function evaluarLlamada(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; explica: string; historial: (Turno | { rol: 'aviso'; texto: string })[] }): Promise<Evaluacion> {
   const transcripcion = p.historial.map(t => t.rol === 'aviso' ? `(aviso: ${t.texto})` : `${t.rol === 'alumno' ? 'ALUMNO' : 'TUTOR'}: ${t.texto}`).join('\n');
-  const r = await generarJsonOpenAI(promptEvaluador(p), [{ role: 'user', content: `TRANSCRIPCIÓN:\n${transcripcion}` }], ESQUEMA_EVALUACION, config.openaiModeloTutor, 'low', 1, 8000);
+  const pedir = (max: number) => generarJsonOpenAI(promptEvaluador(p), [{ role: 'user', content: `TRANSCRIPCIÓN:\n${transcripcion}` }], ESQUEMA_EVALUACION, config.openaiModeloTutor, 'low', 1, max);
+  // A veces se corta por longitud (llamada larga o razonamiento extenso): un reintento con más margen.
+  const r = await pedir(8000).catch((e) => /length/.test(String(e)) ? pedir(16000) : Promise.reject(e));
   const j = r.json as Omit<Evaluacion, 'nota'>;
   const puntos = Object.fromEntries(criterios.map(c => [c, limitar(j.puntos?.[c])])) as Record<Criterio, number>;
   return {

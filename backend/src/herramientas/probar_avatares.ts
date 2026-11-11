@@ -9,6 +9,7 @@
  *   npx tsx src/herramientas/probar_avatares.ts [--avatares chloe,andre] [--turnos 6] [--frases-voz 2] [--guardar]
  */
 import { mkdir, writeFile } from 'node:fs/promises';
+import { medirLufs, OBJETIVO_LUFS } from '../lib/volumen.js';
 import path from 'node:path';
 import { responder, type Turno } from '../lib/ia.js';
 import { generarJsonOpenAI } from '../lib/ia_openai.js';
@@ -54,7 +55,7 @@ Responde SOLO lo que dirías en voz alta, una o dos frases, sin comillas.`, msgs
   return String(r.json.texto);
 }
 
-type Voz = { texto: string; habla: string; vozClave: string; vozNombre: string; respaldo: boolean; ms: number; error?: string };
+type Voz = { texto: string; habla: string; vozClave: string; vozNombre: string; respaldo: boolean; ms: number; lufs?: number | null; error?: string };
 async function vozDe(c: Caso, reply: string): Promise<Voz[]> {
   const partes = c.explica === 'nativo' ? separadorDeLenguas(c.idioma)(reply) : [{ texto: sinCorchetes(reply), nativo: false }];
   const out: Voz[] = [];
@@ -63,8 +64,9 @@ async function vozDe(c: Caso, reply: string): Promise<Voz[]> {
     const habla = '';
     const clave = rolDeVoz(c.avatar, c.idioma), t0 = Date.now();
     try {
-      const a = await obtenerAudioAlineado({ texto: p.texto, idioma: c.idioma, voz: c.avatar, habla: habla || undefined }, true);
-      out.push({ texto: p.texto, habla, vozClave: clave, vozNombre: VOCES[clave]?.nombre ?? '?', respaldo: !!a.respaldo, ms: Date.now() - t0 });
+      // Como chat.ts: cada frase medida y llevada al mismo volumen.
+      const a = await obtenerAudioAlineado({ texto: p.texto, idioma: c.idioma, voz: c.avatar, habla: habla || undefined });
+      out.push({ texto: p.texto, habla, vozClave: clave, vozNombre: VOCES[clave]?.nombre ?? '?', respaldo: !!a.respaldo, ms: Date.now() - t0, lufs: await medirLufs(a.buffer).catch(() => null) });
     } catch (e) { out.push({ texto: p.texto, habla, vozClave: clave, vozNombre: VOCES[clave]?.nombre ?? '?', respaldo: false, ms: Date.now() - t0, error: String(e).slice(0, 120) }); }
   }
   return out;
@@ -130,6 +132,10 @@ const md: string[] = [
 const vocesPorIdioma = new Map<string, string[]>();
 for (const r of resultados) { const v = r.voces.find(x => !x.habla); if (v) vocesPorIdioma.set(r.caso.idioma, [...(vocesPorIdioma.get(r.caso.idioma) ?? []), v.vozClave]); }
 md.push(`**Voces:** ${resultados.reduce((a, r) => a + r.voces.length, 0)} frases sintetizadas, ${resultados.reduce((a, r) => a + r.voces.filter(x => x.respaldo).length, 0)} con la voz de respaldo, ${resultados.reduce((a, r) => a + r.voces.filter(x => x.error).length, 0)} con error. Latencia media ${media(resultados.flatMap(r => r.voces.map(x => x.ms)))} ms.`, '');
+{
+  const l = resultados.flatMap(r => r.voces.map(v => v.lufs)).filter((x): x is number => typeof x === 'number');
+  if (l.length) md.push('', `**Volumen:** ${l.length} frases medidas · objetivo ${OBJETIVO_LUFS} LUFS · media ${media(l)} · de ${Math.min(...l).toFixed(1)} a ${Math.max(...l).toFixed(1)} LUFS.`);
+}
 for (const r of resultados) {
   const e = r.evaluacion;
   md.push(`## ${nombre(r.caso.avatar)} · ${r.caso.idioma} N${r.caso.nivel} · explica ${r.caso.explica}${e ? ` · ${e.nota}/10` : ''}`, '');
@@ -143,7 +149,7 @@ for (const r of resultados) {
   if (v) md.push(`**Voz:** ${v.vozNombre} (\`${v.vozClave}\`)${r.voces.some(x => x.respaldo) ? ' · con frases de respaldo' : ' · todo ElevenLabs'}${r.voces.some(x => x.error) ? ` · errores: ${r.voces.filter(x => x.error).map(x => x.error).join('; ')}` : ''}`, '');
   md.push('<details><summary>Transcripción</summary>', '', ...r.transcripcion.map(t => t.rol === 'aviso' ? `- *(silencio: ${t.texto})*` : `- **${t.rol === 'tutor' ? 'T' : 'A'}:** ${t.texto}`), '', '</details>', '');
 }
-const dir = path.resolve('..', 'docs', 'claude-educacion', 'pruebas-tutor');
+const dir = path.resolve(arg('salida', path.join('..', 'docs', 'claude-educacion', 'pruebas-tutor')));
 await mkdir(dir, { recursive: true });
 await writeFile(path.join(dir, `${fecha}.md`), md.join('\n'));
 await writeFile(path.join(dir, `${fecha}.json`), JSON.stringify(resultados, null, 1));
@@ -152,7 +158,7 @@ console.log(`nota media ${media(ev.map(r => r.evaluacion!.nota))}`);
 for (const r of resultados) console.log(nombre(r.caso.avatar), r.caso.idioma, `N${r.caso.nivel}`, r.evaluacion?.nota ?? r.error, r.voces.filter(x => !x.habla)[0]?.vozClave, `respaldo ${r.voces.filter(x => x.respaldo).length}/${r.voces.length}`);
 
 if (GUARDAR) {
-  if (/onelingo\.org|179\.197/.test(config.databaseUrl)) throw new Error('--guardar es solo para la base local');
+  if (/onelingo\.org|179\.197/.test(config.databaseUrl) || process.cwd().startsWith('/var/www/')) throw new Error('--guardar es solo para la base local');
   const u = await uno<{ id: string }>(`INSERT INTO usuarios (email, nombre, apellido, idioma_nativo, idioma_meta, es_demo) VALUES ('pruebas-tutor@onelingo.demo', 'Pruebas', 'Tutor', 'es', 'en', true)
     ON CONFLICT (email) DO UPDATE SET nombre = EXCLUDED.nombre RETURNING id`);
   for (const r of resultados) await query(`INSERT INTO informes_llamada (usuario_id, idioma, nivel, tutor_id, explica, turnos, evaluacion, tecnico, nota) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
