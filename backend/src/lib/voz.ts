@@ -2,7 +2,7 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { mkdir, readFile, writeFile, stat, rename, unlink, link, copyFile, constants } from 'node:fs/promises';
-import { conGananciaVoz, normalizarVolumen } from './volumen.js';
+import { conGananciaVoz, medirLufs, normalizarVolumen, OBJETIVO_LUFS } from './volumen.js';
 import path from 'node:path';
 import { Readable } from 'node:stream';
 import { config } from './config.js';
@@ -619,6 +619,22 @@ const enCursoAlineado = new Map<string, Promise<{ buffer: Buffer; alineacion: Al
 const guardando = new Set<Promise<unknown>>();
 /** Termina de guardar en disco y en `audios` lo ya entregado (pruebas, apagado). */
 export const esperarGuardados = () => Promise.all([...guardando]);
+const nivelados = new Set<string>();
+/**
+ * Audio en caché de la llamada guardado con la ganancia fija de la voz (antes
+ * del 11-11): la primera vez que se reutiliza se mide y, si se aleja del
+ * objetivo, se nivela y se reescribe (misma clave, mismo contenido, otro volumen).
+ */
+async function nivelarCache(hash: string, buffer: Buffer, rol: string) {
+  if (nivelados.has(hash)) return buffer;
+  if (nivelados.size > 50_000) nivelados.clear();
+  nivelados.add(hash);
+  const lufs = await medirLufs(buffer).catch(() => null);
+  if (lufs === null || Math.abs(lufs - OBJETIVO_LUFS) < 1.5) return buffer;
+  const nuevo = await normalizarVolumen(buffer, rol);
+  if (nuevo !== buffer && nuevo.length) void escribirEntero(path.join(dir(), `${hash}.mp3`), nuevo).catch(() => {});
+  return nuevo;
+}
 /**
  * Un trozo con su alineación. Si el MP3 ya estaba en caché se reutiliza (no se
  * vuelve a pagar) y la alineación sale de `<hash>.json` si existe; si no, va
@@ -628,7 +644,7 @@ async function trozoAlineado(t: Trozo, idioma: string, rol: string, vozId: strin
   const enMarcha = enCursoAlineado.get(t.hash);
   if (enMarcha) { const r = await enMarcha; return { hash: t.hash, buffer: r.buffer, alineacion: r.alineacion, cache: false }; }
   const hit = await buscarTrozo(t, idioma, rol, vozId);
-  if (hit) { void registrarUso(hit.hash); return { hash: hit.hash, buffer: hit.buffer, alineacion: await leerAlineacion(hit.hash), cache: true }; }
+  if (hit) { void registrarUso(hit.hash); return { hash: hit.hash, buffer: await nivelarCache(hit.hash, hit.buffer, rol), alineacion: await leerAlineacion(hit.hash), cache: true }; }
   // Respaldo sin alineación: el cliente reparte las letras a lo largo del audio.
   return conRespaldo(t, idioma, rol, () => trozoAlineadoEleven(t, idioma, rol, vozId, rapido), { alineacion: null as Alineacion | null });
 }
