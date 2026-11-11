@@ -72,7 +72,7 @@ export default async function rutas(app: FastifyInstance) {
     return {
       reply: r.respuesta.reply, espera: r.respuesta.espera ?? null, traduccion: r.respuesta.traduccion,
       correcciones: r.respuesta.corrections.map((c) => ({ original: c.original, correcto: c.correcto, explicacion: c.explicacion })),
-      notas: [estadoTurno(historial), notaVariedad(historial, d.ajustes)].filter(Boolean), modelo: r.modelo, ms: Date.now() - t0,
+      notas: [estadoTurno(historial, undefined, d.idiomaMeta), notaVariedad(historial, d.ajustes)].filter(Boolean), modelo: r.modelo, ms: Date.now() - t0,
     };
   });
 

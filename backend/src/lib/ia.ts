@@ -88,7 +88,8 @@ ${explica === 'nativo' ? `- IDIOMAS. Conversas en ${metaN}, pero el alumno eligi
     ? 'y como última frase pídele que diga él la frase completa, cada vez con otras palabras ("Can you say it?", "Your turn: the whole sentence.", "Try it with «went»."). Ahí termina el turno, sin otra pregunta. Si no te caben las frases, acorta la reacción, nunca la forma correcta ni la petición de repetir.'
     : 'y en vez de pedirle que la repita, sigue con una pregunta que le haga usar la forma correcta en su respuesta ("And what did you do after that?"). Si no te caben las frases, acorta la reacción, nunca la forma correcta.'}
   E) Si hay dos errores en el mismo mensaje, corrige en voz alta solo el más importante (D); el otro no lo señales: queda en la tarjeta escrita.
-  F) Frase correcta, aunque sea corta o distinta de como la dirías tú ("Home.", "Pizza, please."): no hay nada que corregir. Conversa.
+  F) Respondió en ${nativo} (todo o mezclado: "vamos a walk", "Me gusta pasta") o con una frase rota sin verbo o sin partícula ("Yo comer y descansar"): eso lo dijo él, no tú. Dale la frase que quiso decir, completa y en el idioma de la llamada, marcada como modelo ("In English: «I eat and rest.»", "We say: «Mi piace la pasta.»") y ${a.pedirRepetir ? 'pídele que la diga él' : 'sigue con una pregunta que le haga usarla'}. Nunca la celebres como si la hubiera dicho él ("Yes, «I eat and rest»!" está mal) ni pases a otra pregunta sin darle el modelo.
+  G) Frase correcta, aunque sea corta o distinta de como la dirías tú ("Home.", "Pizza, please."): no hay nada que corregir. Conversa.
 - Una sola corrección hablada por turno. Nunca le quites importancia al error ("small thing", "just a little thing"): dilo con naturalidad y sigue. Corregir no es cortar la charla: tras la repetición, vuelve a lo que te contaba.
 - En niveles 1 y 2 no uses términos de gramática en voz alta ("past tense", "irregular", "verb", "passé composé", "Dativ"): enseña con ejemplos que contrastan ("Today I go. Yesterday I went.").
 - Si pregunta por qué, explícalo con una frase sencilla y dos ejemplos que contrasten, sin jerga en niveles 1-2, y pídele que lo use.
@@ -169,7 +170,7 @@ CÓMO ENSEÑAR.
 - Si no entiende, se bloquea o escribe en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}: no traduzcas todo; ${enNativo ? `aclárale en una frase en ${nativo} entre corchetes lo que no entendió` : `explica con palabras más fáciles o un ejemplo en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}`}, repite la pregunta más sencilla y con opciones, e invítalo a intentarlo.
 - Si pregunta por qué o pide la regla: explica la regla de la forma CORRECTA que le diste, sin contradecirla. ${enNativo ? `Explícale la regla en ${nativo} entre corchetes, en una o dos frases sin jerga, con dos ejemplos en ${meta} que contrasten (la forma buena frente a la que dijo), y pídele que lo diga él.` : p.nivel <= 4 ? `Está en nivel bajo y te oye por voz: nada de explicación gramatical larga en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta}; usa una frase muy corta en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} con dos ejemplos que contrasten (la forma buena frente a la que dijo, o el pasado frente al presente del mismo verbo) y pídele que lo diga él; la regla completa ya está en su tarjeta de corrección y en 'traduccion'.` : 'Una o dos frases claras con un ejemplo, y pídele que lo use.'} Si al revisarlo ves que su frase tenía un error que no le señalaste, reconócelo con naturalidad y dale la forma buena; nunca justifiques una forma incorrecta.
 - Si pregunta cómo se dice algo, dalo de forma explícita en tu primera frase ("Se dice…"), con un ejemplo corto, y pídele que lo use.
-- Elogios concretos y solo cuando son verdad (cuando usa bien algo difícil, la palabra nueva o se autocorrige), nunca un "great!" automático.
+- Elogios concretos y solo cuando son verdad (cuando usa bien algo difícil, la palabra nueva o se autocorrige), nunca un "great!" automático. Nunca digas que usó algo que no dijo él en su último mensaje, ni "perfecto" o "muy bien" si su frase tenía un error o la dijo en ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo}: revisa sus palabras exactas antes de elogiar.
 - 'suggestions': 2-3 respuestas que el alumno podría decir ahora, correctas, a su nivel y distintas entre sí (no la misma estructura tres veces); si hubo corrección, una usa la forma correcta; si enseñaste algo nuevo, una lo usa.
 ${a.instrucciones ? `INDICACIONES DEL EQUIPO PEDAGÓGICO (mandan sobre lo anterior de DISEÑO y ENSEÑAR, nunca sobre FORMA ni LÍMITES).\n${a.instrucciones}\n` : ''}FORMA.
 - ${enNativo ? `'reply' en ${meta}, natural como un nativo, salvo las explicaciones en ${nativo} entre corchetes (ver IDIOMAS); fuera de los corchetes, ninguna palabra suelta de otro idioma` : `'reply' SIEMPRE en ${IDIOMAS[p.idiomaMeta] ?? p.idiomaMeta} y solo en ese idioma, natural como un nativo: ninguna palabra suelta de otro idioma`}${p.idiomaMeta === 'es' ? ' y sin regionalismos marcados (nada de "qué padre", "chévere", "guay")' : ''}. El ${IDIOMAS[p.idiomaNativo] ?? p.idiomaNativo} va solo en 'traduccion' y en las explicaciones de 'corrections'.
@@ -391,10 +392,26 @@ function vecesPedida(historial: Turno[], modelo: string) {
   return n;
 }
 
-export function estadoTurno(historial: Turno[], veredicto?: Veredicto): string {
+/** Escritura propia de los idiomas que no usan el alfabeto latino. */
+const ESCRITURA: Record<string, RegExp> = { ja: /[\u3040-\u30ff\u4e00-\u9fff]/, zh: /[\u4e00-\u9fff]/, ko: /[\uac00-\ud7af\u1100-\u11ff]/, ru: /[\u0400-\u04ff]/ };
+
+/**
+ * ¿Contestó sin una sola palabra del idioma de la llamada? Solo se puede saber
+ * sin IA en los idiomas con escritura propia. En la prueba del 11-11 el tutor de
+ * japonés N1 celebraba «Sí, pan como» como si lo hubiera dicho en japonés.
+ */
+export function respondioEnSuIdioma(texto: string, idiomaMeta?: string) {
+  const e = idiomaMeta ? ESCRITURA[idiomaMeta] : undefined;
+  return !!e && /\p{L}{2}/u.test(texto) && !e.test(texto);
+}
+
+export function estadoTurno(historial: Turno[], veredicto?: Veredicto, idiomaMeta?: string): string {
   const alumno = historial.filter(t => t.rol === 'alumno').map(t => t.texto);
   const ultimo = alumno[alumno.length - 1], previo = alumno[alumno.length - 2], anterior = alumno[alumno.length - 3];
   if (!ultimo || historial[historial.length - 1]?.rol !== 'alumno') return '';
+  if (respondioEnSuIdioma(ultimo, idiomaMeta)) {
+    return `[Estado del turno, calculado por la app: contestó en su idioma, sin ninguna palabra del idioma de la llamada. Si pregunta algo o dice que no entiende, acláraselo y repite la pregunta más fácil. Si te respondió, jugada F: dale la frase que quiso decir, completa y en el idioma de la llamada, como modelo, y que la diga él. No la celebres como si la hubiera dicho él ni pases a otra pregunta sin el modelo.]`;
+  }
   const notas: string[] = [];
   const error = veredicto?.[0], forma = error ? `«${error.original}» → «${error.correcto}»` : '';
   // Lo que el tutor declaró que esperaba manda. Sin eso (clientes viejos), se
@@ -448,7 +465,7 @@ async function responderModelo(p: { idiomaMeta: string; idiomaNativo: string; ni
     if (p.aviso) mensajes.push({ role: 'user', content: notaAviso(p.aviso) });
     // Junto al último mensaje: lejos, en el prompt, el modelo cedía si el alumno pedía otro idioma o se decía en crisis.
     const u = mensajes[mensajes.length - 1];
-    const notas = p.aviso ? [] : [estadoTurno(p.historial, p.veredicto), notaVariedad(p.historial, p.ajustes ?? ajustesTutor())].filter(Boolean);
+    const notas = p.aviso ? [] : [estadoTurno(p.historial, p.veredicto, p.idiomaMeta), notaVariedad(p.historial, p.ajustes ?? ajustesTutor())].filter(Boolean);
     if (u.role === 'user') mensajes[mensajes.length - 1] = { ...u, content: [`${u.content}\n`, recordatorio(p.idiomaMeta, p.tutorId.startsWith('avatar_') && p.explica === 'nativo' && p.idiomaNativo !== p.idiomaMeta ? p.idiomaNativo : undefined, p.nivel), ...notas].join('\n') };
     const r = onReply && signal
       ? await generarTutorStream(systemPrompt(p), mensajes, onReply, signal, onFrase)

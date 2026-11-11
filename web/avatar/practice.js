@@ -42,6 +42,10 @@ let turno = null, enPuerta = false, ultimaVoz = 0;
 // Frase que suena (y lo dicho justo antes, para el filtro de eco); generación
 // de la escucha en vivo (una apertura vieja que termina tarde se cierra sola).
 let reintentoVivo = null, reintentosVivo = 0, errorVivo = '';
+// Datos técnicos de la llamada para su informe (se mandan al colgar con el resumen).
+const statsVacias = () => ({turnosVivo: 0, turnosPulsar: 0, cortesVivo: 0, reintentosVivo: 0, frasesTutor: 0, frasesRespaldo: 0, avisos: {}, ultimoErrorVivo: ''});
+let stats = statsVacias();
+const contarFrase = respaldo => { stats.frasesTutor++; if (respaldo) stats.frasesRespaldo++; };
 let itemActual = null, dichoReciente = '', genVivo = 0, ultimoParcialEn = 0, bloqueoPantalla = null;
 const alumnoSuena = () => performance.now() - ultimaVoz < 600;
 // Respuesta en camino que aún no se oye (esperando o arrancando el audio).
@@ -278,7 +282,7 @@ function iniciarLlamada() {
   if (vivoDisponible()) abrirVivo();
   else navigator.mediaDevices?.getUserMedia?.({audio: true}).then(s => s.getTracks().forEach(t => t.stop())).catch(() => {});
   document.body.classList.remove('puede-llamar');
-  enLlamada = true; inicioLlamada = Date.now(); iniciarReloj(); controls(); error('');
+  enLlamada = true; inicioLlamada = Date.now(); stats = statsVacias(); iniciarReloj(); controls(); error('');
   mantenerPantalla();
   phase(t('Conectando…'), 'thinking');
   vigilarConexion(epoch);
@@ -388,10 +392,10 @@ function prepararFrase(text, version, indice, habla = '') {
     const delStream = vozDelStream(indice);
     // Si la voz no llega en el stream (servidor viejo o fallo), se pide aparte.
     const datos = delStream ? conLimite(delStream.p, 4000).then(d => d?.audio ? d : pedir()) : pedir();
-    return datos.then(d => fraseAlineada(d, text, habla));
+    return datos.then(d => { contarFrase(d?.respaldo); return fraseAlineada(d, text, habla); });
   }
   return fetch(urlVoz(text, previo, '/voz/stream', habla), {headers: headers(), signal: senalVoz()})
-    .then(r => { if (!r.ok) throw Error(t('La voz no está disponible ({estado}).', {estado: r.status})); return r.arrayBuffer(); })
+    .then(r => { if (!r.ok) throw Error(t('La voz no está disponible ({estado}).', {estado: r.status})); contarFrase(r.headers.get('x-voz-origen') === 'respaldo'); return r.arrayBuffer(); })
     .then(async bytes => ({url: URL.createObjectURL(new Blob([bytes], {type: 'audio/mpeg'})), env: await envolvente(bytes).catch(() => null)}));
 }
 // Cada frase se descarga en cuanto llega (en paralelo a la que suena). Antes
@@ -538,6 +542,7 @@ async function requestTutor(entrada, opening = false) {
   let frases = 0, final = false, transcrito = false, burbujaTutor = null, turnoTutor = null, espera = null;
   const partes = [];
   if (entrada?.texto || entrada?.audio) silencios = 0;
+  if (entrada?.aviso) stats.avisos[entrada.aviso] = (stats.avisos[entrada.aviso] || 0) + 1;
   turno = opening || entrada?.aviso ? null : {hist: history.length, dom: $('messages').childElementCount, corr: correcciones, oido: false, lastReply};
   if (!opening) {
     limpiarTurno();
@@ -759,6 +764,7 @@ function finGrabacion(mio) {
   if (dur < 700) { status(t('Mantén pulsado 🎙 mientras hablas y suelta al terminar.')); return; }
   const blob = new Blob(mio.chunks, {type: mio.rec.mimeType || 'audio/webm'});
   if (blob.size < 500) { status(t('No te escuché. Acércate al micrófono y vuelve a intentarlo.')); return; }
+  stats.turnosPulsar++;
   void requestTutor({audio: blob, tipo: blob.type}, false);
 }
 hablar.addEventListener('pointerdown', e => {
@@ -822,7 +828,7 @@ async function abrirVivo(motivo = 'inicio') {
         if (gen !== genVivo) return;
         if (e === 'reconectando') status(t('Reconectando el micrófono…'));
         if (e === 'escuchando' && $('stage').dataset.phase === 'ready') finTurno(); // quita «Reconectando…»
-        if (e === 'error') { console.warn('escucha en vivo', detalle); errorVivo = String(detalle ?? 'error'); volverAPulsar(t('Se cortó la escucha en vivo: mantén pulsado 🎙 para hablar.'), true); }
+        if (e === 'error') { console.warn('escucha en vivo', detalle); errorVivo = String(detalle ?? 'error'); stats.cortesVivo++; stats.ultimoErrorVivo = errorVivo.slice(0, 160); volverAPulsar(t('Se cortó la escucha en vivo: mantén pulsado 🎙 para hablar.'), true); }
       },
     });
     // Se colgó, se cerró o se volvió a abrir mientras esta apertura esperaba: se descarta.
@@ -857,7 +863,7 @@ function volverAPulsar(pista, reintentar = false) {
       if (!enLlamada || modoVivo) return;
       // Mientras graba con el botón o la pestaña está oculta, se espera un poco más.
       if (grab || busy || document.hidden) { reintentoVivo = setTimeout(intentar, 5000); return; }
-      abrirVivo('reintento');
+      stats.reintentosVivo++; abrirVivo('reintento');
     }, ESPERAS_REINTENTO_VIVO[reintentosVivo++]);
 }
 function alternarMudo() { mudo = !mudo; vivo?.silenciar(mudo); textoVivo(); if (mudo) mostrarAlumno(''); if (!sonando && !busy) finTurno(); }
@@ -895,6 +901,7 @@ function oirFinal(texto) {
   const todo = (arrastre ? arrastre + ' ' : '') + texto; arrastre = '';
   stop();
   retenerHasta = performance.now() + paciencia(todo);
+  stats.turnosVivo++;
   void requestTutor({texto: todo}, false);
 }
 // Cada cuadro: el halo late con la voz del alumno; «Te escucho» aparece en cuanto
@@ -1025,7 +1032,8 @@ async function mostrarResumen() {
   const card = el('div', 'resumen'); card.append(el('h3', null, t('Resumen de la llamada')), el('p', null, t('Preparando…')));
   $('messages').append(card); card.scrollIntoView({block: 'end'});
   try {
-    const r = await fetch(config.api + '/chat/resumen', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify({idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-40)})});
+    const r = await fetch(config.api + '/chat/resumen', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify({idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-40), explica: explicaActual(),
+      tecnico: {...stats, duracionSegundos: Math.round((Date.now() - inicioLlamada) / 1000), dispositivo: /Android/i.test(navigator.userAgent) ? 'android' : /iPhone|iPad/i.test(navigator.userAgent) ? 'ios' : 'web'}})});
     if (!r.ok) throw Error(t('No se pudo preparar el resumen.'));
     const d = await r.json();
     card.replaceChildren(el('h3', null, t('Resumen de la llamada')));

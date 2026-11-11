@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { contextoSituacion, objetivoValido } from '../lib/situaciones.js';
 import { query } from '../lib/db.js';
 import { iaDisponible, responder, resumirSesion } from '../lib/ia.js';
+import { guardarInforme, Tecnico } from '../lib/informe_llamada.js';
 import { openaiDisponible, transcribirOpenAI } from '../lib/ia_openai.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { requierePractica } from '../lib/pagos/suscripciones.js';
@@ -99,7 +100,7 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
                 voces.push(conTope(obtenerAudioAlineado({ texto, idioma: peticion.idiomaMeta, voz: peticion.tutorId, previo: previo || undefined, habla }, true), VOZ_TOPE_MS)
                   .then((a) => {
                     if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started), cache: a.cache }, 'chat_primera_voz');
-                    emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion });
+                    emit('voz', { indice, audio: a.buffer.toString('base64'), alineacion: a.alineacion, respaldo: !!a.respaldo });
                   })
                   .catch((e) => { req.log.warn({ err: String(e) }, 'chat_voz'); emit('voz', { indice, error: true }); }));
               }
@@ -134,15 +135,21 @@ export default async function rutas(app: FastifyInstance) {
     const d = z.object({
       idiomaMeta: z.string().max(5), idiomaNativo: z.string().max(5).default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().max(40),
       historial: z.array(z.object({ rol: z.enum(['tutor', 'alumno']), texto: z.string().max(1200) })).max(40),
+      explica: z.enum(['meta', 'nativo']).default('meta'), tecnico: Tecnico.default({}),
     }).parse(req.body);
     if (!d.historial.some(t => t.rol === 'alumno')) return reply.code(400).send({ error: 'sin_turnos' });
+    // Informe de la llamada (evaluación del tutor + datos técnicos): después de responder, sin espera para el alumno.
+    const informe = (resumen: Awaited<ReturnType<typeof resumirSesion>> | null) => void guardarInforme({ usuarioId: s.sub, ...d, resumen })
+      .catch((e) => req.log.warn({ err: String(e) }, 'informe_llamada'));
     try {
       const r = await resumirSesion(d);
+      informe(r);
       await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1, $2, $3)', [s.sub, 'resumen_tutor', JSON.stringify({ idioma: d.idiomaMeta, tutorId: d.tutorId, nivel: d.nivel, turnos: d.historial.filter(t => t.rol === 'alumno').length, ...r })]);
       // Al colgar, la ficha recoge la llamada entera aunque fuera corta.
       void actualizarFicha(s.sub, d.idiomaMeta, d.idiomaNativo, d.nivel, 1).catch((e) => req.log.warn({ err: String(e) }, 'ficha'));
       return r;
     } catch (e) {
+      informe(null);
       req.log.error({ err: String(e) }, 'chat_resumen');
       return reply.code(502).send({ error: 'resumen_error' });
     }

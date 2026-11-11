@@ -37,7 +37,7 @@ export default async function rutas(app: FastifyInstance) {
     try {
       const a = await obtenerAudioStream(q, controller.signal, () => req.log.info({ ms: Math.round(performance.now() - started) }, 'voz_first_chunk'));
       return reply.type('audio/mpeg').header('cache-control', 'private, no-store')
-        .header('x-accel-buffering', 'no').header('x-voz-cache', a.cache ? 'hit' : 'miss').send(a.stream);
+        .header('x-accel-buffering', 'no').header('x-voz-cache', a.cache ? 'hit' : 'miss').header('x-voz-origen', (a as { respaldo?: boolean }).respaldo ? 'respaldo' : 'elevenlabs').send(a.stream);
     } catch (e) {
       clearTimeout(timer);
       req.log.error({ err: String(e) }, 'voz_stream');
@@ -58,7 +58,7 @@ export default async function rutas(app: FastifyInstance) {
       const a = await obtenerAudioAlineado(q);
       req.log.info({ ms: Math.round(performance.now() - inicio), cache: a.cache, alineada: !!a.alineacion }, 'voz_alineada');
       return reply.header('cache-control', 'private, no-store').header('x-voz-cache', a.cache ? 'hit' : 'miss')
-        .send({ hash: a.hash, cache: a.cache, audio: a.buffer.toString('base64'), alineacion: a.alineacion });
+        .send({ hash: a.hash, cache: a.cache, audio: a.buffer.toString('base64'), alineacion: a.alineacion, respaldo: !!a.respaldo });
     } catch (e) {
       req.log.error({ err: String(e) }, 'voz_alineada');
       return reply.code(502).send({ error: 'voz_error' });

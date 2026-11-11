@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import InformesLlamada from './InformesLlamada'
 import { api, ESTADOS, fecha, hace, IDIOMAS, minutos, nivelCorto, num, PLATAFORMAS, SKILLS, usd } from '../api'
 import ErrorCarga from '../ErrorCarga'
 
@@ -157,7 +158,7 @@ function FichasTutor({ id, idiomaMeta }: { id: string; idiomaMeta: string }) {
   )
 }
 
-export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id: string; volver: () => void; desde?: 'usuarios' | 'suscripciones' | 'reportes' | 'referidos' }) {
+export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id: string; volver: () => void; desde?: 'usuarios' | 'suscripciones' | 'reportes' | 'referidos' | 'calidad' }) {
   const [d, setD] = useState<any>(null)
   const [err, setErr] = useState('')
   const cargar = () => api(`/admin/usuarios/${id}`).then(setD).catch((e) => setErr(e.message))
@@ -169,7 +170,7 @@ export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id:
   const nivelMax = Math.max(-1, ...(d.progresoIdiomas.find((x: any) => x.idioma === u.idioma_meta)?.niveles ?? []).filter((n: any) => n.clases > 0).map((n: any) => n.nivel))
   return (
     <>
-      <div className="cab"><div><span className="volver" onClick={volver}>← {desde === 'suscripciones' ? 'Suscripciones' : desde === 'reportes' ? 'Reportes IA' : desde === 'referidos' ? 'Referidos' : 'Alumnos'}</span><h1>{[u.nombre, u.apellido].filter(Boolean).join(' ')}</h1>
+      <div className="cab"><div><span className="volver" onClick={volver}>← {desde === 'suscripciones' ? 'Suscripciones' : desde === 'reportes' ? 'Reportes IA' : desde === 'referidos' ? 'Referidos' : desde === 'calidad' ? 'Calidad de llamadas' : 'Alumnos'}</span><h1>{[u.nombre, u.apellido].filter(Boolean).join(' ')}</h1>
         <span className="muted mono">{u.email}{u.email_verificado ? ' ✓ verificado' : ' · sin verificar'}{u.telefono ? ` · ${u.telefono}` : ''} · {PLATAFORMAS[u.plataforma || 'desconocida'] ?? u.plataforma} · registrado {fecha(u.creado_en)} · activo {hace(u.ultima_actividad)}{u.referido_codigo ? ` · referido por ${u.referido_codigo}` : ''}</span></div>
         <div>{d.suscripcion.accesoPlan ? <span className="pill ok">Plan {d.suscripcion.planId}</span> : <span className="pill trial">Prueba gratuita · {Math.round(d.suscripcion.prueba.restanteSegundos / 60)} min</span>}</div></div>
       <div className="kpis">
@@ -209,6 +210,7 @@ export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id:
             <table><tbody>{d.empezadas.map((c: any) => <tr key={c.unidad}><td><b>{c.titulo || c.unidad}</b> <span className="muted mono">{c.unidad}</span></td><td className="num">{fecha(c.fecha)}</td></tr>)}</tbody></table></>}
         </div>
         <FichasTutor id={id} idiomaMeta={u.idioma_meta} />
+        <InformesLlamada id={id} />
         <Certificados id={id} />
         <div className="tarjeta"><h2>Conversaciones con el tutor</h2>
           <table><tbody>{d.conversaciones.map((c: any) => <tr key={c.id}><td><span className="muted">{IDIOMAS[c.idioma] ?? c.idioma} · N{c.nivel}{c.situacion_id ? ` · situación ${c.situacion_id}` : ''}</span><br />{c.mensaje_alumno}<br /><span className="muted">↳ {c.respuesta}</span></td><td className="num" style={{ width: 110 }}>{fecha(c.fecha)}<br /><span className="muted">{c.tokens_entrada + c.tokens_salida} tokens</span></td></tr>)}</tbody></table>
