@@ -1314,3 +1314,13 @@ Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Prueba en producción** (simulador en el servidor, sin escribir en la base): 5 avatares, 46 frases con ElevenLabs, 0 de respaldo, latencia media 456 ms; volumen de −18,8 a −17,2 LUFS en todas, también entre la voz del idioma y la voz nativa; nota 8,6/10.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261111-edu-94-voz-nativa; for f in backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/lib/ia.ts backend/src/lib/informe_llamada.ts backend/src/herramientas/probar_avatares.ts web/avatar/practice.js web/avatar/vivo.js web/avatar/index.html; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`
+
+## Release: 20261111-edu-95-indicaciones
+
+Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario («se ve raro a cada frase inglés, español… agrupemos, el español va al final» y «con subtítulos en el avatar, el español que sea más para indicaciones»). Commit `15ffa5f`. `routes/chat.ts`, `lib/ia.ts`, `lib/informe_llamada.ts`, `lib/explicaciones.ts`, `herramientas/probar_avatares.ts`. Sin cambios en `web/avatar` (la página ya mostraba la frase con `habla` en el subtítulo pequeño). PM2 reiniciado. `.env` igual. `config.ts` sin tocar. Hashes de prod iguales a `7abcba8` antes de copiar.
+
+**Contenido:** la ayuda en el idioma del alumno se junta en una sola frase al final del turno, con la voz nativa del tutor. Prompt: ese idioma es para indicaciones (qué hacer, el porqué breve de una corrección, qué significa una palabra nueva, responder lo que pregunta), no para traducir lo dicho. Lo que va entre corchetes se trata como indicación aunque venga en el idioma meta y, si puede estarlo (escritura propia en ja/zh/ko/ru; siempre con dos idiomas latinos), se pasa al idioma del alumno con `config.openaiModelo` (0,6-0,9 s mientras suena lo anterior; tope 2,5 s, si no queda como vino).
+
+**Pruebas:** backend 183/183. Local: con solo el prompt, ja/ko escribían la indicación en su idioma en 9 de 21; con la conversión quedan todas en español. **Prueba en producción** (simulador en el servidor, sin escribir en la base): 5 avatares, 34 frases con ElevenLabs y 0 de respaldo, latencia media 442 ms, volumen de −18,9 a −17,4 LUFS, nota 9,5/10; cada turno suena primero en el idioma de la clase y al final una indicación en español con la voz nativa del tutor.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261111-edu-95-indicaciones; for f in backend/src/routes/chat.ts backend/src/lib/ia.ts backend/src/lib/informe_llamada.ts backend/src/lib/explicaciones.ts backend/src/herramientas/probar_avatares.ts; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`
