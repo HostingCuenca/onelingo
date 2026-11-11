@@ -45,6 +45,7 @@ const CASOS: Caso[] = [
   { avatar: 'avatar_elena', idioma: 'es', nativo: 'en', nivel: 3, explica: 'nativo', alumno: persona(3) },
 ];
 const IDIOMA_ALUMNO: Record<string, string> = { es: 'español', en: 'inglés' };
+const RUIDO: Record<string, string> = { es: 'la de', en: 'so the' };
 
 async function hablaAlumno(c: Caso, historial: Turno[]) {
   const msgs = historial.map(t => ({ role: (t.rol === 'tutor' ? 'user' : 'assistant') as 'user' | 'assistant', content: t.texto }));
@@ -58,7 +59,8 @@ async function vozDe(c: Caso, reply: string): Promise<Voz[]> {
   const partes = c.explica === 'nativo' ? separadorDeLenguas(c.idioma)(reply) : [{ texto: sinCorchetes(reply), nativo: false }];
   const out: Voz[] = [];
   for (const p of partes) {
-    const habla = p.nativo ? c.nativo : '';
+    if (p.nativo) continue; // la ayuda en su idioma va escrita, sin voz
+    const habla = '';
     const clave = rolDeVoz(c.avatar, c.idioma), t0 = Date.now();
     try {
       const a = await obtenerAudioAlineado({ texto: p.texto, idioma: c.idioma, voz: c.avatar, habla: habla || undefined }, true);
@@ -73,7 +75,8 @@ async function llamada(c: Caso): Promise<Resultado> {
   const historial: Turno[] = [], transcripcion: Resultado['transcripcion'] = [], voces: Voz[] = [];
   const tutor = async (aviso?: 'iniciativa') => {
     const r = await responder({ idiomaMeta: c.idioma, idiomaNativo: c.nativo, nivel: c.nivel, tutorId: c.avatar, explica: c.explica, historial: [...historial], aviso } as any);
-    historial.push({ rol: 'tutor', texto: r.respuesta.reply }); transcripcion.push({ rol: 'tutor', texto: r.respuesta.reply });
+    // Como la página: lo que el tutor espera (repetir, elegir) viaja con su turno.
+    historial.push({ rol: 'tutor', texto: r.respuesta.reply, ...(r.respuesta.espera ? { espera: r.respuesta.espera } : {}) } as Turno); transcripcion.push({ rol: 'tutor', texto: r.respuesta.reply });
     if (voces.filter(v => !v.habla).length < FRASES_VOZ * 2 && transcripcion.filter(t => t.rol === 'tutor').length <= FRASES_VOZ) voces.push(...await vozDe(c, r.respuesta.reply));
   };
   try {
@@ -81,6 +84,13 @@ async function llamada(c: Caso): Promise<Resultado> {
     for (let i = 0; i < TURNOS; i++) {
       // A mitad de la llamada, el alumno se queda callado: el tutor toma la iniciativa.
       if (i === Math.floor(TURNOS / 2)) { transcripcion.push({ rol: 'aviso', texto: 'iniciativa' }); await tutor('iniciativa'); }
+      // En el segundo turno, un ruido de fondo mal transcrito: el tutor debería pedir que lo repita.
+      if (i === 1) {
+        const ruido = RUIDO[c.nativo] ?? 'the';
+        transcripcion.push({ rol: 'aviso', texto: `ruido: el alumno no dijo «${ruido}», fue ruido de fondo transcrito` });
+        historial.push({ rol: 'alumno', texto: ruido }); transcripcion.push({ rol: 'alumno', texto: ruido });
+        await tutor();
+      }
       const a = await hablaAlumno(c, historial);
       historial.push({ rol: 'alumno', texto: a }); transcripcion.push({ rol: 'alumno', texto: a });
       await tutor();

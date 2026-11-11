@@ -71,11 +71,12 @@ body.en-llamada .abajo,body.puede-llamar .abajo{flex:none;height:auto;min-height
 .subtitulos{text-align:center;min-height:24px}
 .sub-tutor{margin:0;font-size:clamp(16px,4.5vw,19px);font-weight:800;line-height:1.32}
 .sub-traduccion{margin:4px 0 0;color:var(--gris);font-size:14px}
+.sub-ayuda{margin:6px 0 0;color:var(--gris);font-size:15px;font-style:italic;line-height:1.3}
 .sub-alumno{margin:8px auto 0;display:table;max-width:92%;background:var(--morado);color:#fff;border-radius:16px 16px 4px 16px;padding:7px 12px;font-size:15px;font-weight:700}
 .sub-acciones{display:flex;justify-content:center;gap:14px;margin-top:4px}
 .enlace{color:var(--morado);font-weight:800;font-size:13px;padding:4px}
 .ideas{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}
-.ideas[hidden],.sub-traduccion[hidden],.sub-alumno[hidden],.enlace[hidden]{display:none}
+.ideas[hidden],.sub-traduccion[hidden],.sub-ayuda[hidden],.sub-alumno[hidden],.enlace[hidden]{display:none}
 .ideas-titulo{width:100%;text-align:center;font-size:12px;font-weight:900;color:var(--gris);letter-spacing:.04em;text-transform:uppercase}
 .idea{padding:7px 12px;border-radius:999px;background:#fff;border:1.5px solid var(--morado-claro);color:var(--morado);font-size:14px;font-weight:700}
 .pista{margin:8px 0 0;text-align:center;font-size:13px;color:var(--gris);font-weight:700;min-height:18px}
@@ -177,6 +178,7 @@ body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inl
   <div class="zona-texto">
   <div class="subtitulos" aria-live="polite">
    <p id="subTutor" class="sub-tutor"></p>
+   <p id="subAyuda" class="sub-ayuda" hidden></p>
    <p id="subTraduccion" class="sub-traduccion" hidden></p>
    <div class="sub-acciones"><button id="replay" class="enlace" type="button" hidden>↻ Repetir</button><button id="verTraduccion" class="enlace" type="button" hidden>Ver traducción</button><button id="reportar" class="enlace discreto" type="button" hidden aria-label="Reportar la última respuesta del tutor"><span aria-hidden="true">⚑</span> Reportar</button></div>
    <div id="subCorreccion" class="sub-correccion" hidden></div>
@@ -211,4 +213,4 @@ body.vivo #stage[data-phase=listening] .sub-alumno::after{content:'';display:inl
  </div>
  <audio id="audio" preload="auto" playsinline></audio>
 </section>
-<script type="module" src="./practice.js?v=72"></script></html>
+<script type="module" src="./practice.js?v=73"></script></html>

@@ -497,7 +497,7 @@ function stop() {
 
 // ---------- Subtítulos, correcciones e ideas ----------
 function limpiarTurno() {
-  $('subTutor').textContent = ''; $('subTraduccion').hidden = true; $('verTraduccion').hidden = true; $('replay').hidden = true; $('reportar').hidden = true;
+  $('subTutor').textContent = ''; $('subAyuda').textContent = ''; $('subAyuda').hidden = true; $('subTraduccion').hidden = true; $('verTraduccion').hidden = true; $('replay').hidden = true; $('reportar').hidden = true;
   $('subAlumno').hidden = true; ideas([]);
 }
 // La corrección del turno, en pantalla y no solo en 💬: se queda mientras el
@@ -539,7 +539,7 @@ async function requestTutor(entrada, opening = false) {
   const version = epoch;
   fraseAnterior = {version: -1, texto: ''}; // turno nuevo: sin frase anterior
   busy = true; respuestaCompleta = false; controls(); error(''); ultimoFallo = null;
-  let frases = 0, final = false, transcrito = false, burbujaTutor = null, turnoTutor = null, espera = null;
+  let frases = 0, ayudas = 0, final = false, transcrito = false, burbujaTutor = null, turnoTutor = null, espera = null;
   const partes = [];
   if (entrada?.texto || entrada?.audio) silencios = 0;
   if (entrada?.aviso) stats.avisos[entrada.aviso] = (stats.avisos[entrada.aviso] || 0) + 1;
@@ -615,14 +615,17 @@ async function requestTutor(entrada, opening = false) {
       }
       // Cada frase terminada se muestra y se dice sin esperar al resto.
       if (e.tipo === 'frase') { if (!frases) mostrarCorreccion(null); $('subTutor').textContent = (frases ? $('subTutor').textContent + ' ' : '') + e.data.texto; frases++; partes.push({texto: e.data.texto, habla: e.data.habla || ''}); encolar(e.data.texto, version, e.data.indice, false, e.data.habla || ''); }
+      // Ayuda en el idioma del alumno: subtítulo, sin voz (la voz del tutor solo habla el idioma de la clase).
+      if (e.tipo === 'ayuda') { if (!frases && !ayudas) mostrarCorreccion(null); ayudas++; const a = $('subAyuda'); a.textContent = (a.textContent ? a.textContent + ' ' : '') + e.data.texto; a.hidden = false; }
       if (e.tipo === 'voz_activa') vozActiva = true;
       if (e.tipo === 'voz') { window.__marca?.('voz_llega', e.data.indice); vozDelStream(e.data.indice)?.ok(e.data); }
-      if (e.tipo === 'reply') { if (!frases) { mostrarCorreccion(null); $('subTutor').textContent = e.data; frases++; encolar(e.data, version); } anotarTutor(e.data); }
+      if (e.tipo === 'reply') { if (!frases && !ayudas) { mostrarCorreccion(null); $('subTutor').textContent = e.data; frases++; encolar(e.data, version); } anotarTutor(e.data); }
       if (e.tipo === 'final') {
         final = true;
         const r = e.data;
-        if (!frases) { mostrarCorreccion(null); frases++; encolar(r.reply, version); }
-        $('subTutor').textContent = r.reply;
+        if (!frases && !ayudas) { mostrarCorreccion(null); frases++; encolar(r.reply, version); }
+        // Con ayuda en su idioma, el subtítulo grande muestra solo lo que dice la voz.
+        $('subTutor').textContent = ayudas ? partes.map(p => p.texto).join(' ') : r.reply;
         if (r.espera) espera = r.espera;
         const b = anotarTutor(r.reply);
         if (espera) turnoTutor.espera = espera;
@@ -796,6 +799,10 @@ const tutorAudible = () => tutorSuena() || performance.now() - finVozEn < 1200;
 // Ya callado, solo cuenta su última frase: tras «We say «I went to the park». Can you say it?»,
 // el alumno que repite el modelo enseguida no es eco (antes se descartaba y la llamada se quedaba esperando).
 const pareceEco = texto => tutorAudible() && (tutorSuena() || palabras(texto) > 2) && esEco(texto, `${tutorSuena() ? dichoReciente : itemActual?.text || ''} ${relleno}`);
+// Ruido transcrito: muletillas sueltas («mm», «uh», «oh») o etiquetas de sonido («(risas)», «[música]»).
+// No son un turno ni cortan al tutor: con un golpe o una tos el avatar se quedaba parado.
+const MULETILLA = /^(m+|m+h+m+|h+m+|u+h+|u+m+|u+h+m+|e+h+|e+r+m*|e+h+m+|a+h+|o+h+|a+h+a+|aj[aá]|ajá)$/iu;
+const soloRuido = texto => { const p = String(texto).replace(/\([^)]*\)|\[[^\]]*\]/g, ' ').match(/[\p{L}\p{N}]+/gu) || []; return p.every(w => MULETILLA.test(w)); };
 function textoVivo() { $('hablarTexto').textContent = t(mudo ? 'Silenciado · toca 🎙 para hablar' : 'Micrófono abierto · habla cuando quieras'); document.body.classList.toggle('mudo', mudo); }
 // El servidor no deja usar al tutor: prueba gratuita agotada (402) o modo demo cerrado (403).
 async function bloqueoTutor(r) {
@@ -870,18 +877,22 @@ function alternarMudo() { mudo = !mudo; vivo?.silenciar(mudo); textoVivo(); if (
 // Mientras el alumno habla: se muestra lo que va diciendo y, si el tutor
 // estaba hablando o pensando, se le interrumpe.
 function oirParcial(texto) {
-  if (!enLlamada || mudo || !texto.trim()) return;
+  if (!enLlamada || mudo || !texto.trim() || soloRuido(texto)) return;
   if (pareceEco(texto)) return;
-  clearTimeout(silencioTimer); ultimoParcialEn = performance.now();
   if (noSeOye() || (busy && !sonando && !turno?.oido)) {
+    // Una palabra suelta puede ser ruido mal transcrito: no se descarta la
+    // respuesta del tutor por eso (si de verdad sigue hablando, llega más).
+    if (palabras(texto) < 2) return;
+    clearTimeout(silencioTimer); ultimoParcialEn = performance.now();
     // Seguía hablando tras una pausa: la respuesta en preparación se descarta y
     // lo ya dicho se junta con lo nuevo.
     recuperarTurno(); stop();
   } else if (sonando || busy) {
     // Ya oyó al tutor: una palabra suelta («yeah», «mm») no lo corta.
     if (palabras(texto) < 2) return;
+    clearTimeout(silencioTimer); ultimoParcialEn = performance.now();
     stop();
-  }
+  } else { clearTimeout(silencioTimer); ultimoParcialEn = performance.now(); }
   // Si lo nuevo no llega a cerrarse (ruido, una tos), se responde a lo que ya
   // había; cada parcial lo aplaza (si no, cortaba a mitad de una frase larga).
   if (arrastre) {
@@ -893,6 +904,7 @@ function oirParcial(texto) {
 }
 function oirFinal(texto) {
   if (!enLlamada || mudo) return;
+  if (soloRuido(texto)) { console.info('escucha: descartado, solo ruido o muletillas'); return; }
   if (pareceEco(texto)) return;
   // Asentir («yeah», «mm-hm») mientras habla el tutor no es un turno.
   if (tutorSuena() && (!turno || turno.oido) && palabras(texto) < 2) return;
@@ -923,7 +935,8 @@ function animarNivel() {
   const hablando = vozDesde && ahora - vozDesde > 160;
   if (audible) {
     if (!hablando && audio.volume === 1) ecoMedio = ecoMedio * 0.97 + n * 0.03;
-    if (hablando) audio.volume = 0.3;
+    // Bajar la voz del tutor solo con voz sostenida: un golpe o una tos no.
+    if (hablando && ahora - vozDesde > 350) audio.volume = 0.3;
     else if (audio.volume < 1 && ahora - calmaDesde > 500) audio.volume = 1;
   } else {
     if (audio.volume < 1) audio.volume = 1;

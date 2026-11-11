@@ -194,9 +194,11 @@ test('turn state flags repetition attempts and very short answers', () => {
   assert.match(estadoTurno([t('tutor', 'Where did you eat?'), t('alumno', 'Home.'), t('tutor', 'What did you eat?'), t('alumno', 'Pizza')]), /muy pocas palabras/);
   assert.match(estadoTurno([t('tutor', '何をしましたか？'), t('alumno', '公園を行きました'), t('tutor', '「公園に行きました」ですね。言ってみてください。'), t('alumno', '公園を行きました')]), /repitiendo/);
   assert.equal(estadoTurno([t('alumno', 'Hi'), t('tutor', 'Hello!')]), '');
-  assert.match(estadoTurno([t('tutor', 'パンを食べますか。'), t('alumno', 'Sí, pan como.')], undefined, 'ja'), /contestó en su idioma[\s\S]*jugada F/);
-  assert.match(estadoTurno([t('tutor', 'Что ты пьёшь?'), t('alumno', 'Agua')], undefined, 'ru'), /contestó en su idioma/);
-  assert.doesNotMatch(estadoTurno([t('tutor', 'パンを食べますか。'), t('alumno', 'No entiendo ごはん')], undefined, 'ja'), /contestó en su idioma/);
+  assert.match(estadoTurno([t('tutor', 'パンを食べますか。'), t('alumno', 'Sí, pan como.')], undefined, 'ja'), /contestó sin ninguna palabra[\s\S]*jugada F/);
+  assert.match(estadoTurno([t('tutor', 'Что ты пьёшь?'), t('alumno', 'Agua')], undefined, 'ru'), /muy corto[\s\S]*repita/);
+  const pedir = (m: string) => ({ rol: 'tutor' as const, texto: `Скажи: «${m}»`, espera: { tipo: 'repetir' as const, modelo: m } });
+  assert.match(estadoTurno([pedir('Я хочу есть'), t('alumno', 'Ya quiero es'), pedir('Я хочу есть'), t('alumno', 'Ya quiero es por favor')], undefined, 'ru'), /no se lo pidas otra vez/);
+  assert.doesNotMatch(estadoTurno([t('tutor', 'パンを食べますか。'), t('alumno', 'No entiendo ごはん')], undefined, 'ja'), /contestó sin ninguna palabra/);
   assert.doesNotMatch(estadoTurno([t('tutor', 'Where?'), t('alumno', 'En casa')], undefined, 'en'), /contestó en su idioma/);
 });
 

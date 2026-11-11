@@ -71,3 +71,26 @@ test('/chat retries once when the provider fails before emitting anything', asyn
     assert.doesNotMatch(texto, /"tipo":"error"/);
   } finally { globalThis.fetch = originalFetch; config.iaProveedor = prev.p; config.openaiApiKey = prev.k; pool.query = query; await app.close(); }
 });
+
+test('/chat: la ayuda en el idioma del alumno llega como subtítulo, sin frase de voz', async () => {
+  const app = await montar();
+  const prev = { p: config.iaProveedor, k: config.openaiApiKey }; config.iaProveedor = 'openai'; config.openaiApiKey = 'test';
+  const query = pool.query; (pool as any).query = async () => ({ rows: [] });
+  globalThis.fetch = async (url, options) => {
+    if (!String(url).includes('/chat/completions')) return originalFetch(url, options);
+    if (!JSON.parse(String(options?.body)).stream) return Response.json({ choices: [{ message: { content: '{"analisis":"","corrections":[]}' } }] });
+    return sse('{"reply":"I eat with my family. [«With» significa «con».] Your turn!",', RESTO);
+  };
+  try {
+    const address = await app.listen({ host: '127.0.0.1', port: 0 });
+    const r = await originalFetch(address + '/chat', { method: 'POST', headers: { authorization: `Bearer ${app.jwt.sign({ sub: 'test', rol: 'alumno' })}`, 'content-type': 'application/json', accept: 'text/event-stream' },
+      body: JSON.stringify({ idiomaMeta: 'en', idiomaNativo: 'es', explica: 'nativo', nivel: 1, tutorId: 'avatar_chloe', historial: [{ rol: 'alumno', texto: 'What is with?' }] }) });
+    const eventos = (await r.text()).split('\n\n').filter(l => l.startsWith('data: ')).map(l => JSON.parse(l.slice(6)));
+    const frases = eventos.filter(e => e.tipo === 'frase').map(e => e.data.texto).join(' ');
+    const ayudas = eventos.filter(e => e.tipo === 'ayuda').map(e => e.data.texto).join(' ');
+    assert.match(frases, /I eat with my family/);
+    assert.match(frases, /Your turn/);
+    assert.doesNotMatch(frases, /significa/);
+    assert.match(ayudas, /significa/);
+  } finally { globalThis.fetch = originalFetch; config.iaProveedor = prev.p; config.openaiApiKey = prev.k; pool.query = query; await app.close(); }
+});
