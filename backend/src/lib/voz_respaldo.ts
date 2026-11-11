@@ -21,8 +21,18 @@ const MASCULINO = /\b(hombre|narrador|Andre|Erik|Frank|Tomas|Amadou|Anatole|Andr
 const FEMENINAS = ['coral', 'nova', 'shimmer', 'sage', 'marin'];
 const MASCULINAS = ['ash', 'echo', 'onyx', 'cedar', 'verse'];
 
-/** Voz de OpenAI estable para cada voz del catálogo, del mismo género. */
+/**
+ * Cada tutor de la videollamada con su voz de OpenAI propia (no se repite entre
+ * ellos): con 5 voces por género elegidas por hash, varios sonaban iguales.
+ */
+export const VOZ_AVATAR: Record<string, string> = {
+  avatar_chloe: 'coral', avatar_hana: 'nova', avatar_julia: 'shimmer', avatar_nora: 'sage', avatar_ana: 'marin', avatar_elena: 'alloy',
+  avatar_andre: 'onyx', avatar_erik: 'verse', avatar_frank: 'ash', avatar_tomas: 'cedar', avatar_lucas: 'echo', avatar_diego: 'ballad',
+};
+
+/** Voz de OpenAI estable para cada tutor o voz del catálogo, del mismo género. */
 export function vozRespaldo(rol: string, nombre: string, descripcion: string) {
+  if (VOZ_AVATAR[rol]) return VOZ_AVATAR[rol];
   const lista = MASCULINO.test(`${nombre} ${descripcion}`) ? MASCULINAS : FEMENINAS;
   const n = createHash('sha1').update(rol).digest()[0];
   return lista[n % lista.length];

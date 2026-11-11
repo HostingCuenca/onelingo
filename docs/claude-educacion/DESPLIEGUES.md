@@ -1224,3 +1224,21 @@ Fecha: 2026-11-08 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Backup:** `backups/20261108-edu-86-microfono-bilingue/` (los 5 archivos previos y `env.sha`).
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261108-edu-86-microfono-bilingue; for f in backend/src/lib/ia_openai.ts backend/src/routes/chat.ts backend/src/routes/voz.ts web/avatar/index.html web/avatar/practice.js; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`.
+
+## Release: 20261110-edu-87-respaldo-voz-referidos
+
+Fecha: 2026-11-10 · Responsable: Claude (Claude Code), por pedido del usuario («Servidor + parche Shorebird»). Backend (8 archivos modificados, 2 nuevos, migración 017) + `web/avatar` (`index.html`, `practice.js?v=70`, `vivo.js?v=6`) + panel + parche 4 de Shorebird. PM2 `onelingo-api` reiniciado (solo esa app). `.env` sin cambios (hash igual antes y después). `config.ts` de prod: se conservó el suyo (`elevenModelo` por defecto `eleven_multilingual_v2`) y solo se le añadió `openaiModeloVozRespaldo`.
+
+**Contenido:**
+- `4d7245b`: tras ~4 s de silencio el tutor toma la iniciativa y pregunta de qué quiere hablar el alumno (aviso `iniciativa`; a los 9 s, `pista`).
+- `10a0f8c`: voz de respaldo con OpenAI (`gpt-4o-mini-tts`, voz del mismo género) cuando ElevenLabs falla; con la cuota agotada no se le pregunta en 15 min. Caché propia, no ocupa la clave de ElevenLabs; sin alineación (la boca se estima). Herramientas de solo lectura `uso_voz.ts` y `consumo_eleven.ts`. Motivo: la cuota mensual (43 105) se agotó el 10-11 por la música de Wayra Karts (misma cuenta) y el tutor quedó mudo.
+- `63210e4`: revisión de llamadas reales. Lo pendiente de la ficha se ofrece, no se impone (cada llamada empezaba con «la fiesta»); el perfilador quita lo practicado o rechazado; la clase guiada deja elegir el tema entre dos opciones; en N1-2 con explicaciones en el idioma del alumno, cada pregunta va con su traducción entre corchetes; la escucha en vivo descarta lo transcrito en un alfabeto ajeno (ruido que salía como hindi). `simular_tutor.ts` para llamadas simuladas.
+- `ac0cd79` + `e506095`: referidos (solo seguimiento). Panel → Referidos: códigos por vendedor, registrados, pagando e ingreso mensual; el admin puede asignar o quitar el código de un alumno. App: «Código de referido (opcional)» en el registro (validado antes del correo) y en el perfil, una sola vez. Migración `017_referidos.sql`.
+
+**Pruebas:** backend 177/177, `tsc` limpio (también en prod antes del reinicio), Flutter completo en verde (un test de recorrido dio timeout con la máquina cargada y pasa solo), `extraer.py --comprobar` 0 errores. Llamadas simuladas (fiesta pendiente, N1 que no entiende, silencio). Respaldo de voz probado en local y en prod con síntesis real.
+
+**Verificado en producción:** «Migración aplicada: 017_referidos.sql»; `/api/salud`, `/avatar/index.html` (`practice.js?v=70` con el filtro), `/panel/` en 200; `/api/referidos/validar?codigo=NADA` → `valido:false`; `/api/admin/referidos` y `/api/usuarios/me/referido` sin sesión 401; registro con código inexistente → 400 con el mensaje. Respaldo en el servidor: ElevenLabs 401 `quota_exceeded` → audio de OpenAI en 1,2–2,5 s (en, ja, explicación en español y stream); repetido sale de caché. Log de errores limpio.
+
+**Backup:** `backups/20261110-edu-87-respaldo-voz-referidos/` (los 11 archivos previos y `env.sha`). Panel anterior en `staging/20261110-edu-87-respaldo-voz-referidos/panel-retirado`.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261110-edu-87-respaldo-voz-referidos; S=staging/20261110-edu-87-respaldo-voz-referidos; for f in backend/src/lib/config.ts backend/src/lib/ficha_alumno.ts backend/src/lib/ia.ts backend/src/lib/situaciones.ts backend/src/lib/voz.ts backend/src/routes/chat.ts backend/src/routes/auth.ts backend/src/app.ts web/avatar/index.html web/avatar/practice.js web/avatar/vivo.js; do cp -p $K/$f $f; done; rm backend/src/lib/voz_respaldo.ts backend/src/routes/referidos.ts; mv panel $S/panel-post && mv $S/panel-retirado panel; sudo -u onelingo -H pm2 restart onelingo-api'`. La tabla `referidos` y las columnas nuevas de `usuarios` pueden quedarse.

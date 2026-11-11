@@ -41,6 +41,7 @@ let retenerHasta = 0, rescate = null;
 let turno = null, enPuerta = false, ultimaVoz = 0;
 // Frase que suena (y lo dicho justo antes, para el filtro de eco); generación
 // de la escucha en vivo (una apertura vieja que termina tarde se cierra sola).
+let reintentoVivo = null, reintentosVivo = 0, errorVivo = '';
 let itemActual = null, dichoReciente = '', genVivo = 0, ultimoParcialEn = 0, bloqueoPantalla = null;
 const alumnoSuena = () => performance.now() - ultimaVoz < 600;
 // Respuesta en camino que aún no se oye (esperando o arrancando el audio).
@@ -336,7 +337,7 @@ function colgar(resumen = true) {
   stop();
   if (grab) cancelarGrabacion();
   cerrarVivo();
-  enLlamada = false; clearInterval(reloj); controls();
+  enLlamada = false; clearInterval(reloj); clearTimeout(reintentoVivo); reintentosVivo = 0; errorVivo = ''; controls();
   turno = null; arrastre = ''; clearTimeout(rescate);
   bloqueoPantalla?.release().catch(() => {}); bloqueoPantalla = null;
   $('form').hidden = true; mostrarCorreccion(null);
@@ -810,7 +811,7 @@ async function abrirVivo(motivo = 'inicio') {
       idioma: config.idiomaNativo && config.idiomaNativo !== language() ? undefined : language(),
       // Al reconectar se cuenta cómo se cortó la sesión anterior (telemetría del servidor).
       pedirToken: async cierre => {
-        const r = await fetch(config.api + '/llamada/token', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify({motivo: cierre ? 'reconexion' : motivo, cierre})});
+        const r = await fetch(config.api + '/llamada/token', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify({motivo: cierre ? 'reconexion' : motivo, cierre: cierre ?? (errorVivo ? {aviso: errorVivo.slice(0, 160)} : undefined)})});
         if (!r.ok) throw Error(r.status === 429 ? 'Demasiadas llamadas seguidas.' : await bloqueoTutor(r) ?? `Sin escucha en vivo (${r.status}).`);
         return r.json();
       },
@@ -821,16 +822,18 @@ async function abrirVivo(motivo = 'inicio') {
         if (gen !== genVivo) return;
         if (e === 'reconectando') status(t('Reconectando el micrófono…'));
         if (e === 'escuchando' && $('stage').dataset.phase === 'ready') finTurno(); // quita «Reconectando…»
-        if (e === 'error') { console.warn('escucha en vivo', detalle); volverAPulsar(t('Se cortó la escucha en vivo: mantén pulsado 🎙 para hablar.')); }
+        if (e === 'error') { console.warn('escucha en vivo', detalle); errorVivo = String(detalle ?? 'error'); volverAPulsar(t('Se cortó la escucha en vivo: mantén pulsado 🎙 para hablar.'), true); }
       },
     });
     // Se colgó, se cerró o se volvió a abrir mientras esta apertura esperaba: se descarta.
     if (gen !== genVivo || !modoVivo || !enLlamada) { h.cerrar(); return; }
-    vivo = h; vivo.silenciar(mudo);
+    vivo = h; vivo.silenciar(mudo); reintentosVivo = 0; errorVivo = '';
   } catch (e) {
     console.warn('escucha en vivo', e?.name, e?.message);
     if (gen !== genVivo || !modoVivo || !enLlamada) return;
-    volverAPulsar(t(/Demasiadas/.test(e?.message) ? 'La escucha en vivo vuelve en unos minutos: mientras, mantén pulsado 🎙 para hablar.' : 'Mantén pulsado 🎙 para hablar.'));
+    errorVivo = String(e?.message ?? e?.name ?? 'error');
+    // Sin permiso de micrófono no se reintenta: lo arregla el alumno.
+    volverAPulsar(t(/Demasiadas/.test(e?.message) ? 'La escucha en vivo vuelve en unos minutos: mientras, mantén pulsado 🎙 para hablar.' : 'Mantén pulsado 🎙 para hablar.'), !(e instanceof DOMException));
     if (e instanceof DOMException) faltaMicrofono(e); // fallo del micrófono, no del servidor
   }
 }
@@ -840,7 +843,23 @@ function cerrarVivo() {
   $('hablarTexto').textContent = t('Mantén pulsado para hablar');
   h?.cerrar();
 }
-function volverAPulsar(pista) { cerrarVivo(); if (enLlamada) { status(pista); controls(); } }
+// Si la escucha en vivo se corta (red, cuota de transcripción), la llamada
+// sigue con «mantén pulsado» y vuelve sola a la escucha en vivo: antes se
+// quedaba en pulsar hasta colgar.
+const ESPERAS_REINTENTO_VIVO = [15000, 30000, 60000, 120000];
+function volverAPulsar(pista, reintentar = false) {
+  cerrarVivo();
+  if (!enLlamada) return;
+  status(pista); controls();
+  clearTimeout(reintentoVivo);
+  if (reintentar && reintentosVivo < ESPERAS_REINTENTO_VIVO.length && vivoDisponible())
+    reintentoVivo = setTimeout(function intentar() {
+      if (!enLlamada || modoVivo) return;
+      // Mientras graba con el botón o la pestaña está oculta, se espera un poco más.
+      if (grab || busy || document.hidden) { reintentoVivo = setTimeout(intentar, 5000); return; }
+      abrirVivo('reintento');
+    }, ESPERAS_REINTENTO_VIVO[reintentosVivo++]);
+}
 function alternarMudo() { mudo = !mudo; vivo?.silenciar(mudo); textoVivo(); if (mudo) mostrarAlumno(''); if (!sonando && !busy) finTurno(); }
 // Mientras el alumno habla: se muestra lo que va diciendo y, si el tutor
 // estaba hablando o pensando, se le interrumpe.

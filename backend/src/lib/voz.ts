@@ -453,7 +453,7 @@ export type Audio = { hash: string; buffer: Buffer; cache: boolean; voz: string;
  * alumno dentro de la videollamada): la misma voz, con esa pronunciación.
  */
 export type PeticionVoz = { texto: string; idioma: string; voz?: string; modo?: string; previo?: string; habla?: string };
-type Trozo = { texto: string; hash: string; legado: string; previo?: string };
+type Trozo = { texto: string; hash: string; legado: string; previo?: string; pedido?: string };
 
 /** Normaliza, elige la voz y divide en trozos con su clave de caché. */
 function preparar(p: PeticionVoz) {
@@ -469,7 +469,7 @@ function preparar(p: PeticionVoz) {
   const previo = p.previo ? textoParaVoz(p.previo, lengua).slice(-config.vozMaxCaracteres) || undefined : undefined;
   const trozos: Trozo[] = partes.map((t, i) => ({
     texto: t, hash: hashAudio(t, v.id, modelo, lengua, ajustes), legado: hashAudioLegado(t, v.id, modelo, lengua),
-    previo: i === 0 ? previo : partes[i - 1],
+    previo: i === 0 ? previo : partes[i - 1], pedido: p.voz,
   }));
   return { texto, rol, v, ajustes, trozos, lengua };
 }
@@ -512,7 +512,7 @@ const registrarAudio = (hash: string, idioma: string, rol: string, vozId: string
 /** Trozo con la voz de respaldo (OpenAI): ElevenLabs falló o está en pausa. */
 async function trozoRespaldo(t: Trozo, idioma: string, rol: string) {
   const v = VOCES[rol];
-  const r = await sintetizarRespaldo(t.texto, idioma, vozRespaldo(rol, v?.nombre ?? '', v?.descripcion ?? ''), (b) => normalizarVolumen(b, rol));
+  const r = await sintetizarRespaldo(t.texto, idioma, vozRespaldo(t.pedido || rol, v?.nombre ?? '', v?.descripcion ?? ''), (b) => normalizarVolumen(b, rol));
   return { hash: r.hash, buffer: r.buffer, cache: r.cache };
 }
 /**

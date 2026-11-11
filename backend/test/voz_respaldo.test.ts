@@ -18,3 +18,11 @@ test('quota errors pause ElevenLabs for a while; other errors do not', () => {
   reanudarEleven();
   assert.equal(elevenPausado(), false);
 });
+
+test('each video-call tutor has its own backup voice', async () => {
+  const { VOZ_AVATAR } = await import('../src/lib/voz_respaldo.js');
+  const voces = Object.values(VOZ_AVATAR);
+  assert.equal(new Set(voces).size, voces.length);
+  assert.equal(vozRespaldo('avatar_chloe', '', ''), 'coral');
+  assert.notEqual(vozRespaldo('avatar_hana', '', ''), vozRespaldo('avatar_julia', '', ''));
+});
