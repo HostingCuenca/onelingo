@@ -11,8 +11,12 @@ class SituationIllustrations extends StatefulWidget {
   State<SituationIllustrations> createState() => _SituationIllustrationsState();
 }
 
+/// Situaciones cuya escena 2 salió casi igual a la 1: se muestra una sola.
+const _unaEscena = {22};
+
 class _SituationIllustrationsState extends State<SituationIllustrations> {
   int selected = 0;
+  int get escenas => _unaEscena.contains(widget.id) ? 1 : 2;
   @override
   Widget build(BuildContext context) => Column(
     children: [
@@ -21,7 +25,7 @@ class _SituationIllustrationsState extends State<SituationIllustrations> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(22),
           child: PageView.builder(
-            itemCount: 2,
+            itemCount: escenas,
             onPageChanged: (v) => setState(() => selected = v),
             itemBuilder: (context, i) => Image.asset(
               'assets/img/situaciones/situacion-${widget.id.toString().padLeft(2, '0')}-${i + 1}.webp',
@@ -43,28 +47,30 @@ class _SituationIllustrationsState extends State<SituationIllustrations> {
           ),
         ),
       ),
-      const SizedBox(height: 8),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          for (var i = 0; i < 2; i++)
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              width: selected == i ? 22 : 7,
-              height: 7,
-              margin: const EdgeInsets.symmetric(horizontal: 3),
-              decoration: BoxDecoration(
-                color: selected == i ? OL.morado : OL.moradoClaro,
-                borderRadius: BorderRadius.circular(8),
+      if (escenas > 1) ...[
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (var i = 0; i < 2; i++)
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: selected == i ? 22 : 7,
+                height: 7,
+                margin: const EdgeInsets.symmetric(horizontal: 3),
+                decoration: BoxDecoration(
+                  color: selected == i ? OL.morado : OL.moradoClaro,
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
+            const SizedBox(width: 8),
+            Text(
+              tr('Escena {n} de 2 · desliza', {'n': selected + 1}),
+              style: const TextStyle(color: OL.gris, fontSize: 11),
             ),
-          const SizedBox(width: 8),
-          Text(
-            tr('Escena {n} de 2 · desliza', {'n': selected + 1}),
-            style: const TextStyle(color: OL.gris, fontSize: 11),
-          ),
-        ],
-      ),
+          ],
+        ),
+      ],
     ],
   );
 }
