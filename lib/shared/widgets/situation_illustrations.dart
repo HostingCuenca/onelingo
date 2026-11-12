@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 import '../../app/theme.dart';
 import '../../core/i18n/i18n.dart';
@@ -11,12 +12,38 @@ class SituationIllustrations extends StatefulWidget {
   State<SituationIllustrations> createState() => _SituationIllustrationsState();
 }
 
-/// Situaciones cuya escena 2 salió casi igual a la 1: se muestra una sola.
-const _unaEscena = {22};
+/// Escenas rehechas con otro nombre de archivo: la 2 original salió casi igual
+/// a la 1. Un parche de Shorebird no lleva assets nuevos, así que en una APK
+/// sin el archivo nuevo se muestra solo la escena 1.
+const _escenaNueva = {22: 'situacion-22-2b.webp'};
+final _hayEscenaNueva = <int, Future<bool>>{};
+
+String _ruta(int id, int i) {
+  final n = id.toString().padLeft(2, '0');
+  return 'assets/img/situaciones/${i == 1 && _escenaNueva.containsKey(id) ? _escenaNueva[id] : 'situacion-$n-${i + 1}.webp'}';
+}
 
 class _SituationIllustrationsState extends State<SituationIllustrations> {
   int selected = 0;
-  int get escenas => _unaEscena.contains(widget.id) ? 1 : 2;
+  int escenas = 2;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!_escenaNueva.containsKey(widget.id)) return;
+    escenas = 1;
+    _hayEscenaNueva
+        .putIfAbsent(
+          widget.id,
+          () => rootBundle
+              .load(_ruta(widget.id, 1))
+              .then((_) => true, onError: (_) => false),
+        )
+        .then((hay) {
+          if (hay && mounted) setState(() => escenas = 2);
+        });
+  }
+
   @override
   Widget build(BuildContext context) => Column(
     children: [
@@ -28,7 +55,7 @@ class _SituationIllustrationsState extends State<SituationIllustrations> {
             itemCount: escenas,
             onPageChanged: (v) => setState(() => selected = v),
             itemBuilder: (context, i) => Image.asset(
-              'assets/img/situaciones/situacion-${widget.id.toString().padLeft(2, '0')}-${i + 1}.webp',
+              _ruta(widget.id, i),
               fit: BoxFit.cover,
               semanticLabel: tr('Ilustración de la situación, escena {n}', {
                 'n': i + 1,
