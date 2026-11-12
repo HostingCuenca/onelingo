@@ -1324,3 +1324,21 @@ Fecha: 2026-11-11 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Pruebas:** backend 183/183. Local: con solo el prompt, ja/ko escribían la indicación en su idioma en 9 de 21; con la conversión quedan todas en español. **Prueba en producción** (simulador en el servidor, sin escribir en la base): 5 avatares, 34 frases con ElevenLabs y 0 de respaldo, latencia media 442 ms, volumen de −18,9 a −17,4 LUFS, nota 9,5/10; cada turno suena primero en el idioma de la clase y al final una indicación en español con la voz nativa del tutor.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261111-edu-95-indicaciones; for f in backend/src/routes/chat.ts backend/src/lib/ia.ts backend/src/lib/informe_llamada.ts backend/src/lib/explicaciones.ts backend/src/herramientas/probar_avatares.ts; do cp -p $K/$f $f; done; sudo -u onelingo -H pm2 restart onelingo-api'`
+
+## Release: 20261112-edu-96-clase-bilingue
+
+Fecha: 2026-11-12 · Responsable: Claude (Claude Code), por pedido del usuario (capturas de dos apps de referencia: «que el avatar enseñe en el idioma nativo… español inglés», «el avatar debe tratar siempre de enseñar», «manda a producción» y «además de mantener pulsado, la opción de micrófono abierto… que no sea tan sensible a los ruidos»). Commit `06473b0`. Hashes de prod iguales a `822c6bf` antes de copiar. PM2 reiniciado. `.env` igual. `config.ts` sin tocar.
+
+**Contenido:**
+- **Clase bilingüe** (explicaciones en su idioma): el tutor habla en el idioma del alumno con las frases del idioma de la clase dentro, como las referencias («¡Súper! Entonces, yo soy la barista. Hi there!…»). Sin corchetes. Más idioma meta según el nivel: N1-2 casi todo en el suyo, N3-4 mitad y mitad, N5+ casi todo en el meta.
+- **Una sola voz**, la nativa del alumno de cada tutor (`habla` «es+en», sin `language_code`). Prueba de vuelta con Scribe: 216 audios (12 tutores, es→9 idiomas y en→9); las frases en idiomas latinos salen exactas y en ja/ko/zh/ru se transcriben bien en letras latinas.
+- **El tutor enseña siempre:** cada turno deja una frase modelo, una palabra nueva, una corrección o una forma más natural. Unas palabras sueltas («la de») son ruido, no una respuesta.
+- **Pantalla nueva:**
+  - El tutor va arriba y la conversación en burbujas, con «escuchar otra vez», traducción y reportar.
+  - Abajo, Escribir / micrófono / Ayuda; la velocidad de la voz va de 1x a 0,7x.
+  - Un selector visible elige micrófono abierto o mantener pulsado y se recuerda; `/llamada/token` acepta `motivo: manual`.
+- **Herramienta nueva:** `herramientas/probar_voz_bilingue.ts`.
+
+**Pruebas:** backend 184/184. Simulador local, 6 avatares en clase bilingüe: 9,2/10 y 9,0/10. **Prueba en producción** (simulador en el servidor, sin escribir en la base, los 12 avatares): 9,3/10 (enseña 5/5), 24 frases con ElevenLabs y 0 de respaldo, latencia media 648 ms, volumen de −18,9 a −17,1 LUFS. Página probada en local con Lumo (el panel no tiene WebGL), con turno escrito, selector de micrófono y móvil de 375×812.
+
+**Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261112-edu-96-clase-bilingue; for f in backend/src/herramientas/probar_avatares.ts backend/src/herramientas/probar_voz_bilingue.ts backend/src/lib/explicaciones.ts backend/src/lib/ia.ts backend/src/lib/informe_llamada.ts backend/src/lib/personajes.ts backend/src/lib/voz.ts backend/src/lib/voz_respaldo.ts backend/src/routes/chat.ts backend/src/routes/voz.ts backend/src/routes/llamada.ts web/avatar/index.html web/avatar/practice.js web/avatar/textos.js ; do if [ -f $K/$f ]; then cp -p $K/$f $f; else rm -f $f; fi; done; sudo -u onelingo -H pm2 restart onelingo-api'`
