@@ -1342,3 +1342,19 @@ Fecha: 2026-11-12 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Pruebas:** backend 184/184. Simulador local, 6 avatares en clase bilingüe: 9,2/10 y 9,0/10. **Prueba en producción** (simulador en el servidor, sin escribir en la base, los 12 avatares): 9,3/10 (enseña 5/5), 24 frases con ElevenLabs y 0 de respaldo, latencia media 648 ms, volumen de −18,9 a −17,1 LUFS. Página probada en local con Lumo (el panel no tiene WebGL), con turno escrito, selector de micrófono y móvil de 375×812.
 
 **Rollback:** `ssh onelingo 'set -e; cd /var/www/onelingo; K=backups/20261112-edu-96-clase-bilingue; for f in backend/src/herramientas/probar_avatares.ts backend/src/herramientas/probar_voz_bilingue.ts backend/src/lib/explicaciones.ts backend/src/lib/ia.ts backend/src/lib/informe_llamada.ts backend/src/lib/personajes.ts backend/src/lib/voz.ts backend/src/lib/voz_respaldo.ts backend/src/routes/chat.ts backend/src/routes/voz.ts backend/src/routes/llamada.ts web/avatar/index.html web/avatar/practice.js web/avatar/textos.js ; do if [ -f $K/$f ]; then cp -p $K/$f $f; else rm -f $f; fi; done; sudo -u onelingo -H pm2 restart onelingo-api'`
+
+## Release: 20261112-edu-97-situaciones
+
+Fecha: 2026-11-12 · Responsable: Claude (Claude Code), por pedido del usuario («las 50 situaciones hay imágenes muy repetidas», «subamos un poco más los elementos… indicador abajo para gestos», «si sube las dos cosas a producción»). Commits `a4ca6bb`, `ed02123`, `cbd6d66`. `web/avatar/index.html` + parche 5 de Shorebird. Sin cambios en el backend; sin reiniciar PM2.
+
+**Contenido:**
+- **Llamada:** los controles de abajo suben 18 px sobre la zona segura (barra de gestos). «Explica en…» pasa a la fila de arriba, junto a la velocidad: tapaba el pelo de Tomás, Hana y Andre. Revisado con los 12 avatares en 390×844 y 360×740.
+- **Situaciones:** las 50 tarjetas usaban 31 fotos genéricas (taxi ×4, aeropuerto ×3…). Ahora cada una lleva la escena 1 de su propia ilustración (ya incluidas en la release), decodificada a 420 px de alto. En la situación 22 la escena 2 era casi igual a la 1 (correlación 0,66; el resto ≤ 0,48 entre escenas de la misma situación): se muestra una sola hasta generar otra.
+
+**Web:** `index.html` comprobado igual al commit anterior antes de copiar; respaldo en `backups/20261112-edu-97-situaciones/`. Va con `Cache-Control: no-cache`, la app la toma al abrir la llamada.
+
+**Parche 5 de Android** (sobre 0.5.8+2014, canal stable), desde `cbd6d66` en el worktree `~/.cache/onelingo-build/edu87`: `shorebird patch android --release-version=0.5.8+2014 --no-confirm --allow-asset-diffs -- --dart-define=API_URL=https://onelingo.org/api`. Publicado y promovido a stable. Lleva las tarjetas de situaciones con su propia ilustración y la situación 22 con una sola escena. Pruebas antes: `flutter analyze` sin avisos y tests de situaciones/navegación/diseño/arquitectura (24 en verde). Se aplica al abrir la app y cobra efecto en el siguiente arranque.
+
+**Rollback:**
+- **Web:** `ssh onelingo 'cd /var/www/onelingo && cp -p backups/20261112-edu-97-situaciones/web/avatar/index.html web/avatar/index.html'`
+- **Android:** `shorebird patches rollback --release-version=0.5.8+2014` vuelve al parche 4.
