@@ -7,7 +7,7 @@ import {envolvente, muestraEn, BANDAS_TIPICAS} from './voz.js?v=27';
 import {createAvatarTH} from './avatar-th.js?v=14';
 import {lineaDeVisemas, alineacionEstimada} from './visemas.js?v=1';
 import {abrirEscucha, esEco, escrituraAjena, vivoDisponible} from './vivo.js?v=7';
-import {t, nombreTema, traducirPagina} from './textos.js?v=2';
+import {t, nombreTema, traducirPagina} from './textos.js?v=3';
 
 const $ = id => document.getElementById(id), audio = $('audio');
 // Idioma de la interfaz (?ui=en|es, el de la app): antes de cargar nada.
@@ -101,9 +101,9 @@ const conLimite = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms)
 
 const INSIGNIAS = {speaking: t('Hablando'), 'voice-loading': t('Pensando…'), thinking: t('Pensando…'), listening: t('Te escucho'), ready: t('Tu turno')};
 function phase(label, value = 'ready') {
-  $('state').textContent = label; $('stage').dataset.phase = value;
+  $('state').textContent = label; $('stage').dataset.phase = value; $('reloj').dataset.fase = value;
   const i = $('insignia'); i.textContent = enLlamada ? (value === 'ready' && mudo ? t('Micrófono en silencio') : INSIGNIAS[value] ?? '') : ''; i.hidden = !i.textContent;
-  $('pedirPista').hidden = !(enLlamada && value === 'ready');
+  $('pedirPista').disabled = !(enLlamada && value === 'ready');
 }
 function status(t) { $('status').textContent = t; }
 function error(e, reintentar, etiqueta = t('Reintentar')) {
@@ -152,6 +152,8 @@ $('explica').onclick = () => {
 // Sin localStorage la elección dura lo que la página.
 let sesionExplica = null;
 const explicaActual = () => sesionExplica || explica();
+// Clase bilingüe: el tutor habla en el idioma del alumno con el de la clase dentro, con una sola voz (la nativa del alumno).
+const hablaClase = () => explicaActual() === 'nativo' && config?.idiomaNativo && config.idiomaNativo !== language() ? `${config.idiomaNativo}+${language()}` : '';
 
 // ---------- Arranque e integración con la app ----------
 window.addEventListener('message', event => {
@@ -224,7 +226,7 @@ async function select(tu) {
   document.body.classList.remove('puede-llamar');
   avatar?.dispose(); avatar = null; tutor = tu; history = []; lastReply = ''; correcciones = 0;
   limpiarTurno(); $('messages').replaceChildren(); actualizarContador();
-  $('name').textContent = tu.name;
+  $('name').textContent = tu.name; $('reloj').textContent = '00:00';
   $('selection').hidden = true; $('session').hidden = false;
   $('loading').hidden = false; $('loading').textContent = t('Cargando a {nombre}…', {nombre: tu.name});
   error(''); phase(t('Preparando…'), 'loading'); controls();
@@ -279,7 +281,7 @@ function iniciarLlamada() {
   if (enLlamada || !avatar || !config?.token) return;
   if (audio.src !== SILENCIO || audio.paused) { audio.src = SILENCIO; audio.play().catch(() => {}); }
   // Permiso del micrófono al empezar: así no aparece a mitad de mantener pulsado.
-  if (vivoDisponible()) abrirVivo();
+  if (quiereVivo()) abrirVivo();
   else navigator.mediaDevices?.getUserMedia?.({audio: true}).then(s => s.getTracks().forEach(t => t.stop())).catch(() => {});
   document.body.classList.remove('puede-llamar');
   enLlamada = true; inicioLlamada = Date.now(); stats = statsVacias(); iniciarReloj(); controls(); error('');
@@ -318,12 +320,13 @@ function vigilarConexion(version, intento = 1) {
 // Las muletillas quedan en la caché de voz del servidor: después suenan al instante.
 function calentarRellenos() {
   if (!enLlamada || !tutor) return;
-  for (const f of RELLENOS[language()] || []) fetch(urlVoz(f, '', avatar?.alineado ? '/voz/alineada' : '/voz/stream'), {headers: headers()}).catch(() => {});
+  const habla = hablaClase();
+  for (const f of RELLENOS[habla ? config.idiomaNativo : language()] || []) fetch(urlVoz(f, '', avatar?.alineado ? '/voz/alineada' : '/voz/stream', habla), {headers: headers()}).catch(() => {});
 }
 function ponerRelleno(version) {
   if (performance.now() < retenerHasta) return; // el alumno quizá sigue: nada de muletillas encima
-  const lista = RELLENOS[language()] || []; if (!lista.length) return;
-  relleno = lista[rellenos++ % lista.length]; encolar(relleno, version, undefined, true);
+  const habla = hablaClase(), lista = RELLENOS[habla ? config.idiomaNativo : language()] || []; if (!lista.length) return;
+  relleno = lista[rellenos++ % lista.length]; encolar(relleno, version, undefined, true, habla);
 }
 
 function iniciarReloj() {
@@ -332,6 +335,7 @@ function iniciarReloj() {
     if (!enLlamada) return;
     const s = Math.floor((Date.now() - inicioLlamada) / 1000);
     $('stage').dataset.reloj = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+    $('reloj').textContent = $('stage').dataset.reloj;
     if ($('stage').dataset.phase === 'ready') $('state').textContent = t('En llamada · {tiempo}', {tiempo: $('stage').dataset.reloj});
   }, 1000);
 }
@@ -354,9 +358,10 @@ function colgar(resumen = true) {
     if (resumen && history.some(t => t.rol === 'alumno')) void mostrarResumen();
   }
 }
-$('end').onclick = () => colgar(true);
-// Integrada en la app, la flecha devuelve a «Tutores con IA» (la app no pone cabecera propia).
-$('back').onclick = () => { if (embebido) { colgar(false); avisarApp('onelingo-avatar-salir'); return; } selection++; colgar(false); avatar?.dispose(); avatar = null; $('session').hidden = true; $('selection').hidden = false; };
+// ✕ arriba: durante la llamada cuelga (y sale el resumen en la conversación); colgada, vuelve a los tutores.
+function salir() { if (embebido) { colgar(false); avisarApp('onelingo-avatar-salir'); return; } selection++; colgar(false); avatar?.dispose(); avatar = null; $('session').hidden = true; $('selection').hidden = false; }
+$('end').onclick = () => enLlamada ? colgar(true) : salir();
+$('end').setAttribute('aria-label', t('Terminar la llamada'));
 
 // ---------- Voz del tutor ----------
 function senalVoz() { if (!vozController) vozController = new AbortController(); return vozController.signal; }
@@ -380,7 +385,7 @@ function vozDelStream(indice) {
   return item;
 }
 const fraseAlineada = (d, text, habla) => ({url: URL.createObjectURL(new Blob([Uint8Array.from(atob(d.audio), c => c.charCodeAt(0))], {type: 'audio/mpeg'})), env: null, texto: text, habla,
-  linea: d.alineacion ? lineaDeVisemas(d.alineacion, habla || language()) : null});
+  linea: d.alineacion ? lineaDeVisemas(d.alineacion, habla.split('+')[0] || language()) : null});
 // `habla`: la frase es una explicación en el idioma del alumno (misma voz, su pronunciación).
 function prepararFrase(text, version, indice, habla = '') {
   const previo = fraseAnterior.version === version && fraseAnterior.habla === habla ? fraseAnterior.texto : '';
@@ -401,10 +406,11 @@ function prepararFrase(text, version, indice, habla = '') {
 // Cada frase se descarga en cuanto llega (en paralelo a la que suena). Antes
 // de contestar solo se descargan: suenan al empezar la llamada.
 // Vuelve a decir la última respuesta frase a frase, cada una en su idioma.
-function decirUltima(version) {
-  if (ultimasPartes.texto === lastReply && ultimasPartes.partes.length) for (const p of ultimasPartes.partes) encolar(p.texto, version, undefined, false, p.habla);
-  else encolar(lastReply, version);
+function decirPartes(partes, texto, version) {
+  if (partes.length) for (const p of partes) encolar(p.texto, version, undefined, false, p.habla);
+  else encolar(texto, version, undefined, false, hablaClase());
 }
+function decirUltima(version) { decirPartes(ultimasPartes.texto === lastReply ? ultimasPartes.partes : [], lastReply, version); }
 function encolar(text, version, indice, esRelleno = false, habla = '') {
   const listo = prepararFrase(text, version, indice, habla);
   listo.catch(() => {});
@@ -429,9 +435,9 @@ async function siguiente(version) {
     if (version !== epoch) { URL.revokeObjectURL(f.url); return; }
     soltarURL(); urlActual = f.url; envActual = f.env; lineaActual = f.linea || null;
     dichoReciente = `${itemActual && !itemActual.relleno ? itemActual.text : ''} ${item.text}`; itemActual = item;
-    window.__marca?.('play'); audio.src = f.url;
+    window.__marca?.('play'); audio.src = f.url; audio.defaultPlaybackRate = audio.playbackRate = velocidad;
     // Audio guardado antes de existir la alineación: tiempos repartidos por la duración.
-    if (f.texto && !f.linea) audio.addEventListener('loadedmetadata', () => { if (urlActual === f.url && isFinite(audio.duration)) lineaActual = lineaDeVisemas(alineacionEstimada(f.texto, audio.duration), f.habla || language()); }, {once: true});
+    if (f.texto && !f.linea) audio.addEventListener('loadedmetadata', () => { if (urlActual === f.url && isFinite(audio.duration)) lineaActual = lineaDeVisemas(alineacionEstimada(f.texto, audio.duration), (f.habla || '').split('+')[0] || language()); }, {once: true});
     await audio.play();
   } catch (e) {
     if (version !== epoch || vozController?.signal.aborted) return;
@@ -483,8 +489,11 @@ function vigilarSilencio() {
     void requestTutor({aviso: AVISOS_SILENCIO[silencios++]}, false);
   }, ESPERAS_SILENCIO[silencios]);
 }
+// Velocidad de la voz (como en las apps de referencia): 1x, 0.85x y 0.7x.
+const VELOCIDADES = [1, 0.85, 0.7];
+let velocidad = 1;
+$('velocidad').onclick = () => { velocidad = VELOCIDADES[(VELOCIDADES.indexOf(velocidad) + 1) % VELOCIDADES.length]; audio.playbackRate = velocidad; $('velocidad').textContent = `${velocidad}x`; };
 $('pedirPista').onclick = () => { if (!enLlamada || busy) return; silencios = ESPERAS_SILENCIO.length; void requestTutor({aviso: 'pista'}, false); };
-$('replay').onclick = () => { if (!lastReply || busy || !enLlamada) return; stop(); turno = null; decirUltima(epoch); };
 
 function stop() {
   clearTimeout(silencioTimer);
@@ -495,30 +504,46 @@ function stop() {
   busy = false; respuestaCompleta = true; controls();
 }
 
-// ---------- Subtítulos, correcciones e ideas ----------
-function limpiarTurno() {
-  $('subTutor').textContent = ''; $('subAyuda').textContent = ''; $('subAyuda').hidden = true; $('subTraduccion').hidden = true; $('verTraduccion').hidden = true; $('replay').hidden = true; $('reportar').hidden = true;
-  $('subAlumno').hidden = true; ideas([]);
+// ---------- Conversación en burbujas, correcciones e ideas ----------
+// Como en las apps de referencia: cada respuesta del tutor es una burbuja que se
+// va escribiendo mientras habla, con «escuchar otra vez» y «ver traducción».
+const ICONO = {
+  oir: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+  traducir: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h8M8 3v2M6 5c0 4 2.5 7 6 8M10 5c-.5 3.5-3 6.5-6 8"/><path d="m13 21 4-9 4 9M14.5 18h5"/></svg>',
+  reportar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>',
+};
+function bajar(forzar = false) { const c = $('chat'); if (forzar || c.scrollHeight - c.scrollTop - c.clientHeight < 200) c.scrollTop = c.scrollHeight; }
+function msg(text, kind = '') { const m = el('div', 'msg ' + kind), b = el('div', 'bubble'), tx = el('span', 'texto', text); b.append(tx); m.append(b); m._b = b; m._tx = tx; return m; }
+function burbuja(text, kind = '') { const m = msg(text, kind); $('messages').append(m); bajar(true); return m; }
+function accion(icono, etiqueta, discreta = false) { const b = el('button', 'accion' + (discreta ? ' discreta' : '')); b.type = 'button'; b.innerHTML = ICONO[icono]; b.setAttribute('aria-label', t(etiqueta)); return b; }
+function nuevaBurbujaTutor() {
+  const m = burbuja('', 'tutor'), acc = el('div', 'acciones');
+  const oir = accion('oir', 'Escuchar otra vez'), trad = accion('traducir', 'Ver traducción'), rep = accion('reportar', 'Reportar', true);
+  trad.hidden = true; m._partes = []; m._trad = trad;
+  oir.onclick = () => { if (!enLlamada || busy) return; stop(); turno = null; decirPartes(m._partes, m._tx.textContent, epoch); };
+  rep.onclick = () => abrirReporte(m._tx.textContent);
+  acc.append(oir, trad, rep); m.append(acc);
+  return m;
 }
-// La corrección del turno, en pantalla y no solo en 💬: se queda mientras el
-// alumno repite la frase y se va cuando el tutor vuelve a hablar.
-function mostrarCorreccion(c) {
-  const box = $('subCorreccion'); box.replaceChildren(); box.hidden = !c;
-  if (!c) return;
-  const fila = el('div', 'correccion-fila');
-  fila.append(el('s', null, c.original), el('span', 'flecha', '→'), el('strong', null, c.correcto));
-  box.append(fila);
-  if (c.explicacion) box.append(el('small', null, c.explicacion));
+function ponerTraduccion(m, texto) {
+  m._b.querySelector('.burbuja-traduccion')?.remove();
+  const d = el('span', 'burbuja-traduccion', texto); d.hidden = true; m._b.append(d);
+  m._trad.hidden = false; m._trad.setAttribute('aria-pressed', 'false');
+  m._trad.onclick = () => { d.hidden = !d.hidden; m._trad.setAttribute('aria-pressed', String(!d.hidden)); m._trad.setAttribute('aria-label', t(d.hidden ? 'Ver traducción' : 'Ocultar traducción')); if (!d.hidden) bajar(); };
 }
-function mostrarAlumno(texto) { $('subAlumno').textContent = texto; $('subAlumno').hidden = !texto; }
-function burbuja(text, kind = '') { const e = el('div', 'bubble ' + kind, text); $('messages').append(e); return e; }
-function actualizarContador() { $('contador').hidden = !correcciones; $('contador').textContent = correcciones; }
+function limpiarTurno() { mostrarAlumno(''); ideas([]); }
+// Las correcciones van como tarjeta en la conversación, debajo de la respuesta del tutor.
+function mostrarCorreccion() {}
+// Lo que el alumno va diciendo (escucha en vivo o «…» mientras se transcribe).
+function mostrarAlumno(texto) { const box = $('alumnoVivo'); box.replaceChildren(); if (texto) { box.append(msg(texto, 'mine vivo')); bajar(); } }
+function actualizarContador() {}
 function correccion(c, despues) {
   const card = el('div', 'correccion'), fila = el('div', 'correccion-fila');
   fila.append(el('s', null, c.original), el('span', 'flecha', '→'), el('strong', null, c.correcto));
   card.append(el('span', 'correccion-titulo', t('Corrección')), fila);
   if (c.explicacion) card.append(el('small', null, c.explicacion));
   if (despues) despues.after(card); else $('messages').append(card);
+  bajar();
   return card;
 }
 // Ideas para responder: tocar una la envía como respuesta.
@@ -527,8 +552,8 @@ function ideas(lista) {
   if (!lista.length) return;
   box.append(el('span', 'ideas-titulo', t('Puedes decir')));
   for (const s of lista) { const b = el('button', 'idea', s); b.type = 'button'; b.onclick = () => requestTutor({texto: s}, false); box.append(b); }
+  bajar();
 }
-$('verTraduccion').onclick = () => { const sub = $('subTraduccion'); sub.hidden = !sub.hidden; $('verTraduccion').textContent = t(sub.hidden ? 'Ver traducción' : 'Ocultar traducción'); };
 
 // ---------- Turno: texto o voz → respuesta por frases ----------
 // entrada: null (saludo) · {texto} · {audio, tipo} · {continuar: true} (reintento sin turno nuevo)
@@ -546,7 +571,7 @@ async function requestTutor(entrada, opening = false) {
   turno = opening || entrada?.aviso ? null : {hist: history.length, dom: $('messages').childElementCount, corr: correcciones, oido: false, lastReply};
   if (!opening) {
     limpiarTurno();
-    if (entrada?.texto) { mostrarAlumno(entrada.texto); burbuja(entrada.texto, 'mine'); history.push({rol: 'alumno', texto: entrada.texto}); }
+    if (entrada?.texto) { burbuja(entrada.texto, 'mine'); history.push({rol: 'alumno', texto: entrada.texto}); }
     else if (entrada?.audio) mostrarAlumno('…');
     phase(t('Pensando…'), 'thinking'); status('');
   } else if (enLlamada) phase(t('Conectando…'), 'thinking');
@@ -572,7 +597,7 @@ async function requestTutor(entrada, opening = false) {
         if (!tr.ok) throw Error(t('No se pudo transcribir. Vuelve a intentarlo o escribe con ⌨️.'));
         const texto = ((await tr.json()).texto || '').trim();
         if (!texto) throw Error(t('No te escuché bien. Mantén pulsado el micrófono mientras hablas.'));
-        transcrito = true; mostrarAlumno(texto); burbuja(texto, 'mine'); history.push({rol: 'alumno', texto});
+        transcrito = true; mostrarAlumno(''); burbuja(texto, 'mine'); history.push({rol: 'alumno', texto});
         response = await fetch(config.api + '/chat' + conVoz, {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json', Accept: 'text/event-stream'}, body: JSON.stringify({...datos, historial: history.slice(-30)}), signal: current.signal});
       }
     } else {
@@ -585,9 +610,10 @@ async function requestTutor(entrada, opening = false) {
     // (evento `reply`), no al final: el final espera al corrector y, si el
     // alumno contestaba antes, el tutor olvidaba que le había pedido repetir.
     const anotarTutor = texto => {
-      if (burbujaTutor) return burbujaTutor;
-      lastReply = texto; ultimasPartes = {texto, partes}; turnoTutor = {rol: 'tutor', texto, ...(espera ? {espera} : {})}; history.push(turnoTutor); burbujaTutor = burbuja(texto);
-      $('replay').hidden = false; $('reportar').hidden = false;
+      if (turnoTutor) return burbujaTutor;
+      burbujaTutor ||= nuevaBurbujaTutor();
+      burbujaTutor._tx.textContent = texto; burbujaTutor._partes = partes;
+      lastReply = texto; ultimasPartes = {texto, partes}; turnoTutor = {rol: 'tutor', texto, ...(espera ? {espera} : {})}; history.push(turnoTutor);
       current.respondida = true;
       return burbujaTutor;
     };
@@ -610,33 +636,38 @@ async function requestTutor(entrada, opening = false) {
       if (e.tipo === 'error') throw Error(e.data);
       if (e.tipo === 'transcripcion' && (e.data.texto || '').trim()) {
         transcrito = true;
-        mostrarAlumno(e.data.texto); burbuja(e.data.texto, 'mine');
+        mostrarAlumno(''); burbuja(e.data.texto, 'mine');
         history.push({rol: 'alumno', texto: e.data.texto});
       }
       // Cada frase terminada se muestra y se dice sin esperar al resto.
       // La ayuda en su idioma (habla) suena con la voz nativa del tutor y se lee aparte, más pequeña.
-      if (e.tipo === 'frase') { if (!frases) mostrarCorreccion(null); const sub = e.data.habla ? $('subAyuda') : $('subTutor'); if (e.data.habla) { ayudas++; sub.hidden = false; } sub.textContent = (sub.textContent ? sub.textContent + ' ' : '') + e.data.texto; frases++; partes.push({texto: e.data.texto, habla: e.data.habla || ''}); encolar(e.data.texto, version, e.data.indice, false, e.data.habla || ''); }
-      // Ayuda en el idioma del alumno: subtítulo, sin voz (la voz del tutor solo habla el idioma de la clase).
-      if (e.tipo === 'ayuda') { if (!frases && !ayudas) mostrarCorreccion(null); ayudas++; const a = $('subAyuda'); a.textContent = (a.textContent ? a.textContent + ' ' : '') + e.data.texto; a.hidden = false; }
+      // Cada frase terminada se escribe en la burbuja y se dice sin esperar al resto.
+      if (e.tipo === 'frase') {
+        const b = burbujaTutor ||= nuevaBurbujaTutor();
+        b._tx.textContent = (b._tx.textContent ? b._tx.textContent + ' ' : '') + e.data.texto; b._partes = partes;
+        frases++; partes.push({texto: e.data.texto, habla: e.data.habla || ''}); encolar(e.data.texto, version, e.data.indice, false, e.data.habla || ''); bajar();
+      }
+      // Ayuda escrita en su idioma (servidor viejo): debajo, sin voz.
+      if (e.tipo === 'ayuda') {
+        ayudas++; const b = burbujaTutor ||= nuevaBurbujaTutor();
+        if (!b._ayuda) { b._ayuda = el('span', 'aviso-ayuda'); b._ayuda.style.display = 'block'; b._b.append(b._ayuda); }
+        b._ayuda.textContent = (b._ayuda.textContent ? b._ayuda.textContent + ' ' : '') + e.data.texto; bajar();
+      }
       if (e.tipo === 'voz_activa') vozActiva = true;
       if (e.tipo === 'voz') { window.__marca?.('voz_llega', e.data.indice); vozDelStream(e.data.indice)?.ok(e.data); }
-      if (e.tipo === 'reply') { if (!frases && !ayudas) { mostrarCorreccion(null); $('subTutor').textContent = e.data; frases++; encolar(e.data, version); } anotarTutor(e.data); }
+      if (e.tipo === 'reply') { if (!frases && !ayudas) { frases++; encolar(e.data, version, undefined, false, hablaClase()); } anotarTutor(e.data); bajar(); }
       if (e.tipo === 'final') {
         final = true;
         const r = e.data;
-        if (!frases && !ayudas) { mostrarCorreccion(null); frases++; encolar(r.reply, version); }
-        // Con ayuda en su idioma, el subtítulo grande muestra solo lo que dice la voz.
-        $('subTutor').textContent = ayudas ? partes.filter(p => !p.habla).map(p => p.texto).join(' ') : r.reply;
+        if (!frases && !ayudas) { frases++; encolar(r.reply, version, undefined, false, hablaClase()); }
         if (r.espera) espera = r.espera;
         const b = anotarTutor(r.reply);
         if (espera) turnoTutor.espera = espera;
-        if (lastReply !== r.reply) { if (ultimasPartes.texto === lastReply) ultimasPartes.texto = r.reply; lastReply = r.reply; b.textContent = r.reply; const h = history.findLastIndex(x => x.rol === 'tutor'); if (h >= 0) history[h].texto = r.reply; }
-        if (r.romanizacion) b.append(el('span', 'romanizacion', r.romanizacion));
-        if (r.traduccion) {
-          $('subTraduccion').textContent = r.traduccion; $('subTraduccion').hidden = true;
-          $('verTraduccion').hidden = false; $('verTraduccion').textContent = t('Ver traducción');
-          const d = el('details', 'traduccion'); d.append(el('summary', null, t('Ver traducción')), el('span', null, r.traduccion)); b.append(d);
-        }
+        if (lastReply !== r.reply) { if (ultimasPartes.texto === lastReply) ultimasPartes.texto = r.reply; lastReply = r.reply; b._tx.textContent = r.reply; const h = history.findLastIndex(x => x.rol === 'tutor'); if (h >= 0) history[h].texto = r.reply; }
+        if (r.romanizacion) b._b.append(el('span', 'romanizacion', r.romanizacion));
+        // En la clase bilingüe la traducción casi no cambia el texto: el botón solo sale si aporta algo.
+        const plano = x => String(x).toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+        if (r.traduccion && plano(r.traduccion) !== plano(r.reply)) ponerTraduccion(b, r.traduccion);
         const cs = r.corrections || [];
         // El tutor la dice en voz alta; por escrito queda en la conversación (💬).
         let ref = b; for (const c of cs) ref = correccion(c, ref);
@@ -663,7 +694,7 @@ async function requestTutor(entrada, opening = false) {
       else if (!opening && !frases) ultimoFallo = {continuar: true};
       if (entrada?.texto && !frases) ultimoFallo = {continuar: true};
       // Lo que el tutor ya dijo cuenta para el siguiente turno (si no, no sabe que lo dijo).
-      if (frases && !burbujaTutor && $('subTutor').textContent) { lastReply = $('subTutor').textContent; history.push({rol: 'tutor', texto: lastReply}); burbuja(lastReply); }
+      if (frases && !turnoTutor) { const dicho = partes.map(p => p.texto).join(' '); if (dicho) { lastReply = dicho; ultimasPartes = {texto: dicho, partes}; history.push({rol: 'tutor', texto: dicho}); } }
       phase(t('No se pudo responder'), 'error');
       const reintento = ultimoFallo;
       error(msg, reintento || opening ? () => requestTutor(reintento, opening) : null);
@@ -673,7 +704,8 @@ async function requestTutor(entrada, opening = false) {
     if (version === epoch) { busy = false; respuestaCompleta = true; controller = null; controls(); if ($('stage').dataset.phase !== 'error') finTurno(); }
   }
 }
-$('form').onsubmit = event => { event.preventDefault(); const t = $('text').value.trim(); if (!t || busy) return; $('text').value = ''; requestTutor({texto: t}, false); };
+// Escribir es una respuesta explícita: si el tutor estaba preparando algo (una pista), se corta y se responde a lo escrito.
+$('form').onsubmit = event => { event.preventDefault(); const t = $('text').value.trim(); if (!t) return; if (busy) stop(); $('text').value = ''; requestTutor({texto: t}, false); };
 $('teclado').onclick = () => { const f = $('form'); f.hidden = !f.hidden; if (!f.hidden) $('text').focus(); };
 
 // ---------- Mantener pulsado para hablar ----------
@@ -701,7 +733,7 @@ function faltaMicrofono(e) {
 }
 function microfonoListo() {
   error(''); status(t('Micrófono listo: mantén pulsado 🎙 para hablar.'));
-  if (enLlamada && !modoVivo && vivoDisponible()) abrirVivo();
+  if (enLlamada && !modoVivo && quiereVivo()) abrirVivo();
 }
 function pedirPermisoMicrofono() {
   if (window.OneLingo) { avisarApp('onelingo-avatar-permiso-microfono'); return; }
@@ -853,6 +885,27 @@ async function abrirVivo(motivo = 'inicio') {
     if (e instanceof DOMException) faltaMicrofono(e); // fallo del micrófono, no del servidor
   }
 }
+// Cómo habla el alumno: micrófono abierto (escucha en vivo, como en una llamada) o
+// mantener pulsado (como un audio de WhatsApp). Lo elige él y se recuerda.
+function modoMicrofono() { try { return localStorage.getItem('onelingo.microfono') === 'pulsar' ? 'pulsar' : 'vivo'; } catch { return 'vivo'; } }
+const quiereVivo = () => modoMicrofono() === 'vivo' && vivoDisponible();
+function pintarModo() {
+  const vivoOk = vivoDisponible(), m = vivoOk ? modoMicrofono() : 'pulsar';
+  $('modoVivo').setAttribute('aria-pressed', String(m === 'vivo')); $('modoPulsar').setAttribute('aria-pressed', String(m === 'pulsar'));
+  $('modoVivo').disabled = !vivoOk;
+}
+function elegirModo(m) {
+  try { localStorage.setItem('onelingo.microfono', m); } catch { /* solo esta vez */ }
+  pintarModo();
+  if (!enLlamada) return;
+  clearTimeout(reintentoVivo); reintentosVivo = 0;
+  if (m === 'pulsar' && modoVivo) { cerrarVivo(); status(t('Mantén pulsado 🎙 para hablar y suelta al terminar.')); }
+  if (m === 'vivo' && !modoVivo && vivoDisponible()) { if (grab) cancelarGrabacion(); abrirVivo('manual'); status(t('Micrófono abierto: habla cuando quieras.')); }
+  controls();
+}
+$('modoVivo').onclick = () => elegirModo('vivo');
+$('modoPulsar').onclick = () => elegirModo('pulsar');
+pintarModo();
 function cerrarVivo() {
   const h = vivo; vivo = null; modoVivo = false; arrastre = ''; genVivo++;
   document.body.classList.remove('vivo', 'mudo');
@@ -868,7 +921,7 @@ function volverAPulsar(pista, reintentar = false) {
   if (!enLlamada) return;
   status(pista); controls();
   clearTimeout(reintentoVivo);
-  if (reintentar && reintentosVivo < ESPERAS_REINTENTO_VIVO.length && vivoDisponible())
+  if (reintentar && reintentosVivo < ESPERAS_REINTENTO_VIVO.length && quiereVivo())
     reintentoVivo = setTimeout(function intentar() {
       if (!enLlamada || modoVivo) return;
       // Mientras graba con el botón o la pestaña está oculta, se espera un poco más.
@@ -974,21 +1027,20 @@ function recuperarTurno() {
 // ---------- Hoja inferior: conversación y temas ----------
 function abrirPanel(cual) {
   $('panel').hidden = false;
-  $('messages').hidden = cual !== 'conversacion';
   $('temas').hidden = cual !== 'temas';
   $('reporte').hidden = cual !== 'reporte';
-  $('panelTitulo').textContent = t(cual === 'temas' ? '¿Qué quieres practicar?' : cual === 'reporte' ? 'Reportar respuesta' : 'Conversación');
+  $('panelTitulo').textContent = t(cual === 'temas' ? '¿Qué quieres practicar?' : 'Reportar respuesta');
   if (cual === 'temas') pintarTemas();
-  else if (cual === 'conversacion') $('messages').lastElementChild?.scrollIntoView({block: 'end'});
 }
 // ---------- Reportar la última respuesta del tutor (política de IA de Google Play) ----------
 // Misma API que la app (POST /reportes-ia) con el token de la sesión.
 const MOTIVOS = [['ofensivo', t('Ofensiva')], ['incorrecto', t('Incorrecta')], ['inapropiado', t('Inapropiada')], ['otro', t('Otro motivo')]];
 let reporte = null;
-function abrirReporte() {
-  if (!lastReply || !config?.token) return;
-  reporte = {texto: lastReply, motivo: null, enviando: false};
-  $('reporteCita').textContent = lastReply;
+function abrirReporte(texto) {
+  texto = typeof texto === 'string' && texto ? texto : lastReply;
+  if (!texto || !config?.token) return;
+  reporte = {texto, motivo: null, enviando: false};
+  $('reporteCita').textContent = texto;
   $('reporteComentario').value = ''; $('reporteAviso').textContent = '';
   $('reporte').querySelector('.reporte-gracias')?.remove();
   for (const n of $('reporte').children) n.hidden = false;
@@ -1001,7 +1053,6 @@ function abrirReporte() {
   $('reporteEnviar').disabled = true; $('reporteEnviar').textContent = t('Enviar reporte');
   abrirPanel('reporte');
 }
-$('reportar').onclick = abrirReporte;
 $('reporte').onsubmit = async e => {
   e.preventDefault();
   if (!reporte?.motivo || reporte.enviando) return;
@@ -1020,7 +1071,6 @@ $('reporte').onsubmit = async e => {
     reporte.enviando = false; $('reporteEnviar').disabled = false; $('reporteEnviar').textContent = t('Enviar reporte');
   }
 };
-$('verConversacion').onclick = () => abrirPanel('conversacion');
 $('cerrarPanel').onclick = () => { $('panel').hidden = true; };
 $('tema').onclick = () => abrirPanel('temas');
 function pintarTemas() {
@@ -1039,15 +1089,14 @@ function elegirTema(u) {
   temaId = u.id; objetivoId = null; $('temaNombre').textContent = nombreTema(u);
   stop(); if (grab) cancelarGrabacion();
   history = []; lastReply = ''; limpiarTurno();
-  burbuja(t('Nuevo tema: {tema}', {tema: nombreTema(u)}), 'feedback');
+  burbuja(t('Nuevo tema: {tema}', {tema: nombreTema(u)}), 'aviso-tema');
   void requestTutor(null, true);
 }
 
 // ---------- Resumen al colgar ----------
 async function mostrarResumen() {
-  abrirPanel('conversacion');
   const card = el('div', 'resumen'); card.append(el('h3', null, t('Resumen de la llamada')), el('p', null, t('Preparando…')));
-  $('messages').append(card); card.scrollIntoView({block: 'end'});
+  $('messages').append(card); bajar(true);
   try {
     const r = await fetch(config.api + '/chat/resumen', {method: 'POST', headers: {...headers(), 'Content-Type': 'application/json'}, body: JSON.stringify({idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-40), explica: explicaActual(),
       tecnico: {...stats, duracionSegundos: Math.round((Date.now() - inicioLlamada) / 1000), dispositivo: /Android/i.test(navigator.userAgent) ? 'android' : /iPhone|iPad/i.test(navigator.userAgent) ? 'ios' : 'web'}})});
@@ -1060,7 +1109,7 @@ async function mostrarResumen() {
     seccion(t('Vocabulario de hoy'), (d.vocabulario || []).map(v => { const li = el('li'); li.append(el('strong', null, v.palabra), ' · ' + v.significado); return li; }));
     if (d.siguientePaso) card.append(el('p', 'siguiente', d.siguientePaso));
     card.append(el('p', null, t('{nombre} recordará esto en tu próxima llamada.', {nombre: tutor.name})));
-    card.scrollIntoView({block: 'end'});
+    bajar(true);
   } catch (e) { card.replaceChildren(el('h3', null, t('Resumen de la llamada')), el('p', null, t(e.message))); }
 }
 

@@ -10,7 +10,7 @@ import { requiereAlumno, type Sesion } from '../lib/auth.js';
 import { requierePractica } from '../lib/pagos/suscripciones.js';
 import { actualizarFicha } from '../lib/ficha_alumno.js';
 import { obtenerAudioAlineado, vozDisponible } from '../lib/voz.js';
-import { indicacionEnSuIdioma, separadorDeLenguas, sinCorchetes } from '../lib/explicaciones.js';
+import { hablaBilingue, indicacionEnSuIdioma, separadorDeLenguas, sinCorchetes } from '../lib/explicaciones.js';
 
 const EsquemaChat = z.object({
   idiomaMeta: z.string().max(5), idiomaNativo: z.string().max(5).default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().max(40).default('mia'),
@@ -79,6 +79,8 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
       // Las explicaciones en el idioma del alumno llegan entre corchetes: cada
       // parte es una frase propia (otra pronunciación) y el alumno no ve los corchetes.
       const separar = separadorDeLenguas(peticion.idiomaMeta);
+      // Clase bilingüe: cada frase tal cual, en orden, con la voz nativa del alumno.
+      const bilingue = hablaBilingue(peticion);
       let partes = 0;
       const emitirFrase = (texto: string, habla?: string) => {
         const indice = partes++;
@@ -112,6 +114,7 @@ function responderSse(req: FastifyRequest, reply: FastifyReply, s: Sesion, prepa
             emit('reply', sinCorchetes(texto));
           }, controller.signal, (frase) => {
             emitido = true;
+            if (bilingue) { const t = sinCorchetes(frase); if (/[\p{L}\p{N}]/u.test(t)) emitirFrase(t, bilingue); return; }
             for (const { texto, nativo, corchete } of separar(frase)) {
               // Lo que iba entre corchetes es una indicación, aunque viniera en el idioma meta.
               if (nativo || corchete) ayuda.push(texto); else emitirFrase(texto);

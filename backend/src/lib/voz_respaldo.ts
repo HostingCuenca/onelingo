@@ -40,7 +40,9 @@ export function vozRespaldo(rol: string, nombre: string, descripcion: string) {
 
 /** Indicaciones de pronunciación: el idioma del texto, como nativo, con tono de profesor. */
 export const instruccionesRespaldo = (lengua: string) =>
-  `Habla en ${NOMBRE_ES[lengua] ?? lengua} con pronunciación nativa y natural, como un profesor particular cálido y claro, a ritmo tranquilo.`;
+  lengua.includes('+')
+    ? `Habla en ${NOMBRE_ES[lengua.split('+')[0]] ?? lengua} con pronunciación nativa y natural, y di las frases en ${NOMBRE_ES[lengua.split('+')[1]] ?? 'el otro idioma'} con su pronunciación correcta, como un profesor particular cálido y claro, a ritmo tranquilo.`
+    : `Habla en ${NOMBRE_ES[lengua] ?? lengua} con pronunciación nativa y natural, como un profesor particular cálido y claro, a ritmo tranquilo.`;
 
 /** ElevenLabs en pausa tras un error de cuota o de clave: no se le vuelve a preguntar en cada frase. */
 let pausadoHasta = 0;

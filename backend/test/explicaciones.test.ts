@@ -45,22 +45,33 @@ test('a closing bracket ends the sentence for the voice', () => {
   assert.deepEqual(frasesCompletas('On va pratiquer « j’aime… » et « je n’aime pas… ». Et toi ?', true), ['On va pratiquer « j’aime… » et « je n’aime pas… ».', 'Et toi ?']);
 });
 
-test('only the video call in native mode asks for bracketed explanations', () => {
+test('only the video call in native mode is a bilingual class', () => {
   const base = { idiomaMeta: 'ja', idiomaNativo: 'es', nivel: 2, tutorId: 'avatar_chloe' };
   const nativo = systemPrompt({ ...base, explica: 'nativo' });
-  assert.match(nativo, /eligió que le EXPLIQUES en español/);
-  assert.match(nativo, /entre corchetes/);
-  // La indicación en su idioma va al final del turno, en un solo bloque.
-  assert.match(nativo, /昨日、公園に行きました。 言ってみて！ \[Como fue ayer, se dice «いきました», no «いく». Di la frase completa.\]»/);
-  assert.match(nativo, /INDICACIONES, no para traducir/);
-  assert.match(systemPrompt({ ...base, idiomaMeta: 'es', idiomaNativo: 'en', explica: 'nativo' }), /Your turn!|¡Te toca! \[It was yesterday, so we say «fui», not «voy». Say the whole sentence.\]/);
+  assert.match(nativo, /CLASE BILINGÜE\. El alumno eligió que le enseñes en español/);
+  assert.match(nativo, /el japonés que enseñas DENTRO de tus frases/);
+  assert.match(nativo, /¡Casi! Como fue ayer, en japonés se dice «いきました», no «いく»: «きのう こうえんに いきました。» A ver, dilo tú\./);
+  assert.match(nativo, /nada de corchetes/);
+  assert.doesNotMatch(nativo, /hablas en ese idioma todo el tiempo/);
+  assert.match(systemPrompt({ ...base, idiomaMeta: 'es', idiomaNativo: 'en', explica: 'nativo' }), /Almost! It was yesterday, so in Spanish we say «fui», not «voy»/);
   assert.doesNotMatch(nativo, /tu voz solo habla japonés/);
   const meta = systemPrompt({ ...base, explica: 'meta' });
-  assert.doesNotMatch(meta, /EXPLIQUES/);
+  assert.doesNotMatch(meta, /CLASE BILINGÜE/);
   assert.match(meta, /botón «Explica en…»/);
   assert.match(meta, /tu voz solo habla japonés/);
-  assert.doesNotMatch(systemPrompt({ ...base, tutorId: 'mia', explica: 'nativo' }), /EXPLIQUES/, 'el chat escrito no cambia');
-  assert.doesNotMatch(systemPrompt({ ...base, idiomaNativo: 'ja', explica: 'nativo' }), /EXPLIQUES/);
+  assert.doesNotMatch(systemPrompt({ ...base, tutorId: 'mia', explica: 'nativo' }), /CLASE BILINGÜE/, 'el chat escrito no cambia');
+  assert.doesNotMatch(systemPrompt({ ...base, idiomaNativo: 'ja', explica: 'nativo' }), /CLASE BILINGÜE/);
+});
+
+test('bilingual voice: one native voice, the language is not forced', async () => {
+  const { hablaBilingue } = await import('../src/lib/explicaciones.js');
+  const { lenguaBase, codigoIdiomaVoz, rolDeVoz } = await import('../src/lib/voz.js');
+  assert.equal(hablaBilingue({ tutorId: 'avatar_chloe', explica: 'nativo', idiomaMeta: 'en', idiomaNativo: 'es' }), 'es+en');
+  assert.equal(hablaBilingue({ tutorId: 'avatar_chloe', explica: 'meta', idiomaMeta: 'en', idiomaNativo: 'es' }), '');
+  assert.equal(hablaBilingue({ tutorId: 'mia', explica: 'nativo', idiomaMeta: 'en', idiomaNativo: 'es' }), '');
+  assert.equal(lenguaBase('es+en'), 'es');
+  assert.equal(codigoIdiomaVoz('es+en', 'eleven_flash_v2_5'), undefined);
+  assert.equal(rolDeVoz('avatar_chloe', lenguaBase('es+en')), 'es_lina');
 });
 
 test('the transcription also expects the learner language', async () => {
@@ -84,7 +95,9 @@ test('after about 4 silent seconds the tutor takes the initiative and asks the l
 
 test('beginners in native mode get every question translated; topics are offered, not imposed', async () => {
   const base = { idiomaMeta: 'en', idiomaNativo: 'es', tutorId: 'avatar_chloe', explica: 'nativo' as const };
-  assert.match(systemPrompt({ ...base, nivel: 1 }), /NIVEL INICIAL: casi no entiende inglés/);
+  assert.match(systemPrompt({ ...base, nivel: 1 }), /NIVEL INICIAL, casi no entiende inglés/);
+  assert.match(systemPrompt({ ...base, nivel: 4 }), /mitad y mitad/);
+  assert.match(systemPrompt({ ...base, nivel: 6 }), /casi toda en inglés/);
   assert.doesNotMatch(systemPrompt({ ...base, nivel: 4 }), /NIVEL INICIAL/);
   assert.doesNotMatch(systemPrompt({ ...base, nivel: 1, explica: 'meta' }), /NIVEL INICIAL/);
   const { textoFicha } = await import('../src/lib/ficha_alumno.js');

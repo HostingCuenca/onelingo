@@ -88,7 +88,7 @@ test('cada tutor en vivo conoce un idioma de primera mano y todos los idiomas ti
   for (const l of idiomas) assert.ok(de.includes(l), `sin especialista: ${l}`);
   // Con su idioma aporta cultura y uso real; con otro, solo lo menciona.
   assert.match(fichaTutor('avatar_erik', 'ja'), /especialidad es el japonés, justo el que practica/);
-  assert.match(fichaTutor('avatar_erik', 'en'), /Hoy el alumno practica inglés: hablas en ese idioma todo el tiempo/);
+  assert.match(fichaTutor('avatar_erik', 'en'), /Hoy el alumno practica inglés: enseñas ese idioma y no el de tu especialidad/);
   assert.doesNotMatch(fichaTutor('mia', 'en'), /especialidad es el/);
 });
 

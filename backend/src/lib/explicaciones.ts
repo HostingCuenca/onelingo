@@ -8,6 +8,14 @@ import { config } from './config.js';
 import { generarJsonOpenAI, openaiDisponible } from './ia_openai.js';
 
 export type Explica = 'nativo' | 'meta';
+
+/**
+ * Clase bilingüe (videollamada con explicaciones en su idioma): el tutor habla
+ * en el idioma del alumno con el idioma de la clase dentro y una sola voz, la
+ * nativa del alumno, lo lee todo («es+en», ver lenguaBase en voz.ts). '' si no aplica.
+ */
+export const hablaBilingue = (p: { tutorId: string; explica?: Explica; idiomaMeta: string; idiomaNativo: string }) =>
+  p.tutorId.startsWith('avatar_') && p.explica === 'nativo' && p.idiomaNativo && p.idiomaNativo !== p.idiomaMeta ? `${p.idiomaNativo}+${p.idiomaMeta}` : '';
 /** `corchete`: venía entre corchetes (una indicación para el alumno, aunque el tutor la escribiera en el idioma meta). */
 export type Parte = { texto: string; nativo: boolean; corchete?: boolean };
 

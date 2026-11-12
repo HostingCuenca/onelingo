@@ -14,8 +14,8 @@ import path from 'node:path';
 import { responder, type Turno } from '../lib/ia.js';
 import { generarJsonOpenAI } from '../lib/ia_openai.js';
 import { evaluarLlamada, CRITERIOS, type Evaluacion } from '../lib/informe_llamada.js';
-import { indicacionEnSuIdioma, separadorDeLenguas, sinCorchetes } from '../lib/explicaciones.js';
-import { obtenerAudioAlineado, rolDeVoz, VOCES } from '../lib/voz.js';
+import { indicacionEnSuIdioma, sinCorchetes } from '../lib/explicaciones.js';
+import { lenguaBase, obtenerAudioAlineado, rolDeVoz, VOCES } from '../lib/voz.js';
 import { config } from '../lib/config.js';
 import { query, uno } from '../lib/db.js';
 
@@ -55,18 +55,24 @@ Responde SOLO lo que dirías en voz alta, una o dos frases, sin comillas.`, msgs
   return String(r.json.texto);
 }
 
+/** La voz de la clase: la del idioma practicado o, en la clase bilingüe, la única que suena. */
+const principal = (v: { habla: string }) => !v.habla || v.habla.includes('+');
 type Voz = { texto: string; habla: string; vozClave: string; vozNombre: string; respaldo: boolean; ms: number; lufs?: number | null; error?: string };
 async function vozDe(c: Caso, reply: string): Promise<Voz[]> {
-  const sueltas = c.explica === 'nativo' ? separadorDeLenguas(c.idioma)(reply) : [{ texto: sinCorchetes(reply), nativo: false }];
+  // Clase bilingüe (como chat.ts): todo en orden y con la voz nativa del alumno.
+  if (c.explica === 'nativo') return vocesDe(c, [{ texto: sinCorchetes(reply), habla: `${c.nativo}+${c.idioma}` }]);
+  const sueltas = [{ texto: sinCorchetes(reply), nativo: false, corchete: false }];
   // Como chat.ts: la ayuda en su idioma, junta y al final del turno.
   const juntas = sueltas.filter(p => p.nativo || p.corchete).map(p => p.texto).join(' ');
   const ayuda = juntas ? await indicacionEnSuIdioma(juntas, c.idioma, c.nativo) : '';
   const partes = [...sueltas.filter(p => !p.nativo && !p.corchete), ...(ayuda ? [{ texto: ayuda, nativo: true }] : [])];
+  return vocesDe(c, partes.map(p => ({ texto: p.texto, habla: p.nativo ? c.nativo : '' })));
+}
+async function vocesDe(c: Caso, partes: { texto: string; habla: string }[]): Promise<Voz[]> {
   const out: Voz[] = [];
-  for (const p of partes) {
-    // La ayuda en su idioma la dice la voz nativa de ese idioma del mismo tutor.
-    const habla = p.nativo ? c.nativo : '';
-    const clave = rolDeVoz(c.avatar, habla || c.idioma), t0 = Date.now();
+  for (const { texto, habla } of partes) {
+    const p = { texto };
+    const clave = rolDeVoz(c.avatar, habla ? lenguaBase(habla) : c.idioma), t0 = Date.now();
     try {
       // Como chat.ts: cada frase medida y llevada al mismo volumen.
       const a = await obtenerAudioAlineado({ texto: p.texto, idioma: c.idioma, voz: c.avatar, habla: habla || undefined });
@@ -83,7 +89,7 @@ async function llamada(c: Caso): Promise<Resultado> {
     const r = await responder({ idiomaMeta: c.idioma, idiomaNativo: c.nativo, nivel: c.nivel, tutorId: c.avatar, explica: c.explica, historial: [...historial], aviso } as any);
     // Como la página: lo que el tutor espera (repetir, elegir) viaja con su turno.
     historial.push({ rol: 'tutor', texto: r.respuesta.reply, ...(r.respuesta.espera ? { espera: r.respuesta.espera } : {}) } as Turno); transcripcion.push({ rol: 'tutor', texto: r.respuesta.reply });
-    if (voces.filter(v => !v.habla).length < FRASES_VOZ * 2 && transcripcion.filter(t => t.rol === 'tutor').length <= FRASES_VOZ) voces.push(...await vozDe(c, r.respuesta.reply));
+    if (voces.filter(principal).length < FRASES_VOZ * 2 && transcripcion.filter(t => t.rol === 'tutor').length <= FRASES_VOZ) voces.push(...await vozDe(c, r.respuesta.reply));
   };
   try {
     await tutor();
@@ -129,12 +135,12 @@ const md: string[] = [
   '| Tutor | Idioma | Nivel | Explica | Nota | ' + criterios.join(' | ') + ' | Voz | Respaldo |',
   '|---|---|---|---|---|' + criterios.map(() => '---').join('|') + '|---|---|',
   ...resultados.map(r => {
-    const e = r.evaluacion, v = r.voces.filter(x => !x.habla);
+    const e = r.evaluacion, v = r.voces.filter(principal);
     return `| ${nombre(r.caso.avatar)} | ${r.caso.idioma} | N${r.caso.nivel} | ${r.caso.explica} | ${e ? e.nota : 'error'} | ${criterios.map(c => e?.puntos[c] ?? '–').join(' | ')} | ${v[0]?.vozNombre ?? '?'} | ${r.voces.filter(x => x.respaldo).length}/${r.voces.length} |`;
   }), '',
 ];
 const vocesPorIdioma = new Map<string, string[]>();
-for (const r of resultados) { const v = r.voces.find(x => !x.habla); if (v) vocesPorIdioma.set(r.caso.idioma, [...(vocesPorIdioma.get(r.caso.idioma) ?? []), v.vozClave]); }
+for (const r of resultados) { const v = r.voces.find(principal); if (v) vocesPorIdioma.set(r.caso.idioma, [...(vocesPorIdioma.get(r.caso.idioma) ?? []), v.vozClave]); }
 md.push(`**Voces:** ${resultados.reduce((a, r) => a + r.voces.length, 0)} frases sintetizadas, ${resultados.reduce((a, r) => a + r.voces.filter(x => x.respaldo).length, 0)} con la voz de respaldo, ${resultados.reduce((a, r) => a + r.voces.filter(x => x.error).length, 0)} con error. Latencia media ${media(resultados.flatMap(r => r.voces.map(x => x.ms)))} ms.`, '');
 {
   const l = resultados.flatMap(r => r.voces.map(v => v.lufs)).filter((x): x is number => typeof x === 'number');
@@ -149,7 +155,7 @@ for (const r of resultados) {
     if (e.problemas.length) md.push('**Problemas:**', ...e.problemas.map(p => `- (${p.criterio}) «${p.cita}» → ${p.mejor}`), '');
     md.push(`**Alumno:** ${e.alumno.nivelReal}${e.alumno.dificultades.length ? ` Dificultades: ${e.alumno.dificultades.join('; ')}.` : ''}`, '', `**Recomendación:** ${e.recomendacion}`, '');
   }
-  const v = r.voces.filter(x => !x.habla)[0];
+  const v = r.voces.filter(principal)[0];
   if (v) md.push(`**Voz:** ${v.vozNombre} (\`${v.vozClave}\`)${r.voces.some(x => x.respaldo) ? ' · con frases de respaldo' : ' · todo ElevenLabs'}${r.voces.some(x => x.error) ? ` · errores: ${r.voces.filter(x => x.error).map(x => x.error).join('; ')}` : ''}`, '');
   md.push('<details><summary>Transcripción</summary>', '', ...r.transcripcion.map(t => t.rol === 'aviso' ? `- *(silencio: ${t.texto})*` : `- **${t.rol === 'tutor' ? 'T' : 'A'}:** ${t.texto}`), '', '</details>', '');
 }
@@ -159,7 +165,7 @@ await writeFile(path.join(dir, `${fecha}.md`), md.join('\n'));
 await writeFile(path.join(dir, `${fecha}.json`), JSON.stringify(resultados, null, 1));
 console.log(`informe: docs/claude-educacion/pruebas-tutor/${fecha}.md`);
 console.log(`nota media ${media(ev.map(r => r.evaluacion!.nota))}`);
-for (const r of resultados) console.log(nombre(r.caso.avatar), r.caso.idioma, `N${r.caso.nivel}`, r.evaluacion?.nota ?? r.error, r.voces.filter(x => !x.habla)[0]?.vozClave, `respaldo ${r.voces.filter(x => x.respaldo).length}/${r.voces.length}`);
+for (const r of resultados) console.log(nombre(r.caso.avatar), r.caso.idioma, `N${r.caso.nivel}`, r.evaluacion?.nota ?? r.error, r.voces.filter(principal)[0]?.vozClave, `respaldo ${r.voces.filter(x => x.respaldo).length}/${r.voces.length}`);
 
 if (GUARDAR) {
   if (/onelingo\.org|179\.197/.test(config.databaseUrl) || process.cwd().startsWith('/var/www/')) throw new Error('--guardar es solo para la base local');

@@ -26,7 +26,7 @@ export const esperaCupo = (usuario: string, ahora = Date.now()) =>
  * móviles. Las páginas viejas no mandan cuerpo.
  */
 const Telemetria = z.object({
-  motivo: z.enum(['inicio', 'reconexion', 'visible', 'reintento']).optional(),
+  motivo: z.enum(['inicio', 'reconexion', 'visible', 'reintento', 'manual']).optional(),
   cierre: z.object({
     codigo: z.number().int().optional(), razon: z.string().max(120).optional(), segundos: z.number().min(0).max(100_000).optional(),
     audio: z.string().max(20).optional(), aviso: z.string().max(160).optional(),

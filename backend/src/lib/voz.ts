@@ -456,20 +456,29 @@ export type Audio = { hash: string; buffer: Buffer; cache: boolean; voz: string;
  * extranjero y a otro volumen (11-11).
  */
 export type PeticionVoz = { texto: string; idioma: string; voz?: string; modo?: string; previo?: string; habla?: string };
+
+/**
+ * `habla` «es+en»: el tutor enseña en el idioma del alumno (es) con frases del
+ * idioma de la clase (en) dentro, como un profesor que comparte su idioma. Una
+ * sola voz, la nativa del alumno, y sin `language_code`: forzado, leía el inglés
+ * con pronunciación española (prueba del 12-11: con Flash v2.5 sin forzar, la
+ * transcripción de vuelta salió exacta en en, fr y ja).
+ */
+export const lenguaBase = (lengua: string) => lengua.split('+')[0];
 type Trozo = { texto: string; hash: string; legado: string; previo?: string; pedido?: string };
 
 /** Normaliza, elige la voz y divide en trozos con su clave de caché. */
 function preparar(p: PeticionVoz) {
-  const lengua = p.habla ?? p.idioma;
-  const texto = textoParaVoz(p.texto, lengua, p.modo);
+  const lengua = p.habla ?? p.idioma, base = lenguaBase(lengua);
+  const texto = textoParaVoz(p.texto, base, p.modo);
   if (!texto) throw new Error('texto_vacio');
   const partes = trocearTexto(texto, config.vozMaxCaracteres);
   if (partes.length > VOZ_MAX_TROZOS) throw new Error(`texto_demasiado_largo (${texto.length} > ${vozMaxTotal()})`);
-  const rol = rolDeVoz(p.voz, p.habla && p.habla !== p.idioma ? p.habla : p.idioma);
+  const rol = rolDeVoz(p.voz, p.habla && base !== p.idioma ? base : p.idioma);
   const v = VOCES[rol];
   const ajustes = ajustesDeVoz(rol);
   const modelo = config.elevenModelo;
-  const previo = p.previo ? textoParaVoz(p.previo, lengua).slice(-config.vozMaxCaracteres) || undefined : undefined;
+  const previo = p.previo ? textoParaVoz(p.previo, base).slice(-config.vozMaxCaracteres) || undefined : undefined;
   const trozos: Trozo[] = partes.map((t, i) => ({
     texto: t, hash: hashAudio(t, v.id, modelo, lengua, ajustes), legado: hashAudioLegado(t, v.id, modelo, lengua),
     previo: i === 0 ? previo : partes[i - 1], pedido: p.voz,
