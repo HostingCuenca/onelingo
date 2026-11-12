@@ -40,7 +40,7 @@ body.en-llamada #stage[data-phase=listening]{box-shadow:0 0 0 calc(3px + var(--n
 .reloj[data-fase=ready]::before{background:#5FE07A}
 .reloj[data-fase=thinking]::before,.reloj[data-fase=voice-loading]::before{background:var(--naranja);animation:latido 1.4s ease-in-out infinite}
 #velocidad{top:max(12px,env(safe-area-inset-top));right:12px}
-#explica{top:calc(max(12px,env(safe-area-inset-top)) + 52px);right:12px;font-size:13px;gap:4px;display:flex}
+#explica{top:max(12px,env(safe-area-inset-top));right:64px;font-size:13px;gap:4px;display:flex}
 #explica[hidden],.insignia[hidden]{display:none}
 .quien{position:absolute;z-index:3;left:12px;bottom:12px;display:flex;align-items:center;gap:8px;max-width:calc(100% - 24px)}
 .quien strong{color:#fff;font-size:17px;font-weight:900;text-shadow:0 1px 6px #0006}
@@ -86,7 +86,7 @@ body.vivo #stage[data-phase=listening] ~ .chat .msg.vivo .bubble::after{content:
 .resumen{border:2px solid var(--morado-claro);border-radius:18px;padding:12px 14px;background:#fff}.resumen h3{margin:0 0 6px;color:var(--morado)}.resumen h4{margin:10px 0 4px;font-size:14px}.resumen ul{margin:0;padding-left:18px;display:grid;gap:4px}.resumen li small{display:block;color:var(--gris)}.resumen s{color:var(--rojo)}.resumen strong{color:#197D58}.resumen .siguiente{margin:10px 0 0;padding:10px 12px;border-radius:14px;background:var(--verde-suave);color:#1F5A2B;font-weight:700}
 
 /* Abajo: avisos, escribir, contestar y controles */
-.abajo{flex:none;padding-top:6px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:linear-gradient(#fcf9f800,var(--fondo) 18px)}
+.abajo{flex:none;padding-top:6px;padding-bottom:calc(max(12px,env(safe-area-inset-bottom)) + 18px);background:linear-gradient(#fcf9f800,var(--fondo) 18px)}
 .pista{margin:0;text-align:center;font-size:13px;color:var(--gris);font-weight:700;min-height:18px}
 .aviso{margin:4px 0 0;text-align:center;font-size:14px;color:var(--rojo);font-weight:700}
 .aviso:empty{display:none}
