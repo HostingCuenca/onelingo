@@ -6,21 +6,11 @@ import 'package:flutter/painting.dart';
 
 const _base = 'assets/img/fotos/';
 
-String? fotoSituacion(int id) {
-  const m = <int, String>{
-    1: 'restaurante', 2: 'cafeteria', 3: 'supermercado', 4: 'tienda-ropa', 5: 'tienda-ropa',
-    6: 'tienda-ropa', 7: 'aeropuerto', 8: 'aeropuerto', 9: 'aeropuerto', 10: 'hotel',
-    11: 'taxi', 12: 'taxi', 13: 'taxi', 14: 'taxi', 15: 'medico', 16: 'farmacia', 17: 'medico',
-    18: 'banco', 19: 'supermercado', 20: 'entrevista', 21: 'oficina', 22: 'entrevista',
-    23: 'oficina', 24: 'telefono', 25: 'telefono', 26: 'apartamento', 27: 'apartamento',
-    28: 'apartamento', 29: 'policia', 30: 'ciudad', 31: 'autobus', 32: 'tren', 33: 'direcciones',
-    34: 'escuela', 35: 'escuela', 36: 'ejercicio', 37: 'gimnasio', 38: 'playa', 39: 'playa',
-    40: 'cine', 41: 'fiesta', 42: 'cine', 43: 'familia', 44: 'saludo', 45: 'saludo', 46: 'fiesta',
-    47: 'fiesta', 48: 'cocina', 49: 'cocina', 50: 'ciudad',
-  };
-  final n = m[id];
-  return n == null ? null : '$_base$n.jpg';
-}
+/// Tarjeta de cada situación: su propia ilustración (escena 1). Antes eran 31
+/// fotos genéricas para 50 situaciones y se repetían (taxi ×4, aeropuerto ×3…).
+String? fotoSituacion(int id) => id >= 1 && id <= 50
+    ? 'assets/img/situaciones/situacion-${id.toString().padLeft(2, '0')}-1.webp'
+    : null;
 
 String? fotoUnidad(int nivel, int numero) {
   if (nivel != 1) return null;

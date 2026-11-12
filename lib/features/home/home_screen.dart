@@ -644,7 +644,7 @@ class _SituationPreview extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       if (fotoSituacion(sit.id) != null)
-                        Image.asset(fotoSituacion(sit.id)!, fit: BoxFit.cover)
+                        Image.asset(fotoSituacion(sit.id)!, fit: BoxFit.cover, cacheHeight: 420)
                       else
                         ColoredBox(color: sit.color.withValues(alpha: .15)),
                       const DecoratedBox(

@@ -267,7 +267,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                                       fit: StackFit.expand,
                                       children: [
                                         if (foto != null)
-                                          Image.asset(foto, fit: BoxFit.cover)
+                                          Image.asset(foto, fit: BoxFit.cover, cacheHeight: 420)
                                         else
                                           Container(
                                             color: x.color.withValues(
