@@ -1403,3 +1403,11 @@ Fecha: 2026-11-17 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Verificado:** `/`, `/main.dart.js`, `/avatar/index.html`, `/descargas/version.json` (0.5.9), `/privacidad/`, `/panel/`, `/api/salud` y la ilustración nueva en 200. Con la cuenta demo: «Tutores con IA» muestra los 12 tutores en vivo (Frank elegido para inglés) y «Videollamada con Frank» abre el visor hasta el permiso de micrófono (el panel del navegador no permite micrófono; la llamada completa no se probó).
 
 **Rollback:** `ssh onelingo 'cd /var/www/onelingo && R=20261117-edu-100-web && mv web staging/$R/web-post && mv staging/$R/web-retirada web'` (copia también en `backups/20261117-edu-100-web/web-anterior`).
+
+## Cambio: 20261117-edu-101-demo-apagado
+
+Fecha: 2026-11-17 17:10 · Responsable: Claude (Claude Code), por pedido del usuario («Sí, apágalo»), con la 0.5.9 (2015) aprobada por Google y en «Cambios listos para publicarse» (publicación administrada). `UPDATE ajustes_pago SET demo_activo=false` en prod. Sin reinicio (el ajuste se lee en cada petición).
+
+**Verificado:** `POST /api/usuarios/login` con `bryan@onelingo.demo` → 403 `demo_cerrado`; `/api/planes` → `demoActivo: false`. La app y la web ocultan las tarjetas demo. Revisores de Google: `ana@onelingo.org` (cuenta normal, no depende del demo). El localhost conserva el demo.
+
+**Rollback:** `ssh onelingo 'cd /var/www/onelingo/backend; set -a; . ./.env; set +a; psql "$DATABASE_URL" -c "UPDATE ajustes_pago SET demo_activo=true"'` (estado anterior en `backups/20261117-edu-98-produccion-play/ajustes-pago-antes.csv`).
