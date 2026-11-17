@@ -1358,3 +1358,28 @@ Fecha: 2026-11-12 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Rollback:**
 - **Web:** `ssh onelingo 'cd /var/www/onelingo && cp -p backups/20261112-edu-97-situaciones/web/avatar/index.html web/avatar/index.html'`
 - **Android:** `shorebird patches rollback --release-version=0.5.8+2014` vuelve al parche 4.
+
+## Release: 20261117-edu-98-produccion-play
+
+Fecha: 2026-11-17 · Responsable: Claude (Claude Code), por pedido del usuario («haz todos los trámites para que se publique la versión»; eligió la release completa 0.5.9 y apagar el modo demo al lanzar). App 0.5.9+2015 (release completa de Shorebird) + APK de la web + versión de producción en Google Play + cuenta de Ana con contraseña. Sin cambios en el backend, el panel ni la web Flutter; sin reiniciar PM2.
+
+**Contenido:** release completa sobre `31c8b98` (pubspec 0.5.9+2015). Lleva lo que los parches de la 0.5.8 no podían llevar: `assets/i18n/en.json` (textos del tutor, certificado y referidos con la interfaz en inglés) y la escena nueva de la situación 22 (`situacion-22-2b.webp`). `00f88ef` (constante de versión de Perfil) va por parche 1.
+
+**Build:** worktree limpio `~/.cache/onelingo-build/edu98` con `key.properties` y `gradle-wrapper.jar` de edu87. `shorebird release android --no-confirm --build-number=2015 -- --dart-define=API_URL=https://onelingo.org/api` publicó la release 0.5.9+2015 (AAB 183 MB). El segundo paso con `--artifact apk` compiló el APK (197 MB) pero Shorebird rechazó registrar otra vez la misma versión (EXIT 70); no hace falta: `libapp.so` y `libflutter.so` del APK son idénticos byte a byte a los del AAB en las tres ABI, así que recibe los mismos parches. APK: versionCode 2015, RECORD_AUDIO + MODIFY_AUDIO_SETTINGS, `https://onelingo.org/api`, firma SHA-1 E3:C8:F4:AD…03:DC, sha256 `192445809badd15b…`. Pruebas: `validar_ruta.py` 0 errores (10 idiomas); `flutter analyze` 24 avisos «info» de estilo preexistentes; `flutter test` 511 en verde, 1 omitida, 1 fallo (`version_app_test`: la constante de Perfil seguía en 0.5.8, arreglado en `00f88ef`). `/tmp` (tmpfs) se llenó: las pruebas van con `TMPDIR` en `~/.cache/onelingo-build/tmp-tests`.
+
+**Web:** `/descargas/onelingo.apk` y `onelingo-armv7.apk` (enlace duro) con la 0.5.9; `version.json` `{"version":"0.5.9","tamano_mb":197}`. Cambio con `ln` + `mv` desde `staging/20261117-edu-98-produccion-play/`. Verificado: `version.json` 0.5.9, APK 200 con 197268062 bytes, `/api/salud` 200.
+
+**Ana (cuenta de pruebas y de los revisores de Google):** `ana@onelingo.demo` → `ana@onelingo.org`, con contraseña (bcrypt), `email_verificado=true`, `es_demo=false`; conserva su id, progreso y cortesía p1 sin vencimiento. La contraseña está solo en `~/.config/onelingo/ana-revisores.txt` (0600) del equipo de trabajo. Comprobado: `/auth/login` 200 con plan p1 y 401 con clave mala. Motivo: con el demo apagado la app bloquea los correos `@onelingo.demo`, y el servidor dejaba entrar sin contraseña a una cuenta demo con cortesía. Tras el cambio ninguna cuenta demo tiene cortesía vigente (Bryan Smith venció el 30-10).
+
+**Google Play:** versión de producción «0.5.9 (2015)» (AAB subido por el usuario), 178 países, notas es-419 + en-US; vista previa sin errores. «Detalles de acceso» → «Reviewer account (full plan)» con `ana@onelingo.org` (contraseña la escribió el usuario). Ambos cambios enviados juntos a revisión el 17-11 (se reinició la revisión que el usuario había iniciado minutos antes). **Publicación administrada activa:** al aprobarse no sale sola; hay que pulsar «Publicar».
+
+**Pendiente al publicar:** apagar «Usuarios demo» en producción (`ajustes_pago.demo_activo=false`, respaldo en `backups/20261117-edu-98-produccion-play/ajustes-pago-antes.csv`) justo antes de «Publicar»; mientras dure la revisión queda encendido para que el revisor entre por cualquiera de las dos vías. El localhost conserva el demo (su propia base).
+
+**Lock:** `/tmp/onelingo-deploy.lock` venía vacío desde edu-97 (12-11 13:55, sin procesos de despliegue); se tomó para esta release.
+
+**Rollback:**
+- **APK web:** `ssh onelingo 'cd /var/www/onelingo/web/descargas && K=../../backups/20261117-edu-98-produccion-play/descargas-anterior && ln -f $K/onelingo.apk onelingo.apk && ln -f onelingo.apk onelingo-armv7.apk && cp -p $K/version.json version.json'`
+- **Ana:** restaurar email/clave/es_demo desde `backups/20261117-edu-98-produccion-play/ana-usuario-antes.csv`.
+- **Play:** «Quitar los cambios» en Descripción general mientras no esté publicada; ya publicada, subir otra versión.
+
+**Parche 1 de Android** (sobre 0.5.9+2015, canal stable), desde `00f88ef` en el worktree `edu98`: `shorebird patch android --release-version=0.5.9+2015 --no-confirm -- --dart-define=API_URL=https://onelingo.org/api`. Publicado. Solo cambia la versión que muestra Perfil (0.5.9 · 2015). Rollback: `shorebird patches rollback --release-version=0.5.9+2015`.
