@@ -1383,3 +1383,13 @@ Fecha: 2026-11-17 · Responsable: Claude (Claude Code), por pedido del usuario (
 - **Play:** «Quitar los cambios» en Descripción general mientras no esté publicada; ya publicada, subir otra versión.
 
 **Parche 1 de Android** (sobre 0.5.9+2015, canal stable), desde `00f88ef` en el worktree `edu98`: `shorebird patch android --release-version=0.5.9+2015 --no-confirm -- --dart-define=API_URL=https://onelingo.org/api`. Publicado. Solo cambia la versión que muestra Perfil (0.5.9 · 2015). Rollback: `shorebird patches rollback --release-version=0.5.9+2015`.
+
+## Release: 20261117-edu-99-tutores-chat
+
+Fecha: 2026-11-17 · Responsable: Claude (Claude Code), por pedido del usuario («a los tutores no disponibles de conversación libre quitemos» → lista «Chat de voz y texto»; «Sí, publícalo»). Solo parche 2 de Shorebird sobre 0.5.9+2015 (canal stable). Sin cambios en servidor, panel ni web.
+
+**Contenido:** `8e2eae3`: en Tutores se quitan las tarjetas de personalidad del chat (Mia, Leo, Sofía, Max); «Chat de voz y texto» queda con «Hablar con mi tutor», que usa el tutor ya elegido (o el primero). Subtítulo con una frase ya presente en `en.json` («Tu tutor recuerda tu nivel…»), sin assets nuevos. `test/tutores_ia_test.dart` comprueba que no vuelvan.
+
+**Build:** worktree `edu98` en `8e2eae3`: `shorebird patch android --release-version=0.5.9+2015 --no-confirm -- --dart-define=API_URL=https://onelingo.org/api` (sin `--allow-asset-diffs`: no hubo diferencias de assets). Pruebas antes: `tutores_ia_test` y `arquitectura_test` en verde, `flutter analyze` del archivo sin avisos. La web Flutter sigue sin este cambio (último despliegue web: edu-90).
+
+**Rollback:** `shorebird patches rollback --release-version=0.5.9+2015` vuelve al parche 1.
