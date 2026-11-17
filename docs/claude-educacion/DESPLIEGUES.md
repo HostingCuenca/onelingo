@@ -1393,3 +1393,13 @@ Fecha: 2026-11-17 · Responsable: Claude (Claude Code), por pedido del usuario (
 **Build:** worktree `edu98` en `8e2eae3`: `shorebird patch android --release-version=0.5.9+2015 --no-confirm -- --dart-define=API_URL=https://onelingo.org/api` (sin `--allow-asset-diffs`: no hubo diferencias de assets). Pruebas antes: `tutores_ia_test` y `arquitectura_test` en verde, `flutter analyze` del archivo sin avisos. La web Flutter sigue sin este cambio (último despliegue web: edu-90).
 
 **Rollback:** `shorebird patches rollback --release-version=0.5.9+2015` vuelve al parche 1.
+
+## Release: 20261117-edu-100-web
+
+Fecha: 2026-11-17 · Responsable: Claude (Claude Code), por pedido del usuario («despliega también la web… que en la web estén los avatares y todo»). La web Flutter estaba en edu-90 (`b14d7c6`); `web/avatar` en prod ya era igual al repo (41 archivos comparados por sha256). El código no oculta nada en web: los tutores en vivo y Lumo se abren en el visor integrado (iframe de `/avatar`).
+
+**Web:** `flutter build web --release --dart-define=API_URL=https://onelingo.org/api` en el worktree `edu98` (`8e2eae3`, mismo `lib/` que la app 0.5.9 con el parche 2). Staging con enlaces duros de `web/` y `rsync -rlc` encima excluyendo `descargas/`, `apk/` y `avatar/models/` (7 archivos: `main.dart.js`, `flutter_bootstrap.js`, `version.json`, `.last_build_id`, `AssetManifest.bin(.json)` y `situacion-22-2b.webp`); cambio con `mv` bajo el candado. `main.dart.js` sha256 `f54e579eed3b58ba…`. Lleva a la web la llamada bilingüe, los controles nuevos, las ilustraciones por situación y los tutores sin las tarjetas del chat.
+
+**Verificado:** `/`, `/main.dart.js`, `/avatar/index.html`, `/descargas/version.json` (0.5.9), `/privacidad/`, `/panel/`, `/api/salud` y la ilustración nueva en 200. Con la cuenta demo: «Tutores con IA» muestra los 12 tutores en vivo (Frank elegido para inglés) y «Videollamada con Frank» abre el visor hasta el permiso de micrófono (el panel del navegador no permite micrófono; la llamada completa no se probó).
+
+**Rollback:** `ssh onelingo 'cd /var/www/onelingo && R=20261117-edu-100-web && mv web staging/$R/web-post && mv staging/$R/web-retirada web'` (copia también en `backups/20261117-edu-100-web/web-anterior`).
