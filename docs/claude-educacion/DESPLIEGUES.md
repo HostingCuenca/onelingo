@@ -1411,3 +1411,7 @@ Fecha: 2026-11-17 17:10 · Responsable: Claude (Claude Code), por pedido del usu
 **Verificado:** `POST /api/usuarios/login` con `bryan@onelingo.demo` → 403 `demo_cerrado`; `/api/planes` → `demoActivo: false`. La app y la web ocultan las tarjetas demo. Revisores de Google: `ana@onelingo.org` (cuenta normal, no depende del demo). El localhost conserva el demo.
 
 **Rollback:** `ssh onelingo 'cd /var/www/onelingo/backend; set -a; . ./.env; set +a; psql "$DATABASE_URL" -c "UPDATE ajustes_pago SET demo_activo=true"'` (estado anterior en `backups/20261117-edu-98-produccion-play/ajustes-pago-antes.csv`).
+
+## Publicación: 0.5.9 (2015) en producción de Google Play
+
+Fecha: 2026-11-17 · El usuario pulsó «Publicar 1 cambio» (publicación administrada) tras apagar el demo (edu-101). Play Console → Producción: **Activo**, versión más reciente 0.5.9 (2015), 178 países o regiones, lanzamiento completo. Ficha pública `https://play.google.com/store/apps/details?id=com.torisoftt.onelingo` en 200 con «Descargar». Los parches de Shorebird 1 y 2 de la 0.5.9+2015 llegan también a las instalaciones de Play. Aviso recomendado de la consola: «Es posible que la pantalla de borde a borde no se muestre para todos los usuarios» (pendiente, no bloquea).
