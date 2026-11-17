@@ -111,6 +111,14 @@ void main() {
     // Los tutores 3D de MakeHuman están ocultos por ahora.
     expect(find.text(tutores3dPara('en').first.nombre), findsNothing);
     expect(find.text('Hablar con mi tutor'), findsOneWidget);
+    // Sin tarjetas de personalidad del chat (Mia, Leo, Sofía, Max): se quitaron.
+    for (final n in ['Mia', 'Leo', 'Sofía', 'Max']) {
+      expect(find.text(n), findsNothing, reason: n);
+    }
+    expect(
+      find.text('Elige la personalidad de tu tutor; recuerda tus objetivos y correcciones.'),
+      findsNothing,
+    );
     expect(tester.takeException(), isNull);
   });
 }

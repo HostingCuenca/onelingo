@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
-import '../../core/content/fotos.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/i18n/nombres_idioma.dart';
 import '../../core/state/providers.dart';
@@ -129,76 +128,11 @@ class TutorsScreen extends ConsumerWidget {
                 icono: Icons.forum_rounded,
                 titulo: tr('Chat de voz y texto'),
                 texto: tr(
-                  'Elige la personalidad de tu tutor; recuerda tus objetivos y correcciones.',
+                  'Tu tutor recuerda tu nivel, tus correcciones y lo que practicaste en otras llamadas.',
                 ),
               ),
-              for (final t in tutores)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Tarjeta(
-                    onTap: () =>
-                        ref.read(progressProvider.notifier).elegirTutor(t.id),
-                    borde: t.id == s.tutorId ? t.color : null,
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 104,
-                          height: 136,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: t.color, width: 2.5),
-                            image: DecorationImage(
-                              image: AssetImage(fotoTutor(t.id)),
-                              alignment: encuadreTutor(t.id),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 14),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Wrap(
-                                spacing: 4,
-                                runSpacing: 6,
-                                children: [
-                                  Text(
-                                    t.nombre,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Etiqueta(
-                                    nombrePersonalidad(t.personalidad),
-                                    color: t.color,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                t.descripcion,
-                                style: const TextStyle(
-                                  color: OL.gris,
-                                  fontSize: 13,
-                                  height: 1.3,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Icon(
-                          t.id == s.tutorId
-                              ? Icons.check_circle
-                              : Icons.circle_outlined,
-                          color: t.id == s.tutorId ? t.color : OL.grisClaro,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              // Las tarjetas de personalidad del chat se quitaron (17-11): el
+              // chat sigue con el tutor ya elegido (o el primero por defecto).
               const SizedBox(height: 4),
               FilledButton.icon(
                 style: FilledButton.styleFrom(
