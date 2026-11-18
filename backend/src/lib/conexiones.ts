@@ -584,11 +584,21 @@ export function resumen() {
 const proveedorDeModelo = (m: string) => /^gemini/i.test(m) ? 'gemini' : /^claude/i.test(m) ? 'anthropic' : 'openai';
 const redondear = (v: number, d = 4) => Math.round(v * 10 ** d) / 10 ** d;
 
+/**
+ * Consumo de IA del mes por modelo. Desde que existe `uso_ia` (cada llamada, con
+ * caché y todas las funciones) se usa esa tabla; antes, solo los turnos del
+ * tutor guardados en `conversaciones`.
+ */
 async function iaDelMes() {
-  const filas = await query<{ modelo: string; conversaciones: number; entrada: number; salida: number }>(
-    `SELECT coalesce(modelo, '') AS modelo, count(*)::int AS conversaciones, coalesce(sum(tokens_entrada), 0)::bigint AS entrada, coalesce(sum(tokens_salida), 0)::bigint AS salida
-     FROM conversaciones WHERE fecha >= date_trunc('month', now()) GROUP BY 1`).catch(() => []);
-  return filas.map((f) => ({ ...f, proveedor: proveedorDeModelo(f.modelo), coste: redondear(costeIa(f.modelo, f.entrada, f.salida)) }));
+  const filas = await query<{ modelo: string; conversaciones: number; entrada: number; cache: number; salida: number }>(
+    `WITH desde AS (SELECT coalesce(min(fecha), now()) AS f FROM uso_ia WHERE fecha >= date_trunc('month', now()))
+     SELECT modelo, sum(n)::int AS conversaciones, sum(e)::bigint AS entrada, sum(c)::bigint AS cache, sum(s)::bigint AS salida FROM (
+       SELECT coalesce(modelo, '') AS modelo, count(*) AS n, coalesce(sum(tokens_entrada), 0) AS e, 0 AS c, coalesce(sum(tokens_salida), 0) AS s
+       FROM conversaciones, desde WHERE fecha >= date_trunc('month', now()) AND fecha < desde.f GROUP BY 1
+       UNION ALL
+       SELECT modelo, count(*), sum(entrada), sum(cache), sum(salida) FROM uso_ia WHERE fecha >= date_trunc('month', now()) GROUP BY 1
+     ) x GROUP BY 1`).catch(() => []);
+  return filas.map((f) => ({ ...f, proveedor: proveedorDeModelo(f.modelo), coste: redondear(costeIa(f.modelo, f.entrada, f.salida, f.cache)) }));
 }
 
 async function consumoEleven(op: Opciones) {
@@ -633,7 +643,7 @@ async function consumoOpenAI(op: Opciones, ia: Awaited<ReturnType<typeof iaDelMe
       };
     } catch (e) { return { tipo: 'estimado', estimado, nota: errorDeRed('OpenAI', e, t).mensaje + ' Se muestra el estimado.' }; }
   }
-  return { tipo: 'estimado', estimado, nota: 'Estimado con los tokens del tutor registrados y las tarifas de analitica.ts (no incluye transcripción ni evaluación). Para ver el costo real añade una Admin key de OpenAI.' };
+  return { tipo: 'estimado', estimado, nota: 'Estimado con las llamadas registradas (desde el 18-11-2026, todas las funciones y con la caché; antes, solo el tutor) y las tarifas de analitica.ts. Para ver el costo real añade una Admin key de OpenAI.' };
 }
 
 function consumoGemini(ia: Awaited<ReturnType<typeof iaDelMes>>) {

@@ -1,5 +1,29 @@
 /** Proveedor OpenAI: tutor conversacional (Chat Completions con salida JSON estricta) y transcripción de voz. */
 import { config } from './config.js';
+import { query } from './db.js';
+
+/**
+ * Función que pidió la llamada («ficha_alumno:actualizarFicha»), sacada de la
+ * pila: así cada uso queda etiquetado sin cambiar a quien llama.
+ */
+function quienLlama(): string {
+  for (const l of (new Error().stack ?? '').split('\n').slice(2)) {
+    if (l.includes('ia_openai.')) continue;
+    const m = /at (?:async )?([\w$.<>]+)? ?\(?.*?([\w-]+)\.[mc]?[jt]s:\d+/.exec(l);
+    if (m) return `${m[2]}${m[1] && !m[1].includes('<') ? ':' + m[1].replace(/^Object\./, '') : ''}`.slice(0, 80);
+  }
+  return 'desconocido';
+}
+
+/** Guarda tokens de una llamada en `uso_ia` sin esperar ni fallar (en las pruebas no se guarda). */
+export function registrarUso(funcion: string, modelo: string, u: any) {
+  if (!u || process.env.NODE_TEST_CONTEXT || !config.databaseUrl) return;
+  const n = (v: unknown) => Math.max(0, Math.round(Number(v) || 0));
+  void query('INSERT INTO uso_ia (funcion, modelo, entrada, cache, salida, razonamiento) VALUES ($1,$2,$3,$4,$5,$6)', [
+    funcion, modelo, n(u.prompt_tokens ?? u.input_tokens), n(u.prompt_tokens_details?.cached_tokens ?? u.input_tokens_details?.cached_tokens),
+    n(u.completion_tokens ?? u.output_tokens), n(u.completion_tokens_details?.reasoning_tokens),
+  ]).catch(() => {});
+}
 
 /** Esquema JSON estricto (Structured Outputs exige additionalProperties:false y todas las claves en required). */
 export const ESQUEMA_TUTOR_OPENAI = {
@@ -66,6 +90,7 @@ export async function generarJsonOpenAI(system: string, mensajes: { role: 'user'
 }
 
 async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], esquema: unknown, modelo: string, esfuerzo: string, maxSalida?: number) {
+  const funcion = quienLlama();
   const { j } = await conReintentos(() => fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${config.openaiApiKey}` },
@@ -77,6 +102,7 @@ async function pedirJsonOpenAI(system: string, mensajes: { role: 'user' | 'assis
       ...(esRazonador(modelo) ? { reasoning_effort: esfuerzo, max_completion_tokens: maxSalida ?? 3000 } : { temperature: 0.7, max_tokens: maxSalida ?? 700 }),
     }),
   }));
+  registrarUso(funcion, j?.model ?? modelo, j?.usage);
   const m = j?.choices?.[0]?.message;
   if (m?.refusal) throw Object.assign(new Error(`OpenAI rechazó la petición: ${m.refusal}`), { refusal: String(m.refusal) });
   const texto: string = m?.content ?? '';
@@ -112,6 +138,7 @@ export async function transcribirOpenAI(audio: Buffer, nombre: string, idioma: s
   const { j } = await conReintentos(() => fetch('https://api.openai.com/v1/audio/transcriptions', {
     method: 'POST', headers: { authorization: `Bearer ${config.openaiApiKey}` }, body: fd,
   }));
+  registrarUso('transcripcion', config.openaiModeloTranscripcion, j?.usage);
   return { texto: String(j?.text ?? '').trim(), modelo: config.openaiModeloTranscripcion };
 }
 
@@ -193,7 +220,7 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
   if (!r.ok || !r.body) throw new Error(`OpenAI ${r.status}`);
   const reader = r.body.getReader(); const decoder = new TextDecoder();
   let pending = '', texto = '', enviado = false, done = false, frasesEnviadas = 0;
-  let modelo = config.openaiModeloTutor, entrada = 0, salida = 0;
+  let modelo = config.openaiModeloTutor, entrada = 0, salida = 0, uso: any = null;
   try {
     while (true) {
       const next = await reader.read();
@@ -207,7 +234,7 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
         const j = JSON.parse(data);
         if (j.error || j.choices?.[0]?.delta?.refusal) throw new Error(`Respuesta rechazada: ${String(j.error?.message ?? j.error?.code ?? j.choices?.[0]?.delta?.refusal).slice(0, 160)}`);
         modelo = j.model ?? modelo;
-        if (j.usage) { entrada = j.usage.prompt_tokens; salida = j.usage.completion_tokens; }
+        if (j.usage) { uso = j.usage; entrada = j.usage.prompt_tokens; salida = j.usage.completion_tokens; }
         texto += j.choices?.[0]?.delta?.content ?? '';
         // La voz arranca con la primera frase terminada, sin esperar al resto de la respuesta.
         if (onFrase && !enviado) {
@@ -223,5 +250,6 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
     }
     if (!done) throw new Error('Respuesta interrumpida');
     return { json: JSON.parse(texto), modelo, entrada, salida };
-  } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
+  } finally {
+    registrarUso('ia:tutor', modelo, uso); await reader.cancel().catch(() => {}); reader.releaseLock(); }
 }

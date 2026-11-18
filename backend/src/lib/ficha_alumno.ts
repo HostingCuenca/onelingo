@@ -102,7 +102,7 @@ export async function actualizarFicha(usuarioId: string, idioma: string, nativo:
     ].filter(Boolean).join('\n')).join('\n');
     const actual = previa ? FichaAlumno.safeParse(previa.datos) : null;
     const meta = IDIOMAS[idioma] ?? idioma, nat = IDIOMAS[nativo] ?? nativo;
-    const r = await generarJsonOpenAI(promptPerfilador(meta, nat, nivel), [{ role: 'user', content: `FICHA ACTUAL:\n${actual?.success ? JSON.stringify(actual.data) : '(vacía: primera vez)'}\n\nCONVERSACIONES NUEVAS:\n${transcripcion}` }], ESQUEMA_FICHA, config.openaiModeloTutor);
+    const r = await generarJsonOpenAI(promptPerfilador(meta, nat, nivel), [{ role: 'user', content: `FICHA ACTUAL:\n${actual?.success ? JSON.stringify(actual.data) : '(vacía: primera vez)'}\n\nCONVERSACIONES NUEVAS:\n${transcripcion}` }], ESQUEMA_FICHA, config.openaiModelo);
     const f = FichaAlumno.parse(r.json);
     const ficha: FichaAlumno = {
       ...f, sobreMi: recorta(f.sobreMi, 8), intereses: recorta(f.intereses, 6), domina: recorta(f.domina, 8), comoAprende: recorta(f.comoAprende, 6),

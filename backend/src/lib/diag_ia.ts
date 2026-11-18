@@ -123,11 +123,11 @@ export async function generarPregunta(p: PeticionPregunta) {
     } catch (e) {
       console.warn('[diagnostico] Gemini falló, se usa OpenAI:', String(e).slice(0, 120));
       if (!openaiDisponible()) throw e;
-      const r = await generarJsonOpenAI(system, [{ role: 'user', content: user }], ESQUEMA_OPENAI);
+      const r = await generarJsonOpenAI(system, [{ role: 'user', content: user }], ESQUEMA_OPENAI, config.openaiModelo, 'none');
       json = r.json; modelo = r.modelo;
     }
   } else {
-    const r = await generarJsonOpenAI(system, [{ role: 'user', content: user }], ESQUEMA_OPENAI);
+    const r = await generarJsonOpenAI(system, [{ role: 'user', content: user }], ESQUEMA_OPENAI, config.openaiModelo, 'none');
     json = r.json; modelo = r.modelo;
   }
   const opciones: string[] = Array.isArray(json.opciones) ? json.opciones.map(String).filter(Boolean).slice(0, 4) : [];
@@ -171,7 +171,7 @@ async function revisarPregunta(pregunta: unknown, p: PeticionPregunta): Promise<
     json = (await conTimeout(generarJsonGemini(system,[{role:'user',text:user}],g),GEMINI_MS)).json;
   } catch (e) {
     if (!openaiDisponible()) throw e;
-    json = (await generarJsonOpenAI(system,[{role:'user',content:user}],o)).json;
+    json = (await generarJsonOpenAI(system,[{role:'user',content:user}],o, config.openaiModelo, 'none')).json;
   }
   if (json.valida !== true || typeof json.explicacion !== 'string' || !json.explicacion.trim()) throw new Error('pregunta_no_supera_revision: ' + String(json.explicacion).slice(0, 240));
   return json.explicacion;
@@ -199,6 +199,6 @@ Devuelve: "resumen" (3-5 frases: nivel, qué hace bien, dónde falla y por qué 
   if (geminiDisponible()) {
     try { const r = await conTimeout(generarJsonGemini(system, [{ role: 'user', text: user }], ESQUEMA_PERFIL_GEMINI), GEMINI_MS); return { ...r.json, modelo: r.modelo }; } catch (e) { console.warn('[diagnostico] Gemini falló (perfil), se usa OpenAI:', String(e).slice(0, 120)); if (!openaiDisponible()) throw e; }
   }
-  const r = await generarJsonOpenAI(system, [{ role: 'user', content: user }], ESQUEMA_PERFIL_OPENAI);
+  const r = await generarJsonOpenAI(system, [{ role: 'user', content: user }], ESQUEMA_PERFIL_OPENAI, config.openaiModelo, 'none');
   return { ...r.json, modelo: r.modelo };
 }

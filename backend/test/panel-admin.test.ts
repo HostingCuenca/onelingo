@@ -39,8 +39,14 @@ test('infoClase: ids de la ruta actual y del legado', () => {
 });
 
 test('tarifas: por prefijo más largo y estimación por defecto', () => {
-  assert.deepEqual(tarifaDe('gpt-4.1-mini-2025-04-14'), { entrada: 0.4, salida: 1.6 });
-  assert.deepEqual(tarifaDe('gpt-4.1-2025-04-14'), { entrada: 2, salida: 8 });
+  assert.deepEqual(tarifaDe('gpt-4.1-mini-2025-04-14'), { entrada: 0.4, cache: 0.1, salida: 1.6 });
+  assert.deepEqual(tarifaDe('gpt-4.1-2025-04-14'), { entrada: 2, cache: 0.5, salida: 8 });
+  // El tutor: antes caía en la tarifa por defecto y el panel lo inflaba ~10 veces.
+  assert.equal(tarifaDe('gpt-6-luna-2026-09-01').entrada, 0.1);
+  assert.equal(tarifaDe('gpt-5.6-luna').salida, 1.2);
+  // La entrada servida desde la caché cuesta su tarifa de caché.
+  assert.ok(Math.abs(costeIa('gpt-6-luna', 1_000_000, 0, 900_000) - (100_000 * 0.1 + 900_000 * 0.01) / 1e6) < 1e-12);
+  assert.ok(Math.abs(costeIa('gpt-6-luna', 1_000, 0, 5_000) - 1_000 * 0.01 / 1e6) < 1e-12);
   assert.deepEqual(tarifaDe('modelo-raro'), TARIFA_IA_DESCONOCIDA);
   assert.ok(Math.abs(costeIa('gpt-4.1-mini', 1_000_000, 500_000) - 1.2) < 1e-9);
   assert.ok(Math.abs(costeVoz(2000) - 0.22) < 1e-9);

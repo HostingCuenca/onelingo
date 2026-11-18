@@ -52,7 +52,7 @@ Devuelve la corrección conservando la idea del alumno, un comentario en ${IDIOM
         json = r.json; modelo = r.modelo;
       } catch (e) {
         if (!openaiDisponible()) throw e;
-        const r = await generarJsonOpenAI(system, [{ role: 'user', content: user }], ESQUEMA, config.openaiModeloEvaluacion);
+        const r = await generarJsonOpenAI(system, [{ role: 'user', content: user }], ESQUEMA, config.openaiModeloEvaluacion, 'none');
         json = r.json; modelo = r.modelo;
       }
       for (const key of ['puntuacion', 'gramatica', 'vocabulario', 'coherencia', 'naturalidad']) {

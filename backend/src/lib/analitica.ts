@@ -26,17 +26,27 @@ export const DIAS_ABANDONO = 2;
  * "gpt-4.1-mini-2025-04-14" usa "gpt-4.1-mini". Revisa los precios del
  * proveedor y cámbialos aquí; el resto del panel se recalcula solo.
  */
-export const TARIFAS_IA: Record<string, { entrada: number; salida: number }> = {
-  'gpt-4.1-mini': { entrada: 0.4, salida: 1.6 },
-  'gpt-4.1-nano': { entrada: 0.1, salida: 0.4 },
-  'gpt-4.1': { entrada: 2, salida: 8 },
+export const TARIFAS_IA: Record<string, { entrada: number; salida: number; cache?: number }> = {
+  'gpt-6-luna': { entrada: 0.1, cache: 0.01, salida: 0.5 },
+  'gpt-6-sol': { entrada: 2, cache: 0.2, salida: 10 },
+  'gpt-6-astra': { entrada: 10, cache: 1, salida: 50 },
+  'gpt-5.6-luna': { entrada: 0.2, cache: 0.02, salida: 1.2 },
+  'gpt-5.6-terra': { entrada: 2, cache: 0.2, salida: 12 },
+  'gpt-5.6-sol': { entrada: 4, cache: 0.4, salida: 20 },
+  'gpt-5.4-nano': { entrada: 0.2, cache: 0.02, salida: 1.25 },
+  'gpt-5.4-mini': { entrada: 0.75, cache: 0.075, salida: 4.5 },
+  'gpt-5.4': { entrada: 2.5, cache: 0.25, salida: 15 },
+  'gpt-4.1-mini': { entrada: 0.4, cache: 0.1, salida: 1.6 },
+  'gpt-4.1-nano': { entrada: 0.1, cache: 0.025, salida: 0.4 },
+  'gpt-4.1': { entrada: 2, cache: 0.5, salida: 8 },
+  'gpt-4o-mini-transcribe': { entrada: 1.25, salida: 5 },
   'gpt-4o-mini': { entrada: 0.15, salida: 0.6 },
   'gpt-4o': { entrada: 2.5, salida: 10 },
   'gemini': { entrada: 0.3, salida: 2.5 },
   'claude': { entrada: 5, salida: 25 },
 };
 /** Si el modelo no coincide con ninguna tarifa (estimación conservadora). */
-export const TARIFA_IA_DESCONOCIDA = { entrada: 2, salida: 8 };
+export const TARIFA_IA_DESCONOCIDA: { entrada: number; salida: number; cache?: number } = { entrada: 2, salida: 8 };
 
 /**
  * ElevenLabs: USD estimados por cada 1.000 caracteres sintetizados. Depende
@@ -52,9 +62,10 @@ export function tarifaDe(modelo: string) {
   return mejor ? TARIFAS_IA[mejor] : TARIFA_IA_DESCONOCIDA;
 }
 
-export function costeIa(modelo: string, entrada: number, salida: number) {
-  const t = tarifaDe(modelo);
-  return (entrada * t.entrada + salida * t.salida) / 1_000_000;
+/** `cache`: parte de `entrada` servida desde la caché del proveedor (más barata). */
+export function costeIa(modelo: string, entrada: number, salida: number, cache = 0) {
+  const t = tarifaDe(modelo), c = Math.min(Math.max(cache, 0), entrada);
+  return ((entrada - c) * t.entrada + c * (t.cache ?? t.entrada) + salida * t.salida) / 1_000_000;
 }
 
 export const costeVoz = (caracteres: number) => (caracteres / 1000) * USD_POR_MIL_CARACTERES_VOZ;
