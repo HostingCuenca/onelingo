@@ -98,3 +98,5 @@ Llenada en es-MX y en-US con los textos de `docs/appstore/textos.json` y las cap
 - Revisión: usuario `ana@onelingo.org` (la clave está en `~/.config/onelingo/ana-revisores.txt`, la pone el dueño) y notas en inglés; contacto Bryan Fonseca Segura, falta el teléfono.
 - La versión de la ficha dice 1.0 y la compilación 0.5.9: hay que igualarlas para asociar la compilación.
 - URL de soporte provisional: `/privacidad/` (tiene el correo de contacto); conviene una página `/soporte/`.
+
+**Enviada a revisión de Apple el 19-11-2026** (0.5.9, compilación 201505; privacidad publicada; URL de privacidad también en en-US). Publicación automática al aprobarse. Riesgo conocido: en iOS la pantalla de Planes muestra precios con «Pagos próximamente» y no hay IAP.
