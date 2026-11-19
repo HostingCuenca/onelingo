@@ -25,10 +25,35 @@ Todos los assets de `pubspec.yaml` están en git; no hace falta copiar nada desd
 
 ## Lo que falta en la Mac
 
-1. **Equipo de firma.** `DEVELOPMENT_TEAM` no está en el proyecto. En Xcode → Runner → Signing & Capabilities → Team, elegir la cuenta de Apple Developer de Torisoftt (equipo `T7YMDHWVKP`, el de Jewel Andino). Xcode lo guarda en `project.pbxproj`; ese cambio sí se puede commitear.
-2. **App en App Store Connect.** Registrar el bundle `com.torisoftt.onelingo` y crear la app «OneLingo» antes de subir a TestFlight.
+1. **Equipo de firma.** `DEVELOPMENT_TEAM` no está en el proyecto. En Xcode → Runner → Signing & Capabilities → Team, elegir la cuenta de Apple Developer de Torisoftt (Bryan Fonseca Segura, equipo `V82AC4GTUM`; cuenta infoonelingo@gmail.com). Xcode lo guarda en `project.pbxproj`; ese cambio sí se puede commitear.
+2. ~~App en App Store Connect~~: hecho el 19-11-2026 (App ID `com.torisoftt.onelingo` registrado y app «OneLingo» creada, idioma principal español de México, SKU `onelingo-ios`).
 
-## Compilar
+## Compilar en la nube (sin Mac)
+
+`.github/workflows/ios-testflight.yml` compila en una Mac de GitHub (gratis: el repo es público), firma con la firma en la nube de Apple y sube a TestFlight.
+
+Una sola vez, el dueño de la cuenta de Apple:
+
+1. App Store Connect → Usuarios y acceso → Integraciones → App Store Connect API → claves de equipo → generar una clave con rol **Admin** (con menos permisos no puede crear el certificado de distribución). Anotar el **Issuer ID** y el **Key ID**, descargar `AuthKey_XXXX.p8` (solo se puede bajar una vez).
+2. Cargar los secretos desde la PC con `gh` (la clave nunca pasa por el chat ni por el código):
+
+```bash
+gh secret set ASC_KEY_ID --repo HostingCuenca/onelingo
+gh secret set ASC_ISSUER_ID --repo HostingCuenca/onelingo
+gh secret set ASC_KEY_P8 --repo HostingCuenca/onelingo < ~/Descargas/AuthKey_XXXX.p8
+```
+
+Cada compilación:
+
+```bash
+gh workflow run ios-testflight.yml --repo HostingCuenca/onelingo --ref claude/educacion-multilenguaje
+```
+
+Número de compilación = build de `pubspec.yaml` × 100 + número de corrida (p. ej. 2015 → 201501), así nunca se repite entre subidas. La versión sale de `pubspec.yaml`. `Info.plist` declara `ITSAppUsesNonExemptEncryption = false` (solo HTTPS), así TestFlight no pregunta por cifrado en cada subida.
+
+Aviso: el archivo se firma con un certificado *Apple Development* que Xcode crea en cada Mac nueva de GitHub. Si un día falla por límite de certificados, revocar los viejos de desarrollo en Certificates (no afecta a la app publicada).
+
+## Compilar en una Mac
 
 `API_URL` es obligatorio. Sin él la app apunta a `localhost:8091` y no conecta con nada.
 
