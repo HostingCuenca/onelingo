@@ -21,7 +21,7 @@ Todos los assets de `pubspec.yaml` están en git; no hace falta copiar nada desd
 
 - Bundle ID `com.torisoftt.onelingo` (igual que Android), iOS mínimo 15.0, firma automática.
 - `Info.plist`: nombre «Onelingo», permisos de micrófono y de reconocimiento de voz.
-- Ícono 1024 y tamaños de iOS en `ios/Runner/Assets.xcassets/AppIcon.appiconset`.
+- Ícono: `ios/Runner/Assets.xcassets/AppIcon.appiconset`, generado con `python3 tools/imagenes/iconos_app.py --solo-ios` (hasta el 19-11-2026 tenía el ícono por defecto de Flutter; las compilaciones 201502–201504 salieron con ese ícono).
 
 ## Lo que falta en la Mac
 

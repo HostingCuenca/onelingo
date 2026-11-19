@@ -16,6 +16,7 @@ Genera:
 - Web: web/iconos/ (192, 512, maskable y apple-touch) y web/favicon.png. La
   carpeta no se llama «icons» porque Apache reserva /icons/ con un alias.
 - Página de descarga: web/descargar/icono.png.
+- iOS: ios/Runner/Assets.xcassets/AppIcon.appiconset (solo esto con --solo-ios).
 """
 import sys
 from pathlib import Path
@@ -106,7 +107,26 @@ def main():
     guardar(lienzo(180, .84), WEB / 'iconos/apple-touch-icon.png', rgb=True)
     guardar(lienzo(64, .96, (0, 0, 0, 0)), WEB / 'favicon.png')
     guardar(lienzo(192, .84), WEB / 'descargar/icono.png', rgb=True)
+    ios()
 
 
-if __name__ == '__main__':
+def ios():
+    """iOS: todos los tamaños de AppIcon.appiconset (los nombres salen de su
+    Contents.json). Sin transparencia: Apple rechaza el 1024 con canal alfa,
+    y iOS redondea las esquinas por su cuenta."""
+    import json
+    carpeta = RAIZ / 'ios/Runner/Assets.xcassets/AppIcon.appiconset'
+    hechos = set()
+    for img in json.loads((carpeta / 'Contents.json').read_text())['images']:
+        nombre = img.get('filename')
+        if not nombre or nombre in hechos:
+            continue
+        lado = round(float(img['size'].split('x')[0]) * int(img['scale'].rstrip('x')))
+        guardar(lienzo(lado, .8), carpeta / nombre, rgb=True)
+        hechos.add(nombre)
+
+
+if __name__ == '__main__' and '--solo-ios' in sys.argv:
+    ios()
+elif __name__ == '__main__':
     main()
