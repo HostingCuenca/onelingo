@@ -51,7 +51,7 @@ gh workflow run ios-testflight.yml --repo HostingCuenca/onelingo --ref claude/ed
 
 Número de compilación = build de `pubspec.yaml` × 100 + número de corrida (p. ej. 2015 → 201501), así nunca se repite entre subidas. La versión sale de `pubspec.yaml`. `Info.plist` declara `ITSAppUsesNonExemptEncryption = false` (solo HTTPS), así TestFlight no pregunta por cifrado en cada subida.
 
-Aviso: el archivo se firma con un certificado *Apple Development* que Xcode crea en cada Mac nueva de GitHub. Si un día falla por límite de certificados, revocar los viejos de desarrollo en Certificates (no afecta a la app publicada).
+El archivo de Xcode se genera sin firmar (con firma automática Xcode exigiría un iPhone registrado para el perfil de desarrollo); la exportación lo firma con el certificado de distribución que Apple administra en la nube.
 
 ## Compilar en una Mac
 
