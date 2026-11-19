@@ -87,3 +87,14 @@ flutter run -d "iPhone 16" --dart-define=API_URL=https://onelingo.org/api
 
 - No commitear `ios/Pods`, `Flutter/Generated.xcconfig`, `.ipa`, certificados `.p12`, llaves `.p8` ni perfiles `.mobileprovision`.
 - No tocar el backend ni el servidor desde la Mac: los despliegues siguen el flujo de `docs/claude-educacion/DESPLIEGUES.md`.
+
+## Ficha de App Store (19-11-2026)
+
+Llenada en es-MX y en-US con los textos de `docs/appstore/textos.json` y las capturas de `docs/appstore/capturas/` (1206×2622, generadas con `python3 tools/appstore/capturas_ios.py` a partir de las de Play). La app es solo iPhone (`TARGETED_DEVICE_FAMILY = 1`), así no se piden capturas de iPad.
+
+- Información de la app: nombre «OneLingo: idiomas con IA» / «OneLingo: AI Language Tutor», categoría Educación, derechos de contenido de terceros «Sí», clasificación 13+ (los términos piden 13 años).
+- Privacidad: 8 tipos de datos (nombre, correo, teléfono, audio, otro contenido, ID de usuario, compras, interacción), todos vinculados, ninguno para seguimiento. Falta pulsar **Publicar** (declaración del dueño de la cuenta).
+- Precio: gratis; disponible en 174 países (sin China continental, que exige declaración de IA).
+- Revisión: usuario `ana@onelingo.demo` y notas en inglés; faltan la contraseña y los datos de contacto (teléfono obligatorio).
+- La versión de la ficha dice 1.0 y la compilación 0.5.9: hay que igualarlas para asociar la compilación.
+- URL de soporte provisional: `/privacidad/` (tiene el correo de contacto); conviene una página `/soporte/`.
