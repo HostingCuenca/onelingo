@@ -100,3 +100,6 @@ Llenada en es-MX y en-US con los textos de `docs/appstore/textos.json` y las cap
 - URL de soporte provisional: `/privacidad/` (tiene el correo de contacto); conviene una página `/soporte/`.
 
 **Enviada a revisión de Apple el 19-11-2026** (0.5.9, compilación 201505; privacidad publicada; URL de privacidad también en en-US). Publicación automática al aprobarse. Riesgo conocido: en iOS la pantalla de Planes muestra precios con «Pagos próximamente» y no hay IAP.
+
+**Rechazo 19-11-2026 (guía 2.1, Information Needed):** Apple pide en las Notas de revisión: video grabado en un iPhone físico con iOS al día (desde abrir la app: registro, login, borrado de cuenta, reportar respuesta de IA, acceso a lo pagado), propósito y público, instrucciones de acceso, servicios externos (OpenAI, ElevenLabs, Google, Stripe), diferencias por región. También recuerda 3.1.1 (IAP junto con la app).
+**21-11-2026:** disponibilidad reducida a 147 países: fuera China continental (declaración de IA) y los 27 de la UE (falta la declaración de comerciante; se reactivan al presentarla).
